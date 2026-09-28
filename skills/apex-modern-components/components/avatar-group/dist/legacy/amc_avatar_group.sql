@@ -32,7 +32,7 @@ wwv_flow_imp_shared.create_plugin(
 ,p_name=>'AMC_AVATAR_GROUP'
 ,p_display_name=>'Avatar Group'
 ,p_supported_component_types=>'REPORT'
-,p_partial_template=>'{if ?OVERFLOW_TEXT/}<span class="amc-AvatarGroup-avatar amc-AvatarGroup-more">#OVERFLOW_TEXT#</span>{else/}{if ?LINK_URL/}<a class="amc-AvatarGroup-avatar amc-AvatarGroup-link" href="#LINK_URL#" title="#NAME#" aria-label="#NAME#">{else/}<span class="amc-AvatarGroup-avatar" title="#NAME#" role="img" aria-label="#NAME#">{endif/}{if ?IMAGE_URL/}<img class="amc-AvatarGroup-img" src="#IMAGE_URL#" alt="" loading="lazy">{else/}<span class="amc-AvatarGroup-initials" aria-hidden="true">#INITIALS#</span>{endif/}{if ?LINK_URL/}</a>{else/}</span>{endif/}{endif/}'
+,p_partial_template=>'{if ?OVERFLOW_TEXT/}<span class="amc-AvatarGroup-avatar amc-AvatarGroup-more">#OVERFLOW_TEXT#</span>{else/}{if ?LINK_URL/}<a class="amc-AvatarGroup-avatar amc-AvatarGroup-link" href="#LINK_URL#" title="#NAME#" aria-label="#NAME#">{else/}<span class="amc-AvatarGroup-avatar" title="#NAME#" role="img" aria-label="#NAME#">{endif/}{if ?IMAGE_URL/}<img class="amc-AvatarGroup-img" src="#IMAGE_URL#" alt="" width="48" height="48" loading="lazy">{else/}<span class="amc-AvatarGroup-initials" aria-hidden="true">#INITIALS#</span>{endif/}{if ?LINK_URL/}</a>{else/}</span>{endif/}{endif/}'
 ,p_default_escape_mode=>'HTML'
 ,p_translate_this_template=>false
 ,p_api_version=>1

@@ -46,6 +46,7 @@ function checkCss(slug, css, errors, warnings) {
       }
     }
     if (/!important/.test(code)) warnings.push(`${slug}: avoid !important (line ${i + 1})`);
+    if (/transition\s*:\s*all\b/.test(code)) errors.push(`${slug}: CSS line ${i + 1} uses transition: all; list the properties`);
     if (/\b(margin|padding)-(left|right)\b|\b(left|right)\s*:/.test(code)) {
       warnings.push(`${slug}: prefer logical properties for RTL (line ${i + 1}): ${line.trim()}`);
     }
@@ -122,6 +123,10 @@ export function validateComponent({ slug, component: c, loaded }) {
         errors.push(`${slug}: ${key} substitutes a value into a style attribute (CSS injection risk)`);
       }
       if (/<script/i.test(text)) errors.push(`${slug}: ${key} contains <script>; ship JS as a plug-in file`);
+      for (const img of text.match(/<img\b[^>]*>/gi) || []) {
+        if (!/\bwidth=/.test(img) || !/\bheight=/.test(img)) errors.push(`${slug}: ${key} has <img> without width/height (layout shift)`);
+        if (!/\balt=/.test(img)) errors.push(`${slug}: ${key} has <img> without alt`);
+      }
       const { subs, directives } = templateRefs(text);
       for (const ref of [...subs, ...directives]) {
         if (ids.has(ref) || BASELINE_BUILTINS.has(ref)) continue;

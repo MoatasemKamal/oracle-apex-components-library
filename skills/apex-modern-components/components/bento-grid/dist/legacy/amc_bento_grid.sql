@@ -34,7 +34,7 @@ wwv_flow_imp_shared.create_plugin(
 ,p_supported_component_types=>'REPORT'
 ,p_partial_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="amc-Bento-tile{if ?LINK_URL/} amc-Bento-tile--link{endif/}">',
-'  {if ?IMAGE_URL/}<img class="amc-Bento-bg" src="#IMAGE_URL#" alt="" loading="lazy">{endif/}',
+'  {if ?IMAGE_URL/}<img class="amc-Bento-bg" src="#IMAGE_URL#" alt="" width="640" height="360" loading="lazy">{endif/}',
 '  <div class="amc-Bento-content">',
 '    {if ?ICON/}<span class="amc-Bento-icon fa #ICON#" aria-hidden="true"></span>{endif/}',
 '    <h3 class="amc-Bento-title">{if ?LINK_URL/}<a class="amc-Bento-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>',

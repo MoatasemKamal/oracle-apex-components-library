@@ -29,6 +29,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/porting-external-components.md`: 21st.dev / React / Tailwind / 3D to APEX
    - `references/design-systems.md`: turn a DESIGN.md (awesome-design-md) into a Universal Theme style
    - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
+   - `references/design-quality.md`: research-first quality gate and craft checklist (adapted from Refero, MIT)
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
 
@@ -55,7 +56,9 @@ All `node tools/...` commands run from this skill's root (the folder holding thi
 
 ## B. Create or port a component
 
-1. Check the catalog; extend an existing component rather than duplicating it.
+1. Check the catalog; extend an existing component rather than duplicating it. Research
+   the pattern first (`references/design-quality.md` section 1; use the Refero MCP if
+   it is connected).
 2. For external designs (21st.dev, Magic UI, etc.), first run the **licence check** and
    classification in `references/porting-external-components.md`. Stop if the
    licence is not permissive; recreate the design instead.
@@ -69,7 +72,8 @@ All `node tools/...` commands run from this skill's root (the folder holding thi
    `dist/`. If the apexlang skill is available locally, also run
    `node tools/apexlang-check.mjs --apexlang <apexlang skill root>`.
 7. `node tools/preview.mjs`, then inspect `preview/index.html` in light, dark and RTL
-   (screenshot it if a browser is available) and fix visual defects.
+   (screenshot it if a browser is available) and fix visual defects. Walk the
+   checklist in `references/design-quality.md` sections 2 and 3.
 8. Continue with section A to test in an app. Report what was verified offline and
    what still needs a live APEX check.
 
