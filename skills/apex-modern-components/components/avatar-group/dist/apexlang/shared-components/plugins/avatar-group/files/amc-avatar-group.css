@@ -1,0 +1,85 @@
+/* APEX Modern Components - Avatar Group
+ * Design adapted from Magic UI "Avatar Circles" (MIT License, (c) Magic UI). */
+
+.amc-AvatarGroup {
+  --amc-av-size: 2.25rem;
+  --amc-av-overlap: -.4rem;
+  --amc-av-ring: var(--ut-component-background-color, #fff);
+  --amc-av-bg: color-mix(in srgb, var(--ut-palette-primary, #056ac8) 16%, var(--ut-component-background-color, #fff));
+  --amc-av-fg: var(--ut-palette-primary, #056ac8);
+  --amc-av-more-bg: var(--ut-component-text-default-color, #262626);
+  --amc-av-more-fg: var(--ut-component-background-color, #fff);
+  --amc-av-focus: var(--ut-focus-outline-color, #056ac8);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: calc(var(--amc-av-overlap) * -1);
+  list-style: none;
+}
+
+.amc-AvatarGroup--sm { --amc-av-size: 1.75rem; --amc-av-overlap: -.3rem; }
+.amc-AvatarGroup--lg { --amc-av-size: 3rem; --amc-av-overlap: -.6rem; }
+
+.amc-AvatarGroup-item {
+  margin-inline-start: var(--amc-av-overlap);
+}
+
+.amc-AvatarGroup-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--amc-av-size);
+  block-size: var(--amc-av-size);
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 2px solid var(--amc-av-ring);
+  border-radius: 50%;
+  background-color: var(--amc-av-bg);
+  color: var(--amc-av-fg);
+  font-size: calc(var(--amc-av-size) * .34);
+  letter-spacing: -.02em;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform .15s ease;
+}
+
+.amc-AvatarGroup-link:hover,
+.amc-AvatarGroup-link:focus-visible {
+  z-index: 1;
+  transform: translateY(-2px);
+}
+
+.amc-AvatarGroup-link:focus-visible {
+  outline: 2px solid var(--amc-av-focus);
+  outline-offset: 1px;
+}
+
+.amc-AvatarGroup-img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.amc-AvatarGroup-more {
+  background-color: var(--amc-av-more-bg);
+  color: var(--amc-av-more-fg);
+  font-size: calc(var(--amc-av-size) * .32);
+  text-transform: none;
+  unicode-bidi: plaintext;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-AvatarGroup-avatar { transition: none; }
+  .amc-AvatarGroup-link:hover,
+  .amc-AvatarGroup-link:focus-visible { transform: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-AvatarGroup-avatar { border-color: CanvasText; }
+}

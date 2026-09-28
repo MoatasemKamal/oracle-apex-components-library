@@ -1,0 +1,193 @@
+plugin avatarGroup (
+    name: Avatar Group
+    staticId: AMC_AVATAR_GROUP
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            {if ?OVERFLOW_TEXT/}<span class="amc-AvatarGroup-avatar amc-AvatarGroup-more">#OVERFLOW_TEXT#</span>{else/}{if ?LINK_URL/}<a class="amc-AvatarGroup-avatar amc-AvatarGroup-link" href="#LINK_URL#" title="#NAME#" aria-label="#NAME#">{else/}<span class="amc-AvatarGroup-avatar" title="#NAME#" role="img" aria-label="#NAME#">{endif/}{if ?IMAGE_URL/}<img class="amc-AvatarGroup-img" src="#IMAGE_URL#" alt="" loading="lazy">{else/}<span class="amc-AvatarGroup-initials" aria-hidden="true">#INITIALS#</span>{endif/}{if ?LINK_URL/}</a>{else/}</span>{endif/}{endif/}
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-AvatarGroup{if ?SIZE/} amc-AvatarGroup--#SIZE#{endif/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-AvatarGroup-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-avatar-group.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each row is one person: map Name, and Image URL or Initials. To show a counter, add a final row whose Overflow Text is for example +12 (union it in SQL).
+            ```
+    }
+    customAttribute NAME (
+        apexlangName: name
+        attribute: 1
+        name: Name
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Person's name: used as tooltip and accessible name.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 2
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Avatar image URL, for example built with apex_util.get_blob_file_src or #APP_FILES#. Leave empty to show initials.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 3
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no image, for example apex_string.get_initials(name).
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 4
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target when the avatar is clicked (developer-controlled URL).
+                ```
+        }
+    )
+    customAttribute OVERFLOW_TEXT (
+        apexlangName: overflowText
+        attribute: 5
+        name: Overflow Text
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                When set, the row renders as a counter bubble (for example +12) instead of an avatar.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 6
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 60
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Avatar diameter.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small, 28px
+            return: sm
+        )
+        entry large (
+            sequence: 20
+            display: Large, 48px
+            return: lg
+        )
+    )
+    file "amc-avatar-group.css" (
+        fileName: amc-avatar-group.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

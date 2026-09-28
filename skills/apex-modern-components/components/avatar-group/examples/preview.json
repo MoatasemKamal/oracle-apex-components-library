@@ -1,0 +1,16 @@
+{
+  "samples": [
+    {
+      "title": "Initials + counter",
+      "mode": "report",
+      "settings": {},
+      "rows": [
+        { "NAME": "Sara Ahmed", "INITIALS": "SA", "LINK_URL": "#" },
+        { "NAME": "Omar Khaled", "INITIALS": "OK", "LINK_URL": "#" },
+        { "NAME": "Lina Haddad", "INITIALS": "LH" },
+        { "NAME": "Yusuf Ali", "INITIALS": "YA" },
+        { "NAME": "more", "OVERFLOW_TEXT": "+12" }
+      ]
+    }
+  ]
+}

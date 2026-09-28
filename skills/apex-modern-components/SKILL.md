@@ -28,6 +28,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/component-authoring.md`: `component.json` fields, template and item rules
    - `references/porting-external-components.md`: 21st.dev / React / Tailwind / 3D to APEX
    - `references/design-systems.md`: turn a DESIGN.md (awesome-design-md) into a Universal Theme style
+   - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
 
@@ -55,7 +56,7 @@ All `node tools/...` commands run from this skill's root (the folder holding thi
 ## B. Create or port a component
 
 1. Check the catalog; extend an existing component rather than duplicating it.
-2. For external designs (21st.dev etc.), first run the **licence check** and
+2. For external designs (21st.dev, Magic UI, etc.), first run the **licence check** and
    classification in `references/porting-external-components.md`. Stop if the
    licence is not permissive; recreate the design instead.
 3. `node tools/new-component.mjs <kebab-slug> "<Display Name>"`

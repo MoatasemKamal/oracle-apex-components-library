@@ -24,6 +24,9 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 | [Key-Value List](skills/apex-modern-components/components/key-value-list) | template component | report | Record detail panels (`<dl>`), inline / stacked / grid |
 | [Empty State](skills/apex-modern-components/components/empty-state) | template component | partial | No-data and first-run placeholders with a native button |
 | [Star Rating](skills/apex-modern-components/components/star-rating) | item plug-in | page item | 1..N rating item with DA, read-only and `apex.item` support |
+| [Circular Progress](skills/apex-modern-components/components/circular-progress) | template component | partial, report | Animated ring gauges (adapted from Magic UI, MIT) |
+| [Avatar Group](skills/apex-modern-components/components/avatar-group) | template component | report | Overlapping team avatars with +N counter (adapted from Magic UI, MIT) |
+| [Bento Grid](skills/apex-modern-components/components/bento-grid) | template component | report | Home page launchpad tiles in a bento layout (adapted from Magic UI, MIT) |
 
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.

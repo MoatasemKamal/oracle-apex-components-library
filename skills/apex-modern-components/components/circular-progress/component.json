@@ -1,0 +1,40 @@
+{
+  "name": "Circular Progress",
+  "apexlangName": "circularProgress",
+  "staticId": "AMC_CIRCULAR_PROGRESS",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["gauge", "ring", "donut", "radial", "progress", "percent", "completion", "kpi", "meter"],
+  "description": "Animated ring gauge showing a value against a maximum, with the value in the center. One gauge (partial) or a row of labelled gauges (report).",
+  "helpText": "Map Value (and optionally Maximum) to numeric columns. The ring animates from zero on load and after region refresh; users with reduced motion see it without animation. Non-numeric values show an empty ring.",
+  "source": { "url": "https://magicui.design/docs/components/animated-circular-progress-bar", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-circular-progress.css", "files/amc-circular-progress.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-circular-progress.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-circular-progress.js"],
+  "attributes": [
+    { "staticId": "VALUE", "apexlangName": "value", "attribute": 1, "name": "Value", "type": "sessionStateValue", "required": true, "escapeMode": "htmlAttribute", "sequence": 10, "helpText": "Current numeric value, with a period as decimal separator." },
+    { "staticId": "MAX", "apexlangName": "max", "attribute": 2, "name": "Maximum", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "default": "100", "sequence": 20, "helpText": "Value of a full ring. Defaults to 100." },
+    { "staticId": "CENTER_TEXT", "apexlangName": "centerText", "attribute": 3, "name": "Center Text", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 30, "helpText": "Text in the middle of the ring, for example 72% or 8/12. Leave empty to show the percentage computed from Value and Maximum." },
+    { "staticId": "LABEL", "apexlangName": "label", "attribute": 4, "name": "Label", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 40, "helpText": "Caption under the ring. Also the accessible name." },
+    { "staticId": "STATE", "apexlangName": "state", "attribute": 5, "name": "State", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 50, "helpText": "Optional success, warning, danger or info. Anything else uses the primary color." },
+    {
+      "staticId": "SIZE", "apexlangName": "size", "attribute": 6, "name": "Size", "type": "selectList", "required": false, "escapeMode": "htmlAttribute", "sequence": 60,
+      "helpText": "Ring diameter.",
+      "entries": [
+        { "name": "small", "display": "Small, 64px", "return": "sm", "sequence": 10 },
+        { "name": "large", "display": "Large, 160px", "return": "lg", "sequence": 20 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "samples": [
+    {
+      "title": "Launchpad",
+      "mode": "report",
+      "settings": { "ROW_HEIGHT": "compact" },
+      "rows": [
+        { "TITLE": "Sales Dashboard", "DESCRIPTION": "Revenue, pipeline and forecast for this quarter.", "ICON": "fa-line-chart", "SPAN": "large", "LINK_URL": "#", "LINK_LABEL": "Open" },
+        { "TITLE": "Orders", "DESCRIPTION": "Create and track orders.", "ICON": "fa-shopping-cart", "LINK_URL": "#", "LINK_LABEL": "Open" },
+        { "TITLE": "Customers", "DESCRIPTION": "Accounts and contacts.", "ICON": "fa-users", "LINK_URL": "#", "LINK_LABEL": "Open" },
+        { "TITLE": "Approvals", "DESCRIPTION": "3 requests are waiting for you.", "ICON": "fa-check-square-o", "SPAN": "wide", "LINK_URL": "#", "LINK_LABEL": "Review" },
+        { "TITLE": "Reports", "DESCRIPTION": "Scheduled and ad-hoc reports.", "ICON": "fa-file-text-o" }
+      ]
+    }
+  ]
+}

@@ -34,6 +34,9 @@ npx @21st-dev/cli theme <id> --json                                # a theme's C
 If `21st.dev` is blocked by your network, have the user paste the component code or
 the page's "Copy code" output instead.
 
+Magic UI (MIT) has its own guide with a component-by-component fit list:
+`magicui.md`.
+
 ## 0. Licence check first (stop condition)
 
 Open the component page and its source repository and record the licence in

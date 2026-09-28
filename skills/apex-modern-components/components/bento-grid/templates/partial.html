@@ -1,0 +1,9 @@
+<div class="amc-Bento-tile{if ?LINK_URL/} amc-Bento-tile--link{endif/}">
+  {if ?IMAGE_URL/}<img class="amc-Bento-bg" src="#IMAGE_URL#" alt="" loading="lazy">{endif/}
+  <div class="amc-Bento-content">
+    {if ?ICON/}<span class="amc-Bento-icon fa #ICON#" aria-hidden="true"></span>{endif/}
+    <h3 class="amc-Bento-title">{if ?LINK_URL/}<a class="amc-Bento-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+    {if ?DESCRIPTION/}<p class="amc-Bento-desc">#DESCRIPTION#</p>{endif/}
+  </div>
+  {if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-Bento-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-Bento-arrow fa fa-arrow-right"></span></span>{endif/}{endif/}
+</div>

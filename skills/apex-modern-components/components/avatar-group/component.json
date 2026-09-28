@@ -1,0 +1,39 @@
+{
+  "name": "Avatar Group",
+  "apexlangName": "avatarGroup",
+  "staticId": "AMC_AVATAR_GROUP",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["avatars", "people", "team", "members", "assignees", "participants", "stack", "facepile"],
+  "description": "Overlapping stack of user avatars (image or initials) with an optional +N counter. One row per person.",
+  "helpText": "Each row is one person: map Name, and Image URL or Initials. To show a counter, add a final row whose Overflow Text is for example +12 (union it in SQL).",
+  "source": { "url": "https://magicui.design/docs/components/avatar-circles", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-avatar-group.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-avatar-group.css"],
+  "attributes": [
+    { "staticId": "NAME", "apexlangName": "name", "attribute": 1, "name": "Name", "type": "sessionStateValue", "required": true, "escapeMode": "htmlAttribute", "sequence": 10, "helpText": "Person's name: used as tooltip and accessible name." },
+    { "staticId": "IMAGE_URL", "apexlangName": "imageUrl", "attribute": 2, "name": "Image URL", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 20, "helpText": "Avatar image URL, for example built with apex_util.get_blob_file_src or #APP_FILES#. Leave empty to show initials." },
+    { "staticId": "INITIALS", "apexlangName": "initials", "attribute": 3, "name": "Initials", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 30, "helpText": "One or two letters shown when there is no image, for example apex_string.get_initials(name)." },
+    { "staticId": "LINK_URL", "apexlangName": "linkUrl", "attribute": 4, "name": "Link URL", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 40, "helpText": "Optional target when the avatar is clicked (developer-controlled URL)." },
+    { "staticId": "OVERFLOW_TEXT", "apexlangName": "overflowText", "attribute": 5, "name": "Overflow Text", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 50, "helpText": "When set, the row renders as a counter bubble (for example +12) instead of an avatar." },
+    {
+      "staticId": "SIZE", "apexlangName": "size", "attribute": 6, "name": "Size", "type": "selectList", "required": false, "escapeMode": "htmlAttribute", "sequence": 60,
+      "helpText": "Avatar diameter.",
+      "entries": [
+        { "name": "small", "display": "Small, 28px", "return": "sm", "sequence": 10 },
+        { "name": "large", "display": "Large, 48px", "return": "lg", "sequence": 20 }
+      ]
+    }
+  ]
+}

@@ -92,6 +92,13 @@ export function validateComponent({ slug, component: c, loaded }) {
     if (a.escapeMode === "raw") errors.push(`${slug}: ${a.staticId} uses raw escaping; not allowed in this library`);
     if (a.type === "selectList") need((a.entries || []).length > 0, `${a.staticId}: selectList needs entries`);
     need(a.helpText, `${a.staticId}: helpText is required (it is what the Page Designer shows)`);
+    // apexlang rejects ( ) { } on any non-fenced line, even inside a value.
+    const inline = [a.name, a.default, ...(a.entries || []).flatMap((e) => [e.name, e.display, e.return])];
+    for (const v of inline) {
+      if (v !== undefined && v !== null && /[(){}]/.test(String(v))) {
+        errors.push(`${slug}: ${a.staticId} value "${v}" contains ( ) { }, which APEXlang treats as structure; rephrase it`);
+      }
+    }
     ids.add(a.staticId);
     numbers.add(a.attribute);
   }

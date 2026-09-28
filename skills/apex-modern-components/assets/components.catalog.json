@@ -8,6 +8,240 @@
   },
   "components": [
     {
+      "slug": "avatar-group",
+      "name": "Avatar Group",
+      "apexlangName": "avatarGroup",
+      "staticId": "AMC_AVATAR_GROUP",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/avatarGroup",
+      "apexlangItemType": null,
+      "keywords": [
+        "avatars",
+        "people",
+        "team",
+        "members",
+        "assignees",
+        "participants",
+        "stack",
+        "facepile"
+      ],
+      "description": "Overlapping stack of user avatars (image or initials) with an optional +N counter. One row per person.",
+      "settings": [
+        {
+          "apexlangName": "name",
+          "staticId": "NAME",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "overflowText",
+          "staticId": "OVERFLOW_TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/avatar-group/README.md",
+        "example": "components/avatar-group/examples",
+        "apexlang": "components/avatar-group/dist/apexlang/shared-components/plugins/avatar-group",
+        "legacySql": "components/avatar-group/dist/legacy/amc_avatar_group.sql"
+      }
+    },
+    {
+      "slug": "bento-grid",
+      "name": "Bento Grid",
+      "apexlangName": "bentoGrid",
+      "staticId": "AMC_BENTO_GRID",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/bentoGrid",
+      "apexlangItemType": null,
+      "keywords": [
+        "bento",
+        "tiles",
+        "launchpad",
+        "home page",
+        "dashboard",
+        "navigation",
+        "feature grid",
+        "cards",
+        "menu"
+      ],
+      "description": "Asymmetric grid of feature tiles (normal, wide, tall or large) with icon, title, description, optional background image and a call-to-action that slides in on hover. Good for home pages and app launchpads.",
+      "settings": [
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "span",
+          "staticId": "SPAN",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "rowHeight",
+          "staticId": "ROW_HEIGHT",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "compact",
+            "tall"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/bento-grid/README.md",
+        "example": "components/bento-grid/examples",
+        "apexlang": "components/bento-grid/dist/apexlang/shared-components/plugins/bento-grid",
+        "legacySql": "components/bento-grid/dist/legacy/amc_bento_grid.sql"
+      }
+    },
+    {
+      "slug": "circular-progress",
+      "name": "Circular Progress",
+      "apexlangName": "circularProgress",
+      "staticId": "AMC_CIRCULAR_PROGRESS",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/circularProgress",
+      "apexlangItemType": null,
+      "keywords": [
+        "gauge",
+        "ring",
+        "donut",
+        "radial",
+        "progress",
+        "percent",
+        "completion",
+        "kpi",
+        "meter"
+      ],
+      "description": "Animated ring gauge showing a value against a maximum, with the value in the center. One gauge (partial) or a row of labelled gauges (report).",
+      "settings": [
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "max",
+          "staticId": "MAX",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "centerText",
+          "staticId": "CENTER_TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/circular-progress/README.md",
+        "example": "components/circular-progress/examples",
+        "apexlang": "components/circular-progress/dist/apexlang/shared-components/plugins/circular-progress",
+        "legacySql": "components/circular-progress/dist/legacy/amc_circular_progress.sql"
+      }
+    },
+    {
       "slug": "empty-state",
       "name": "Empty State",
       "apexlangName": "emptyState",

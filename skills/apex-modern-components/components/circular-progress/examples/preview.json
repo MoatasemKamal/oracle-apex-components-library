@@ -1,0 +1,15 @@
+{
+  "samples": [
+    {
+      "title": "Report",
+      "mode": "report",
+      "settings": {},
+      "rows": [
+        { "VALUE": "72", "LABEL": "Storage", "STATE": "warning" },
+        { "VALUE": "8", "MAX": "12", "CENTER_TEXT": "8/12", "LABEL": "Sprint tasks", "STATE": "success" },
+        { "VALUE": "96", "LABEL": "Budget used", "STATE": "danger" },
+        { "VALUE": "35", "LABEL": "Onboarding" }
+      ]
+    }
+  ]
+}

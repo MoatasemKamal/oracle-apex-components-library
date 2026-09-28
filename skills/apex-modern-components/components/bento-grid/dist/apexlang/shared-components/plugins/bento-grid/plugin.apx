@@ -1,0 +1,245 @@
+plugin bentoGrid (
+    name: Bento Grid
+    staticId: AMC_BENTO_GRID
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-Bento-tile{if ?LINK_URL/} amc-Bento-tile--link{endif/}">
+              {if ?IMAGE_URL/}<img class="amc-Bento-bg" src="#IMAGE_URL#" alt="" loading="lazy">{endif/}
+              <div class="amc-Bento-content">
+                {if ?ICON/}<span class="amc-Bento-icon fa #ICON#" aria-hidden="true"></span>{endif/}
+                <h3 class="amc-Bento-title">{if ?LINK_URL/}<a class="amc-Bento-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+                {if ?DESCRIPTION/}<p class="amc-Bento-desc">#DESCRIPTION#</p>{endif/}
+              </div>
+              {if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-Bento-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-Bento-arrow fa fa-arrow-right"></span></span>{endif/}{endif/}
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-Bento{if ?ROW_HEIGHT/} amc-Bento--#ROW_HEIGHT#{endif/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-Bento-item {case SPAN/}{when wide/}amc-Bento-item--wide{when tall/}amc-Bento-item--tall{when large/}amc-Bento-item--large{otherwise/}amc-Bento-item--normal{endcase/}">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-bento-grid.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each row is one tile. Map Span to a column returning normal, wide, tall or large to build the bento layout. On phones all tiles stack in one column.
+            ```
+    }
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 1
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Tile heading.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 2
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two sentences under the title.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 3
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-line-chart.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 4
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target of the tile (developer-controlled URL, for example apex_page.get_url(p_page => 10)).
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 5
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Call-to-action text, for example Open. Shown on hover or focus (always on touch screens).
+                ```
+        }
+    )
+    customAttribute SPAN (
+        apexlangName: span
+        attribute: 6
+        name: Span
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Tile size: normal (1x1), wide (2x1), tall (1x2) or large (2x2). Unknown values render as normal.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 7
+        name: Background Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional decorative image shown faded at the top of the tile.
+                ```
+        }
+    )
+    customAttribute ROW_HEIGHT (
+        apexlangName: rowHeight
+        attribute: 8
+        name: Row Height
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 80
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Height of one grid row.
+                ```
+        }
+        entry compact (
+            sequence: 10
+            display: Compact, 10rem
+            return: compact
+        )
+        entry tall (
+            sequence: 20
+            display: Tall, 18rem
+            return: tall
+        )
+    )
+    file "amc-bento-grid.css" (
+        fileName: amc-bento-grid.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

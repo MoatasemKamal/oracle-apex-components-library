@@ -84,6 +84,7 @@ if (fs.existsSync(STYLES_DIR)) {
 }
 
 const units = listComponentDirs(path.join(SKILL_ROOT, "components")).map(loadComponent);
+const js = units.flatMap((u) => u.loaded.files.filter((f) => f.fileName.endsWith(".js")).map((f) => f.content.toString("utf8")));
 const css = units.flatMap((u) => u.loaded.files.filter((f) => f.fileName.endsWith(".css")).map((f) => f.content.toString("utf8")));
 
 function sampleHtml(unit) {
@@ -124,6 +125,7 @@ h1 { margin: 0; padding: 16px; font-size: 18px; }
 /* Minimal stand-in for Universal Theme buttons used by Empty State */
 .t-Button { display: inline-flex; align-items: center; padding: 8px 12px; border-radius: 4px; border: 0; font: inherit; font-size: 13px; text-decoration: none; background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast, #fff); }
 /* Glyph fallbacks in case the icon font cannot load (APEX ships Font APEX) */
+[class*="fa-"]::before { content: "\\25CF"; }
 .fa-star::before { content: "\\2605"; } .fa-check::before { content: "\\2713"; } .fa-exclamation::before { content: "!"; }
 .fa-arrow-up::before { content: "\\2191"; } .fa-arrow-down::before { content: "\\2193"; } .fa-minus::before { content: "\\2212"; }
 .fa-times-circle-o::before { content: "\\2715"; } .fa-inbox::before, .fa-search::before, .fa-money::before, .fa-ticket::before,
@@ -152,6 +154,8 @@ ${sample.html}
 </div>`
 ).join("\n")}
 </div>
+<script>window.apex = window.apex || { item: { create: function () {} } };</script>
+${js.map((code) => `<script>${code.replace(/<\/script/gi, "<\\/script")}</script>`).join("\n")}
 </body>
 </html>
 `;
