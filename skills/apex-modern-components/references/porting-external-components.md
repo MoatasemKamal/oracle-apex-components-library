@@ -6,13 +6,37 @@ react-three-fiber for 3D). It cannot run in APEX as-is. APEX has no React runtim
 Tailwind utility classes would fight Universal Theme. Port the **design and
 behavior**, not the code.
 
-## Getting the source from 21st.dev (optional, with the 21st CLI)
+## Getting the source from 21st.dev (optional)
 
-21st.dev publishes agent skills at <https://github.com/21st-dev/skill> (Apache-2.0).
-Only **`21st-cli-use`** is useful for this workflow. `21st-registry`, `21st-ai` and
-`21st-design-sync` publish or generate React work and do not apply here. Requirements:
-network access to `21st.dev`, and a login (`npx @21st-dev/cli login`) or API key
-(`TWENTYFIRST_TOKEN`). Retrieving code has a daily free quota.
+21st.dev offers two agent entry points. Both need network access to `21st.dev` and a
+free API key from <https://21st.dev/mcp>. Retrieving code has a daily free quota
+(2 installs per day on the free tier at the time of writing).
+
+**A. 21st MCP server (recommended for agents).** This replaced the old Magic MCP
+(`21st-dev/magic-mcp`, ISC licence), which is now only a proxy to it.
+
+```json
+{
+  "mcpServers": {
+    "21st": { "url": "https://21st.dev/api/mcp", "headers": { "x-api-key": "<API_KEY_21ST>" } }
+  }
+}
+```
+
+In Claude Code: `claude plugin marketplace add 21st-dev/magic-mcp`, then
+`/plugin install 21st`, with `API_KEY_21ST` exported. Tools for this workflow:
+
+| Tool | Use here |
+|---|---|
+| `search` | Find candidates ("stats card", "stepper", "pricing table") |
+| `get_component` | Get the React/Tailwind source to port. This counts against the quota. |
+| `get_inspiration` | Browse designs before choosing |
+| `search_logo` | Not for APEX apps: brand logos are trademarks |
+| `generate` / `iterate_generation` | Hosted AI generation, only when `get_usage.aiGenerationEnabled` is true. It returns React code, which still has to be ported. Do not retry after `ai_subscription_required`. |
+
+**B. 21st CLI** (<https://github.com/21st-dev/skill>, Apache-2.0). Of its skills, only
+**`21st-cli-use`** applies. `21st-registry`, `21st-ai` and `21st-design-sync` publish or
+generate React work.
 
 ```bash
 npx @21st-dev/cli search "stats card" --type c --limit 10 --json   # metadata, free
@@ -20,16 +44,17 @@ npx @21st-dev/cli get <id> --json > /tmp/21st-<id>.json            # component +
 npx @21st-dev/cli theme <id> --json                                # a theme's CSS tokens
 ```
 
-- Use `search` + `get` only. **Do not run `21st add`.** It installs into a React/shadcn
-  project, which an APEX app is not.
+Rules for both routes:
+- Use search and get only. **Never install** (`21st add`, shadcn add). An APEX app is
+  not a React project.
 - Keep the downloaded code in a scratch directory, not in `components/`. It is
   reference material for the port below, not library source.
 - Record the component URL and author in `component.json` `source`, then do the licence
-  check below. The CLI's output does not replace it.
+  check below. Each 21st.dev component has its own author and licence, and the MCP
+  result does not replace that check.
 - `21st theme` CSS (shadcn `--primary`, `--background`, ... for `:root` and
   `.dark`) can be converted to a Universal Theme look by mapping those tokens onto the
-  `--ut-*` variables in the table in section 3, for example as Theme Roller custom CSS.
-  Components in this library then pick it up automatically.
+  `--ut-*` variables in the table in section 3.
 
 If `21st.dev` is blocked by your network, have the user paste the component code or
 the page's "Copy code" output instead.
