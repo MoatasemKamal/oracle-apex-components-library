@@ -1,0 +1,76 @@
+/* APEX Modern Components - Key-Value List */
+
+.amc-KeyValue {
+  --amc-kv-fg: var(--ut-component-text-default-color, #262626);
+  --amc-kv-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-kv-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-kv-label-width: 12rem;
+  --amc-kv-min: 16rem;
+
+  margin: 0;
+  padding: 0;
+  color: var(--amc-kv-fg);
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.amc-KeyValue-item {
+  padding-block: .625rem;
+  min-inline-size: 0;
+}
+
+.amc-KeyValue--dividers .amc-KeyValue-item + .amc-KeyValue-item {
+  border-block-start: 1px solid var(--amc-kv-line);
+}
+
+.amc-KeyValue-label {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  margin: 0;
+  color: var(--amc-kv-muted);
+  font-weight: 500;
+}
+
+.amc-KeyValue-icon { font-size: .875rem; }
+
+.amc-KeyValue-value {
+  margin: 0;
+  overflow-wrap: anywhere;
+  unicode-bidi: isolate;
+}
+
+.amc-KeyValue-empty { color: var(--amc-kv-muted); }
+
+.amc-KeyValue--inline .amc-KeyValue-item {
+  display: grid;
+  grid-template-columns: minmax(0, var(--amc-kv-label-width)) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.amc-KeyValue--stacked .amc-KeyValue-value,
+.amc-KeyValue--grid .amc-KeyValue-value {
+  margin-block-start: .125rem;
+}
+
+.amc-KeyValue--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-kv-min), 100%), 1fr));
+  column-gap: 1.5rem;
+}
+
+.amc-KeyValue--grid.amc-KeyValue--dividers .amc-KeyValue-item + .amc-KeyValue-item {
+  border-block-start: 0;
+}
+
+.amc-KeyValue--grid.amc-KeyValue--dividers .amc-KeyValue-item {
+  border-block-end: 1px solid var(--amc-kv-line);
+}
+
+@media (max-width: 640px) {
+  .amc-KeyValue--inline .amc-KeyValue-item {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .125rem;
+  }
+}

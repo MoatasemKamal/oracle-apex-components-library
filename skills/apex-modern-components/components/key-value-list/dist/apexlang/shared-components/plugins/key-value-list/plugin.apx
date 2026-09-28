@@ -1,0 +1,205 @@
+plugin keyValueList (
+    name: Key-Value List
+    staticId: AMC_KEY_VALUE_LIST
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <dt class="amc-KeyValue-label">{if ?ICON/}<span class="amc-KeyValue-icon fa #ICON#" aria-hidden="true"></span>{endif/}#LABEL#</dt>
+            <dd class="amc-KeyValue-value">{if ?VALUE/}#VALUE#{else/}<span class="amc-KeyValue-empty">#EMPTY_TEXT#</span>{endif/}</dd>
+            ```
+        reportBody:
+            ```html
+            <dl class="amc-KeyValue amc-KeyValue--#LAYOUT#{if DIVIDERS/} amc-KeyValue--dividers{endif/}">#APEX$ROWS#</dl>
+            ```
+        reportRow:
+            ```html
+            <div class="amc-KeyValue-item">#APEX$PARTIAL#</div>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-key-value-list.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row renders one label/value pair. Typical source: an UNPIVOT of the current record or a query returning one row per attribute.
+            ```
+    }
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 1
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Name of the property, for example Customer.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 2
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Property value. Empty values show the Empty Text.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 3
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class shown before the label, for example fa-user.
+                ```
+        }
+    )
+    customAttribute EMPTY_TEXT (
+        apexlangName: emptyText
+        attribute: 4
+        name: Empty Text
+        scope: component
+        type: text
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        default {
+            value: -
+        }
+        help {
+            helpText:
+                ```
+                Text shown when a value is null.
+                ```
+        }
+    )
+    customAttribute LAYOUT (
+        apexlangName: layout
+        attribute: 5
+        name: Layout
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 50
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: inline
+        }
+        help {
+            helpText:
+                ```
+                Inline puts label and value side by side (stacks on phones). Grid places pairs in responsive columns.
+                ```
+        }
+        entry inline (
+            sequence: 10
+            display: Label Beside Value
+            return: inline
+        )
+        entry stacked (
+            sequence: 20
+            display: Label Above Value
+            return: stacked
+        )
+        entry grid (
+            sequence: 30
+            display: Grid
+            return: grid
+        )
+    )
+    customAttribute DIVIDERS (
+        apexlangName: dividers
+        attribute: 6
+        name: Show Dividers
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 60
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: true
+        }
+        help {
+            helpText:
+                ```
+                Draw a line between pairs.
+                ```
+        }
+    )
+    file "amc-key-value-list.css" (
+        fileName: amc-key-value-list.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

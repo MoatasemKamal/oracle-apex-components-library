@@ -1,0 +1,19 @@
+{
+  "samples": [
+    {
+      "title": "Report, 3 columns",
+      "mode": "report",
+      "settings": { "COLUMNS": "3", "ACCENT": "" },
+      "rows": [
+        { "LABEL": "Revenue", "VALUE": "1,284,500", "SUFFIX": "SAR", "CHANGE": "+12.4%", "TREND": "up", "ICON": "fa-money", "DESCRIPTION": "vs. last month" },
+        { "LABEL": "Open Tickets", "VALUE": "86", "CHANGE": "-9", "TREND": "down", "ICON": "fa-ticket", "DESCRIPTION": "last 7 days" },
+        { "LABEL": "Avg. Response", "VALUE": "2.4", "SUFFIX": "h", "CHANGE": "0%", "TREND": "flat", "ICON": "fa-clock-o" }
+      ]
+    },
+    {
+      "title": "Partial, accent + down is good",
+      "mode": "partial",
+      "settings": { "LABEL": "Error Rate", "VALUE": "0.8", "SUFFIX": "%", "CHANGE": "-0.3 pts", "TREND": "down", "INVERT_TREND": "Y", "ICON": "fa-bug", "ACCENT": "danger" }
+    }
+  ]
+}

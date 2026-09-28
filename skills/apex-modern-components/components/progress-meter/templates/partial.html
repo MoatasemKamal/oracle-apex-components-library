@@ -1,0 +1,11 @@
+<div class="amc-Meter{if ?SIZE/} amc-Meter--#SIZE#{endif/} {case STATE/}{when success/}amc-Meter--success{when warning/}amc-Meter--warning{when danger/}amc-Meter--danger{when info/}amc-Meter--info{otherwise/}amc-Meter--primary{endcase/}">
+  {if ?LABEL/}
+  <div class="amc-Meter-header">
+    <span class="amc-Meter-label">#LABEL#</span>
+    {if ?VALUE_TEXT/}<span class="amc-Meter-valueText">#VALUE_TEXT#</span>{endif/}
+  </div>
+  {else/}
+  {if ?VALUE_TEXT/}<div class="amc-Meter-header"><span class="amc-Meter-valueText">#VALUE_TEXT#</span></div>{endif/}
+  {endif/}
+  <progress class="amc-Meter-bar" value="#VALUE#" max="{if ?MAX/}#MAX#{else/}100{endif/}"{if ?LABEL/} aria-label="#LABEL!ATTR#"{endif/}{if ?VALUE_TEXT/} aria-valuetext="#VALUE_TEXT!ATTR#"{endif/}></progress>
+</div>

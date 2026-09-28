@@ -1,0 +1,71 @@
+/* APEX Modern Components - Empty State
+ * The call-to-action reuses Universal Theme's t-Button classes, so it is
+ * styled by the theme itself; this file only lays out the block. */
+
+.amc-EmptyState {
+  --amc-empty-fg: var(--ut-component-text-default-color, #262626);
+  --amc-empty-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-empty-line: var(--ut-component-border-color, rgba(0, 0, 0, .15));
+  --amc-empty-radius: var(--ut-component-border-radius, .5rem);
+  --amc-empty-accent: var(--ut-palette-primary, #056ac8);
+  --amc-empty-icon-size: 3.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  box-sizing: border-box;
+  max-inline-size: 36rem;
+  margin-inline: auto;
+  padding: 2.5rem 1.5rem;
+  color: var(--amc-empty-fg);
+  text-align: center;
+}
+
+.amc-EmptyState--compact {
+  --amc-empty-icon-size: 2.5rem;
+  padding: 1.25rem 1rem;
+}
+
+.amc-EmptyState--large {
+  --amc-empty-icon-size: 5rem;
+  padding: 4rem 2rem;
+}
+
+.amc-EmptyState--bordered {
+  max-inline-size: none;
+  border: 2px dashed var(--amc-empty-line);
+  border-radius: var(--amc-empty-radius);
+}
+
+.amc-EmptyState-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: calc(var(--amc-empty-icon-size) * 1.6);
+  block-size: calc(var(--amc-empty-icon-size) * 1.6);
+  margin-block-end: .5rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-empty-accent) 10%, transparent);
+  color: var(--amc-empty-accent);
+  font-size: var(--amc-empty-icon-size);
+}
+
+.amc-EmptyState-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.amc-EmptyState--compact .amc-EmptyState-title { font-size: 1rem; }
+.amc-EmptyState--large .amc-EmptyState-title { font-size: 1.5rem; }
+
+.amc-EmptyState-message {
+  margin: 0;
+  color: var(--amc-empty-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+.amc-EmptyState-button { margin-block-start: .75rem; }

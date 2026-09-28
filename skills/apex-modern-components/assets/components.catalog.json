@@ -1,0 +1,451 @@
+{
+  "schemaVersion": 1,
+  "library": "apex-modern-components",
+  "cssPrefix": "amc-",
+  "supportedApex": {
+    "min": "23.1",
+    "apexlang": "26.1"
+  },
+  "components": [
+    {
+      "slug": "empty-state",
+      "name": "Empty State",
+      "apexlangName": "emptyState",
+      "staticId": "AMC_EMPTY_STATE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/emptyState",
+      "apexlangItemType": null,
+      "keywords": [
+        "empty",
+        "no data",
+        "placeholder",
+        "onboarding",
+        "zero state",
+        "call to action"
+      ],
+      "description": "Centered illustration-style message with icon, title, text and an optional Universal Theme button. Use for no-data, first-run and error placeholders.",
+      "settings": [
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "icon",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "message",
+          "staticId": "MESSAGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "compact",
+            "large"
+          ]
+        },
+        {
+          "apexlangName": "bordered",
+          "staticId": "BORDERED",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/empty-state/README.md",
+        "example": "components/empty-state/examples",
+        "apexlang": "components/empty-state/dist/apexlang/shared-components/plugins/empty-state",
+        "legacySql": "components/empty-state/dist/legacy/amc_empty_state.sql"
+      }
+    },
+    {
+      "slug": "key-value-list",
+      "name": "Key-Value List",
+      "apexlangName": "keyValueList",
+      "staticId": "AMC_KEY_VALUE_LIST",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/keyValueList",
+      "apexlangItemType": null,
+      "keywords": [
+        "details",
+        "properties",
+        "attributes",
+        "description list",
+        "record",
+        "summary",
+        "label value"
+      ],
+      "description": "Semantic description list (<dl>) for record details: label and value pairs in stacked, side-by-side or grid layout.",
+      "settings": [
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "emptyText",
+          "staticId": "EMPTY_TEXT",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "layout",
+          "staticId": "LAYOUT",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "inline",
+            "stacked",
+            "grid"
+          ]
+        },
+        {
+          "apexlangName": "dividers",
+          "staticId": "DIVIDERS",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/key-value-list/README.md",
+        "example": "components/key-value-list/examples",
+        "apexlang": "components/key-value-list/dist/apexlang/shared-components/plugins/key-value-list",
+        "legacySql": "components/key-value-list/dist/legacy/amc_key_value_list.sql"
+      }
+    },
+    {
+      "slug": "progress-meter",
+      "name": "Progress Meter",
+      "apexlangName": "progressMeter",
+      "staticId": "AMC_PROGRESS_METER",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/progressMeter",
+      "apexlangItemType": null,
+      "keywords": [
+        "progress",
+        "meter",
+        "percent",
+        "completion",
+        "bar",
+        "capacity",
+        "quota"
+      ],
+      "description": "Accessible horizontal progress bar built on the native <progress> element. Use as a report column (partial) or as a list of labelled bars (report).",
+      "settings": [
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "max",
+          "staticId": "MAX",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "valueText",
+          "staticId": "VALUE_TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/progress-meter/README.md",
+        "example": "components/progress-meter/examples",
+        "apexlang": "components/progress-meter/dist/apexlang/shared-components/plugins/progress-meter",
+        "legacySql": "components/progress-meter/dist/legacy/amc_progress_meter.sql"
+      }
+    },
+    {
+      "slug": "progress-steps",
+      "name": "Progress Steps",
+      "apexlangName": "progressSteps",
+      "staticId": "AMC_PROGRESS_STEPS",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/progressSteps",
+      "apexlangItemType": null,
+      "keywords": [
+        "stepper",
+        "steps",
+        "wizard",
+        "workflow",
+        "status",
+        "process",
+        "timeline"
+      ],
+      "description": "Data-driven stepper that shows where a record is in a process (for example an approval or order workflow). One row per step.",
+      "settings": [
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "status",
+          "staticId": "STATUS",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "orientation",
+          "staticId": "ORIENTATION",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "horizontal",
+            "vertical"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/progress-steps/README.md",
+        "example": "components/progress-steps/examples",
+        "apexlang": "components/progress-steps/dist/apexlang/shared-components/plugins/progress-steps",
+        "legacySql": "components/progress-steps/dist/legacy/amc_progress_steps.sql"
+      }
+    },
+    {
+      "slug": "star-rating",
+      "name": "Star Rating",
+      "apexlangName": "starRating",
+      "staticId": "AMC_STAR_RATING",
+      "pluginType": "item",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": null,
+      "apexlangRegionType": null,
+      "apexlangItemType": "plugin/starRating",
+      "keywords": [
+        "rating",
+        "stars",
+        "score",
+        "review",
+        "feedback",
+        "item"
+      ],
+      "description": "Page item for 1..N ratings built from native radio buttons: keyboard accessible, works with Dynamic Actions, validations, read-only and session state like any native item.",
+      "settings": [
+        {
+          "apexlangName": "maxStars",
+          "staticId": "MAX_STARS",
+          "type": "integer",
+          "required": true
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "clearable",
+          "staticId": "CLEARABLE",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "clearLabel",
+          "staticId": "CLEAR_LABEL",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/star-rating/README.md",
+        "example": "components/star-rating/examples",
+        "apexlang": "components/star-rating/dist/apexlang/shared-components/plugins/star-rating",
+        "legacySql": "components/star-rating/dist/legacy/amc_star_rating.sql"
+      }
+    },
+    {
+      "slug": "stat-card",
+      "name": "Stat Card",
+      "apexlangName": "statCard",
+      "staticId": "AMC_STAT_CARD",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/statCard",
+      "apexlangItemType": null,
+      "keywords": [
+        "kpi",
+        "metric",
+        "stat",
+        "dashboard",
+        "tile",
+        "trend"
+      ],
+      "description": "KPI tile with label, value, optional unit, trend delta and icon. Renders one card (partial) or a responsive grid of cards (report).",
+      "settings": [
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "suffix",
+          "staticId": "SUFFIX",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "change",
+          "staticId": "CHANGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "trend",
+          "staticId": "TREND",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "invertTrend",
+          "staticId": "INVERT_TREND",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "accent",
+          "staticId": "ACCENT",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "primary",
+            "info",
+            "success",
+            "warning",
+            "danger"
+          ]
+        },
+        {
+          "apexlangName": "columns",
+          "staticId": "COLUMNS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "two",
+            "three",
+            "four"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/stat-card/README.md",
+        "example": "components/stat-card/examples",
+        "apexlang": "components/stat-card/dist/apexlang/shared-components/plugins/stat-card",
+        "legacySql": "components/stat-card/dist/legacy/amc_stat_card.sql"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+<div class="amc-StatCard{if ?ACCENT/} amc-StatCard--#ACCENT#{endif/}{if INVERT_TREND/} amc-StatCard--invertTrend{endif/}">
+  {if ?ICON/}<span class="amc-StatCard-icon fa #ICON#" aria-hidden="true"></span>{endif/}
+  <div class="amc-StatCard-body">
+    <span class="amc-StatCard-label">#LABEL#</span>
+    <span class="amc-StatCard-value">#VALUE#{if ?SUFFIX/}<span class="amc-StatCard-unit">#SUFFIX#</span>{endif/}</span>
+    {if ?CHANGE/}
+    <span class="amc-StatCard-delta {case TREND/}{when up/}amc-StatCard-delta--up{when down/}amc-StatCard-delta--down{otherwise/}amc-StatCard-delta--flat{endcase/}">
+      <span class="amc-StatCard-deltaIcon fa {case TREND/}{when up/}fa-arrow-up{when down/}fa-arrow-down{otherwise/}fa-minus{endcase/}" aria-hidden="true"></span>
+      <span class="amc-u-srOnly">{case TREND/}{when up/}Increase{when down/}Decrease{otherwise/}No change{endcase/}</span>
+      #CHANGE#
+    </span>
+    {endif/}
+    {if ?DESCRIPTION/}<span class="amc-StatCard-desc">#DESCRIPTION#</span>{endif/}
+  </div>
+</div>

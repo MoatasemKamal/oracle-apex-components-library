@@ -1,0 +1,215 @@
+plugin emptyState (
+    name: Empty State
+    staticId: AMC_EMPTY_STATE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+        ]
+        partial:
+            ```html
+            <div class="amc-EmptyState{if ?SIZE/} amc-EmptyState--#SIZE#{endif/}{if BORDERED/} amc-EmptyState--bordered{endif/}" role="status">
+              {if ?ICON/}<span class="amc-EmptyState-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+              <h3 class="amc-EmptyState-title">#TITLE#</h3>
+              {if ?MESSAGE/}<p class="amc-EmptyState-message">#MESSAGE#</p>{endif/}
+              {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="t-Button t-Button--hot amc-EmptyState-button" href="#LINK_URL#"><span class="t-Button-label">#LINK_LABEL#</span></a>{endif/}{endif/}
+            </div>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-empty-state.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Place in a region (or use its markup as a report's No Data Found message). The button uses Universal Theme button classes so it matches native buttons in every theme style.
+            ```
+    }
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 1
+        name: Icon
+        scope: component
+        type: icon
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: fa-inbox
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Main message, for example No orders yet.
+                ```
+        }
+    )
+    customAttribute MESSAGE (
+        apexlangName: message
+        attribute: 3
+        name: Message
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Supporting sentence that tells the user what to do next.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 4
+        name: Button Target URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target, for example f?p=&APP_ID.:10:&SESSION. or a column holding apex_page.get_url(...). Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 5
+        name: Button Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Button text. The button renders only when both Target URL and Label are set.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 6
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 60
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Compact fits inside cards and dialogs; Large suits full pages.
+                ```
+        }
+        entry compact (
+            sequence: 10
+            display: Compact
+            return: compact
+        )
+        entry large (
+            sequence: 20
+            display: Large
+            return: large
+        )
+    )
+    customAttribute BORDERED (
+        apexlangName: bordered
+        attribute: 7
+        name: Dashed Border
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 70
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: false
+        }
+        help {
+            helpText:
+                ```
+                Outline the area with a dashed border, useful for drop zones and first-run panels.
+                ```
+        }
+    )
+    file "amc-empty-state.css" (
+        fileName: amc-empty-state.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

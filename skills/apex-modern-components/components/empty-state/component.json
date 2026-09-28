@@ -1,0 +1,106 @@
+{
+  "name": "Empty State",
+  "apexlangName": "emptyState",
+  "staticId": "AMC_EMPTY_STATE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["empty", "no data", "placeholder", "onboarding", "zero state", "call to action"],
+  "description": "Centered illustration-style message with icon, title, text and an optional Universal Theme button. Use for no-data, first-run and error placeholders.",
+  "helpText": "Place in a region (or use its markup as a report's No Data Found message). The button uses Universal Theme button classes so it matches native buttons in every theme style.",
+  "templateComponent": {
+    "availableAs": ["partial"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": ["files/amc-empty-state.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-empty-state.css"],
+  "attributes": [
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 1,
+      "name": "Icon",
+      "type": "icon",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "fa-inbox",
+      "sequence": 10,
+      "helpText": "Font APEX icon class."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Main message, for example No orders yet."
+    },
+    {
+      "staticId": "MESSAGE",
+      "apexlangName": "message",
+      "attribute": 3,
+      "name": "Message",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Supporting sentence that tells the user what to do next."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 4,
+      "name": "Button Target URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Optional target, for example f?p=&APP_ID.:10:&SESSION. or a column holding apex_page.get_url(...). Must be developer-controlled, never end-user input."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 5,
+      "name": "Button Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Button text. The button renders only when both Target URL and Label are set."
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 6,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Compact fits inside cards and dialogs; Large suits full pages.",
+      "entries": [
+        { "name": "compact", "display": "Compact", "return": "compact", "sequence": 10 },
+        { "name": "large", "display": "Large", "return": "large", "sequence": 20 }
+      ]
+    },
+    {
+      "staticId": "BORDERED",
+      "apexlangName": "bordered",
+      "attribute": 7,
+      "name": "Dashed Border",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 70,
+      "helpText": "Outline the area with a dashed border, useful for drop zones and first-run panels."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "samples": [
+    {
+      "title": "Editable (rendered HTML sample, value 3)",
+      "html": "<fieldset id=\"P1_RATING\" class=\"amc-Rating\"><input type=\"radio\" class=\"amc-Rating-input\" id=\"P1_RATING_1\" name=\"p\" value=\"1\"><label class=\"amc-Rating-star is-on\" for=\"P1_RATING_1\"><span class=\"fa fa-star\"></span></label><input type=\"radio\" class=\"amc-Rating-input\" id=\"P1_RATING_2\" name=\"p\" value=\"2\"><label class=\"amc-Rating-star is-on\" for=\"P1_RATING_2\"><span class=\"fa fa-star\"></span></label><input type=\"radio\" class=\"amc-Rating-input\" id=\"P1_RATING_3\" name=\"p\" value=\"3\" checked><label class=\"amc-Rating-star is-on\" for=\"P1_RATING_3\"><span class=\"fa fa-star\"></span></label><input type=\"radio\" class=\"amc-Rating-input\" id=\"P1_RATING_4\" name=\"p\" value=\"4\"><label class=\"amc-Rating-star\" for=\"P1_RATING_4\"><span class=\"fa fa-star\"></span></label><input type=\"radio\" class=\"amc-Rating-input\" id=\"P1_RATING_5\" name=\"p\" value=\"5\"><label class=\"amc-Rating-star\" for=\"P1_RATING_5\"><span class=\"fa fa-star\"></span></label><button type=\"button\" class=\"amc-Rating-clear\" aria-label=\"Clear rating\"><span class=\"fa fa-times-circle-o\"></span></button></fieldset>"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<div class="amc-EmptyState{if ?SIZE/} amc-EmptyState--#SIZE#{endif/}{if BORDERED/} amc-EmptyState--bordered{endif/}" role="status">
+  {if ?ICON/}<span class="amc-EmptyState-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+  <h3 class="amc-EmptyState-title">#TITLE#</h3>
+  {if ?MESSAGE/}<p class="amc-EmptyState-message">#MESSAGE#</p>{endif/}
+  {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="t-Button t-Button--hot amc-EmptyState-button" href="#LINK_URL#"><span class="t-Button-label">#LINK_LABEL#</span></a>{endif/}{endif/}
+</div>

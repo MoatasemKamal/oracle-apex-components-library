@@ -1,0 +1,25 @@
+{
+  "samples": [
+    {
+      "title": "Horizontal",
+      "mode": "report",
+      "settings": { "ORIENTATION": "horizontal" },
+      "rows": [
+        { "TITLE": "Submitted", "DESCRIPTION": "12 Sep", "STATUS": "complete" },
+        { "TITLE": "Manager Approval", "DESCRIPTION": "13 Sep", "STATUS": "complete" },
+        { "TITLE": "Finance Review", "DESCRIPTION": "In progress", "STATUS": "current" },
+        { "TITLE": "Paid", "STATUS": "upcoming" }
+      ]
+    },
+    {
+      "title": "Vertical with error",
+      "mode": "report",
+      "settings": { "ORIENTATION": "vertical" },
+      "rows": [
+        { "TITLE": "Order placed", "DESCRIPTION": "Mon 09:12", "STATUS": "complete" },
+        { "TITLE": "Payment", "DESCRIPTION": "Card declined", "STATUS": "error" },
+        { "TITLE": "Shipping", "STATUS": "upcoming" }
+      ]
+    }
+  ]
+}

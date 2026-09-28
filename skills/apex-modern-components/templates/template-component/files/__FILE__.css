@@ -1,0 +1,28 @@
+/* APEX Modern Components - __NAME__
+ * Resolve every color from --ut-* variables (with a fallback) so the component
+ * follows the active theme style, dark mode and Theme Roller. */
+
+.__CLASS__,
+.__CLASS__s {
+  --amc-x-fg: var(--ut-component-text-default-color, #262626);
+  --amc-x-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-x-bg: var(--ut-component-background-color, #fff);
+  --amc-x-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-x-accent: var(--ut-palette-primary, #056ac8);
+}
+
+.__CLASS__s {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.__CLASS__ {
+  color: var(--amc-x-fg);
+}
+
+.__CLASS__-title {
+  font-weight: 600;
+}

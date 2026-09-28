@@ -1,0 +1,6 @@
+<span class="amc-Steps-marker" aria-hidden="true"><span class="amc-Steps-icon fa {case STATUS/}{when complete/}fa-check{when error/}fa-exclamation{otherwise/}{endcase/}"></span></span>
+<span class="amc-Steps-content">
+  <span class="amc-Steps-title">#TITLE#</span>
+  <span class="amc-u-srOnly">{case STATUS/}{when complete/}Completed{when current/}Current step{when error/}Needs attention{otherwise/}Not started{endcase/}</span>
+  {if ?DESCRIPTION/}<span class="amc-Steps-desc">#DESCRIPTION#</span>{endif/}
+</span>

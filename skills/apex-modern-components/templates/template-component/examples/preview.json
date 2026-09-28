@@ -1,0 +1,6 @@
+{
+  "samples": [
+    { "title": "Partial", "mode": "partial", "settings": { "TITLE": "Hello" } },
+    { "title": "Report", "mode": "report", "settings": {}, "rows": [{ "TITLE": "One" }, { "TITLE": "Two" }] }
+  ]
+}

@@ -1,0 +1,92 @@
+/* APEX Modern Components - Progress Meter
+ * Styles the native <progress> element with Universal Theme variables. */
+
+.amc-Meter,
+.amc-Meters {
+  --amc-meter-track: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-meter-fg: var(--ut-component-text-default-color, #262626);
+  --amc-meter-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-meter-fill: var(--ut-palette-primary, #056ac8);
+  --amc-meter-height: .5rem;
+  --amc-meter-radius: 999px;
+}
+
+.amc-Meters {
+  display: flex;
+  flex-direction: column;
+  gap: .875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-Meter {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  min-inline-size: 6rem;
+  color: var(--amc-meter-fg);
+}
+
+.amc-Meter--sm { --amc-meter-height: .25rem; }
+.amc-Meter--lg { --amc-meter-height: .75rem; }
+
+.amc-Meter--primary { --amc-meter-fill: var(--ut-palette-primary, #056ac8); }
+.amc-Meter--success { --amc-meter-fill: var(--ut-palette-success, #278701); }
+.amc-Meter--warning { --amc-meter-fill: var(--ut-palette-warning, #fbce4a); }
+.amc-Meter--danger { --amc-meter-fill: var(--ut-palette-danger, #cb1100); }
+.amc-Meter--info { --amc-meter-fill: var(--ut-palette-info, #056ac8); }
+
+.amc-Meter-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem;
+  font-size: .8125rem;
+  line-height: 1.25;
+}
+
+.amc-Meter-label { font-weight: 500; }
+
+.amc-Meter-valueText {
+  margin-inline-start: auto;
+  color: var(--amc-meter-muted);
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+
+.amc-Meter-bar {
+  display: block;
+  inline-size: 100%;
+  block-size: var(--amc-meter-height);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--amc-meter-radius);
+  background-color: var(--amc-meter-track);
+  color: var(--amc-meter-fill);
+  appearance: none;
+}
+
+.amc-Meter-bar::-webkit-progress-bar {
+  border-radius: var(--amc-meter-radius);
+  background-color: var(--amc-meter-track);
+}
+
+.amc-Meter-bar::-webkit-progress-value {
+  border-radius: var(--amc-meter-radius);
+  background-color: var(--amc-meter-fill);
+  transition: inline-size .3s ease;
+}
+
+.amc-Meter-bar::-moz-progress-bar {
+  border-radius: var(--amc-meter-radius);
+  background-color: var(--amc-meter-fill);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-Meter-bar::-webkit-progress-value { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-Meter-bar { border: 1px solid CanvasText; }
+}

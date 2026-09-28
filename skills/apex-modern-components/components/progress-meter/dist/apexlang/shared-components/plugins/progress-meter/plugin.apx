@@ -1,0 +1,207 @@
+plugin progressMeter (
+    name: Progress Meter
+    staticId: AMC_PROGRESS_METER
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-Meter{if ?SIZE/} amc-Meter--#SIZE#{endif/} {case STATE/}{when success/}amc-Meter--success{when warning/}amc-Meter--warning{when danger/}amc-Meter--danger{when info/}amc-Meter--info{otherwise/}amc-Meter--primary{endcase/}">
+              {if ?LABEL/}
+              <div class="amc-Meter-header">
+                <span class="amc-Meter-label">#LABEL#</span>
+                {if ?VALUE_TEXT/}<span class="amc-Meter-valueText">#VALUE_TEXT#</span>{endif/}
+              </div>
+              {else/}
+              {if ?VALUE_TEXT/}<div class="amc-Meter-header"><span class="amc-Meter-valueText">#VALUE_TEXT#</span></div>{endif/}
+              {endif/}
+              <progress class="amc-Meter-bar" value="#VALUE#" max="{if ?MAX/}#MAX#{else/}100{endif/}"{if ?LABEL/} aria-label="#LABEL!ATTR#"{endif/}{if ?VALUE_TEXT/} aria-valuetext="#VALUE_TEXT!ATTR#"{endif/}></progress>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-Meters">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-Meters-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-progress-meter.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Shows a value against a maximum. Map Value to a numeric column; non-numeric values render an empty bar instead of breaking the page. State colors the bar with the theme palette.
+            ```
+    }
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 1
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible caption above the bar. Also used as the accessible name of the progress bar.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 2
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Current numeric value, for example 42. Use a plain number with a period as decimal separator.
+                ```
+        }
+    )
+    customAttribute MAX (
+        apexlangName: max
+        attribute: 3
+        name: Maximum
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 100
+        }
+        help {
+            helpText:
+                ```
+                Value that represents a full bar. Defaults to 100.
+                ```
+        }
+    )
+    customAttribute VALUE_TEXT (
+        apexlangName: valueText
+        attribute: 4
+        name: Value Text
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Formatted value shown next to the label, for example 42% or 8 of 12 tasks. Leave empty to hide.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 5
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional per-row state: success, warning, danger or info. Anything else uses the primary color.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 6
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 60
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Bar thickness.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small
+            return: sm
+        )
+        entry large (
+            sequence: 20
+            display: Large
+            return: lg
+        )
+    )
+    file "amc-progress-meter.css" (
+        fileName: amc-progress-meter.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

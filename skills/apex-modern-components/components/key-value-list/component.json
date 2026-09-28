@@ -1,0 +1,99 @@
+{
+  "name": "Key-Value List",
+  "apexlangName": "keyValueList",
+  "staticId": "AMC_KEY_VALUE_LIST",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["details", "properties", "attributes", "description list", "record", "summary", "label value"],
+  "description": "Semantic description list (<dl>) for record details: label and value pairs in stacked, side-by-side or grid layout.",
+  "helpText": "Each query row renders one label/value pair. Typical source: an UNPIVOT of the current record or a query returning one row per attribute.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-key-value-list.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-key-value-list.css"],
+  "attributes": [
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 1,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 10,
+      "helpText": "Name of the property, for example Customer."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 2,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Property value. Empty values show the Empty Text."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 3,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Optional Font APEX icon class shown before the label, for example fa-user."
+    },
+    {
+      "staticId": "EMPTY_TEXT",
+      "apexlangName": "emptyText",
+      "attribute": 4,
+      "name": "Empty Text",
+      "type": "text",
+      "required": false,
+      "escapeMode": "html",
+      "default": "-",
+      "sequence": 40,
+      "helpText": "Text shown when a value is null."
+    },
+    {
+      "staticId": "LAYOUT",
+      "apexlangName": "layout",
+      "attribute": 5,
+      "name": "Layout",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "inline",
+      "sequence": 50,
+      "helpText": "Inline puts label and value side by side (stacks on phones). Grid places pairs in responsive columns.",
+      "entries": [
+        { "name": "inline", "display": "Label Beside Value", "return": "inline", "sequence": 10 },
+        { "name": "stacked", "display": "Label Above Value", "return": "stacked", "sequence": 20 },
+        { "name": "grid", "display": "Grid", "return": "grid", "sequence": 30 }
+      ]
+    },
+    {
+      "staticId": "DIVIDERS",
+      "apexlangName": "dividers",
+      "attribute": 6,
+      "name": "Show Dividers",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "Y",
+      "sequence": 60,
+      "helpText": "Draw a line between pairs."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "__NAME__",
+  "apexlangName": "__APEXLANG_NAME__",
+  "staticId": "__STATIC_ID__",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": [],
+  "description": "One sentence: what it shows and when to use it.",
+  "helpText": "What the developer must map, and which values each column may return.",
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/__FILE__.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#__FILE__.css"],
+  "attributes": [
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 1,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 10,
+      "helpText": "Describe the value this setting expects."
+    }
+  ]
+}

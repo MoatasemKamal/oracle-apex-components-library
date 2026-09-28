@@ -1,0 +1,100 @@
+/* APEX Modern Components - Star Rating item */
+
+.amc-Rating {
+  --amc-rating-on: var(--ut-palette-warning, #fbce4a);
+  --amc-rating-off: var(--ut-component-border-color, rgba(0, 0, 0, .2));
+  --amc-rating-focus: var(--ut-focus-outline-color, #056ac8);
+  --amc-rating-size: 1.5rem;
+
+  display: inline-flex;
+  align-items: center;
+  gap: .125rem;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.amc-Rating-input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  opacity: 0;
+}
+
+.amc-Rating-star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .125rem;
+  border-radius: .25rem;
+  color: var(--amc-rating-off);
+  font-size: var(--amc-rating-size);
+  line-height: 1;
+  cursor: pointer;
+  transition: color .15s ease, transform .15s ease;
+}
+
+.amc-Rating-star.is-on { color: var(--amc-rating-on); }
+.amc-Rating-star:hover { transform: scale(1.1); }
+
+.amc-Rating-input:focus-visible + .amc-Rating-star {
+  outline: 2px solid var(--amc-rating-focus);
+  outline-offset: 1px;
+}
+
+.amc-Rating-clear {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: .25rem;
+  padding: .25rem;
+  border: 0;
+  border-radius: .25rem;
+  background: none;
+  color: var(--ut-component-text-muted-color, #6b6b6b);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.amc-Rating-clear:focus-visible {
+  outline: 2px solid var(--amc-rating-focus);
+}
+
+.amc-Rating.is-disabled,
+.amc-Rating--readonly { cursor: default; }
+
+.amc-Rating.is-disabled .amc-Rating-star,
+.amc-Rating.is-disabled .amc-Rating-clear {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.amc-Rating--readonly .amc-Rating-star,
+.amc-Rating.is-disabled .amc-Rating-star:hover {
+  cursor: default;
+  transform: none;
+}
+
+.amc-u-srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-Rating-star { transition: none; }
+  .amc-Rating-star:hover { transform: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-Rating-star.is-on { color: Highlight; }
+}

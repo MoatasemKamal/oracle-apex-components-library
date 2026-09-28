@@ -1,0 +1,15 @@
+{
+  "samples": [
+    {
+      "title": "Report",
+      "mode": "report",
+      "settings": {},
+      "rows": [
+        { "LABEL": "Storage", "VALUE": "72", "VALUE_TEXT": "72 of 100 GB", "STATE": "warning" },
+        { "LABEL": "Sprint tasks", "VALUE": "8", "MAX": "12", "VALUE_TEXT": "8 / 12", "STATE": "success" },
+        { "LABEL": "Budget used", "VALUE": "96", "VALUE_TEXT": "96%", "STATE": "danger" },
+        { "LABEL": "Onboarding", "VALUE": "35", "VALUE_TEXT": "35%" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+/* APEX Modern Components - Stat Card
+ * Every color, radius and shadow resolves from Universal Theme variables
+ * (--ut-*), so the card follows Vita, Vita Dark, Redwood Light, Theme Roller
+ * styles and custom themes. Override any --amc-stat-* token on a parent to restyle. */
+
+.amc-StatCard,
+.amc-StatCards {
+  --amc-stat-bg: var(--ut-component-background-color, #fff);
+  --amc-stat-fg: var(--ut-component-text-default-color, #262626);
+  --amc-stat-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-stat-border: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-stat-radius: var(--ut-component-border-radius, .5rem);
+  --amc-stat-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .05));
+  --amc-stat-accent: var(--ut-palette-primary, #056ac8);
+  --amc-stat-up: var(--ut-palette-success, #278701);
+  --amc-stat-down: var(--ut-palette-danger, #cb1100);
+  --amc-stat-flat: var(--amc-stat-muted);
+  --amc-stat-gap: 1rem;
+  --amc-stat-min: 14rem;
+}
+
+.amc-StatCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-stat-min), 100%), 1fr));
+  gap: var(--amc-stat-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-StatCards--cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.amc-StatCards--cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.amc-StatCards--cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 640px) {
+  .amc-StatCards--cols2,
+  .amc-StatCards--cols3,
+  .amc-StatCards--cols4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.amc-StatCards-item {
+  display: flex;
+  min-inline-size: 0;
+  container-type: inline-size;
+}
+
+.amc-StatCard {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  gap: .875rem;
+  box-sizing: border-box;
+  inline-size: 100%;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--amc-stat-border);
+  border-radius: var(--amc-stat-radius);
+  background-color: var(--amc-stat-bg);
+  box-shadow: var(--amc-stat-shadow);
+  color: var(--amc-stat-fg);
+}
+
+.amc-StatCard--primary { --amc-stat-accent: var(--ut-palette-primary, #056ac8); }
+.amc-StatCard--info { --amc-stat-accent: var(--ut-palette-info, #056ac8); }
+.amc-StatCard--success { --amc-stat-accent: var(--ut-palette-success, #278701); }
+.amc-StatCard--warning { --amc-stat-accent: var(--ut-palette-warning, #fbce4a); }
+.amc-StatCard--danger { --amc-stat-accent: var(--ut-palette-danger, #cb1100); }
+
+.amc-StatCard--primary,
+.amc-StatCard--info,
+.amc-StatCard--success,
+.amc-StatCard--warning,
+.amc-StatCard--danger {
+  border-block-start: 3px solid var(--amc-stat-accent);
+}
+
+.amc-StatCard-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: calc(var(--amc-stat-radius) * .75);
+  background-color: color-mix(in srgb, var(--amc-stat-accent) 12%, transparent);
+  color: var(--amc-stat-accent);
+  font-size: 1.25rem;
+}
+
+.amc-StatCard-body {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  min-inline-size: 0;
+}
+
+.amc-StatCard-label {
+  color: var(--amc-stat-muted);
+  font-size: .8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.amc-StatCard-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: .25rem;
+  font-size: 1.75rem;
+  font-size: clamp(1rem, 12cqi, 1.75rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  unicode-bidi: plaintext;
+}
+
+.amc-StatCard-unit {
+  white-space: nowrap;
+  color: var(--amc-stat-muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.amc-StatCard-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+
+.amc-StatCard-deltaIcon { font-size: .75rem; }
+
+.amc-StatCard-delta--up { color: var(--amc-stat-up); }
+.amc-StatCard-delta--down { color: var(--amc-stat-down); }
+.amc-StatCard-delta--flat { color: var(--amc-stat-flat); }
+.amc-StatCard--invertTrend .amc-StatCard-delta--up { color: var(--amc-stat-down); }
+.amc-StatCard--invertTrend .amc-StatCard-delta--down { color: var(--amc-stat-up); }
+
+.amc-StatCard-desc {
+  color: var(--amc-stat-muted);
+  font-size: .75rem;
+}
+
+.amc-u-srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Narrow cards (many columns or small regions): stack icon above text */
+@container (max-width: 13rem) {
+  .amc-StatCard { flex-direction: column; gap: .5rem; padding: .875rem; }
+}
+
+@media (forced-colors: active) {
+  .amc-StatCard { border-color: CanvasText; }
+}

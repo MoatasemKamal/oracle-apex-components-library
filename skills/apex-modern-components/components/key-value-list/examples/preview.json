@@ -1,0 +1,26 @@
+{
+  "samples": [
+    {
+      "title": "Label beside value",
+      "mode": "report",
+      "settings": { "LAYOUT": "inline", "DIVIDERS": "Y", "EMPTY_TEXT": "-" },
+      "rows": [
+        { "LABEL": "Customer", "VALUE": "Acme Trading Co.", "ICON": "fa-building-o" },
+        { "LABEL": "Account Manager", "VALUE": "Sara Ahmed", "ICON": "fa-user" },
+        { "LABEL": "Contract End", "VALUE": "31-Dec-2026", "ICON": "fa-calendar" },
+        { "LABEL": "Notes", "VALUE": "", "ICON": "fa-sticky-note-o" }
+      ]
+    },
+    {
+      "title": "Grid",
+      "mode": "report",
+      "settings": { "LAYOUT": "grid", "DIVIDERS": "Y", "EMPTY_TEXT": "-" },
+      "rows": [
+        { "LABEL": "Status", "VALUE": "Active" },
+        { "LABEL": "Region", "VALUE": "EMEA" },
+        { "LABEL": "Tier", "VALUE": "Gold" },
+        { "LABEL": "Since", "VALUE": "2019" }
+      ]
+    }
+  ]
+}

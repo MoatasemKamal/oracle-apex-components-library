@@ -1,0 +1,329 @@
+plugin statCard (
+    name: Stat Card
+    staticId: AMC_STAT_CARD
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-StatCard{if ?ACCENT/} amc-StatCard--#ACCENT#{endif/}{if INVERT_TREND/} amc-StatCard--invertTrend{endif/}">
+              {if ?ICON/}<span class="amc-StatCard-icon fa #ICON#" aria-hidden="true"></span>{endif/}
+              <div class="amc-StatCard-body">
+                <span class="amc-StatCard-label">#LABEL#</span>
+                <span class="amc-StatCard-value">#VALUE#{if ?SUFFIX/}<span class="amc-StatCard-unit">#SUFFIX#</span>{endif/}</span>
+                {if ?CHANGE/}
+                <span class="amc-StatCard-delta {case TREND/}{when up/}amc-StatCard-delta--up{when down/}amc-StatCard-delta--down{otherwise/}amc-StatCard-delta--flat{endcase/}">
+                  <span class="amc-StatCard-deltaIcon fa {case TREND/}{when up/}fa-arrow-up{when down/}fa-arrow-down{otherwise/}fa-minus{endcase/}" aria-hidden="true"></span>
+                  <span class="amc-u-srOnly">{case TREND/}{when up/}Increase{when down/}Decrease{otherwise/}No change{endcase/}</span>
+                  #CHANGE#
+                </span>
+                {endif/}
+                {if ?DESCRIPTION/}<span class="amc-StatCard-desc">#DESCRIPTION#</span>{endif/}
+              </div>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-StatCards{if ?COLUMNS/} amc-StatCards--cols#COLUMNS#{endif/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-StatCards-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-stat-card.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).
+            ```
+    }
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 1
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short caption shown above the value, for example Open Orders.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 2
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                The key figure. Format it in SQL (for example to_char(amount, 'FML999G999G990')) so it follows the application's NLS settings.
+                ```
+        }
+    )
+    customAttribute SUFFIX (
+        apexlangName: suffix
+        attribute: 3
+        name: Unit
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional unit rendered after the value, for example %, SAR or ms.
+                ```
+        }
+    )
+    customAttribute CHANGE (
+        apexlangName: change
+        attribute: 4
+        name: Change
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional delta text such as +12.4%. Leave empty to hide the trend row.
+                ```
+        }
+    )
+    customAttribute TREND (
+        apexlangName: trend
+        attribute: 5
+        name: Trend
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Direction of the change: up, down or flat. Any other value renders as flat.
+                ```
+        }
+    )
+    customAttribute INVERT_TREND (
+        apexlangName: invertTrend
+        attribute: 6
+        name: Down Is Good
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 60
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: false
+        }
+        help {
+            helpText:
+                ```
+                Swap trend colors so a decrease is shown as positive, for example for costs or error rates.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 7
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-users. Can be static text or a column.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 8
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional footnote, for example vs. last month.
+                ```
+        }
+    )
+    customAttribute ACCENT (
+        apexlangName: accent
+        attribute: 9
+        name: Accent
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 90
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Colors the icon and top edge using the theme palette.
+                ```
+        }
+        entry primary (
+            sequence: 10
+            display: Primary
+            return: primary
+        )
+        entry info (
+            sequence: 20
+            display: Info
+            return: info
+        )
+        entry success (
+            sequence: 30
+            display: Success
+            return: success
+        )
+        entry warning (
+            sequence: 40
+            display: Warning
+            return: warning
+        )
+        entry danger (
+            sequence: 50
+            display: Danger
+            return: danger
+        )
+    )
+    customAttribute COLUMNS (
+        apexlangName: columns
+        attribute: 10
+        name: Columns
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 100
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Report mode only. Auto fits as many cards as the region width allows; the fixed options collapse to one column on phones.
+                ```
+        }
+        entry two (
+            sequence: 10
+            display: 2 Columns
+            return: 2
+        )
+        entry three (
+            sequence: 20
+            display: 3 Columns
+            return: 3
+        )
+        entry four (
+            sequence: 30
+            display: 4 Columns
+            return: 4
+        )
+    )
+    file "amc-stat-card.css" (
+        fileName: amc-stat-card.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

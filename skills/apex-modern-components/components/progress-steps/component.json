@@ -1,0 +1,74 @@
+{
+  "name": "Progress Steps",
+  "apexlangName": "progressSteps",
+  "staticId": "AMC_PROGRESS_STEPS",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["stepper", "steps", "wizard", "workflow", "status", "process", "timeline"],
+  "description": "Data-driven stepper that shows where a record is in a process (for example an approval or order workflow). One row per step.",
+  "helpText": "Each query row is one step. Map Status to a column returning complete, current, upcoming or error. Steps are numbered automatically and the current step is announced to screen readers.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-progress-steps.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-progress-steps.css"],
+  "attributes": [
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 1,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 10,
+      "helpText": "Step name, for example Manager Approval."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 2,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Optional secondary text such as a date or the responsible person."
+    },
+    {
+      "staticId": "STATUS",
+      "apexlangName": "status",
+      "attribute": 3,
+      "name": "Status",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "One of complete, current, upcoming or error. Unknown values render as upcoming."
+    },
+    {
+      "staticId": "ORIENTATION",
+      "apexlangName": "orientation",
+      "attribute": 4,
+      "name": "Orientation",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "horizontal",
+      "sequence": 40,
+      "helpText": "Horizontal steps switch to vertical automatically on narrow screens.",
+      "entries": [
+        { "name": "horizontal", "display": "Horizontal", "return": "horizontal", "sequence": 10 },
+        { "name": "vertical", "display": "Vertical", "return": "vertical", "sequence": 20 }
+      ]
+    }
+  ]
+}

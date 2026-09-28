@@ -1,0 +1,108 @@
+{
+  "name": "Star Rating",
+  "apexlangName": "starRating",
+  "staticId": "AMC_STAR_RATING",
+  "pluginType": "item",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": [
+    "rating",
+    "stars",
+    "score",
+    "review",
+    "feedback",
+    "item"
+  ],
+  "description": "Page item for 1..N ratings built from native radio buttons: keyboard accessible, works with Dynamic Actions, validations, read-only and session state like any native item.",
+  "helpText": "Stores the selected number (1..Maximum) in session state, or null when cleared. Supports apex.item() getValue/setValue/enable/disable so Dynamic Actions work as with native items.",
+  "item": {
+    "plsqlFile": "src/render.plsql",
+    "renderProcedureName": "render",
+    "apiInterface": "procedure",
+    "supports": [
+      "pageItem"
+    ],
+    "sessionStateDataTypes": [
+      "varchar2"
+    ],
+    "standardAttributes": [
+      "visible",
+      "formElement",
+      "sessionState",
+      "readOnly",
+      "source",
+      "element",
+      "initJavaScriptCode"
+    ],
+    "legacySupportedComponentTypes": "APEX_APPLICATION_PAGE_ITEMS",
+    "legacyStandardAttributes": "VISIBLE:FORM_ELEMENT:SESSION_STATE:READONLY:SOURCE:ELEMENT:INIT_JAVASCRIPT_CODE",
+    "apexlangUnverifiedTokens": [
+      "component.supports",
+      "component.supportsSessionStateDataTypes",
+      "component.standardAttributes",
+      "callbacks.apiInterface"
+    ]
+  },
+  "files": [
+    "files/amc-star-rating.css",
+    "files/amc-star-rating.js"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-star-rating.css"
+  ],
+  "jsFileUrls": [
+    "#PLUGIN_FILES#amc-star-rating.js"
+  ],
+  "attributes": [
+    {
+      "staticId": "MAX_STARS",
+      "apexlangName": "maxStars",
+      "attribute": 1,
+      "name": "Maximum",
+      "type": "integer",
+      "required": true,
+      "default": "5",
+      "sequence": 10,
+      "helpText": "Number of stars, 1 to 10."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 2,
+      "name": "Icon",
+      "type": "text",
+      "required": false,
+      "default": "fa-star",
+      "sequence": 20,
+      "helpText": "Font APEX icon used for each step, for example fa-star, fa-heart or fa-circle."
+    },
+    {
+      "staticId": "CLEARABLE",
+      "apexlangName": "clearable",
+      "attribute": 3,
+      "name": "Allow Clear",
+      "type": "yesNo",
+      "required": false,
+      "default": "Y",
+      "sequence": 30,
+      "helpText": "Show a small button that resets the rating to null."
+    },
+    {
+      "staticId": "CLEAR_LABEL",
+      "apexlangName": "clearLabel",
+      "attribute": 4,
+      "name": "Clear Button Label",
+      "type": "text",
+      "required": false,
+      "translatable": true,
+      "default": "Clear rating",
+      "sequence": 40,
+      "helpText": "Accessible label of the clear button (it is announced, not displayed).",
+      "dependsOn": {
+        "attribute": "CLEARABLE",
+        "condition": "equals",
+        "value": "Y"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+name: components
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate components and verify generated files are up to date
+        working-directory: skills/apex-modern-components
+        run: node tools/build.mjs --check
+      - name: Oracle apexlang offline structure checks
+        run: |
+          git clone --depth 1 https://github.com/oracle/skills.git /tmp/oracle-skills
+          node skills/apex-modern-components/tools/apexlang-check.mjs --apexlang /tmp/oracle-skills/apex/apexlang

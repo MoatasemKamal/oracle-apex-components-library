@@ -1,0 +1,14 @@
+{
+  "samples": [
+    {
+      "title": "With button, dashed",
+      "mode": "partial",
+      "settings": { "ICON": "fa-inbox", "TITLE": "No orders yet", "MESSAGE": "Orders you create will appear here.", "LINK_URL": "#", "LINK_LABEL": "Create Order", "BORDERED": "Y" }
+    },
+    {
+      "title": "Compact",
+      "mode": "partial",
+      "settings": { "ICON": "fa-search", "TITLE": "No matching records", "MESSAGE": "Try removing a filter.", "SIZE": "compact" }
+    }
+  ]
+}
