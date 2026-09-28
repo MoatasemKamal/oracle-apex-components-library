@@ -28,6 +28,15 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Design systems (DESIGN.md)
+
+`tools/design-md-to-ut.mjs` converts a DESIGN.md, for example from
+[awesome-design-md](https://github.com/VoltAgent/awesome-design-md), into a Universal
+Theme style (`--ut-*` variables). Applied with Theme Roller, it restyles native APEX
+components and this library together. Examples are in
+[`skills/apex-modern-components/styles/`](skills/apex-modern-components/styles). See
+[`references/design-systems.md`](skills/apex-modern-components/references/design-systems.md).
+
 ## Install into an app
 
 **APEX 26.1+ (APEXlang)**: copy
@@ -61,6 +70,7 @@ node tools/new-component.mjs pricing-card "Pricing Card"   # scaffold
 node tools/build.mjs          # validate + generate APEXlang, legacy SQL, READMEs, catalog
 node tools/preview.mjs        # preview/index.html: light, dark, RTL
 node tools/apexlang-check.mjs --apexlang <path>/oracle-skills/apex/apexlang
+node tools/design-md-to-ut.mjs <path>/DESIGN.md             # design system -> UT style
 ```
 
 See [`SKILL.md`](skills/apex-modern-components/SKILL.md) and the

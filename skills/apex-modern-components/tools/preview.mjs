@@ -74,6 +74,15 @@ const STYLES = [
   }
 ];
 
+// Styles generated from DESIGN.md files (tools/design-md-to-ut.mjs) get their own panels.
+const STYLES_DIR = path.join(SKILL_ROOT, "styles");
+if (fs.existsSync(STYLES_DIR)) {
+  for (const f of fs.readdirSync(STYLES_DIR).filter((n) => n.endsWith(".vars.json")).sort()) {
+    const spec = JSON.parse(fs.readFileSync(path.join(STYLES_DIR, f), "utf8"));
+    STYLES.push({ id: `ds-${spec.slug}`, label: `${spec.slug} (DESIGN.md${spec.dark ? ", dark" : ""})`, dir: "ltr", vars: spec.vars });
+  }
+}
+
 const units = listComponentDirs(path.join(SKILL_ROOT, "components")).map(loadComponent);
 const css = units.flatMap((u) => u.loaded.files.filter((f) => f.fileName.endsWith(".css")).map((f) => f.content.toString("utf8")));
 

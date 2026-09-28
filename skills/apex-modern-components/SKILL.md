@@ -20,12 +20,14 @@ Never bypass apexlang's gates for app artifacts.
    - **Use an existing component in an app**: section A.
    - **Create a new component, or port one from 21st.dev and similar galleries**: section B.
    - **Install on APEX 23.1-25.x**: section C.
+   - **Make the app look like a design system (DESIGN.md, "make it look like X")**: section D.
 3. Load only the reference you need:
    - `references/apexlang-integration.md`: installing plug-ins into an APEXlang app, page usage rules, gates
    - `references/native-look-contract.md`: theme variables, UT classes, RTL, a11y, security
    - `references/version-compatibility.md`: 23.1 baseline, gated features, upgrades
    - `references/component-authoring.md`: `component.json` fields, template and item rules
    - `references/porting-external-components.md`: 21st.dev / React / Tailwind / 3D to APEX
+   - `references/design-systems.md`: turn a DESIGN.md (awesome-design-md) into a Universal Theme style
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
 
@@ -77,6 +79,17 @@ Builder > Shared Components > Plug-ins > Import (any version 23.1+), or with SQL
 after `apex_application_install.set_workspace/set_application_id/generate_offset/set_schema`.
 Then describe the page setup in Builder terms using the component README's
 "Builder label" column.
+
+## D. Apply a design system (DESIGN.md)
+
+1. Get the DESIGN.md, for example from `https://github.com/VoltAgent/awesome-design-md`
+   (MIT): `design-md/<design>/DESIGN.md`.
+2. `node tools/design-md-to-ut.mjs <DESIGN.md>` writes `styles/<design>.css` (and
+   `-dark.css` when the design has both palettes).
+3. `node tools/preview.mjs`: the style appears as its own panel. Check contrast.
+4. Give the user the CSS and the Theme Roller steps from `references/design-systems.md`.
+   Components need no changes, because they already read the `--ut-*` variables.
+   Never put the source brand's name or logo in the app.
 
 ## Rules
 

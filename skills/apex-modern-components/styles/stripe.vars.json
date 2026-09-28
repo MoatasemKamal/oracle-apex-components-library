@@ -1,0 +1,21 @@
+{
+  "name": "Stripi-Inspired-design-analysis",
+  "slug": "stripe",
+  "dark": false,
+  "vars": {
+    "--ut-body-background-color": "#ffffff",
+    "--ut-body-text-color": "#0d253d",
+    "--ut-component-background-color": "#f6f9fc",
+    "--ut-component-text-default-color": "#0d253d",
+    "--ut-component-text-muted-color": "#64748d",
+    "--ut-component-border-color": "#e3e8ee",
+    "--ut-component-border-radius": "8px",
+    "--ut-link-text-color": "#533afd",
+    "--ut-palette-primary": "#533afd",
+    "--ut-palette-primary-contrast": "#ffffff",
+    "--ut-palette-danger": "#ea2261",
+    "--ut-palette-danger-contrast": "#ffffff",
+    "--ut-palette-info": "#533afd",
+    "--ut-palette-info-contrast": "#ffffff"
+  }
+}

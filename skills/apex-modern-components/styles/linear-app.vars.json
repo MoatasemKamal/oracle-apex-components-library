@@ -1,0 +1,21 @@
+{
+  "name": "Linear-design-analysis",
+  "slug": "linear-app",
+  "dark": true,
+  "vars": {
+    "--ut-body-background-color": "#010102",
+    "--ut-body-text-color": "#f7f8f8",
+    "--ut-component-background-color": "#0f1011",
+    "--ut-component-text-default-color": "#f7f8f8",
+    "--ut-component-text-muted-color": "#d0d6e0",
+    "--ut-component-border-color": "#23252a",
+    "--ut-component-border-radius": "12px",
+    "--ut-link-text-color": "#5e6ad2",
+    "--ut-palette-primary": "#5e6ad2",
+    "--ut-palette-primary-contrast": "#ffffff",
+    "--ut-palette-success": "#27a644",
+    "--ut-palette-success-contrast": "#ffffff",
+    "--ut-palette-info": "#5e6ad2",
+    "--ut-palette-info-contrast": "#ffffff"
+  }
+}

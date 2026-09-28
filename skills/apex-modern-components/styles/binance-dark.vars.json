@@ -1,0 +1,23 @@
+{
+  "name": "Binance-design-analysis",
+  "slug": "binance-dark",
+  "dark": true,
+  "vars": {
+    "--ut-body-background-color": "#0b0e11",
+    "--ut-body-text-color": "#ffffff",
+    "--ut-component-background-color": "#1e2329",
+    "--ut-component-text-default-color": "#ffffff",
+    "--ut-component-text-muted-color": "#a8a8a8",
+    "--ut-component-border-color": "#2b3139",
+    "--ut-component-border-radius": "6px",
+    "--ut-link-text-color": "#fcd535",
+    "--ut-palette-primary": "#fcd535",
+    "--ut-palette-primary-contrast": "#181a20",
+    "--ut-palette-success": "#0ecb81",
+    "--ut-palette-success-contrast": "#ffffff",
+    "--ut-palette-danger": "#f6465d",
+    "--ut-palette-danger-contrast": "#ffffff",
+    "--ut-palette-info": "#3b82f6",
+    "--ut-palette-info-contrast": "#ffffff"
+  }
+}
