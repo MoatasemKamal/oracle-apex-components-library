@@ -1,0 +1,784 @@
+/* APEX Modern Components - Next Badge (Next Collection)
+ * Ten current-generation badge designs in four directions:
+ * motion (shine, pulseLive, beamOutline), depth (stickerTilt, extruded),
+ * bold (neoBrutal, clay, holo) and smart (expandLabel, stackCount).
+ * Every color resolves from Universal Theme variables (--ut-*), so the badges follow
+ * Vita, Vita Dark, Redwood Light, Theme Roller and custom styles.
+ * Shine and beam outline are adapted from Magic UI shine-border and border-beam
+ * (https://magicui.design, MIT License, (c) Magic UI) and rebuilt in plain CSS.
+ * All animation stops under prefers-reduced-motion. */
+
+@property --amc-nbd-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ---------- tokens ---------- */
+
+.amc-NBadge,
+.amc-NBadges {
+  --amc-nbd-surface: var(--ut-component-background-color, #fff);
+  --amc-nbd-fg: var(--ut-component-text-default-color, #262626);
+  --amc-nbd-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-nbd-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nbd-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-nbd-primary: var(--ut-palette-primary, #056ac8);
+  --amc-nbd-shade: var(--amc-next-shade, #000);
+  --amc-nbd-light: var(--amc-next-light, #fff);
+  --amc-nbd-mask: var(--amc-next-mask, #000);
+}
+
+.amc-NBadge {
+  --amc-nbd-c: var(--amc-nbd-muted);
+  --amc-nbd-on: var(--amc-nbd-surface);
+  --amc-nbd-inkMix: 72%;
+  --amc-nbd-ink: color-mix(in srgb, var(--amc-nbd-c) var(--amc-nbd-inkMix), var(--amc-nbd-fg));
+  /* Dark text for the light, theme-independent designs (sticker, clay, holo). */
+  --amc-nbd-deep: color-mix(in srgb, var(--amc-nbd-c) 45%, var(--amc-nbd-shade));
+}
+
+.amc-NBadge--success {
+  --amc-nbd-c: var(--ut-palette-success, #278701);
+  --amc-nbd-on: var(--ut-palette-success-contrast, #fff);
+}
+
+.amc-NBadge--warning {
+  --amc-nbd-c: var(--ut-palette-warning, #fbce4a);
+  --amc-nbd-on: var(--ut-palette-warning-contrast, #262626);
+  --amc-nbd-inkMix: 42%;
+  --amc-nbd-deep: color-mix(in srgb, var(--amc-nbd-c) 30%, var(--amc-nbd-shade));
+}
+
+.amc-NBadge--danger {
+  --amc-nbd-c: var(--ut-palette-danger, #cb1100);
+  --amc-nbd-on: var(--ut-palette-danger-contrast, #fff);
+}
+
+.amc-NBadge--info {
+  --amc-nbd-c: var(--ut-palette-info, #0076df);
+  --amc-nbd-on: var(--ut-palette-info-contrast, var(--ut-palette-primary-contrast, #fff));
+}
+
+.amc-NBadge--neutral {
+  --amc-nbd-inkMix: 0%;
+  --amc-nbd-deep: color-mix(in srgb, var(--amc-nbd-shade) 80%, var(--amc-nbd-light));
+}
+
+/* ---------- report: wrapping group ---------- */
+
+.amc-NBadges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .625rem;
+  margin: 0;
+  padding: .25rem 0;
+  list-style: none;
+}
+
+.amc-NBadges-item {
+  display: flex;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* ---------- shared structure ---------- */
+
+.amc-NBadge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-block-size: 1.625rem;
+  padding: .1875rem .625rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--amc-nbd-ink);
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  vertical-align: middle;
+  isolation: isolate;
+  transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s ease, background-color .2s ease;
+}
+
+.amc-NBadge-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.amc-NBadge-icon {
+  flex: none;
+  font-size: .875em;
+}
+
+.amc-NBadge-text {
+  display: inline-flex;
+  min-inline-size: 0;
+}
+
+.amc-NBadge-label {
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+  unicode-bidi: isolate;
+}
+
+.amc-NBadge-value {
+  flex: none;
+  padding-inline-start: .375rem;
+  border-inline-start: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  unicode-bidi: plaintext;
+}
+
+.amc-NBadge-dot,
+.amc-NBadge-bars { display: none; }
+
+.amc-NBadge:focus-visible {
+  outline: 2px solid var(--amc-nbd-c);
+  outline-offset: 3px;
+}
+
+/* ================= MOTION 1. shine: glossy gel pill with a travelling glint ================= */
+
+.amc-NBadge--shine {
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--amc-nbd-c) 72%, var(--amc-nbd-light)) 0%,
+      var(--amc-nbd-c) 55%,
+      color-mix(in srgb, var(--amc-nbd-c) 82%, var(--amc-nbd-shade)) 100%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbd-light) 55%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--amc-nbd-shade) 20%, transparent),
+    0 .25rem .625rem -.25rem color-mix(in srgb, var(--amc-nbd-c) 80%, transparent);
+  color: var(--amc-nbd-on);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--amc-nbd-shade) 18%, transparent);
+}
+
+.amc-NBadge--shine .amc-NBadge-fx {
+  z-index: 1;
+  overflow: hidden;
+}
+
+.amc-NBadge--shine .amc-NBadge-fx::before {
+  position: absolute;
+  inset-block: -50%;
+  inset-inline-start: 0;
+  inline-size: 40%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--amc-nbd-light) 70%, transparent), transparent);
+  content: "";
+  transform: translateX(170%) skewX(-24deg);
+  animation: amc-nbd-glint 3.6s cubic-bezier(.6, 0, .3, 1) infinite;
+}
+
+.amc-NBadge--shine .amc-NBadge-fx::after {
+  position: absolute;
+  inset: 1px 10% 50%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--amc-nbd-light) 40%, transparent), transparent);
+  content: "";
+}
+
+.amc-NBadge--shine.amc-NBadge--neutral { --amc-nbd-c: color-mix(in srgb, var(--amc-nbd-muted) 80%, var(--amc-nbd-fg)); }
+
+@keyframes amc-nbd-glint {
+  0% { transform: translateX(-130%) skewX(-24deg); }
+  45%, 100% { transform: translateX(300%) skewX(-24deg); }
+}
+
+/* ================= MOTION 2. pulseLive: broadcast dot, activity bars and live counter ================= */
+
+.amc-NBadge--pulseLive {
+  gap: .4375rem;
+  padding-inline: .5rem .625rem;
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 10%, var(--amc-nbd-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent);
+  font-size: .6875rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.amc-NBadge--pulseLive .amc-NBadge-dot {
+  position: relative;
+  display: block;
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-nbd-c);
+  box-shadow: 0 0 0 .1875rem color-mix(in srgb, var(--amc-nbd-c) 22%, transparent);
+}
+
+.amc-NBadge--pulseLive .amc-NBadge-dot::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--amc-nbd-c);
+  content: "";
+  animation: amc-nbd-ping 1.6s cubic-bezier(0, 0, .2, 1) infinite;
+}
+
+.amc-NBadge--pulseLive .amc-NBadge-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  block-size: .6875rem;
+}
+
+.amc-NBadge--pulseLive .amc-NBadge-bar {
+  inline-size: 2px;
+  block-size: 100%;
+  border-radius: 1px;
+  background-color: var(--amc-nbd-c);
+  transform-origin: 50% 100%;
+  transform: scaleY(.5);
+  animation: amc-nbd-eq 1.1s ease-in-out infinite alternate;
+}
+
+.amc-NBadge--pulseLive .amc-NBadge-bar:nth-child(2) { transform: scaleY(.9); animation-delay: -.35s; }
+
+.amc-NBadge--pulseLive .amc-NBadge-bar:nth-child(3) { transform: scaleY(.35); animation-delay: -.7s; }
+
+.amc-NBadge--pulseLive .amc-NBadge-value {
+  padding: .0625rem .375rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--amc-nbd-c);
+  color: var(--amc-nbd-on);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  letter-spacing: 0;
+}
+
+@keyframes amc-nbd-ping {
+  75%, 100% { opacity: 0; transform: scale(2.6); }
+}
+
+@keyframes amc-nbd-eq {
+  0% { transform: scaleY(.3); }
+  100% { transform: scaleY(1); }
+}
+
+/* ================= MOTION 3. beamOutline: a beam of light runs around a hairline pill ================= */
+
+.amc-NBadge--beamOutline {
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 6%, var(--amc-nbd-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 22%, var(--amc-nbd-line));
+}
+
+.amc-NBadge--beamOutline .amc-NBadge-fx {
+  z-index: 0;
+  padding: 1.5px;
+  background: conic-gradient(from var(--amc-nbd-angle),
+    transparent 0deg 200deg,
+    color-mix(in srgb, var(--amc-nbd-c) 35%, transparent) 280deg,
+    var(--amc-nbd-c) 335deg,
+    color-mix(in srgb, var(--amc-nbd-c) 30%, var(--amc-nbd-light)) 350deg,
+    transparent 360deg);
+  filter: drop-shadow(0 0 2px color-mix(in srgb, var(--amc-nbd-c) 70%, transparent));
+  -webkit-mask: linear-gradient(var(--amc-nbd-mask) 0 0) content-box, linear-gradient(var(--amc-nbd-mask) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-nbd-mask) 0 0) content-box exclude, linear-gradient(var(--amc-nbd-mask) 0 0);
+  animation: amc-nbd-orbit 3.2s linear infinite;
+}
+
+.amc-NBadge--beamOutline .amc-NBadge-icon { color: var(--amc-nbd-c); }
+
+.amc-NBadge--beamOutline.amc-NBadge--warning .amc-NBadge-icon { color: var(--amc-nbd-ink); }
+
+@keyframes amc-nbd-orbit {
+  to { --amc-nbd-angle: 360deg; }
+}
+
+/* ================= DEPTH 4. stickerTilt: die-cut sticker with a peeling corner ================= */
+
+.amc-NBadge--stickerTilt {
+  --amc-nbd-tilt: -4deg;
+  padding: .25rem .75rem;
+  border: 3px solid color-mix(in srgb, var(--amc-nbd-light) 94%, var(--amc-nbd-c));
+  border-radius: .625rem;
+  background:
+    radial-gradient(120% 90% at 20% 0%, color-mix(in srgb, var(--amc-nbd-light) 45%, transparent), transparent 60%),
+    color-mix(in srgb, var(--amc-nbd-c) 30%, var(--amc-nbd-light));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-nbd-shade) 10%, transparent),
+    .125rem .25rem 0 color-mix(in srgb, var(--amc-nbd-shade) 12%, transparent),
+    .25rem .5rem .75rem -.25rem color-mix(in srgb, var(--amc-nbd-shade) 35%, transparent);
+  color: var(--amc-nbd-deep);
+  font-weight: 800;
+  transform: rotate(var(--amc-nbd-tilt));
+}
+
+/* Peeling corner at the inline end. */
+.amc-NBadge--stickerTilt .amc-NBadge-fx {
+  inset: -3px;
+  z-index: 1;
+  border-radius: .625rem;
+  overflow: hidden;
+}
+
+.amc-NBadge--stickerTilt .amc-NBadge-fx::after {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  inline-size: .75rem;
+  block-size: .75rem;
+  background: linear-gradient(225deg,
+    var(--amc-nbd-page) 0 48%,
+    color-mix(in srgb, var(--amc-nbd-light) 70%, var(--amc-nbd-shade)) 52%,
+    var(--amc-nbd-light) 100%);
+  box-shadow: -1px 1px 2px color-mix(in srgb, var(--amc-nbd-shade) 25%, transparent);
+  content: "";
+}
+
+.amc-NBadge--stickerTilt:dir(rtl) .amc-NBadge-fx::after { transform: scaleX(-1); }
+
+.amc-NBadge--stickerTilt .amc-NBadge-value { border-color: color-mix(in srgb, var(--amc-nbd-deep) 30%, transparent); }
+
+.amc-NBadges-item:nth-child(3n + 2) .amc-NBadge--stickerTilt { --amc-nbd-tilt: 3deg; }
+
+.amc-NBadges-item:nth-child(3n + 3) .amc-NBadge--stickerTilt { --amc-nbd-tilt: -1.5deg; }
+
+.amc-NBadge--stickerTilt:hover {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-nbd-shade) 10%, transparent),
+    .25rem .5rem 0 color-mix(in srgb, var(--amc-nbd-shade) 8%, transparent),
+    .375rem .875rem 1.25rem -.25rem color-mix(in srgb, var(--amc-nbd-shade) 35%, transparent);
+  transform: rotate(0deg) translateY(-2px) scale(1.06);
+}
+
+/* ================= DEPTH 5. extruded: a pill with real thickness ================= */
+
+.amc-NBadge--extruded {
+  --amc-nbd-side: color-mix(in srgb, var(--amc-nbd-c) 55%, color-mix(in srgb, var(--amc-nbd-surface) 50%, var(--amc-nbd-shade)));
+  margin-block-end: .3125rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nbd-light) 30%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-nbd-c) 18%, var(--amc-nbd-surface));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent),
+    0 1px 0 var(--amc-nbd-side),
+    0 2px 0 var(--amc-nbd-side),
+    0 3px 0 var(--amc-nbd-side),
+    0 4px 0 var(--amc-nbd-side),
+    0 5px 0 color-mix(in srgb, var(--amc-nbd-side) 80%, var(--amc-nbd-shade)),
+    0 .5rem .75rem -.125rem color-mix(in srgb, var(--amc-nbd-shade) 30%, transparent);
+  transform: translateY(-2px);
+}
+
+.amc-NBadge--extruded .amc-NBadge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  margin-inline-start: -.3125rem;
+  border-radius: 50%;
+  background-color: var(--amc-nbd-c);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--amc-nbd-shade) 25%, transparent);
+  color: var(--amc-nbd-on);
+  font-size: .625rem;
+}
+
+.amc-NBadge--extruded:hover {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent),
+    0 1px 0 var(--amc-nbd-side),
+    0 2px 0 color-mix(in srgb, var(--amc-nbd-side) 80%, var(--amc-nbd-shade)),
+    0 .25rem .375rem -.125rem color-mix(in srgb, var(--amc-nbd-shade) 30%, transparent);
+  transform: translateY(1px);
+}
+
+/* ================= BOLD 6. neoBrutal: ink outline, hard shadow, flat color ================= */
+
+.amc-NBadge--neoBrutal {
+  --amc-nbd-off: 3px;
+  border: 2px solid var(--amc-nbd-fg);
+  border-radius: .3125rem;
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 38%, var(--amc-nbd-surface));
+  box-shadow: var(--amc-nbd-off) var(--amc-nbd-off) 0 var(--amc-nbd-fg);
+  color: var(--amc-nbd-fg);
+  font-size: .6875rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.amc-NBadge--neoBrutal:dir(rtl) { box-shadow: calc(var(--amc-nbd-off) * -1) var(--amc-nbd-off) 0 var(--amc-nbd-fg); }
+
+.amc-NBadge--neoBrutal.amc-NBadge--neutral { background-color: var(--amc-nbd-surface); }
+
+.amc-NBadge--neoBrutal .amc-NBadge-value {
+  margin-block: -.1875rem;
+  margin-inline-end: -.625rem;
+  padding: .1875rem .5rem;
+  border-inline-start: 2px solid var(--amc-nbd-fg);
+  background-color: var(--amc-nbd-surface);
+}
+
+/* ================= BOLD 7. clay: soft, inflated pastel ================= */
+
+.amc-NBadge--clay {
+  padding: .3125rem .75rem;
+  border-radius: 1rem;
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 32%, var(--amc-nbd-light));
+  box-shadow:
+    .1875rem .3125rem .625rem -.125rem color-mix(in srgb, var(--amc-nbd-c) 40%, color-mix(in srgb, var(--amc-nbd-page) 60%, var(--amc-nbd-shade))),
+    inset .1875rem .1875rem .375rem color-mix(in srgb, var(--amc-nbd-light) 75%, transparent),
+    inset -.1875rem -.25rem .375rem color-mix(in srgb, var(--amc-nbd-c) 45%, var(--amc-nbd-light));
+  color: var(--amc-nbd-deep);
+  font-weight: 700;
+}
+
+.amc-NBadge--clay .amc-NBadge-icon { color: color-mix(in srgb, var(--amc-nbd-c) 70%, var(--amc-nbd-shade)); }
+
+.amc-NBadge--clay .amc-NBadge-value {
+  padding: .0625rem .4375rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nbd-light) 70%, transparent);
+  box-shadow: inset 1px 1px 2px color-mix(in srgb, var(--amc-nbd-c) 40%, transparent);
+}
+
+/* ================= BOLD 8. holo: iridescent foil with a state jewel ================= */
+
+.amc-NBadge--holo {
+  padding-inline-start: .375rem;
+  background:
+    repeating-linear-gradient(115deg, transparent 0 .3125rem, color-mix(in srgb, var(--amc-nbd-light) 35%, transparent) .3125rem .375rem),
+    linear-gradient(115deg,
+      color-mix(in srgb, var(--ut-palette-primary, #056ac8) 35%, var(--amc-nbd-light)),
+      color-mix(in srgb, var(--ut-palette-info, #0076df) 25%, var(--amc-nbd-light)) 20%,
+      color-mix(in srgb, var(--ut-palette-success, #278701) 28%, var(--amc-nbd-light)) 40%,
+      color-mix(in srgb, var(--ut-palette-warning, #fbce4a) 40%, var(--amc-nbd-light)) 60%,
+      color-mix(in srgb, var(--ut-palette-danger, #cb1100) 25%, var(--amc-nbd-light)) 80%,
+      color-mix(in srgb, var(--ut-palette-primary, #056ac8) 35%, var(--amc-nbd-light)));
+  background-size: auto, 250% 100%;
+  background-position: 0 0, 20% 50%;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-light) 75%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-nbd-primary) 22%, var(--amc-nbd-line)),
+    0 .25rem .625rem -.25rem color-mix(in srgb, var(--amc-nbd-primary) 45%, transparent);
+  color: color-mix(in srgb, var(--amc-nbd-shade) 82%, var(--amc-nbd-primary));
+  font-weight: 700;
+  transition: background-position .8s ease, transform .25s ease;
+}
+
+/* State jewel: a glossy bead in the state color. */
+.amc-NBadge--holo::before {
+  flex: none;
+  inline-size: .75rem;
+  block-size: .75rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--amc-nbd-c) 30%, var(--amc-nbd-light)), var(--amc-nbd-c) 60%, color-mix(in srgb, var(--amc-nbd-c) 70%, var(--amc-nbd-shade)));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--amc-nbd-light) 70%, transparent);
+  content: "";
+}
+
+.amc-NBadge--holo .amc-NBadge-value { border-color: color-mix(in srgb, currentColor 25%, transparent); }
+
+.amc-NBadge--holo:hover { background-position: 0 0, 90% 50%; }
+
+/* ================= SMART 9. expandLabel: a status dot that grows into its label ================= */
+
+.amc-NBadge--expandLabel {
+  gap: 0;
+  padding: .1875rem;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px transparent;
+  cursor: default;
+  transition: background-color .3s ease, box-shadow .3s ease, gap .3s ease, padding .3s ease;
+}
+
+.amc-NBadge--expandLabel .amc-NBadge-dot,
+.amc-NBadge--stackCount .amc-NBadge-dot {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.375rem;
+  block-size: 1.375rem;
+  border-radius: 50%;
+  background-color: var(--amc-nbd-c);
+  box-shadow:
+    0 0 0 .1875rem color-mix(in srgb, var(--amc-nbd-c) 18%, transparent),
+    inset 0 -2px 0 color-mix(in srgb, var(--amc-nbd-shade) 15%, transparent);
+  color: var(--amc-nbd-on);
+  font-size: .6875rem;
+}
+
+.amc-NBadge--expandLabel .amc-NBadge-dot:empty::before,
+.amc-NBadge--stackCount .amc-NBadge-dot:empty::before {
+  inline-size: .375rem;
+  block-size: .375rem;
+  border-radius: 50%;
+  background-color: var(--amc-nbd-on);
+  content: "";
+}
+
+.amc-NBadge--expandLabel .amc-NBadge-text {
+  display: grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NBadge--expandLabel .amc-NBadge-label {
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.amc-NBadge--expandLabel .amc-NBadge-value { display: none; }
+
+.amc-NBadge--expandLabel:hover,
+.amc-NBadge--expandLabel:focus-visible {
+  gap: .4375rem;
+  padding-inline-end: .75rem;
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 12%, var(--amc-nbd-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent);
+}
+
+.amc-NBadge--expandLabel:hover .amc-NBadge-text,
+.amc-NBadge--expandLabel:focus-visible .amc-NBadge-text { grid-template-columns: 1fr; }
+
+.amc-NBadge--expandLabel:hover .amc-NBadge-label,
+.amc-NBadge--expandLabel:focus-visible .amc-NBadge-label {
+  opacity: 1;
+  transition-delay: .08s;
+}
+
+.amc-NBadge--expandLabel:hover .amc-NBadge-value,
+.amc-NBadge--expandLabel:focus-visible .amc-NBadge-value { display: inline; }
+
+/* When the region has room, every label is shown without interaction. */
+.amc-NBadges--expandLabel { container-type: inline-size; }
+
+@container (min-width: 40rem) {
+  .amc-NBadge--expandLabel {
+    gap: .4375rem;
+    padding-inline-end: .75rem;
+    background-color: color-mix(in srgb, var(--amc-nbd-c) 12%, var(--amc-nbd-surface));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent);
+  }
+
+  .amc-NBadge--expandLabel .amc-NBadge-text { grid-template-columns: 1fr; }
+
+  .amc-NBadge--expandLabel .amc-NBadge-label { opacity: 1; }
+}
+
+/* ================= SMART 10. stackCount: a stack with a total that fans into pills ================= */
+
+/* Single badge: a pill resting on two stacked plates, with a count bubble. */
+.amc-NBadge--stackCount {
+  --amc-nbd-plate1: color-mix(in srgb, var(--amc-nbd-c) 30%, var(--amc-nbd-surface));
+  --amc-nbd-plate2: color-mix(in srgb, var(--amc-nbd-c) 16%, var(--amc-nbd-surface));
+  margin-block-start: .5rem;
+  padding-inline-start: .25rem;
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 12%, var(--amc-nbd-surface));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent),
+    0 0 0 1px var(--amc-nbd-surface),
+    0 -.3125rem 0 -.125rem var(--amc-nbd-plate1),
+    0 -.3125rem 0 -.0625rem var(--amc-nbd-surface),
+    0 -.625rem 0 -.25rem var(--amc-nbd-plate2),
+    0 .125rem .25rem color-mix(in srgb, var(--amc-nbd-shade) 10%, transparent);
+}
+
+.amc-NBadge--stackCount .amc-NBadge-dot {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  box-shadow: none;
+  font-size: .5625rem;
+}
+
+.amc-NBadge--stackCount .amc-NBadge-value {
+  min-inline-size: 1.125rem;
+  margin-inline-end: -.375rem;
+  padding: .0625rem .3125rem;
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--amc-nbd-c);
+  color: var(--amc-nbd-on);
+  text-align: center;
+}
+
+/* Report: rows overlap as a stack of dots; the total is counted in CSS. */
+.amc-NBadges--stackCount {
+  flex-wrap: nowrap;
+  gap: 0;
+  inline-size: max-content;
+  max-inline-size: 100%;
+  padding: .25rem .375rem;
+  border-radius: 999px;
+  counter-reset: amc-nbd-stack;
+  transition: gap .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NBadges--stackCount .amc-NBadges-item {
+  counter-increment: amc-nbd-stack;
+  min-inline-size: 0;
+  transition: margin .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NBadges--stackCount .amc-NBadges-item + .amc-NBadges-item { margin-inline-start: -.5rem; }
+
+.amc-NBadges--stackCount .amc-NBadge--stackCount {
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  background-color: var(--amc-nbd-surface);
+  box-shadow: 0 0 0 2px var(--amc-nbd-surface);
+  transition: gap .35s ease, padding .35s ease, background-color .3s ease;
+}
+
+.amc-NBadges--stackCount .amc-NBadge-fx,
+.amc-NBadges--stackCount .amc-NBadge-value { display: none; }
+
+.amc-NBadges--stackCount .amc-NBadge--stackCount .amc-NBadge-dot {
+  inline-size: 1.625rem;
+  block-size: 1.625rem;
+  font-size: .6875rem;
+}
+
+.amc-NBadges--stackCount .amc-NBadge-text {
+  display: grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NBadges--stackCount .amc-NBadge-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.amc-NBadges--stackCount::after {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 1.625rem;
+  block-size: 1.625rem;
+  margin-inline-start: .375rem;
+  padding-inline: .375rem;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background-color: var(--amc-nbd-fg);
+  color: var(--amc-nbd-surface);
+  content: counter(amc-nbd-stack);
+  font-size: .75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: opacity .25s ease;
+}
+
+.amc-NBadges--stackCount:focus-visible {
+  outline: 2px solid var(--amc-nbd-primary);
+  outline-offset: 2px;
+}
+
+.amc-NBadges--stackCount:hover,
+.amc-NBadges--stackCount:focus-within {
+  flex-wrap: wrap;
+  gap: .375rem;
+}
+
+.amc-NBadges--stackCount:hover .amc-NBadges-item + .amc-NBadges-item,
+.amc-NBadges--stackCount:focus-within .amc-NBadges-item + .amc-NBadges-item { margin-inline-start: 0; }
+
+.amc-NBadges--stackCount:hover .amc-NBadge--stackCount,
+.amc-NBadges--stackCount:focus-within .amc-NBadge--stackCount {
+  gap: .375rem;
+  padding-inline-end: .625rem;
+  background-color: color-mix(in srgb, var(--amc-nbd-c) 12%, var(--amc-nbd-surface));
+}
+
+.amc-NBadges--stackCount:hover .amc-NBadge-text,
+.amc-NBadges--stackCount:focus-within .amc-NBadge-text { grid-template-columns: 1fr; }
+
+.amc-NBadges--stackCount:hover .amc-NBadge-label,
+.amc-NBadges--stackCount:focus-within .amc-NBadge-label {
+  opacity: 1;
+  transition-delay: .1s;
+}
+
+.amc-NBadges--stackCount:hover::after,
+.amc-NBadges--stackCount:focus-within::after { opacity: .45; }
+
+/* ---------- touch screens: no hover, so show the labels from the start ---------- */
+
+@media (hover: none) {
+  .amc-NBadge--expandLabel {
+    gap: .4375rem;
+    padding-inline-end: .75rem;
+    background-color: color-mix(in srgb, var(--amc-nbd-c) 12%, var(--amc-nbd-surface));
+  }
+
+  .amc-NBadge--expandLabel .amc-NBadge-text,
+  .amc-NBadges--stackCount .amc-NBadge-text { grid-template-columns: 1fr; }
+
+  .amc-NBadge--expandLabel .amc-NBadge-label,
+  .amc-NBadges--stackCount .amc-NBadge-label { opacity: 1; }
+
+  .amc-NBadges--stackCount {
+    flex-wrap: wrap;
+    gap: .375rem;
+  }
+
+  .amc-NBadges--stackCount .amc-NBadges-item + .amc-NBadges-item { margin-inline-start: 0; }
+
+  .amc-NBadges--stackCount .amc-NBadge--stackCount {
+    gap: .375rem;
+    padding-inline-end: .625rem;
+  }
+}
+
+/* ================= reduced motion, forced colors ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-NBadge,
+  .amc-NBadges,
+  .amc-NBadges-item,
+  .amc-NBadges--stackCount::after,
+  .amc-NBadge-text,
+  .amc-NBadge-label,
+  .amc-NBadge-bar,
+  .amc-NBadge-dot::after,
+  .amc-NBadge-fx,
+  .amc-NBadge-fx::before,
+  .amc-NBadge-fx::after {
+    animation: none;
+    transition: none;
+  }
+
+  /* The beam rests as a static gradient arc; the glint rests on the gel. */
+  .amc-NBadge--beamOutline .amc-NBadge-fx { --amc-nbd-angle: 30deg; }
+
+  .amc-NBadge--pulseLive .amc-NBadge-dot::after { display: none; }
+
+  .amc-NBadge--stickerTilt:hover { transform: rotate(var(--amc-nbd-tilt)); }
+}
+
+@media (forced-colors: active) {
+  .amc-NBadge {
+    border: 1px solid CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  .amc-NBadge-fx { display: none; }
+
+  .amc-NBadge--expandLabel .amc-NBadge-text,
+  .amc-NBadges--stackCount .amc-NBadge-text { grid-template-columns: 1fr; }
+
+  .amc-NBadge--expandLabel .amc-NBadge-label,
+  .amc-NBadges--stackCount .amc-NBadge-label { opacity: 1; }
+}

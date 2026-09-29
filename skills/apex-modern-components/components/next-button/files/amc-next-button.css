@@ -1,0 +1,1048 @@
+/* APEX Modern Components - Next Button (Next Collection)
+ * Twelve current-generation call-to-action designs in four directions:
+ * motion (borderBeam, shimmer, rainbowGlow, pulseRing), depth (keycap, layered,
+ * magnetic), bold (neoBrutal, clay, holo) and smart (morphIcon, confirmHold).
+ * Every color resolves from Universal Theme variables (--ut-*), so the buttons follow
+ * Vita, Vita Dark, Redwood Light, Theme Roller and custom styles.
+ * Border beam, shimmer, rainbow and pulse designs are adapted from Magic UI
+ * (https://magicui.design, MIT License, (c) Magic UI) and rebuilt in plain CSS.
+ * All animation and pointer tracking stops under prefers-reduced-motion. */
+
+@property --amc-nbtn-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ---------- tokens ---------- */
+
+.amc-NButton,
+.amc-NButtons {
+  --amc-nbtn-surface: var(--ut-component-background-color, #fff);
+  --amc-nbtn-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-nbtn-ink: var(--ut-component-text-default-color, #262626);
+  --amc-nbtn-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-nbtn-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nbtn-primary: var(--ut-palette-primary, #056ac8);
+  --amc-nbtn-success: var(--ut-palette-success, #278701);
+  --amc-nbtn-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-nbtn-danger: var(--ut-palette-danger, #cb1100);
+  --amc-nbtn-info: var(--ut-palette-info, #0076df);
+  /* Fixed shade and light used for depth, foil and glints (override on a parent). */
+  --amc-nbtn-shade: var(--amc-next-shade, #000);
+  --amc-nbtn-light: var(--amc-next-light, #fff);
+  --amc-nbtn-mask: var(--amc-next-mask, #000);
+  --amc-nbtn-spectrum: linear-gradient(90deg,
+    var(--amc-nbtn-primary), var(--amc-nbtn-info), var(--amc-nbtn-success),
+    var(--amc-nbtn-warning), var(--amc-nbtn-danger), var(--amc-nbtn-primary));
+}
+
+.amc-NButton,
+.amc-NButton--primary {
+  --amc-nbtn-c: var(--amc-nbtn-primary);
+  --amc-nbtn-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-nbtn-textMix: 80%;
+}
+
+.amc-NButton--success {
+  --amc-nbtn-c: var(--amc-nbtn-success);
+  --amc-nbtn-on: var(--ut-palette-success-contrast, #fff);
+}
+
+.amc-NButton--warning {
+  --amc-nbtn-c: var(--amc-nbtn-warning);
+  --amc-nbtn-on: var(--ut-palette-warning-contrast, #262626);
+  --amc-nbtn-textMix: 45%;
+}
+
+.amc-NButton--danger {
+  --amc-nbtn-c: var(--amc-nbtn-danger);
+  --amc-nbtn-on: var(--ut-palette-danger-contrast, #fff);
+}
+
+.amc-NButton--info {
+  --amc-nbtn-c: var(--amc-nbtn-info);
+  --amc-nbtn-on: var(--ut-palette-info-contrast, var(--ut-palette-primary-contrast, #fff));
+}
+
+/* ---------- report: wrapping action bar ---------- */
+
+.amc-NButtons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: .25rem 0;
+  list-style: none;
+}
+
+.amc-NButtons-item {
+  display: flex;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* ---------- shared structure ---------- */
+
+.amc-NButton {
+  --amc-nbtn-h: 2.75rem;
+  --amc-nbtn-pad: 1.25rem;
+  --amc-nbtn-fs: .875rem;
+  --amc-nbtn-cText: color-mix(in srgb, var(--amc-nbtn-c) var(--amc-nbtn-textMix), var(--amc-nbtn-ink));
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-block-size: var(--amc-nbtn-h);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--amc-nbtn-ink);
+  font: inherit;
+  font-size: var(--amc-nbtn-fs);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform .22s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .22s ease,
+    background-color .2s ease,
+    background-position .6s ease,
+    color .2s ease;
+}
+
+.amc-NButton:hover,
+.amc-NButton:focus {
+  color: var(--amc-nbtn-ink);
+  text-decoration: none;
+}
+
+.amc-NButton:focus-visible {
+  outline: 2px solid var(--amc-nbtn-c);
+  outline-offset: 4px;
+}
+
+.amc-NButton--small {
+  --amc-nbtn-h: 2.125rem;
+  --amc-nbtn-pad: .875rem;
+  --amc-nbtn-fs: .75rem;
+}
+
+.amc-NButton--large {
+  --amc-nbtn-h: 3.375rem;
+  --amc-nbtn-pad: 1.75rem;
+  --amc-nbtn-fs: 1rem;
+}
+
+.amc-NButton-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.amc-NButton-face {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: .5rem var(--amc-nbtn-pad);
+  border-radius: inherit;
+  transition:
+    transform .22s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .22s ease,
+    background-color .2s ease,
+    padding .3s ease;
+}
+
+.amc-NButton-text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem .5rem;
+  min-inline-size: 0;
+}
+
+.amc-NButton-label {
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+  text-align: center;
+  unicode-bidi: isolate;
+}
+
+.amc-NButton-hint {
+  flex: none;
+  padding: .125rem .4rem;
+  border-radius: .3rem;
+  background-color: color-mix(in srgb, currentColor 14%, transparent);
+  font-size: .75em;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+.amc-NButton-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  transition: transform .25s cubic-bezier(.2, .8, .2, 1), background-color .2s ease;
+}
+
+.amc-NButton-icon--auto { display: none; }
+
+/* Arrow drawn in CSS, pointing to the inline end. */
+.amc-NButton-arrow {
+  position: relative;
+  display: block;
+  inline-size: .75em;
+  block-size: .125em;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+.amc-NButton-arrow::after {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 0;
+  inline-size: .4em;
+  block-size: .4em;
+  border: solid currentColor;
+  border-width: .125em .125em 0 0;
+  content: "";
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.amc-NButton:dir(rtl) .amc-NButton-arrow::after { transform: translateY(-50%) rotate(-135deg); }
+
+/* ================= MOTION 1. borderBeam: two beams of light orbit the border ================= */
+
+.amc-NButton--borderBeam {
+  border-radius: .875rem;
+  background:
+    radial-gradient(110% 150% at 50% 130%, color-mix(in srgb, var(--amc-nbtn-c) 18%, transparent), transparent 62%),
+    var(--amc-nbtn-surface);
+  box-shadow:
+    inset 0 0 0 1px var(--amc-nbtn-line),
+    0 1px 2px color-mix(in srgb, var(--amc-nbtn-shade) 8%, transparent),
+    0 .75rem 1.75rem -1rem color-mix(in srgb, var(--amc-nbtn-c) 60%, transparent);
+}
+
+.amc-NButton--borderBeam .amc-NButton-fx {
+  padding: 2px;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--amc-nbtn-c) 70%, transparent));
+  background: conic-gradient(from var(--amc-nbtn-angle),
+    transparent 0deg 30deg,
+    color-mix(in srgb, var(--amc-nbtn-info) 50%, transparent) 80deg,
+    var(--amc-nbtn-info) 125deg,
+    transparent 150deg 210deg,
+    color-mix(in srgb, var(--amc-nbtn-c) 45%, transparent) 260deg,
+    var(--amc-nbtn-c) 330deg,
+    color-mix(in srgb, var(--amc-nbtn-c) 40%, var(--amc-nbtn-light)) 345deg,
+    transparent 360deg);
+  -webkit-mask: linear-gradient(var(--amc-nbtn-mask) 0 0) content-box, linear-gradient(var(--amc-nbtn-mask) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-nbtn-mask) 0 0) content-box exclude, linear-gradient(var(--amc-nbtn-mask) 0 0);
+  animation: amc-nbtn-orbit 4.5s linear infinite;
+}
+
+.amc-NButton--borderBeam .amc-NButton-icon { color: var(--amc-nbtn-cText); }
+
+.amc-NButton--borderBeam:hover,
+.amc-NButton--borderBeam:focus-visible {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbtn-c) 30%, var(--amc-nbtn-line)),
+    0 1px 2px color-mix(in srgb, var(--amc-nbtn-shade) 8%, transparent),
+    0 1rem 2.25rem -1rem color-mix(in srgb, var(--amc-nbtn-c) 80%, transparent);
+  transform: translateY(-1px);
+}
+
+.amc-NButton--borderBeam:hover .amc-NButton-icon,
+.amc-NButton--borderBeam:focus-visible .amc-NButton-icon { transform: scale(1.15); }
+
+.amc-NButton--borderBeam:active { transform: scale(.97); }
+
+@keyframes amc-nbtn-orbit {
+  to { --amc-nbtn-angle: 360deg; }
+}
+
+/* ================= MOTION 2. shimmer: glint sweeps across a deep pill ================= */
+
+.amc-NButton--shimmer {
+  --amc-nbtn-pill: color-mix(in srgb, var(--amc-nbtn-c) 16%, var(--amc-nbtn-shade));
+  overflow: hidden;
+  background:
+    radial-gradient(80% 120% at 50% 120%, color-mix(in srgb, var(--amc-nbtn-c) 55%, transparent), transparent 70%),
+    var(--amc-nbtn-pill);
+  box-shadow:
+    inset 0 -.5rem .625rem color-mix(in srgb, var(--amc-nbtn-light) 12%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 22%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-nbtn-c) 40%, var(--amc-nbtn-shade)),
+    0 .75rem 1.5rem -.75rem color-mix(in srgb, var(--amc-nbtn-c) 75%, transparent);
+  color: var(--amc-nbtn-light);
+}
+
+.amc-NButton--shimmer:hover,
+.amc-NButton--shimmer:focus,
+.amc-NButton--shimmer:focus-visible { color: var(--amc-nbtn-light); }
+
+.amc-NButton--shimmer .amc-NButton-fx::before {
+  position: absolute;
+  inset-block: -50%;
+  inset-inline-start: 0;
+  inline-size: 45%;
+  background: linear-gradient(90deg,
+    transparent,
+    color-mix(in srgb, var(--amc-nbtn-light) 10%, transparent) 30%,
+    color-mix(in srgb, var(--amc-nbtn-light) 55%, transparent) 50%,
+    color-mix(in srgb, var(--amc-nbtn-light) 10%, transparent) 70%,
+    transparent);
+  content: "";
+  transform: translateX(130%) skewX(-20deg);
+  animation: amc-nbtn-sweep 3.2s cubic-bezier(.6, 0, .3, 1) infinite;
+}
+
+.amc-NButton--shimmer .amc-NButton-fx::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent 10%, color-mix(in srgb, var(--amc-nbtn-light) 70%, transparent) 50%, transparent 90%) top / 100% 1px no-repeat;
+  content: "";
+}
+
+.amc-NButton--shimmer .amc-NButton-hint { background-color: color-mix(in srgb, var(--amc-nbtn-light) 16%, transparent); }
+
+.amc-NButton--shimmer:hover,
+.amc-NButton--shimmer:focus-visible {
+  box-shadow:
+    inset 0 -.375rem .625rem color-mix(in srgb, var(--amc-nbtn-light) 25%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 30%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-nbtn-c) 60%, var(--amc-nbtn-shade)),
+    0 1rem 2rem -.75rem color-mix(in srgb, var(--amc-nbtn-c) 90%, transparent);
+}
+
+.amc-NButton--shimmer:active {
+  box-shadow:
+    inset 0 -.625rem .625rem color-mix(in srgb, var(--amc-nbtn-light) 25%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-nbtn-c) 60%, var(--amc-nbtn-shade));
+  transform: translateY(1px);
+}
+
+@keyframes amc-nbtn-sweep {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  55%, 100% { transform: translateX(260%) skewX(-20deg); }
+}
+
+/* ================= MOTION 3. rainbowGlow: spectrum border and glow from the palette ================= */
+
+.amc-NButton--rainbowGlow {
+  border: 2px solid transparent;
+  border-radius: .75rem;
+  background:
+    linear-gradient(var(--amc-nbtn-ink) 35%, color-mix(in srgb, var(--amc-nbtn-ink) 45%, transparent) 70%, transparent) border-box,
+    var(--amc-nbtn-spectrum) border-box;
+  background-size: 100% 100%, 200% 100%;
+  color: var(--amc-nbtn-surface);
+  animation: amc-nbtn-rainbow 3s linear infinite;
+}
+
+.amc-NButton--rainbowGlow .amc-NButton-face {
+  border-radius: calc(.75rem - 2px);
+  background-color: var(--amc-nbtn-ink);
+}
+
+.amc-NButton--rainbowGlow:hover,
+.amc-NButton--rainbowGlow:focus { color: var(--amc-nbtn-surface); }
+
+.amc-NButton--rainbowGlow .amc-NButton-fx {
+  inset: 65% 12% -40%;
+  border-radius: 50%;
+  background: var(--amc-nbtn-spectrum);
+  background-size: 200% 100%;
+  filter: blur(.75rem);
+  opacity: .85;
+  animation: amc-nbtn-rainbowGlow 3s linear infinite;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.amc-NButton--rainbowGlow .amc-NButton-hint {
+  background: var(--amc-nbtn-spectrum);
+  color: var(--amc-nbtn-shade);
+}
+
+.amc-NButton--rainbowGlow:hover,
+.amc-NButton--rainbowGlow:focus-visible { transform: translateY(-2px); }
+
+.amc-NButton--rainbowGlow:hover .amc-NButton-fx,
+.amc-NButton--rainbowGlow:focus-visible .amc-NButton-fx {
+  opacity: 1;
+  transform: scale(1.1, 1.3);
+}
+
+.amc-NButton--rainbowGlow:active { transform: translateY(0) scale(.98); }
+
+@keyframes amc-nbtn-rainbow {
+  from { background-position: 0 0, 0% 50%; }
+  to { background-position: 0 0, 200% 50%; }
+}
+
+@keyframes amc-nbtn-rainbowGlow {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+
+/* ================= MOTION 4. pulseRing: sonar rings broadcast from a solid pill ================= */
+
+.amc-NButton--pulseRing {
+  background-color: var(--amc-nbtn-c);
+  box-shadow:
+    0 0 0 .25rem color-mix(in srgb, var(--amc-nbtn-c) 20%, transparent),
+    0 0 0 .5rem color-mix(in srgb, var(--amc-nbtn-c) 8%, transparent),
+    0 .5rem 1.25rem -.5rem color-mix(in srgb, var(--amc-nbtn-c) 80%, transparent);
+  color: var(--amc-nbtn-on);
+}
+
+.amc-NButton--pulseRing:hover,
+.amc-NButton--pulseRing:focus { color: var(--amc-nbtn-on); }
+
+.amc-NButton--pulseRing .amc-NButton-fx::before,
+.amc-NButton--pulseRing .amc-NButton-fx::after {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--amc-nbtn-c);
+  border-radius: inherit;
+  content: "";
+  opacity: 0;
+  animation: amc-nbtn-ping 2.6s cubic-bezier(.2, .6, .35, 1) infinite;
+}
+
+.amc-NButton--pulseRing .amc-NButton-fx::after { animation-delay: 1.3s; }
+
+.amc-NButton--pulseRing .amc-NButton-icon {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  margin-inline-start: -.5rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-nbtn-on) 22%, transparent);
+  font-size: .8em;
+}
+
+.amc-NButton--pulseRing:hover,
+.amc-NButton--pulseRing:focus-visible {
+  box-shadow:
+    0 0 0 .3rem color-mix(in srgb, var(--amc-nbtn-c) 28%, transparent),
+    0 0 0 .7rem color-mix(in srgb, var(--amc-nbtn-c) 10%, transparent),
+    0 .75rem 1.5rem -.5rem color-mix(in srgb, var(--amc-nbtn-c) 90%, transparent);
+  transform: scale(1.03);
+}
+
+.amc-NButton--pulseRing:active { transform: scale(.96); }
+
+@keyframes amc-nbtn-ping {
+  0% { opacity: .7; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.14, 1.75); }
+}
+
+/* ================= DEPTH 5. keycap: mechanical key with a dished top that travels down ================= */
+
+.amc-NButton--keycap {
+  --amc-nbtn-skirt: color-mix(in srgb, var(--amc-nbtn-c) 70%, var(--amc-nbtn-shade));
+  padding: .1875rem .375rem .5625rem;
+  border-radius: .75rem;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--amc-nbtn-c) 88%, var(--amc-nbtn-light)),
+    var(--amc-nbtn-skirt));
+  box-shadow:
+    0 .3125rem 0 color-mix(in srgb, var(--amc-nbtn-c) 45%, var(--amc-nbtn-shade)),
+    0 .625rem 1rem -.25rem color-mix(in srgb, var(--amc-nbtn-shade) 45%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 35%, transparent);
+  color: var(--amc-nbtn-on);
+  margin-block-end: .3125rem;
+}
+
+.amc-NButton--keycap:hover,
+.amc-NButton--keycap:focus { color: var(--amc-nbtn-on); }
+
+.amc-NButton--keycap .amc-NButton-face {
+  justify-content: flex-start;
+  min-inline-size: 5.5rem;
+  padding: 1rem calc(var(--amc-nbtn-pad) * .8) .375rem;
+  border-radius: .5rem;
+  background:
+    radial-gradient(90% 70% at 50% 35%, color-mix(in srgb, var(--amc-nbtn-light) 16%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nbtn-c) 92%, var(--amc-nbtn-light)), var(--amc-nbtn-c));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 40%, transparent),
+    inset 0 -2px 3px color-mix(in srgb, var(--amc-nbtn-shade) 14%, transparent),
+    0 1px 2px color-mix(in srgb, var(--amc-nbtn-shade) 30%, transparent);
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--amc-nbtn-shade) 25%, transparent);
+}
+
+.amc-NButton--keycap .amc-NButton-label { text-align: start; }
+
+/* Shortcut printed as a legend in the top corner, like a key print. */
+.amc-NButton--keycap .amc-NButton-hint {
+  position: absolute;
+  inset-block-start: .25rem;
+  inset-inline-end: .4375rem;
+  padding: 0;
+  background: none;
+  font-size: .625rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  opacity: .8;
+}
+
+.amc-NButton--keycap .amc-NButton-icon { font-size: .9em; opacity: .9; }
+
+.amc-NButton--keycap:hover .amc-NButton-face,
+.amc-NButton--keycap:focus-visible .amc-NButton-face {
+  background:
+    radial-gradient(90% 70% at 50% 35%, color-mix(in srgb, var(--amc-nbtn-light) 26%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nbtn-c) 88%, var(--amc-nbtn-light)), var(--amc-nbtn-c));
+}
+
+.amc-NButton--keycap:active {
+  box-shadow:
+    0 .0625rem 0 color-mix(in srgb, var(--amc-nbtn-c) 45%, var(--amc-nbtn-shade)),
+    0 .125rem .25rem -.125rem color-mix(in srgb, var(--amc-nbtn-shade) 45%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 20%, transparent);
+  transform: translateY(.25rem);
+}
+
+.amc-NButton--keycap:active .amc-NButton-face { transform: translateY(.0625rem) scale(.985); }
+
+/* ================= DEPTH 6. layered: a stack of plates that fans apart on hover ================= */
+
+.amc-NButton--layered {
+  border-radius: .875rem;
+  margin-block-end: .875rem;
+  color: var(--amc-nbtn-on);
+}
+
+.amc-NButton--layered:hover,
+.amc-NButton--layered:focus { color: var(--amc-nbtn-on); }
+
+.amc-NButton--layered .amc-NButton-face {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nbtn-light) 16%, transparent), transparent 55%),
+    var(--amc-nbtn-c);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 30%, transparent),
+    0 .125rem .375rem color-mix(in srgb, var(--amc-nbtn-shade) 20%, transparent);
+}
+
+.amc-NButton--layered .amc-NButton-fx::before,
+.amc-NButton--layered .amc-NButton-fx::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbtn-c) 30%, transparent),
+    0 .125rem .375rem color-mix(in srgb, var(--amc-nbtn-shade) 12%, transparent);
+  content: "";
+  transition: transform .4s cubic-bezier(.3, 1.5, .5, 1);
+}
+
+.amc-NButton--layered .amc-NButton-fx::before {
+  z-index: 1;
+  background-color: color-mix(in srgb, var(--amc-nbtn-c) 55%, var(--amc-nbtn-surface));
+  transform: translateY(.375rem) scale(.93, .95);
+}
+
+.amc-NButton--layered .amc-NButton-fx::after {
+  z-index: 0;
+  background-color: color-mix(in srgb, var(--amc-nbtn-c) 25%, var(--amc-nbtn-surface));
+  transform: translateY(.75rem) scale(.86, .9);
+}
+
+.amc-NButton--layered .amc-NButton-fx { z-index: 0; }
+
+.amc-NButton--layered .amc-NButton-hint { background-color: color-mix(in srgb, var(--amc-nbtn-on) 20%, transparent); }
+
+.amc-NButton--layered:hover .amc-NButton-face,
+.amc-NButton--layered:focus-visible .amc-NButton-face { transform: translateY(-.25rem); }
+
+.amc-NButton--layered:hover .amc-NButton-fx::before,
+.amc-NButton--layered:focus-visible .amc-NButton-fx::before { transform: translateY(.5rem) scale(.95, .95); }
+
+.amc-NButton--layered:hover .amc-NButton-fx::after,
+.amc-NButton--layered:focus-visible .amc-NButton-fx::after { transform: translateY(1.125rem) scale(.9, .9); }
+
+.amc-NButton--layered:active .amc-NButton-face { transform: translateY(.25rem); }
+
+.amc-NButton--layered:active .amc-NButton-fx::before { transform: translateY(.375rem) scale(.96, .95); }
+
+.amc-NButton--layered:active .amc-NButton-fx::after { transform: translateY(.5rem) scale(.92, .9); }
+
+/* ================= DEPTH 7. magnetic: a floating pill that leans toward the pointer ================= */
+
+.amc-NButton--magnetic {
+  --amc-nbtn-lift: -.25rem;
+  margin-block-end: .5rem;
+  transform: translate(calc(var(--amc-mx, 0) * .5rem), calc(var(--amc-my, 0) * .375rem + var(--amc-nbtn-lift)));
+  transition: transform .35s cubic-bezier(.2, .9, .25, 1.2);
+}
+
+.amc-NButton--magnetic .amc-NButton-face {
+  padding-inline-end: .375rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nbtn-c) 30%, var(--amc-nbtn-line));
+  background:
+    radial-gradient(4rem 4rem at calc(50% + var(--amc-mx, 0) * 50%) calc(50% + var(--amc-my, 0) * 60%), color-mix(in srgb, var(--amc-nbtn-c) 18%, transparent), transparent),
+    linear-gradient(180deg, var(--amc-nbtn-surface), color-mix(in srgb, var(--amc-nbtn-c) 6%, var(--amc-nbtn-surface)));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nbtn-light) 60%, transparent),
+    0 .125rem .25rem color-mix(in srgb, var(--amc-nbtn-shade) 8%, transparent);
+}
+
+/* The label and icon travel further than the body: parallax inside the pill. */
+.amc-NButton--magnetic .amc-NButton-text {
+  transform: translate(calc(var(--amc-mx, 0) * .25rem), calc(var(--amc-my, 0) * .1875rem));
+  transition: transform .35s cubic-bezier(.2, .9, .25, 1.2);
+}
+
+.amc-NButton--magnetic .amc-NButton-icon,
+.amc-NButton--magnetic .amc-NButton-icon--auto {
+  display: inline-flex;
+  order: 2;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  background-color: var(--amc-nbtn-c);
+  box-shadow: 0 .25rem .5rem -.125rem color-mix(in srgb, var(--amc-nbtn-c) 70%, transparent);
+  color: var(--amc-nbtn-on);
+  transform: translate(calc(var(--amc-mx, 0) * .5rem), calc(var(--amc-my, 0) * .375rem));
+  transition: transform .35s cubic-bezier(.2, .9, .25, 1.2);
+}
+
+.amc-NButton--small.amc-NButton--magnetic .amc-NButton-icon { inline-size: 1.5rem; block-size: 1.5rem; }
+
+/* Ground shadow stays on the floor, so the gap reads as height. */
+.amc-NButton--magnetic .amc-NButton-fx {
+  inset: -.5rem;
+  pointer-events: auto;
+}
+
+.amc-NButton--magnetic .amc-NButton-fx::after {
+  position: absolute;
+  inset-inline: 18%;
+  inset-block-end: .125rem;
+  block-size: .625rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--amc-nbtn-shade) 28%, transparent), transparent);
+  content: "";
+  transform: translate(calc(var(--amc-mx, 0) * -.25rem), calc(var(--amc-nbtn-lift) * -1.5));
+  transition: transform .35s cubic-bezier(.2, .9, .25, 1.2), opacity .35s ease;
+}
+
+.amc-NButton--magnetic:hover,
+.amc-NButton--magnetic:focus-visible { --amc-nbtn-lift: -.4375rem; }
+
+.amc-NButton--magnetic:hover .amc-NButton-fx::after,
+.amc-NButton--magnetic:focus-visible .amc-NButton-fx::after { opacity: .7; }
+
+.amc-NButton--magnetic:active { --amc-nbtn-lift: 0rem; }
+
+/* ================= BOLD 8. neoBrutal: ink border, hard offset shadow, flat fill ================= */
+
+.amc-NButton--neoBrutal {
+  --amc-nbtn-off: .25rem;
+  border: 2px solid var(--amc-nbtn-ink);
+  border-radius: .5rem;
+  background-color: color-mix(in srgb, var(--amc-nbtn-c) 32%, var(--amc-nbtn-surface));
+  box-shadow: var(--amc-nbtn-off) var(--amc-nbtn-off) 0 0 var(--amc-nbtn-ink);
+  color: var(--amc-nbtn-ink);
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+.amc-NButton--neoBrutal:dir(rtl) { box-shadow: calc(var(--amc-nbtn-off) * -1) var(--amc-nbtn-off) 0 0 var(--amc-nbtn-ink); }
+
+.amc-NButton--neoBrutal .amc-NButton-face { padding-inline-start: .375rem; }
+
+.amc-NButton--neoBrutal .amc-NButton-icon,
+.amc-NButton--neoBrutal .amc-NButton-icon--auto {
+  display: inline-flex;
+  align-self: stretch;
+  inline-size: 2rem;
+  margin-block: -.125rem;
+  border: 2px solid var(--amc-nbtn-ink);
+  border-radius: .3125rem;
+  background-color: var(--amc-nbtn-c);
+  color: var(--amc-nbtn-on);
+}
+
+.amc-NButton--neoBrutal .amc-NButton-hint {
+  border: 2px solid var(--amc-nbtn-ink);
+  border-radius: 999px;
+  background-color: var(--amc-nbtn-surface);
+}
+
+.amc-NButton--neoBrutal:hover,
+.amc-NButton--neoBrutal:focus-visible {
+  --amc-nbtn-off: .375rem;
+  transform: translate(-.125rem, -.125rem);
+}
+
+.amc-NButton--neoBrutal:dir(rtl):hover,
+.amc-NButton--neoBrutal:dir(rtl):focus-visible { transform: translate(.125rem, -.125rem); }
+
+.amc-NButton--neoBrutal:active,
+.amc-NButton--neoBrutal:dir(rtl):active {
+  --amc-nbtn-off: 0rem;
+  transform: translate(0, .25rem);
+}
+
+.amc-NButton--neoBrutal:focus-visible { outline-color: var(--amc-nbtn-ink); }
+
+/* ================= BOLD 9. clay: pillowy, inflated surface with inner light ================= */
+
+.amc-NButton--clay {
+  border-radius: 1.375rem;
+  background-color: color-mix(in srgb, var(--amc-nbtn-c) 80%, var(--amc-nbtn-light));
+  box-shadow:
+    .5rem .625rem 1.25rem -.25rem color-mix(in srgb, var(--amc-nbtn-c) 45%, color-mix(in srgb, var(--amc-nbtn-page) 60%, var(--amc-nbtn-shade))),
+    -.25rem -.25rem .75rem color-mix(in srgb, var(--amc-nbtn-page) 70%, var(--amc-nbtn-light)),
+    inset .375rem .375rem .75rem color-mix(in srgb, var(--amc-nbtn-light) 45%, transparent),
+    inset -.375rem -.5rem .75rem color-mix(in srgb, var(--amc-nbtn-c) 60%, var(--amc-nbtn-shade));
+  color: var(--amc-nbtn-on);
+  text-shadow: 0 1px 1px color-mix(in srgb, var(--amc-nbtn-shade) 20%, transparent);
+}
+
+.amc-NButton--clay:hover,
+.amc-NButton--clay:focus { color: var(--amc-nbtn-on); }
+
+.amc-NButton--clay .amc-NButton-face { padding-inline: calc(var(--amc-nbtn-pad) * 1.15); }
+
+.amc-NButton--clay .amc-NButton-icon {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  margin-inline-start: -.5rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-nbtn-c) 70%, var(--amc-nbtn-light));
+  box-shadow:
+    inset .125rem .125rem .25rem color-mix(in srgb, var(--amc-nbtn-light) 50%, transparent),
+    inset -.125rem -.1875rem .25rem color-mix(in srgb, var(--amc-nbtn-c) 60%, var(--amc-nbtn-shade)),
+    0 .1875rem .375rem color-mix(in srgb, var(--amc-nbtn-c) 50%, var(--amc-nbtn-shade));
+  font-size: .85em;
+}
+
+.amc-NButton--clay .amc-NButton-hint { background-color: color-mix(in srgb, var(--amc-nbtn-light) 25%, transparent); }
+
+.amc-NButton--clay:hover,
+.amc-NButton--clay:focus-visible { transform: translateY(-2px) scale(1.02); }
+
+.amc-NButton--clay:active {
+  box-shadow:
+    .125rem .25rem .5rem -.125rem color-mix(in srgb, var(--amc-nbtn-c) 45%, color-mix(in srgb, var(--amc-nbtn-page) 60%, var(--amc-nbtn-shade))),
+    inset .5rem .5rem 1rem color-mix(in srgb, var(--amc-nbtn-c) 55%, var(--amc-nbtn-shade)),
+    inset -.25rem -.25rem .5rem color-mix(in srgb, var(--amc-nbtn-light) 30%, transparent);
+  transform: scale(.96);
+}
+
+/* ================= BOLD 10. holo: iridescent foil that shifts with the pointer ================= */
+
+.amc-NButton--holo {
+  --amc-nbtn-foil: 25%;
+  --amc-nbtn-holoInk: color-mix(in srgb, var(--amc-nbtn-shade) 82%, var(--amc-nbtn-primary));
+  border-radius: .875rem;
+  background:
+    repeating-linear-gradient(115deg, transparent 0 .375rem, color-mix(in srgb, var(--amc-nbtn-light) 30%, transparent) .375rem .4375rem),
+    linear-gradient(115deg,
+      color-mix(in srgb, var(--amc-nbtn-primary) 38%, var(--amc-nbtn-light)),
+      color-mix(in srgb, var(--amc-nbtn-info) 30%, var(--amc-nbtn-light)) 18%,
+      color-mix(in srgb, var(--amc-nbtn-success) 30%, var(--amc-nbtn-light)) 34%,
+      color-mix(in srgb, var(--amc-nbtn-warning) 40%, var(--amc-nbtn-light)) 50%,
+      color-mix(in srgb, var(--amc-nbtn-danger) 28%, var(--amc-nbtn-light)) 66%,
+      color-mix(in srgb, var(--amc-nbtn-primary) 38%, var(--amc-nbtn-light)) 82%,
+      color-mix(in srgb, var(--amc-nbtn-info) 30%, var(--amc-nbtn-light)));
+  background-size: auto, 300% 100%;
+  background-position: 0 0, calc(var(--amc-nbtn-foil) + var(--amc-mx, 0) * 30%) 50%;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-nbtn-light) 70%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-nbtn-primary) 25%, var(--amc-nbtn-line)),
+    0 .5rem 1.25rem -.5rem color-mix(in srgb, var(--amc-nbtn-primary) 45%, transparent);
+  color: var(--amc-nbtn-holoInk);
+}
+
+.amc-NButton--holo:hover,
+.amc-NButton--holo:focus { color: var(--amc-nbtn-holoInk); }
+
+/* Specular band that slides across the foil. */
+.amc-NButton--holo .amc-NButton-fx {
+  background: linear-gradient(105deg,
+    transparent 30%,
+    color-mix(in srgb, var(--amc-nbtn-light) 75%, transparent) 48%,
+    color-mix(in srgb, var(--amc-nbtn-light) 20%, transparent) 55%,
+    transparent 70%);
+  background-size: 250% 100%;
+  background-position: calc(100% - var(--amc-nbtn-foil) - var(--amc-mx, 0) * 40%) 0;
+  mix-blend-mode: soft-light;
+  transition: background-position .6s ease;
+}
+
+.amc-NButton--holo .amc-NButton-hint {
+  background-color: var(--amc-nbtn-holoInk);
+  color: var(--amc-nbtn-light);
+}
+
+.amc-NButton--holo:hover,
+.amc-NButton--holo:focus-visible {
+  --amc-nbtn-foil: 75%;
+  transform: translateY(-1px);
+}
+
+.amc-NButton--holo:active { transform: scale(.97); }
+
+/* ================= SMART 11. morphIcon: icon circle that grows into its label ================= */
+
+.amc-NButton--morphIcon {
+  min-inline-size: var(--amc-nbtn-h);
+  background-color: var(--amc-nbtn-c);
+  box-shadow:
+    0 0 0 .3125rem color-mix(in srgb, var(--amc-nbtn-c) 14%, transparent),
+    0 .5rem 1rem -.5rem color-mix(in srgb, var(--amc-nbtn-c) 80%, transparent);
+  color: var(--amc-nbtn-on);
+}
+
+.amc-NButton--morphIcon:hover,
+.amc-NButton--morphIcon:focus { color: var(--amc-nbtn-on); }
+
+.amc-NButton--morphIcon .amc-NButton-face {
+  gap: 0;
+  padding-inline: calc((var(--amc-nbtn-h) - 1.25rem) / 2);
+  transition: padding .35s cubic-bezier(.2, .8, .2, 1), gap .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NButton--morphIcon .amc-NButton-icon,
+.amc-NButton--morphIcon .amc-NButton-icon--auto {
+  display: inline-flex;
+  inline-size: 1.25rem;
+  font-size: 1.05em;
+}
+
+.amc-NButton--morphIcon .amc-NButton-text {
+  display: grid;
+  grid-template-columns: 0fr;
+  transition: grid-template-columns .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NButton--morphIcon .amc-NButton-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.amc-NButton--morphIcon .amc-NButton-hint { display: none; }
+
+.amc-NButton--morphIcon:hover .amc-NButton-face,
+.amc-NButton--morphIcon:focus-visible .amc-NButton-face {
+  gap: .5rem;
+  padding-inline-end: var(--amc-nbtn-pad);
+}
+
+.amc-NButton--morphIcon:hover .amc-NButton-text,
+.amc-NButton--morphIcon:focus-visible .amc-NButton-text { grid-template-columns: 1fr; }
+
+.amc-NButton--morphIcon:hover .amc-NButton-label,
+.amc-NButton--morphIcon:focus-visible .amc-NButton-label {
+  opacity: 1;
+  transition-delay: .1s;
+}
+
+.amc-NButton--morphIcon:hover .amc-NButton-icon,
+.amc-NButton--morphIcon:focus-visible .amc-NButton-icon { transform: rotate(-12deg) scale(1.1); }
+
+.amc-NButton--morphIcon:active { transform: scale(.95); }
+
+/* Touch screens have no hover: show the label from the start. */
+@media (hover: none) {
+  .amc-NButton--morphIcon .amc-NButton-face {
+    gap: .5rem;
+    padding-inline-end: var(--amc-nbtn-pad);
+  }
+
+  .amc-NButton--morphIcon .amc-NButton-text { grid-template-columns: 1fr; }
+
+  .amc-NButton--morphIcon .amc-NButton-label { opacity: 1; }
+}
+
+/* ================= SMART 12. confirmHold: striped fill that charges while pressed ================= */
+
+.amc-NButton--confirmHold {
+  --amc-nbtn-hold: 1.2s;
+  overflow: hidden;
+  border-radius: .75rem;
+  background-color: color-mix(in srgb, var(--amc-nbtn-c) 9%, var(--amc-nbtn-surface));
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--amc-nbtn-c) 55%, transparent);
+  color: var(--amc-nbtn-cText);
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.amc-NButton--confirmHold:hover,
+.amc-NButton--confirmHold:focus { color: var(--amc-nbtn-cText); }
+
+.amc-NButton--confirmHold .amc-NButton-fx {
+  background: repeating-linear-gradient(-45deg,
+    color-mix(in srgb, var(--amc-nbtn-c) 30%, var(--amc-nbtn-surface)) 0 .5rem,
+    color-mix(in srgb, var(--amc-nbtn-c) 20%, var(--amc-nbtn-surface)) .5rem 1rem);
+  transform: scaleX(.06);
+  transform-origin: 0 50%;
+  transition: transform .45s cubic-bezier(.4, 0, .2, 1);
+}
+
+.amc-NButton--confirmHold:dir(rtl) .amc-NButton-fx { transform-origin: 100% 50%; }
+
+.amc-NButton--confirmHold .amc-NButton-face {
+  justify-content: flex-start;
+  padding-inline: calc(var(--amc-nbtn-pad) * .75) 2.25rem;
+}
+
+.amc-NButton--confirmHold .amc-NButton-text {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .0625rem;
+}
+
+.amc-NButton--confirmHold .amc-NButton-label { text-align: start; }
+
+.amc-NButton--confirmHold .amc-NButton-hint {
+  padding: 0;
+  background: none;
+  font-size: .6875rem;
+  font-weight: 500;
+  opacity: .8;
+}
+
+/* Hold ring around the icon: the dashed track is the countdown affordance. */
+.amc-NButton--confirmHold .amc-NButton-icon,
+.amc-NButton--confirmHold .amc-NButton-icon--auto {
+  display: inline-flex;
+  inline-size: 1.875rem;
+  block-size: 1.875rem;
+  border: 2px dashed color-mix(in srgb, var(--amc-nbtn-c) 60%, transparent);
+  border-radius: 50%;
+  font-size: .85em;
+}
+
+.amc-NButton--confirmHold .amc-NButton-done {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: .875rem;
+  inline-size: .5rem;
+  block-size: .9rem;
+  border: solid currentColor;
+  border-width: 0 .1875rem .1875rem 0;
+  opacity: 0;
+  transform: translateY(-65%) rotate(45deg) scale(.4);
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.amc-NButton--confirmHold:hover,
+.amc-NButton--confirmHold:focus-visible { background-color: color-mix(in srgb, var(--amc-nbtn-c) 14%, var(--amc-nbtn-surface)); }
+
+.amc-NButton--confirmHold:hover .amc-NButton-fx,
+.amc-NButton--confirmHold:focus-visible .amc-NButton-fx { transform: scaleX(.1); }
+
+.amc-NButton--confirmHold:active .amc-NButton-fx {
+  opacity: 0;
+  transform: scaleX(1);
+  transition: transform var(--amc-nbtn-hold) linear, opacity .2s ease var(--amc-nbtn-hold);
+}
+
+.amc-NButton--confirmHold:active {
+  background-color: var(--amc-nbtn-c);
+  color: var(--amc-nbtn-on);
+  transition: background-color .2s ease var(--amc-nbtn-hold), color .2s ease var(--amc-nbtn-hold);
+}
+
+.amc-NButton--confirmHold:active .amc-NButton-icon {
+  border-style: solid;
+  border-color: currentColor;
+  animation: amc-nbtn-spinOnce var(--amc-nbtn-hold) linear;
+}
+
+.amc-NButton--confirmHold:active .amc-NButton-done {
+  opacity: 1;
+  transform: translateY(-65%) rotate(45deg) scale(1);
+  transition: opacity .15s ease var(--amc-nbtn-hold), transform .25s cubic-bezier(.3, 1.6, .5, 1) var(--amc-nbtn-hold);
+}
+
+@keyframes amc-nbtn-spinOnce {
+  to { transform: rotate(360deg); }
+}
+
+/* ================= reduced motion, forced colors ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-NButton,
+  .amc-NButton-face,
+  .amc-NButton-text,
+  .amc-NButton-label,
+  .amc-NButton-icon,
+  .amc-NButton-done,
+  .amc-NButton-fx,
+  .amc-NButton-fx::before,
+  .amc-NButton-fx::after {
+    animation: none;
+    transition: none;
+  }
+
+  /* Beam becomes a static gradient border; the glint rests on the pill. */
+  .amc-NButton--borderBeam .amc-NButton-fx { --amc-nbtn-angle: 20deg; }
+
+  .amc-NButton--shimmer .amc-NButton-fx::before { transform: translateX(150%) skewX(-20deg); }
+
+  .amc-NButton--pulseRing .amc-NButton-fx::before {
+    opacity: .3;
+    transform: scale(1.06, 1.3);
+  }
+
+  .amc-NButton--magnetic,
+  .amc-NButton--magnetic .amc-NButton-text,
+  .amc-NButton--magnetic .amc-NButton-icon { transform: none; }
+
+  .amc-NButton--magnetic .amc-NButton-fx::after { transform: none; }
+
+  .amc-NButton:hover,
+  .amc-NButton:focus-visible,
+  .amc-NButton:active { transform: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-NButton {
+    border: 2px solid ButtonText;
+    background: ButtonFace;
+    color: ButtonText;
+    forced-color-adjust: none;
+  }
+
+  .amc-NButton-fx { display: none; }
+
+  .amc-NButton-face {
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .amc-NButton--morphIcon .amc-NButton-label { opacity: 1; }
+
+  .amc-NButton--morphIcon .amc-NButton-text { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,291 @@
+{
+  "samples": [
+    {
+      "title": "Border beam",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "borderBeam"
+      },
+      "rows": [
+        {
+          "LABEL": "Open Q3 Forecast",
+          "ICON": "fa-line-chart",
+          "LINK_URL": "#forecast"
+        },
+        {
+          "LABEL": "Review 12 Orders",
+          "HINT": "New",
+          "LINK_URL": "#orders"
+        }
+      ]
+    },
+    {
+      "title": "Shimmer",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "shimmer"
+      },
+      "rows": [
+        {
+          "LABEL": "Upgrade to Enterprise",
+          "ICON": "fa-star",
+          "LINK_URL": "#upgrade"
+        },
+        {
+          "LABEL": "Start Free Trial",
+          "COLOR": "info"
+        }
+      ]
+    },
+    {
+      "title": "Rainbow glow",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "rainbowGlow"
+      },
+      "rows": [
+        {
+          "LABEL": "Launch Campaign",
+          "ICON": "fa-rocket",
+          "LINK_URL": "#campaign"
+        },
+        {
+          "LABEL": "Publish Price List",
+          "HINT": "v2"
+        }
+      ]
+    },
+    {
+      "title": "Pulse ring",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "pulseRing"
+      },
+      "rows": [
+        {
+          "LABEL": "Join Live Review",
+          "ICON": "fa-video-camera",
+          "COLOR": "danger",
+          "LINK_URL": "#live"
+        },
+        {
+          "LABEL": "Approve 3 Invoices",
+          "ICON": "fa-check",
+          "COLOR": "success"
+        }
+      ]
+    },
+    {
+      "title": "Keycap",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "keycap"
+      },
+      "rows": [
+        {
+          "LABEL": "Save Order",
+          "ICON": "fa-save",
+          "HINT": "Ctrl S"
+        },
+        {
+          "LABEL": "New Customer",
+          "ICON": "fa-user-plus",
+          "HINT": "Alt N",
+          "COLOR": "success"
+        },
+        {
+          "LABEL": "Search",
+          "ICON": "fa-search",
+          "HINT": "/",
+          "COLOR": "info"
+        }
+      ]
+    },
+    {
+      "title": "Layered stack",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "layered"
+      },
+      "rows": [
+        {
+          "LABEL": "Create Project",
+          "ICON": "fa-plus",
+          "LINK_URL": "#projects/new"
+        },
+        {
+          "LABEL": "Duplicate Quote",
+          "ICON": "fa-copy",
+          "COLOR": "info"
+        }
+      ]
+    },
+    {
+      "title": "Magnetic float",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "magnetic"
+      },
+      "rows": [
+        {
+          "LABEL": "Continue to Checkout",
+          "LINK_URL": "#checkout"
+        },
+        {
+          "LABEL": "Book Onboarding Call",
+          "ICON": "fa-calendar",
+          "COLOR": "success",
+          "LINK_URL": "#call"
+        }
+      ]
+    },
+    {
+      "title": "Neo-brutal",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neoBrutal"
+      },
+      "rows": [
+        {
+          "LABEL": "Export Invoices",
+          "ICON": "fa-download",
+          "LINK_URL": "#export"
+        },
+        {
+          "LABEL": "Flag Shipment",
+          "ICON": "fa-flag",
+          "COLOR": "warning",
+          "HINT": "2"
+        }
+      ]
+    },
+    {
+      "title": "Clay",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "clay"
+      },
+      "rows": [
+        {
+          "LABEL": "Add Line Item",
+          "ICON": "fa-plus"
+        },
+        {
+          "LABEL": "Mark as Paid",
+          "ICON": "fa-check",
+          "COLOR": "success"
+        }
+      ]
+    },
+    {
+      "title": "Holo foil",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "holo"
+      },
+      "rows": [
+        {
+          "LABEL": "Claim Partner Badge",
+          "ICON": "fa-certificate",
+          "LINK_URL": "#partner"
+        },
+        {
+          "LABEL": "View Annual Report",
+          "HINT": "2026",
+          "LINK_URL": "#report"
+        }
+      ]
+    },
+    {
+      "title": "Morph icon",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "morphIcon"
+      },
+      "rows": [
+        {
+          "LABEL": "Add Customer",
+          "ICON": "fa-user-plus"
+        },
+        {
+          "LABEL": "Export to Excel",
+          "ICON": "fa-file-excel-o",
+          "COLOR": "success"
+        },
+        {
+          "LABEL": "Share Dashboard",
+          "ICON": "fa-share-alt",
+          "COLOR": "info"
+        },
+        {
+          "LABEL": "Open Details"
+        }
+      ]
+    },
+    {
+      "title": "Confirm hold",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "confirmHold"
+      },
+      "rows": [
+        {
+          "LABEL": "Delete Invoice INV-2041",
+          "ICON": "fa-trash",
+          "HINT": "Hold to confirm",
+          "COLOR": "danger"
+        },
+        {
+          "LABEL": "Release Payment Run",
+          "ICON": "fa-send",
+          "HINT": "Hold 1 second",
+          "COLOR": "success"
+        }
+      ]
+    },
+    {
+      "title": "Large, partial",
+      "direction": "motion",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "borderBeam",
+        "SIZE": "large",
+        "LABEL": "Create Your Workspace",
+        "ICON": "fa-magic",
+        "LINK_URL": "#workspace"
+      }
+    },
+    {
+      "title": "Small, report",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neoBrutal",
+        "SIZE": "small"
+      },
+      "rows": [
+        {
+          "LABEL": "Edit",
+          "ICON": "fa-pencil"
+        },
+        {
+          "LABEL": "Archive",
+          "ICON": "fa-archive",
+          "COLOR": "warning"
+        }
+      ]
+    }
+  ]
+}

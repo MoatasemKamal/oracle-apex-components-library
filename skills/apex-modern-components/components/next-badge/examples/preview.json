@@ -1,0 +1,297 @@
+{
+  "samples": [
+    {
+      "title": "Shine",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "shine"
+      },
+      "rows": [
+        {
+          "LABEL": "Paid",
+          "STATE": "success",
+          "ICON": "fa-check"
+        },
+        {
+          "LABEL": "Overdue",
+          "STATE": "danger",
+          "VALUE": "14 days"
+        },
+        {
+          "LABEL": "Enterprise",
+          "STATE": "info",
+          "ICON": "fa-star"
+        },
+        {
+          "LABEL": "Draft",
+          "STATE": "neutral"
+        }
+      ]
+    },
+    {
+      "title": "Live pulse",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "pulseLive"
+      },
+      "rows": [
+        {
+          "LABEL": "Live",
+          "STATE": "danger",
+          "VALUE": "128"
+        },
+        {
+          "LABEL": "Syncing orders",
+          "STATE": "info",
+          "VALUE": "2,431"
+        },
+        {
+          "LABEL": "Online",
+          "STATE": "success"
+        }
+      ]
+    },
+    {
+      "title": "Beam outline",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "beamOutline"
+      },
+      "rows": [
+        {
+          "LABEL": "In Review",
+          "STATE": "info",
+          "ICON": "fa-eye"
+        },
+        {
+          "LABEL": "Awaiting Approval",
+          "STATE": "warning",
+          "ICON": "fa-clock-o"
+        },
+        {
+          "LABEL": "Shipped",
+          "STATE": "success",
+          "ICON": "fa-truck",
+          "VALUE": "3 of 4"
+        }
+      ]
+    },
+    {
+      "title": "Sticker tilt",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "stickerTilt"
+      },
+      "rows": [
+        {
+          "LABEL": "Top Customer",
+          "STATE": "warning",
+          "ICON": "fa-trophy"
+        },
+        {
+          "LABEL": "New",
+          "STATE": "info"
+        },
+        {
+          "LABEL": "Renewed",
+          "STATE": "success",
+          "ICON": "fa-refresh",
+          "VALUE": "2026"
+        }
+      ]
+    },
+    {
+      "title": "Extruded",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "extruded"
+      },
+      "rows": [
+        {
+          "LABEL": "Approved",
+          "STATE": "success",
+          "ICON": "fa-check"
+        },
+        {
+          "LABEL": "On Hold",
+          "STATE": "warning",
+          "ICON": "fa-pause"
+        },
+        {
+          "LABEL": "Rejected",
+          "STATE": "danger",
+          "ICON": "fa-times"
+        },
+        {
+          "LABEL": "Archived",
+          "STATE": "neutral",
+          "ICON": "fa-archive"
+        }
+      ]
+    },
+    {
+      "title": "Neo-brutal",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neoBrutal"
+      },
+      "rows": [
+        {
+          "LABEL": "Urgent",
+          "STATE": "danger",
+          "ICON": "fa-bolt"
+        },
+        {
+          "LABEL": "Backorder",
+          "STATE": "warning",
+          "VALUE": "36"
+        },
+        {
+          "LABEL": "In Stock",
+          "STATE": "success"
+        },
+        {
+          "LABEL": "Q3 Budget",
+          "STATE": "neutral"
+        }
+      ]
+    },
+    {
+      "title": "Clay",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "clay"
+      },
+      "rows": [
+        {
+          "LABEL": "Onboarding",
+          "STATE": "info",
+          "ICON": "fa-rocket"
+        },
+        {
+          "LABEL": "Healthy",
+          "STATE": "success",
+          "VALUE": "92"
+        },
+        {
+          "LABEL": "At Risk",
+          "STATE": "danger",
+          "ICON": "fa-heartbeat"
+        }
+      ]
+    },
+    {
+      "title": "Holo foil",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "holo"
+      },
+      "rows": [
+        {
+          "LABEL": "Platinum Partner",
+          "STATE": "info"
+        },
+        {
+          "LABEL": "Verified Supplier",
+          "STATE": "success",
+          "ICON": "fa-certificate"
+        },
+        {
+          "LABEL": "Beta Access",
+          "STATE": "warning",
+          "VALUE": "v4"
+        }
+      ]
+    },
+    {
+      "title": "Expand label",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "expandLabel"
+      },
+      "rows": [
+        {
+          "LABEL": "Invoice paid",
+          "STATE": "success",
+          "ICON": "fa-check"
+        },
+        {
+          "LABEL": "Contract expiring in 12 days",
+          "STATE": "warning",
+          "ICON": "fa-exclamation"
+        },
+        {
+          "LABEL": "Payment failed",
+          "STATE": "danger",
+          "ICON": "fa-times"
+        },
+        {
+          "LABEL": "Customer note added",
+          "STATE": "info"
+        }
+      ]
+    },
+    {
+      "title": "Stack count",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "stackCount"
+      },
+      "rows": [
+        {
+          "LABEL": "Design",
+          "STATE": "info",
+          "ICON": "fa-paint-brush"
+        },
+        {
+          "LABEL": "Finance",
+          "STATE": "success",
+          "ICON": "fa-money"
+        },
+        {
+          "LABEL": "Legal",
+          "STATE": "warning",
+          "ICON": "fa-gavel"
+        },
+        {
+          "LABEL": "Security review",
+          "STATE": "danger",
+          "ICON": "fa-shield"
+        }
+      ]
+    },
+    {
+      "title": "Stack count, partial",
+      "direction": "smart",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "stackCount",
+        "LABEL": "Open tickets",
+        "STATE": "danger",
+        "ICON": "fa-ticket",
+        "VALUE": "7"
+      }
+    },
+    {
+      "title": "Sticker tilt, partial",
+      "direction": "depth",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "stickerTilt",
+        "LABEL": "Best Seller",
+        "STATE": "danger",
+        "ICON": "fa-fire"
+      }
+    }
+  ]
+}

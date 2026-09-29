@@ -1,0 +1,113 @@
+{
+  "name": "Next Badge",
+  "apexlangName": "nextBadge",
+  "staticId": "AMC_NEXT_BADGE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": [
+    "badge",
+    "status",
+    "tag",
+    "label",
+    "pill",
+    "live",
+    "sticker",
+    "neo brutalism",
+    "claymorphism",
+    "holographic",
+    "border beam",
+    "stacked badges",
+    "next collection"
+  ],
+  "description": "Status badges in 10 current-generation designs from the Next Collection: motion (shine glint, live pulse with activity bars, border beam outline), depth (tilted die-cut sticker, extruded 3D pill), bold aesthetics (neo-brutal, clay, holographic foil) and smart shape changes (an icon dot that grows into its label, and a stack that shows a count and fans out into labeled pills). Border beam and shine adapt Magic UI's border-beam and shine-border; every color comes from the Universal Theme palette. One badge (partial) or a wrapping group (report).",
+  "helpText": "Choose a Style, map Label to the text and State to a column returning success, warning, danger, info or neutral (anything else renders as neutral). The label must carry the meaning, for example Paid or Overdue, so state is never shown by color alone. Value adds a second segment: the viewer or item count in Live pulse and Stack count, trailing text elsewhere. Expand label and Stack count are keyboard focusable, show their labels on hover or focus, and always show them on touch screens.",
+  "source": {
+    "url": "https://github.com/magicuidesign/magicui",
+    "author": "Magic UI",
+    "license": "MIT"
+  },
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-badge.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-badge.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "shine",
+      "sequence": 10,
+      "helpText": "Badge design and its Next Collection direction. Motion: Shine, Live pulse, Beam outline. Depth: Sticker tilt, Extruded. Bold: Neo-brutal, Clay, Holo foil. Smart: Expand label shows an icon dot that grows into its label on hover or focus, and in report mode shows every label when the region is wider than about 40rem; Stack count overlaps the report rows as a stack of dots with a total count and fans them out into labeled pills on hover or focus.",
+      "entries": [
+        { "name": "shine", "display": "Shine", "return": "shine", "sequence": 10 },
+        { "name": "pulseLive", "display": "Live pulse", "return": "pulseLive", "sequence": 20 },
+        { "name": "beamOutline", "display": "Beam outline", "return": "beamOutline", "sequence": 30 },
+        { "name": "stickerTilt", "display": "Sticker tilt", "return": "stickerTilt", "sequence": 40 },
+        { "name": "extruded", "display": "Extruded", "return": "extruded", "sequence": 50 },
+        { "name": "neoBrutal", "display": "Neo-brutal", "return": "neoBrutal", "sequence": 60 },
+        { "name": "clay", "display": "Clay", "return": "clay", "sequence": 70 },
+        { "name": "holo", "display": "Holo foil", "return": "holo", "sequence": 80 },
+        { "name": "expandLabel", "display": "Expand label", "return": "expandLabel", "sequence": 90 },
+        { "name": "stackCount", "display": "Stack count", "return": "stackCount", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Badge text, for example Paid, Overdue or In Review. Keep it short; it must convey the state in words. Expand label and Stack count hide it visually until hover or focus, but screen readers always read it."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 3,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Semantic color: success, warning, danger, info or neutral. Empty or any other value renders as neutral. Can be static text or a column."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 4,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Optional Font APEX icon class, for example fa-check or fa-truck. Shown before the label; Expand label and Stack count show it inside the colored dot, and Live pulse draws its own pulsing dot instead."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 5,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional second segment after the label, for example 24 or 3 days. Live pulse shows it as a live counter, Stack count as the count bubble of a single badge. Format numbers in SQL."
+    }
+  ]
+}

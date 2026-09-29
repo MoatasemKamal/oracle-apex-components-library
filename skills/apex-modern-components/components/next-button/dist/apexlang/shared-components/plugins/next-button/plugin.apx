@@ -1,0 +1,295 @@
+plugin nextButton (
+    name: Next Button
+    staticId: AMC_NEXT_BUTTON
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            {if ?LINK_URL/}<a class="amc-NButton amc-NButton--#STYLE#{case SIZE/}{when small/} amc-NButton--small{when large/} amc-NButton--large{endcase/}{case COLOR/}{when success/} amc-NButton--success{when warning/} amc-NButton--warning{when danger/} amc-NButton--danger{when info/} amc-NButton--info{otherwise/} amc-NButton--primary{endcase/}" href="#LINK_URL#">{else/}<button class="amc-NButton amc-NButton--#STYLE#{case SIZE/}{when small/} amc-NButton--small{when large/} amc-NButton--large{endcase/}{case COLOR/}{when success/} amc-NButton--success{when warning/} amc-NButton--warning{when danger/} amc-NButton--danger{when info/} amc-NButton--info{otherwise/} amc-NButton--primary{endcase/}" type="button">{endif/}<span class="amc-NButton-fx" aria-hidden="true"></span><span class="amc-NButton-face">{if ?ICON/}<span class="amc-NButton-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{else/}<span class="amc-NButton-icon amc-NButton-icon--auto" aria-hidden="true"><span class="amc-NButton-arrow"></span></span>{endif/}<span class="amc-NButton-text"><span class="amc-NButton-label">#LABEL#</span>{if ?HINT/}<span class="amc-NButton-hint">#HINT#</span>{endif/}</span>{case STYLE/}{when confirmHold/}<span class="amc-NButton-done" aria-hidden="true"></span>{endcase/}</span>{if ?LINK_URL/}</a>{else/}</button>{endif/}
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-NButtons amc-NButtons--#STYLE#">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NButtons-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-button.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-button.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Use for one or two prominent calls to action per page and keep native Universal Theme buttons for ordinary form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Map Color to a column returning primary, success, warning, danger or info (anything else renders as primary). Hint is short secondary text: the shortcut legend on Keycap, the instruction under the label on Confirm hold, a small trailing tag elsewhere. Every design has hover, pressed and keyboard focus states, and all motion stops under reduced motion.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: borderBeam
+        }
+        help {
+            helpText:
+                ```
+                The button design and its Next Collection direction. Motion: Border beam, Shimmer, Rainbow glow, Pulse ring. Depth: Keycap presses down like a mechanical key, Layered separates a stack of plates on hover, Magnetic floats and follows the pointer. Bold: Neo-brutal, Clay, Holo foil. Smart: Morph icon is an icon circle that expands into its label on hover or focus and stays expanded on touch screens; Confirm hold fills while pressed and shows a check when the hold completes, as visual feedback only, so keep a confirmation in the Dynamic Action for destructive actions.
+                ```
+        }
+        entry borderBeam (
+            sequence: 10
+            display: Border beam
+            return: borderBeam
+        )
+        entry shimmer (
+            sequence: 20
+            display: Shimmer
+            return: shimmer
+        )
+        entry rainbowGlow (
+            sequence: 30
+            display: Rainbow glow
+            return: rainbowGlow
+        )
+        entry pulseRing (
+            sequence: 40
+            display: Pulse ring
+            return: pulseRing
+        )
+        entry keycap (
+            sequence: 50
+            display: Keycap
+            return: keycap
+        )
+        entry layered (
+            sequence: 60
+            display: Layered stack
+            return: layered
+        )
+        entry magnetic (
+            sequence: 70
+            display: Magnetic float
+            return: magnetic
+        )
+        entry neoBrutal (
+            sequence: 80
+            display: Neo-brutal
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 90
+            display: Clay
+            return: clay
+        )
+        entry holo (
+            sequence: 100
+            display: Holo foil
+            return: holo
+        )
+        entry morphIcon (
+            sequence: 110
+            display: Morph icon
+            return: morphIcon
+        )
+        entry confirmHold (
+            sequence: 120
+            display: Confirm hold
+            return: confirmHold
+        )
+    )
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 2
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible button text and its accessible name. Use a specific verb, for example Create Order or Approve Invoice. Morph icon hides it visually until hover or focus, but screen readers always read it.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 3
+        name: Link
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target URL, for example f?p=&APP_ID.:10:&SESSION. When set an anchor is rendered, otherwise a button for a Dynamic Action. Must be a developer-controlled value, never raw user input.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 4
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-plus or fa-trash. Morph icon, Magnetic float and Confirm hold draw an arrow when it is empty.
+                ```
+        }
+    )
+    customAttribute HINT (
+        apexlangName: hint
+        attribute: 5
+        name: Hint
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short secondary text: the shortcut legend on Keycap, for example Ctrl S; the instruction under the label on Confirm hold, for example Hold to confirm; a small trailing tag in the other designs, for example New or 3.
+                ```
+        }
+    )
+    customAttribute COLOR (
+        apexlangName: color
+        attribute: 6
+        name: Color
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: primary
+        }
+        help {
+            helpText:
+                ```
+                Palette color: primary, success, warning, danger or info. Empty or any other value renders as primary. Can be static text or a column. Holo foil and Rainbow glow use the whole palette and take the color only for the focus ring and icon.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 7
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 70
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Leave empty for the default size, or choose Small or Large.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small
+            return: small
+        )
+        entry large (
+            sequence: 20
+            display: Large
+            return: large
+        )
+    )
+    file "amc-next-button.css" (
+        fileName: amc-next-button.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-button.js" (
+        fileName: amc-next-button.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

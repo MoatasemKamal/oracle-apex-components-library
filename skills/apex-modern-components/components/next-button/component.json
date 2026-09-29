@@ -1,0 +1,144 @@
+{
+  "name": "Next Button",
+  "apexlangName": "nextButton",
+  "staticId": "AMC_NEXT_BUTTON",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": [
+    "button",
+    "call to action",
+    "cta",
+    "border beam",
+    "shimmer",
+    "rainbow",
+    "pulse",
+    "keycap",
+    "magnetic",
+    "neo brutalism",
+    "claymorphism",
+    "holographic",
+    "hold to confirm",
+    "next collection"
+  ],
+  "description": "Call-to-action buttons in 12 current-generation designs from the Next Collection, covering motion (border beam, shimmer sweep, rainbow glow, pulse ring), depth (mechanical keycap, layered stack, magnetic float), bold aesthetics (neo-brutal, clay, holographic foil) and smart shape changes (icon that morphs into a label, hold-to-confirm fill). Motion designs adapt Magic UI's shimmer, rainbow, pulsating and border-beam buttons; every color is resolved from the Universal Theme palette so the buttons follow Vita, Vita Dark, Redwood and Theme Roller. Report mode renders a wrapping action bar.",
+  "helpText": "Use for one or two prominent calls to action per page and keep native Universal Theme buttons for ordinary form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Map Color to a column returning primary, success, warning, danger or info (anything else renders as primary). Hint is short secondary text: the shortcut legend on Keycap, the instruction under the label on Confirm hold, a small trailing tag elsewhere. Every design has hover, pressed and keyboard focus states, and all motion stops under reduced motion.",
+  "source": {
+    "url": "https://github.com/magicuidesign/magicui",
+    "author": "Magic UI",
+    "license": "MIT"
+  },
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-button.css", "files/amc-next-button.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-button.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-button.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "borderBeam",
+      "sequence": 10,
+      "helpText": "The button design and its Next Collection direction. Motion: Border beam, Shimmer, Rainbow glow, Pulse ring. Depth: Keycap presses down like a mechanical key, Layered separates a stack of plates on hover, Magnetic floats and follows the pointer. Bold: Neo-brutal, Clay, Holo foil. Smart: Morph icon is an icon circle that expands into its label on hover or focus and stays expanded on touch screens; Confirm hold fills while pressed and shows a check when the hold completes, as visual feedback only, so keep a confirmation in the Dynamic Action for destructive actions.",
+      "entries": [
+        { "name": "borderBeam", "display": "Border beam", "return": "borderBeam", "sequence": 10 },
+        { "name": "shimmer", "display": "Shimmer", "return": "shimmer", "sequence": 20 },
+        { "name": "rainbowGlow", "display": "Rainbow glow", "return": "rainbowGlow", "sequence": 30 },
+        { "name": "pulseRing", "display": "Pulse ring", "return": "pulseRing", "sequence": 40 },
+        { "name": "keycap", "display": "Keycap", "return": "keycap", "sequence": 50 },
+        { "name": "layered", "display": "Layered stack", "return": "layered", "sequence": 60 },
+        { "name": "magnetic", "display": "Magnetic float", "return": "magnetic", "sequence": 70 },
+        { "name": "neoBrutal", "display": "Neo-brutal", "return": "neoBrutal", "sequence": 80 },
+        { "name": "clay", "display": "Clay", "return": "clay", "sequence": 90 },
+        { "name": "holo", "display": "Holo foil", "return": "holo", "sequence": 100 },
+        { "name": "morphIcon", "display": "Morph icon", "return": "morphIcon", "sequence": 110 },
+        { "name": "confirmHold", "display": "Confirm hold", "return": "confirmHold", "sequence": 120 }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Visible button text and its accessible name. Use a specific verb, for example Create Order or Approve Invoice. Morph icon hides it visually until hover or focus, but screen readers always read it."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 3,
+      "name": "Link",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Target URL, for example f?p=&APP_ID.:10:&SESSION. When set an anchor is rendered, otherwise a button for a Dynamic Action. Must be a developer-controlled value, never raw user input."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 4,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Font APEX icon class, for example fa-plus or fa-trash. Morph icon, Magnetic float and Confirm hold draw an arrow when it is empty."
+    },
+    {
+      "staticId": "HINT",
+      "apexlangName": "hint",
+      "attribute": 5,
+      "name": "Hint",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional short secondary text: the shortcut legend on Keycap, for example Ctrl S; the instruction under the label on Confirm hold, for example Hold to confirm; a small trailing tag in the other designs, for example New or 3."
+    },
+    {
+      "staticId": "COLOR",
+      "apexlangName": "color",
+      "attribute": 6,
+      "name": "Color",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "primary",
+      "sequence": 60,
+      "helpText": "Palette color: primary, success, warning, danger or info. Empty or any other value renders as primary. Can be static text or a column. Holo foil and Rainbow glow use the whole palette and take the color only for the focus ring and icon."
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 7,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Leave empty for the default size, or choose Small or Large.",
+      "entries": [
+        { "name": "small", "display": "Small", "return": "small", "sequence": 10 },
+        { "name": "large", "display": "Large", "return": "large", "sequence": 20 }
+      ]
+    }
+  ]
+}
