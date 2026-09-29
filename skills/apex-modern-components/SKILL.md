@@ -32,6 +32,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
    - `references/design-quality.md`: research-first quality gate and craft checklist (adapted from Refero, MIT)
    - `references/design-collection.md`: the `design*` families (100+ styles chosen with a Style setting) and their shared conventions
+   - `references/next-collection.md`: the `next*` families (new-generation motion, 3D, bold and adaptive designs) that sit beside the Design Collection
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
 
