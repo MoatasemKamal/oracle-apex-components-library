@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Zoom Dial",
+  "staticId": "AMC_TPL_ZOOM_DIAL",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A region with its own size dial: each user picks Compact, Cozy, Comfortable or Large for this one region and the native content inside is re-laid out at that size and remembered, instead of one fixed density for everybody or a browser zoom that scales the whole page.",
+  "useFor": "Dense Interactive Reports and Interactive Grids that power users want smaller, Forms and Classic Reports that users on large screens or with low vision want larger, Charts on wall displays, and Cards regions.",
+  "keywords": ["zoom", "density", "text size", "compact", "large", "accessibility", "personalisation", "living"],
+  "helpText": "Living region template (behaviour-aware). The header holds a size dial with four steps, Compact 87.5 percent, Cozy 100 percent, Comfortable 112.5 percent and Large 125 percent, as a group of real buttons with aria-pressed, plus a small readout of the current level and percentage that is announced politely when it changes. Arrow keys, Home and End move along the dial in reading direction. The level sets the CSS zoom property on an inner wrapper around the region body, so the native content is laid out again at that size: text wraps, report columns reflow and charts get a resize event to redraw. zoom is used rather than transform because it does not create a containing block, so date pickers, report menus and other fixed-position popups keep working, and the body is never clipped; wide content scrolls sideways. The choice is remembered in localStorage per application, page and region (key amc-tpl-zoom-dial:APP_ID:PAGE_ID:region static ID) and nothing leaves the browser; give the region a Static ID so the key survives changes. Picking the default level again is the way to reset. Browser support: CSS zoom works in Chromium-based browsers and Safari, and in Firefox from version 126; where it is not supported the dial is hidden and the content stays at 100 percent. Without JavaScript the default level from the template options still applies and the dial is hidden. Template options: Default Compact, Default Comfortable and Default Large set the starting level (Cozy when none is chosen); Hide readout keeps the level text for screen readers only; No body padding runs reports edge to edge. English UI strings to translate in the template: the group label Content size and the step names Compact, Cozy, Comfortable and Large, each used as button text for screen readers and as its title tooltip. Under reduced motion the dial thumb does not slide. JavaScript API: amcTplZoomDial.set(element, level 1 to 4) and amcTplZoomDial.get(element); the region fires a bubbling amczoomdial event after each change.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "DEFAULT_COMPACT", "name": "Default Compact", "cssClass": "amc-TZoomDial--defCompact", "sequence": 10, "help": "Starts at 87.5 percent until the user picks another level. For dense reports and grids." },
+    { "staticId": "DEFAULT_COMFORTABLE", "name": "Default Comfortable", "cssClass": "amc-TZoomDial--defComfortable", "sequence": 20, "help": "Starts at 112.5 percent until the user picks another level. For reading-heavy regions." },
+    { "staticId": "DEFAULT_LARGE", "name": "Default Large", "cssClass": "amc-TZoomDial--defLarge", "sequence": 30, "help": "Starts at 125 percent until the user picks another level. For wall displays, kiosks and low-vision users." },
+    { "staticId": "HIDE_READOUT", "name": "Hide readout", "cssClass": "amc-TZoomDial--noReadout", "sequence": 40, "help": "Hides the level and percentage text next to the dial; it is still announced to screen readers." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TZoomDial--noPadding", "sequence": 50, "help": "Removes side padding so reports and grids run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

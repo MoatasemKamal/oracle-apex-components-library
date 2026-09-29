@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Long form, focus on input, stage light", "regionTitle": "Supplier onboarding", "icon": "fa-edit", "bodyKind": "form", "options": ["amc-TFocusStage--auto", "amc-TFocusStage--spotlight"], "buttons": { "PREVIOUS": "Cancel", "NEXT": "Submit for approval" } },
+    { "title": "Dense report, deep dim", "regionTitle": "Open orders", "icon": "fa-table", "bodyKind": "report", "options": ["amc-TFocusStage--deep", "amc-TFocusStage--noPadding"], "buttons": { "CREATE": "New order" } },
+    { "title": "Chart, icon-only button", "regionTitle": "Revenue this quarter", "icon": "fa-bar-chart", "bodyKind": "chart", "options": ["amc-TFocusStage--iconOnly"] },
+    { "title": "KPI cards", "regionTitle": "Today", "icon": "fa-dashboard", "bodyKind": "cards", "options": [] }
+  ]
+}

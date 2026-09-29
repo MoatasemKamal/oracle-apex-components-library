@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Report, default Compact", "regionTitle": "Open orders", "icon": "fa-table", "bodyKind": "report", "options": ["amc-TZoomDial--defCompact", "amc-TZoomDial--noPadding"], "buttons": { "CREATE": "New order" } },
+    { "title": "Form, default Cozy", "regionTitle": "Customer", "icon": "fa-user", "bodyKind": "form", "options": [] },
+    { "title": "Chart, default Large", "regionTitle": "Revenue this quarter", "icon": "fa-bar-chart", "bodyKind": "chart", "options": ["amc-TZoomDial--defLarge"] },
+    { "title": "Cards, default Comfortable, readout hidden", "regionTitle": "Today", "icon": "fa-dashboard", "bodyKind": "cards", "options": ["amc-TZoomDial--defComfortable", "amc-TZoomDial--noReadout"] }
+  ]
+}

@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-zoom-dial.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-zoom-dial.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

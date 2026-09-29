@@ -1,0 +1,228 @@
+/* Focus Stage: living region template for Universal Theme. A Focus button in the header puts the
+   region on stage: the script adds a page-level scrim to <body> (pointer-events: none), fades and
+   blurs everything outside the region, lifts the region above the scrim and keeps its header,
+   with the exit button, sticky while a long form or report scrolls. Escape, the button, a click
+   on the dimmed page or tabbing out returns the page. Focus is never trapped. The body that holds
+   the native content is never clipped or transformed, so menus, date pickers and IR dialogs keep
+   working. Without JavaScript it is a plain region and the Focus button stays hidden. */
+.amc-TFocusStage {
+  --amc-tfs-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tfs-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tfs-surface: var(--ut-component-background-color, #fff);
+  --amc-tfs-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tfs-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tfs-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tfs-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tfs-top: 0px;
+  --amc-tfs-dur: .32s;
+  --amc-tfs-ease: cubic-bezier(.2, .7, .2, 1);
+  --amc-tfs-glow: color-mix(in srgb, var(--amc-tfs-ink) 18%, transparent);
+  position: relative;
+  margin-block-end: 16px;
+  color: var(--amc-tfs-ink);
+}
+
+/* Stage light: a soft halo behind the lifted surface (decoration on the frame, not the body). */
+.amc-TFocusStage::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  z-index: -1;
+  border-radius: calc(var(--amc-tfs-radius) + 18px);
+  background: radial-gradient(closest-side, var(--amc-tfs-glow), transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--amc-tfs-dur) ease;
+}
+
+.amc-TFocusStage-surface {
+  position: relative;
+  border-radius: var(--amc-tfs-radius);
+  background: var(--amc-tfs-surface);
+  box-shadow:
+    0 0 0 1px var(--amc-tfs-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tfs-ink) 7%, transparent);
+  transition: box-shadow var(--amc-tfs-dur) var(--amc-tfs-ease);
+}
+
+/* Header */
+.amc-TFocusStage-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-inline-size: 0;
+  padding-block: 10px;
+  padding-inline: 16px 10px;
+  border-block-end: 1px solid var(--amc-tfs-line);
+  border-start-start-radius: var(--amc-tfs-radius);
+  border-start-end-radius: var(--amc-tfs-radius);
+  background: var(--amc-tfs-surface);
+  transition: background-color var(--amc-tfs-dur) ease, box-shadow var(--amc-tfs-dur) ease;
+}
+.amc-TFocusStage-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tfs-accent) 12%, transparent);
+  color: var(--amc-tfs-accent);
+  font-size: 14px;
+}
+.amc-TFocusStage-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TFocusStage-title { flex: 1 1 12ch; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TFocusStage-actions, .amc-TFocusStage-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TFocusStage-actions:empty, .amc-TFocusStage-footer:empty { display: none; }
+
+/* Focus toggle: shown only once the script is ready. */
+.amc-TFocusStage-toggle {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding-block: 5px;
+  padding-inline: 9px 11px;
+  border: 1px solid var(--amc-tfs-line);
+  border-radius: 999px;
+  background: var(--amc-tfs-surface);
+  color: var(--amc-tfs-ink);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.amc-TFocusStage.is-ready .amc-TFocusStage-toggle { display: inline-flex; }
+.amc-TFocusStage-toggle:hover { border-color: color-mix(in srgb, var(--amc-tfs-accent) 45%, var(--amc-tfs-line)); background: color-mix(in srgb, var(--amc-tfs-accent) 7%, var(--amc-tfs-surface)); }
+.amc-TFocusStage-toggle:focus-visible { outline: 2px solid var(--amc-tfs-accent); outline-offset: 2px; }
+.amc-TFocusStage-toggle[aria-pressed="true"] { border-color: transparent; background: var(--amc-tfs-accent); color: var(--amc-tfs-accent-ink); }
+
+/* Glyph: four focus brackets around a dot that fills when on stage. */
+.amc-TFocusStage-glyph {
+  position: relative;
+  flex: none;
+  inline-size: 14px;
+  block-size: 14px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 0 / 5px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 0 / 1.5px 5px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 0 / 5px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 0 / 1.5px 5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 5px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 1.5px 5px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 100% / 5px 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 100% / 1.5px 5px no-repeat;
+}
+.amc-TFocusStage-glyph::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  transition: background-color .2s ease, scale .2s ease;
+}
+.amc-TFocusStage-toggle[aria-pressed="true"] .amc-TFocusStage-glyph::after { background: currentColor; scale: 1.15; }
+.amc-TFocusStage-kbd {
+  display: none;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  font: inherit;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.amc-TFocusStage-toggle[aria-pressed="true"] .amc-TFocusStage-kbd { display: inline-block; }
+
+/* Body: never clipped, never transformed. */
+.amc-TFocusStage-body { padding: 14px 16px 16px; min-inline-size: 0; overflow-x: auto; }
+.amc-TFocusStage-footer { justify-content: flex-end; padding: 0 16px 14px; }
+
+.amc-TFocusStage-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* On stage: lifted above the page scrim (z-index 50), ring and deep shadow, sticky header. */
+.amc-TFocusStage.is-staged { z-index: 52; }
+.amc-TFocusStage.is-staged .amc-TFocusStage-surface {
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--amc-tfs-accent) 70%, transparent),
+    0 0 0 7px color-mix(in srgb, var(--amc-tfs-accent) 16%, transparent),
+    0 30px 60px -20px color-mix(in srgb, var(--amc-tfs-glow-ink, #000) 55%, transparent),
+    0 12px 24px -12px color-mix(in srgb, var(--amc-tfs-glow-ink, #000) 35%, transparent);
+}
+.amc-TFocusStage.is-staged .amc-TFocusStage-header {
+  position: sticky;
+  inset-block-start: var(--amc-tfs-top);
+  z-index: 3;
+  background: color-mix(in srgb, var(--amc-tfs-accent) 6%, var(--amc-tfs-surface));
+  box-shadow: 0 6px 12px -10px color-mix(in srgb, var(--amc-tfs-ink) 40%, transparent);
+}
+.amc-TFocusStage.is-staged::before { opacity: 1; }
+
+/* Page-level parts the script adds outside the region. */
+.amc-TFocusStage-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--amc-tfs-veil, rgba(10, 12, 18, .44));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .32s ease;
+}
+.amc-TFocusStage-scrim.is-on { opacity: 1; }
+.amc-TFocusStage-scrim.is-deep { background: var(--amc-tfs-veil-deep, rgba(6, 8, 12, .66)); }
+.amc-TFocusStage-muted {
+  opacity: .42;
+  filter: blur(2px) saturate(.55);
+  pointer-events: none;
+  user-select: none;
+  transition: opacity .32s ease, filter .32s ease;
+}
+.amc-TFocusStage-muted.amc-TFocusStage-mutedDeep { opacity: .22; filter: blur(4px) saturate(.3); }
+.amc-TFocusStage-unmuting { transition: opacity .32s ease, filter .32s ease; }
+.amc-TFocusStage-lift { z-index: 51; }
+.amc-TFocusStage-liftPos { position: relative; }
+
+/* Template options */
+.amc-TFocusStage--auto { --amc-tfs-auto: 1; }
+.amc-TFocusStage--deep { --amc-tfs-deep: 1; }
+.amc-TFocusStage--spotlight {
+  --amc-tfs-glow: color-mix(in srgb, var(--amc-tfs-accent) 42%, transparent);
+}
+.amc-TFocusStage--spotlight.is-staged::before { inset: -40px; border-radius: calc(var(--amc-tfs-radius) + 40px); }
+.amc-TFocusStage--iconOnly .amc-TFocusStage-toggleLabel {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-TFocusStage--iconOnly .amc-TFocusStage-toggle { padding-inline: 8px; }
+.amc-TFocusStage--noPadding .amc-TFocusStage-body { padding-inline: 0; padding-block: 0 4px; }
+
+@media (max-width: 480px) {
+  .amc-TFocusStage-header { padding-inline: 12px 8px; }
+  .amc-TFocusStage-body { padding-inline: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TFocusStage::before, .amc-TFocusStage-surface, .amc-TFocusStage-header, .amc-TFocusStage-toggle,
+  .amc-TFocusStage-glyph::after, .amc-TFocusStage-scrim, .amc-TFocusStage-muted,
+  .amc-TFocusStage-unmuting { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TFocusStage-surface { border: 1px solid CanvasText; }
+  .amc-TFocusStage.is-staged .amc-TFocusStage-surface { outline: 3px solid Highlight; }
+  .amc-TFocusStage-toggle { border: 1px solid ButtonText; }
+  .amc-TFocusStage-toggle[aria-pressed="true"] { background: Highlight; color: HighlightText; }
+}

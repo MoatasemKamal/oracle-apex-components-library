@@ -1,0 +1,159 @@
+/* Zoom Dial: living region template for Universal Theme. A four-step size dial in the header
+   (Compact, Cozy, Comfortable, Large) scales the native content with the CSS zoom property on an
+   inner wrapper. zoom re-lays out the content at the new size (text wraps, reports reflow) and,
+   unlike transform, does not create a containing block, so position: fixed popups and menus keep
+   working. The choice is remembered per page and region by the script. The body is never
+   clipped: wide reports scroll sideways. Without JavaScript the default level from the template
+   options still applies and the dial stays hidden. */
+.amc-TZoomDial {
+  --amc-tzd-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tzd-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tzd-surface: var(--ut-component-background-color, #fff);
+  --amc-tzd-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tzd-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tzd-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tzd-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tzd-step: 30px;
+  --amc-tzd-zoom: 1;
+  --amc-tzd-i: 2;
+  margin-block-end: 16px;
+  border-radius: var(--amc-tzd-radius);
+  background: var(--amc-tzd-surface);
+  color: var(--amc-tzd-ink);
+  box-shadow:
+    0 0 0 1px var(--amc-tzd-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tzd-ink) 7%, transparent);
+}
+
+/* Header */
+.amc-TZoomDial-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-inline-size: 0;
+  padding-block: 9px;
+  padding-inline: 16px 10px;
+  border-block-end: 1px solid var(--amc-tzd-line);
+}
+.amc-TZoomDial-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tzd-accent) 12%, transparent);
+  color: var(--amc-tzd-accent);
+  font-size: 14px;
+}
+.amc-TZoomDial-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TZoomDial-title { flex: 1 1 12ch; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TZoomDial-actions, .amc-TZoomDial-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TZoomDial-actions:empty, .amc-TZoomDial-footer:empty { display: none; }
+
+/* The dial: a segmented control with a sliding thumb and letters that grow with the level. */
+.amc-TZoomDial-control { display: none; align-items: center; gap: 8px; margin-inline-start: auto; }
+.amc-TZoomDial.is-ready .amc-TZoomDial-control { display: inline-flex; }
+.amc-TZoomDial.is-nozoom .amc-TZoomDial-control { display: none; }
+.amc-TZoomDial-dial {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(4, var(--amc-tzd-step));
+  padding: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tzd-ink) 6%, transparent);
+  box-shadow: inset 0 0 0 1px var(--amc-tzd-line);
+}
+.amc-TZoomDial-thumb {
+  position: absolute;
+  inset-block: 3px;
+  inset-inline-start: calc(3px + (var(--amc-tzd-i) - 1) * var(--amc-tzd-step));
+  inline-size: var(--amc-tzd-step);
+  border-radius: 999px;
+  background: var(--amc-tzd-accent);
+  box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--amc-tzd-accent) 70%, transparent);
+  transition: inset-inline-start .28s cubic-bezier(.3, 1.3, .5, 1);
+}
+.amc-TZoomDial-step {
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--amc-tzd-muted);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+.amc-TZoomDial-step:hover { color: var(--amc-tzd-ink); }
+.amc-TZoomDial-step:focus-visible { outline: 2px solid var(--amc-tzd-accent); outline-offset: 1px; }
+.amc-TZoomDial-step[aria-pressed="true"] { color: var(--amc-tzd-accent-ink); }
+.amc-TZoomDial-step[data-amc-level="1"] .amc-TZoomDial-glyph { font-size: .6875rem; }
+.amc-TZoomDial-step[data-amc-level="2"] .amc-TZoomDial-glyph { font-size: .8125rem; }
+.amc-TZoomDial-step[data-amc-level="3"] .amc-TZoomDial-glyph { font-size: .9375rem; }
+.amc-TZoomDial-step[data-amc-level="4"] .amc-TZoomDial-glyph { font-size: 1.0625rem; }
+.amc-TZoomDial-name {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-TZoomDial-readout {
+  min-inline-size: 9ch;
+  color: var(--amc-tzd-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+/* Body: padding stays outside the zoomed wrapper; never clipped, wide content scrolls. */
+.amc-TZoomDial-body { padding: 14px 16px 16px; min-inline-size: 0; overflow-x: auto; }
+.amc-TZoomDial-zoom { zoom: var(--amc-tzd-zoom); min-inline-size: 0; }
+.amc-TZoomDial-footer { justify-content: flex-end; padding: 0 16px 14px; }
+
+/* Levels: default from template options, current level from the script. */
+.amc-TZoomDial--defCompact { --amc-tzd-zoom: .875; --amc-tzd-i: 1; }
+.amc-TZoomDial--defComfortable { --amc-tzd-zoom: 1.125; --amc-tzd-i: 3; }
+.amc-TZoomDial--defLarge { --amc-tzd-zoom: 1.25; --amc-tzd-i: 4; }
+.amc-TZoomDial.is-z1 { --amc-tzd-zoom: .875; --amc-tzd-i: 1; }
+.amc-TZoomDial.is-z2 { --amc-tzd-zoom: 1; --amc-tzd-i: 2; }
+.amc-TZoomDial.is-z3 { --amc-tzd-zoom: 1.125; --amc-tzd-i: 3; }
+.amc-TZoomDial.is-z4 { --amc-tzd-zoom: 1.25; --amc-tzd-i: 4; }
+
+/* Other template options */
+.amc-TZoomDial--noPadding .amc-TZoomDial-body { padding-inline: 0; padding-block: 0 4px; }
+.amc-TZoomDial--noReadout .amc-TZoomDial-readout {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  min-inline-size: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 480px) {
+  .amc-TZoomDial-header { padding-inline: 12px 8px; }
+  .amc-TZoomDial-body { padding-inline: 12px; }
+  .amc-TZoomDial-readout { min-inline-size: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TZoomDial-thumb, .amc-TZoomDial-step { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TZoomDial { border: 1px solid CanvasText; }
+  .amc-TZoomDial-dial { border: 1px solid ButtonText; }
+  .amc-TZoomDial-thumb { background: Highlight; }
+  .amc-TZoomDial-step[aria-pressed="true"] { color: HighlightText; }
+}

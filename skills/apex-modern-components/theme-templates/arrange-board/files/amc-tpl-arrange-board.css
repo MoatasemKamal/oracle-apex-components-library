@@ -1,0 +1,202 @@
+/* Arrange Board: living region template for Universal Theme (experimental). Regions that use it
+   and share one parent (a parent region or the same page position) become a personal dashboard:
+   the script turns their common parent into a 12-column CSS grid board, flattens the APEX grid
+   rows and columns in between with display: contents, and each region's header toolbar moves it
+   earlier or later, sets its width (Small 4, Medium 6, Large 12 columns) or collapses it. Order,
+   widths and collapsed state are stored per page. The region body is never clipped or
+   transformed. Without JavaScript the regions keep the normal APEX grid layout. */
+.amc-TArrangeBoard {
+  --amc-tab-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tab-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tab-surface: var(--ut-component-background-color, #fff);
+  --amc-tab-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tab-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tab-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tab-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tab-span: 6;
+  min-inline-size: 0;
+  margin-block-end: 16px;
+  border-radius: var(--amc-tab-radius);
+  background: var(--amc-tab-surface);
+  color: var(--amc-tab-ink);
+  box-shadow:
+    0 0 0 1px var(--amc-tab-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tab-ink) 7%, transparent);
+  transition: box-shadow .25s ease;
+}
+
+/* Header */
+.amc-TArrangeBoard-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-inline-size: 0;
+  padding-block: 9px;
+  padding-inline: 16px 10px;
+  border-block-end: 1px solid var(--amc-tab-line);
+}
+.amc-TArrangeBoard-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tab-accent) 12%, transparent);
+  color: var(--amc-tab-accent);
+  font-size: 14px;
+}
+.amc-TArrangeBoard-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TArrangeBoard-title { flex: 1 1 10ch; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TArrangeBoard-actions, .amc-TArrangeBoard-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TArrangeBoard-actions:empty, .amc-TArrangeBoard-footer:empty { display: none; }
+
+/* Toolbar: shown once the script is ready; move and width only on a board. */
+.amc-TArrangeBoard-tools { display: none; align-items: center; gap: 4px; margin-inline-start: auto; }
+.amc-TArrangeBoard.is-ready .amc-TArrangeBoard-tools { display: inline-flex; }
+.amc-TArrangeBoard-move, .amc-TArrangeBoard-sizes {
+  display: none;
+  padding: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tab-ink) 6%, transparent);
+  box-shadow: inset 0 0 0 1px var(--amc-tab-line);
+}
+.amc-TArrangeBoard.is-boarded .amc-TArrangeBoard-move, .amc-TArrangeBoard.is-boarded .amc-TArrangeBoard-sizes { display: inline-flex; }
+.amc-TArrangeBoard-btn {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 26px;
+  block-size: 26px;
+  margin: 0;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--amc-tab-muted);
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.amc-TArrangeBoard-btn:hover { background: color-mix(in srgb, var(--amc-tab-ink) 9%, transparent); color: var(--amc-tab-ink); }
+.amc-TArrangeBoard-btn:focus-visible { outline: 2px solid var(--amc-tab-accent); outline-offset: 1px; }
+.amc-TArrangeBoard-btn[aria-disabled="true"] { opacity: .35; cursor: default; }
+.amc-TArrangeBoard-btn[aria-disabled="true"]:hover { background: none; color: var(--amc-tab-muted); }
+.amc-TArrangeBoard-size[aria-pressed="true"], .amc-TArrangeBoard-size[aria-pressed="true"]:hover { background: var(--amc-tab-accent); color: var(--amc-tab-accent-ink); }
+.amc-TArrangeBoard-collapse { border: 1px solid var(--amc-tab-line); }
+
+/* Arrows point in reading direction; chevron turns when collapsed. */
+.amc-TArrangeBoard-arrow, .amc-TArrangeBoard-chevron {
+  inline-size: 7px;
+  block-size: 7px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+}
+.amc-TArrangeBoard-arrow { rotate: -45deg; translate: -1px 0; }
+.amc-TArrangeBoard-arrow--back { rotate: 135deg; translate: 1px 0; }
+.amc-TArrangeBoard-arrow:dir(rtl) { rotate: 135deg; translate: 1px 0; }
+.amc-TArrangeBoard-arrow--back:dir(rtl) { rotate: -45deg; translate: -1px 0; }
+.amc-TArrangeBoard-chevron { rotate: 225deg; translate: 0 2px; transition: rotate .25s ease, translate .25s ease; }
+.amc-TArrangeBoard.is-collapsed .amc-TArrangeBoard-chevron { rotate: 45deg; translate: 0 -2px; }
+
+.amc-TArrangeBoard-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Body: never clipped, wide content scrolls. */
+.amc-TArrangeBoard-body { padding: 14px 16px 16px; min-inline-size: 0; overflow-x: auto; }
+.amc-TArrangeBoard-footer { justify-content: flex-end; padding: 0 16px 14px; }
+.amc-TArrangeBoard.is-collapsed .amc-TArrangeBoard-body, .amc-TArrangeBoard.is-collapsed .amc-TArrangeBoard-footer { display: none; }
+.amc-TArrangeBoard.is-collapsed .amc-TArrangeBoard-header { border-block-end-color: transparent; }
+
+/* The board: the regions' common parent, turned into a grid by the script. The doubled class
+   outranks the APEX grid row and column rules whatever order the stylesheets load in. */
+.amc-TArrangeBoard-board.amc-TArrangeBoard-board {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+  margin-inline: 0;
+  margin-block: 0 16px;
+  padding-inline: 0;
+}
+.amc-TArrangeBoard-flat.amc-TArrangeBoard-flat { display: contents; }
+.amc-TArrangeBoard-other.amc-TArrangeBoard-other { grid-column: 1 / -1; min-inline-size: 0; inline-size: auto; max-inline-size: none; margin-inline: 0; }
+.amc-TArrangeBoard.is-boarded { grid-column: span var(--amc-tab-span); margin: 0; }
+.amc-TArrangeBoard.is-sizeS { --amc-tab-span: 4; }
+.amc-TArrangeBoard.is-sizeM { --amc-tab-span: 6; }
+.amc-TArrangeBoard.is-sizeL { --amc-tab-span: 12; }
+.amc-TArrangeBoard-board.is-mid .amc-TArrangeBoard.is-sizeS { --amc-tab-span: 6; }
+.amc-TArrangeBoard-board.is-narrow .amc-TArrangeBoard.is-boarded { --amc-tab-span: 12; }
+.amc-TArrangeBoard-board.is-narrow .amc-TArrangeBoard-sizes { display: none; }
+.amc-TArrangeBoard.is-moved { box-shadow: 0 0 0 2px var(--amc-tab-accent), 0 10px 24px -14px color-mix(in srgb, var(--amc-tab-accent) 80%, transparent); }
+
+/* Page-level bar before the board: layout state and Reset layout. */
+.amc-TArrangeBoard-bar {
+  --amc-tab-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tab-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tab-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tab-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-block-end: 10px;
+  color: var(--amc-tab-muted);
+  font-size: .8125rem;
+}
+.amc-TArrangeBoard-barGlyph {
+  inline-size: 14px;
+  block-size: 14px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 0 / 6px 6px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 0 / 6px 6px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 14px 6px no-repeat;
+  opacity: .7;
+}
+.amc-TArrangeBoard-bar.is-custom .amc-TArrangeBoard-barGlyph { color: var(--amc-tab-accent); opacity: 1; }
+.amc-TArrangeBoard-reset {
+  margin: 0;
+  padding: 4px 10px;
+  border: 1px solid var(--amc-tab-line);
+  border-radius: 999px;
+  background: none;
+  color: var(--amc-tab-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.amc-TArrangeBoard-reset:hover { background: color-mix(in srgb, var(--amc-tab-ink) 7%, transparent); }
+.amc-TArrangeBoard-reset:focus-visible { outline: 2px solid var(--amc-tab-accent); outline-offset: 2px; }
+
+/* Template options */
+.amc-TArrangeBoard--defS { --amc-tab-span: 4; }
+.amc-TArrangeBoard--defL { --amc-tab-span: 12; }
+.amc-TArrangeBoard--fixed .amc-TArrangeBoard-sizes { display: none; }
+.amc-TArrangeBoard.amc-TArrangeBoard--fixed.is-boarded .amc-TArrangeBoard-sizes { display: none; }
+.amc-TArrangeBoard--collapsed { --amc-tab-start-collapsed: 1; }
+.amc-TArrangeBoard--noPadding .amc-TArrangeBoard-body { padding-inline: 0; padding-block: 0 4px; }
+
+@media (max-width: 480px) {
+  .amc-TArrangeBoard-header { padding-inline: 12px 8px; }
+  .amc-TArrangeBoard-body { padding-inline: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TArrangeBoard, .amc-TArrangeBoard-btn, .amc-TArrangeBoard-chevron, .amc-TArrangeBoard-reset { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TArrangeBoard { border: 1px solid CanvasText; }
+  .amc-TArrangeBoard-btn { border: 1px solid ButtonText; }
+  .amc-TArrangeBoard-size[aria-pressed="true"] { background: Highlight; color: HighlightText; }
+  .amc-TArrangeBoard.is-moved { outline: 2px solid Highlight; }
+}

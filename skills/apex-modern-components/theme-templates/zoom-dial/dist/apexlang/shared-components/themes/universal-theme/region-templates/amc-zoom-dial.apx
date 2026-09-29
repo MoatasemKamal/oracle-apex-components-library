@@ -1,0 +1,142 @@
+regionTemplate amc-zoom-dial (
+    name: AMC Zoom Dial
+    region {
+        template:
+            ```html
+            <section class="amc-TZoomDial #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <header class="amc-TZoomDial-header">
+                <span class="amc-TZoomDial-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                <h2 class="amc-TZoomDial-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                <div class="amc-TZoomDial-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                <div class="amc-TZoomDial-control">
+                  <div class="amc-TZoomDial-dial" role="group" aria-label="Content size">
+                    <span class="amc-TZoomDial-thumb" aria-hidden="true"></span>
+                    <button type="button" class="amc-TZoomDial-step" data-amc-level="1" aria-pressed="false" title="Compact"><span class="amc-TZoomDial-glyph" aria-hidden="true">A</span><span class="amc-TZoomDial-name">Compact</span></button>
+                    <button type="button" class="amc-TZoomDial-step" data-amc-level="2" aria-pressed="false" title="Cozy"><span class="amc-TZoomDial-glyph" aria-hidden="true">A</span><span class="amc-TZoomDial-name">Cozy</span></button>
+                    <button type="button" class="amc-TZoomDial-step" data-amc-level="3" aria-pressed="false" title="Comfortable"><span class="amc-TZoomDial-glyph" aria-hidden="true">A</span><span class="amc-TZoomDial-name">Comfortable</span></button>
+                    <button type="button" class="amc-TZoomDial-step" data-amc-level="4" aria-pressed="false" title="Large"><span class="amc-TZoomDial-glyph" aria-hidden="true">A</span><span class="amc-TZoomDial-name">Large</span></button>
+                  </div>
+                  <span class="amc-TZoomDial-readout" role="status" aria-live="polite"></span>
+                </div>
+              </header>
+              <div class="amc-TZoomDial-body">
+                <div class="amc-TZoomDial-zoom">#BODY##SUB_REGIONS#</div>
+              </div>
+              <footer class="amc-TZoomDial-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-zoom-dial.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-zoom-dial.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_ZOOM_DIAL
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Living region template (behaviour-aware). The header holds a size dial with four steps, Compact 87.5 percent, Cozy 100 percent, Comfortable 112.5 percent and Large 125 percent, as a group of real buttons with aria-pressed, plus a small readout of the current level and percentage that is announced politely when it changes. Arrow keys, Home and End move along the dial in reading direction. The level sets the CSS zoom property on an inner wrapper around the region body, so the native content is laid out again at that size: text wraps, report columns reflow and charts get a resize event to redraw. zoom is used rather than transform because it does not create a containing block, so date pickers, report menus and other fixed-position popups keep working, and the body is never clipped; wide content scrolls sideways. The choice is remembered in localStorage per application, page and region (key amc-tpl-zoom-dial:APP_ID:PAGE_ID:region static ID) and nothing leaves the browser; give the region a Static ID so the key survives changes. Picking the default level again is the way to reset. Browser support: CSS zoom works in Chromium-based browsers and Safari, and in Firefox from version 126; where it is not supported the dial is hidden and the content stays at 100 percent. Without JavaScript the default level from the template options still applies and the dial is hidden. Template options: Default Compact, Default Comfortable and Default Large set the starting level (Cozy when none is chosen); Hide readout keeps the level text for screen readers only; No body padding runs reports edge to edge. English UI strings to translate in the template: the group label Content size and the step names Compact, Cozy, Comfortable and Large, each used as button text for screen readers and as its title tooltip. Under reduced motion the dial thumb does not slide. JavaScript API: amcTplZoomDial.set(element, level 1 to 4) and amcTplZoomDial.get(element); the region fires a bubbling amczoomdial event after each change.
+            ```
+    }
+
+    templateOption amc-zoom-dial-default-compact (
+        name: Default Compact
+        sequence: 10
+        appearance {
+            cssClasses: amc-TZoomDial--defCompact
+        }
+        help {
+            helpText:
+                ```text
+                Starts at 87.5 percent until the user picks another level. For dense reports and grids.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DEFAULT_COMPACT
+        }
+    )
+
+    templateOption amc-zoom-dial-default-comfortable (
+        name: Default Comfortable
+        sequence: 20
+        appearance {
+            cssClasses: amc-TZoomDial--defComfortable
+        }
+        help {
+            helpText:
+                ```text
+                Starts at 112.5 percent until the user picks another level. For reading-heavy regions.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DEFAULT_COMFORTABLE
+        }
+    )
+
+    templateOption amc-zoom-dial-default-large (
+        name: Default Large
+        sequence: 30
+        appearance {
+            cssClasses: amc-TZoomDial--defLarge
+        }
+        help {
+            helpText:
+                ```text
+                Starts at 125 percent until the user picks another level. For wall displays, kiosks and low-vision users.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DEFAULT_LARGE
+        }
+    )
+
+    templateOption amc-zoom-dial-hide-readout (
+        name: Hide readout
+        sequence: 40
+        appearance {
+            cssClasses: amc-TZoomDial--noReadout
+        }
+        help {
+            helpText:
+                ```text
+                Hides the level and percentage text next to the dial; it is still announced to screen readers.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: HIDE_READOUT
+        }
+    )
+
+    templateOption amc-zoom-dial-no-body-padding (
+        name: No body padding
+        sequence: 50
+        appearance {
+            cssClasses: amc-TZoomDial--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding so reports and grids run edge to edge.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

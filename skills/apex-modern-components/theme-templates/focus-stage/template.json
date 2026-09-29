@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Focus Stage",
+  "staticId": "AMC_TPL_FOCUS_STAGE",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A region that can take the stage: its Focus button (or focusing a field inside it) dims and blurs the rest of the page behind a scrim and lifts the region with a sticky header, so a long form or a dense report gets the user's full attention without leaving the page.",
+  "useFor": "Long Forms (data entry, approvals, checklists), dense Interactive Reports or Interactive Grids, a Chart under discussion in a meeting, and any region that users work in for a long time on a busy page.",
+  "keywords": ["focus mode", "spotlight", "distraction free", "dim page", "stage", "zen mode", "living"],
+  "helpText": "Living region template (behaviour-aware). A Focus button in the header puts the region on stage: the script adds a page-level scrim to the document body that ignores the pointer, fades and blurs everything outside the region, lifts the region with a ring and deep shadow, and makes its header, with the Focus button, sticky below any fixed page header so it stays reachable in long forms and reports. Focus mode ends with Escape, the Focus button, a click on the dimmed page, or by tabbing onto the dimmed page; focus is never trapped and stays wherever the user put it. Only one region is on stage at a time and nothing is stored. Popups that APEX adds to the page later, such as report menus, date pickers, LOV and modal dialogs, are not dimmed and do not end focus mode; Escape inside an open combobox (aria-expanded true) is left to that control. The region body is never clipped or transformed. The button is a real button with aria-pressed; entering and leaving are announced through a polite live region. Without JavaScript the region is a plain framed region and the Focus button is hidden. Under reduced motion there are no transitions, but the page is still dimmed. Template options: Focus on input enters focus mode as soon as a form field inside the region gets focus, and after Escape waits until focus leaves the region before it can enter again; Deep dim uses a darker scrim and stronger blur; Stage light adds a primary-colored halo around the region on stage; Icon-only button hides the Focus label visually; No body padding runs reports edge to edge. English UI strings to translate in the template: the button label Focus, the key hint Esc, and the data-amc-msg-on and data-amc-msg-off announcements on the region element. Layering: the scrim uses z-index 50 and the region 52, so page headers with a higher z-index stay above the scrim but are dimmed with the rest of the page; if an ancestor of the region forms its own stacking context, the script lifts that ancestor to z-index 51 and dims its other children instead. JavaScript API: amcTplFocusStage.enter(element), amcTplFocusStage.exit(), amcTplFocusStage.active(); a window event amcfocusstage reports each change.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "AUTO_FOCUS", "name": "Focus on input", "cssClass": "amc-TFocusStage--auto", "sequence": 10, "help": "Enters focus mode automatically when a text field, select list or text area inside the region gets focus. Escape or the Focus button leaves it; it can enter again after focus has left the region." },
+    { "staticId": "DEEP_DIM", "name": "Deep dim", "cssClass": "amc-TFocusStage--deep", "sequence": 20, "help": "A darker scrim and a stronger blur on the rest of the page, for busy dashboards." },
+    { "staticId": "STAGE_LIGHT", "name": "Stage light", "cssClass": "amc-TFocusStage--spotlight", "sequence": 30, "help": "Adds a soft halo in the primary color around the region while it is on stage." },
+    { "staticId": "ICON_ONLY", "name": "Icon-only button", "cssClass": "amc-TFocusStage--iconOnly", "sequence": 40, "help": "Shows only the focus glyph in the header; the label stays available to screen readers. For narrow regions." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TFocusStage--noPadding", "sequence": 50, "help": "Removes side padding so reports and grids run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}
