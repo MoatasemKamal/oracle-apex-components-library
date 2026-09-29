@@ -39,6 +39,22 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Install the skills
+
+This repo ships two agent skills:
+
+| Skill | For |
+|---|---|
+| [`apex-modern-components`](skills/apex-modern-components/SKILL.md) | Components, theme styles, templates, Motion Kit |
+| [`apex-pwa`](skills/apex-pwa/SKILL.md) | Auditing and improving an APEX app as a Progressive Web App: install, icons, app-like design, offline, updates, sessions, push, plus the [PWA Kit](skills/apex-pwa/pwa-kit) |
+
+- **Inside this repo**: nothing to do; `.claude/skills/` links both, so Claude Code loads them.
+- **For all your projects**: `./install-skills.sh` (copies to `~/.claude/skills`).
+- **For one APEX app project**: `./install-skills.sh /path/to/app`.
+- Add `WITH_APEXLANG=1` to also install Oracle's `apexlang` skill.
+
+Then ask, for example: "Audit my APEX app as a PWA and fix the design and behavior issues".
+
 ## App navigation (Navigation Menu and Navigation Bar)
 
 Two templates for the application-level slots in User Interface, set once for the whole app:
