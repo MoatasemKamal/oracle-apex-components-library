@@ -1,0 +1,372 @@
+plugin designPricing (
+    name: Design Pricing
+    staticId: AMC_DESIGN_PRICING
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-DPricing amc-DPricing--#STYLE#{case HIGHLIGHT/}{when Y/} is-highlighted{endcase/}">
+              <div class="amc-DPricing-card">
+                <div class="amc-DPricing-top">
+                  <div class="amc-DPricing-head">
+                    <h3 class="amc-DPricing-plan">#PLAN#</h3>
+                    {if ?BADGE/}<span class="amc-DPricing-badge">#BADGE#</span>{endif/}
+                  </div>
+                  {if ?DESCRIPTION/}<p class="amc-DPricing-desc">#DESCRIPTION#</p>{endif/}
+                  <p class="amc-DPricing-price">{if ?CURRENCY/}<span class="amc-DPricing-currency">#CURRENCY#</span>{endif/}<span class="amc-DPricing-amount">#PRICE#</span>{if ?PERIOD/}<span class="amc-DPricing-period">#PERIOD#</span>{endif/}</p>
+                </div>
+                <div class="amc-DPricing-body">
+                  {if ?FEATURES/}<div class="amc-DPricing-features">#FEATURES#</div>{endif/}
+                  {if ?CTA_LABEL/}<div class="amc-DPricing-action">{if ?CTA_URL/}<a class="t-Button{case HIGHLIGHT/}{when Y/} t-Button--hot{endcase/} amc-DPricing-cta" href="#CTA_URL#">{else/}<button class="t-Button{case HIGHLIGHT/}{when Y/} t-Button--hot{endcase/} amc-DPricing-cta" type="button">{endif/}<span class="t-Button-label amc-DPricing-ctaLabel">#CTA_LABEL#</span>{if ?CTA_URL/}</a>{else/}</button>{endif/}</div>{endif/}
+                </div>
+              </div>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-DPricings amc-DPricings--#STYLE#">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DPricings-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-pricing.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-pricing.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Use report mode with one row per plan (2 to 4 plans read best). Map Features to a column that joins the features with |, for example Unlimited orders|Priority support. Map Highlight to a column returning Y for the recommended plan. The call to action renders as a native Universal Theme button (hot for the highlighted plan).
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: classic
+        }
+        help {
+            helpText:
+                ```
+                The pricing design. Every style is a different layout or treatment; colors always come from the active theme style.
+                ```
+        }
+        entry classic (
+            sequence: 10
+            display: Classic card
+            return: classic
+        )
+        entry highlighted (
+            sequence: 20
+            display: Highlighted plan
+            return: highlighted
+        )
+        entry glass (
+            sequence: 30
+            display: Glass
+            return: glass
+        )
+        entry gradientHeader (
+            sequence: 40
+            display: Gradient header
+            return: gradientHeader
+        )
+        entry minimal (
+            sequence: 50
+            display: Minimal columns
+            return: minimal
+        )
+        entry horizontal (
+            sequence: 60
+            display: Horizontal row
+            return: horizontal
+        )
+        entry checklist (
+            sequence: 70
+            display: Checklist
+            return: checklist
+        )
+        entry compact (
+            sequence: 80
+            display: Compact
+            return: compact
+        )
+        entry darkEnterprise (
+            sequence: 90
+            display: Dark enterprise
+            return: darkEnterprise
+        )
+        entry outlineBold (
+            sequence: 100
+            display: Outline bold
+            return: outlineBold
+        )
+    )
+    customAttribute PLAN (
+        apexlangName: plan
+        attribute: 2
+        name: Plan
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Plan name, for example Starter, Business or Enterprise.
+                ```
+        }
+    )
+    customAttribute PRICE (
+        apexlangName: price
+        attribute: 3
+        name: Price
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                The amount. Format it in SQL with the application's NLS settings, for example to_char(monthly_fee, 'FML999G990'). Text such as Custom also works.
+                ```
+        }
+    )
+    customAttribute CURRENCY (
+        apexlangName: currency
+        attribute: 4
+        name: Currency
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Currency symbol or code shown before the amount, for example SAR, USD or $. Leave empty for text prices such as Custom.
+                ```
+        }
+    )
+    customAttribute PERIOD (
+        apexlangName: period
+        attribute: 5
+        name: Period
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Billing period shown after the amount, for example / month or per user / year.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 6
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One short sentence about who the plan is for.
+                ```
+        }
+    )
+    customAttribute FEATURES (
+        apexlangName: features
+        attribute: 7
+        name: Features
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Features separated by |, for example 5 users|Unlimited orders|Email support. The runtime file turns them into a check list; without JavaScript the plain text is shown.
+                ```
+        }
+    )
+    customAttribute CTA_LABEL (
+        apexlangName: ctaLabel
+        attribute: 8
+        name: Button Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Call to action label, for example Start free trial or Contact sales. Leave empty to hide the button.
+                ```
+        }
+    )
+    customAttribute CTA_URL (
+        apexlangName: ctaUrl
+        attribute: 9
+        name: Button Link
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target URL of the call to action, for example f?p=&APP_ID.:20:&SESSION.::NO::P20_PLAN:BUSINESS. Must be a developer-controlled value, never raw user input. Without a link a plain button is rendered for a Dynamic Action.
+                ```
+        }
+    )
+    customAttribute BADGE (
+        apexlangName: badge
+        attribute: 10
+        name: Badge
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short badge, for example Most popular or Save 20%.
+                ```
+        }
+    )
+    customAttribute HIGHLIGHT (
+        apexlangName: highlight
+        attribute: 11
+        name: Highlight
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Y highlights this plan and makes its button the hot button. Any other value, or empty, renders a normal plan.
+                ```
+        }
+    )
+    file "amc-design-pricing.css" (
+        fileName: amc-design-pricing.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-design-pricing.js" (
+        fileName: amc-design-pricing.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

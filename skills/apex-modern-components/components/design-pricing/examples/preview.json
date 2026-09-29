@@ -1,0 +1,423 @@
+{
+  "samples": [
+    {
+      "title": "Classic card",
+      "mode": "report",
+      "settings": {
+        "STYLE": "classic"
+      },
+      "rows": [
+        {
+          "PLAN": "Starter",
+          "CURRENCY": "SAR",
+          "PRICE": "149",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For small teams tracking their first orders.",
+          "FEATURES": "3 users|500 orders per month|Invoice PDF export|Email support",
+          "CTA_LABEL": "Start free trial",
+          "CTA_URL": "#starter",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Business",
+          "CURRENCY": "SAR",
+          "PRICE": "449",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For growing companies with several warehouses.",
+          "FEATURES": "15 users|Unlimited orders|Multi-warehouse stock|Approval workflows|Priority support",
+          "CTA_LABEL": "Choose Business",
+          "CTA_URL": "#business",
+          "BADGE": "Most popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Enterprise",
+          "PRICE": "Custom",
+          "DESCRIPTION": "For groups that need SSO, audit and a dedicated manager.",
+          "FEATURES": "Unlimited users|Single sign-on|Audit trail and data retention|Dedicated account manager",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#enterprise",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Highlighted plan",
+      "mode": "report",
+      "settings": {
+        "STYLE": "highlighted"
+      },
+      "rows": [
+        {
+          "PLAN": "Starter",
+          "CURRENCY": "SAR",
+          "PRICE": "149",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For small teams tracking their first orders.",
+          "FEATURES": "3 users|500 orders per month|Invoice PDF export|Email support",
+          "CTA_LABEL": "Start free trial",
+          "CTA_URL": "#starter",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Business",
+          "CURRENCY": "SAR",
+          "PRICE": "449",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For growing companies with several warehouses.",
+          "FEATURES": "15 users|Unlimited orders|Multi-warehouse stock|Approval workflows|Priority support",
+          "CTA_LABEL": "Choose Business",
+          "CTA_URL": "#business",
+          "BADGE": "Most popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Enterprise",
+          "PRICE": "Custom",
+          "DESCRIPTION": "For groups that need SSO, audit and a dedicated manager.",
+          "FEATURES": "Unlimited users|Single sign-on|Audit trail and data retention|Dedicated account manager",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#enterprise",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Glass",
+      "mode": "report",
+      "settings": {
+        "STYLE": "glass"
+      },
+      "rows": [
+        {
+          "PLAN": "Team",
+          "CURRENCY": "EUR",
+          "PRICE": "12",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Shared projects and time tracking.",
+          "FEATURES": "Unlimited projects|Timesheets|Client portal",
+          "CTA_LABEL": "Try Team",
+          "CTA_URL": "#team",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Pro",
+          "CURRENCY": "EUR",
+          "PRICE": "24",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Budgets, invoicing and resource planning.",
+          "FEATURES": "Everything in Team|Project budgets|Invoicing from timesheets|Resource planner",
+          "CTA_LABEL": "Try Pro",
+          "CTA_URL": "#pro",
+          "BADGE": "Save 20% yearly",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Scale",
+          "CURRENCY": "EUR",
+          "PRICE": "39",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Portfolio reporting for PMOs.",
+          "FEATURES": "Everything in Pro|Portfolio dashboards|Custom roles|API access",
+          "CTA_LABEL": "Try Scale",
+          "CTA_URL": "#scale",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Gradient header",
+      "mode": "report",
+      "settings": {
+        "STYLE": "gradientHeader"
+      },
+      "rows": [
+        {
+          "PLAN": "Basic Care",
+          "CURRENCY": "USD",
+          "PRICE": "0",
+          "PERIOD": "included",
+          "DESCRIPTION": "Help center and community answers.",
+          "FEATURES": "Knowledge base|Community forum|Response in 3 business days",
+          "CTA_LABEL": "Current plan",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Priority Care",
+          "CURRENCY": "USD",
+          "PRICE": "1,200",
+          "PERIOD": "/ year",
+          "DESCRIPTION": "Named engineers and a 4 hour response target.",
+          "FEATURES": "24/7 ticket desk|4 hour response|Quarterly health check|Upgrade assistance",
+          "CTA_LABEL": "Upgrade",
+          "CTA_URL": "#priority",
+          "BADGE": "Recommended",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Premier Care",
+          "CURRENCY": "USD",
+          "PRICE": "4,800",
+          "PERIOD": "/ year",
+          "DESCRIPTION": "A dedicated team for business-critical apps.",
+          "FEATURES": "1 hour response|Dedicated success manager|On-site workshops|Custom SLA",
+          "CTA_LABEL": "Talk to us",
+          "CTA_URL": "#premier",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Minimal columns",
+      "mode": "report",
+      "settings": {
+        "STYLE": "minimal"
+      },
+      "rows": [
+        {
+          "PLAN": "Team",
+          "CURRENCY": "EUR",
+          "PRICE": "12",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Shared projects and time tracking.",
+          "FEATURES": "Unlimited projects|Timesheets|Client portal",
+          "CTA_LABEL": "Try Team",
+          "CTA_URL": "#team",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Pro",
+          "CURRENCY": "EUR",
+          "PRICE": "24",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Budgets, invoicing and resource planning.",
+          "FEATURES": "Everything in Team|Project budgets|Invoicing from timesheets|Resource planner",
+          "CTA_LABEL": "Try Pro",
+          "CTA_URL": "#pro",
+          "BADGE": "Save 20% yearly",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Scale",
+          "CURRENCY": "EUR",
+          "PRICE": "39",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Portfolio reporting for PMOs.",
+          "FEATURES": "Everything in Pro|Portfolio dashboards|Custom roles|API access",
+          "CTA_LABEL": "Try Scale",
+          "CTA_URL": "#scale",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Horizontal row",
+      "mode": "report",
+      "settings": {
+        "STYLE": "horizontal"
+      },
+      "rows": [
+        {
+          "PLAN": "Basic Care",
+          "CURRENCY": "USD",
+          "PRICE": "0",
+          "PERIOD": "included",
+          "DESCRIPTION": "Help center and community answers.",
+          "FEATURES": "Knowledge base|Community forum|Response in 3 business days",
+          "CTA_LABEL": "Current plan",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Priority Care",
+          "CURRENCY": "USD",
+          "PRICE": "1,200",
+          "PERIOD": "/ year",
+          "DESCRIPTION": "Named engineers and a 4 hour response target.",
+          "FEATURES": "24/7 ticket desk|4 hour response|Quarterly health check|Upgrade assistance",
+          "CTA_LABEL": "Upgrade",
+          "CTA_URL": "#priority",
+          "BADGE": "Recommended",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Premier Care",
+          "CURRENCY": "USD",
+          "PRICE": "4,800",
+          "PERIOD": "/ year",
+          "DESCRIPTION": "A dedicated team for business-critical apps.",
+          "FEATURES": "1 hour response|Dedicated success manager|On-site workshops|Custom SLA",
+          "CTA_LABEL": "Talk to us",
+          "CTA_URL": "#premier",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Checklist",
+      "mode": "report",
+      "settings": {
+        "STYLE": "checklist"
+      },
+      "rows": [
+        {
+          "PLAN": "Starter",
+          "CURRENCY": "SAR",
+          "PRICE": "149",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For small teams tracking their first orders.",
+          "FEATURES": "3 users|500 orders per month|Invoice PDF export|Email support",
+          "CTA_LABEL": "Start free trial",
+          "CTA_URL": "#starter",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Business",
+          "CURRENCY": "SAR",
+          "PRICE": "449",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For growing companies with several warehouses.",
+          "FEATURES": "15 users|Unlimited orders|Multi-warehouse stock|Approval workflows|Priority support",
+          "CTA_LABEL": "Choose Business",
+          "CTA_URL": "#business",
+          "BADGE": "Most popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Enterprise",
+          "PRICE": "Custom",
+          "DESCRIPTION": "For groups that need SSO, audit and a dedicated manager.",
+          "FEATURES": "Unlimited users|Single sign-on|Audit trail and data retention|Dedicated account manager",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#enterprise",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Compact",
+      "mode": "report",
+      "settings": {
+        "STYLE": "compact"
+      },
+      "rows": [
+        {
+          "PLAN": "Team",
+          "CURRENCY": "EUR",
+          "PRICE": "12",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Shared projects and time tracking.",
+          "FEATURES": "Unlimited projects|Timesheets|Client portal",
+          "CTA_LABEL": "Try Team",
+          "CTA_URL": "#team",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Pro",
+          "CURRENCY": "EUR",
+          "PRICE": "24",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Budgets, invoicing and resource planning.",
+          "FEATURES": "Everything in Team|Project budgets|Invoicing from timesheets|Resource planner",
+          "CTA_LABEL": "Try Pro",
+          "CTA_URL": "#pro",
+          "BADGE": "Save 20% yearly",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Scale",
+          "CURRENCY": "EUR",
+          "PRICE": "39",
+          "PERIOD": "per user / month",
+          "DESCRIPTION": "Portfolio reporting for PMOs.",
+          "FEATURES": "Everything in Pro|Portfolio dashboards|Custom roles|API access",
+          "CTA_LABEL": "Try Scale",
+          "CTA_URL": "#scale",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Dark enterprise",
+      "mode": "report",
+      "settings": {
+        "STYLE": "darkEnterprise"
+      },
+      "rows": [
+        {
+          "PLAN": "Starter",
+          "CURRENCY": "SAR",
+          "PRICE": "149",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For small teams tracking their first orders.",
+          "FEATURES": "3 users|500 orders per month|Invoice PDF export|Email support",
+          "CTA_LABEL": "Start free trial",
+          "CTA_URL": "#starter",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Business",
+          "CURRENCY": "SAR",
+          "PRICE": "449",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "For growing companies with several warehouses.",
+          "FEATURES": "15 users|Unlimited orders|Multi-warehouse stock|Approval workflows|Priority support",
+          "CTA_LABEL": "Choose Business",
+          "CTA_URL": "#business",
+          "BADGE": "Most popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Enterprise",
+          "PRICE": "Custom",
+          "DESCRIPTION": "For groups that need SSO, audit and a dedicated manager.",
+          "FEATURES": "Unlimited users|Single sign-on|Audit trail and data retention|Dedicated account manager",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#enterprise",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    },
+    {
+      "title": "Outline bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "outlineBold"
+      },
+      "rows": [
+        {
+          "PLAN": "Basic Care",
+          "CURRENCY": "USD",
+          "PRICE": "0",
+          "PERIOD": "included",
+          "DESCRIPTION": "Help center and community answers.",
+          "FEATURES": "Knowledge base|Community forum|Response in 3 business days",
+          "CTA_LABEL": "Current plan",
+          "HIGHLIGHT": "N"
+        },
+        {
+          "PLAN": "Priority Care",
+          "CURRENCY": "USD",
+          "PRICE": "1,200",
+          "PERIOD": "/ year",
+          "DESCRIPTION": "Named engineers and a 4 hour response target.",
+          "FEATURES": "24/7 ticket desk|4 hour response|Quarterly health check|Upgrade assistance",
+          "CTA_LABEL": "Upgrade",
+          "CTA_URL": "#priority",
+          "BADGE": "Recommended",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Premier Care",
+          "CURRENCY": "USD",
+          "PRICE": "4,800",
+          "PERIOD": "/ year",
+          "DESCRIPTION": "A dedicated team for business-critical apps.",
+          "FEATURES": "1 hour response|Dedicated success manager|On-site workshops|Custom SLA",
+          "CTA_LABEL": "Talk to us",
+          "CTA_URL": "#premier",
+          "HIGHLIGHT": "N"
+        }
+      ]
+    }
+  ]
+}

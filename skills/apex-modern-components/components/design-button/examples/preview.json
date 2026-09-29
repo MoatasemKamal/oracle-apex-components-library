@@ -1,0 +1,246 @@
+{
+  "samples": [
+    {
+      "title": "Soft tint",
+      "mode": "report",
+      "settings": {
+        "STYLE": "soft"
+      },
+      "rows": [
+        {
+          "LABEL": "Create Order",
+          "ICON": "fa-plus",
+          "LINK_URL": "#orders/new"
+        },
+        {
+          "LABEL": "Export CSV",
+          "ICON": "fa-download"
+        },
+        {
+          "LABEL": "View Invoices",
+          "LINK_URL": "#invoices"
+        }
+      ]
+    },
+    {
+      "title": "Gradient",
+      "mode": "report",
+      "settings": {
+        "STYLE": "gradient"
+      },
+      "rows": [
+        {
+          "LABEL": "Start Free Trial",
+          "LINK_URL": "#trial"
+        },
+        {
+          "LABEL": "Book a Demo",
+          "ICON": "fa-calendar",
+          "LINK_URL": "#demo"
+        }
+      ]
+    },
+    {
+      "title": "Glass",
+      "mode": "report",
+      "settings": {
+        "STYLE": "glass"
+      },
+      "rows": [
+        {
+          "LABEL": "Open Dashboard",
+          "ICON": "fa-dashboard",
+          "LINK_URL": "#dash"
+        },
+        {
+          "LABEL": "Share Report",
+          "ICON": "fa-share-alt"
+        }
+      ]
+    },
+    {
+      "title": "Outline draw",
+      "mode": "report",
+      "settings": {
+        "STYLE": "outlineDraw"
+      },
+      "rows": [
+        {
+          "LABEL": "View Pipeline",
+          "LINK_URL": "#pipeline"
+        },
+        {
+          "LABEL": "Download Statement",
+          "ICON": "fa-download",
+          "LINK_URL": "#statement"
+        }
+      ]
+    },
+    {
+      "title": "Pill with arrow",
+      "mode": "report",
+      "settings": {
+        "STYLE": "pillArrow"
+      },
+      "rows": [
+        {
+          "LABEL": "Get Started",
+          "LINK_URL": "#start"
+        },
+        {
+          "LABEL": "Explore Plans",
+          "LINK_URL": "#plans"
+        }
+      ]
+    },
+    {
+      "title": "Icon circle",
+      "mode": "report",
+      "settings": {
+        "STYLE": "iconCircle"
+      },
+      "rows": [
+        {
+          "LABEL": "Add Customer",
+          "ICON": "fa-user-plus",
+          "LINK_URL": "#customers/new"
+        },
+        {
+          "LABEL": "Continue to Payment",
+          "LINK_URL": "#pay"
+        }
+      ]
+    },
+    {
+      "title": "3D press",
+      "mode": "report",
+      "settings": {
+        "STYLE": "press3d"
+      },
+      "rows": [
+        {
+          "LABEL": "Approve Request",
+          "ICON": "fa-check"
+        },
+        {
+          "LABEL": "Submit Timesheet",
+          "LINK_URL": "#timesheet"
+        }
+      ]
+    },
+    {
+      "title": "Shimmer",
+      "mode": "report",
+      "settings": {
+        "STYLE": "shimmer"
+      },
+      "rows": [
+        {
+          "LABEL": "Upgrade to Business",
+          "ICON": "fa-star",
+          "LINK_URL": "#upgrade"
+        },
+        {
+          "LABEL": "Claim Offer",
+          "LINK_URL": "#offer"
+        }
+      ]
+    },
+    {
+      "title": "Underline link",
+      "mode": "report",
+      "settings": {
+        "STYLE": "underline"
+      },
+      "rows": [
+        {
+          "LABEL": "Read the release notes",
+          "LINK_URL": "#notes"
+        },
+        {
+          "LABEL": "See all projects",
+          "LINK_URL": "#projects"
+        }
+      ]
+    },
+    {
+      "title": "Ghost glow",
+      "mode": "report",
+      "settings": {
+        "STYLE": "ghostGlow"
+      },
+      "rows": [
+        {
+          "LABEL": "Contact Sales",
+          "ICON": "fa-envelope",
+          "LINK_URL": "#sales"
+        },
+        {
+          "LABEL": "Schedule Call",
+          "ICON": "fa-phone"
+        }
+      ]
+    },
+    {
+      "title": "Split icon",
+      "mode": "report",
+      "settings": {
+        "STYLE": "splitIcon"
+      },
+      "rows": [
+        {
+          "LABEL": "Download Invoice",
+          "ICON": "fa-download",
+          "LINK_URL": "#inv"
+        },
+        {
+          "LABEL": "Next Step"
+        }
+      ]
+    },
+    {
+      "title": "Neon border",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neonBorder"
+      },
+      "rows": [
+        {
+          "LABEL": "Launch Campaign",
+          "ICON": "fa-rocket",
+          "LINK_URL": "#campaign"
+        },
+        {
+          "LABEL": "Preview Email"
+        }
+      ]
+    },
+    {
+      "title": "Sizes: small",
+      "mode": "report",
+      "settings": {
+        "STYLE": "soft",
+        "SIZE": "small"
+      },
+      "rows": [
+        {
+          "LABEL": "Edit",
+          "ICON": "fa-pencil"
+        },
+        {
+          "LABEL": "Duplicate"
+        }
+      ]
+    },
+    {
+      "title": "Sizes: large, partial",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "pillArrow",
+        "SIZE": "large",
+        "LABEL": "Create Your Workspace",
+        "LINK_URL": "#workspace"
+      }
+    }
+  ]
+}

@@ -1,0 +1,745 @@
+/* APEX Modern Components - Design Pricing
+ * Ten pricing-plan designs chosen with the Style setting. Every color, radius and
+ * shadow resolves from Universal Theme variables (--ut-*), so the plans follow Vita,
+ * Vita Dark, Redwood Light, Theme Roller and custom styles. The call to action is a
+ * native t-Button and is never restyled here. Override any --amc-dp-* token on a
+ * parent to adjust a design. */
+
+.amc-DPricing,
+.amc-DPricings {
+  --amc-dp-bg: var(--ut-component-background-color, #fff);
+  --amc-dp-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-dp-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dp-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dp-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-dp-radius: var(--ut-component-border-radius, .5rem);
+  --amc-dp-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .06));
+  --amc-dp-accent: var(--ut-palette-primary, #056ac8);
+  --amc-dp-on-accent: var(--ut-palette-primary-contrast, #fff);
+  --amc-dp-info: var(--ut-palette-info, #0076df);
+  --amc-dp-accent-text: color-mix(in srgb, var(--amc-dp-accent) 82%, var(--amc-dp-fg));
+  --amc-dp-tint: color-mix(in srgb, var(--amc-dp-accent) 12%, transparent);
+  /* Shade used to deepen gradients, and the fixed surface of Dark Enterprise. */
+  --amc-dp-shade: var(--amc-design-shade, #000);
+  --amc-dp-ink: var(--amc-design-ink, #10131a);
+  --amc-dp-ink-fg: var(--amc-design-ink-text, #f3f5f8);
+}
+
+/* ---------- report layout ---------- */
+
+.amc-DPricings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  container: amc-dp-list / inline-size;
+}
+
+.amc-DPricings-item {
+  display: flex;
+  min-inline-size: 0;
+}
+
+/* ---------- shared structure ---------- */
+
+.amc-DPricing {
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  container-type: inline-size;
+  color: var(--amc-dp-fg);
+}
+
+.amc-DPricing-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--amc-dp-line);
+  border-radius: calc(var(--amc-dp-radius) * 1.5);
+  background-color: var(--amc-dp-bg);
+}
+
+.amc-DPricing-top {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  min-inline-size: 0;
+}
+
+.amc-DPricing-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem .5rem;
+}
+
+.amc-DPricing-plan {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.amc-DPricing-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  background-color: var(--amc-dp-tint);
+  color: var(--amc-dp-accent-text);
+  font-size: .6875rem;
+  font-weight: 600;
+  line-height: 1.45;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+.amc-DPricing-desc {
+  margin: 0;
+  color: var(--amc-dp-muted);
+  font-size: .8125rem;
+  line-height: 1.45;
+}
+
+.amc-DPricing-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .125rem .375rem;
+  margin: .25rem 0 0;
+  line-height: 1.1;
+  unicode-bidi: isolate;
+}
+
+.amc-DPricing-currency {
+  color: var(--amc-dp-muted);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.amc-DPricing-amount {
+  font-size: 2.25rem;
+  font-size: clamp(1.75rem, 14cqi, 2.5rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  unicode-bidi: plaintext;
+}
+
+.amc-DPricing-period {
+  color: var(--amc-dp-muted);
+  font-size: .8125rem;
+}
+
+.amc-DPricing-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-inline-size: 0;
+}
+
+.amc-DPricing-features {
+  font-size: .8125rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.amc-DPricing-list {
+  display: grid;
+  gap: .625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-DPricing-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: .625rem;
+  min-inline-size: 0;
+}
+
+.amc-DPricing-featureText { min-inline-size: 0; }
+
+/* Check mark drawn in CSS (no icon font needed). */
+.amc-DPricing-check {
+  position: relative;
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border-radius: 50%;
+  background-color: var(--amc-dp-tint);
+  color: var(--amc-dp-accent-text);
+}
+
+.amc-DPricing-check::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  inline-size: .25rem;
+  block-size: .5rem;
+  margin: auto;
+  border: solid currentColor;
+  border-width: 0 .125rem .125rem 0;
+  transform: translateY(-12%) rotate(45deg);
+}
+
+.amc-DPricing-action {
+  display: grid;
+  margin-block-start: auto;
+}
+
+.amc-DPricing-ctaLabel {
+  flex: 1;
+  text-align: center;
+}
+
+/* ================= 1. classic: centered card, pill badge on the top edge ================= */
+
+.amc-DPricing--classic { padding-block-start: .75rem; }
+
+.amc-DPricing--classic .amc-DPricing-card {
+  box-shadow: var(--amc-dp-shadow);
+  text-align: center;
+}
+
+.amc-DPricing--classic .amc-DPricing-head,
+.amc-DPricing--classic .amc-DPricing-price { justify-content: center; }
+
+.amc-DPricing--classic .amc-DPricing-badge {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  inline-size: fit-content;
+  margin-inline: auto;
+  padding: .25rem .75rem;
+  background-color: var(--amc-dp-accent);
+  color: var(--amc-dp-on-accent);
+  translate: 0 -50%;
+}
+
+.amc-DPricing--classic .amc-DPricing-body {
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid var(--amc-dp-line);
+  text-align: start;
+}
+
+.amc-DPricing--classic.is-highlighted .amc-DPricing-card {
+  border-color: var(--amc-dp-accent);
+  box-shadow: 0 0 0 1px var(--amc-dp-accent), 0 .75rem 1.75rem -1rem color-mix(in srgb, var(--amc-dp-accent) 60%, transparent);
+}
+
+/* ================= 2. highlighted: recessed plans, raised spotlight plan with a banner ================= */
+
+.amc-DPricing--highlighted { padding-block: 2.75rem 1rem; }
+.amc-DPricing--highlighted.is-highlighted { padding-block: 1.75rem 0; }
+
+.amc-DPricing--highlighted .amc-DPricing-card {
+  border-color: transparent;
+  background-color: color-mix(in srgb, var(--amc-dp-fg) 4%, var(--amc-dp-bg));
+}
+
+.amc-DPricing--highlighted.is-highlighted .amc-DPricing-card {
+  padding-block: 2rem 1.75rem;
+  border: 2px solid var(--amc-dp-accent);
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 5%, var(--amc-dp-bg));
+  box-shadow: 0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--amc-dp-accent) 70%, transparent);
+}
+
+.amc-DPricing--highlighted.is-highlighted .amc-DPricing-card:has(.amc-DPricing-badge) {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+
+.amc-DPricing--highlighted.is-highlighted .amc-DPricing-badge {
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline: -2px;
+  justify-content: center;
+  padding: .375rem .75rem;
+  border-radius: calc(var(--amc-dp-radius) * 1.5) calc(var(--amc-dp-radius) * 1.5) 0 0;
+  background-color: var(--amc-dp-accent);
+  color: var(--amc-dp-on-accent);
+  font-size: .75rem;
+  letter-spacing: .02em;
+}
+
+.amc-DPricing--highlighted.is-highlighted .amc-DPricing-plan { color: var(--amc-dp-accent-text); }
+.amc-DPricing--highlighted.is-highlighted .amc-DPricing-amount { font-size: clamp(2rem, 16cqi, 3rem); }
+
+.amc-DPricing--highlighted .amc-DPricing-check {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+  color: var(--amc-dp-muted);
+}
+
+.amc-DPricing--highlighted.is-highlighted .amc-DPricing-check {
+  background-color: var(--amc-dp-accent);
+  box-shadow: none;
+  color: var(--amc-dp-on-accent);
+}
+
+/* One plan per row: no stagger, keep only the room for the banner. */
+@container amc-dp-list (max-inline-size: 34rem) {
+  .amc-DPricing--highlighted { padding-block: 0; }
+  .amc-DPricing--highlighted.is-highlighted { padding-block: 1.75rem 0; }
+}
+
+/* ================= 3. glass: frosted panels on a tinted backdrop ================= */
+
+.amc-DPricings--glass {
+  padding: clamp(.75rem, 3vw, 1.5rem);
+  border-radius: calc(var(--amc-dp-radius) * 2);
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--amc-dp-accent) 26%, transparent), transparent 70%),
+    linear-gradient(160deg, color-mix(in srgb, var(--amc-dp-info) 10%, var(--amc-dp-page)), var(--amc-dp-page));
+}
+
+.amc-DPricing--glass .amc-DPricing-card {
+  border: 1px solid color-mix(in srgb, var(--amc-dp-fg) 12%, transparent);
+  border-radius: calc(var(--amc-dp-radius) * 2.5);
+  background-color: color-mix(in srgb, var(--amc-dp-bg) 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-dp-bg) 80%, transparent),
+    0 .75rem 2rem -1.25rem color-mix(in srgb, var(--amc-dp-fg) 45%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.amc-DPricing--glass .amc-DPricing-badge {
+  border: 1px solid color-mix(in srgb, var(--amc-dp-accent) 35%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 14%, transparent);
+}
+
+.amc-DPricing--glass .amc-DPricing-check {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-dp-accent) 45%, transparent);
+}
+
+.amc-DPricing--glass.is-highlighted .amc-DPricing-card {
+  border-color: color-mix(in srgb, var(--amc-dp-accent) 55%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dp-bg) 72%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-dp-bg) 80%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-dp-accent) 30%, transparent),
+    0 1rem 2.5rem -1.25rem color-mix(in srgb, var(--amc-dp-accent) 65%, transparent);
+}
+
+/* ================= 4. gradientHeader: colored header band with the price ================= */
+
+.amc-DPricing--gradientHeader .amc-DPricing-card {
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: var(--amc-dp-shadow);
+}
+
+.amc-DPricing--gradientHeader .amc-DPricing-top {
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: linear-gradient(135deg, var(--amc-dp-accent), color-mix(in srgb, var(--amc-dp-accent) 62%, var(--amc-dp-shade)));
+  color: var(--amc-dp-on-accent);
+}
+
+.amc-DPricing--gradientHeader .amc-DPricing-desc,
+.amc-DPricing--gradientHeader .amc-DPricing-currency,
+.amc-DPricing--gradientHeader .amc-DPricing-period {
+  color: color-mix(in srgb, var(--amc-dp-on-accent) 82%, transparent);
+}
+
+.amc-DPricing--gradientHeader .amc-DPricing-badge {
+  margin-inline-start: auto;
+  border: 1px solid color-mix(in srgb, var(--amc-dp-on-accent) 40%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dp-on-accent) 18%, transparent);
+  color: var(--amc-dp-on-accent);
+}
+
+.amc-DPricing--gradientHeader .amc-DPricing-body { padding: 1.25rem 1.5rem 1.5rem; }
+
+.amc-DPricing--gradientHeader.is-highlighted .amc-DPricing-card {
+  border-color: var(--amc-dp-accent);
+  box-shadow: 0 0 0 1px var(--amc-dp-accent), 0 1rem 2rem -1.25rem color-mix(in srgb, var(--amc-dp-accent) 70%, transparent);
+}
+
+.amc-DPricing--gradientHeader.is-highlighted .amc-DPricing-top { padding-block: 1.75rem 2rem; }
+
+/* ================= 5. minimal: no card, top rule, light oversized price ================= */
+
+.amc-DPricings--minimal { gap: 2rem 1.5rem; }
+
+.amc-DPricing--minimal .amc-DPricing-card {
+  padding: 1.25rem 0 0;
+  border: 0;
+  border-block-start: 2px solid color-mix(in srgb, var(--amc-dp-fg) 14%, transparent);
+  border-radius: 0;
+  background: none;
+}
+
+.amc-DPricing--minimal .amc-DPricing-plan {
+  color: var(--amc-dp-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.amc-DPricing--minimal .amc-DPricing-amount {
+  font-size: clamp(2.25rem, 20cqi, 3.25rem);
+  font-weight: 300;
+  letter-spacing: -.03em;
+}
+
+.amc-DPricing--minimal .amc-DPricing-badge {
+  padding: 0;
+  background: none;
+  color: var(--amc-dp-accent-text);
+}
+
+.amc-DPricing--minimal .amc-DPricing-badge::before {
+  content: "";
+  inline-size: .375rem;
+  block-size: .375rem;
+  margin-inline-end: .375rem;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.amc-DPricing--minimal .amc-DPricing-features { color: var(--amc-dp-muted); }
+.amc-DPricing--minimal .amc-DPricing-list { gap: .5rem; }
+
+.amc-DPricing--minimal .amc-DPricing-check {
+  inline-size: .875rem;
+  block-size: 1.125rem;
+  background: none;
+}
+
+.amc-DPricing--minimal .amc-DPricing-action { justify-items: start; }
+
+.amc-DPricing--minimal.is-highlighted .amc-DPricing-card { border-block-start-color: var(--amc-dp-accent); }
+.amc-DPricing--minimal.is-highlighted .amc-DPricing-plan { color: var(--amc-dp-accent-text); }
+
+/* ================= 6. horizontal: one full-width row per plan ================= */
+
+.amc-DPricings--horizontal {
+  grid-template-columns: minmax(0, 1fr);
+  gap: .75rem;
+}
+
+.amc-DPricing--horizontal .amc-DPricing-card {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(0, 1.6fr) auto;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.amc-DPricing--horizontal .amc-DPricing-body { display: contents; }
+
+.amc-DPricing--horizontal .amc-DPricing-top { gap: .25rem; }
+
+.amc-DPricing--horizontal .amc-DPricing-amount { font-size: 1.75rem; }
+
+.amc-DPricing--horizontal .amc-DPricing-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+}
+
+.amc-DPricing--horizontal .amc-DPricing-feature {
+  align-items: center;
+  gap: .375rem;
+  padding: .25rem .625rem .25rem .375rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dp-fg) 5%, transparent);
+  font-size: .75rem;
+}
+
+.amc-DPricing--horizontal .amc-DPricing-check {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.amc-DPricing--horizontal .amc-DPricing-action {
+  margin: 0;
+  justify-items: end;
+}
+
+.amc-DPricing--horizontal.is-highlighted .amc-DPricing-card {
+  border-color: var(--amc-dp-accent);
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 5%, var(--amc-dp-bg));
+  box-shadow: inset 0 0 0 1px var(--amc-dp-accent);
+}
+
+@container (max-inline-size: 40rem) {
+  .amc-DPricing--horizontal .amc-DPricing-card { grid-template-columns: minmax(0, 1fr); }
+  .amc-DPricing--horizontal .amc-DPricing-action { justify-items: stretch; }
+}
+
+/* ================= 7. checklist: price beside the plan, ruled feature table ================= */
+
+.amc-DPricing--checklist .amc-DPricing-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .25rem 1rem;
+}
+
+.amc-DPricing--checklist .amc-DPricing-head,
+.amc-DPricing--checklist .amc-DPricing-desc { grid-column: 1; }
+
+.amc-DPricing--checklist .amc-DPricing-price {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .125rem;
+  margin: 0;
+  text-align: end;
+}
+
+.amc-DPricing--checklist .amc-DPricing-amount { font-size: 1.5rem; }
+.amc-DPricing--checklist .amc-DPricing-currency { font-size: .75rem; }
+
+.amc-DPricing--checklist .amc-DPricing-list {
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--amc-dp-line);
+  border-radius: var(--amc-dp-radius);
+}
+
+.amc-DPricing--checklist .amc-DPricing-feature {
+  align-items: center;
+  padding: .625rem .75rem;
+}
+
+.amc-DPricing--checklist .amc-DPricing-feature + .amc-DPricing-feature { border-block-start: 1px solid var(--amc-dp-line); }
+
+.amc-DPricing--checklist .amc-DPricing-check {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  background-color: var(--amc-dp-accent);
+  color: var(--amc-dp-on-accent);
+}
+
+.amc-DPricing--checklist.is-highlighted .amc-DPricing-card { border-color: var(--amc-dp-accent); }
+.amc-DPricing--checklist.is-highlighted .amc-DPricing-list {
+  border-color: color-mix(in srgb, var(--amc-dp-accent) 35%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 5%, transparent);
+}
+
+@container (max-inline-size: 16rem) {
+  .amc-DPricing--checklist .amc-DPricing-top { grid-template-columns: minmax(0, 1fr); }
+  .amc-DPricing--checklist .amc-DPricing-price {
+    grid-column: 1;
+    grid-row: auto;
+    flex-direction: row;
+    align-items: baseline;
+    text-align: start;
+  }
+}
+
+/* ================= 8. compact: dense tile, features as one line of text ================= */
+
+.amc-DPricings--compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+  gap: .75rem;
+}
+
+.amc-DPricing--compact .amc-DPricing-card {
+  gap: .875rem;
+  padding: 1rem;
+  border-radius: var(--amc-dp-radius);
+}
+
+.amc-DPricing--compact .amc-DPricing-top { gap: .25rem; }
+.amc-DPricing--compact .amc-DPricing-head { flex-wrap: nowrap; }
+.amc-DPricing--compact .amc-DPricing-plan { min-inline-size: 0; font-size: .875rem; }
+
+.amc-DPricing--compact .amc-DPricing-badge {
+  flex-shrink: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  margin-inline-start: auto;
+  padding: .0625rem .375rem;
+  border-radius: calc(var(--amc-dp-radius) * .5);
+  font-size: .625rem;
+  text-overflow: ellipsis;
+}
+
+.amc-DPricing--compact .amc-DPricing-desc { font-size: .75rem; }
+.amc-DPricing--compact .amc-DPricing-amount { font-size: 1.5rem; }
+.amc-DPricing--compact .amc-DPricing-body { gap: .875rem; }
+
+.amc-DPricing--compact .amc-DPricing-features {
+  color: var(--amc-dp-muted);
+  font-size: .75rem;
+}
+
+.amc-DPricing--compact .amc-DPricing-list { display: block; }
+.amc-DPricing--compact .amc-DPricing-feature {
+  display: inline-block;
+  max-inline-size: 100%;
+}
+.amc-DPricing--compact .amc-DPricing-check { display: none; }
+
+.amc-DPricing--compact .amc-DPricing-feature + .amc-DPricing-feature::before {
+  content: "\00B7";
+  margin-inline: .375rem;
+  color: var(--amc-dp-accent-text);
+  font-weight: 700;
+}
+
+.amc-DPricing--compact.is-highlighted .amc-DPricing-card {
+  border-color: color-mix(in srgb, var(--amc-dp-accent) 55%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 6%, var(--amc-dp-bg));
+}
+
+/* ================= 9. darkEnterprise: deep ink panel with a brand-tinted glow ================= */
+
+.amc-DPricing--darkEnterprise .amc-DPricing-card {
+  --amc-dp-muted: color-mix(in srgb, var(--amc-dp-ink-fg) 68%, transparent);
+  --amc-dp-glow: color-mix(in srgb, var(--amc-dp-accent) 55%, var(--amc-dp-ink-fg));
+  padding: 1.75rem;
+  border-color: color-mix(in srgb, var(--amc-dp-ink-fg) 14%, transparent);
+  border-radius: calc(var(--amc-dp-radius) * 2);
+  background: linear-gradient(165deg, color-mix(in srgb, var(--amc-dp-accent) 24%, var(--amc-dp-ink)), var(--amc-dp-ink) 55%);
+  box-shadow: 0 1.25rem 2.5rem -1.5rem color-mix(in srgb, var(--amc-dp-ink) 90%, transparent);
+  color: var(--amc-dp-ink-fg);
+}
+
+.amc-DPricing--darkEnterprise .amc-DPricing-card::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline: 1.5rem;
+  block-size: 1px;
+  background: linear-gradient(90deg, transparent, var(--amc-dp-glow), transparent);
+}
+
+.amc-DPricing--darkEnterprise .amc-DPricing-plan {
+  color: var(--amc-dp-glow);
+  font-size: .8125rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.amc-DPricing--darkEnterprise .amc-DPricing-badge {
+  border: 1px solid color-mix(in srgb, var(--amc-dp-glow) 50%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 22%, transparent);
+  color: var(--amc-dp-ink-fg);
+}
+
+.amc-DPricing--darkEnterprise .amc-DPricing-body {
+  padding-block-start: 1.25rem;
+  border-block-start: 1px dashed color-mix(in srgb, var(--amc-dp-ink-fg) 18%, transparent);
+}
+
+.amc-DPricing--darkEnterprise .amc-DPricing-check {
+  background-color: color-mix(in srgb, var(--amc-dp-accent) 28%, transparent);
+  color: var(--amc-dp-glow);
+}
+
+.amc-DPricing--darkEnterprise.is-highlighted .amc-DPricing-card {
+  border-color: color-mix(in srgb, var(--amc-dp-glow) 60%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-dp-accent) 45%, transparent),
+    0 1.25rem 3rem -1rem color-mix(in srgb, var(--amc-dp-accent) 55%, transparent);
+}
+
+/* ================= 10. outlineBold: thick outline, hard offset shadow, tag badge ================= */
+
+.amc-DPricing--outlineBold {
+  --amc-dp-offset: .375rem;
+  padding-block-start: .75rem;
+  padding-inline-end: var(--amc-dp-offset);
+  padding-block-end: var(--amc-dp-offset);
+}
+
+.amc-DPricing--outlineBold .amc-DPricing-card {
+  border: 2px solid var(--amc-dp-fg);
+  border-radius: calc(var(--amc-dp-radius) * .5);
+  box-shadow: var(--amc-dp-offset) var(--amc-dp-offset) 0 var(--amc-dp-fg);
+}
+
+.amc-DPricing--outlineBold:dir(rtl) .amc-DPricing-card {
+  box-shadow: calc(var(--amc-dp-offset) * -1) var(--amc-dp-offset) 0 var(--amc-dp-fg);
+}
+
+.amc-DPricing--outlineBold .amc-DPricing-plan {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.amc-DPricing--outlineBold .amc-DPricing-amount { font-weight: 800; }
+.amc-DPricing--outlineBold .amc-DPricing-currency { color: var(--amc-dp-fg); }
+
+.amc-DPricing--outlineBold .amc-DPricing-badge {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 1rem;
+  padding: .25rem .5rem;
+  border-radius: 0;
+  background-color: var(--amc-dp-fg);
+  color: var(--amc-dp-bg);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  translate: 0 -50%;
+}
+
+.amc-DPricing--outlineBold .amc-DPricing-body {
+  padding-block-start: 1.25rem;
+  border-block-start: 2px solid var(--amc-dp-fg);
+}
+
+.amc-DPricing--outlineBold .amc-DPricing-features { font-weight: 500; }
+
+.amc-DPricing--outlineBold .amc-DPricing-check {
+  inline-size: 1rem;
+  block-size: 1rem;
+  border: 2px solid var(--amc-dp-fg);
+  border-radius: 0;
+  background: none;
+  color: var(--amc-dp-fg);
+}
+
+.amc-DPricing--outlineBold.is-highlighted .amc-DPricing-card {
+  border-color: var(--amc-dp-accent);
+  box-shadow: var(--amc-dp-offset) var(--amc-dp-offset) 0 var(--amc-dp-accent);
+}
+
+.amc-DPricing--outlineBold.is-highlighted:dir(rtl) .amc-DPricing-card {
+  box-shadow: calc(var(--amc-dp-offset) * -1) var(--amc-dp-offset) 0 var(--amc-dp-accent);
+}
+
+.amc-DPricing--outlineBold.is-highlighted .amc-DPricing-badge {
+  background-color: var(--amc-dp-accent);
+  color: var(--amc-dp-on-accent);
+}
+
+.amc-DPricing--outlineBold.is-highlighted .amc-DPricing-check {
+  border-color: var(--amc-dp-accent);
+  background-color: var(--amc-dp-accent);
+  color: var(--amc-dp-on-accent);
+}
+
+/* ---------- high contrast ---------- */
+
+@media (forced-colors: active) {
+  .amc-DPricing-card { border: 1px solid CanvasText; }
+  .amc-DPricing.is-highlighted .amc-DPricing-card { outline: 3px solid Highlight; outline-offset: 2px; }
+  .amc-DPricing-check { forced-color-adjust: none; color: CanvasText; background: none; }
+  .amc-DPricing-badge { border: 1px solid CanvasText; }
+}

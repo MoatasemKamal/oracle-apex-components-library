@@ -1,0 +1,242 @@
+plugin designButton (
+    name: Design Button
+    staticId: AMC_DESIGN_BUTTON
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            {if ?LINK_URL/}<a class="amc-DButton amc-DButton--#STYLE#{if ?SIZE/} amc-DButton--#SIZE#{endif/}" href="#LINK_URL#">{else/}<button class="amc-DButton amc-DButton--#STYLE#{if ?SIZE/} amc-DButton--#SIZE#{endif/}" type="button">{endif/}
+              {if ?ICON/}<span class="amc-DButton-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{else/}<span class="amc-DButton-icon amc-DButton-icon--auto" aria-hidden="true"><span class="amc-DButton-chevron"></span></span>{endif/}
+              <span class="amc-DButton-label">#LABEL#</span>
+              <span class="amc-DButton-arrow" aria-hidden="true"><span class="amc-DButton-chevron"></span></span>
+            {if ?LINK_URL/}</a>{else/}</button>{endif/}
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-DButtons amc-DButtons--#STYLE#">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DButtons-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-button.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Use for marketing-style calls to action and hero links; keep native Universal Theme buttons for form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Every design has hover, pressed and keyboard focus states and respects reduced motion.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: soft
+        }
+        help {
+            helpText:
+                ```
+                The button design. Colors always come from the active theme style; shimmer, outline draw and neon border animate only on hover or keyboard focus.
+                ```
+        }
+        entry soft (
+            sequence: 10
+            display: Soft tint
+            return: soft
+        )
+        entry gradient (
+            sequence: 20
+            display: Gradient
+            return: gradient
+        )
+        entry glass (
+            sequence: 30
+            display: Glass
+            return: glass
+        )
+        entry outlineDraw (
+            sequence: 40
+            display: Outline draw
+            return: outlineDraw
+        )
+        entry pillArrow (
+            sequence: 50
+            display: Pill with arrow
+            return: pillArrow
+        )
+        entry iconCircle (
+            sequence: 60
+            display: Icon circle
+            return: iconCircle
+        )
+        entry press3d (
+            sequence: 70
+            display: 3D press
+            return: press3d
+        )
+        entry shimmer (
+            sequence: 80
+            display: Shimmer
+            return: shimmer
+        )
+        entry underline (
+            sequence: 90
+            display: Underline link
+            return: underline
+        )
+        entry ghostGlow (
+            sequence: 100
+            display: Ghost glow
+            return: ghostGlow
+        )
+        entry splitIcon (
+            sequence: 110
+            display: Split icon
+            return: splitIcon
+        )
+        entry neonBorder (
+            sequence: 120
+            display: Neon border
+            return: neonBorder
+        )
+    )
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 2
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible button text. Use a specific verb, for example Create Order or View Invoices.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 3
+        name: Link
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target URL, for example f?p=&APP_ID.:10:&SESSION. When set an anchor is rendered, otherwise a button for a Dynamic Action. Must be a developer-controlled value, never raw user input.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 4
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-plus or fa-download. Icon circle and split icon show a chevron when it is empty.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 5
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 50
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Leave empty for the default size.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small
+            return: small
+        )
+        entry large (
+            sequence: 20
+            display: Large
+            return: large
+        )
+    )
+    file "amc-design-button.css" (
+        fileName: amc-design-button.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

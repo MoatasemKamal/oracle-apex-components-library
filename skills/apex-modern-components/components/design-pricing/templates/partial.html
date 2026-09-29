@@ -1,0 +1,16 @@
+<div class="amc-DPricing amc-DPricing--#STYLE#{case HIGHLIGHT/}{when Y/} is-highlighted{endcase/}">
+  <div class="amc-DPricing-card">
+    <div class="amc-DPricing-top">
+      <div class="amc-DPricing-head">
+        <h3 class="amc-DPricing-plan">#PLAN#</h3>
+        {if ?BADGE/}<span class="amc-DPricing-badge">#BADGE#</span>{endif/}
+      </div>
+      {if ?DESCRIPTION/}<p class="amc-DPricing-desc">#DESCRIPTION#</p>{endif/}
+      <p class="amc-DPricing-price">{if ?CURRENCY/}<span class="amc-DPricing-currency">#CURRENCY#</span>{endif/}<span class="amc-DPricing-amount">#PRICE#</span>{if ?PERIOD/}<span class="amc-DPricing-period">#PERIOD#</span>{endif/}</p>
+    </div>
+    <div class="amc-DPricing-body">
+      {if ?FEATURES/}<div class="amc-DPricing-features">#FEATURES#</div>{endif/}
+      {if ?CTA_LABEL/}<div class="amc-DPricing-action">{if ?CTA_URL/}<a class="t-Button{case HIGHLIGHT/}{when Y/} t-Button--hot{endcase/} amc-DPricing-cta" href="#CTA_URL#">{else/}<button class="t-Button{case HIGHLIGHT/}{when Y/} t-Button--hot{endcase/} amc-DPricing-cta" type="button">{endif/}<span class="t-Button-label amc-DPricing-ctaLabel">#CTA_LABEL#</span>{if ?CTA_URL/}</a>{else/}</button>{endif/}</div>{endif/}
+    </div>
+  </div>
+</div>

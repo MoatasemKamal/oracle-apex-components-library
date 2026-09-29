@@ -1,0 +1,187 @@
+{
+  "name": "Design Button",
+  "apexlangName": "designButton",
+  "staticId": "AMC_DESIGN_BUTTON",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": [
+    "button",
+    "link button",
+    "call to action",
+    "cta",
+    "action bar",
+    "hover",
+    "gradient button",
+    "pill",
+    "design collection"
+  ],
+  "description": "Link and action buttons in 12 designs (soft, gradient, glass, outline draw, pill arrow, icon circle, 3D press, shimmer, underline, ghost glow, split icon, neon border). Follows the call-to-action patterns of current design systems, built only from the theme palette so each design stays native to Universal Theme. Report mode renders a wrapping action bar.",
+  "helpText": "Use for marketing-style calls to action and hero links; keep native Universal Theme buttons for form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Every design has hover, pressed and keyboard focus states and respects reduced motion.",
+  "templateComponent": {
+    "availableAs": [
+      "partial",
+      "report"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": [
+    "files/amc-design-button.css"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-design-button.css"
+  ],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "soft",
+      "sequence": 10,
+      "helpText": "The button design. Colors always come from the active theme style; shimmer, outline draw and neon border animate only on hover or keyboard focus.",
+      "entries": [
+        {
+          "name": "soft",
+          "display": "Soft tint",
+          "return": "soft",
+          "sequence": 10
+        },
+        {
+          "name": "gradient",
+          "display": "Gradient",
+          "return": "gradient",
+          "sequence": 20
+        },
+        {
+          "name": "glass",
+          "display": "Glass",
+          "return": "glass",
+          "sequence": 30
+        },
+        {
+          "name": "outlineDraw",
+          "display": "Outline draw",
+          "return": "outlineDraw",
+          "sequence": 40
+        },
+        {
+          "name": "pillArrow",
+          "display": "Pill with arrow",
+          "return": "pillArrow",
+          "sequence": 50
+        },
+        {
+          "name": "iconCircle",
+          "display": "Icon circle",
+          "return": "iconCircle",
+          "sequence": 60
+        },
+        {
+          "name": "press3d",
+          "display": "3D press",
+          "return": "press3d",
+          "sequence": 70
+        },
+        {
+          "name": "shimmer",
+          "display": "Shimmer",
+          "return": "shimmer",
+          "sequence": 80
+        },
+        {
+          "name": "underline",
+          "display": "Underline link",
+          "return": "underline",
+          "sequence": 90
+        },
+        {
+          "name": "ghostGlow",
+          "display": "Ghost glow",
+          "return": "ghostGlow",
+          "sequence": 100
+        },
+        {
+          "name": "splitIcon",
+          "display": "Split icon",
+          "return": "splitIcon",
+          "sequence": 110
+        },
+        {
+          "name": "neonBorder",
+          "display": "Neon border",
+          "return": "neonBorder",
+          "sequence": 120
+        }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Visible button text. Use a specific verb, for example Create Order or View Invoices."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 3,
+      "name": "Link",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Target URL, for example f?p=&APP_ID.:10:&SESSION. When set an anchor is rendered, otherwise a button for a Dynamic Action. Must be a developer-controlled value, never raw user input."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 4,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Font APEX icon class, for example fa-plus or fa-download. Icon circle and split icon show a chevron when it is empty."
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 5,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Leave empty for the default size.",
+      "entries": [
+        {
+          "name": "small",
+          "display": "Small",
+          "return": "small",
+          "sequence": 10
+        },
+        {
+          "name": "large",
+          "display": "Large",
+          "return": "large",
+          "sequence": 20
+        }
+      ]
+    }
+  ]
+}

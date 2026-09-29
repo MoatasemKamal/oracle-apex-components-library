@@ -1,0 +1,563 @@
+/* APEX Modern Components - Design Button
+ * Twelve call-to-action designs chosen with the Style setting. Every color resolves
+ * from Universal Theme variables (--ut-*), so the buttons follow Vita, Vita Dark,
+ * Redwood Light, Theme Roller and custom styles. Each design has hover, pressed and
+ * :focus-visible states; motion is removed under prefers-reduced-motion. */
+
+@property --amc-db-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.amc-DButton,
+.amc-DButtons {
+  --amc-db-bg: var(--ut-component-background-color, #fff);
+  --amc-db-fg: var(--ut-component-text-default-color, #262626);
+  --amc-db-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-db-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-db-radius: var(--ut-component-border-radius, .5rem);
+  --amc-db-accent: var(--ut-palette-primary, #056ac8);
+  --amc-db-on-accent: var(--ut-palette-primary-contrast, #fff);
+  --amc-db-info: var(--ut-palette-info, #0076df);
+  --amc-db-accent-text: color-mix(in srgb, var(--amc-db-accent) 82%, var(--amc-db-fg));
+  /* Shade used to deepen the accent (3D ledge, split segment, gradient end). */
+  --amc-db-shade: var(--amc-design-shade, #000);
+}
+
+/* ---------- report: wrapping action bar ---------- */
+
+.amc-DButtons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-DButtons-item {
+  display: flex;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* ---------- shared structure ---------- */
+
+.amc-DButton {
+  --amc-db-fs: .875rem;
+  --amc-db-h: 2.5rem;
+  --amc-db-pad: 1.125rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-block-size: var(--amc-db-h);
+  margin: 0;
+  padding: 0 var(--amc-db-pad);
+  border: 1px solid transparent;
+  border-radius: var(--amc-db-radius);
+  background: none;
+  color: var(--amc-db-fg);
+  font: inherit;
+  font-size: var(--amc-db-fs);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  isolation: isolate;
+  transition:
+    background-color .18s ease,
+    background-position .4s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease,
+    transform .14s ease;
+}
+
+.amc-DButton:hover,
+.amc-DButton:focus { text-decoration: none; }
+
+.amc-DButton:focus-visible {
+  outline: 2px solid var(--amc-db-accent);
+  outline-offset: 3px;
+}
+
+.amc-DButton--small {
+  --amc-db-fs: .75rem;
+  --amc-db-h: 2rem;
+  --amc-db-pad: .75rem;
+}
+
+.amc-DButton--large {
+  --amc-db-fs: 1rem;
+  --amc-db-h: 3rem;
+  --amc-db-pad: 1.5rem;
+}
+
+.amc-DButton-label {
+  position: relative;
+  min-inline-size: 0;
+  padding-block: .5em;
+  overflow-wrap: anywhere;
+  text-align: center;
+  unicode-bidi: isolate;
+}
+
+.amc-DButton-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  transition: transform .2s ease, background-color .18s ease;
+}
+
+.amc-DButton-icon--auto,
+.amc-DButton-arrow { display: none; }
+
+.amc-DButton-arrow {
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  transition: transform .2s ease, background-color .18s ease;
+}
+
+/* Chevron drawn in CSS, pointing to the inline end. */
+.amc-DButton-chevron {
+  display: block;
+  inline-size: .45em;
+  block-size: .45em;
+  margin-inline-end: .12em;
+  border: solid currentColor;
+  border-width: 0 .14em .14em 0;
+  transform: rotate(-45deg);
+}
+
+.amc-DButton:dir(rtl) .amc-DButton-chevron {
+  margin-inline: .12em 0;
+  transform: rotate(135deg);
+}
+
+/* ================= 1. soft: tinted fill, accent text ================= */
+
+.amc-DButton--soft {
+  background-color: color-mix(in srgb, var(--amc-db-accent) 12%, transparent);
+  color: var(--amc-db-accent-text);
+}
+
+.amc-DButton--soft:hover { background-color: color-mix(in srgb, var(--amc-db-accent) 20%, transparent); }
+
+.amc-DButton--soft:active {
+  background-color: color-mix(in srgb, var(--amc-db-accent) 28%, transparent);
+  transform: scale(.97);
+}
+
+/* ================= 2. gradient: diagonal accent gradient, colored lift ================= */
+
+.amc-DButton--gradient {
+  background-image: linear-gradient(120deg,
+    color-mix(in srgb, var(--amc-db-accent) 80%, var(--amc-db-info)),
+    var(--amc-db-accent) 45%,
+    color-mix(in srgb, var(--amc-db-accent) 62%, var(--amc-db-shade)));
+  background-size: 200% 100%;
+  background-position: 0 50%;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-db-on-accent) 28%, transparent),
+    0 .375rem 1rem -.5rem color-mix(in srgb, var(--amc-db-accent) 80%, transparent);
+  color: var(--amc-db-on-accent);
+}
+
+.amc-DButton--gradient:hover {
+  background-position: 100% 50%;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-db-on-accent) 28%, transparent),
+    0 .625rem 1.5rem -.5rem color-mix(in srgb, var(--amc-db-accent) 85%, transparent);
+  transform: translateY(-1px);
+}
+
+.amc-DButton--gradient:active {
+  box-shadow: inset 0 2px 4px color-mix(in srgb, var(--amc-db-shade) 25%, transparent);
+  transform: translateY(0);
+}
+
+/* ================= 3. glass: frosted translucent surface ================= */
+
+.amc-DButton--glass {
+  border-color: color-mix(in srgb, var(--amc-db-fg) 16%, transparent);
+  border-radius: calc(var(--amc-db-radius) * 1.5);
+  background-color: color-mix(in srgb, var(--amc-db-bg) 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-db-bg) 85%, transparent),
+    0 .25rem .75rem -.25rem color-mix(in srgb, var(--amc-db-fg) 22%, transparent);
+  color: var(--amc-db-fg);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+}
+
+.amc-DButton--glass:hover {
+  border-color: color-mix(in srgb, var(--amc-db-accent) 45%, transparent);
+  background-color: color-mix(in srgb, var(--amc-db-bg) 82%, transparent);
+  color: var(--amc-db-accent-text);
+}
+
+.amc-DButton--glass:active {
+  background-color: color-mix(in srgb, var(--amc-db-accent) 10%, var(--amc-db-bg));
+  transform: scale(.97);
+}
+
+/* ================= 4. outlineDraw: hairline box, accent border draws itself on hover ================= */
+
+.amc-DButton--outlineDraw {
+  border-color: color-mix(in srgb, var(--amc-db-fg) 24%, transparent);
+  border-radius: 0;
+  color: var(--amc-db-fg);
+  letter-spacing: .02em;
+}
+
+.amc-DButton--outlineDraw::before,
+.amc-DButton--outlineDraw::after {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  inline-size: 0;
+  block-size: 0;
+  border: 2px solid transparent;
+  pointer-events: none;
+}
+
+.amc-DButton--outlineDraw::before {
+  inset-block-start: -1px;
+  inset-inline-start: -1px;
+}
+
+.amc-DButton--outlineDraw::after {
+  inset-block-end: -1px;
+  inset-inline-end: -1px;
+}
+
+.amc-DButton--outlineDraw:hover,
+.amc-DButton--outlineDraw:focus-visible { color: var(--amc-db-accent-text); }
+
+.amc-DButton--outlineDraw:hover::before,
+.amc-DButton--outlineDraw:focus-visible::before,
+.amc-DButton--outlineDraw:hover::after,
+.amc-DButton--outlineDraw:focus-visible::after {
+  inline-size: calc(100% + 2px);
+  block-size: calc(100% + 2px);
+}
+
+.amc-DButton--outlineDraw:hover::before,
+.amc-DButton--outlineDraw:focus-visible::before {
+  border-block-start-color: var(--amc-db-accent);
+  border-inline-end-color: var(--amc-db-accent);
+  transition: inline-size .2s ease-out, block-size .2s ease-out .2s;
+}
+
+.amc-DButton--outlineDraw:hover::after,
+.amc-DButton--outlineDraw:focus-visible::after {
+  border-block-end-color: var(--amc-db-accent);
+  border-inline-start-color: var(--amc-db-accent);
+  transition: border-color 0s .4s, inline-size .2s ease-out .4s, block-size .2s ease-out .6s;
+}
+
+.amc-DButton--outlineDraw:active {
+  background-color: color-mix(in srgb, var(--amc-db-accent) 10%, transparent);
+  transform: scale(.98);
+}
+
+/* ================= 5. pillArrow: high-contrast pill, accent arrow disc slides ================= */
+
+.amc-DButton--pillArrow {
+  gap: .75em;
+  padding-inline: var(--amc-db-pad) .3125rem;
+  border-radius: 999px;
+  background-color: var(--amc-db-fg);
+  color: var(--amc-db-bg);
+}
+
+.amc-DButton--pillArrow .amc-DButton-arrow {
+  display: inline-flex;
+  inline-size: calc(var(--amc-db-h) - .625rem);
+  block-size: calc(var(--amc-db-h) - .625rem);
+  border-radius: 50%;
+  background-color: var(--amc-db-accent);
+  color: var(--amc-db-on-accent);
+}
+
+.amc-DButton--pillArrow:hover { background-color: color-mix(in srgb, var(--amc-db-fg) 86%, var(--amc-db-accent)); }
+.amc-DButton--pillArrow:hover .amc-DButton-arrow,
+.amc-DButton--pillArrow:focus-visible .amc-DButton-arrow { transform: translateX(.25rem); }
+.amc-DButton--pillArrow:dir(rtl):hover .amc-DButton-arrow,
+.amc-DButton--pillArrow:dir(rtl):focus-visible .amc-DButton-arrow { transform: translateX(-.25rem); }
+.amc-DButton--pillArrow:active { transform: scale(.97); }
+
+/* ================= 6. iconCircle: outlined pill led by a filled icon disc ================= */
+
+.amc-DButton--iconCircle {
+  gap: .625em;
+  padding-inline: .25rem var(--amc-db-pad);
+  border-color: var(--amc-db-line);
+  border-radius: 999px;
+  background-color: var(--amc-db-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-db-fg) 10%, transparent);
+  color: var(--amc-db-fg);
+}
+
+.amc-DButton--iconCircle .amc-DButton-icon {
+  display: inline-flex;
+  inline-size: calc(var(--amc-db-h) - .5rem - 2px);
+  block-size: calc(var(--amc-db-h) - .5rem - 2px);
+  border-radius: 50%;
+  background-color: var(--amc-db-accent);
+  color: var(--amc-db-on-accent);
+}
+
+.amc-DButton--iconCircle:hover {
+  border-color: color-mix(in srgb, var(--amc-db-accent) 45%, transparent);
+  background-color: color-mix(in srgb, var(--amc-db-accent) 7%, var(--amc-db-bg));
+}
+
+.amc-DButton--iconCircle:hover .amc-DButton-icon,
+.amc-DButton--iconCircle:focus-visible .amc-DButton-icon { transform: rotate(-12deg) scale(1.08); }
+
+.amc-DButton--iconCircle:active { transform: scale(.97); }
+
+/* ================= 7. press3d: solid key with a ledge that sinks when pressed ================= */
+
+.amc-DButton--press3d {
+  --amc-db-ledge: .25rem;
+  margin-block-end: var(--amc-db-ledge);
+  border-color: color-mix(in srgb, var(--amc-db-accent) 80%, var(--amc-db-shade));
+  background-color: var(--amc-db-accent);
+  box-shadow:
+    0 var(--amc-db-ledge) 0 color-mix(in srgb, var(--amc-db-accent) 58%, var(--amc-db-shade)),
+    0 calc(var(--amc-db-ledge) + .25rem) .5rem -.125rem color-mix(in srgb, var(--amc-db-shade) 30%, transparent);
+  color: var(--amc-db-on-accent);
+}
+
+.amc-DButton--press3d:hover {
+  box-shadow:
+    0 calc(var(--amc-db-ledge) + 1px) 0 color-mix(in srgb, var(--amc-db-accent) 58%, var(--amc-db-shade)),
+    0 calc(var(--amc-db-ledge) + .375rem) .625rem -.125rem color-mix(in srgb, var(--amc-db-shade) 30%, transparent);
+  transform: translateY(-1px);
+}
+
+.amc-DButton--press3d:active {
+  box-shadow: 0 0 0 color-mix(in srgb, var(--amc-db-accent) 58%, var(--amc-db-shade));
+  transform: translateY(var(--amc-db-ledge));
+  transition-duration: .06s;
+}
+
+/* ================= 8. shimmer: glossy accent, a light sweep runs on hover or focus ================= */
+
+.amc-DButton--shimmer {
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--amc-db-accent) 70%, var(--amc-db-shade));
+  border-radius: 999px;
+  background-image: linear-gradient(180deg,
+    color-mix(in srgb, var(--amc-db-accent) 88%, var(--amc-db-on-accent)),
+    var(--amc-db-accent) 55%,
+    color-mix(in srgb, var(--amc-db-accent) 85%, var(--amc-db-shade)));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-db-on-accent) 35%, transparent);
+  color: var(--amc-db-on-accent);
+}
+
+.amc-DButton--shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(105deg,
+    transparent 30%,
+    color-mix(in srgb, var(--amc-db-on-accent) 45%, transparent) 50%,
+    transparent 70%);
+  pointer-events: none;
+  transform: translateX(-110%);
+}
+
+.amc-DButton--shimmer:hover::after,
+.amc-DButton--shimmer:focus-visible::after { animation: amc-db-shimmer 1.4s ease-in-out infinite; }
+
+.amc-DButton--shimmer:dir(rtl):hover::after,
+.amc-DButton--shimmer:dir(rtl):focus-visible::after { animation-direction: reverse; }
+
+.amc-DButton--shimmer:active { transform: scale(.97); }
+
+@keyframes amc-db-shimmer {
+  0% { transform: translateX(-110%); }
+  60%, 100% { transform: translateX(110%); }
+}
+
+/* ================= 9. underline: text link with a growing underline and nudging arrow ================= */
+
+.amc-DButton--underline {
+  gap: .375em;
+  padding-inline: .125rem;
+  border-radius: calc(var(--amc-db-radius) * .5);
+  color: var(--amc-db-accent-text);
+}
+
+.amc-DButton--underline .amc-DButton-label::before,
+.amc-DButton--underline .amc-DButton-label::after {
+  content: "";
+  position: absolute;
+  inset-block-end: .3em;
+  inset-inline-start: 0;
+  block-size: 1px;
+  background-color: currentColor;
+}
+
+.amc-DButton--underline .amc-DButton-label::before {
+  inset-inline-end: 0;
+  opacity: .35;
+}
+
+.amc-DButton--underline .amc-DButton-label::after {
+  inline-size: 0;
+  block-size: 2px;
+  transition: inline-size .25s ease;
+}
+
+.amc-DButton--underline .amc-DButton-arrow { display: inline-flex; }
+
+.amc-DButton--underline:hover .amc-DButton-label::after,
+.amc-DButton--underline:focus-visible .amc-DButton-label::after { inline-size: 100%; }
+
+.amc-DButton--underline:hover .amc-DButton-arrow,
+.amc-DButton--underline:focus-visible .amc-DButton-arrow { transform: translateX(.1875rem); }
+
+.amc-DButton--underline:dir(rtl):hover .amc-DButton-arrow,
+.amc-DButton--underline:dir(rtl):focus-visible .amc-DButton-arrow { transform: translateX(-.1875rem); }
+
+.amc-DButton--underline:active { color: var(--amc-db-fg); }
+
+/* ================= 10. ghostGlow: accent hairline pill that glows on hover ================= */
+
+.amc-DButton--ghostGlow {
+  border-color: color-mix(in srgb, var(--amc-db-accent) 55%, transparent);
+  border-radius: 999px;
+  color: var(--amc-db-accent-text);
+}
+
+.amc-DButton--ghostGlow:hover,
+.amc-DButton--ghostGlow:focus-visible {
+  border-color: var(--amc-db-accent);
+  background-color: color-mix(in srgb, var(--amc-db-accent) 9%, transparent);
+  box-shadow:
+    0 0 0 .25rem color-mix(in srgb, var(--amc-db-accent) 14%, transparent),
+    0 0 1.5rem color-mix(in srgb, var(--amc-db-accent) 45%, transparent);
+}
+
+.amc-DButton--ghostGlow:active {
+  background-color: color-mix(in srgb, var(--amc-db-accent) 18%, transparent);
+  box-shadow: 0 0 0 .125rem color-mix(in srgb, var(--amc-db-accent) 20%, transparent);
+  transform: scale(.97);
+}
+
+/* ================= 11. splitIcon: label and a darker icon segment behind a divider ================= */
+
+.amc-DButton--splitIcon {
+  align-items: stretch;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+  background-color: var(--amc-db-accent);
+  color: var(--amc-db-on-accent);
+}
+
+.amc-DButton--splitIcon .amc-DButton-label {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--amc-db-pad);
+}
+
+.amc-DButton--splitIcon .amc-DButton-icon {
+  display: inline-flex;
+  order: 2;
+  min-inline-size: var(--amc-db-h);
+  padding-inline: .5rem;
+  box-sizing: border-box;
+  border-inline-start: 1px solid color-mix(in srgb, var(--amc-db-on-accent) 30%, transparent);
+  background-color: color-mix(in srgb, var(--amc-db-shade) 16%, transparent);
+}
+
+.amc-DButton--splitIcon .amc-DButton-icon > * { transition: transform .2s ease; }
+
+.amc-DButton--splitIcon:hover { background-color: color-mix(in srgb, var(--amc-db-accent) 90%, var(--amc-db-shade)); }
+.amc-DButton--splitIcon:hover .amc-DButton-icon { background-color: color-mix(in srgb, var(--amc-db-shade) 26%, transparent); }
+.amc-DButton--splitIcon:hover .amc-DButton-icon > *,
+.amc-DButton--splitIcon:focus-visible .amc-DButton-icon > * { transform: translateY(1px) scale(1.12); }
+.amc-DButton--splitIcon:active { transform: scale(.97); }
+
+/* ================= 12. neonBorder: gradient ring that rotates on hover or focus ================= */
+
+.amc-DButton--neonBorder {
+  --amc-db-angle: 0deg;
+  border: 2px solid transparent;
+  border-radius: calc(var(--amc-db-radius) * 1.5);
+  background:
+    linear-gradient(var(--amc-db-bg), var(--amc-db-bg)) padding-box,
+    conic-gradient(from var(--amc-db-angle),
+      var(--amc-db-accent),
+      color-mix(in srgb, var(--amc-db-accent) 12%, var(--amc-db-bg)) 25%,
+      var(--amc-db-info) 50%,
+      color-mix(in srgb, var(--amc-db-accent) 12%, var(--amc-db-bg)) 75%,
+      var(--amc-db-accent)) border-box;
+  box-shadow: 0 0 .75rem -.25rem color-mix(in srgb, var(--amc-db-accent) 55%, transparent);
+  color: var(--amc-db-fg);
+}
+
+.amc-DButton--neonBorder:hover,
+.amc-DButton--neonBorder:focus-visible {
+  box-shadow: 0 0 1.25rem -.125rem color-mix(in srgb, var(--amc-db-accent) 65%, transparent);
+  color: var(--amc-db-accent-text);
+  animation: amc-db-spin 2.4s linear infinite;
+}
+
+.amc-DButton--neonBorder:active { transform: scale(.97); }
+
+@keyframes amc-db-spin {
+  to { --amc-db-angle: 360deg; }
+}
+
+/* ---------- accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-DButton,
+  .amc-DButton::before,
+  .amc-DButton::after,
+  .amc-DButton-icon,
+  .amc-DButton-icon > *,
+  .amc-DButton-arrow,
+  .amc-DButton-label::after {
+    animation: none;
+    transition: none;
+  }
+
+  .amc-DButton:hover,
+  .amc-DButton:active,
+  .amc-DButton:hover .amc-DButton-icon,
+  .amc-DButton:hover .amc-DButton-icon > *,
+  .amc-DButton:hover .amc-DButton-arrow {
+    transform: none;
+  }
+
+  .amc-DButton--shimmer:hover::after,
+  .amc-DButton--shimmer:focus-visible::after {
+    background-color: color-mix(in srgb, var(--amc-db-on-accent) 14%, transparent);
+    background-image: none;
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .amc-DButton { border: 1px solid ButtonText; }
+  .amc-DButton:focus-visible { outline-color: Highlight; }
+  .amc-DButton--underline .amc-DButton-label::before,
+  .amc-DButton--underline .amc-DButton-label::after { background-color: LinkText; }
+}

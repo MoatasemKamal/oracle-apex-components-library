@@ -1,0 +1,5 @@
+{if ?LINK_URL/}<a class="amc-DButton amc-DButton--#STYLE#{if ?SIZE/} amc-DButton--#SIZE#{endif/}" href="#LINK_URL#">{else/}<button class="amc-DButton amc-DButton--#STYLE#{if ?SIZE/} amc-DButton--#SIZE#{endif/}" type="button">{endif/}
+  {if ?ICON/}<span class="amc-DButton-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{else/}<span class="amc-DButton-icon amc-DButton-icon--auto" aria-hidden="true"><span class="amc-DButton-chevron"></span></span>{endif/}
+  <span class="amc-DButton-label">#LABEL#</span>
+  <span class="amc-DButton-arrow" aria-hidden="true"><span class="amc-DButton-chevron"></span></span>
+{if ?LINK_URL/}</a>{else/}</button>{endif/}
