@@ -20,7 +20,8 @@ const SKILL_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".
 // App-wide kits packaged as Static Application Files (each is optional; only existing kits build).
 const KITS = [
   { dir: "motion-kit", folder: "amc-motion-kit", title: "Motion Kit", files: ["amc-motion-kit.css", "amc-motion-kit.js"] },
-  { dir: "message-kit", folder: "amc-message-kit", title: "Message Kit", files: ["amc-message-kit.css", "amc-message-kit.js"] }
+  { dir: "message-kit", folder: "amc-message-kit", title: "Message Kit", files: ["amc-message-kit.css", "amc-message-kit.js"] },
+  { dir: "theme-kit", folder: "amc-theme-kit", title: "Theme Kit", files: ["amc-theme-kit.css", "amc-theme-kit.js"] }
 ].filter((k) => fs.existsSync(path.join(SKILL_ROOT, k.dir, k.files[0])));
 const check = process.argv.includes("--check");
 const outputs = new Map();
