@@ -1,0 +1,11 @@
+<article class="amc-NBento-tile{if ?LINK_URL/} amc-NBento-tile--link{endif/} {case STATE/}{when success/}amc-NBento-tile--success{when warning/}amc-NBento-tile--warning{when danger/}amc-NBento-tile--danger{when info/}amc-NBento-tile--info{otherwise/}amc-NBento-tile--neutral{endcase/}">
+  <span class="amc-NBento-fx" aria-hidden="true"></span>
+  {if ?ICON/}<span class="amc-NBento-icon" aria-hidden="true"><span class="amc-NBento-glyph fa #ICON#"></span></span>{endif/}
+  <div class="amc-NBento-body">
+    {if ?EYEBROW/}<p class="amc-NBento-eyebrow">#EYEBROW#</p>{endif/}
+    <h3 class="amc-NBento-title">{if ?LINK_URL/}<a class="amc-NBento-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+    {if ?DESCRIPTION/}<div class="amc-NBento-more"><p class="amc-NBento-desc">#DESCRIPTION#</p></div>{endif/}
+  </div>
+  {if ?VALUE/}<p class="amc-NBento-figure"><span class="amc-NBento-value">#VALUE#</span>{if ?VALUE_LABEL/} <span class="amc-NBento-valueLabel">#VALUE_LABEL#</span>{endif/}</p>{endif/}
+  {if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-NBento-cta" aria-hidden="true"><span class="amc-NBento-ctaText">#LINK_LABEL#</span><span class="amc-NBento-arrow fa fa-arrow-right"></span></span>{endif/}{endif/}
+</article>

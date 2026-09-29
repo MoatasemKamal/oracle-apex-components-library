@@ -1,0 +1,593 @@
+{
+  "samples": [
+    {
+      "title": "Spotlight Glow · sales launchpad",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "spotlightGlow",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Sales Dashboard",
+          "DESCRIPTION": "Revenue, pipeline and forecast for Q3, refreshed every hour.",
+          "ICON": "fa-line-chart",
+          "EYEBROW": "Sales",
+          "VALUE": "$2.48M",
+          "VALUE_LABEL": "booked this quarter",
+          "SPAN": "large",
+          "HIGHLIGHT": "Y",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Orders",
+          "DESCRIPTION": "Create, track and ship customer orders.",
+          "ICON": "fa-shopping-cart",
+          "EYEBROW": "Operations",
+          "VALUE": "128",
+          "VALUE_LABEL": "open orders",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Customers",
+          "DESCRIPTION": "Accounts, contacts and credit limits.",
+          "ICON": "fa-users",
+          "VALUE": "3,412",
+          "VALUE_LABEL": "accounts",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Approvals",
+          "DESCRIPTION": "Discounts above 15% waiting for you.",
+          "ICON": "fa-check-square-o",
+          "VALUE": "7",
+          "VALUE_LABEL": "waiting",
+          "STATE": "warning",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Review"
+        }
+      ]
+    },
+    {
+      "title": "Beam Feature · month-end close",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "beamFeature",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Month-end Close",
+          "DESCRIPTION": "Reconcile ledgers, accrue expenses and lock September before Friday.",
+          "ICON": "fa-calendar-check-o",
+          "EYEBROW": "Finance",
+          "VALUE": "82%",
+          "VALUE_LABEL": "complete",
+          "SPAN": "large",
+          "HIGHLIGHT": "Y",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Continue"
+        },
+        {
+          "TITLE": "Invoices",
+          "DESCRIPTION": "Issue, send and match invoices.",
+          "ICON": "fa-file-text-o",
+          "VALUE": "46",
+          "VALUE_LABEL": "due this week",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Payments",
+          "DESCRIPTION": "Incoming and outgoing transfers.",
+          "ICON": "fa-exchange",
+          "VALUE": "$184K",
+          "VALUE_LABEL": "received",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Overdue",
+          "DESCRIPTION": "Invoices past their due date.",
+          "ICON": "fa-exclamation-triangle",
+          "VALUE": "12",
+          "VALUE_LABEL": "overdue",
+          "STATE": "danger",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Chase"
+        }
+      ]
+    },
+    {
+      "title": "Tilt Tiles · warehouse",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "tiltTiles",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Inventory",
+          "DESCRIPTION": "Stock levels across 4 warehouses.",
+          "ICON": "fa-cubes",
+          "EYEBROW": "Warehouse",
+          "VALUE": "18,240",
+          "VALUE_LABEL": "units on hand",
+          "SPAN": "large",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Inbound",
+          "DESCRIPTION": "Purchase orders arriving today.",
+          "ICON": "fa-truck",
+          "VALUE": "9",
+          "VALUE_LABEL": "deliveries",
+          "STATE": "info",
+          "SPAN": "tall",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Receive"
+        },
+        {
+          "TITLE": "Picking",
+          "DESCRIPTION": "Orders ready to pick.",
+          "ICON": "fa-hand-grab-o",
+          "VALUE": "64",
+          "VALUE_LABEL": "lines",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Returns",
+          "DESCRIPTION": "Items waiting for inspection.",
+          "ICON": "fa-undo",
+          "VALUE": "5",
+          "VALUE_LABEL": "to inspect",
+          "STATE": "warning",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Suppliers",
+          "DESCRIPTION": "Contracts, lead times and ratings.",
+          "ICON": "fa-building-o",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Reports",
+          "DESCRIPTION": "Stock valuation and turnover reports.",
+          "ICON": "fa-file-pdf-o",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Browse"
+        }
+      ]
+    },
+    {
+      "title": "Layered Glass · customer service",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "layeredGlass",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Service Desk",
+          "DESCRIPTION": "Open tickets across email, chat and phone.",
+          "ICON": "fa-life-ring",
+          "EYEBROW": "Support",
+          "VALUE": "214",
+          "VALUE_LABEL": "open tickets",
+          "SPAN": "large",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "SLA Breaches",
+          "DESCRIPTION": "Tickets past their response target.",
+          "ICON": "fa-clock-o",
+          "VALUE": "3",
+          "VALUE_LABEL": "breached",
+          "STATE": "danger",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Review"
+        },
+        {
+          "TITLE": "Satisfaction",
+          "DESCRIPTION": "Average CSAT, last 30 days.",
+          "ICON": "fa-smile-o",
+          "VALUE": "4.6",
+          "VALUE_LABEL": "out of 5",
+          "STATE": "success",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Knowledge Base",
+          "DESCRIPTION": "Articles agents can share with customers.",
+          "ICON": "fa-book",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Browse"
+        }
+      ]
+    },
+    {
+      "title": "Neo Brutal · HR self-service",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neoBrutal",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Time Off",
+          "DESCRIPTION": "Request leave and see your balance.",
+          "ICON": "fa-plane",
+          "EYEBROW": "Me",
+          "VALUE": "14.5",
+          "VALUE_LABEL": "days left",
+          "SPAN": "large",
+          "HIGHLIGHT": "Y",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Request"
+        },
+        {
+          "TITLE": "Expenses",
+          "DESCRIPTION": "Submit receipts from your last trip.",
+          "ICON": "fa-credit-card",
+          "VALUE": "$312",
+          "VALUE_LABEL": "to submit",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Payslips",
+          "DESCRIPTION": "Download your monthly payslips.",
+          "ICON": "fa-file-text-o",
+          "LINK_URL": "#",
+          "LINK_LABEL": "View"
+        },
+        {
+          "TITLE": "Approvals",
+          "DESCRIPTION": "Team requests waiting on you.",
+          "ICON": "fa-check-square-o",
+          "VALUE": "4",
+          "VALUE_LABEL": "pending",
+          "STATE": "warning",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Review"
+        }
+      ]
+    },
+    {
+      "title": "Clay · project workspace",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "clay",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Projects",
+          "DESCRIPTION": "Active projects and their health.",
+          "ICON": "fa-folder-open-o",
+          "EYEBROW": "Delivery",
+          "VALUE": "23",
+          "VALUE_LABEL": "active",
+          "SPAN": "large",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Timesheets",
+          "DESCRIPTION": "Log this week's hours.",
+          "ICON": "fa-clock-o",
+          "VALUE": "31.5 h",
+          "VALUE_LABEL": "logged",
+          "STATE": "info",
+          "SPAN": "tall",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Log"
+        },
+        {
+          "TITLE": "Tasks",
+          "DESCRIPTION": "Assigned to you.",
+          "ICON": "fa-tasks",
+          "VALUE": "12",
+          "VALUE_LABEL": "open",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Risks",
+          "DESCRIPTION": "Raised in the last sprint.",
+          "ICON": "fa-exclamation-circle",
+          "VALUE": "2",
+          "VALUE_LABEL": "high",
+          "STATE": "danger",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Documents",
+          "DESCRIPTION": "Specs, contracts and minutes.",
+          "ICON": "fa-files-o",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Browse"
+        },
+        {
+          "TITLE": "Team",
+          "DESCRIPTION": "Who is working on what this week.",
+          "ICON": "fa-users",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        }
+      ]
+    },
+    {
+      "title": "Aurora Mosaic · executive home",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "auroraMosaic",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Revenue",
+          "DESCRIPTION": "Year to date, all regions.",
+          "ICON": "fa-bar-chart",
+          "EYEBROW": "Executive",
+          "VALUE": "$18.7M",
+          "VALUE_LABEL": "+12.4% vs last year",
+          "STATE": "success",
+          "SPAN": "large",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Pipeline",
+          "DESCRIPTION": "Qualified opportunities.",
+          "ICON": "fa-filter",
+          "VALUE": "$6.2M",
+          "VALUE_LABEL": "weighted",
+          "SPAN": "tall",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "New Customers",
+          "DESCRIPTION": "Signed this month.",
+          "ICON": "fa-user-plus",
+          "VALUE": "38",
+          "VALUE_LABEL": "accounts",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Churn",
+          "DESCRIPTION": "Accounts at risk.",
+          "ICON": "fa-user-times",
+          "VALUE": "5",
+          "VALUE_LABEL": "at risk",
+          "STATE": "warning",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Board Pack",
+          "DESCRIPTION": "Q3 board presentation and appendix.",
+          "ICON": "fa-briefcase",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Forecast",
+          "DESCRIPTION": "Rolling 12-month forecast.",
+          "ICON": "fa-area-chart",
+          "VALUE": "$24.1M",
+          "VALUE_LABEL": "full year",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        }
+      ]
+    },
+    {
+      "title": "Grid Pattern · admin console",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "gridPattern",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Users",
+          "DESCRIPTION": "Accounts, roles and access requests.",
+          "ICON": "fa-users",
+          "EYEBROW": "Admin",
+          "VALUE": "1,284",
+          "VALUE_LABEL": "active users",
+          "SPAN": "large",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Audit Log",
+          "DESCRIPTION": "Sign-ins and data changes.",
+          "ICON": "fa-history",
+          "VALUE": "9,812",
+          "VALUE_LABEL": "events today",
+          "SPAN": "wide",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Jobs",
+          "DESCRIPTION": "Scheduled background jobs.",
+          "ICON": "fa-cogs",
+          "VALUE": "2",
+          "VALUE_LABEL": "failed",
+          "STATE": "danger",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Inspect"
+        },
+        {
+          "TITLE": "Integrations",
+          "DESCRIPTION": "REST sources and web credentials.",
+          "ICON": "fa-plug",
+          "VALUE": "14",
+          "VALUE_LABEL": "connected",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        }
+      ]
+    },
+    {
+      "title": "Magazine · weekly business review",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "magazine",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Q3 closed 8% above plan",
+          "DESCRIPTION": "Enterprise renewals and the new partner channel carried the quarter; mid-market slowed in August.",
+          "ICON": "fa-line-chart",
+          "EYEBROW": "This week",
+          "VALUE": "$2.48M",
+          "VALUE_LABEL": "revenue",
+          "HIGHLIGHT": "Y",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Read review"
+        },
+        {
+          "TITLE": "Orders",
+          "DESCRIPTION": "Backlog is down to two days.",
+          "ICON": "fa-shopping-cart",
+          "EYEBROW": "Operations",
+          "VALUE": "128",
+          "VALUE_LABEL": "open",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Invoices",
+          "DESCRIPTION": "Collections improved after reminders.",
+          "ICON": "fa-file-text-o",
+          "EYEBROW": "Finance",
+          "VALUE": "46",
+          "VALUE_LABEL": "due",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Approvals",
+          "DESCRIPTION": "Discount requests need a decision.",
+          "ICON": "fa-check-square-o",
+          "EYEBROW": "Sales",
+          "VALUE": "7",
+          "VALUE_LABEL": "waiting",
+          "STATE": "warning",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Customers",
+          "DESCRIPTION": "Net promoter score is up four points.",
+          "ICON": "fa-users",
+          "EYEBROW": "Service",
+          "VALUE": "+4",
+          "VALUE_LABEL": "NPS",
+          "STATE": "success",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        }
+      ]
+    },
+    {
+      "title": "Expanding Tiles · order-to-cash",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "expandingTiles",
+        "ROW_HEIGHT": "standard"
+      },
+      "rows": [
+        {
+          "TITLE": "Orders",
+          "DESCRIPTION": "Create, track and ship customer orders; 12 are waiting for stock.",
+          "ICON": "fa-shopping-cart",
+          "EYEBROW": "Step 1",
+          "VALUE": "128",
+          "VALUE_LABEL": "open",
+          "HIGHLIGHT": "Y",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Invoices",
+          "DESCRIPTION": "Issue invoices for shipped orders and send them by email.",
+          "ICON": "fa-file-text-o",
+          "EYEBROW": "Step 2",
+          "VALUE": "46",
+          "VALUE_LABEL": "to issue",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Payments",
+          "DESCRIPTION": "Match incoming transfers to open invoices.",
+          "ICON": "fa-credit-card",
+          "EYEBROW": "Step 3",
+          "VALUE": "$184K",
+          "VALUE_LABEL": "received",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Collections",
+          "DESCRIPTION": "Chase overdue invoices with reminder letters.",
+          "ICON": "fa-bell-o",
+          "EYEBROW": "Step 4",
+          "VALUE": "12",
+          "VALUE_LABEL": "overdue",
+          "STATE": "danger",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open"
+        },
+        {
+          "TITLE": "Reports",
+          "DESCRIPTION": "Days sales outstanding and aging by customer.",
+          "ICON": "fa-pie-chart",
+          "EYEBROW": "Step 5",
+          "VALUE": "38 d",
+          "VALUE_LABEL": "DSO",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Analyze"
+        }
+      ]
+    }
+  ]
+}

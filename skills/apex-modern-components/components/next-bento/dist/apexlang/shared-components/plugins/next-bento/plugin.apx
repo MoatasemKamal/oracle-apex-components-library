@@ -1,0 +1,431 @@
+plugin nextBento (
+    name: Next Bento
+    staticId: AMC_NEXT_BENTO
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <article class="amc-NBento-tile{if ?LINK_URL/} amc-NBento-tile--link{endif/} {case STATE/}{when success/}amc-NBento-tile--success{when warning/}amc-NBento-tile--warning{when danger/}amc-NBento-tile--danger{when info/}amc-NBento-tile--info{otherwise/}amc-NBento-tile--neutral{endcase/}">
+              <span class="amc-NBento-fx" aria-hidden="true"></span>
+              {if ?ICON/}<span class="amc-NBento-icon" aria-hidden="true"><span class="amc-NBento-glyph fa #ICON#"></span></span>{endif/}
+              <div class="amc-NBento-body">
+                {if ?EYEBROW/}<p class="amc-NBento-eyebrow">#EYEBROW#</p>{endif/}
+                <h3 class="amc-NBento-title">{if ?LINK_URL/}<a class="amc-NBento-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+                {if ?DESCRIPTION/}<div class="amc-NBento-more"><p class="amc-NBento-desc">#DESCRIPTION#</p></div>{endif/}
+              </div>
+              {if ?VALUE/}<p class="amc-NBento-figure"><span class="amc-NBento-value">#VALUE#</span>{if ?VALUE_LABEL/} <span class="amc-NBento-valueLabel">#VALUE_LABEL#</span>{endif/}</p>{endif/}
+              {if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-NBento-cta" aria-hidden="true"><span class="amc-NBento-ctaText">#LINK_LABEL#</span><span class="amc-NBento-arrow fa fa-arrow-right"></span></span>{endif/}{endif/}
+            </article>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NBento amc-NBento--#STYLE# {case ROW_HEIGHT/}{when compact/}amc-NBento--rowCompact{when tall/}amc-NBento--rowTall{otherwise/}amc-NBento--rowStandard{endcase/}"><ul class="amc-NBento-grid">#APEX$ROWS#</ul></div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NBento-item {case SPAN/}{when wide/}amc-NBento-item--wide{when tall/}amc-NBento-item--tall{when large/}amc-NBento-item--large{otherwise/}amc-NBento-item--normal{endcase/}{if HIGHLIGHT/} amc-NBento-item--featured{endif/}">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-bento.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-bento.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row is one tile. Pick a Style, map Title (required) and any of Eyebrow, Description, Icon, Value, Value Label, State, Link URL, Link Label, Span and Featured. Span returns normal, wide, tall or large and builds the bento layout; the grid switches to two columns and then one column based on the width of the region itself, not the window. Featured returns Y for the tile the style should emphasise, such as the beam tile, the magazine cover story or the tile that is open first. Colors follow the active Universal Theme style, including dark styles, Theme Roller changes and right-to-left pages.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: spotlightGlow
+        }
+        help {
+            helpText:
+                ```
+                Bento design, tagged with its Next direction. Spotlight Glow, motion: one light follows the pointer across the whole grid and lights the nearest borders. Beam Feature, motion: a light beam travels around the Featured tile, the others stay quiet. Tilt Tiles, depth: each tile tilts toward the pointer with its icon and figure floating above the surface. Layered Glass, depth: frosted tiles float at different heights over a soft blurred color field that shifts with the pointer. Neo Brutal, bold: ink borders, hard offset shadows and flat fills. Clay, bold: soft pillowy tiles with inner and outer shadows. Aurora Mosaic, bold: tiles cut as windows from one continuous aurora gradient with film grain. Grid Pattern, bold: grid and dot patterns with oversized outline icons. Magazine, smart: editorial cover story and numbered columns when wide, two columns when medium, a numbered contents list when narrow. Expanding Tiles, smart: the hovered or focused tile grows while its siblings shrink; a vertical accordion when narrow. The pointer effects need a mouse or trackpad and stop when the user prefers reduced motion; the static design stays complete.
+                ```
+        }
+        entry spotlightGlow (
+            sequence: 10
+            display: Spotlight Glow - motion
+            return: spotlightGlow
+        )
+        entry beamFeature (
+            sequence: 20
+            display: Beam Feature - motion
+            return: beamFeature
+        )
+        entry tiltTiles (
+            sequence: 30
+            display: Tilt Tiles - depth
+            return: tiltTiles
+        )
+        entry layeredGlass (
+            sequence: 40
+            display: Layered Glass - depth
+            return: layeredGlass
+        )
+        entry neoBrutal (
+            sequence: 50
+            display: Neo Brutal - bold
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 60
+            display: Clay - bold
+            return: clay
+        )
+        entry auroraMosaic (
+            sequence: 70
+            display: Aurora Mosaic - bold
+            return: auroraMosaic
+        )
+        entry gridPattern (
+            sequence: 80
+            display: Grid Pattern - bold
+            return: gridPattern
+        )
+        entry magazine (
+            sequence: 90
+            display: Magazine - smart
+            return: magazine
+        )
+        entry expandingTiles (
+            sequence: 100
+            display: Expanding Tiles - smart
+            return: expandingTiles
+        )
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Tile heading, for example Orders or Pending Approvals. Rendered as an h3; it carries the link when Link URL is set.
+                ```
+        }
+    )
+    customAttribute EYEBROW (
+        apexlangName: eyebrow
+        attribute: 3
+        name: Eyebrow
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short line above the title, for example the module name Sales or Finance.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 4
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two sentences under the title.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-shopping-cart. Decorative; the title carries the meaning.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 6
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional figure shown large on the tile, for example 128 or $48.2K. Format it in SQL with the application NLS settings.
+                ```
+        }
+    )
+    customAttribute VALUE_LABEL (
+        apexlangName: valueLabel
+        attribute: 7
+        name: Value Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Words that explain Value, for example open orders or overdue. Also the text alternative for the State color.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 8
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional status of Value: success, warning, danger, info or neutral. Colors the figure and its marker; unknown values render as neutral. Put the meaning in Value Label as well, because color alone is not enough.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 9
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target of the whole tile. Must be a developer-controlled URL, for example apex_page.get_url with p_page => 10.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 10
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short call to action shown with an arrow, for example Open or Review. Shown only when Link URL is set; the title is the accessible link text.
+                ```
+        }
+    )
+    customAttribute SPAN (
+        apexlangName: span
+        attribute: 11
+        name: Span
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Tile size in the four-column grid: normal is 1 by 1, wide is 2 by 1, tall is 1 by 2, large is 2 by 2. Unknown values render as normal. Magazine and Expanding Tiles compose their own layout and use Featured instead.
+                ```
+        }
+    )
+    customAttribute HIGHLIGHT (
+        apexlangName: featured
+        attribute: 12
+        name: Featured
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Return Y for the tile to emphasise, N or null otherwise. Beam Feature puts the beam on it, Magazine makes it the cover story, Expanding Tiles opens it first, Neo Brutal fills it with the primary color. When no tile is featured, those styles use the first or the large tile.
+                ```
+        }
+    )
+    customAttribute ROW_HEIGHT (
+        apexlangName: rowHeight
+        attribute: 13
+        name: Row Height
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 130
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: standard
+        }
+        help {
+            helpText:
+                ```
+                Height of one grid row. Compact is about 9rem, Standard about 11rem, Tall about 14rem. Tiles grow when their content needs more room.
+                ```
+        }
+        entry compact (
+            sequence: 10
+            display: Compact
+            return: compact
+        )
+        entry standard (
+            sequence: 20
+            display: Standard
+            return: standard
+        )
+        entry tall (
+            sequence: 30
+            display: Tall
+            return: tall
+        )
+    )
+    file "amc-next-bento.css" (
+        fileName: amc-next-bento.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-bento.js" (
+        fileName: amc-next-bento.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

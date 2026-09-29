@@ -1,0 +1,190 @@
+{
+  "name": "Next Bento",
+  "apexlangName": "nextBento",
+  "staticId": "AMC_NEXT_BENTO",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["bento", "bento grid", "launchpad", "home page", "dashboard", "tiles", "feature grid", "spotlight", "border beam", "tilt", "glass", "neo brutalism", "clay", "aurora", "grid pattern", "magazine", "expanding", "next collection"],
+  "description": "Next Collection bento family: a report-driven grid of launchpad tiles (title, description, icon, optional figure, link, span) in 10 current-generation styles across the four Next directions: motion (pointer spotlight, travelling border beam), depth (pointer tilt with inner parallax, floating glass over a blurred color field), bold (neo-brutal, clay, one continuous aurora cut into tiles, oversized outline icons on grid patterns) and smart layout (container-query magazine recomposition, tiles that expand while siblings shrink). Follows the Magic UI bento-grid, magic-card, border-beam and grid-pattern patterns, rebuilt as plain CSS on Universal Theme variables so every style follows the active theme style.",
+  "helpText": "Each query row is one tile. Pick a Style, map Title (required) and any of Eyebrow, Description, Icon, Value, Value Label, State, Link URL, Link Label, Span and Featured. Span returns normal, wide, tall or large and builds the bento layout; the grid switches to two columns and then one column based on the width of the region itself, not the window. Featured returns Y for the tile the style should emphasise, such as the beam tile, the magazine cover story or the tile that is open first. Colors follow the active Universal Theme style, including dark styles, Theme Roller changes and right-to-left pages.",
+  "source": { "url": "https://magicui.design/docs/components/bento-grid", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-bento.css", "files/amc-next-bento.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-bento.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-bento.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "spotlightGlow",
+      "sequence": 10,
+      "helpText": "Bento design, tagged with its Next direction. Spotlight Glow, motion: one light follows the pointer across the whole grid and lights the nearest borders. Beam Feature, motion: a light beam travels around the Featured tile, the others stay quiet. Tilt Tiles, depth: each tile tilts toward the pointer with its icon and figure floating above the surface. Layered Glass, depth: frosted tiles float at different heights over a soft blurred color field that shifts with the pointer. Neo Brutal, bold: ink borders, hard offset shadows and flat fills. Clay, bold: soft pillowy tiles with inner and outer shadows. Aurora Mosaic, bold: tiles cut as windows from one continuous aurora gradient with film grain. Grid Pattern, bold: grid and dot patterns with oversized outline icons. Magazine, smart: editorial cover story and numbered columns when wide, two columns when medium, a numbered contents list when narrow. Expanding Tiles, smart: the hovered or focused tile grows while its siblings shrink; a vertical accordion when narrow. The pointer effects need a mouse or trackpad and stop when the user prefers reduced motion; the static design stays complete.",
+      "entries": [
+        { "name": "spotlightGlow", "display": "Spotlight Glow - motion", "return": "spotlightGlow", "sequence": 10 },
+        { "name": "beamFeature", "display": "Beam Feature - motion", "return": "beamFeature", "sequence": 20 },
+        { "name": "tiltTiles", "display": "Tilt Tiles - depth", "return": "tiltTiles", "sequence": 30 },
+        { "name": "layeredGlass", "display": "Layered Glass - depth", "return": "layeredGlass", "sequence": 40 },
+        { "name": "neoBrutal", "display": "Neo Brutal - bold", "return": "neoBrutal", "sequence": 50 },
+        { "name": "clay", "display": "Clay - bold", "return": "clay", "sequence": 60 },
+        { "name": "auroraMosaic", "display": "Aurora Mosaic - bold", "return": "auroraMosaic", "sequence": 70 },
+        { "name": "gridPattern", "display": "Grid Pattern - bold", "return": "gridPattern", "sequence": 80 },
+        { "name": "magazine", "display": "Magazine - smart", "return": "magazine", "sequence": 90 },
+        { "name": "expandingTiles", "display": "Expanding Tiles - smart", "return": "expandingTiles", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Tile heading, for example Orders or Pending Approvals. Rendered as an h3; it carries the link when Link URL is set."
+    },
+    {
+      "staticId": "EYEBROW",
+      "apexlangName": "eyebrow",
+      "attribute": 3,
+      "name": "Eyebrow",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional short line above the title, for example the module name Sales or Finance."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 4,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "One or two sentences under the title."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Font APEX icon class, for example fa-shopping-cart. Decorative; the title carries the meaning."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 6,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional figure shown large on the tile, for example 128 or $48.2K. Format it in SQL with the application NLS settings."
+    },
+    {
+      "staticId": "VALUE_LABEL",
+      "apexlangName": "valueLabel",
+      "attribute": 7,
+      "name": "Value Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Words that explain Value, for example open orders or overdue. Also the text alternative for the State color."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 8,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Optional status of Value: success, warning, danger, info or neutral. Colors the figure and its marker; unknown values render as neutral. Put the meaning in Value Label as well, because color alone is not enough."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 9,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Target of the whole tile. Must be a developer-controlled URL, for example apex_page.get_url with p_page => 10."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 10,
+      "name": "Link Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Short call to action shown with an arrow, for example Open or Review. Shown only when Link URL is set; the title is the accessible link text."
+    },
+    {
+      "staticId": "SPAN",
+      "apexlangName": "span",
+      "attribute": 11,
+      "name": "Span",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "Tile size in the four-column grid: normal is 1 by 1, wide is 2 by 1, tall is 1 by 2, large is 2 by 2. Unknown values render as normal. Magazine and Expanding Tiles compose their own layout and use Featured instead."
+    },
+    {
+      "staticId": "HIGHLIGHT",
+      "apexlangName": "featured",
+      "attribute": 12,
+      "name": "Featured",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 120,
+      "helpText": "Return Y for the tile to emphasise, N or null otherwise. Beam Feature puts the beam on it, Magazine makes it the cover story, Expanding Tiles opens it first, Neo Brutal fills it with the primary color. When no tile is featured, those styles use the first or the large tile."
+    },
+    {
+      "staticId": "ROW_HEIGHT",
+      "apexlangName": "rowHeight",
+      "attribute": 13,
+      "name": "Row Height",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "standard",
+      "sequence": 130,
+      "helpText": "Height of one grid row. Compact is about 9rem, Standard about 11rem, Tall about 14rem. Tiles grow when their content needs more room.",
+      "entries": [
+        { "name": "compact", "display": "Compact", "return": "compact", "sequence": 10 },
+        { "name": "standard", "display": "Standard", "return": "standard", "sequence": 20 },
+        { "name": "tall", "display": "Tall", "return": "tall", "sequence": 30 }
+      ]
+    }
+  ]
+}

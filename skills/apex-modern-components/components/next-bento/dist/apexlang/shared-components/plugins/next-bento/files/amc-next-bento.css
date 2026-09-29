@@ -1,0 +1,1389 @@
+/* APEX Modern Components - Next Bento (Next Collection)
+ * Bento layout, pointer spotlight, border beam and grid pattern adapted from Magic UI
+ * "bento-grid", "magic-card", "border-beam" and "grid-pattern"
+ * (MIT License, (c) Magic UI, https://magicui.design), rebuilt as plain CSS on
+ * Universal Theme variables. Pointer positions come from amc-next-bento.js, which
+ * only writes parsed numbers into --amc-mx / --amc-my / --amc-rx / --amc-ry.
+ * Every style is complete without JavaScript and without motion. */
+
+@property --amc-nb-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --amc-nb-open {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* ------------------------------------------------------------------ tokens */
+
+.amc-NBento {
+  --amc-nb-bg: var(--ut-component-background-color, #fff);
+  --amc-nb-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-nb-fg: var(--ut-component-text-default-color, #262626);
+  --amc-nb-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-nb-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nb-accent: var(--ut-palette-primary, #056ac8);
+  --amc-nb-on-accent: var(--ut-palette-primary-contrast, #fff);
+  --amc-nb-focus: var(--ut-focus-outline-color, #056ac8);
+  --amc-nb-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .06));
+  --amc-nb-shade: var(--amc-shadow-color, rgba(0, 0, 0, .28));
+  --amc-nb-shade-solid: var(--amc-shadow-ink, rgba(0, 0, 0, 1));
+  --amc-nb-radius: max(.875rem, calc(var(--ut-component-border-radius, .5rem) * 2));
+  --amc-nb-row: 11rem;
+  --amc-nb-gap: 1rem;
+  --amc-nb-ease: cubic-bezier(.2, .8, .2, 1);
+  /* Analogous hues of the theme primary (fallback: primary shades) */
+  --amc-nb-a2: color-mix(in srgb, var(--amc-nb-accent) 70%, var(--amc-nb-fg));
+  --amc-nb-a3: color-mix(in srgb, var(--amc-nb-accent) 60%, var(--amc-nb-bg));
+  --amc-nb-a4: color-mix(in srgb, var(--amc-nb-accent) 80%, var(--amc-nb-fg));
+
+  position: relative;
+  container: amc-nbento / inline-size;
+  color: var(--amc-nb-fg);
+}
+
+@supports (color: oklch(from red l c h)) {
+  .amc-NBento {
+    --amc-nb-a2: oklch(from var(--amc-nb-accent) l c calc(h + 55));
+    --amc-nb-a3: oklch(from var(--amc-nb-accent) l c calc(h - 45));
+    --amc-nb-a4: oklch(from var(--amc-nb-accent) l calc(c * .9) calc(h + 115));
+  }
+}
+
+.amc-NBento--rowCompact { --amc-nb-row: 9rem; }
+.amc-NBento--rowTall { --amc-nb-row: 14rem; }
+
+.amc-NBento-tile--success { --amc-nb-state: var(--ut-palette-success, #278701); }
+.amc-NBento-tile--warning { --amc-nb-state: var(--ut-palette-warning, #fbce4a); }
+.amc-NBento-tile--danger { --amc-nb-state: var(--ut-palette-danger, #cb1100); }
+.amc-NBento-tile--info { --amc-nb-state: var(--ut-palette-info, #0076df); }
+
+/* -------------------------------------------------------------------- grid */
+
+.amc-NBento-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(var(--amc-nb-row), auto);
+  grid-auto-flow: row dense;
+  gap: var(--amc-nb-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NBento-item {
+  display: flex;
+  min-inline-size: 0;
+  margin: 0;
+  container: amc-nbtile / inline-size;
+}
+
+.amc-NBento-item--wide { grid-column: span 2; }
+.amc-NBento-item--tall { grid-row: span 2; }
+.amc-NBento-item--large { grid-column: span 2; grid-row: span 2; }
+
+@container amc-nbento (width < 48rem) {
+  .amc-NBento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .amc-NBento-item--large { grid-row: span 1; }
+}
+
+@container amc-nbento (width < 30rem) {
+  .amc-NBento-grid { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+  .amc-NBento-item--wide,
+  .amc-NBento-item--tall,
+  .amc-NBento-item--large { grid-column: auto; grid-row: auto; }
+  .amc-NBento-tile { min-block-size: calc(var(--amc-nb-row) * .8); }
+}
+
+/* -------------------------------------------------------------------- tile */
+
+.amc-NBento-tile {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "icon cta"
+    ". ."
+    "figure figure"
+    "body body";
+  gap: .25rem .75rem;
+  min-inline-size: 0;
+  padding: 1.25rem;
+  border-radius: var(--amc-nb-radius);
+  color: var(--amc-nb-fg);
+}
+
+.amc-NBento-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.amc-NBento-icon {
+  grid-area: icon;
+  display: inline-grid;
+  place-items: center;
+  justify-self: start;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: calc(var(--amc-nb-radius) * .6);
+  background: color-mix(in srgb, var(--amc-nb-accent) 12%, transparent);
+  color: var(--amc-nb-accent);
+  font-size: 1.25rem;
+}
+
+.amc-NBento-glyph { line-height: 1; }
+
+.amc-NBento-body {
+  grid-area: body;
+  display: grid;
+  align-content: end;
+  gap: .25rem;
+  min-inline-size: 0;
+}
+
+.amc-NBento-eyebrow {
+  margin: 0;
+  color: var(--amc-nb-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  unicode-bidi: isolate;
+}
+
+.amc-NBento-title {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  unicode-bidi: isolate;
+}
+
+.amc-NBento-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Whole tile is the click target */
+.amc-NBento-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.amc-NBento-link:focus-visible { outline: none; }
+
+.amc-NBento-tile--link:focus-within {
+  outline: 2px solid var(--amc-nb-focus);
+  outline-offset: 3px;
+}
+
+.amc-NBento-more { display: grid; }
+
+.amc-NBento-desc {
+  max-inline-size: 38rem;
+  margin: 0;
+  color: var(--amc-nb-muted);
+  font-size: .875rem;
+  line-height: 1.45;
+}
+
+.amc-NBento-figure {
+  grid-area: figure;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem .5rem;
+  margin: 0 0 .25rem;
+}
+
+.amc-NBento-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+
+.amc-NBento-valueLabel {
+  color: var(--amc-nb-muted);
+  font-size: .8125rem;
+  font-weight: 500;
+  unicode-bidi: isolate;
+}
+
+/* State: dot + tinted label, the label text carries the meaning */
+.amc-NBento-tile--success .amc-NBento-valueLabel,
+.amc-NBento-tile--warning .amc-NBento-valueLabel,
+.amc-NBento-tile--danger .amc-NBento-valueLabel,
+.amc-NBento-tile--info .amc-NBento-valueLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-nb-state) 16%, transparent);
+  color: inherit;
+  font-weight: 600;
+}
+
+.amc-NBento-tile--success .amc-NBento-valueLabel::before,
+.amc-NBento-tile--warning .amc-NBento-valueLabel::before,
+.amc-NBento-tile--danger .amc-NBento-valueLabel::before,
+.amc-NBento-tile--info .amc-NBento-valueLabel::before {
+  content: "";
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background: var(--amc-nb-state);
+}
+
+.amc-NBento-cta {
+  grid-area: cta;
+  display: inline-flex;
+  align-items: center;
+  align-self: start;
+  gap: .375rem;
+  color: var(--amc-nb-muted);
+  font-size: .8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.amc-NBento-arrow {
+  font-size: .75rem;
+  transition: transform .3s var(--amc-nb-ease);
+}
+
+[dir="rtl"] .amc-NBento-arrow { scale: -1 1; }
+
+.amc-NBento-tile--link:hover .amc-NBento-arrow,
+.amc-NBento-tile--link:focus-within .amc-NBento-arrow { transform: translateX(.25rem); }
+
+[dir="rtl"] .amc-NBento-tile--link:hover .amc-NBento-arrow,
+[dir="rtl"] .amc-NBento-tile--link:focus-within .amc-NBento-arrow { transform: translateX(-.25rem); }
+
+/* Wider tiles show a bigger figure */
+@container amc-nbtile (width >= 22rem) {
+  .amc-NBento-value { font-size: 2.75rem; }
+  .amc-NBento-title { font-size: 1.1875rem; }
+}
+
+@container amc-nbtile (width < 13rem) {
+  .amc-NBento-tile { padding: 1rem; }
+  .amc-NBento-ctaText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+}
+
+/* =================================================== 1. spotlightGlow · motion
+ * One light for the whole grid: every tile gets the pointer position relative to
+ * itself, so neighbours light up along the edges nearest the pointer. */
+
+.amc-NBento--spotlightGlow .amc-NBento-tile {
+  overflow: hidden;
+  border: 1px solid var(--amc-nb-line);
+  background:
+    radial-gradient(90% 70% at 50% -10%, color-mix(in srgb, var(--amc-nb-accent) 11%, transparent), transparent 70%),
+    var(--amc-nb-bg);
+  box-shadow: var(--amc-nb-shadow);
+}
+
+/* rest: a light line on the top edge */
+.amc-NBento--spotlightGlow .amc-NBento-fx {
+  inset: -1px;
+  background:
+    linear-gradient(90deg, transparent, color-mix(in srgb, var(--amc-nb-accent) 70%, transparent), transparent)
+    50% 0 / 70% 1px no-repeat;
+}
+
+.amc-NBento--spotlightGlow .amc-NBento-fx::before,
+.amc-NBento--spotlightGlow .amc-NBento-fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+
+.amc-NBento--spotlightGlow .amc-NBento-fx::before {
+  background: radial-gradient(22rem circle at var(--amc-mx, 50%) var(--amc-my, 0%), color-mix(in srgb, var(--amc-nb-accent) 22%, transparent), transparent 70%);
+}
+
+.amc-NBento--spotlightGlow .amc-NBento-fx::after {
+  padding: 1.5px;
+  background: radial-gradient(20rem circle at var(--amc-mx, 50%) var(--amc-my, 0%), var(--amc-nb-accent), color-mix(in srgb, var(--amc-nb-accent) 25%, transparent) 45%, transparent 75%);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+}
+
+.amc-NBento--spotlightGlow.amc-is-lit .amc-NBento-fx::before,
+.amc-NBento--spotlightGlow.amc-is-lit .amc-NBento-fx::after,
+.amc-NBento--spotlightGlow .amc-NBento-tile:focus-within .amc-NBento-fx::before,
+.amc-NBento--spotlightGlow .amc-NBento-tile:focus-within .amc-NBento-fx::after { opacity: 1; }
+
+.amc-NBento--spotlightGlow .amc-NBento-icon {
+  border: 1px solid color-mix(in srgb, var(--amc-nb-accent) 35%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--amc-nb-accent) 20%, transparent), color-mix(in srgb, var(--amc-nb-accent) 4%, transparent));
+  box-shadow: 0 .5rem 1.5rem -.5rem color-mix(in srgb, var(--amc-nb-accent) 70%, transparent);
+}
+
+.amc-NBento--spotlightGlow .amc-NBento-value {
+  background: linear-gradient(180deg, var(--amc-nb-fg) 30%, color-mix(in srgb, var(--amc-nb-fg) 45%, transparent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.amc-NBento--spotlightGlow .amc-NBento-item--featured .amc-NBento-tile {
+  border-color: color-mix(in srgb, var(--amc-nb-accent) 40%, var(--amc-nb-line));
+  background:
+    radial-gradient(80% 90% at 50% -20%, color-mix(in srgb, var(--amc-nb-accent) 24%, transparent), transparent 70%),
+    var(--amc-nb-bg);
+}
+
+.amc-NBento--spotlightGlow .amc-NBento-tile--link:hover .amc-NBento-cta,
+.amc-NBento--spotlightGlow .amc-NBento-tile--link:focus-within .amc-NBento-cta { color: var(--amc-nb-accent); }
+
+/* ===================================================== 2. beamFeature · motion
+ * A light beam travels around the featured tile (conic-gradient on a registered
+ * angle, masked to the border). Other tiles stay quiet with a shine on hover. */
+
+.amc-NBento--beamFeature .amc-NBento-tile {
+  overflow: hidden;
+  border: 1px solid var(--amc-nb-line);
+  background: var(--amc-nb-bg);
+  box-shadow: var(--amc-nb-shadow);
+  transition: border-color .3s ease;
+}
+
+.amc-NBento--beamFeature .amc-NBento-icon {
+  border: 1px solid var(--amc-nb-line);
+  background: transparent;
+  color: var(--amc-nb-fg);
+}
+
+/* quiet tiles: shine sweep on hover / focus */
+.amc-NBento--beamFeature .amc-NBento-fx {
+  background: linear-gradient(105deg, transparent 35%, color-mix(in srgb, var(--amc-nb-accent) 14%, transparent) 50%, transparent 65%) 150% 0 / 250% 100% no-repeat;
+  transition: background-position .9s var(--amc-nb-ease);
+}
+
+.amc-NBento--beamFeature .amc-NBento-tile--link:hover,
+.amc-NBento--beamFeature .amc-NBento-tile--link:focus-within { border-color: color-mix(in srgb, var(--amc-nb-accent) 45%, var(--amc-nb-line)); }
+
+.amc-NBento--beamFeature .amc-NBento-tile--link:hover .amc-NBento-fx,
+.amc-NBento--beamFeature .amc-NBento-tile--link:focus-within .amc-NBento-fx { background-position: -50% 0; }
+
+/* the featured tile (Featured = Y, else the large tile) */
+.amc-NBento--beamFeature .amc-NBento-item--featured .amc-NBento-tile,
+.amc-NBento--beamFeature .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item--large .amc-NBento-tile {
+  border-color: color-mix(in srgb, var(--amc-nb-accent) 25%, var(--amc-nb-line));
+  background:
+    radial-gradient(70% 60% at 100% 0%, color-mix(in srgb, var(--amc-nb-accent) 20%, transparent), transparent 70%),
+    radial-gradient(60% 60% at 0% 100%, color-mix(in srgb, var(--amc-nb-a2) 14%, transparent), transparent 70%),
+    var(--amc-nb-bg);
+  box-shadow: 0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--amc-nb-accent) 55%, transparent);
+}
+
+.amc-NBento--beamFeature .amc-NBento-item--featured .amc-NBento-fx,
+.amc-NBento--beamFeature .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item--large .amc-NBento-fx {
+  inset: -1px;
+  padding: 2px;
+  background: conic-gradient(from var(--amc-nb-angle),
+    transparent 0 8%, color-mix(in srgb, var(--amc-nb-a2) 80%, transparent) 20%, transparent 24%,
+    transparent 58%, color-mix(in srgb, var(--amc-nb-accent) 35%, transparent) 72%, var(--amc-nb-accent) 86%,
+    color-mix(in srgb, var(--amc-nb-accent) 40%, var(--amc-nb-bg)) 89%, transparent 91%);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+  animation: amc-nb-beam 6s linear infinite;
+  transition: none;
+}
+
+.amc-NBento--beamFeature .amc-NBento-item--featured .amc-NBento-icon,
+.amc-NBento--beamFeature .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item--large .amc-NBento-icon {
+  border: 0;
+  background: linear-gradient(135deg, var(--amc-nb-accent), var(--amc-nb-a2));
+  box-shadow: 0 .75rem 1.5rem -.5rem color-mix(in srgb, var(--amc-nb-accent) 65%, transparent);
+  color: var(--amc-nb-on-accent);
+}
+
+.amc-NBento--beamFeature .amc-NBento-item--featured .amc-NBento-value,
+.amc-NBento--beamFeature .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item--large .amc-NBento-value {
+  background: linear-gradient(90deg, var(--amc-nb-accent), var(--amc-nb-a2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 3.25rem;
+}
+
+@keyframes amc-nb-beam {
+  to { --amc-nb-angle: 360deg; }
+}
+
+/* ======================================================== 3. tiltTiles · depth
+ * Tiles are slabs with a visible edge. The tile tilts toward the pointer; icon,
+ * figure and text float at different depths (inner parallax). */
+
+.amc-NBento--tiltTiles .amc-NBento-item { perspective: 55rem; }
+
+.amc-NBento--tiltTiles .amc-NBento-tile {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--amc-rx, 0deg)) rotateY(var(--amc-ry, 0deg));
+  border: 1px solid var(--amc-nb-line);
+  background: linear-gradient(165deg, var(--amc-nb-bg) 40%, color-mix(in srgb, var(--amc-nb-accent) 8%, var(--amc-nb-bg)));
+  box-shadow:
+    0 .375rem 0 -.0625rem color-mix(in srgb, var(--amc-nb-accent) 22%, var(--amc-nb-bg)),
+    0 .375rem 0 0 color-mix(in srgb, var(--amc-nb-accent) 30%, var(--amc-nb-line)),
+    0 1.75rem 2.5rem -1.25rem var(--amc-nb-shade);
+  transition: transform .6s var(--amc-nb-ease), box-shadow .4s ease;
+}
+
+.amc-NBento--tiltTiles .amc-NBento-tile.amc-is-tilting { transition: transform .12s linear, box-shadow .4s ease; }
+
+.amc-NBento--tiltTiles .amc-NBento-fx {
+  background: radial-gradient(26rem circle at var(--amc-mx, 20%) var(--amc-my, 0%), color-mix(in srgb, var(--amc-nb-accent) 16%, transparent), transparent 60%);
+  transform: translateZ(1px);
+}
+
+.amc-NBento--tiltTiles .amc-NBento-icon {
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--amc-nb-accent) 75%, var(--amc-nb-bg)), var(--amc-nb-accent));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nb-on-accent) 45%, transparent),
+    0 1rem 1.25rem -.625rem color-mix(in srgb, var(--amc-nb-accent) 70%, transparent);
+  color: var(--amc-nb-on-accent);
+  font-size: 1.375rem;
+  transform: translateZ(3rem);
+}
+
+.amc-NBento--tiltTiles .amc-NBento-figure { transform: translateZ(2.25rem); }
+.amc-NBento--tiltTiles .amc-NBento-body { transform: translateZ(1.25rem); }
+.amc-NBento--tiltTiles .amc-NBento-cta { transform: translateZ(2rem); }
+
+.amc-NBento--tiltTiles .amc-NBento-value { text-shadow: 0 .5rem 1rem color-mix(in srgb, var(--amc-nb-accent) 25%, transparent); }
+
+.amc-NBento--tiltTiles .amc-NBento-tile--link:focus-within {
+  --amc-rx: 5deg;
+  --amc-ry: -7deg;
+}
+
+.amc-NBento--tiltTiles .amc-NBento-tile--link:hover,
+.amc-NBento--tiltTiles .amc-NBento-tile--link:focus-within {
+  box-shadow:
+    0 .375rem 0 -.0625rem color-mix(in srgb, var(--amc-nb-accent) 22%, var(--amc-nb-bg)),
+    0 .375rem 0 0 color-mix(in srgb, var(--amc-nb-accent) 45%, var(--amc-nb-line)),
+    0 2.5rem 3.5rem -1.5rem var(--amc-nb-shade);
+}
+
+/* ===================================================== 4. layeredGlass · depth
+ * Frosted tiles float at three heights over a blurred color field. The field and
+ * the tiles shift by different amounts with the pointer (layered parallax). */
+
+.amc-NBento--layeredGlass {
+  overflow: clip;
+  padding: 1.5rem;
+  border-radius: calc(var(--amc-nb-radius) + .5rem);
+  background: color-mix(in srgb, var(--amc-nb-accent) 6%, var(--amc-nb-body));
+  isolation: isolate;
+}
+
+.amc-NBento--layeredGlass::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background:
+    radial-gradient(30% 38% at 22% 28%, color-mix(in srgb, var(--amc-nb-accent) 70%, transparent), transparent 70%),
+    radial-gradient(28% 36% at 78% 22%, color-mix(in srgb, var(--amc-nb-a2) 60%, transparent), transparent 70%),
+    radial-gradient(34% 40% at 62% 82%, color-mix(in srgb, var(--amc-nb-a3) 55%, transparent), transparent 70%),
+    radial-gradient(24% 30% at 18% 86%, color-mix(in srgb, var(--amc-nb-a4) 40%, transparent), transparent 70%);
+  filter: blur(1.5rem);
+  translate: calc(var(--amc-mx, 0) * -3rem) calc(var(--amc-my, 0) * -3rem);
+  animation: amc-nb-drift 22s ease-in-out infinite alternate;
+  transition: translate .8s var(--amc-nb-ease);
+}
+
+@keyframes amc-nb-drift {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(14deg) scale(1.12); }
+}
+
+.amc-NBento--layeredGlass .amc-NBento-grid { gap: 1.25rem; }
+
+.amc-NBento--layeredGlass .amc-NBento-item { --amc-nb-z: 2; }
+.amc-NBento--layeredGlass .amc-NBento-item:nth-child(3n + 1) { --amc-nb-z: 3; }
+.amc-NBento--layeredGlass .amc-NBento-item:nth-child(3n + 2) { --amc-nb-z: 1; }
+
+.amc-NBento--layeredGlass .amc-NBento-tile {
+  border: 1px solid color-mix(in srgb, var(--amc-nb-bg) 65%, transparent);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--amc-nb-bg) 74%, transparent), color-mix(in srgb, var(--amc-nb-bg) 48%, transparent));
+  -webkit-backdrop-filter: blur(1.125rem) saturate(1.6);
+  backdrop-filter: blur(1.125rem) saturate(1.6);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nb-bg) 90%, transparent),
+    0 calc(var(--amc-nb-z) * .5rem) calc(var(--amc-nb-z) * 1.25rem) calc(var(--amc-nb-z) * -.375rem) var(--amc-nb-shade);
+  transform:
+    translate(calc(var(--amc-mx, 0) * var(--amc-nb-z) * .5rem), calc(var(--amc-my, 0) * var(--amc-nb-z) * .5rem))
+    translateY(calc(var(--amc-nb-z) * -.25rem));
+  transition: transform .6s var(--amc-nb-ease), box-shadow .4s ease;
+}
+
+.amc-NBento--layeredGlass .amc-NBento-tile--link:hover,
+.amc-NBento--layeredGlass .amc-NBento-tile--link:focus-within {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nb-bg) 90%, transparent),
+    0 2.25rem 3.5rem -1.25rem var(--amc-nb-shade);
+  transform:
+    translate(calc(var(--amc-mx, 0) * var(--amc-nb-z) * .5rem), calc(var(--amc-my, 0) * var(--amc-nb-z) * .5rem))
+    translateY(-1.25rem);
+}
+
+.amc-NBento--layeredGlass .amc-NBento-icon {
+  border: 1px solid color-mix(in srgb, var(--amc-nb-on-accent) 30%, transparent);
+  background: linear-gradient(145deg, var(--amc-nb-accent), var(--amc-nb-a2));
+  box-shadow: 0 .75rem 1.25rem -.5rem color-mix(in srgb, var(--amc-nb-accent) 60%, transparent);
+  color: var(--amc-nb-on-accent);
+}
+
+.amc-NBento--layeredGlass .amc-NBento-cta {
+  padding: .25rem .625rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nb-bg) 70%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-nb-bg) 55%, transparent);
+  color: var(--amc-nb-fg);
+}
+
+@container amc-nbento (width < 30rem) {
+  .amc-NBento--layeredGlass { padding: 1rem; }
+}
+
+/* ========================================================== 5. neoBrutal · bold
+ * Ink borders, hard offset shadows, flat fills, sticker labels. Ink is the theme
+ * text color, so it inverts in dark styles. The shadow follows the reading side. */
+
+.amc-NBento--neoBrutal {
+  --amc-nb-ink: var(--amc-nb-fg);
+  --amc-nb-off: .375rem;
+  --amc-nb-x: 1;
+}
+
+[dir="rtl"] .amc-NBento--neoBrutal { --amc-nb-x: -1; }
+
+.amc-NBento--neoBrutal .amc-NBento-grid { gap: 1.25rem; }
+
+.amc-NBento--neoBrutal .amc-NBento-tile {
+  --amc-nb-tile-muted: color-mix(in srgb, currentColor 78%, transparent);
+  margin-block-end: var(--amc-nb-off);
+  margin-inline-end: var(--amc-nb-off);
+  border: 3px solid var(--amc-nb-ink);
+  border-radius: .5rem;
+  background: var(--amc-nb-bg);
+  box-shadow: calc(var(--amc-nb-off) * var(--amc-nb-x)) var(--amc-nb-off) 0 var(--amc-nb-ink);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.amc-NBento--neoBrutal .amc-NBento-item:nth-child(4n + 2) .amc-NBento-tile { background: color-mix(in srgb, var(--amc-nb-a2) 24%, var(--amc-nb-bg)); }
+.amc-NBento--neoBrutal .amc-NBento-item:nth-child(4n + 3) .amc-NBento-tile { background: color-mix(in srgb, var(--amc-nb-a3) 20%, var(--amc-nb-bg)); }
+
+.amc-NBento--neoBrutal .amc-NBento-item--featured .amc-NBento-tile,
+.amc-NBento--neoBrutal .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
+  background: var(--amc-nb-accent);
+  color: var(--amc-nb-on-accent);
+}
+
+.amc-NBento--neoBrutal .amc-NBento-tile--link:hover,
+.amc-NBento--neoBrutal .amc-NBento-tile--link:focus-within {
+  transform: translate(calc(-.1875rem * var(--amc-nb-x)), -.1875rem);
+  box-shadow: calc((var(--amc-nb-off) + .1875rem) * var(--amc-nb-x)) calc(var(--amc-nb-off) + .1875rem) 0 var(--amc-nb-ink);
+}
+
+.amc-NBento--neoBrutal .amc-NBento-tile--link:active {
+  transform: translate(calc(var(--amc-nb-off) * var(--amc-nb-x)), var(--amc-nb-off));
+  box-shadow: 0 0 0 var(--amc-nb-ink);
+}
+
+.amc-NBento--neoBrutal .amc-NBento-tile--link:focus-within { outline-offset: 5px; }
+
+.amc-NBento--neoBrutal .amc-NBento-icon {
+  inline-size: 3rem;
+  block-size: 3rem;
+  border: 3px solid var(--amc-nb-ink);
+  border-radius: .375rem;
+  background: var(--amc-nb-bg);
+  box-shadow: calc(.1875rem * var(--amc-nb-x)) .1875rem 0 var(--amc-nb-ink);
+  color: var(--amc-nb-fg);
+  rotate: -4deg;
+}
+
+.amc-NBento--neoBrutal .amc-NBento-eyebrow {
+  justify-self: start;
+  margin-block-end: .25rem;
+  padding: .125rem .5rem;
+  border: 2px solid var(--amc-nb-ink);
+  background: var(--amc-nb-bg);
+  color: var(--amc-nb-fg);
+  font-weight: 800;
+  rotate: -2deg;
+}
+
+.amc-NBento--neoBrutal .amc-NBento-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+@container amc-nbtile (width >= 22rem) {
+  .amc-NBento--neoBrutal .amc-NBento-title { font-size: 1.75rem; line-height: 1.1; }
+}
+
+.amc-NBento--neoBrutal .amc-NBento-desc,
+.amc-NBento--neoBrutal .amc-NBento-valueLabel { color: var(--amc-nb-tile-muted); font-weight: 500; }
+
+.amc-NBento--neoBrutal .amc-NBento-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+}
+
+.amc-NBento--neoBrutal .amc-NBento-tile--success .amc-NBento-valueLabel,
+.amc-NBento--neoBrutal .amc-NBento-tile--warning .amc-NBento-valueLabel,
+.amc-NBento--neoBrutal .amc-NBento-tile--danger .amc-NBento-valueLabel,
+.amc-NBento--neoBrutal .amc-NBento-tile--info .amc-NBento-valueLabel {
+  border: 2px solid var(--amc-nb-ink);
+  border-radius: .25rem;
+  background: var(--amc-nb-bg);
+  color: var(--amc-nb-fg);
+  font-weight: 800;
+}
+
+.amc-NBento--neoBrutal .amc-NBento-valueLabel::before { border: 2px solid var(--amc-nb-ink); }
+
+.amc-NBento--neoBrutal .amc-NBento-cta {
+  padding: .25rem .625rem;
+  border: 2px solid var(--amc-nb-ink);
+  border-radius: 999px;
+  background: var(--amc-nb-bg);
+  color: var(--amc-nb-fg);
+  font-weight: 800;
+}
+
+/* ================================================================ 6. clay · bold
+ * Pillowy tiles: soft outer shadow plus inner light and dark shadows, mixed from
+ * the palette and the body background; puffy icon spheres and pressed figures. */
+
+.amc-NBento--clay {
+  --amc-nb-clay-dark: color-mix(in srgb, var(--amc-nb-body) 74%, var(--amc-nb-shade-solid));
+  --amc-nb-clay-light: color-mix(in srgb, var(--amc-nb-bg) 85%, transparent);
+}
+
+.amc-NBento--clay .amc-NBento-grid { gap: 1.5rem; }
+
+.amc-NBento--clay .amc-NBento-item { --amc-nb-tint: var(--amc-nb-accent); }
+.amc-NBento--clay .amc-NBento-item:nth-child(4n + 2) { --amc-nb-tint: var(--amc-nb-a2); }
+.amc-NBento--clay .amc-NBento-item:nth-child(4n + 3) { --amc-nb-tint: var(--amc-nb-a3); }
+.amc-NBento--clay .amc-NBento-item:nth-child(4n + 4) { --amc-nb-tint: var(--amc-nb-a4); }
+
+.amc-NBento--clay .amc-NBento-tile {
+  border-radius: max(1.75rem, var(--amc-nb-radius));
+  background: color-mix(in srgb, var(--amc-nb-tint) 13%, var(--amc-nb-bg));
+  box-shadow:
+    .75rem .875rem 1.75rem color-mix(in srgb, var(--amc-nb-tint) 22%, var(--amc-nb-clay-dark)),
+    inset -.5rem -.625rem 1rem color-mix(in srgb, var(--amc-nb-tint) 20%, transparent),
+    inset .5rem .5rem 1rem var(--amc-nb-clay-light);
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .35s ease;
+}
+
+.amc-NBento--clay .amc-NBento-tile--link:hover,
+.amc-NBento--clay .amc-NBento-tile--link:focus-within {
+  transform: translateY(-.25rem) scale(1.015);
+  box-shadow:
+    1rem 1.25rem 2.25rem color-mix(in srgb, var(--amc-nb-tint) 28%, var(--amc-nb-clay-dark)),
+    inset -.5rem -.625rem 1rem color-mix(in srgb, var(--amc-nb-tint) 22%, transparent),
+    inset .5rem .5rem 1rem var(--amc-nb-clay-light);
+}
+
+.amc-NBento--clay .amc-NBento-tile--link:active { transform: scale(.98); }
+
+.amc-NBento--clay .amc-NBento-icon {
+  inline-size: 3.5rem;
+  block-size: 3.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--amc-nb-tint) 45%, var(--amc-nb-bg)), var(--amc-nb-tint) 70%);
+  box-shadow:
+    inset -.375rem -.375rem .75rem color-mix(in srgb, var(--amc-nb-tint) 70%, var(--amc-nb-shade-solid)),
+    inset .25rem .25rem .5rem color-mix(in srgb, var(--amc-nb-bg) 55%, transparent),
+    .375rem .5rem 1rem color-mix(in srgb, var(--amc-nb-tint) 40%, transparent);
+  color: var(--amc-nb-on-accent);
+  font-size: 1.375rem;
+}
+
+.amc-NBento--clay .amc-NBento-figure {
+  justify-self: start;
+  padding: .5rem .875rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-nb-tint) 8%, var(--amc-nb-bg));
+  box-shadow:
+    inset .25rem .25rem .5rem color-mix(in srgb, var(--amc-nb-tint) 22%, var(--amc-nb-clay-dark)),
+    inset -.25rem -.25rem .5rem var(--amc-nb-clay-light);
+}
+
+.amc-NBento--clay .amc-NBento-value { font-size: 1.75rem; font-weight: 800; }
+
+@container amc-nbtile (width >= 22rem) {
+  .amc-NBento--clay .amc-NBento-value { font-size: 2.25rem; }
+}
+
+.amc-NBento--clay .amc-NBento-title { font-weight: 750; }
+
+.amc-NBento--clay .amc-NBento-cta {
+  padding: .375rem .75rem;
+  border-radius: 999px;
+  background: var(--amc-nb-tint);
+  box-shadow:
+    inset -.125rem -.1875rem .375rem color-mix(in srgb, var(--amc-nb-tint) 60%, var(--amc-nb-shade-solid)),
+    inset .125rem .125rem .25rem color-mix(in srgb, var(--amc-nb-bg) 45%, transparent),
+    .25rem .375rem .75rem color-mix(in srgb, var(--amc-nb-tint) 35%, transparent);
+  color: var(--amc-nb-on-accent);
+}
+
+/* ======================================================= 7. auroraMosaic · bold
+ * One aurora painted once per grid: every tile paints a grid-sized aurora layer
+ * that is positioned against the grid (tile and item stay unpositioned) and is
+ * clipped to the tile with clip-path, so the tiles read as windows cut from one
+ * continuous gradient. Film grain from an SVG feTurbulence data URI. */
+
+.amc-NBento--auroraMosaic .amc-NBento-grid { gap: .625rem; }
+
+.amc-NBento--auroraMosaic .amc-NBento-item {
+  container-type: normal;
+  border-radius: var(--amc-nb-radius);
+}
+
+.amc-NBento--auroraMosaic .amc-NBento-tile {
+  --amc-nb-tile-muted: color-mix(in srgb, var(--amc-nb-on-accent) 82%, transparent);
+  position: static;
+  clip-path: inset(0 round var(--amc-nb-radius));
+  background: color-mix(in srgb, var(--amc-nb-accent) 60%, var(--amc-nb-bg));
+  color: var(--amc-nb-on-accent);
+}
+
+.amc-NBento--auroraMosaic .amc-NBento-fx {
+  border-radius: 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px 160px,
+    radial-gradient(40% 55% at 12% 18%, var(--amc-nb-a2), transparent 70%) 0 0 / 100% 100% no-repeat,
+    radial-gradient(45% 60% at 88% 12%, var(--amc-nb-a4), transparent 70%) 0 0 / 100% 100% no-repeat,
+    radial-gradient(50% 70% at 70% 95%, var(--amc-nb-a3), transparent 70%) 0 0 / 100% 100% no-repeat,
+    linear-gradient(125deg, var(--amc-nb-accent), var(--amc-nb-a2) 45%, var(--amc-nb-a3)) 0 0 / 180% 180%;
+  background-blend-mode: soft-light, normal, normal, normal, normal;
+  animation: amc-nb-aurora 16s ease-in-out infinite alternate;
+}
+
+@keyframes amc-nb-aurora {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0% 0%; }
+  to { background-position: 0 0, 0 0, 0 0, 0 0, 100% 100%; }
+}
+
+/* soft shade at the bottom of each window keeps text readable */
+.amc-NBento--auroraMosaic .amc-NBento-body,
+.amc-NBento--auroraMosaic .amc-NBento-figure,
+.amc-NBento--auroraMosaic .amc-NBento-icon,
+.amc-NBento--auroraMosaic .amc-NBento-cta { text-shadow: 0 1px .5rem color-mix(in srgb, var(--amc-nb-accent) 60%, transparent); }
+
+.amc-NBento--auroraMosaic .amc-NBento-link::after { border-radius: 0; }
+
+.amc-NBento--auroraMosaic .amc-NBento-icon {
+  border: 1px solid color-mix(in srgb, var(--amc-nb-on-accent) 40%, transparent);
+  background: color-mix(in srgb, var(--amc-nb-on-accent) 16%, transparent);
+  color: var(--amc-nb-on-accent);
+}
+
+.amc-NBento--auroraMosaic .amc-NBento-eyebrow,
+.amc-NBento--auroraMosaic .amc-NBento-desc,
+.amc-NBento--auroraMosaic .amc-NBento-valueLabel,
+.amc-NBento--auroraMosaic .amc-NBento-cta { color: var(--amc-nb-tile-muted); }
+
+.amc-NBento--auroraMosaic .amc-NBento-value { font-size: 2.5rem; font-weight: 800; letter-spacing: -.03em; }
+
+.amc-NBento--auroraMosaic .amc-NBento-tile--success .amc-NBento-valueLabel,
+.amc-NBento--auroraMosaic .amc-NBento-tile--warning .amc-NBento-valueLabel,
+.amc-NBento--auroraMosaic .amc-NBento-tile--danger .amc-NBento-valueLabel,
+.amc-NBento--auroraMosaic .amc-NBento-tile--info .amc-NBento-valueLabel {
+  background: color-mix(in srgb, var(--amc-nb-on-accent) 18%, transparent);
+  color: var(--amc-nb-on-accent);
+}
+
+.amc-NBento--auroraMosaic .amc-NBento-valueLabel::before { box-shadow: 0 0 0 2px var(--amc-nb-on-accent); }
+
+/* hover: the window brightens */
+.amc-NBento--auroraMosaic .amc-NBento-fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--amc-nb-on-accent) 14%, transparent);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+.amc-NBento--auroraMosaic .amc-NBento-tile--link:hover .amc-NBento-fx::after,
+.amc-NBento--auroraMosaic .amc-NBento-tile--link:focus-within .amc-NBento-fx::after { opacity: 1; }
+
+/* clip-path hides the tile outline, so the item draws the focus ring */
+.amc-NBento--auroraMosaic .amc-NBento-tile--link:focus-within { outline: none; }
+
+.amc-NBento--auroraMosaic .amc-NBento-item:focus-within {
+  outline: 2px solid var(--amc-nb-focus);
+  outline-offset: 3px;
+}
+
+/* ======================================================== 8. gridPattern · bold
+ * Magic UI grid / dot patterns with a few lit cells, faded by a radial mask, and
+ * oversized outline icons bleeding off the corner. */
+
+.amc-NBento--gridPattern .amc-NBento-tile {
+  --amc-nb-cell: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--amc-nb-line);
+  background: var(--amc-nb-bg);
+  grid-template-areas:
+    "figure figure"
+    ". ."
+    "body cta";
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.amc-NBento--gridPattern .amc-NBento-fx {
+  background:
+    linear-gradient(to right, color-mix(in srgb, var(--amc-nb-fg) 10%, transparent) 1px, transparent 1px) -1px -1px / var(--amc-nb-cell) var(--amc-nb-cell),
+    linear-gradient(to bottom, color-mix(in srgb, var(--amc-nb-fg) 10%, transparent) 1px, transparent 1px) -1px -1px / var(--amc-nb-cell) var(--amc-nb-cell);
+  -webkit-mask-image: radial-gradient(110% 90% at 100% 0%, black 25%, transparent 75%);
+  mask-image: radial-gradient(110% 90% at 100% 0%, black 25%, transparent 75%);
+}
+
+[dir="rtl"] .amc-NBento--gridPattern .amc-NBento-fx {
+  -webkit-mask-image: radial-gradient(110% 90% at 0% 0%, black 25%, transparent 75%);
+  mask-image: radial-gradient(110% 90% at 0% 0%, black 25%, transparent 75%);
+}
+
+.amc-NBento--gridPattern .amc-NBento-item:nth-child(even) .amc-NBento-fx {
+  background: radial-gradient(circle, color-mix(in srgb, var(--amc-nb-fg) 22%, transparent) 1px, transparent 1.5px) 0 0 / 1rem 1rem;
+}
+
+/* lit cells */
+.amc-NBento--gridPattern .amc-NBento-fx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(color-mix(in srgb, var(--amc-nb-accent) 22%, transparent) 0 0) calc(100% - var(--amc-nb-cell) * 2) calc(var(--amc-nb-cell) * 1) / calc(var(--amc-nb-cell) - 1px) calc(var(--amc-nb-cell) - 1px) no-repeat,
+    linear-gradient(color-mix(in srgb, var(--amc-nb-accent) 14%, transparent) 0 0) calc(100% - var(--amc-nb-cell) * 5) calc(var(--amc-nb-cell) * 3) / calc(var(--amc-nb-cell) - 1px) calc(var(--amc-nb-cell) - 1px) no-repeat,
+    linear-gradient(color-mix(in srgb, var(--amc-nb-accent) 30%, transparent) 0 0) calc(100% - var(--amc-nb-cell) * 1) calc(var(--amc-nb-cell) * 4) / calc(var(--amc-nb-cell) - 1px) calc(var(--amc-nb-cell) - 1px) no-repeat;
+  animation: amc-nb-cells 4s ease-in-out infinite alternate;
+}
+
+.amc-NBento--gridPattern .amc-NBento-item:nth-child(even) .amc-NBento-fx::before { content: none; }
+
+@keyframes amc-nb-cells {
+  from { opacity: .35; }
+  to { opacity: 1; }
+}
+
+.amc-NBento--gridPattern .amc-NBento-icon {
+  position: absolute;
+  inset-block-start: -1.25rem;
+  inset-inline-end: -1rem;
+  z-index: -1;
+  inline-size: auto;
+  block-size: auto;
+  border-radius: 0;
+  background: none;
+  color: transparent;
+  font-size: 7.5rem;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--amc-nb-accent) 65%, transparent);
+  transition: color .4s ease, transform .5s var(--amc-nb-ease);
+}
+
+@container amc-nbtile (width < 18rem) {
+  .amc-NBento--gridPattern .amc-NBento-icon { font-size: 5rem; inset-block-start: -.75rem; inset-inline-end: -.75rem; -webkit-text-stroke-width: 1px; }
+}
+
+@container amc-nbtile (width >= 22rem) {
+  .amc-NBento--gridPattern .amc-NBento-icon { font-size: 11rem; inset-block-start: -2rem; }
+  .amc-NBento--gridPattern .amc-NBento-value { font-size: 3.75rem; }
+}
+
+.amc-NBento--gridPattern .amc-NBento-tile--link:hover .amc-NBento-icon,
+.amc-NBento--gridPattern .amc-NBento-tile--link:focus-within .amc-NBento-icon {
+  color: color-mix(in srgb, var(--amc-nb-accent) 14%, transparent);
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.amc-NBento--gridPattern .amc-NBento-value { font-size: 2.75rem; font-weight: 800; letter-spacing: -.035em; }
+
+.amc-NBento--gridPattern .amc-NBento-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  color: var(--amc-nb-accent);
+}
+
+.amc-NBento--gridPattern .amc-NBento-eyebrow::before {
+  content: "";
+  inline-size: .5rem;
+  block-size: .5rem;
+  background: var(--amc-nb-accent);
+}
+
+.amc-NBento--gridPattern .amc-NBento-title { font-size: 1.1875rem; font-weight: 750; }
+
+.amc-NBento--gridPattern .amc-NBento-cta {
+  align-self: end;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  justify-content: center;
+  border: 1px solid var(--amc-nb-line);
+  border-radius: 50%;
+  background: var(--amc-nb-bg);
+  color: var(--amc-nb-fg);
+}
+
+.amc-NBento--gridPattern .amc-NBento-ctaText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+
+.amc-NBento--gridPattern .amc-NBento-tile--link:hover .amc-NBento-cta,
+.amc-NBento--gridPattern .amc-NBento-tile--link:focus-within .amc-NBento-cta {
+  border-color: var(--amc-nb-accent);
+  background: var(--amc-nb-accent);
+  color: var(--amc-nb-on-accent);
+}
+
+/* ============================================================ 9. magazine · smart
+ * Editorial composition that changes with the region width (container queries):
+ * wide = cover story + numbered columns with rules, medium = cover across the top
+ * + two columns, narrow = numbered table of contents. Card chrome is dropped. */
+
+.amc-NBento--magazine .amc-NBento-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  gap: 1.75rem 1.5rem;
+  counter-reset: amc-nb-story;
+}
+
+.amc-NBento--magazine .amc-NBento-item {
+  grid-column: auto;
+  grid-row: auto;
+  counter-increment: amc-nb-story;
+}
+
+.amc-NBento--magazine .amc-NBento-tile {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas:
+    "index icon"
+    "body body"
+    "figure figure"
+    "cta cta";
+  gap: .5rem .75rem;
+  padding: .875rem 0 0;
+  border-block-start: 1px solid var(--amc-nb-fg);
+  border-radius: 0;
+}
+
+.amc-NBento--magazine .amc-NBento-tile::before {
+  content: counter(amc-nb-story, decimal-leading-zero);
+  content: counter(amc-nb-story, decimal-leading-zero) / "";
+  grid-area: index;
+  color: var(--amc-nb-accent);
+  font-size: .8125rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .06em;
+}
+
+.amc-NBento--magazine .amc-NBento-icon {
+  justify-self: end;
+  inline-size: auto;
+  block-size: auto;
+  background: none;
+  color: var(--amc-nb-muted);
+  font-size: 1rem;
+}
+
+.amc-NBento--magazine .amc-NBento-body { align-content: start; }
+
+.amc-NBento--magazine .amc-NBento-eyebrow {
+  color: var(--amc-nb-accent);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.amc-NBento--magazine .amc-NBento-title {
+  font-size: 1.125rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+}
+
+.amc-NBento--magazine .amc-NBento-figure {
+  margin: 0;
+  padding-block-start: .5rem;
+  border-block-start: 1px dotted var(--amc-nb-line);
+}
+
+.amc-NBento--magazine .amc-NBento-value { font-size: 1.5rem; }
+
+.amc-NBento--magazine .amc-NBento-cta {
+  align-self: end;
+  color: var(--amc-nb-fg);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .3em;
+  text-decoration-color: var(--amc-nb-accent);
+}
+
+.amc-NBento--magazine .amc-NBento-tile--link:focus-within { outline-offset: 6px; }
+
+.amc-NBento--magazine .amc-NBento-tile--link:hover .amc-NBento-title,
+.amc-NBento--magazine .amc-NBento-tile--link:focus-within .amc-NBento-title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .2em;
+  text-decoration-color: var(--amc-nb-accent);
+}
+
+/* cover story: Featured, else the first tile */
+.amc-NBento--magazine .amc-NBento-item--featured,
+.amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-tile,
+.amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
+  padding-block-start: 1.25rem;
+  border-block-start-width: .375rem;
+}
+
+.amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-title,
+.amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-title {
+  font-size: clamp(1.75rem, 5.5cqi, 3.25rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.035em;
+}
+
+.amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-desc,
+.amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-desc {
+  font-size: 1.0625rem;
+  color: var(--amc-nb-fg);
+}
+
+.amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-value,
+.amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-value {
+  color: var(--amc-nb-accent);
+  font-size: clamp(2.5rem, 8cqi, 5rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-icon,
+.amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-icon {
+  color: var(--amc-nb-accent);
+  font-size: 1.5rem;
+}
+
+/* medium: cover across the top, composed horizontally */
+@container amc-nbento (width < 48rem) {
+  .amc-NBento--magazine .amc-NBento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .amc-NBento--magazine .amc-NBento-item--featured,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    order: -1;
+  }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-tile,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
+    grid-template-columns: auto minmax(0, 1.6fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "index index icon"
+      "body body figure"
+      "cta cta figure";
+  }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-figure,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-figure {
+    align-self: end;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 0 0 0;
+    padding-inline-start: 1rem;
+    border-block-start: 0;
+    border-inline-start: 1px solid var(--amc-nb-line);
+  }
+}
+
+/* narrow: numbered table of contents */
+@container amc-nbento (width < 30rem) {
+  .amc-NBento--magazine .amc-NBento-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+
+  .amc-NBento--magazine .amc-NBento-tile,
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-tile,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
+    min-block-size: 0;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "index body" "index figure";
+    align-items: start;
+    padding-block: .875rem;
+    border-block-start-width: 1px;
+  }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-tile,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
+    grid-template-areas: "index body" "index figure";
+    padding-block-end: 1.25rem;
+    border-block-start-width: .375rem;
+  }
+
+  .amc-NBento--magazine .amc-NBento-tile::before { padding-block-start: .2em; }
+
+  .amc-NBento--magazine .amc-NBento-icon,
+  .amc-NBento--magazine .amc-NBento-cta { display: none; }
+
+  .amc-NBento--magazine .amc-NBento-figure {
+    padding: .25rem 0 0;
+    border: 0;
+  }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-figure,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-figure {
+    flex-direction: row;
+    align-items: baseline;
+    padding: .5rem 0 0;
+    border: 0;
+    text-align: start;
+  }
+
+  .amc-NBento--magazine .amc-NBento-value { font-size: 1.125rem; }
+  .amc-NBento--magazine .amc-NBento-valueLabel { font-size: .75rem; }
+
+  .amc-NBento--magazine .amc-NBento-desc {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: .8125rem;
+  }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-desc,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-desc {
+    display: block;
+    font-size: .9375rem;
+  }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-title,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-title { font-size: 1.625rem; }
+
+  .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-value,
+  .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-value { font-size: 2.25rem; }
+}
+
+/* ===================================================== 10. expandingTiles · smart
+ * Wide + pointer: a strip of panels; the hovered or focused panel grows while its
+ * siblings shrink (flex-grow driven by a registered --amc-nb-open). Nothing hovered:
+ * the Featured (else first) panel is open, so the resting frame is complete.
+ * Narrow or touch: a vertical accordion using the same open state. */
+
+.amc-NBento--expandingTiles .amc-NBento-item { --amc-nb-open: 0; transition: --amc-nb-open .6s var(--amc-nb-ease); }
+
+.amc-NBento--expandingTiles .amc-NBento-item:hover,
+.amc-NBento--expandingTiles .amc-NBento-item:focus-within,
+.amc-NBento--expandingTiles .amc-NBento-grid:not(:has(.amc-NBento-item:hover, .amc-NBento-item:focus-within)) .amc-NBento-item--featured,
+.amc-NBento--expandingTiles .amc-NBento-grid:not(:has(.amc-NBento-item--featured, .amc-NBento-item:hover, .amc-NBento-item:focus-within)) .amc-NBento-item:first-child { --amc-nb-open: 1; }
+
+.amc-NBento--expandingTiles .amc-NBento-grid {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.amc-NBento--expandingTiles .amc-NBento-tile {
+  overflow: hidden;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto;
+  grid-template-areas: "icon body figure";
+  align-items: center;
+  gap: .25rem 1rem;
+  min-block-size: 0;
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-nb-line);
+  background: var(--amc-nb-bg);
+  color: color-mix(in srgb, var(--amc-nb-on-accent) calc(var(--amc-nb-open) * 100%), var(--amc-nb-fg));
+  box-shadow: var(--amc-nb-shadow);
+}
+
+.amc-NBento--expandingTiles .amc-NBento-fx {
+  background:
+    radial-gradient(90% 80% at 100% 0%, color-mix(in srgb, var(--amc-nb-a2) 70%, transparent), transparent 70%),
+    linear-gradient(150deg, var(--amc-nb-accent), color-mix(in srgb, var(--amc-nb-accent) 70%, var(--amc-nb-a3)));
+  opacity: var(--amc-nb-open);
+}
+
+.amc-NBento--expandingTiles .amc-NBento-icon {
+  background: color-mix(in srgb, var(--amc-nb-on-accent) calc(var(--amc-nb-open) * 20%), color-mix(in srgb, var(--amc-nb-accent) calc((1 - var(--amc-nb-open)) * 12%), transparent));
+  color: inherit;
+}
+
+.amc-NBento--expandingTiles .amc-NBento-eyebrow,
+.amc-NBento--expandingTiles .amc-NBento-desc,
+.amc-NBento--expandingTiles .amc-NBento-valueLabel,
+.amc-NBento--expandingTiles .amc-NBento-cta { color: color-mix(in srgb, color-mix(in srgb, var(--amc-nb-on-accent) 82%, transparent) calc(var(--amc-nb-open) * 100%), var(--amc-nb-muted)); }
+
+.amc-NBento--expandingTiles .amc-NBento-more {
+  max-block-size: calc(var(--amc-nb-open) * 10rem);
+  overflow: hidden;
+  opacity: var(--amc-nb-open);
+}
+
+.amc-NBento--expandingTiles .amc-NBento-cta { display: none; }
+
+.amc-NBento--expandingTiles .amc-NBento-figure { margin: 0; justify-content: flex-end; }
+.amc-NBento--expandingTiles .amc-NBento-value { font-size: 1.5rem; }
+
+@media (hover: none) {
+  .amc-NBento--expandingTiles .amc-NBento-item { --amc-nb-open: 1; }
+}
+
+@container amc-nbento (width < 22rem) {
+  .amc-NBento--expandingTiles .amc-NBento-tile {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "icon figure" "body body";
+  }
+}
+
+@container amc-nbento (width >= 50rem) {
+  @media (hover: hover) {
+    .amc-NBento--expandingTiles .amc-NBento-grid {
+      flex-direction: row;
+      gap: .75rem;
+      min-block-size: calc(var(--amc-nb-row) * 2 + .75rem);
+    }
+
+    .amc-NBento--expandingTiles .amc-NBento-item {
+      flex: calc(1 + var(--amc-nb-open) * 2.4) 1 0;
+    }
+
+    .amc-NBento--expandingTiles .amc-NBento-tile {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto minmax(0, 1fr) auto auto;
+      grid-template-areas:
+        "icon cta"
+        ". ."
+        "figure figure"
+        "body body";
+      align-items: stretch;
+      padding: 1.25rem;
+    }
+
+    .amc-NBento--expandingTiles .amc-NBento-icon { inline-size: 3rem; block-size: 3rem; font-size: 1.375rem; }
+
+    .amc-NBento--expandingTiles .amc-NBento-figure { justify-content: flex-start; }
+    .amc-NBento--expandingTiles .amc-NBento-value { font-size: calc(1.75rem + var(--amc-nb-open) * 1.5rem); }
+
+    .amc-NBento--expandingTiles .amc-NBento-more {
+      max-block-size: none;
+      translate: 0 calc((1 - var(--amc-nb-open)) * 1rem);
+    }
+
+    /* keep the text measure fixed so it does not re-wrap while the panel grows */
+    .amc-NBento--expandingTiles .amc-NBento-desc { inline-size: 17rem; max-inline-size: none; }
+
+    .amc-NBento--expandingTiles .amc-NBento-cta {
+      display: inline-flex;
+      opacity: var(--amc-nb-open);
+    }
+  }
+}
+
+/* ------------------------------------------------------ reduced motion / a11y */
+
+@media (prefers-reduced-motion: reduce) {
+  /* same selectors as the animated rules, so source order wins */
+  .amc-NBento-arrow,
+  .amc-NBento--spotlightGlow .amc-NBento-fx::before,
+  .amc-NBento--spotlightGlow .amc-NBento-fx::after,
+  .amc-NBento--beamFeature .amc-NBento-tile,
+  .amc-NBento--beamFeature .amc-NBento-fx,
+  .amc-NBento--beamFeature .amc-NBento-item--featured .amc-NBento-fx,
+  .amc-NBento--beamFeature .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item--large .amc-NBento-fx,
+  .amc-NBento--tiltTiles .amc-NBento-tile,
+  .amc-NBento--tiltTiles .amc-NBento-tile.amc-is-tilting,
+  .amc-NBento--layeredGlass::before,
+  .amc-NBento--layeredGlass .amc-NBento-tile,
+  .amc-NBento--neoBrutal .amc-NBento-tile,
+  .amc-NBento--clay .amc-NBento-tile,
+  .amc-NBento--auroraMosaic .amc-NBento-fx,
+  .amc-NBento--auroraMosaic .amc-NBento-fx::after,
+  .amc-NBento--gridPattern .amc-NBento-fx::before,
+  .amc-NBento--gridPattern .amc-NBento-icon,
+  .amc-NBento--expandingTiles .amc-NBento-item {
+    animation: none;
+    transition: none;
+  }
+
+
+  /* beam becomes a static gradient border */
+  .amc-NBento--beamFeature .amc-NBento-item--featured .amc-NBento-fx,
+  .amc-NBento--beamFeature .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item--large .amc-NBento-fx {
+    background: linear-gradient(135deg, var(--amc-nb-accent), color-mix(in srgb, var(--amc-nb-a2) 60%, transparent) 50%, var(--amc-nb-accent));
+  }
+
+  /* no tilt, no parallax, no lift */
+  .amc-NBento--tiltTiles .amc-NBento-tile,
+  .amc-NBento--tiltTiles .amc-NBento-tile--link:focus-within { transform: none; }
+  .amc-NBento--layeredGlass::before { translate: none; }
+  .amc-NBento--layeredGlass .amc-NBento-tile,
+  .amc-NBento--layeredGlass .amc-NBento-tile--link:hover,
+  .amc-NBento--layeredGlass .amc-NBento-tile--link:focus-within { transform: translateY(calc(var(--amc-nb-z) * -.25rem)); }
+  .amc-NBento--clay .amc-NBento-tile--link:hover,
+  .amc-NBento--clay .amc-NBento-tile--link:focus-within,
+  .amc-NBento--clay .amc-NBento-tile--link:active,
+  .amc-NBento--neoBrutal .amc-NBento-tile--link:hover,
+  .amc-NBento--neoBrutal .amc-NBento-tile--link:focus-within,
+  .amc-NBento--neoBrutal .amc-NBento-tile--link:active { transform: none; }
+  .amc-NBento--gridPattern .amc-NBento-tile--link:hover .amc-NBento-icon,
+  .amc-NBento--gridPattern .amc-NBento-tile--link:focus-within .amc-NBento-icon { transform: none; }
+  .amc-NBento-tile--link:hover .amc-NBento-arrow,
+  .amc-NBento-tile--link:focus-within .amc-NBento-arrow,
+  [dir="rtl"] .amc-NBento-tile--link:hover .amc-NBento-arrow,
+  [dir="rtl"] .amc-NBento-tile--link:focus-within .amc-NBento-arrow { transform: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-NBento-tile { border: 1px solid CanvasText; }
+  .amc-NBento-fx { display: none; }
+  .amc-NBento--magazine .amc-NBento-tile { border-inline: 0; border-block-end: 0; }
+  .amc-NBento--auroraMosaic .amc-NBento-tile { clip-path: none; background: Canvas; color: CanvasText; }
+  .amc-NBento-value { color: CanvasText; background: none; }
+}
