@@ -1,0 +1,139 @@
+listTemplate amc-constellation-map (
+    name: AMC Constellation Map
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TConstellationMap #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-zoom-in="Zoom in" data-zoom-out="Zoom out" data-fit="Show the whole map" data-list-view="List view" data-reset="Reset brightness" data-reset-done="Brightness reset" data-hint="Drag to pan, Ctrl + scroll or pinch to zoom, arrow keys move between stars" data-here="You are here" data-recent="Used recently" data-zoom="Zoom">
+            <ul class="amc-TConstellationMap-stars">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TConstellationMap-star is-current"><a class="amc-TConstellationMap-link" href="#LINK#" aria-current="page"><span class="amc-TConstellationMap-dot" aria-hidden="true"></span><span class="amc-TConstellationMap-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TConstellationMap-name">#TEXT#</span><span class="amc-TConstellationMap-sep">, </span><span class="amc-TConstellationMap-group">#A01#</span></a><span class="amc-TConstellationMap-desc">#A02#</span></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TConstellationMap-star"><a class="amc-TConstellationMap-link" href="#LINK#"><span class="amc-TConstellationMap-dot" aria-hidden="true"></span><span class="amc-TConstellationMap-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TConstellationMap-name">#TEXT#</span><span class="amc-TConstellationMap-sep">, </span><span class="amc-TConstellationMap-group">#A01#</span></a><span class="amc-TConstellationMap-desc">#A02#</span></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-constellation-map.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-constellation-map.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Constellation
+        a02: Description
+    }
+    advanced {
+        staticId: AMC_TPL_CONSTELLATION_MAP
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a static or dynamic List region, flat lists. Put the group name in User Defined Attribute 1, for example Sales, Finance, Operations, Admin; entries with the same value form one constellation, joined by lines in list order, so keep each group's entries together. Attribute 2 is a short description shown on the label card. With JavaScript the entries become stars on a sky: star positions come from the group and entry names, so the map looks the same on every visit and after adding an entry only its constellation changes. The current page glows with a breathing halo. Pointer hover or keyboard focus on a star shows a label card with the name, group and description. Pan by dragging, zoom with Ctrl or Cmd plus the mouse wheel, a trackpad pinch, two-finger pinch on touch, the Zoom in, Zoom out and Show the whole map buttons, or the plus, minus and 0 keys while focus is on the map; clicking a constellation name zooms to it. Plain mouse wheel keeps scrolling the page. Tab and Shift+Tab, and the arrow keys, Home and End, move focus between stars in list order, and the map pans to keep the focused star in view. The List view button, a toggle with aria-pressed, switches to the plain list, and the choice is remembered in this browser. Without JavaScript the entries are a grid of links, each labelled with its group and description. Template options: Recently used stars shine brighter counts each visit to a page of the list in this browser only, localStorage key amc-tpl-constellation-map, application id and list id, with a Reset brightness button; Night sky; Tall map; Still sky; Start in list view. Under prefers-reduced-motion nothing twinkles, drifts, breathes or glides. English strings to translate are data attributes on the wrapper in the Before List Entry part: data-zoom-in Zoom in, data-zoom-out Zoom out, data-fit Show the whole map, data-list-view List view, data-reset Reset brightness, data-reset-done Brightness reset, data-hint Drag to pan, Ctrl + scroll or pinch to zoom, arrow keys move between stars, data-here You are here, data-recent Used recently, data-zoom Zoom.
+            ```
+    }
+
+    templateOption amc-constellation-map-recent (
+        name: Recently used stars shine brighter
+        sequence: 10
+        appearance {
+            cssClasses: amc-TConstellationMap--recent
+        }
+        help {
+            helpText:
+                ```text
+                Counts visits to the pages of this list in the browser's localStorage, weighted towards recent use, and makes often used stars bigger and brighter while unused ones recede. Nothing leaves the browser; the toolbar gets a Reset brightness button.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: RECENT
+        }
+    )
+
+    templateOption amc-constellation-map-night (
+        name: Night sky
+        sequence: 20
+        appearance {
+            cssClasses: amc-TConstellationMap--night
+        }
+        help {
+            helpText:
+                ```text
+                Draws the map on a deep night sky with warm stars in every theme style, for home pages that want a strong visual.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NIGHT
+        }
+    )
+
+    templateOption amc-constellation-map-tall (
+        name: Tall map
+        sequence: 30
+        appearance {
+            cssClasses: amc-TConstellationMap--tall
+        }
+        help {
+            helpText:
+                ```text
+                Makes the sky up to 80% of the window height, for a full-page app map.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TALL
+        }
+    )
+
+    templateOption amc-constellation-map-still (
+        name: Still sky
+        sequence: 40
+        appearance {
+            cssClasses: amc-TConstellationMap--still
+        }
+        help {
+            helpText:
+                ```text
+                Stops twinkling, the drifting background and the breathing halo for everyone, not only users who ask for reduced motion.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STILL
+        }
+    )
+
+    templateOption amc-constellation-map-start-list (
+        name: Start in list view
+        sequence: 50
+        appearance {
+            cssClasses: amc-TConstellationMap--startList
+        }
+        help {
+            helpText:
+                ```text
+                Shows the grouped list first; users can switch to the map with the List view button, and their choice is remembered.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: START_LIST
+        }
+    )
+)

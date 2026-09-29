@@ -1,0 +1,410 @@
+/* Constellation Map: living list template for Universal Theme. A spatial map of the app:
+   entries are stars grouped into constellations by Attribute 1, joined by lines, on a sky that
+   pans and zooms. amc-tpl-constellation-map.js adds the sky (.is-map); without it, or in list
+   view (.is-list), the entries are a grid of links, each labelled with its constellation. */
+.amc-TConstellationMap {
+  --amc-cm-bg: var(--ut-component-background-color, #fff);
+  --amc-cm-fg: var(--ut-component-text-default-color, #262626);
+  --amc-cm-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-cm-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-cm-accent: var(--ut-palette-primary, #056ac8);
+  --amc-cm-radius: var(--ut-component-border-radius, 8px);
+  --amc-cm-sky: color-mix(in srgb, var(--amc-cm-accent) 5%, var(--amc-cm-bg));
+  --amc-cm-star: var(--amc-cm-accent);
+  --amc-cm-text: var(--amc-cm-fg);
+  --amc-cm-soft: var(--amc-cm-muted);
+  --amc-cm-h: clamp(340px, 58vh, 560px);
+  color: var(--amc-cm-fg);
+}
+.amc-TConstellationMap--tall { --amc-cm-h: clamp(460px, 80vh, 900px); }
+.amc-TConstellationMap--night {
+  --amc-cm-sky: var(--amc-cm-night-sky, #0b1022);
+  --amc-cm-star: var(--amc-cm-night-star, #ffe9a8);
+  --amc-cm-text: var(--amc-cm-night-text, #eef1ff);
+  --amc-cm-soft: var(--amc-cm-night-soft, #9aa3c7);
+}
+
+/* ---------------------------------------------------------------- list (no JS, or List view) */
+.amc-TConstellationMap-stars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TConstellationMap-star {
+  min-inline-size: 0;
+  padding: 10px 12px;
+  background: var(--amc-cm-bg);
+  border: 1px solid var(--amc-cm-line);
+  border-radius: var(--amc-cm-radius);
+}
+.amc-TConstellationMap-star.is-current {
+  background: color-mix(in srgb, var(--amc-cm-accent) 9%, var(--amc-cm-bg));
+  border-color: color-mix(in srgb, var(--amc-cm-accent) 55%, transparent);
+}
+.amc-TConstellationMap-link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.amc-TConstellationMap-link:focus-visible {
+  outline: 2px solid var(--amc-cm-accent);
+  outline-offset: 3px;
+}
+.amc-TConstellationMap-dot { display: none; }
+.amc-TConstellationMap-icon { color: var(--amc-cm-accent); }
+.amc-TConstellationMap-icon:not([class*="fa-"]) { display: none; }
+.amc-TConstellationMap-name { font-weight: 600; unicode-bidi: isolate; }
+.amc-TConstellationMap-link:hover .amc-TConstellationMap-name { text-decoration: underline; }
+.amc-TConstellationMap-star.is-current .amc-TConstellationMap-name { color: var(--amc-cm-accent); }
+.amc-TConstellationMap-sep {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-TConstellationMap-sep:has(+ .amc-TConstellationMap-group:empty) { display: none; }
+.amc-TConstellationMap-group {
+  flex-basis: 100%;
+  order: -1;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--amc-cm-muted);
+}
+.amc-TConstellationMap-group:empty { display: none; }
+.amc-TConstellationMap-desc {
+  display: block;
+  margin-block-start: 4px;
+  font-size: .75rem;
+  line-height: 1.4;
+  color: var(--amc-cm-muted);
+}
+.amc-TConstellationMap-desc:empty { display: none; }
+
+/* ---------------------------------------------------------------- toolbar */
+.amc-TConstellationMap-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-block-end: 8px;
+}
+.amc-TConstellationMap-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-inline-size: 32px;
+  block-size: 32px;
+  padding: 0 8px;
+  font: inherit;
+  font-size: .8125rem;
+  color: var(--amc-cm-fg);
+  cursor: pointer;
+  background: var(--amc-cm-bg);
+  border: 1px solid var(--amc-cm-line);
+  border-radius: 999px;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.amc-TConstellationMap-btn:hover:not(:disabled) { background: color-mix(in srgb, var(--amc-cm-accent) 9%, var(--amc-cm-bg)); }
+.amc-TConstellationMap-btn:focus-visible { outline: 2px solid var(--amc-cm-accent); outline-offset: 2px; }
+.amc-TConstellationMap-btn:disabled { cursor: default; opacity: .45; }
+.amc-TConstellationMap-btn[aria-pressed="true"] {
+  color: var(--amc-cm-accent);
+  background: color-mix(in srgb, var(--amc-cm-accent) 12%, var(--amc-cm-bg));
+  border-color: color-mix(in srgb, var(--amc-cm-accent) 50%, transparent);
+}
+.amc-TConstellationMap-btn[data-action="list"] { margin-inline-start: 6px; }
+.amc-TConstellationMap-hint {
+  flex: 1 1 14rem;
+  min-inline-size: 0;
+  font-size: .75rem;
+  color: var(--amc-cm-muted);
+  text-align: end;
+}
+.amc-TConstellationMap-status { font-size: .75rem; font-weight: 600; color: var(--amc-cm-accent); }
+.amc-TConstellationMap-status:empty { display: none; }
+@media (hover: none) {
+  .amc-TConstellationMap-hint { display: none; }
+}
+
+/* ---------------------------------------------------------------- the sky */
+.amc-TConstellationMap.is-map .amc-TConstellationMap-sky {
+  position: relative;
+  overflow: hidden;
+  block-size: var(--amc-cm-h);
+  color: var(--amc-cm-text);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  background:
+    radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--amc-cm-text) 22%, transparent) 0 1px, transparent 1.5px) 0 0 / 97px 83px,
+    radial-gradient(circle at 70% 60%, color-mix(in srgb, var(--amc-cm-text) 14%, transparent) 0 .8px, transparent 1.3px) 0 0 / 61px 53px,
+    radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--amc-cm-accent) 14%, transparent), transparent 65%),
+    var(--amc-cm-sky);
+  border: 1px solid var(--amc-cm-line);
+  border-radius: calc(var(--amc-cm-radius) + 6px);
+  animation: amc-cm-drift 160s linear infinite;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-sky.is-panning { cursor: grabbing; }
+@keyframes amc-cm-drift {
+  to { background-position: 97px 83px, -61px 53px, 0 0, 0 0; }
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-layer {
+  position: absolute;
+  inset: 0 auto auto 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-sky.is-glide .amc-TConstellationMap-layer {
+  transition: transform .32s cubic-bezier(.2, .8, .2, 1);
+}
+.amc-TConstellationMap.is-list .amc-TConstellationMap-lines,
+.amc-TConstellationMap.is-list .amc-TConstellationMap-labels,
+.amc-TConstellationMap.is-list .amc-TConstellationMap-card,
+.amc-TConstellationMap.is-list .amc-TConstellationMap-hint { display: none; }
+
+.amc-TConstellationMap-lines {
+  position: absolute;
+  inset: 0 auto auto 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.amc-TConstellationMap-grid {
+  fill: none;
+  stroke: color-mix(in srgb, var(--amc-cm-text) 7%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  vector-effect: non-scaling-stroke;
+}
+.amc-TConstellationMap-grid > * { vector-effect: non-scaling-stroke; }
+.amc-TConstellationMap-line {
+  stroke: color-mix(in srgb, var(--amc-cm-star) 55%, transparent);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.amc-TConstellationMap-constellation {
+  position: absolute;
+  inset: 0 auto auto 0;
+  padding: 2px 8px;
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--amc-cm-soft);
+  cursor: zoom-in;
+  border-radius: 999px;
+  transform: translate(calc(var(--amc-cm-x) - 50%), calc(var(--amc-cm-y) - 50%)) scale(calc(1 / var(--amc-cm-s, 1)));
+  transform-origin: 50% 50%;
+}
+.amc-TConstellationMap-constellation:hover { color: var(--amc-cm-star); background: color-mix(in srgb, var(--amc-cm-star) 10%, transparent); }
+
+.amc-TConstellationMap.is-map .amc-TConstellationMap-stars {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none; /* the empty sky and constellation names stay reachable */
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star { pointer-events: auto; }
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star {
+  position: absolute;
+  inset: 0 auto auto 0;
+  inline-size: max-content;
+  max-inline-size: 150px;
+  padding: 0;
+  background: none;
+  border: 0;
+  transform: translate(calc(var(--amc-cm-x) - 50%), calc(var(--amc-cm-y) - 9px));
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-link {
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 0 4px 2px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  /* Names keep a readable screen size when the map is zoomed out (map-style labels). */
+  transform: scale(max(1, calc(.9 / var(--amc-cm-s, 1))));
+  transform-origin: 50% 9px;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-icon,
+.amc-TConstellationMap.is-map .amc-TConstellationMap-desc { display: none; }
+.amc-TConstellationMap.is-map .amc-TConstellationMap-group {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-name {
+  padding: 1px 7px;
+  font-size: .8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--amc-cm-text);
+  background: color-mix(in srgb, var(--amc-cm-sky) 78%, transparent);
+  border-radius: 6px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-link:hover .amc-TConstellationMap-name,
+.amc-TConstellationMap.is-map .amc-TConstellationMap-link:focus-visible .amc-TConstellationMap-name {
+  color: var(--amc-cm-star);
+  text-decoration: none;
+  background: color-mix(in srgb, var(--amc-cm-star) 14%, var(--amc-cm-sky));
+}
+
+/* A star: a hit area with a bright core, a soft glow and a four-point glint. */
+.amc-TConstellationMap.is-map .amc-TConstellationMap-dot {
+  position: relative;
+  display: block;
+  inline-size: 18px;
+  block-size: 18px;
+  --amc-cm-core: 7px;
+  --amc-cm-glow: 8px;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-dot::before {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  inline-size: var(--amc-cm-core);
+  block-size: var(--amc-cm-core);
+  content: "";
+  background: var(--amc-cm-star);
+  border-radius: 50%;
+  box-shadow: 0 0 var(--amc-cm-glow) calc(var(--amc-cm-glow) / 4) color-mix(in srgb, var(--amc-cm-star) 55%, transparent);
+  transform: translate(-50%, -50%);
+  animation: amc-cm-twinkle 5s ease-in-out var(--amc-cm-d, 0s) infinite;
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-dot::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, transparent 0 46%, color-mix(in srgb, var(--amc-cm-star) 70%, transparent) 50%, transparent 54%) 50% 50% / 100% 100% no-repeat,
+    linear-gradient(0deg, transparent 0 46%, color-mix(in srgb, var(--amc-cm-star) 70%, transparent) 50%, transparent 54%) 50% 50% / 100% 100% no-repeat;
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .2s ease, transform .2s ease;
+  mask: radial-gradient(circle, currentColor 0 30%, transparent 70%);
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-link:hover .amc-TConstellationMap-dot::after,
+.amc-TConstellationMap.is-map .amc-TConstellationMap-link:focus-visible .amc-TConstellationMap-dot::after,
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-dot::after,
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-shine3 .amc-TConstellationMap-dot::after {
+  opacity: 1;
+  transform: scale(1.5);
+}
+@keyframes amc-cm-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-link:focus-visible { outline-offset: 2px; }
+
+/* Current page: larger core, halo ring that breathes. */
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-dot { --amc-cm-core: 11px; --amc-cm-glow: 16px; }
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-name {
+  font-weight: 700;
+  color: var(--amc-cm-star);
+}
+.amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-link::before {
+  position: absolute;
+  inset-block-start: -9px;
+  inset-inline-start: 50%;
+  inline-size: 36px;
+  block-size: 36px;
+  margin-inline-start: -18px;
+  content: "";
+  border: 1.5px solid color-mix(in srgb, var(--amc-cm-star) 60%, transparent);
+  border-radius: 50%;
+  animation: amc-cm-halo 2.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes amc-cm-halo {
+  0% { opacity: .9; transform: scale(.55); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+/* Recently used: brighter and bigger with use; unused stars recede a little. */
+.amc-TConstellationMap--recent.is-map .amc-TConstellationMap-star:not([class*="is-shine"]):not(.is-current) .amc-TConstellationMap-dot { opacity: .6; }
+.amc-TConstellationMap--recent.is-map .amc-TConstellationMap-star.is-shine1 .amc-TConstellationMap-dot { --amc-cm-core: 8px; --amc-cm-glow: 10px; }
+.amc-TConstellationMap--recent.is-map .amc-TConstellationMap-star.is-shine2 .amc-TConstellationMap-dot { --amc-cm-core: 10px; --amc-cm-glow: 16px; }
+.amc-TConstellationMap--recent.is-map .amc-TConstellationMap-star.is-shine3 .amc-TConstellationMap-dot { --amc-cm-core: 12px; --amc-cm-glow: 24px; }
+.amc-TConstellationMap--recent.is-map .amc-TConstellationMap-star.is-shine3 .amc-TConstellationMap-name,
+.amc-TConstellationMap--recent.is-map .amc-TConstellationMap-star.is-shine2 .amc-TConstellationMap-name { font-weight: 650; }
+.amc-TConstellationMap--recent .amc-TConstellationMap-star.is-shine3:not(.is-current) {
+  border-color: color-mix(in srgb, var(--amc-cm-accent) 35%, transparent);
+}
+
+/* Label card over the sky (decorative duplicate of the link's name and description). */
+.amc-TConstellationMap-card {
+  position: absolute;
+  z-index: 2;
+  inset: 0 auto auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-sizing: border-box;
+  inline-size: max-content;
+  max-inline-size: min(260px, calc(100% - 16px));
+  padding: 8px 12px;
+  color: var(--amc-cm-fg);
+  pointer-events: none;
+  background: var(--amc-cm-bg);
+  border: 1px solid var(--amc-cm-line);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--amc-cm-fg) 40%, transparent);
+}
+.amc-TConstellationMap-card[hidden] { display: none; }
+.amc-TConstellationMap-cardName { font-size: .875rem; }
+.amc-TConstellationMap-cardMeta {
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--amc-cm-accent);
+}
+.amc-TConstellationMap-cardMeta:empty,
+.amc-TConstellationMap-cardDesc:empty { display: none; }
+.amc-TConstellationMap-cardDesc { font-size: .75rem; line-height: 1.4; color: var(--amc-cm-muted); }
+
+/* Still sky option and reduced motion: no twinkle, drift, halo or glide. */
+.amc-TConstellationMap--still.is-map .amc-TConstellationMap-sky,
+.amc-TConstellationMap--still.is-map .amc-TConstellationMap-dot::before,
+.amc-TConstellationMap--still.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-link::before { animation: none; }
+.amc-TConstellationMap--still.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-link::before { opacity: .8; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-sky,
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-dot::before,
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-link::before { animation: none; }
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-link::before { opacity: .8; transform: none; }
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-sky.is-glide .amc-TConstellationMap-layer,
+  .amc-TConstellationMap .amc-TConstellationMap-btn,
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-name,
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-dot::after { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-dot::before { background: CanvasText; box-shadow: none; }
+  .amc-TConstellationMap.is-map .amc-TConstellationMap-star.is-current .amc-TConstellationMap-dot::before { background: Highlight; }
+  .amc-TConstellationMap-line { stroke: CanvasText; }
+  .amc-TConstellationMap-card { border: 2px solid CanvasText; }
+}
+
+/* Start in list view: the view toggle leads the toolbar, since it is the way to the map. */
+.amc-TConstellationMap--startList .amc-TConstellationMap-btn[data-action="list"] { order: -1; margin-inline: 0 6px; }

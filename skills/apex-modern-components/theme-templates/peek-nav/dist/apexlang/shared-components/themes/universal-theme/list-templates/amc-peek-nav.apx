@@ -1,0 +1,139 @@
+listTemplate amc-peek-nav (
+    name: AMC Peek Nav
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TPeekNav #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-loading="Loading preview" data-unavailable="Preview not available for this page" data-save-data="Live preview is off to save data" data-hint="Click to open, Esc to close">
+            <ul class="amc-TPeekNav-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TPeekNav-item is-current"><a class="amc-TPeekNav-link" href="#LINK#" aria-current="page" data-peek="#A02#"><span class="amc-TPeekNav-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TPeekNav-text"><span class="amc-TPeekNav-label">#TEXT#</span><span class="amc-TPeekNav-desc">#A01#</span></span></a><button type="button" class="amc-TPeekNav-eye" aria-label="Preview #TEXT_ESC_SC#" aria-expanded="false" hidden><span class="amc-TPeekNav-eyeIcon fa fa-eye" aria-hidden="true"></span></button></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TPeekNav-item"><a class="amc-TPeekNav-link" href="#LINK#" data-peek="#A02#"><span class="amc-TPeekNav-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TPeekNav-text"><span class="amc-TPeekNav-label">#TEXT#</span><span class="amc-TPeekNav-desc">#A01#</span></span></a><button type="button" class="amc-TPeekNav-eye" aria-label="Preview #TEXT_ESC_SC#" aria-expanded="false" hidden><span class="amc-TPeekNav-eyeIcon fa fa-eye" aria-hidden="true"></span></button></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-peek-nav.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-peek-nav.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Preview URL or none
+    }
+    advanced {
+        staticId: AMC_TPL_PEEK_NAV
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a static or dynamic List region, flat lists. Each entry is a real link with its icon and label; User Defined Attribute 1 is a one-line description, shown on the preview card and, with the Show descriptions option, under the label. Attribute 2 is optional: a developer-controlled preview URL that replaces the link for the preview only (for example a lighter page made for previews), or the word none to switch the preview off for that entry. With JavaScript, resting the mouse on an entry for about half a second opens one floating preview card: title, page path, a live same-origin view of the target page scaled down in a sandboxed iframe that cannot be clicked or focused and is hidden from screen readers, a skeleton while it loads, and the description. Moving to another entry switches the card at once; leaving the entry and the card, pressing Escape, clicking the link, scrolling or resizing closes it. Only one card is open at a time, and the last 3 previews are kept loaded so going back is instant. Keyboard users press the eye button after each link, a real button with aria-expanded, to open or close the card; Escape closes it. Clicking the card opens the page. No preview is made for external links, javascript links, links to the current page or entries with Attribute 2 set to none, and nothing is ever shown on touch screens. When the browser asks to save data, via Save-Data or prefers-reduced-data, the card shows the description without the live view. A page loaded in the preview runs as a normal page request in the user's session, so do not use it for pages whose load processes change data, and set the page's Embed in Frames security attribute to Allow from same origin. Without JavaScript the list is a plain, fully working navigation list. Template options: Preview on click of the eye button only; Description card only; Show descriptions; Horizontal bar; Large preview. Under prefers-reduced-motion the card appears without animation and the skeleton does not shimmer. English strings to translate: in the entry parts the eye button label Preview followed by the entry text; on the wrapper in the Before List Entry part data-loading Loading preview, data-unavailable Preview not available for this page, data-save-data Live preview is off to save data, data-hint Click to open, Esc to close.
+            ```
+    }
+
+    templateOption amc-peek-nav-eye-only (
+        name: Preview on click of the eye button only
+        sequence: 10
+        appearance {
+            cssClasses: amc-TPeekNav--eyeOnly
+        }
+        help {
+            helpText:
+                ```text
+                Resting the mouse on an entry does nothing; previews open only from the eye button, which is always visible. Use it for dense menus people move through quickly.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: EYE_ONLY
+        }
+    )
+
+    templateOption amc-peek-nav-text-only (
+        name: Description card only
+        sequence: 20
+        appearance {
+            cssClasses: amc-TPeekNav--textOnly
+        }
+        help {
+            helpText:
+                ```text
+                The card shows the title, path and description but never loads the target page. Use it when target pages are heavy or run processes on load.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TEXT_ONLY
+        }
+    )
+
+    templateOption amc-peek-nav-descriptions (
+        name: Show descriptions
+        sequence: 30
+        appearance {
+            cssClasses: amc-TPeekNav--descriptions
+        }
+        help {
+            helpText:
+                ```text
+                Shows Attribute 1 under each label in the list itself, not only on the card.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DESCRIPTIONS
+        }
+    )
+
+    templateOption amc-peek-nav-bar (
+        name: Horizontal bar
+        sequence: 40
+        appearance {
+            cssClasses: amc-TPeekNav--bar
+        }
+        help {
+            helpText:
+                ```text
+                Lays the entries out in a row, for a top navigation bar; the card opens below the entry.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: BAR
+        }
+    )
+
+    templateOption amc-peek-nav-large (
+        name: Large preview
+        sequence: 50
+        appearance {
+            cssClasses: amc-TPeekNav--large
+        }
+        help {
+            helpText:
+                ```text
+                A wider card, 520px instead of 360px, for wide screens and pages with small text.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LARGE
+        }
+    )
+)

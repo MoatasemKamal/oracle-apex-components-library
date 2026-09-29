@@ -1,0 +1,243 @@
+{
+ "samples": [
+  {
+   "title": "App map, recently used stars shine brighter",
+   "options": [
+    "amc-TConstellationMap--recent"
+   ],
+   "entries": [
+    {
+     "text": "Orders",
+     "link": "f?p=100:10:0",
+     "icon": "fa-shopping-cart",
+     "a01": "Sales",
+     "a02": "Open, picking and shipped orders",
+     "current": true
+    },
+    {
+     "text": "Quotes",
+     "link": "f?p=100:12:0",
+     "icon": "fa-file-text-o",
+     "a01": "Sales",
+     "a02": "Quotes waiting for a decision"
+    },
+    {
+     "text": "Customers",
+     "link": "f?p=100:14:0",
+     "icon": "fa-users",
+     "a01": "Sales",
+     "a02": "Accounts, owners and health"
+    },
+    {
+     "text": "Invoices",
+     "link": "f?p=100:20:0",
+     "icon": "fa-file-o",
+     "a01": "Finance",
+     "a02": "Outstanding and overdue invoices"
+    },
+    {
+     "text": "Payments",
+     "link": "f?p=100:22:0",
+     "icon": "fa-credit-card",
+     "a01": "Finance",
+     "a02": "Incoming payments and matching"
+    },
+    {
+     "text": "Month-end",
+     "link": "f?p=100:24:0",
+     "icon": "fa-calendar-check-o",
+     "a01": "Finance",
+     "a02": "Close the period: accruals and sign-off"
+    },
+    {
+     "text": "Inventory",
+     "link": "f?p=100:30:0",
+     "icon": "fa-cubes",
+     "a01": "Operations",
+     "a02": "Stock by warehouse and reorder points"
+    },
+    {
+     "text": "Shipments",
+     "link": "f?p=100:32:0",
+     "icon": "fa-truck",
+     "a01": "Operations",
+     "a02": "Carriers, ETAs and delays"
+    },
+    {
+     "text": "Suppliers",
+     "link": "f?p=100:34:0",
+     "icon": "fa-handshake-o",
+     "a01": "Operations",
+     "a02": "Vendors, lead times and ratings"
+    },
+    {
+     "text": "Users",
+     "link": "f?p=100:90:0",
+     "icon": "fa-user",
+     "a01": "Admin",
+     "a02": "Accounts, roles and sign-in"
+    },
+    {
+     "text": "Settings",
+     "link": "f?p=100:92:0",
+     "icon": "fa-cog",
+     "a01": "Admin",
+     "a02": "App preferences and integrations"
+    }
+   ]
+  },
+  {
+   "title": "Night sky, tall",
+   "options": [
+    "amc-TConstellationMap--night",
+    "amc-TConstellationMap--tall"
+   ],
+   "entries": [
+    {
+     "text": "Orders",
+     "link": "f?p=100:10:0",
+     "icon": "fa-shopping-cart",
+     "a01": "Sales",
+     "a02": "Open, picking and shipped orders"
+    },
+    {
+     "text": "Quotes",
+     "link": "f?p=100:12:0",
+     "icon": "fa-file-text-o",
+     "a01": "Sales",
+     "a02": "Quotes waiting for a decision"
+    },
+    {
+     "text": "Customers",
+     "link": "f?p=100:14:0",
+     "icon": "fa-users",
+     "a01": "Sales",
+     "a02": "Accounts, owners and health"
+    },
+    {
+     "text": "Invoices",
+     "link": "f?p=100:20:0",
+     "icon": "fa-file-o",
+     "a01": "Finance",
+     "a02": "Outstanding and overdue invoices",
+     "current": true
+    },
+    {
+     "text": "Payments",
+     "link": "f?p=100:22:0",
+     "icon": "fa-credit-card",
+     "a01": "Finance",
+     "a02": "Incoming payments and matching"
+    },
+    {
+     "text": "Month-end",
+     "link": "f?p=100:24:0",
+     "icon": "fa-calendar-check-o",
+     "a01": "Finance",
+     "a02": "Close the period: accruals and sign-off"
+    },
+    {
+     "text": "Inventory",
+     "link": "f?p=100:30:0",
+     "icon": "fa-cubes",
+     "a01": "Operations",
+     "a02": "Stock by warehouse and reorder points"
+    },
+    {
+     "text": "Shipments",
+     "link": "f?p=100:32:0",
+     "icon": "fa-truck",
+     "a01": "Operations",
+     "a02": "Carriers, ETAs and delays"
+    },
+    {
+     "text": "Suppliers",
+     "link": "f?p=100:34:0",
+     "icon": "fa-handshake-o",
+     "a01": "Operations",
+     "a02": "Vendors, lead times and ratings"
+    },
+    {
+     "text": "Users",
+     "link": "f?p=100:90:0",
+     "icon": "fa-user",
+     "a01": "Admin",
+     "a02": "Accounts, roles and sign-in"
+    },
+    {
+     "text": "Settings",
+     "link": "f?p=100:92:0",
+     "icon": "fa-cog",
+     "a01": "Admin",
+     "a02": "App preferences and integrations"
+    }
+   ]
+  },
+  {
+   "title": "Start in list view, still sky",
+   "options": [
+    "amc-TConstellationMap--startList",
+    "amc-TConstellationMap--still"
+   ],
+   "entries": [
+    {
+     "text": "Invoices",
+     "link": "f?p=100:20:0",
+     "icon": "fa-file-o",
+     "a01": "Finance",
+     "a02": "Outstanding and overdue invoices"
+    },
+    {
+     "text": "Payments",
+     "link": "f?p=100:22:0",
+     "icon": "fa-credit-card",
+     "a01": "Finance",
+     "a02": "Incoming payments and matching"
+    },
+    {
+     "text": "Month-end",
+     "link": "f?p=100:24:0",
+     "icon": "fa-calendar-check-o",
+     "a01": "Finance",
+     "a02": "Close the period: accruals and sign-off"
+    },
+    {
+     "text": "Inventory",
+     "link": "f?p=100:30:0",
+     "icon": "fa-cubes",
+     "a01": "Operations",
+     "a02": "Stock by warehouse and reorder points"
+    },
+    {
+     "text": "Shipments",
+     "link": "f?p=100:32:0",
+     "icon": "fa-truck",
+     "a01": "Operations",
+     "a02": "Carriers, ETAs and delays"
+    },
+    {
+     "text": "Suppliers",
+     "link": "f?p=100:34:0",
+     "icon": "fa-handshake-o",
+     "a01": "Operations",
+     "a02": "Vendors, lead times and ratings"
+    },
+    {
+     "text": "Users",
+     "link": "f?p=100:90:0",
+     "icon": "fa-user",
+     "a01": "Admin",
+     "a02": "Accounts, roles and sign-in",
+     "current": true
+    },
+    {
+     "text": "Settings",
+     "link": "f?p=100:92:0",
+     "icon": "fa-cog",
+     "a01": "Admin",
+     "a02": "App preferences and integrations"
+    }
+   ]
+  }
+ ]
+}
