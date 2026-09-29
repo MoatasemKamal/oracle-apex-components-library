@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
+  "name": "oracle-apex-components",
+  "owner": {
+    "name": "Moatasem Kamal",
+    "url": "https://github.com/MoatasemKamal/oracle-apex-components-library"
+  },
+  "metadata": {
+    "description": "Modern, native-looking components, templates, theme styles and kits for Oracle APEX 23.1 to 26.x, packaged as an agent skill that works with Oracle's apexlang skill.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "apex-modern-components",
+      "source": "./skills/apex-modern-components",
+      "description": "Create, port, install and use modern Oracle APEX components (template component plug-ins), native List and Region templates (incl. Living, navigation and authentication templates), Universal Theme styles with a WCAG contrast gate, and plugin-free Motion and Message kits. Emits APEXlang for APEX 26.1+ and 23.1 SQL exports; hands off to Oracle's apexlang skill for grammar, compiler and runtime validation.",
+      "category": "oracle",
+      "keywords": ["oracle", "apex", "apexlang", "universal-theme", "components", "templates", "theme-styles", "ui", "design-system"]
+    }
+  ]
+}

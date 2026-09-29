@@ -1,0 +1,9 @@
+{
+  "name": "apex-modern-components",
+  "version": "1.0.0",
+  "description": "Modern Oracle APEX components, native templates, theme styles and kits for APEX 23.1 to 26.x, with APEXlang and 23.1 SQL output.",
+  "author": { "name": "Moatasem Kamal", "url": "https://github.com/MoatasemKamal" },
+  "homepage": "https://github.com/MoatasemKamal/oracle-apex-components-library",
+  "repository": "https://github.com/MoatasemKamal/oracle-apex-components-library",
+  "keywords": ["oracle", "apex", "apexlang", "universal-theme", "components", "templates"]
+}
