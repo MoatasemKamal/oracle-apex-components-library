@@ -10,7 +10,7 @@ Next Collection family of ten current-generation KPI tiles chosen with Style, co
 | APEXlang reference | `type: plugin/nextKpi` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.1 |
+| Version | 1.1.0 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (0 to 100) drives Liquid Fill, the Bento Tile ring and the Adaptive bar. Series (comma-separated numbers) draws the sparkline of Tilt, Aurora Glow and Bento Tile and the bars of Neo Brutal. Compare Value, Compare Label and Breakdown fill the back of Flip Detail. Every style is complete without JavaScript; the runtime file only adds the ticker, the pointer tilt, sparklines and the Percent level.
@@ -26,6 +26,7 @@ Pick a Style, then map Label and Value (formatted in SQL with the application's 
 | `change` | Change | sessionStateValue |  |  | Optional change text such as +12.4% or -9. Leave empty to hide the trend indicator. |
 | `trend` | Trend | sessionStateValue |  |  | Direction of the change: up, down or flat. Any other value renders as flat. Up is shown in the success color and down in the danger color unless Down Is Good is set; the direction is also announced as text. |
 | `invertTrend` | Down Is Good | yesNo |  | `N` | Swap the trend colors so a decrease is shown as positive, for example for costs, churn or error rates. |
+| `lowerIsBetter` | Row Lower Is Better | sessionStateValue |  |  | Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end. |
 | `percent` | Percent | sessionStateValue |  |  | A number from 0 to 100 with a period as decimal separator, for example 72 or 64.5. Liquid Fill uses it as the liquid level, Bento Tile as a ring sub-tile and Adaptive as a progress bar. Values outside the range are clamped; non-numeric values show an empty level. |
 | `series` | Series | sessionStateValue |  |  | Comma-separated numbers, oldest first, with a period as decimal separator, for example 12,18,15,22,27. Tilt, Aurora Glow and Bento Tile draw a sparkline, Neo Brutal draws chunky bars. Up to 24 values are used. Build it in SQL with listagg. |
 | `compareValue` | Compare Value | sessionStateValue |  |  | Flip Detail back face: the reference figure, for example last quarter's value or the target. Format it in SQL like Value. |

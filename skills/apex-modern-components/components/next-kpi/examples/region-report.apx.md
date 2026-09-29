@@ -39,7 +39,7 @@ region revenue_kpis (
                    case when k.change_pct > 0 then 'up'
                         when k.change_pct < 0 then 'down'
                         else 'flat' end                            as trend,
-                   k.lower_is_better                               as invert_trend,
+                   k.lower_is_better                               as lower_is_better,
                    to_char(round(100 * k.actual_amount
                          / nullif(k.target_amount, 0), 1),
                            'FM990D0', 'NLS_NUMERIC_CHARACTERS=''.,''') as pct,
@@ -61,7 +61,7 @@ region revenue_kpis (
         unit: UNIT
         change: CHANGE_TXT
         trend: TREND
-        invertTrend: INVERT_TREND
+        lowerIsBetter: LOWER_IS_BETTER
         percent: PCT
         series: SERIES_TXT
         icon: ICON
@@ -122,13 +122,13 @@ region revenue_kpis (
             primaryKey: false
         }
     )
-    column INVERT_TREND (
+    column LOWER_IS_BETTER (
         layout {
             sequence: 60
         }
         source {
             type: databaseColumn
-            databaseColumn: INVERT_TREND
+            databaseColumn: LOWER_IS_BETTER
             dataType: varchar2
             primaryKey: false
         }
@@ -180,7 +180,7 @@ region revenue_kpis (
 )
 ```
 
-`INVERT_TREND` returns `Y` or `N`. `PCT` and `SERIES_TXT` are produced with a period as
+`LOWER_IS_BETTER` returns `Y` or `N` per row and maps to the per-row **Row Lower Is Better** setting (attribute 15); the region-level `invertTrend` switch (yes/no, static) is the fallback for rows that return null. `PCT` and `SERIES_TXT` are produced with a period as
 decimal separator, as the Percent and Series settings expect.
 
 ## Builder (APEX 23.1 - 25.x, legacy import)

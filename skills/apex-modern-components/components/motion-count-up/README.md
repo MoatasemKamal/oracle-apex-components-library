@@ -10,7 +10,7 @@ KPI numbers that count up from zero when they scroll into view, formatted in the
 | APEXlang reference | `type: plugin/motionCountUp` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.1.0 |
 
 Map Value to a numeric column, using a period as decimal separator. The final value is in the page markup, so screen readers, printing and users with reduced motion get it directly; the count-up only animates what is shown.
 
@@ -26,6 +26,7 @@ Map Value to a numeric column, using a period as decimal separator. The final va
 | `decimals` | Decimal Places | selectList (`one`, `two`) |  |  | Digits after the decimal separator. Leave empty for whole numbers. |
 | `duration` | Duration | selectList (`short`, `long`) |  |  | How long the count takes. Leave empty for 1.6 seconds. |
 | `accent` | Accent | selectList (`primary`, `success`, `warning`, `danger`) |  |  | Colors the number and icon with the theme palette. Leave empty for the default text color. |
+| `accentValue` | Row Accent | sessionStateValue |  |  | Per-row accent from a column: primary, success, warning, danger (lower case). Any other value, or an empty one, falls back to the region's Accent setting. Example: case when overdue_count > 0 then 'danger' else 'success' end. |
 
 ## Install
 

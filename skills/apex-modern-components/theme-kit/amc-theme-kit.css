@@ -1,0 +1,24 @@
+/* =========================================================================
+   APEX Modern Components - Theme Kit
+   Brand tokens (Universal Theme --ut-* variables and app --amc-theme-*
+   variables) set at runtime from a query, per tenant or per user.
+
+   The work is done by amc-theme-kit.js: it validates a JSON object of tokens
+   and sets each accepted one with style.setProperty on <html>. This file only
+   softens a change made after the page is shown (amcThemeKit.apply from a
+   Dynamic Action), and only for users who have not asked for reduced motion.
+
+   - No colors here: every color comes from the variables the kit sets or
+     from the active theme style.
+   - The class amc-theme-kit-animating is on <html> for about 400 ms after a
+     runtime change and never during the first apply on page load.
+   ========================================================================= */
+
+@media (prefers-reduced-motion: no-preference) {
+  html.amc-theme-kit-animating body,
+  html.amc-theme-kit-animating body * {
+    transition-property: background-color, color, border-color, outline-color, fill, stroke;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+  }
+}

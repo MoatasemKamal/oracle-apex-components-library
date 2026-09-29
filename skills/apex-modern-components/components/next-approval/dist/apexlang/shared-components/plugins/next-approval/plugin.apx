@@ -31,7 +31,7 @@ plugin nextApproval (
             ```
         reportRow:
             ```html
-            <li class="amc-NApproval-item amc-NApproval-item--{case STATE/}{when approved/}approved{when pending/}pending{when rejected/}rejected{when skipped/}skipped{otherwise/}waiting{endcase/}" data-step="#STEP#">#APEX$PARTIAL#</li>
+            <li class="amc-NApproval-item amc-NApproval-item--{case STATE/}{when approved/}approved{when pending/}pending{when rejected/}rejected{when skipped/}skipped{otherwise/}waiting{endcase/}" data-step="#STEP#" data-rule="{case PARALLEL_RULE_VALUE/}{when all/}all{when ALL/}all{when All/}all{when any/}any{when ANY/}any{when Any/}any{otherwise/}{endcase/}">#APEX$PARTIAL#</li>
             ```
         translateTemplates: true
         defaultEscapeMode: html
@@ -54,10 +54,10 @@ plugin nextApproval (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.1.0
         helpText:
             ```
-            One query row per approver, ordered by Step. Rows with the same Step number are parallel approvers; Parallel Rule says whether all of them or any one must approve. State accepts approved, pending (acting now), rejected, skipped or waiting (not reached yet); other values render as waiting. Action Date and Due Date are ISO text, TO_CHAR(d, 'YYYY-MM-DD"T"HH24:MI'). The runtime file formats dates in the page language, marks the step that acts now, shows Overdue by or Due in from Due Date, groups parallel approvers and writes a one-line summary such as Waiting on Omar Aziz. Report mode shows the chain; partial mode shows a single approver, for example the step assigned to the current user.
+            One query row per approver, ordered by Step. Rows with the same Step number are parallel approvers; Parallel Rule says whether all of them or any one must approve; Row Parallel Rule lets each step take that rule from a column. State accepts approved, pending (acting now), rejected, skipped or waiting (not reached yet); other values render as waiting. Action Date and Due Date are ISO text, TO_CHAR(d, 'YYYY-MM-DD"T"HH24:MI'). The runtime file formats dates in the page language, marks the step that acts now, shows Overdue by or Due in from Due Date, groups parallel approvers and writes a one-line summary such as Waiting on Omar Aziz. Report mode shows the chain; partial mode shows a single approver, for example the step assigned to the current user.
             ```
     }
     customAttribute STYLE (
@@ -370,6 +370,28 @@ plugin nextApproval (
             display: Any one approves
             return: any
         )
+    )
+    customAttribute PARALLEL_RULE_VALUE (
+        apexlangName: parallelRuleValue
+        attribute: 13
+        name: Row Parallel Rule
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 125
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Per-step rule from a column: all (every approver of the step must approve) or any (the first approval completes the step). Return the same value on every row of a step; the first row of the step that has all or any decides. Empty or any other value falls back to the region's Parallel Rule setting. Example: case when a.step_type = 'ANY_OF' then 'any' else 'all' end.
+                ```
+        }
     )
     file "amc-next-approval.css" (
         fileName: amc-next-approval.css

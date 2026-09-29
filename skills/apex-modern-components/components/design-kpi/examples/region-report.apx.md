@@ -167,6 +167,19 @@ region sales_targets (
 if your session uses a comma decimal separator, select
 `to_char(..., 'FM990D0', 'NLS_NUMERIC_CHARACTERS=''.,''')` instead.
 
+## Per-row values: lower is better
+
+Down Is Good (`invertTrend`) is a region switch. Since 1.1.0 **Row Lower Is Better**
+(`lowerIsBetter`, attribute 14, Session State Value) decides per row: Y/N, yes/no, true/false
+or 1/0; empty uses the region switch. Add to the query
+
+```sql
+       case when k.kpi_code in ('COST', 'RETURNS', 'DEFECTS') then 'Y' end as lower_is_better
+```
+
+and to the region `settings { lowerIsBetter: LOWER_IS_BETTER }` plus a `column LOWER_IS_BETTER`
+entry like the others. Style stays a region setting: it chooses the markup for every tile.
+
 ## Builder (APEX 23.1 - 25.x, legacy import)
 
 Create region > Type **Design KPI [Plug-in]** > Appearance: *Multiple (Report)*, set

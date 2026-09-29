@@ -9,6 +9,16 @@
       "title": "Compact",
       "mode": "partial",
       "settings": { "ICON": "fa-search", "TITLE": "No matching records", "MESSAGE": "Try removing a filter.", "SIZE": "compact" }
+    },
+    {
+      "title": "Icon Value from the query (no search results)",
+      "mode": "partial",
+      "settings": {
+        "ICON": "fa-inbox",
+        "ICON_VALUE": "fa-search",
+        "TITLE": "No orders match your search",
+        "MESSAGE": "Try another customer name or clear the filters."
+      }
     }
   ]
 }

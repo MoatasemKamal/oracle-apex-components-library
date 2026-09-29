@@ -32,4 +32,5 @@ Stores the selected number (1..Maximum) in session state, or null when cleared. 
 
 ## Examples
 
+- [page-item-from-query](examples/page-item-from-query.apx.md)
 - [page-item](examples/page-item.apx.md)

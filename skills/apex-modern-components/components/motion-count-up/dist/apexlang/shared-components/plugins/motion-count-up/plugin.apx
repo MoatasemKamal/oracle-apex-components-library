@@ -9,7 +9,7 @@ plugin motionCountUp (
         ]
         partial:
             ```html
-            <div class="amc-CountUp{if ?ACCENT/} amc-CountUp--#ACCENT#{endif/}">
+            <div class="amc-CountUp{case ACCENT_VALUE/}{when primary/} amc-CountUp--primary{when success/} amc-CountUp--success{when warning/} amc-CountUp--warning{when danger/} amc-CountUp--danger{otherwise/}{if ?ACCENT/} amc-CountUp--#ACCENT#{endif/}{endcase/}">
               {if ?ICON/}<span class="amc-CountUp-icon fa #ICON#" aria-hidden="true"></span>{endif/}
               <span class="amc-CountUp-value">{if ?PREFIX/}<span class="amc-CountUp-affix">#PREFIX#</span>{endif/}<span class="amc-CountUp-num" data-amc-count="#VALUE#" data-amc-decimals="{if ?DECIMALS/}#DECIMALS#{else/}0{endif/}" data-amc-duration="{case DURATION/}{when short/}0.8{when long/}2.8{otherwise/}1.6{endcase/}">#VALUE#</span>{if ?SUFFIX/}<span class="amc-CountUp-affix">#SUFFIX#</span>{endif/}</span>
               {if ?LABEL/}<span class="amc-CountUp-label">#LABEL#</span>{endif/}
@@ -44,7 +44,7 @@ plugin motionCountUp (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.1.0
         helpText:
             ```
             Map Value to a numeric column, using a period as decimal separator. The final value is in the page markup, so screen readers, printing and users with reduced motion get it directly; the count-up only animates what is shown.
@@ -274,6 +274,28 @@ plugin motionCountUp (
             display: Danger
             return: danger
         )
+    )
+    customAttribute ACCENT_VALUE (
+        apexlangName: accentValue
+        attribute: 9
+        name: Row Accent
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 85
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Per-row accent from a column: primary, success, warning, danger (lower case). Any other value, or an empty one, falls back to the region's Accent setting. Example: case when overdue_count > 0 then 'danger' else 'success' end.
+                ```
+        }
     )
     file "amc-motion-count-up.css" (
         fileName: amc-motion-count-up.css

@@ -9,7 +9,7 @@ plugin emptyState (
         partial:
             ```html
             <div class="amc-EmptyState{if ?SIZE/} amc-EmptyState--#SIZE#{endif/}{if BORDERED/} amc-EmptyState--bordered{endif/}" role="status">
-              {if ?ICON/}<span class="amc-EmptyState-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+              {if ?ICON_VALUE/}<span class="amc-EmptyState-icon" aria-hidden="true"><span class="fa #ICON_VALUE#"></span></span>{elseif ?ICON/}<span class="amc-EmptyState-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
               <h3 class="amc-EmptyState-title">#TITLE#</h3>
               {if ?MESSAGE/}<p class="amc-EmptyState-message">#MESSAGE#</p>{endif/}
               {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="t-Button t-Button--hot amc-EmptyState-button" href="#LINK_URL#"><span class="t-Button-label">#LINK_LABEL#</span></a>{endif/}{endif/}
@@ -31,7 +31,7 @@ plugin emptyState (
         ]
     }
     information {
-        version: 1.0.1
+        version: 1.1.0
         helpText:
             ```
             Place in a region (or use its markup as a report's No Data Found message). The button uses Universal Theme button classes so it matches native buttons in every theme style.
@@ -59,6 +59,28 @@ plugin emptyState (
             helpText:
                 ```
                 Font APEX icon class.
+                ```
+        }
+    )
+    customAttribute ICON_VALUE (
+        apexlangName: iconValue
+        attribute: 8
+        name: Icon Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 15
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class from the source query, for example case when :P10_SEARCH is not null then 'fa-search' else 'fa-inbox' end. When not empty it replaces the static Icon, so one region can show a search icon for no results and an inbox for no data.
                 ```
         }
     )

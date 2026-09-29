@@ -3,8 +3,8 @@
   "apexlangName": "nextCalendar",
   "staticId": "AMC_NEXT_CALENDAR",
   "pluginType": "templateComponent",
-  "version": "1.0.1",
-  "filesVersion": 2,
+  "version": "1.1.0",
+  "filesVersion": 3,
   "minApexVersion": "23.1",
   "keywords": ["calendar", "events", "schedule", "agenda", "month", "week", "planner", "heatmap", "year", "resource", "lanes", "gantt", "countdown", "flip calendar", "desk calendar", "poster", "kiosk", "mini calendar", "hijri", "islamic", "umm al-qura", "rtl", "next collection"],
   "description": "Next Collection family of ten calendars that read events from a report, covering views the native APEX Calendar does not offer. Smart: Month (chips, +N more popover, today ring; turns into a dot calendar with a day agenda when narrow), Agenda (sticky day headers, relative labels, durations) and Timeline Lanes (a resource schedule with one lane per Category and day, week or month zoom). Depth: Week (hour grid, overlapping events side by side, live now line) and Flip Date (a desk tear-off calendar that flips in 3D). Bold: Heatmap (a year of activity by count or Value), Poster Day (a giant date poster for home pages and kiosks) and Circular Year (the year as a ring of month arcs). Motion: Countdown (live tiles to the next events) and Mini Dots (a sidebar mini calendar with a sliding selection and a revealed day). Month and weekday names, numbers and durations come from Intl in the page language, with the Gregorian or Islamic Umm al-Qura calendar, and every view follows the theme's Universal Theme variables, dark styles and RTL.",
@@ -183,7 +183,7 @@
       "required": false,
       "escapeMode": "htmlAttribute",
       "sequence": 130,
-      "helpText": "Optional date the calendar opens on, as YYYY-MM-DD, for example 2026-10-01 or a page item reference such as &P10_DATE. formatted that way. Leave empty to open on today. Poster Day and Flip Date show this day; the other views show the month, week or year that contains it."
+      "helpText": "Optional fixed date the calendar opens on, as YYYY-MM-DD, for example 2026-10-01. Leave empty to open on today. To open on a page item or a date from the data, use Initial Date Value instead; whether APEX substitutes &ITEM. references in this static setting is not confirmed for every release. Poster Day and Flip Date show this day; the other views show the month, week or year that contains it."
     },
     {
       "staticId": "CALENDAR_SYSTEM",
@@ -257,6 +257,17 @@
       "sequence": 180,
       "helpText": "Number of countdown tiles, 1 to 12. Countdown shows the next events that have not ended yet, in start order; events in progress show Happening now.",
       "dependsOn": { "attribute": "STYLE", "condition": "equals", "value": "countdown" }
+    },
+    {
+      "staticId": "INITIAL_DATE_VALUE",
+      "apexlangName": "initialDateValue",
+      "attribute": 19,
+      "name": "Initial Date Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 135,
+      "helpText": "Optional date the calendar opens on, as YYYY-MM-DD, taken from a column so it can come from a page item or the data, for example to_char(to_date(:P10_DATE, 'YYYY-MM-DD'), 'YYYY-MM-DD') as initial_date or to_char(min(start_at) over (), 'YYYY-MM-DD'). The first row with a readable date wins over the static Initial Date; when it is empty on every row the static Initial Date, then today, is used."
     }
   ]
 }

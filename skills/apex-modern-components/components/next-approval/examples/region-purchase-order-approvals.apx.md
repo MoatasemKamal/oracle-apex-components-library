@@ -75,3 +75,21 @@ For the approver's own task page, use partial mode (`componentAppearance { displ
 with a single-row source such as `... where a.approver_id = :APP_USER_ID and a.status = 'OPEN'`.
 Confirm column and setting placement with the apexlang grammar contract for your build
 (`apexctl apexlang grammar contract --components region --groups source`).
+
+## Per-row values: parallel rule per step
+
+`parallelRule` is the region default. Since 1.1.0 **Row Parallel Rule**
+(`parallelRuleValue`, attribute 13, Session State Value) lets each step carry its own rule:
+`all` or `any`, repeated on every row of the step (the first row of the step with a valid
+value decides); null or anything else uses `parallelRule`. Add to the query
+
+```sql
+                   case s.decision_mode
+                     when 'ANY_OF' then 'any'
+                     when 'ALL_OF' then 'all'
+                   end                                                 as parallel_rule
+              -- join po_approval_steps s on s.po_id = a.po_id and s.step_no = a.step_no
+```
+
+and to `settings` the line `parallelRuleValue: PARALLEL_RULE`. The step heading then reads
+"Any one of 2 can approve" for that step while the others keep "All must approve".

@@ -1,4 +1,4 @@
-<div class="amc-StatCard{if ?ACCENT/} amc-StatCard--#ACCENT#{endif/}{if INVERT_TREND/} amc-StatCard--invertTrend{endif/}">
+<div class="amc-StatCard{case ACCENT_VALUE/}{when primary/} amc-StatCard--primary{when info/} amc-StatCard--info{when success/} amc-StatCard--success{when warning/} amc-StatCard--warning{when danger/} amc-StatCard--danger{otherwise/}{if ?ACCENT/} amc-StatCard--#ACCENT#{endif/}{endcase/}{case LOWER_IS_BETTER/}{when Y/} amc-StatCard--invertTrend{when y/} amc-StatCard--invertTrend{when YES/} amc-StatCard--invertTrend{when Yes/} amc-StatCard--invertTrend{when yes/} amc-StatCard--invertTrend{when TRUE/} amc-StatCard--invertTrend{when True/} amc-StatCard--invertTrend{when true/} amc-StatCard--invertTrend{when 1/} amc-StatCard--invertTrend{when N/}{when n/}{when NO/}{when No/}{when no/}{when FALSE/}{when False/}{when false/}{when 0/}{otherwise/}{if INVERT_TREND/} amc-StatCard--invertTrend{endif/}{endcase/}">
   {if ?ICON/}<span class="amc-StatCard-icon fa #ICON#" aria-hidden="true"></span>{endif/}
   <div class="amc-StatCard-body">
     <span class="amc-StatCard-label">#LABEL#</span>

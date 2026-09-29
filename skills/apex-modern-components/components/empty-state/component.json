@@ -3,7 +3,7 @@
   "apexlangName": "emptyState",
   "staticId": "AMC_EMPTY_STATE",
   "pluginType": "templateComponent",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "minApexVersion": "23.1",
   "keywords": ["empty", "no data", "placeholder", "onboarding", "zero state", "call to action"],
   "description": "Centered illustration-style message with icon, title, text and an optional Universal Theme button. Use for no-data, first-run and error placeholders.",
@@ -101,6 +101,17 @@
       "default": "N",
       "sequence": 70,
       "helpText": "Outline the area with a dashed border, useful for drop zones and first-run panels."
+    },
+    {
+      "staticId": "ICON_VALUE",
+      "apexlangName": "iconValue",
+      "attribute": 8,
+      "name": "Icon Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 15,
+      "helpText": "Optional Font APEX icon class from the source query, for example case when :P10_SEARCH is not null then 'fa-search' else 'fa-inbox' end. When not empty it replaces the static Icon, so one region can show a search icon for no results and an inbox for no data."
     }
   ]
 }

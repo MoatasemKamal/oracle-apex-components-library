@@ -3,11 +3,11 @@
   "apexlangName": "statCard",
   "staticId": "AMC_STAT_CARD",
   "pluginType": "templateComponent",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "minApexVersion": "23.1",
   "keywords": ["kpi", "metric", "stat", "dashboard", "tile", "trend"],
   "description": "KPI tile with label, value, optional unit, trend delta and icon. Renders one card (partial) or a responsive grid of cards (report).",
-  "helpText": "Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).",
+  "helpText": "Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Row Accent and Row Lower Is Better let each row choose its color and trend direction from the query; they fall back to the region-level Accent and Down Is Good settings. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).",
   "templateComponent": {
     "availableAs": ["partial", "report"],
     "defaultEscapeMode": "html",
@@ -143,6 +143,28 @@
         { "name": "three", "display": "3 Columns", "return": "3", "sequence": 20 },
         { "name": "four", "display": "4 Columns", "return": "4", "sequence": 30 }
       ]
+    },
+    {
+      "staticId": "LOWER_IS_BETTER",
+      "apexlangName": "lowerIsBetter",
+      "attribute": 11,
+      "name": "Row Lower Is Better",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 65,
+      "helpText": "Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end."
+    },
+    {
+      "staticId": "ACCENT_VALUE",
+      "apexlangName": "accentValue",
+      "attribute": 12,
+      "name": "Row Accent",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 95,
+      "helpText": "Per-row accent from a column: primary, info, success, warning, danger (lower case). Any other value, or an empty one, falls back to the region's Accent setting. Example: case when overdue_count > 0 then 'danger' else 'success' end."
     }
   ]
 }

@@ -34,4 +34,5 @@ Pick an effect for hero areas, empty states, success pages or celebrations. Colo
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

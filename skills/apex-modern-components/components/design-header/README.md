@@ -36,4 +36,5 @@ Place at the top of a page or section, usually in a region with the Blank with A
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

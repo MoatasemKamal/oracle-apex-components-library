@@ -1,0 +1,10 @@
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-theme-kit/amc-theme-kit.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-theme-kit/amc-theme-kit.css
+        ]
+    }

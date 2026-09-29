@@ -33,3 +33,4 @@ Shows a value against a maximum. Map Value to a numeric column; non-numeric valu
 ## Examples
 
 - [column-partial](examples/column-partial.apx.md)
+- [region-report-sql](examples/region-report-sql.apx.md)

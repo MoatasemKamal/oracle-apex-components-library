@@ -9,6 +9,33 @@
         { "VALUE": "3481", "LABEL": "Orders shipped", "ICON": "fa-truck" },
         { "VALUE": "98.6", "SUFFIX": "%", "DECIMALS": "1", "LABEL": "On-time delivery", "ICON": "fa-clock-o", "ACCENT": "success" }
       ]
+    },
+    {
+      "title": "Per-row Row Accent",
+      "mode": "report",
+      "settings": {
+        "ACCENT": "primary"
+      },
+      "rows": [
+        {
+          "VALUE": "3481",
+          "LABEL": "Orders shipped",
+          "ICON": "fa-truck",
+          "ACCENT_VALUE": "success"
+        },
+        {
+          "VALUE": "37",
+          "LABEL": "Overdue invoices",
+          "ICON": "fa-file-text-o",
+          "ACCENT_VALUE": "danger"
+        },
+        {
+          "VALUE": "12",
+          "LABEL": "Awaiting stock",
+          "ICON": "fa-cubes",
+          "ACCENT_VALUE": ""
+        }
+      ]
     }
   ]
 }

@@ -169,7 +169,14 @@
     this.events = this.read();
     this.index();
     this.today = dayOf(new Date());
-    var init = parseISO(root.getAttribute("data-initial-date"));
+    /* Initial Date Value (a column, so it can come from a page item or the data) wins over
+       the static Initial Date: the first event row with a readable date decides. */
+    var init = null;
+    var rowsWithInit = root.querySelectorAll(".amc-NCalendar-event[data-initial-date]");
+    for (var ri = 0; ri < rowsWithInit.length && !init; ri++) {
+      init = parseISO(rowsWithInit[ri].getAttribute("data-initial-date"));
+    }
+    if (!init) { init = parseISO(root.getAttribute("data-initial-date")); }
     this.sel = init ? dayOf(init.d) : this.today;
     this.live = h("span", "amc-NCalendar-sr");
     set(this.live, { "aria-live": "polite", "aria-atomic": "true" });

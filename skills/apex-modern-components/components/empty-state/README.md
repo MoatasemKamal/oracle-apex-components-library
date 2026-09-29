@@ -10,7 +10,7 @@ Centered illustration-style message with icon, title, text and an optional Unive
 | APEXlang reference | `type: plugin/emptyState` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.1 |
+| Version | 1.1.0 |
 
 Place in a region (or use its markup as a report's No Data Found message). The button uses Universal Theme button classes so it matches native buttons in every theme style.
 
@@ -19,6 +19,7 @@ Place in a region (or use its markup as a report's No Data Found message). The b
 | APEXlang setting | Builder label | Type | Required | Default | Notes |
 |---|---|---|---|---|---|
 | `icon` | Icon | icon |  | `fa-inbox` | Font APEX icon class. |
+| `iconValue` | Icon Value | sessionStateValue |  |  | Optional Font APEX icon class from the source query, for example case when :P10_SEARCH is not null then 'fa-search' else 'fa-inbox' end. When not empty it replaces the static Icon, so one region can show a search icon for no results and an inbox for no data. |
 | `title` | Title | sessionStateValue | yes |  | Main message, for example No orders yet. |
 | `message` | Message | sessionStateValue |  |  | Supporting sentence that tells the user what to do next. |
 | `linkUrl` | Button Target URL | sessionStateValue |  |  | Optional target, for example f?p=&APP_ID.:10:&SESSION. or a column holding apex_page.get_url(...). Must be developer-controlled, never end-user input. |
@@ -33,4 +34,5 @@ Place in a region (or use its markup as a report's No Data Found message). The b
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

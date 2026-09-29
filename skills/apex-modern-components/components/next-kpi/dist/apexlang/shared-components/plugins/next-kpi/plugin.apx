@@ -9,7 +9,7 @@ plugin nextKpi (
         ]
         partial:
             ```html
-            <div class="amc-NKpi amc-NKpi--#STYLE# {case TREND/}{when up/}amc-NKpi--up{when down/}amc-NKpi--down{otherwise/}amc-NKpi--flat{endcase/}{if INVERT_TREND/} amc-NKpi--invert{endif/}">
+            <div class="amc-NKpi amc-NKpi--#STYLE# {case TREND/}{when up/}amc-NKpi--up{when down/}amc-NKpi--down{otherwise/}amc-NKpi--flat{endcase/}{case LOWER_IS_BETTER/}{when Y/} amc-NKpi--invert{when y/} amc-NKpi--invert{when YES/} amc-NKpi--invert{when Yes/} amc-NKpi--invert{when yes/} amc-NKpi--invert{when TRUE/} amc-NKpi--invert{when True/} amc-NKpi--invert{when true/} amc-NKpi--invert{when 1/} amc-NKpi--invert{when N/}{when n/}{when NO/}{when No/}{when no/}{when FALSE/}{when False/}{when false/}{when 0/}{otherwise/}{if INVERT_TREND/} amc-NKpi--invert{endif/}{endcase/}">
               <div class="amc-NKpi-card" data-percent="#PERCENT#"{case STYLE/}{when flipDetail/} tabindex="0" role="group" aria-label="#LABEL!ATTR#"{when tilt/} data-amc-pointer="tilt"{otherwise/}{endcase/}>
                 {case STYLE/}{when beam/}<span class="amc-NKpi-beam" aria-hidden="true"></span>{when liquidFill/}<span class="amc-NKpi-liquid" aria-hidden="true"><span class="amc-NKpi-wave amc-NKpi-wave--back"></span><span class="amc-NKpi-wave"></span></span>{when auroraGlow/}<span class="amc-NKpi-aurora" aria-hidden="true"></span>{when tilt/}<span class="amc-NKpi-stack" aria-hidden="true"></span><span class="amc-NKpi-glare" aria-hidden="true"></span>{otherwise/}{endcase/}
                 <div class="amc-NKpi-face amc-NKpi-face--front">
@@ -65,7 +65,7 @@ plugin nextKpi (
         ]
     }
     information {
-        version: 1.0.1
+        version: 1.1.0
         helpText:
             ```
             Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (0 to 100) drives Liquid Fill, the Bento Tile ring and the Adaptive bar. Series (comma-separated numbers) draws the sparkline of Tilt, Aurora Glow and Bento Tile and the bars of Neo Brutal. Compare Value, Compare Label and Breakdown fill the back of Flip Detail. Every style is complete without JavaScript; the runtime file only adds the ticker, the pointer tilt, sparklines and the Percent level.
@@ -278,6 +278,28 @@ plugin nextKpi (
             helpText:
                 ```
                 Swap the trend colors so a decrease is shown as positive, for example for costs, churn or error rates.
+                ```
+        }
+    )
+    customAttribute LOWER_IS_BETTER (
+        apexlangName: lowerIsBetter
+        attribute: 15
+        name: Row Lower Is Better
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 75
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end.
                 ```
         }
     )

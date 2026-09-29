@@ -102,3 +102,17 @@ region kpi_counters (
 
 Return Value as a plain number with a period as decimal separator (as above); the
 component formats it for display in the page language.
+
+## Per-row values: accent
+
+Accent is a region select list. Since 1.1.0 **Row Accent** (`accentValue`, attribute 9,
+Session State Value) colors each tile from the data: primary, success, warning or danger;
+anything else, or null, uses the region Accent. Add to the query
+
+```sql
+       case when o.late_count > 0 then 'danger'
+            when o.on_time_pct >= 95 then 'success' end as accent_value
+```
+
+and map `accentValue: ACCENT_VALUE` with a `column ACCENT_VALUE` entry. Decimals and
+Duration stay region settings.

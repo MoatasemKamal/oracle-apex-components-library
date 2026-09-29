@@ -3,7 +3,7 @@
   "apexlangName": "motionCountUp",
   "staticId": "AMC_MOTION_COUNT_UP",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "minApexVersion": "23.1",
   "keywords": ["kpi", "counter", "count up", "number", "odometer", "metric", "dashboard", "animation", "creative"],
   "description": "KPI numbers that count up from zero when they scroll into view, formatted in the user's locale. One figure (partial) or a responsive row of figures (report).",
@@ -52,6 +52,17 @@
         { "name": "warning", "display": "Warning", "return": "warning", "sequence": 30 },
         { "name": "danger", "display": "Danger", "return": "danger", "sequence": 40 }
       ]
+    },
+    {
+      "staticId": "ACCENT_VALUE",
+      "apexlangName": "accentValue",
+      "attribute": 9,
+      "name": "Row Accent",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 85,
+      "helpText": "Per-row accent from a column: primary, success, warning, danger (lower case). Any other value, or an empty one, falls back to the region's Accent setting. Example: case when overdue_count > 0 then 'danger' else 'success' end."
     }
   ]
 }

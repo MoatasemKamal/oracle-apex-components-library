@@ -3,7 +3,7 @@
   "apexlangName": "motionLoader",
   "staticId": "AMC_MOTION_LOADER",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "minApexVersion": "23.1",
   "keywords": [
     "loader",
@@ -130,6 +130,17 @@
           "sequence": 20
         }
       ]
+    },
+    {
+      "staticId": "LABEL_VALUE",
+      "apexlangName": "labelValue",
+      "attribute": 4,
+      "name": "Label Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 25,
+      "helpText": "Optional accessible label taken from the source query or a page item, for example 'Loading ' || count(*) || ' orders'. When not empty it replaces the static Label; screen readers announce it."
     }
   ]
 }

@@ -186,7 +186,20 @@ Change `style` to any entry name (`agenda`, `week`, `heatmap`, `timelineLanes`, 
 `flipDate`, `countdown`, `circularYear`, `miniDots`). Style-specific settings: `dayStart` and
 `dayEnd` (week, hours 0 to 24), `laneZoom` (timelineLanes: `day`, `week`, `month`) and
 `upcomingCount` (countdown). Set `calendarSystem: islamicUmalqura` for Hijri months and
-`initialDate` (YYYY-MM-DD, or `&P20_DATE.` holding that format) to open on another day.
+`initialDate` (a fixed YYYY-MM-DD) to open on another day.
+
+To open on a page item or a date from the data, use **Initial Date Value** (`initialDateValue`,
+attribute 19, Session State Value, since 1.1.0): add a column such as
+
+```sql
+                   nvl(:P20_DATE, to_char(sysdate, 'YYYY-MM-DD'))       as initial_date
+```
+
+(with `P20_DATE` in `pageItemsToSubmit` and holding YYYY-MM-DD), map
+`initialDateValue: INITIAL_DATE` and add a `column INITIAL_DATE` entry. The first row with a
+readable date wins over `initialDate`; if the query returns no rows the static value, then
+today, is used. Whether APEX substitutes `&P20_DATE.` inside the static `initialDate` text
+setting is not confirmed, so prefer the column.
 
 Notes:
 - Return dates as text with `TO_CHAR(..., 'YYYY-MM-DD"T"HH24:MI')`; for all-day rows return the

@@ -113,6 +113,41 @@
         { "LABEL": "Deals won", "VALUE": "37", "CHANGE": "-2", "TREND": "down", "ICON": "fa-handshake-o", "PERCENT": "31" },
         { "LABEL": "Renewals", "VALUE": "52", "CHANGE": "0", "TREND": "flat", "ICON": "fa-repeat", "PERCENT": "88" }
       ]
+    },
+    {
+      "title": "Per-row Lower Is Better",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "adaptive",
+        "INVERT_TREND": "N"
+      },
+      "rows": [
+        {
+          "LABEL": "Orders today",
+          "VALUE": "1,284",
+          "CHANGE": "+9.3%",
+          "TREND": "up",
+          "DESCRIPTION": "higher is better"
+        },
+        {
+          "LABEL": "Open tickets",
+          "VALUE": "86",
+          "CHANGE": "-12",
+          "TREND": "down",
+          "LOWER_IS_BETTER": "Y",
+          "DESCRIPTION": "lower is better"
+        },
+        {
+          "LABEL": "Refund rate",
+          "VALUE": "2.1",
+          "UNIT": "%",
+          "CHANGE": "+0.4 pts",
+          "TREND": "up",
+          "LOWER_IS_BETTER": "Y",
+          "DESCRIPTION": "lower is better"
+        }
+      ]
     }
   ]
 }

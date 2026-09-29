@@ -3,7 +3,7 @@
   "apexlangName": "nextKpi",
   "staticId": "AMC_NEXT_KPI",
   "pluginType": "templateComponent",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "filesVersion": 2,
   "minApexVersion": "23.1",
   "keywords": ["kpi", "metric", "stat", "figure", "dashboard", "tile", "trend", "delta", "ticker", "odometer", "border beam", "liquid", "gauge", "tilt", "3d", "flip", "neo brutalism", "claymorphism", "aurora", "bento", "container query", "adaptive", "sparkline", "next collection"],
@@ -195,6 +195,17 @@
       "escapeMode": "html",
       "sequence": 140,
       "helpText": "Optional footnote, for example vs. last month or rolling 30 days."
+    },
+    {
+      "staticId": "LOWER_IS_BETTER",
+      "apexlangName": "lowerIsBetter",
+      "attribute": 15,
+      "name": "Row Lower Is Better",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 75,
+      "helpText": "Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end."
     }
   ]
 }

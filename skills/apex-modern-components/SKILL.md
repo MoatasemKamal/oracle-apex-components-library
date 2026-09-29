@@ -38,6 +38,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/theme-styles.md`: Universal Theme styles (whole-app looks) and their contrast gate
    - `references/theme-templates.md`: creative List Templates and Region Templates (native templates, not plug-ins)
    - `references/next-collection.md`: the `next*` families (new-generation motion, 3D, bold and adaptive designs) that sit beside the Design Collection
+   - `references/data-binding.md`: where every part (components, item, list/region templates, styles, Theme/Message/Motion Kits) takes its values from a SQL query, with snippets
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
 

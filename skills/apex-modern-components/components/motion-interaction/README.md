@@ -32,4 +32,5 @@ Buttons and cards navigate to Link URL when it is set. The like toggle fires the
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

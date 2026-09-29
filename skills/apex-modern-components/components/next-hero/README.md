@@ -38,4 +38,5 @@ Place at the top of a page or login region, usually in a region with the Blank w
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

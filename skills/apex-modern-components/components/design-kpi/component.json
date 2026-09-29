@@ -3,7 +3,7 @@
   "apexlangName": "designKpi",
   "staticId": "AMC_DESIGN_KPI",
   "pluginType": "templateComponent",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "filesVersion": 2,
   "minApexVersion": "23.1",
   "keywords": ["kpi", "metric", "stat", "figure", "dashboard", "tile", "trend", "delta", "target", "gauge", "ring", "sparkline", "comparison", "design collection"],
@@ -179,6 +179,17 @@
       "escapeMode": "html",
       "sequence": 130,
       "helpText": "Optional footnote, for example vs. last month. In the Compare style it captions the current value, for example This quarter."
+    },
+    {
+      "staticId": "LOWER_IS_BETTER",
+      "apexlangName": "lowerIsBetter",
+      "attribute": 14,
+      "name": "Row Lower Is Better",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 75,
+      "helpText": "Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end."
     }
   ]
 }

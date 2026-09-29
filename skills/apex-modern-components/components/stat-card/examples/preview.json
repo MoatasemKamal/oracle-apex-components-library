@@ -14,6 +14,49 @@
       "title": "Partial, accent + down is good",
       "mode": "partial",
       "settings": { "LABEL": "Checkout error rate", "VALUE": "0.8", "SUFFIX": "%", "CHANGE": "-0.3 pts", "TREND": "down", "INVERT_TREND": "Y", "ICON": "fa-bug", "ACCENT": "danger" }
+    },
+    {
+      "title": "Per-row values: Row Accent and Row Lower Is Better from the query",
+      "mode": "report",
+      "settings": {
+        "COLUMNS": "3",
+        "ACCENT": "primary",
+        "INVERT_TREND": "N"
+      },
+      "rows": [
+        {
+          "LABEL": "Revenue",
+          "VALUE": "1,284,500",
+          "SUFFIX": "SAR",
+          "CHANGE": "+12.4%",
+          "TREND": "up",
+          "ICON": "fa-money",
+          "DESCRIPTION": "higher is better",
+          "ACCENT_VALUE": "success",
+          "LOWER_IS_BETTER": "N"
+        },
+        {
+          "LABEL": "Overdue invoices",
+          "VALUE": "37",
+          "CHANGE": "+5",
+          "TREND": "up",
+          "ICON": "fa-file-text-o",
+          "DESCRIPTION": "lower is better, rising",
+          "ACCENT_VALUE": "danger",
+          "LOWER_IS_BETTER": "Y"
+        },
+        {
+          "LABEL": "Avg. days to pay",
+          "VALUE": "41",
+          "SUFFIX": "d",
+          "CHANGE": "-3",
+          "TREND": "down",
+          "ICON": "fa-clock-o",
+          "DESCRIPTION": "lower is better, falling",
+          "ACCENT_VALUE": "unknown",
+          "LOWER_IS_BETTER": "true"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theme Kit Demo</title>
+<style>
+/* Stand-in for Universal Theme so the demo runs without APEX. Values approximate Vita.
+   Delete this block inside APEX: the theme style provides these variables. */
+:root {
+  --ut-palette-primary: #056ac8; --ut-palette-primary-contrast: #fff;
+  --ut-palette-success: #278701; --ut-palette-success-contrast: #fff;
+  --ut-palette-warning: #fbce4a; --ut-palette-warning-contrast: #443302;
+  --ut-palette-danger: #cb1100; --ut-palette-danger-contrast: #fff;
+  --ut-palette-info: #0076df; --ut-palette-info-contrast: #fff;
+  --ut-body-background-color: #f4f5f7; --ut-body-text-color: #262626;
+  --ut-component-background-color: #fff; --ut-component-text-default-color: #262626;
+  --ut-component-text-muted-color: #6b6b6b; --ut-component-border-color: #e1e3e6;
+  --ut-component-border-radius: .25rem; --ut-link-text-color: #056ac8;
+  --ut-header-background-color: #1c2b3a; --ut-header-text-color: #fff;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ut-body-background-color); color: var(--ut-body-text-color); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.t-Header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; background: var(--ut-header-background-color); color: var(--ut-header-text-color); }
+.t-Body-content { max-width: 1000px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; }
+.t-Region { background: var(--ut-component-background-color); color: var(--ut-component-text-default-color); border: 1px solid var(--ut-component-border-color); border-radius: var(--ut-component-border-radius); padding: 16px; min-width: 0; }
+.t-Region h2 { margin: 0 0 8px; font-size: 16px; }
+.muted { color: var(--ut-component-text-muted-color); }
+a { color: var(--ut-link-text-color); }
+.t-Button { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 14px; border: 1px solid var(--ut-component-border-color); border-radius: var(--ut-component-border-radius); background: var(--ut-component-background-color); color: var(--ut-component-text-default-color); font: inherit; cursor: pointer; }
+.t-Button--hot { background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); border-color: transparent; }
+.t-Button--success { background: var(--ut-palette-success); color: var(--ut-palette-success-contrast); border-color: transparent; }
+.t-Button--danger { background: var(--ut-palette-danger); color: var(--ut-palette-danger-contrast); border-color: transparent; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+pre { margin: 0; padding: 12px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; background: var(--ut-body-background-color); border-radius: var(--ut-component-border-radius); font-size: 12px; }
+</style>
+<link rel="stylesheet" href="amc-theme-kit.css">
+</head>
+<!-- In APEX: Page HTML Body Attribute  data-amc-theme-tokens="&P0_THEME_TOKENS!ATTR." -->
+<body data-amc-theme-tokens='{"--ut-palette-primary":"#0f766e","--ut-palette-primary-contrast":"#ffffff","--ut-link-text-color":"#0f766e","--ut-header-background-color":"#0b3b36","--ut-component-border-radius":"12px"}'>
+<header class="t-Header"><strong>Acme Tenant Portal</strong><span>Theme Kit demo</span></header>
+<main class="t-Body-content">
+  <section class="t-Region" aria-labelledby="r1">
+    <h2 id="r1">Brand tokens from data</h2>
+    <p>This page loaded its tokens from the <code>data-amc-theme-tokens</code> body attribute, which APEX fills from a Page 0 item computed with SQL. <span class="muted">Muted text stays readable.</span> <a href="#">A link</a>.</p>
+    <div class="row">
+      <button type="button" class="t-Button t-Button--hot">Primary</button>
+      <button type="button" class="t-Button t-Button--success">Approve</button>
+      <button type="button" class="t-Button t-Button--danger">Reject</button>
+      <button type="button" class="t-Button">Default</button>
+    </div>
+  </section>
+  <section class="t-Region" aria-labelledby="r2">
+    <h2 id="r2">Switch tenant (amcThemeKit.apply)</h2>
+    <div class="row">
+      <button type="button" class="t-Button" data-tenant="violet">Tenant Violet</button>
+      <button type="button" class="t-Button" data-tenant="yellow">Tenant Yellow (no contrast given)</button>
+      <button type="button" class="t-Button" data-tenant="unsafe">Unsafe text colors</button>
+      <button type="button" class="t-Button" data-tenant="hostile">Hostile values</button>
+      <button type="button" class="t-Button" data-tenant="reset">Reset</button>
+    </div>
+    <p class="muted">The report of the last apply (applied, adjusted, rejected, skipped):</p>
+    <pre id="report" aria-live="polite"></pre>
+  </section>
+</main>
+<script src="amc-theme-kit.js"></script>
+<script>
+(function () {
+  var tenants = {
+    violet: { "--ut-palette-primary": "#6d28d9", "--ut-palette-primary-contrast": "#ffffff", "--ut-link-text-color": "#6d28d9", "--ut-header-background-color": "#2e1065", "--ut-component-border-radius": "4px" },
+    yellow: { "--ut-palette-primary": "#facc15", "--ut-link-text-color": "#854d0e" },
+    unsafe: { "--ut-component-text-default-color": "#dddddd", "--ut-component-background-color": "#ffffff", "--ut-palette-success": "#15803d" },
+    hostile: { "--ut-palette-primary": "red;}body{display:none", "--ut-palette-danger": "url(https://example.com/x.png)", "--ut-palette-info": "var(--evil)", "--ut-component-border-radius": "calc(1px + 99vw)", "--x-not-allowed": "#000", "font-family": "Comic Sans MS", "--amc-theme-accent": "oklch(62% 0.19 150)" }
+  };
+  var out = document.getElementById("report");
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("[data-tenant]") : null;
+    if (!b) { return; }
+    var name = b.getAttribute("data-tenant");
+    if (name === "reset") { amcThemeKit.reset(); out.textContent = "reset"; return; }
+    out.textContent = JSON.stringify(amcThemeKit.apply(tenants[name]), null, 2);
+  });
+  out.textContent = "loaded from the body attribute";
+})();
+</script>
+</body>
+</html>

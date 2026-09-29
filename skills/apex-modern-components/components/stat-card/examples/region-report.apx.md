@@ -131,6 +131,51 @@ region sales_kpis (
 )
 ```
 
+## Per-row values: accent and lower is better
+
+Accent (select list) and Down Is Good (yes/no) are region settings. Since version 1.1.0 each
+row can override them with two Session State Value settings: **Row Accent** (`accentValue`,
+attribute 12: primary, info, success, warning or danger; anything else falls back to Accent)
+and **Row Lower Is Better** (`lowerIsBetter`, attribute 11: Y/N, yes/no, true/false, 1/0;
+empty falls back to Down Is Good). Add two columns to the query above:
+
+```sql
+       case when k.kpi_code in ('OVERDUE_INV', 'DSO', 'ERROR_RATE')
+            then 'Y' else 'N' end                        as lower_is_better,
+       case when k.status = 'RED'   then 'danger'
+            when k.status = 'AMBER' then 'warning'
+            when k.status = 'GREEN' then 'success' end   as accent_value
+```
+
+then map them next to the other settings, with the region-level values as the fallback:
+
+```apexlang
+    settings {
+        accent: primary
+        invertTrend: false
+        lowerIsBetter: LOWER_IS_BETTER
+        accentValue: ACCENT_VALUE
+    }
+    column LOWER_IS_BETTER (
+        source {
+            type: databaseColumn
+            databaseColumn: LOWER_IS_BETTER
+            dataType: varchar2
+            primaryKey: false
+        }
+    )
+    column ACCENT_VALUE (
+        source {
+            type: databaseColumn
+            databaseColumn: ACCENT_VALUE
+            dataType: varchar2
+            primaryKey: false
+        }
+    )
+```
+
+(The fragment shows only the new settings and columns; keep the ones above.)
+
 ## Builder (APEX 23.1 - 25.x, legacy import)
 
 Create region > Type **Stat Card [Plug-in]** > Appearance: *Multiple (Report)*, then map

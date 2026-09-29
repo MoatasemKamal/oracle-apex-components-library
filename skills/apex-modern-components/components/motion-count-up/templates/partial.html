@@ -1,4 +1,4 @@
-<div class="amc-CountUp{if ?ACCENT/} amc-CountUp--#ACCENT#{endif/}">
+<div class="amc-CountUp{case ACCENT_VALUE/}{when primary/} amc-CountUp--primary{when success/} amc-CountUp--success{when warning/} amc-CountUp--warning{when danger/} amc-CountUp--danger{otherwise/}{if ?ACCENT/} amc-CountUp--#ACCENT#{endif/}{endcase/}">
   {if ?ICON/}<span class="amc-CountUp-icon fa #ICON#" aria-hidden="true"></span>{endif/}
   <span class="amc-CountUp-value">{if ?PREFIX/}<span class="amc-CountUp-affix">#PREFIX#</span>{endif/}<span class="amc-CountUp-num" data-amc-count="#VALUE#" data-amc-decimals="{if ?DECIMALS/}#DECIMALS#{else/}0{endif/}" data-amc-duration="{case DURATION/}{when short/}0.8{when long/}2.8{otherwise/}1.6{endcase/}">#VALUE#</span>{if ?SUFFIX/}<span class="amc-CountUp-affix">#SUFFIX#</span>{endif/}</span>
   {if ?LABEL/}<span class="amc-CountUp-label">#LABEL#</span>{endif/}

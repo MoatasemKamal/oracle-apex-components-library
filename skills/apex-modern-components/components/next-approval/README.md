@@ -10,9 +10,9 @@ Next Collection approval chain for purchase orders, leave requests and expense c
 | APEXlang reference | `type: plugin/nextApproval` |
 | Modes | report (multiple rows), partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.1.0 |
 
-One query row per approver, ordered by Step. Rows with the same Step number are parallel approvers; Parallel Rule says whether all of them or any one must approve. State accepts approved, pending (acting now), rejected, skipped or waiting (not reached yet); other values render as waiting. Action Date and Due Date are ISO text, TO_CHAR(d, 'YYYY-MM-DD"T"HH24:MI'). The runtime file formats dates in the page language, marks the step that acts now, shows Overdue by or Due in from Due Date, groups parallel approvers and writes a one-line summary such as Waiting on Omar Aziz. Report mode shows the chain; partial mode shows a single approver, for example the step assigned to the current user.
+One query row per approver, ordered by Step. Rows with the same Step number are parallel approvers; Parallel Rule says whether all of them or any one must approve; Row Parallel Rule lets each step take that rule from a column. State accepts approved, pending (acting now), rejected, skipped or waiting (not reached yet); other values render as waiting. Action Date and Due Date are ISO text, TO_CHAR(d, 'YYYY-MM-DD"T"HH24:MI'). The runtime file formats dates in the page language, marks the step that acts now, shows Overdue by or Due in from Due Date, groups parallel approvers and writes a one-line summary such as Waiting on Omar Aziz. Report mode shows the chain; partial mode shows a single approver, for example the step assigned to the current user.
 
 ## Settings
 
@@ -30,6 +30,7 @@ One query row per approver, ordered by Step. Rows with the same Step number are 
 | `delegatedFrom` | Delegated From | sessionStateValue |  |  | Name of the person who delegated this step to the approver, for example Khalid Alotaibi while on leave. Shown as On behalf of Khalid Alotaibi. |
 | `dueDate` | Due Date | sessionStateValue |  |  | SLA deadline of a pending or waiting step, as ISO text TO_CHAR(due_at, 'YYYY-MM-DD"T"HH24:MI'). A pending step past it shows Overdue by and turns red; within the last quarter of its time, or the last 24 hours, it shows Due in and turns amber. Ignored for decided steps. |
 | `parallelRule` | Parallel Rule | selectList (`all`, `any`) |  | `all` | How a step with several approvers (same Step number) is decided. all: every approver must approve. any: the first approval completes the step. |
+| `parallelRuleValue` | Row Parallel Rule | sessionStateValue |  |  | Per-step rule from a column: all (every approver of the step must approve) or any (the first approval completes the step). Return the same value on every row of a step; the first row of the step that has all or any decides. Empty or any other value falls back to the region's Parallel Rule setting. Example: case when a.step_type = 'ANY_OF' then 'any' else 'all' end. |
 
 ## Install
 

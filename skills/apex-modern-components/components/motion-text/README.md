@@ -31,4 +31,5 @@ For Typewriter and Scramble, separate several phrases with |, for example Welcom
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

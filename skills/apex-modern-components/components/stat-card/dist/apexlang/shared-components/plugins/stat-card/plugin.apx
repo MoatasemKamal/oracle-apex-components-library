@@ -9,7 +9,7 @@ plugin statCard (
         ]
         partial:
             ```html
-            <div class="amc-StatCard{if ?ACCENT/} amc-StatCard--#ACCENT#{endif/}{if INVERT_TREND/} amc-StatCard--invertTrend{endif/}">
+            <div class="amc-StatCard{case ACCENT_VALUE/}{when primary/} amc-StatCard--primary{when info/} amc-StatCard--info{when success/} amc-StatCard--success{when warning/} amc-StatCard--warning{when danger/} amc-StatCard--danger{otherwise/}{if ?ACCENT/} amc-StatCard--#ACCENT#{endif/}{endcase/}{case LOWER_IS_BETTER/}{when Y/} amc-StatCard--invertTrend{when y/} amc-StatCard--invertTrend{when YES/} amc-StatCard--invertTrend{when Yes/} amc-StatCard--invertTrend{when yes/} amc-StatCard--invertTrend{when TRUE/} amc-StatCard--invertTrend{when True/} amc-StatCard--invertTrend{when true/} amc-StatCard--invertTrend{when 1/} amc-StatCard--invertTrend{when N/}{when n/}{when NO/}{when No/}{when no/}{when FALSE/}{when False/}{when false/}{when 0/}{otherwise/}{if INVERT_TREND/} amc-StatCard--invertTrend{endif/}{endcase/}">
               {if ?ICON/}<span class="amc-StatCard-icon fa #ICON#" aria-hidden="true"></span>{endif/}
               <div class="amc-StatCard-body">
                 <span class="amc-StatCard-label">#LABEL#</span>
@@ -49,10 +49,10 @@ plugin statCard (
         ]
     }
     information {
-        version: 1.0.1
+        version: 1.1.0
         helpText:
             ```
-            Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).
+            Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Row Accent and Row Lower Is Better let each row choose its color and trend direction from the query; they fall back to the region-level Accent and Down Is Good settings. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).
             ```
     }
     customAttribute LABEL (
@@ -187,6 +187,28 @@ plugin statCard (
                 ```
         }
     )
+    customAttribute LOWER_IS_BETTER (
+        apexlangName: lowerIsBetter
+        attribute: 11
+        name: Row Lower Is Better
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 65
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end.
+                ```
+        }
+    )
     customAttribute ICON (
         apexlangName: icon
         attribute: 7
@@ -280,6 +302,28 @@ plugin statCard (
             display: Danger
             return: danger
         )
+    )
+    customAttribute ACCENT_VALUE (
+        apexlangName: accentValue
+        attribute: 12
+        name: Row Accent
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 95
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Per-row accent from a column: primary, info, success, warning, danger (lower case). Any other value, or an empty one, falls back to the region's Accent setting. Example: case when overdue_count > 0 then 'danger' else 'success' end.
+                ```
+        }
     )
     customAttribute COLUMNS (
         apexlangName: columns

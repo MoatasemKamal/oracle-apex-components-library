@@ -24,7 +24,7 @@ plugin nextCalendar (
             ```
         reportRow:
             ```html
-            <li class="amc-NCalendar-event amc-NCalendar-event--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}" data-start="#START_DATE#" data-end="#END_DATE#" data-category="#CATEGORY!ATTR#" data-all-day="#ALL_DAY#" data-value="#VALUE#" data-state="{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}">#APEX$PARTIAL#</li>
+            <li class="amc-NCalendar-event amc-NCalendar-event--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}" data-start="#START_DATE#" data-end="#END_DATE#" data-category="#CATEGORY!ATTR#" data-all-day="#ALL_DAY#" data-value="#VALUE#" data-initial-date="#INITIAL_DATE_VALUE#" data-state="{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}">#APEX$PARTIAL#</li>
             ```
         translateTemplates: true
         defaultEscapeMode: html
@@ -47,7 +47,7 @@ plugin nextCalendar (
         ]
     }
     information {
-        version: 1.0.1
+        version: 1.1.0
         helpText:
             ```
             One query row per event. Map Start Date (required) and Title (required); return dates as text in ISO form with TO_CHAR(date_col, 'YYYY-MM-DD"T"HH24:MI'), or 'YYYY-MM-DD' for all-day events. End Date is exclusive for timed events and the last day for all-day events. Category groups events by color and makes the lanes of Timeline Lanes. State accepts success, warning, danger, info or neutral. Value is a number that drives the Heatmap intensity instead of the event count. Without JavaScript the rows show as a readable agenda list; the runtime file builds the chosen view, keyboard navigation and live updates, and rebuilds after a region refresh.
@@ -412,7 +412,29 @@ plugin nextCalendar (
         help {
             helpText:
                 ```
-                Optional date the calendar opens on, as YYYY-MM-DD, for example 2026-10-01 or a page item reference such as &P10_DATE. formatted that way. Leave empty to open on today. Poster Day and Flip Date show this day; the other views show the month, week or year that contains it.
+                Optional fixed date the calendar opens on, as YYYY-MM-DD, for example 2026-10-01. Leave empty to open on today. To open on a page item or a date from the data, use Initial Date Value instead; whether APEX substitutes &ITEM. references in this static setting is not confirmed for every release. Poster Day and Flip Date show this day; the other views show the month, week or year that contains it.
+                ```
+        }
+    )
+    customAttribute INITIAL_DATE_VALUE (
+        apexlangName: initialDateValue
+        attribute: 19
+        name: Initial Date Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 135
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional date the calendar opens on, as YYYY-MM-DD, taken from a column so it can come from a page item or the data, for example to_char(to_date(:P10_DATE, 'YYYY-MM-DD'), 'YYYY-MM-DD') as initial_date or to_char(min(start_at) over (), 'YYYY-MM-DD'). The first row with a readable date wins over the static Initial Date; when it is empty on every row the static Initial Date, then today, is used.
                 ```
         }
     )

@@ -4,7 +4,8 @@
  * dates). This file:
  *  - formats Action Date and Due Date with Intl in the page language;
  *  - groups consecutive rows with the same Step into one parallel step, decided by the
- *    region's Parallel Rule (all or any), with a heading such as "1 of 2 approved";
+ *    step's per-row Parallel Rule value when a row carries one, otherwise the region's
+ *    Parallel Rule (all or any), with a heading such as "1 of 2 approved";
  *  - finds the step that acts now (the first undecided step with a pending approver),
  *    marks it with aria-current="step", and fills its SLA ring from the moment the request
  *    reached it (latest Action Date of the earlier steps) to its Due Date;
@@ -174,9 +175,12 @@
       var step = trim(li.getAttribute("data-step"));
       var g = groups[groups.length - 1];
       if (!g || g.step !== step) {
-        g = { step: step, members: [] };
+        g = { step: step, members: [], rule: "" };
         groups.push(g);
       }
+      /* Per-row Parallel Rule (column): the first row of the step with all or any decides. */
+      var rowRule = li.getAttribute("data-rule");
+      if (!g.rule && (rowRule === "all" || rowRule === "any")) { g.rule = rowRule; }
       g.members.push({ li: li, el: single });
     });
     this.groups = groups;
@@ -184,12 +188,14 @@
     var reached = null;
     var rejectedAt = -1;
     groups.forEach(function (g, gi) {
+      if (!g.rule) { g.rule = self.rule; }
+      g.members.forEach(function (m) { m.li.setAttribute("data-amc-rule", g.rule); });
       var st = g.members.map(function (m) { return stateOf(m.el); });
       var has = function (s) { return st.indexOf(s) >= 0; };
       var approved = st.filter(function (s) { return s === "approved"; }).length;
       g.approved = approved;
       if (has("rejected")) { g.state = "rejected"; }
-      else if (self.rule === "any" ? approved > 0 : (approved > 0 && st.every(function (s) { return s === "approved" || s === "skipped"; }))) { g.state = "approved"; }
+      else if (g.rule === "any" ? approved > 0 : (approved > 0 && st.every(function (s) { return s === "approved" || s === "skipped"; }))) { g.state = "approved"; }
       else if (has("pending")) { g.state = "pending"; }
       else if (st.every(function (s) { return s === "skipped"; })) { g.state = "skipped"; }
       else { g.state = "waiting"; }
@@ -255,7 +261,7 @@
         if (g === self.current) { wrap.setAttribute("aria-current", "step"); }
         var head = h("p", "amc-NApproval-groupHead");
         head.appendChild(h("span", "amc-NApproval-groupStep", fmt(t.step, [g.step])));
-        head.appendChild(h("span", "amc-NApproval-groupRule", self.rule === "any" ? fmt(t.any, [g.members.length]) : fmt(t.all, [g.approved, g.members.length])));
+        head.appendChild(h("span", "amc-NApproval-groupRule", g.rule === "any" ? fmt(t.any, [g.members.length]) : fmt(t.all, [g.approved, g.members.length])));
         var ol = h("ol", "amc-NApproval-members");
         list.insertBefore(wrap, g.members[0].li);
         wrap.appendChild(head);

@@ -10,7 +10,7 @@ Seven animated loading indicators from the Motion Gallery: ring, dots, equalizer
 | APEXlang reference | `type: plugin/motionLoader` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.1.0 |
 | Based on | [Motion Gallery](https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html) (Original) |
 
 Shows an animated loading indicator in the theme's colors. Show and hide it with a Dynamic Action, or place it in a region that is replaced when data arrives. Users with reduced motion see a still frame.
@@ -21,6 +21,7 @@ Shows an animated loading indicator in the theme's colors. Show and hide it with
 |---|---|---|---|---|---|
 | `style` | Style | selectList (`ring`, `dots`, `bars`, `orbit`, `dualRing`, `gridWave`, `indeterminate`) | yes | `ring` | The loader animation. |
 | `label` | Accessible Label | text |  |  | What screen readers announce. Defaults to Loading. |
+| `labelValue` | Label Value | sessionStateValue |  |  | Optional accessible label taken from the source query or a page item, for example 'Loading ' \|\| count(*) \|\| ' orders'. When not empty it replaces the static Label; screen readers announce it. |
 | `size` | Size | selectList (`small`, `large`) |  |  | Leave empty for the medium size. |
 
 ## Install
@@ -30,4 +31,5 @@ Shows an animated loading indicator in the theme's colors. Show and hide it with
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

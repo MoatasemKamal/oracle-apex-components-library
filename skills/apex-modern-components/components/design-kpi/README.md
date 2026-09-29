@@ -10,7 +10,7 @@ Design Collection family of ten KPI tile designs chosen with Style: big number, 
 | APEXlang reference | `type: plugin/designKpi` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.1 |
+| Version | 1.1.0 |
 
 Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (a number from 0 to 100) drives the Target Bar and Ring styles, Series (comma-separated numbers) drives Spark Bars, and Compare Value / Compare Label drive the Compare and Target Bar styles. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.
 
@@ -25,6 +25,7 @@ Pick a Style, then map Label and Value (formatted in SQL with the application's 
 | `change` | Change | sessionStateValue |  |  | Optional change text such as +12.4% or -9. Leave empty to hide the trend indicator. |
 | `trend` | Trend | sessionStateValue |  |  | Direction of the change: up, down or flat. Any other value renders as flat. Up is shown in the success color and down in the danger color unless Down Is Good is set. |
 | `invertTrend` | Down Is Good | yesNo |  | `N` | Swap the trend colors so a decrease is shown as positive, for example for costs, churn or error rates. |
+| `lowerIsBetter` | Row Lower Is Better | sessionStateValue |  |  | Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end. |
 | `percent` | Percent | sessionStateValue |  |  | Target Bar and Ring styles: a number from 0 to 100 with a period as decimal separator, for example 72 or 64.5. Values outside the range are clamped; non-numeric values show an empty bar or ring. |
 | `series` | Series | sessionStateValue |  |  | Spark Bars style: comma-separated numbers, oldest first, with a period as decimal separator, for example 12,18,15,22,27. Up to 24 values are drawn; the last one is highlighted. Build it in SQL with listagg. |
 | `compareValue` | Compare Value | sessionStateValue |  |  | Compare style: the reference figure, for example last quarter's value. Target Bar style: the target, for example 1,500,000. Format it in SQL like Value. |

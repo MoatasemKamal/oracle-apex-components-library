@@ -8,7 +8,7 @@ plugin motionLoader (
         ]
         partial:
             ```html
-            <div class="amc-Motion amc-Motion--loader{if ?SIZE/} amc-Motion--#SIZE#{endif/}" role="status" aria-label="{if ?LABEL/}#LABEL!ATTR#{else/}Loading{endif/}">
+            <div class="amc-Motion amc-Motion--loader{if ?SIZE/} amc-Motion--#SIZE#{endif/}" role="status" aria-label="{if ?LABEL_VALUE/}#LABEL_VALUE!ATTR#{elseif ?LABEL/}#LABEL!ATTR#{else/}Loading{endif/}">
               <div class="amc-Motion-inner" aria-hidden="true">{case STYLE/}
               {when ring/}<div class="amc-ld-ring"></div>
               {when dots/}<div class="amc-ld-dots"><i></i><i></i><i></i></div>
@@ -41,7 +41,7 @@ plugin motionLoader (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.1.0
         helpText:
             ```
             Shows an animated loading indicator in the theme's colors. Show and hide it with a Dynamic Action, or place it in a region that is replaced when data arrives. Users with reduced motion see a still frame.
@@ -129,6 +129,28 @@ plugin motionLoader (
             helpText:
                 ```
                 What screen readers announce. Defaults to Loading.
+                ```
+        }
+    )
+    customAttribute LABEL_VALUE (
+        apexlangName: labelValue
+        attribute: 4
+        name: Label Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 25
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional accessible label taken from the source query or a page item, for example 'Loading ' || count(*) || ' orders'. When not empty it replaces the static Label; screen readers announce it.
                 ```
         }
     )

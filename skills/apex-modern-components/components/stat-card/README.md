@@ -10,9 +10,9 @@ KPI tile with label, value, optional unit, trend delta and icon. Renders one car
 | APEXlang reference | `type: plugin/statCard` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.1 |
+| Version | 1.1.0 |
 
-Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).
+Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Row Accent and Row Lower Is Better let each row choose its color and trend direction from the query; they fall back to the region-level Accent and Down Is Good settings. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).
 
 ## Settings
 
@@ -24,9 +24,11 @@ Displays a key figure with an optional trend indicator. Map Trend to a column re
 | `change` | Change | sessionStateValue |  |  | Optional delta text such as +12.4%. Leave empty to hide the trend row. |
 | `trend` | Trend | sessionStateValue |  |  | Direction of the change: up, down or flat. Any other value renders as flat. |
 | `invertTrend` | Down Is Good | yesNo |  | `N` | Swap trend colors so a decrease is shown as positive, for example for costs or error rates. |
+| `lowerIsBetter` | Row Lower Is Better | sessionStateValue |  |  | Accepts Y, yes, true or 1 (lower is better: a decrease is shown as good) and N, no, false or 0 (higher is better), in upper, lower or title case. A row value wins over the region switch for that row. Leave it empty to use the region's Down Is Good switch. Map it to a column so each row decides, for example case when kpi_code in ('COST','ERRORS') then 'Y' end. |
 | `icon` | Icon | sessionStateValue |  |  | Font APEX icon class, for example fa-users. Can be static text or a column. |
 | `description` | Description | sessionStateValue |  |  | Optional footnote, for example vs. last month. |
 | `accent` | Accent | selectList (`primary`, `info`, `success`, `warning`, `danger`) |  |  | Colors the icon and top edge using the theme palette. |
+| `accentValue` | Row Accent | sessionStateValue |  |  | Per-row accent from a column: primary, info, success, warning, danger (lower case). Any other value, or an empty one, falls back to the region's Accent setting. Example: case when overdue_count > 0 then 'danger' else 'success' end. |
 | `columns` | Columns | selectList (`two`, `three`, `four`) |  |  | Report mode only. Auto fits as many cards as the region width allows; the fixed options collapse to one column on phones. |
 
 ## Install

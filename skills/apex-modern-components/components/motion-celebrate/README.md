@@ -30,4 +30,5 @@ Place the region anywhere (use a blank region template; it renders nothing visib
 
 ## Examples
 
+- [region-from-query](examples/region-from-query.apx.md)
 - [region-partial](examples/region-partial.apx.md)

@@ -103,6 +103,42 @@
       "title": "ring, partial",
       "mode": "partial",
       "settings": { "STYLE": "ring", "LABEL": "Storage used", "VALUE": "812", "UNIT": "GB", "PERCENT": "81", "DESCRIPTION": "of 1 TB plan" }
+    },
+    {
+      "title": "Per-row Lower Is Better",
+      "mode": "report",
+      "settings": {
+        "STYLE": "deltaChip",
+        "INVERT_TREND": "N"
+      },
+      "rows": [
+        {
+          "LABEL": "Revenue",
+          "VALUE": "1,284,500",
+          "UNIT": "SAR",
+          "CHANGE": "+12.4%",
+          "TREND": "up",
+          "DESCRIPTION": "higher is better"
+        },
+        {
+          "LABEL": "Checkout errors",
+          "VALUE": "0.8",
+          "UNIT": "%",
+          "CHANGE": "-0.3 pts",
+          "TREND": "down",
+          "LOWER_IS_BETTER": "Y",
+          "DESCRIPTION": "lower is better"
+        },
+        {
+          "LABEL": "Support cost",
+          "VALUE": "52,300",
+          "UNIT": "SAR",
+          "CHANGE": "+6%",
+          "TREND": "up",
+          "LOWER_IS_BETTER": "Y",
+          "DESCRIPTION": "lower is better"
+        }
+      ]
     }
   ]
 }
