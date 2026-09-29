@@ -39,12 +39,53 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Principle Templates (12 templates grounded in design principles)
+
+Each applies a named design principle (from the MIT-licensed
+[designer-skills](https://github.com/Owl-Listener/designer-skills) suite) to a real APEX need:
+Zeigarnik effect, error-handling UX, loading states and the Doherty threshold, Tesler's law,
+Hick's and Miller's laws, Fitts's law, Von Restorff and serial position, onboarding design,
+readable measure and type scale, common region and proximity, the peak-end rule, and
+figure-ground. All are plugin-free.
+
+| Template | Kind | What it does |
+|---|---|---|
+| [Coach Tour](skills/apex-modern-components/theme-templates/coach-tour) | list | A guided page tour built from a list: each entry is a step that dims the page, cuts a spotlight around its target element and explains it in a coach card with Step 2 of 5, Back, Next and Skip, remembered per application so it runs once; without JavaScript it is a checklist of tips. |
+| [Empty Aware](skills/apex-modern-components/theme-templates/empty-aware) | region | A region frame that notices when the native content inside it has nothing to show, a no-data message, a report table without rows or a card list without cards, and replaces that dead end with a drawn empty state that states what is missing and promotes the region's Create button as the next action, then steps aside when a refresh brings data back. |
+| [Error Summary](skills/apex-modern-components/theme-templates/error-summary) | region | A form frame that turns the item errors APEX shows inside it into a summary at the top, with a count, a link to each field and a plain-language fix hint, moves focus there once and clears itself when the errors clear. |
+| [Form Progress](skills/apex-modern-components/theme-templates/form-progress) | region | A form frame whose top edge is a segmented meter with one segment per required item, and whose header says honestly how many required fields are done and offers a Next button to the next empty one. |
+| [Hick Menu](skills/apex-modern-components/theme-templates/hick-menu) | list | A long list of 20 to 80 entries cut into named groups of at most seven visible entries each, with Show all 12 in Finance for the rest, a filter box that only appears when the list is long, and the entries this user opened last on top. |
+| [Island Groups](skills/apex-modern-components/theme-templates/island-groups) | region | A region frame that turns its sub regions and marked body blocks into clearly bounded islands, grouped by a shared tinted ground and generous gutters instead of borders, on a 12-column grid that follows the region's own width and balances the islands so none is left alone on the last row. |
+| [Peak End Summary](skills/apex-modern-components/theme-templates/peak-end-summary) | region | An end-of-flow summary frame whose single orchestrated moment is the flow's key figure counting up into place while a light blooms behind it and an accent bar draws under it, followed by a still recap list, numbered next steps and a calm closing line; the end state is exactly the static markup. |
+| [Progressive Disclosure](skills/apex-modern-components/theme-templates/progressive-disclosure) | region | A form frame that keeps the essential items in view and gathers the items marked amc-pd-more behind one counted toggle, Show 6 more options, remembers the choice per page and never hides a filled or invalid option silently. |
+| [Readable Article](skills/apex-modern-components/theme-templates/readable-article) | region | A reading frame for long text that holds the body to a comfortable 60 to 75 character measure under a heavy title and a 1.25 modular heading scale, and builds a table of contents from the text's own headings whose rail fills as you read, sticky beside the text when the region is wide and a collapsible Contents block on top when it is narrow. |
+| [Skeleton Region](skills/apex-modern-components/theme-templates/skeleton-region) | region | A region frame that, when a refresh takes longer than 400 ms, lays a skeleton with the exact shape of the current content over the body, measured from the report rows, cards, fields and text lines on screen, and never flashes on fast loads. |
+| [Spotlight Choice](skills/apex-modern-components/theme-templates/spotlight-choice) | list | A plan or option chooser in which exactly one recommended entry is isolated as a solid, raised card with a Recommended flag and placed first or in the middle by serial position, with radio-like keyboard selection that writes the chosen value to a page item. |
+| [Thumb Bar](skills/apex-modern-components/theme-templates/thumb-bar) | list | A mobile-first bottom action bar for the page's main actions: the primary action is the largest target in the thumb zone, secondary actions are compact, the rest wait in a bottom sheet, and on wider screens it is an inline action row. |
+
+## Data from your queries
+
+Everything takes its values from SQL: components map settings to query columns (report mode
+per row, partial mode from a one-row query), list templates and navigation work with APEX
+dynamic lists, region templates wrap native regions, and the **Theme Kit** applies brand
+colours from a query at runtime with validation and contrast safeguards. Settings that are
+data have per-row companions (for example `lowerIsBetter`, `accentValue`). Every component
+has an example fed by a query. See
+[`references/data-binding.md`](skills/apex-modern-components/references/data-binding.md).
+
+## Responsive by test
+
+`node tools/check-responsive.mjs` renders every component, template and theme-style sample
+at 320, 390, 768, 1024 and 1440 px, with and without JavaScript, and fails on page-level
+sideways scroll or anything sticking out of its region.
+
 ## Authentication and messages (plugin-free)
 
 | Part | What it is | What it does |
 |---|---|---|
 | [Auth Card](skills/apex-modern-components/theme-templates/auth-card) | Region template | Login, create account, forgot password, OTP verification and reset password: 7 looks, 7 animated full-screen scenes, and opt-in field behaviours by item CSS class (show/hide password, Caps Lock, strength meter, match check, OTP boxes with paste and auto-submit, resend countdown, loading state, error shake). Five page examples with server-side security checklists |
 | [Auth Result](skills/apex-modern-components/theme-templates/auth-result) | Region template | Confirmation and outcome screens (success, email sent, verified, signed out, expired, error, denied) with self-drawing symbols, optional confetti and an accessible countdown redirect |
+| [Theme Kit](skills/apex-modern-components/theme-kit) | App-wide static files | Brand colours and radius from a query per tenant or user, whitelisted variables, validated values, contrast safeguards |
 | [Message Kit](skills/apex-modern-components/message-kit) | App-wide static files | APEX success and error messages as animated toasts and an error panel with links to fields, restyled alert and confirm dialogs, and `amcMessageKit.toast()` for Dynamic Actions |
 
 None of these is a plug-in: companies that block plug-ins can still use them. Security (OTP expiry, attempt
@@ -167,7 +208,7 @@ See [`references/theme-templates.md`](skills/apex-modern-components/references/t
 | [Terminal Window](skills/apex-modern-components/theme-templates/terminal-window) | bold | A desktop terminal window: an inverse-colored bezel and title bar with three window dots and the title centered in monospace after a prompt, around a readable content pane. |
 | [Ticket Stub](skills/apex-modern-components/theme-templates/ticket-stub) | smart | The region is a ticket: a tinted stub with icon, title, buttons and a barcode is torn off from the body by a perforated line with punched notches, and the stub moves from the side to the top when the region gets narrow. |
 
-## Next Collection (134 new-generation designs)
+## Next Collection (164 new-generation designs)
 
 Eleven template components with designs in four directions: **motion** (border beams,
 spotlights, shimmer, meteors, tickers, marquees), **3D depth** (pointer tilt, flip cards,
@@ -189,10 +230,16 @@ Universal Theme variables, works in RTL and stops all motion under reduced motio
 | [Next Pricing](skills/apex-modern-components/components/next-pricing) | 10 | partial, report | beam featured, spotlight, tilt 3D, flip annual, neo-brutal, clay, holo premium, aurora dark, expand features, comparison adaptive |
 | [Next Alert](skills/apex-modern-components/components/next-alert) | 10 | partial, report | beam toast, pulse critical, ticker bar, stacked toasts, lift glass, neo-brutal, clay, hazard stripe, expand details, adaptive bar |
 | [Next Hero](skills/apex-modern-components/components/next-hero) | 10 | partial | aurora, meteors, grid spotlight, retro grid, parallax layers, kinetic type, neo-brutal, mesh grain, split morph, scroll reveal |
+| [Next Kanban](skills/apex-modern-components/components/next-kanban) | 5 | report | board with WIP-limit slots, pointer and keyboard moves, amc:kanban-move event for saving |
+| [Next Approval](skills/apex-modern-components/components/next-approval) | 5 | report, partial | approval chain with who-acts-now, SLA ring, parallel all/any, rejection stops the chain |
+| [Next Org Chart](skills/apex-modern-components/components/next-org-chart) | 5 | report | hierarchy from ID/PARENT_ID, collapse, search, keyboard tree, zoom and pan |
+| [Next Thread](skills/apex-modern-components/components/next-thread) | 5 | report | comments and activity by day, replies, internal notes, status events |
+| [Next Document](skills/apex-modern-components/components/next-document) | 5 | report | invoices, quotations, receipts, payslips with VAT, stamp, A4 and 80mm print, bilingual tax invoice |
+| [Next Compare](skills/apex-modern-components/components/next-compare) | 5 | report | options x criteria with weighted scores, ranks, best values, pinning, swipe mode |
 | [Next Gallery](skills/apex-modern-components/components/next-gallery) | 10 | report | justified rows, masonry, filmstrip, 3D coverflow, polaroid, mosaic, hover zoom, before/after compare, swipe stack, light table with loupe; shared lightbox with zoom, swipe and keyboard |
 | [Next Calendar](skills/apex-modern-components/components/next-calendar) | 10 | report | month, agenda, week time grid, year heatmap, resource lanes, poster day, flip calendar, countdown, circular year, mini dots; Intl names, Hijri calendar, RTL, keyboard |
 | [Next Bento](skills/apex-modern-components/components/next-bento) | 10 | report | spotlight glow, beam feature, tilt tiles, layered glass, neo-brutal, clay, aurora mosaic, grid pattern, magazine, expanding tiles |
-| **Total** | **134** | | |
+| **Total** | **164** | | |
 
 Techniques adapted from [Magic UI](https://magicui.design) (MIT) are credited in each
 component's `source` and file headers.

@@ -28,3 +28,22 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/oracle/skills.git /tmp/oracle-skills
           node skills/apex-modern-components/tools/apexlang-check.mjs --apexlang /tmp/oracle-skills/apex/apexlang
+
+  responsive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        working-directory: skills/apex-modern-components
+        run: |
+          npm install --no-save playwright@1
+          npx playwright install --with-deps chromium
+      - name: Responsive check (with JavaScript)
+        working-directory: skills/apex-modern-components
+        run: node tools/check-responsive.mjs
+      - name: Responsive check (without JavaScript)
+        working-directory: skills/apex-modern-components
+        run: node tools/check-responsive.mjs --no-js
