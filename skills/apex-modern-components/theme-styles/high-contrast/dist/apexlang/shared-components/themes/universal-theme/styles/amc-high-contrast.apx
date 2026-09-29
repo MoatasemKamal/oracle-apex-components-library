@@ -1,0 +1,23 @@
+style amc-high-contrast (
+    name: AMC High Contrast
+    css {
+        fileUrls: [
+            #THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#
+            #APP_FILES#amc-styles/amc-style-high-contrast.css
+        ]
+    }
+    themeRollerAttributes {
+        readOnly: true
+    }
+    advanced {
+        staticId: AMC_STYLE_HIGH_CONTRAST
+        endUserCanPick: true
+        accessibilityTested: false
+    }
+    comments {
+        comments:
+            ```text
+            Light style built on Vita for users who need strong contrast. All text pairs (body, region, muted, links, button text, badge text, alert text) are at least 7:1 (WCAG AAA). Focus is a 3px outline with a 2px offset (yellow inside the dark header). Links in content are underlined, controls have dark 1px borders, and shadows and gradients are removed. Alerts get a thick start border and, when the alert has no icon, a symbol before the title, so meaning is not carried by color alone. Report and badge refinements target Universal Theme classes and should be checked on a live page.
+            ```
+    }
+)

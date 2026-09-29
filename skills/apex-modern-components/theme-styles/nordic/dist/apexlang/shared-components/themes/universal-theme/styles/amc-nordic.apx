@@ -1,0 +1,23 @@
+style amc-nordic (
+    name: AMC Nordic
+    css {
+        fileUrls: [
+            #THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#
+            #APP_FILES#amc-styles/amc-style-nordic.css
+        ]
+    }
+    themeRollerAttributes {
+        readOnly: true
+    }
+    advanced {
+        staticId: AMC_STYLE_NORDIC
+        endUserCanPick: true
+        accessibilityTested: false
+    }
+    comments {
+        comments:
+            ```text
+            Light style built on Vita. The page is a pale grey-blue, regions are white with a hairline border and a barely visible shadow, text is slate, and the primary color is a muted fjord blue that passes WCAG AA with white text. The header is white with a thin slate rule instead of a colored bar, the current menu entry is a soft tinted pill, and column headings and labels are quieter. Works with every AMC component and template, which read the same --ut-* variables. Header and navigation refinements target Universal Theme classes and should be checked on a live page.
+            ```
+    }
+)

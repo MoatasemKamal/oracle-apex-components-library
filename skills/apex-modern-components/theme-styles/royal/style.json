@@ -1,0 +1,11 @@
+{
+  "name": "AMC Royal",
+  "staticId": "AMC_STYLE_ROYAL",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "A formal government and enterprise style: a deep indigo header with a thin gold rule, a warm ivory page, ivory-white regions, an indigo primary, and gold kept for accents only (current menu marker, focus ring, badges).",
+  "keywords": ["royal", "government", "enterprise", "formal", "indigo", "gold", "ivory", "light"],
+  "helpText": "Light style built on Vita for government and enterprise apps. The header is deep indigo with a thin gold rule beneath it, the page is warm ivory and regions are ivory-white with a fine border. The primary color is indigo (WCAG AA and AAA with white text). Gold is used only as an accent: the current menu marker, the focus ring and neutral badges. Uses the system sans-serif stack with confident weights. Works with every AMC component and template, which read the same --ut-* variables. Header and navigation refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

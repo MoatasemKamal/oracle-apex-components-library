@@ -1,0 +1,11 @@
+{
+  "name": "AMC High Contrast",
+  "staticId": "AMC_STYLE_HIGH_CONTRAST",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "An accessibility-first style: every text pair meets WCAG AAA (7:1), thick offset focus rings, underlined links, a visible border on every control, alerts marked by a thick start border and a symbol, and no shadows or gradients.",
+  "keywords": ["high contrast", "accessibility", "wcag aaa", "a11y", "low vision", "light", "clean"],
+  "helpText": "Light style built on Vita for users who need strong contrast. All text pairs (body, region, muted, links, button text, badge text, alert text) are at least 7:1 (WCAG AAA). Focus is a 3px outline with a 2px offset (yellow inside the dark header). Links in content are underlined, controls have dark 1px borders, and shadows and gradients are removed. Alerts get a thick start border and, when the alert has no icon, a symbol before the title, so meaning is not carried by color alone. Report and badge refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

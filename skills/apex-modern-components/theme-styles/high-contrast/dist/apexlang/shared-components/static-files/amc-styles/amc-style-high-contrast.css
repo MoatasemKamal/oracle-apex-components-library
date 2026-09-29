@@ -1,0 +1,104 @@
+/* AMC High Contrast: Universal Theme style (light), layered on Vita. WCAG AAA text pairs. */
+:root {
+  --ut-body-background-color: #f4f5f7;
+  --ut-body-text-color: #111111;
+  --ut-component-background-color: #ffffff;
+  --ut-component-text-default-color: #111111;
+  --ut-component-text-muted-color: #474747;
+  --ut-component-border-color: #6b6b6b;
+  --ut-component-border-radius: 6px;
+  --ut-component-box-shadow: none;
+  --ut-field-border-color: #474747;
+  --ut-field-background-color: #ffffff;
+  --ut-link-text-color: #0a3d8f;
+  --ut-focus-outline-color: #0a3d8f;
+  --ut-palette-primary: #0a3d8f;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #0e5c2c;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #7a4100;
+  --ut-palette-warning-contrast: #ffffff;
+  --ut-palette-danger: #a0161a;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #005a70;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #111111;
+  --ut-header-text-color: #ffffff;
+  --ut-nav-background-color: #ffffff;
+  --amc-hc-divider: #9a9a9a;
+  --amc-hc-focus-on-dark: #ffd54a;
+}
+
+/* Focus: 3px, offset, never removed. */
+:focus-visible,
+.apex-item-text:focus,
+.apex-item-select:focus {
+  outline: 3px solid var(--ut-focus-outline-color);
+  outline-offset: 2px;
+}
+.t-Header :focus-visible { outline-color: var(--amc-hc-focus-on-dark); }
+
+/* Flat: no shadows or gradients anywhere in the chrome. */
+.t-Header { border-block-end: 1px solid #000000; box-shadow: none; background-image: none; }
+.t-Region, .t-Button, .t-Button--hot, .t-Alert { box-shadow: none; background-image: none; }
+.t-Body-nav { border-inline-end-color: var(--ut-component-border-color); }
+
+/* Links in content are underlined; buttons and navigation stay as they are. */
+.t-Body-content a:not([class*="Button"]):not([class*="Badge"]) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
+}
+.t-Body-content a:not([class*="Button"]):not([class*="Badge"]):hover { text-decoration-thickness: 2px; }
+
+/* Current menu entry: bold, thick bar and a tint (not color alone). */
+.t-TreeNav .is-current > a {
+  color: var(--ut-palette-primary);
+  background: #e7edf7;
+  font-weight: 700;
+  box-shadow: inset 4px 0 0 var(--ut-palette-primary);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -4px 0 0 var(--ut-palette-primary); }
+
+/* Every control has a visible border. */
+.t-Button { border-color: var(--ut-field-border-color); color: var(--ut-component-text-default-color); font-weight: 600; }
+.t-Button--hot { border-color: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); }
+.t-Header .t-Header-controls { border: 1px solid rgba(255, 255, 255, .6); }
+
+/* Labels and column headings use full-strength text. */
+.t-Form-label, .t-Report-colHead { color: var(--ut-component-text-default-color); font-weight: 600; }
+.t-Report-colHead { border-block-end: 2px solid var(--ut-component-text-default-color); }
+.t-Report-cell { border-block-end-color: var(--amc-hc-divider); }
+
+/* Badges: white fill, dark palette text and a border (7:1 or more). */
+.t-Badge { background: #ffffff; color: var(--ut-palette-primary); border: 1px solid currentColor; }
+.t-Badge--success { background: #ffffff; color: var(--ut-palette-success); }
+.t-Badge--warning { background: #ffffff; color: var(--ut-palette-warning); }
+.t-Badge--danger { background: #ffffff; color: var(--ut-palette-danger); }
+
+/* Alerts: thick start border, near-white fill, dark text, symbol when there is no icon. */
+.t-Alert { background: #ffffff; color: var(--ut-component-text-default-color); border: 1px solid var(--ut-component-border-color); border-inline-start-width: 6px; }
+.t-Alert--success { border-color: var(--ut-palette-success); background: #f1f7f3; }
+.t-Alert--warning { border-color: var(--ut-palette-warning); background: #fbf5ee; }
+.t-Alert--danger { border-color: var(--ut-palette-danger); background: #fbf1f1; }
+.t-Alert--info { border-color: var(--ut-palette-info); background: #eef6f8; }
+.t-Alert:not(:has(.t-Alert-icon)) .t-Alert-title::before {
+  display: inline-block;
+  min-width: 1.4em;
+  margin-inline-end: .4em;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font-size: .85em;
+  line-height: 1.25em;
+  text-align: center;
+}
+.t-Alert--success:not(:has(.t-Alert-icon)) .t-Alert-title::before { content: "\2713" / ""; color: var(--ut-palette-success); }
+.t-Alert--warning:not(:has(.t-Alert-icon)) .t-Alert-title::before { content: "!" / ""; color: var(--ut-palette-warning); }
+.t-Alert--danger:not(:has(.t-Alert-icon)) .t-Alert-title::before { content: "\2715" / ""; color: var(--ut-palette-danger); }
+.t-Alert--info:not(:has(.t-Alert-icon)) .t-Alert-title::before { content: "i" / ""; color: var(--ut-palette-info); }
+
+@media (forced-colors: active) {
+  .t-Alert { border-color: CanvasText; }
+  .t-TreeNav .is-current > a { forced-color-adjust: none; background: Highlight; color: HighlightText; box-shadow: none; }
+  :focus-visible { outline-color: Highlight; }
+}

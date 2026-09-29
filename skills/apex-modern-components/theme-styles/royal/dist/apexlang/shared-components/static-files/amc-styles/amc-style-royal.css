@@ -1,0 +1,85 @@
+/* AMC Royal: Universal Theme style (light), layered on Vita. */
+:root {
+  --ut-body-background-color: #f5f2ea;
+  --ut-body-text-color: #1d1a36;
+  --ut-component-background-color: #fffdf7;
+  --ut-component-text-default-color: #1d1a36;
+  --ut-component-text-muted-color: #5b5670;
+  --ut-component-border-color: #e3ddcc;
+  --ut-component-border-radius: 6px;
+  --ut-component-box-shadow: 0 1px 2px rgba(31, 27, 77, .06), 0 4px 12px -8px rgba(31, 27, 77, .14);
+  --ut-field-border-color: #cfc8b4;
+  --ut-link-text-color: #35308f;
+  --ut-focus-outline-color: #9a7410;
+  --ut-palette-primary: #35308f;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #1f6b43;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #c9952f;
+  --ut-palette-warning-contrast: #1c1406;
+  --ut-palette-danger: #a8321f;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #2b5c9e;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #1f1b4d;
+  --ut-header-text-color: #ffffff;
+  --ut-nav-background-color: #fbf9f3;
+  --amc-royal-gold: #c9a227;
+  --amc-royal-gold-deep: #9a7410;
+  --amc-royal-gold-tint: #f3e3b0;
+  --amc-royal-gold-ink: #4a3500;
+}
+
+/* Deep indigo header with a thin gold rule beneath (drawn inside, so no size change). */
+.t-Header {
+  background: var(--ut-header-background-color);
+  color: var(--ut-header-text-color);
+  box-shadow: inset 0 -3px 0 var(--amc-royal-gold), 0 2px 8px -4px rgba(31, 27, 77, .35);
+}
+.t-Header-logo { font-weight: 700; letter-spacing: .02em; }
+.t-Header .t-NavigationBar-item a { color: #e9e4ff; }
+.t-Header :focus-visible { outline: 2px solid var(--amc-royal-gold); outline-offset: 2px; }
+
+/* Gold focus ring everywhere. */
+:focus-visible,
+.apex-item-text:focus,
+.apex-item-select:focus { outline: 2px solid var(--ut-focus-outline-color); outline-offset: 2px; }
+
+/* Navigation: ivory rail, current entry in indigo with a gold marker. */
+.t-Body-nav { background: var(--ut-nav-background-color); border-inline-end-color: var(--ut-component-border-color); }
+.t-TreeNav .is-current > a {
+  background: #ecebf7;
+  color: var(--ut-palette-primary);
+  font-weight: 650;
+  box-shadow: inset 3px 0 0 var(--amc-royal-gold);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -3px 0 0 var(--amc-royal-gold); }
+
+/* Confident, formal type. */
+.t-BreadcrumbRegion-title { font-weight: 700; letter-spacing: -.01em; color: var(--ut-header-background-color); }
+.t-Region-header { background: #faf7ef; border-start-start-radius: var(--ut-component-border-radius); border-start-end-radius: var(--ut-component-border-radius); }
+.t-Region-title { font-weight: 700; color: var(--ut-header-background-color); letter-spacing: .005em; }
+.t-Report-colHead { color: #3c3760; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11px; border-block-end-color: #d3cbb4; }
+.t-Form-label { color: #3c3760; font-weight: 600; }
+
+/* Buttons: indigo primary, crisp secondary. */
+.t-Button { border-color: var(--ut-field-border-color); color: var(--ut-palette-primary); font-weight: 600; }
+.t-Button--hot { background: var(--ut-palette-primary); border-color: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); box-shadow: 0 1px 2px rgba(31, 27, 77, .25); }
+
+/* Badges: neutral badges in gold; status badges keep their semantic colors. */
+.t-Badge { background: #fbf3d9; color: var(--amc-royal-gold-ink); box-shadow: inset 0 0 0 1px var(--amc-royal-gold); }
+.t-Badge--success { background: #dcebe1; color: #17512f; box-shadow: none; }
+.t-Badge--warning { background: #fae0c6; color: #6b3100; box-shadow: none; }
+.t-Badge--danger { background: #f5dfda; color: #82251a; box-shadow: none; }
+
+/* Alerts: warm, formal. */
+.t-Alert--success { background: #eef4ec; }
+.t-Alert--warning { background: #fbf3e2; }
+.t-Alert--danger { background: #faece8; }
+
+@media (forced-colors: active) {
+  .t-Header { border-block-end: 3px solid CanvasText; box-shadow: none; }
+  .t-TreeNav .is-current > a { box-shadow: none; outline: 2px solid Highlight; }
+  .t-Button--hot, .t-Badge { box-shadow: none; }
+  .t-Badge { border: 1px solid CanvasText; }
+}

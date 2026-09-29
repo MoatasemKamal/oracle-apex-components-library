@@ -1,0 +1,82 @@
+/* AMC Nordic: Universal Theme style (light), layered on Vita. */
+:root {
+  --ut-body-background-color: #eef2f5;
+  --ut-body-text-color: #1f2a37;
+  --ut-component-background-color: #ffffff;
+  --ut-component-text-default-color: #1f2a37;
+  --ut-component-text-muted-color: #5b6776;
+  --ut-component-border-color: #dde3e9;
+  --ut-component-border-radius: 12px;
+  --ut-component-box-shadow: 0 1px 2px rgba(31, 42, 55, .04);
+  --ut-field-border-color: #c9d2db;
+  --ut-link-text-color: #35607f;
+  --ut-focus-outline-color: #3b6585;
+  --ut-palette-primary: #3b6585;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #2f6b4f;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #c9952f;
+  --ut-palette-warning-contrast: #1c1406;
+  --ut-palette-danger: #b0413e;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #4a6fa5;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #ffffff;
+  --ut-header-text-color: #1f2a37;
+  --ut-nav-background-color: #f7f9fb;
+  --amc-nordic-rule: #334155;
+  --amc-nordic-tint: #e4ecf2;
+}
+
+/* Thin white header with a slate rule, no colored bar. */
+.t-Header {
+  background: var(--ut-header-background-color);
+  color: var(--ut-header-text-color);
+  box-shadow: inset 0 -1px 0 var(--amc-nordic-rule);
+}
+.t-Header-logo { font-weight: 600; letter-spacing: .01em; }
+.t-Header .t-NavigationBar-item a { color: var(--ut-component-text-muted-color); }
+
+/* Soft fjord focus ring. */
+:focus-visible,
+.apex-item-text:focus,
+.apex-item-select:focus { outline: 2px solid var(--ut-focus-outline-color); outline-offset: 2px; }
+
+/* Quiet side navigation; the current entry is a soft pill, no stripe. */
+.t-Body-nav { background: var(--ut-nav-background-color); border-inline-end-color: var(--ut-component-border-color); }
+.t-TreeNav a { color: #3a4654; }
+.t-TreeNav .is-current > a {
+  background: var(--amc-nordic-tint);
+  color: #24475f;
+  font-weight: 600;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 4px var(--ut-nav-background-color);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset 0 0 0 4px var(--ut-nav-background-color); }
+
+/* Airy type: lighter headings, calm headers and labels. */
+.t-BreadcrumbRegion-title { font-weight: 600; letter-spacing: -.01em; color: #17212c; }
+.t-Region-title { font-weight: 600; letter-spacing: .005em; }
+.t-Region-header { border-block-end-color: #eaeef2; }
+.t-Report-colHead { font-weight: 500; letter-spacing: .02em; color: var(--ut-component-text-muted-color); }
+.t-Report-cell { border-block-end-color: #edf1f4; }
+.t-Form-label { letter-spacing: .01em; }
+
+/* Flat buttons, primary in fjord blue. */
+.t-Button { box-shadow: none; border-color: var(--ut-field-border-color); }
+.t-Button--hot { background: var(--ut-palette-primary); border-color: var(--ut-palette-primary); box-shadow: none; }
+
+/* Softer alerts and badges. */
+.t-Alert--success { background: #f1f7f3; border-color: #cfe0d6; }
+.t-Alert--warning { background: #fcf6ea; border-color: #ecd9ae; }
+.t-Alert--danger { background: #fbf0ef; border-color: #ebcdcb; }
+.t-Badge { letter-spacing: .01em; background: #e4ecf2; color: #2b4d66; }
+.t-Badge--success { background: #e2eee7; color: #24533d; }
+.t-Badge--warning { background: #f6e7c8; color: #5a3f0a; }
+.t-Badge--danger { background: #f6e4e3; color: #8e2f2c; }
+
+@media (forced-colors: active) {
+  .t-Header { border-block-end: 1px solid CanvasText; box-shadow: none; }
+  .t-TreeNav .is-current > a { outline: 2px solid Highlight; }
+  .t-Alert { border-color: CanvasText; }
+}

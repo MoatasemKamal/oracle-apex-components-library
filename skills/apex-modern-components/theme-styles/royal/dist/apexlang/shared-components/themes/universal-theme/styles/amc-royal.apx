@@ -1,0 +1,23 @@
+style amc-royal (
+    name: AMC Royal
+    css {
+        fileUrls: [
+            #THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#
+            #APP_FILES#amc-styles/amc-style-royal.css
+        ]
+    }
+    themeRollerAttributes {
+        readOnly: true
+    }
+    advanced {
+        staticId: AMC_STYLE_ROYAL
+        endUserCanPick: true
+        accessibilityTested: false
+    }
+    comments {
+        comments:
+            ```text
+            Light style built on Vita for government and enterprise apps. The header is deep indigo with a thin gold rule beneath it, the page is warm ivory and regions are ivory-white with a fine border. The primary color is indigo (WCAG AA and AAA with white text). Gold is used only as an accent: the current menu marker, the focus ring and neutral badges. Uses the system sans-serif stack with confident weights. Works with every AMC component and template, which read the same --ut-* variables. Header and navigation refinements target Universal Theme classes and should be checked on a live page.
+            ```
+    }
+)
