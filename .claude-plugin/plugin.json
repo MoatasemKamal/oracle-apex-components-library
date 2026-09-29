@@ -1,0 +1,8 @@
+{
+  "name": "oracle-apex-skills",
+  "version": "1.0.0",
+  "description": "Oracle APEX skills: modern Universal Theme components, styles and templates (apex-modern-components) and PWA design and behavior (apex-pwa). Pair with frontend-design for visual direction and Oracle's apexlang for app files.",
+  "author": { "name": "Moatasem Kamal" },
+  "repository": "https://github.com/MoatasemKamal/oracle-apex-components-library",
+  "keywords": ["oracle", "apex", "pwa", "universal-theme", "apexlang", "design"]
+}

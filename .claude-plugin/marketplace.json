@@ -1,0 +1,16 @@
+{
+  "name": "oracle-apex-skills",
+  "owner": {
+    "name": "Moatasem Kamal"
+  },
+  "metadata": {
+    "description": "Oracle APEX skills for Claude Code: Universal Theme components, styles, templates and PWA design."
+  },
+  "plugins": [
+    {
+      "name": "oracle-apex-skills",
+      "source": "./",
+      "description": "APEX components, theme styles and templates, plus the apex-pwa skill and PWA Kit for installable APEX apps."
+    }
+  ]
+}

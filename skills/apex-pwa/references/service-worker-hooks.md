@@ -6,6 +6,11 @@ Worker Hooks lets you inject JavaScript at fixed points of that generated file
 push and notification-click events). The exact hook names differ slightly by release:
 open the page and read the help of each hook before writing code into it.
 
+Field report (APEX 26.1): Service Worker Hooks written into a SQL export through
+`create_flow`'s `p_pwa_service_worker_hooks` JSON parameter were not imported (stored empty).
+After importing an app, open its generated `sw.js` and check that your hook code is really in
+it; if not, enter the hooks through the Builder or APEXlang and check again.
+
 ## 1. Rules
 
 - Code runs in the service worker, not the page: no `apex.*`, no DOM, no jQuery.

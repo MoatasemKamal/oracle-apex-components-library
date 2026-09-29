@@ -1,6 +1,6 @@
 ---
 name: apex-pwa
-description: Audit and improve the design and behavior of an Oracle APEX application running as a Progressive Web App (PWA) - installability, manifest and icons, standalone/app-like look, safe areas and notches, mobile touch ergonomics, offline and flaky-network behavior, update flow, session expiry, service worker hooks and push notifications - on APEX 20.2 through 26.x with Universal Theme. Use when a user mentions PWA, "install the app", "make my APEX app feel native/mobile", home screen icon, splash screen, offline page, service worker, push notifications, or asks to improve an APEX app on phones and tablets. Works together with the apex-modern-components skill (styles, templates, motion) and Oracle's apexlang skill (app files and validation).
+description: Audit and improve the design and behavior of an Oracle APEX application running as a Progressive Web App (PWA) - installability, manifest and icons, standalone/app-like look, safe areas and notches, mobile touch ergonomics, offline and flaky-network behavior, update flow, session expiry, service worker hooks and push notifications - on APEX 20.2 through 26.x with Universal Theme. Use when a user mentions PWA, "install the app", "make my APEX app feel native/mobile", home screen icon, splash screen, offline page, service worker, push notifications, or asks to improve an APEX app on phones and tablets. Works together with the frontend-design plugin (visual direction), the apex-modern-components skill (styles, templates, motion) and Oracle's apexlang skill (app files and validation).
 ---
 
 # Skill: APEX PWA (`amc-pwa`)
@@ -14,6 +14,10 @@ Division of work:
 - **This skill**: PWA settings, app-like design rules, behavior patterns, `pwa-kit/`.
 - **apex-modern-components** (`skills/apex-modern-components/SKILL.md`): whole-app looks
   (Theme Styles), navigation templates (Command Rail has a phone bottom sheet), Motion Kit.
+- **frontend-design** (Anthropic plugin `frontend-design@claude-code-plugins`): visual
+  direction and taste. This repo's `.claude/settings.json` enables it. Use it for every
+  design decision, through `references/design-direction.md`, which maps its plan onto
+  Universal Theme.
 - **apexlang** (Oracle, `github.com/oracle/skills/tree/main/apex/apexlang`): editing and
   validating APEXlang app files (26.1+). Never bypass its gates.
 
@@ -27,11 +31,13 @@ Division of work:
    (blockers, then high-impact design, then polish).
 3. Fix in this order, loading only the reference you need:
    1. Installability and manifest: `references/pwa-settings.md`
-   2. App-like design (standalone chrome, safe areas, touch, navigation, theme color):
+   2. Visual direction (brief, token plan, Theme Style): `references/design-direction.md`,
+      with the `frontend-design` skill loaded if it is installed
+   3. App-like design (standalone chrome, safe areas, touch, navigation, theme color):
       `references/pwa-design.md`
-   3. Behavior (offline, network errors, updates, session expiry, install prompt, push):
+   4. Behavior (offline, network errors, updates, session expiry, install prompt, push):
       `references/pwa-behavior.md`
-   4. Service worker customization, only when 1-3 are not enough:
+   5. Service worker customization, only when 1-3 are not enough:
       `references/service-worker-hooks.md`
 4. For design and behavior helpers that APEX does not provide, install `pwa-kit/`
    (`pwa-kit/README.md`): standalone and offline CSS hooks, safe-area padding, an offline
@@ -55,6 +61,9 @@ Division of work:
 - Use logical CSS properties so right-to-left apps (Arabic, Hebrew) mirror correctly.
 - Do not promise offline data entry. APEX has no built-in offline sync; say so and
   offer the patterns in `references/pwa-behavior.md` section 2 instead.
+- frontend-design's freedom stops at APEX's rules: colors only through `--ut-*` variables
+  (a Theme Style), fonts shipped as static files, native regions and items kept native.
+  Its taste decides *which* values; this skill decides *where* they go.
 - Do not claim the app was verified as installable unless it was actually installed or
   Lighthouse / DevTools > Application > Manifest ran against the live URL.
 

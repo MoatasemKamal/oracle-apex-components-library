@@ -48,10 +48,25 @@ This repo ships two agent skills:
 | [`apex-modern-components`](skills/apex-modern-components/SKILL.md) | Components, theme styles, templates, Motion Kit |
 | [`apex-pwa`](skills/apex-pwa/SKILL.md) | Auditing and improving an APEX app as a Progressive Web App: install, icons, app-like design, offline, updates, sessions, push, plus the [PWA Kit](skills/apex-pwa/pwa-kit) |
 
-- **Inside this repo**: nothing to do; `.claude/skills/` links both, so Claude Code loads them.
-- **For all your projects**: `./install-skills.sh` (copies to `~/.claude/skills`).
-- **For one APEX app project**: `./install-skills.sh /path/to/app`.
-- Add `WITH_APEXLANG=1` to also install Oracle's `apexlang` skill.
+- **Inside this repo**: nothing to do. `.claude/skills/` links both skills, and
+  `.claude/settings.json` enables Anthropic's
+  [`frontend-design`](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design)
+  plugin (Claude Code asks you once to trust the project and install it).
+- **As a plugin, for all your projects** (in Claude Code):
+  ```
+  /plugin marketplace add MoatasemKamal/oracle-apex-components-library
+  /plugin install oracle-apex-skills@oracle-apex-skills
+  /plugin marketplace add anthropics/claude-code
+  /plugin install frontend-design@claude-code-plugins
+  ```
+- **As plain skill folders**: `./install-skills.sh` (to `~/.claude/skills`) or
+  `./install-skills.sh /path/to/app` (one project). Add `WITH_APEXLANG=1` for Oracle's `apexlang`
+  skill and `WITH_FRONTEND_DESIGN=1` for the `frontend-design` plugin.
+
+`frontend-design` decides the visual direction (brief, palette, type, where to be bold);
+`apex-pwa` maps it onto Universal Theme through
+[`references/design-direction.md`](skills/apex-pwa/references/design-direction.md), so the result is a
+Theme Style that passes the contrast gate instead of loose CSS.
 
 Then ask, for example: "Audit my APEX app as a PWA and fix the design and behavior issues".
 
