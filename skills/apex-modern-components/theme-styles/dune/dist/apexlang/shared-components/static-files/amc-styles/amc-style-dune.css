@@ -1,0 +1,81 @@
+/* AMC Dune: Universal Theme style (light), layered on Vita.
+   Sand neutrals, deep indigo leads, terracotta used sparingly as an accent. */
+:root {
+  --ut-body-background-color: #f4eee4;
+  --ut-body-text-color: #26243a;
+  --ut-component-background-color: #fffcf6;
+  --ut-component-text-default-color: #26243a;
+  --ut-component-text-muted-color: #665f57;
+  --ut-component-border-color: rgba(96, 72, 44, .13);
+  --ut-component-border-radius: 12px;
+  --ut-component-box-shadow: 0 1px 2px rgba(84, 60, 32, .06), 0 22px 44px -28px rgba(84, 60, 32, .34);
+  --ut-link-text-color: #353a8c;
+  --ut-focus-outline-color: #353a8c;
+  --ut-palette-primary: #353a8c;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #3a7449;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #c8891f;
+  --ut-palette-warning-contrast: #1f1604;
+  --ut-palette-danger: #b3261e;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #3c5f9e;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #ece3d4;
+  --ut-header-text-color: #262a64;
+  --ut-nav-background-color: #f9f4ec;
+  --amc-dune-indigo-deep: #262a64;
+  --amc-dune-terracotta: #b8603f;
+  --amc-dune-sand-deep: #e6dac7;
+  /* Two soft dune ridges, low at both ends so they read the same in LTR and RTL. */
+  --amc-dune-ridges: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='48' viewBox='0 0 560 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48C90 46 150 26 250 20s170 10 230 20 60 8 80 8z' fill='%23e2d2ba' fill-opacity='.75'/%3E%3Cpath d='M90 48c70-3 130-14 210-14s130 8 180 11 60 3 80 3z' fill='%23d9c3a3' fill-opacity='.7'/%3E%3C/svg%3E");
+}
+
+/* Header: sand with two soft dune ridges at the inline-end (mirrored for RTL), indigo text, a thin terracotta horizon line. */
+.t-Header {
+  background:
+    var(--amc-dune-ridges) right 12% bottom / 560px 100% no-repeat,
+    linear-gradient(180deg, #f1e9dc, var(--ut-header-background-color));
+  color: var(--ut-header-text-color);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--amc-dune-terracotta) 80%, transparent), 0 10px 30px -22px rgba(84, 60, 32, .5);
+}
+.t-Header-logo { color: var(--amc-dune-indigo-deep); }
+[dir="rtl"] .t-Header { background-position: left 12% bottom, 0 0; }
+
+/* Side navigation: warm, current entry in indigo with a terracotta marker. */
+.t-Body-nav { background: var(--ut-nav-background-color); border-inline-end-color: rgba(96, 72, 44, .1); }
+.t-TreeNav .is-current > a {
+  background: color-mix(in srgb, var(--ut-palette-primary) 9%, transparent);
+  color: var(--ut-palette-primary);
+  box-shadow: inset 3px 0 0 var(--amc-dune-terracotta);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -3px 0 0 var(--amc-dune-terracotta); }
+
+/* Regions: borderless paper floating on long soft shadows. */
+.t-Region { border-color: transparent; }
+.t-Region-header { border-bottom-color: rgba(96, 72, 44, .1); }
+.t-Region-title, .t-BreadcrumbRegion-title { color: var(--amc-dune-indigo-deep); }
+
+/* Hot button: indigo with a long, low shadow. */
+.t-Button--hot {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ut-palette-primary) 90%, #ffffff), var(--ut-palette-primary));
+  box-shadow: 0 10px 20px -12px rgba(38, 42, 100, .7);
+}
+.t-Button:not(.t-Button--hot) { background: #fbf7f0; }
+
+/* Reports: sand header row. */
+.t-Report-colHead, .a-IRR-header {
+  background: #f5eee3;
+  color: #4d463f;
+  border-bottom-color: rgba(96, 72, 44, .16);
+}
+
+/* Fields sit slightly recessed on the warm surface. */
+.apex-item-text, .apex-item-select, .t-Form-field { background-color: #fffefb; }
+
+@media (forced-colors: active) {
+  .t-Header, .t-Button--hot, .t-Region { background: Canvas; box-shadow: none; }
+  .t-Region { border-color: CanvasText; }
+  .t-Header { border-bottom: 2px solid CanvasText; }
+  .t-TreeNav .is-current > a { box-shadow: none; outline: 2px solid Highlight; outline-offset: -2px; }
+}

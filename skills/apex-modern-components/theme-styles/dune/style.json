@@ -1,0 +1,11 @@
+{
+  "name": "AMC Dune",
+  "staticId": "AMC_STYLE_DUNE",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "A calm, warm style: sand neutrals, a deep indigo primary that leads every action, a sparing terracotta accent and soft long shadows, made for HR and hospitality apps.",
+  "keywords": ["dune", "sand", "desert", "indigo", "terracotta", "warm", "calm", "hr", "hospitality", "light"],
+  "helpText": "Light style built on Vita. The page and header are warm sand, regions float on soft long shadows, and a deep indigo primary (WCAG AA with white text) carries buttons, links, the current menu entry and focus. Terracotta appears only as a thin accent (the header underline and the current menu marker), never as a status color, so danger stays clearly red. Uses the system font stack. Header and navigation refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

@@ -1,0 +1,94 @@
+/* AMC Arabesque: Universal Theme style (light), layered on Vita.
+   Emerald + restrained gold on warm ivory, with an eight-point star lattice in the header.
+   Optional web fonts: "IBM Plex Sans Arabic" or "Noto Sans Arabic" are used when the app
+   loads them itself; nothing is imported here. */
+:root {
+  --ut-body-background-color: #f8f4ea;
+  --ut-body-text-color: #1d2a24;
+  --ut-component-background-color: #fffdf8;
+  --ut-component-text-default-color: #1d2a24;
+  --ut-component-text-muted-color: #5a655e;
+  --ut-component-border-color: rgba(64, 52, 24, .12);
+  --ut-component-border-radius: 14px;
+  --ut-component-box-shadow: 0 1px 2px rgba(58, 44, 14, .05), 0 12px 28px -18px rgba(12, 74, 59, .28);
+  --ut-link-text-color: #0e6450;
+  --ut-focus-outline-color: #0e6450;
+  --ut-palette-primary: #0e6450;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #2d7a3e;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #c98b1c;
+  --ut-palette-warning-contrast: #1e1504;
+  --ut-palette-danger: #b3362c;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #2a6592;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #0b4a3c;
+  --ut-header-text-color: #fbf6e8;
+  --ut-nav-background-color: #fcf9f1;
+  --ut-font-family: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, system-ui, -apple-system, Roboto, sans-serif;
+  --amc-arabesque-emerald-deep: #083a2f;
+  --amc-arabesque-gold: #c9a24f;
+  --amc-arabesque-gold-soft: #e7d3a1;
+  --amc-arabesque-ivory-deep: #f3ecdb;
+  /* Eight-point star (Rub el Hizb) lattice on a 48px tile (the header height), gold hairlines. */
+  --amc-arabesque-girih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23dcbc6c' stroke-width='1'%3E%3Cpath d='M16.5 16.5h15v15h-15z' fill='%23dcbc6c' fill-opacity='.07' stroke-opacity='.34'/%3E%3Cpath d='M24 13.4 34.6 24 24 34.6 13.4 24z' fill='%23dcbc6c' fill-opacity='.07' stroke-opacity='.34'/%3E%3Cpath d='M24 20.5 27.5 24 24 27.5 20.5 24z' stroke-opacity='.3'/%3E%3Cpath d='M0 24h13.4M34.6 24H48M24 0v13.4M24 34.6V48' stroke-opacity='.16'/%3E%3Cpath d='M0 7 7 0M41 0l7 7M48 41l-7 7M7 48 0 41' stroke-opacity='.22'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Arabic-first typography with a little more air for the script. */
+body.t-PageBody { font-family: var(--ut-font-family); line-height: 1.6; }
+
+/* Header: deep emerald, faint girih lattice (faded out behind the logo and the navigation bar,
+   so it is symmetric and needs no RTL mirror), thin gold rule. */
+.t-Header {
+  background:
+    linear-gradient(90deg, var(--ut-header-background-color) 0 12rem, transparent 30rem calc(100% - 26rem), var(--ut-header-background-color) calc(100% - 12rem)),
+    var(--amc-arabesque-girih) center / 48px 48px repeat,
+    linear-gradient(180deg, var(--ut-header-background-color), var(--amc-arabesque-emerald-deep));
+  color: var(--ut-header-text-color);
+  box-shadow: inset 0 -2px 0 var(--amc-arabesque-gold), 0 6px 18px -12px rgba(8, 58, 47, .6);
+}
+.t-Header-logo { letter-spacing: .01em; }
+[dir="rtl"] .t-Header-logo { letter-spacing: 0; } /* keep Arabic joins intact */
+
+/* Side navigation: ivory, emerald current item with a gold marker on the inline-start edge. */
+.t-Body-nav { background: var(--ut-nav-background-color); }
+.t-TreeNav .is-current > a {
+  background: color-mix(in srgb, var(--ut-palette-primary) 10%, transparent);
+  color: var(--ut-palette-primary);
+  box-shadow: inset 3px 0 0 var(--amc-arabesque-gold);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -3px 0 0 var(--amc-arabesque-gold); }
+
+/* Regions: rounded, soft lift, warm header band with a gold hairline. */
+.t-Region { border-color: rgba(64, 52, 24, .1); }
+.t-Region-header {
+  background: linear-gradient(180deg, var(--amc-arabesque-ivory-deep), color-mix(in srgb, var(--amc-arabesque-ivory-deep) 35%, var(--ut-component-background-color)));
+  border-bottom-color: color-mix(in srgb, var(--amc-arabesque-gold) 45%, transparent);
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+}
+.t-Region-title, .t-BreadcrumbRegion-title { color: var(--amc-arabesque-emerald-deep); }
+
+/* Buttons: emerald hot button with a hint of depth; neutral buttons stay ivory. */
+.t-Button--hot {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ut-palette-primary) 88%, #ffffff), var(--ut-palette-primary));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .18) inset, 0 6px 14px -8px rgba(8, 58, 47, .7);
+}
+
+/* Reports: warm header row. */
+.t-Report-colHead, .a-IRR-header {
+  background: var(--amc-arabesque-ivory-deep);
+  color: #3b4640;
+  border-bottom-color: color-mix(in srgb, var(--amc-arabesque-gold) 40%, transparent);
+}
+
+/* Badges and alerts keep semantic colors; warning badge text stays dark for contrast. */
+.t-Badge { background: color-mix(in srgb, var(--ut-palette-primary) 11%, transparent); }
+.t-Alert { border-radius: 12px; }
+
+@media (forced-colors: active) {
+  .t-Header, .t-Button--hot, .t-Region-header, .t-Report-colHead { background: Canvas; box-shadow: none; }
+  .t-Header { border-bottom: 2px solid CanvasText; }
+  .t-TreeNav .is-current > a { box-shadow: none; outline: 2px solid Highlight; outline-offset: -2px; }
+}

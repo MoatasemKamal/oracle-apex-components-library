@@ -1,0 +1,23 @@
+style amc-paper (
+    name: AMC Paper
+    css {
+        fileUrls: [
+            #THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#
+            #APP_FILES#amc-styles/amc-style-paper.css
+        ]
+    }
+    themeRollerAttributes {
+        readOnly: true
+    }
+    advanced {
+        staticId: AMC_STYLE_PAPER
+        endUserCanPick: true
+        accessibilityTested: false
+    }
+    comments {
+        comments:
+            ```text
+            Light style built on Vita for reports and document-heavy apps. The page is near-white paper with ink-black text; the only accent is a strong ink blue (WCAG AA with white text) used for hot buttons, links, the current menu entry and focus; red is kept for danger only, so a hot button never reads as destructive. Regions drop their boxes: no fill change, no shadow, square corners and a solid ink rule on top, with hairline rules between rows. Page and region titles use the system serif stack (Georgia, Times New Roman); body text stays on the system sans stack for dense data. The header is paper with a double rule like a masthead. Header and navigation refinements target Universal Theme classes and should be checked on a live page.
+            ```
+    }
+)

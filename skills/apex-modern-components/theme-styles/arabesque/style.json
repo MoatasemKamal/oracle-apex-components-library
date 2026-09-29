@@ -1,0 +1,12 @@
+{
+  "name": "AMC Arabesque",
+  "staticId": "AMC_STYLE_ARABESQUE",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "Contemporary Arabic heritage: a deep emerald header with a faint eight-point star lattice, restrained gold accents, a warm ivory page, generously rounded regions and an Arabic-first font stack.",
+  "keywords": ["arabesque", "arabic", "heritage", "girih", "emerald", "gold", "ivory", "rtl", "light"],
+  "fonts": ["\"IBM Plex Sans Arabic\", \"Noto Sans Arabic\", \"Segoe UI\", Tahoma, system-ui, -apple-system, Roboto, sans-serif"],
+  "helpText": "Light style built on Vita for Arabic and bilingual business apps. The header is deep emerald with a subtle eight-point star (girih) lattice drawn as an inline SVG, underlined by a thin gold rule; the page is warm ivory, regions are rounded and softly lifted, and the primary color is an emerald that passes WCAG AA with white text. Gold is used only for ornament (header rule, current menu marker, region title marker), never for text. The font stack puts IBM Plex Sans Arabic and Noto Sans Arabic first when installed (optional, not shipped) and falls back to Segoe UI, Tahoma and the system font, with a slightly taller line height for Arabic script. Designed for RTL first; header and navigation refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

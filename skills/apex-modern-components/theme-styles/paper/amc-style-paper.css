@@ -1,0 +1,98 @@
+/* AMC Paper: Universal Theme style (light), layered on Vita.
+   Editorial: paper, ink, one blue accent, serif titles, rules instead of boxes. */
+:root {
+  --ut-body-background-color: #faf9f6;
+  --ut-body-text-color: #141414;
+  --ut-component-background-color: #faf9f6;
+  --ut-component-text-default-color: #141414;
+  --ut-component-text-muted-color: #5c5a55;
+  --ut-component-border-color: rgba(20, 20, 20, .14);
+  --ut-component-border-radius: 2px;
+  --ut-component-box-shadow: none;
+  --ut-link-text-color: #1a3ea8;
+  --ut-focus-outline-color: #1a3ea8;
+  --ut-palette-primary: #1a3ea8;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #2b6a3a;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #b97a12;
+  --ut-palette-warning-contrast: #1a1203;
+  --ut-palette-danger: #b3221b;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #2c4f86;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #faf9f6;
+  --ut-header-text-color: #141414;
+  --ut-nav-background-color: #faf9f6;
+  --ut-field-background-color: #ffffff;
+  --amc-paper-ink: #141414;
+  --amc-paper-serif: Georgia, "Times New Roman", Times, serif;
+}
+
+/* Masthead: paper header, serif name, double ink rule. */
+.t-Header {
+  background: var(--ut-header-background-color);
+  color: var(--ut-header-text-color);
+  box-shadow: inset 0 -1px 0 var(--amc-paper-ink), inset 0 -4px 0 var(--ut-header-background-color), inset 0 -5px 0 var(--amc-paper-ink);
+}
+.t-Header-logo { font-family: var(--amc-paper-serif); font-weight: 700; letter-spacing: 0; }
+
+/* Serif titles. */
+.t-BreadcrumbRegion-title, .t-Region-title, .t-HeroRegion-title, .t-Card-title {
+  font-family: var(--amc-paper-serif);
+  font-weight: 700;
+  letter-spacing: -.005em;
+}
+
+/* Navigation: flat paper, a thin rule, the current entry in the accent with a marker rule. */
+.t-Body-nav { background: var(--ut-nav-background-color); border-inline-end-color: rgba(20, 20, 20, .12); }
+.t-TreeNav .is-current > a {
+  background: transparent;
+  color: var(--ut-palette-primary);
+  box-shadow: inset 2px 0 0 var(--ut-palette-primary);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -2px 0 0 var(--ut-palette-primary); }
+
+/* Regions: no box, a solid ink rule on top, hairline under the title. */
+.t-Region {
+  background: transparent;
+  border: 0;
+  border-top: 2px solid var(--amc-paper-ink);
+  border-radius: 0;
+  box-shadow: none;
+}
+.t-Region-header { border-bottom-color: rgba(20, 20, 20, .14); }
+
+/* Reports: small spaced caps headers on an ink hairline, light row rules. */
+.t-Report-colHead, .a-IRR-header {
+  background: transparent;
+  color: var(--amc-paper-ink);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border-bottom: 1px solid var(--amc-paper-ink);
+}
+.t-Report-cell { border-bottom-color: rgba(20, 20, 20, .1); }
+/* Arabic script has no caps and must not be letter-spaced (it breaks the joins). */
+[dir="rtl"] .t-Report-colHead, [dir="rtl"] .a-IRR-header { text-transform: none; letter-spacing: 0; }
+
+/* Buttons: square, ink outline; hot is the solid accent. */
+.t-Button { border-color: rgba(20, 20, 20, .55); background: transparent; }
+.t-Button--hot { background: var(--ut-palette-primary); border-color: var(--ut-palette-primary); }
+
+/* Badges: printed labels, outlined rather than tinted pills; the plain badge is ink, not accent. */
+.t-Badge { border-radius: 2px; background: transparent; box-shadow: inset 0 0 0 1px currentColor; }
+.t-Badge:not([class*="t-Badge--"]) { color: var(--amc-paper-ink); }
+.t-Badge--warning { color: #7a4f06; }
+
+/* Alerts: no tinted box, a colored rule on top like a margin note. */
+.t-Alert { background: transparent; border: 0; border-top: 2px solid; border-radius: 0; }
+.t-Alert--success { border-top-color: var(--ut-palette-success); }
+.t-Alert--warning { border-top-color: var(--ut-palette-warning); }
+.t-Alert--danger { border-top-color: var(--ut-palette-danger); }
+
+@media (forced-colors: active) {
+  .t-Header { box-shadow: none; border-bottom: 3px double CanvasText; }
+  .t-TreeNav .is-current > a { box-shadow: none; outline: 2px solid Highlight; outline-offset: -2px; }
+  .t-Badge { box-shadow: none; border: 1px solid CanvasText; }
+}
+
