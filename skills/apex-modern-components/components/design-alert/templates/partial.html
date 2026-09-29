@@ -1,0 +1,13 @@
+<div class="amc-DAlert amc-DAlert--#STYLE# {case STATE/}{when success/}amc-DAlert--success{when warning/}amc-DAlert--warning{when danger/}amc-DAlert--danger{when info/}amc-DAlert--info{otherwise/}amc-DAlert--neutral{endcase/}" {case STATE/}{when danger/}role="alert"{otherwise/}role="status"{endcase/}>
+  <span class="amc-DAlert-mark fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span>
+  <div class="amc-DAlert-inner">
+    <span class="amc-DAlert-icon" aria-hidden="true"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}"></span></span>
+    <div class="amc-DAlert-body">
+      <span class="amc-DAlert-state">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Information{otherwise/}Notice{endcase/}</span>
+      <h3 class="amc-DAlert-title">#TITLE#</h3>
+      {if ?MESSAGE/}<p class="amc-DAlert-message">#MESSAGE#</p>{endif/}
+      {if ?META/}<p class="amc-DAlert-meta">#META#</p>{endif/}
+    </div>
+    {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-DAlert-link" href="#LINK_URL#"><span class="amc-DAlert-linkLabel">#LINK_LABEL#</span><span class="amc-DAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+  </div>
+</div>

@@ -1,0 +1,153 @@
+{
+  "samples": [
+    {
+      "title": "gradientHero",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "gradientHero",
+        "EYEBROW": "Sales workspace",
+        "TITLE": "Good morning, Layla",
+        "SUBTITLE": "You have 12 orders waiting for approval and 3 invoices due this week.",
+        "ICON": "fa-line-chart",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Review Orders",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Open Reports"
+      }
+    },
+    {
+      "title": "split, with image",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "split",
+        "EYEBROW": "Inventory",
+        "TITLE": "Riyadh Central Warehouse",
+        "SUBTITLE": "4,812 SKUs across 36 aisles. Stock counts were reconciled today at 07:30.",
+        "ICON": "fa-cubes",
+        "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237fa7c9'/%3E%3Cstop offset='1' stop-color='%232c4a63'/%3E%3C/linearGradient%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c9a46a'/%3E%3Cstop offset='1' stop-color='%238a6a3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='400' fill='url%28%23s%29'/%3E%3Crect y='300' width='800' height='100' fill='%233b3f45'/%3E%3Cg transform='translate%2840 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28230 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28420 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28610 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Ccircle cx='690' cy='60' r='26' fill='%23f4e3b5' opacity='.7'/%3E%3C/svg%3E",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Start Stock Count",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "View Aisles"
+      }
+    },
+    {
+      "title": "minimal",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "minimal",
+        "EYEBROW": "Sales / Orders",
+        "TITLE": "Customer Orders",
+        "SUBTITLE": "All open and shipped orders for the current fiscal year.",
+        "ICON": "fa-shopping-cart",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Create Order",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Import"
+      }
+    },
+    {
+      "title": "imageOverlay",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "imageOverlay",
+        "EYEBROW": "Logistics",
+        "TITLE": "Same-day delivery now covers Jeddah",
+        "SUBTITLE": "Orders placed before 13:00 ship from the new western hub and arrive the same evening.",
+        "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237fa7c9'/%3E%3Cstop offset='1' stop-color='%232c4a63'/%3E%3C/linearGradient%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c9a46a'/%3E%3Cstop offset='1' stop-color='%238a6a3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='400' fill='url%28%23s%29'/%3E%3Crect y='300' width='800' height='100' fill='%233b3f45'/%3E%3Cg transform='translate%2840 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28230 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28420 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28610 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Ccircle cx='690' cy='60' r='26' fill='%23f4e3b5' opacity='.7'/%3E%3C/svg%3E",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Plan Routes",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Coverage Map"
+      }
+    },
+    {
+      "title": "dottedGrid",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "dottedGrid",
+        "EYEBROW": "New in Projects",
+        "TITLE": "Plan every project in one place",
+        "SUBTITLE": "Milestones, budgets and timesheets now share one timeline, so project managers see overruns before they happen.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Create Project",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Watch Tour"
+      }
+    },
+    {
+      "title": "cardHeader",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "cardHeader",
+        "EYEBROW": "Customer CUST-0192",
+        "TITLE": "Northwind Traders",
+        "SUBTITLE": "Wholesale account since 2019, 148 orders, credit limit 50,000 SAR.",
+        "ICON": "fa-building-o",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "New Order",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Edit"
+      }
+    },
+    {
+      "title": "centeredIcon",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "centeredIcon",
+        "EYEBROW": "Accounts payable",
+        "TITLE": "Approve supplier invoices",
+        "SUBTITLE": "Invoices matched to a purchase order and goods receipt are ready to approve in one step.",
+        "ICON": "fa-file-text-o",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Approve Matched",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "View Exceptions"
+      }
+    },
+    {
+      "title": "waveBottom",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "waveBottom",
+        "EYEBROW": "Q3 2026 review",
+        "TITLE": "Revenue grew 18% this quarter",
+        "SUBTITLE": "Subscriptions drove most of the growth. See the breakdown by region and product line.",
+        "ICON": "fa-bar-chart",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Open Dashboard",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Download PDF"
+      }
+    },
+    {
+      "title": "glassPanel",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "glassPanel",
+        "EYEBROW": "Help center",
+        "TITLE": "How can we help with billing?",
+        "SUBTITLE": "Find answers about invoices, payment methods, refunds and tax documents.",
+        "ICON": "fa-life-ring",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Contact Support",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Browse Articles"
+      }
+    },
+    {
+      "title": "eyebrow",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "eyebrow",
+        "EYEBROW": "Annual report 2025",
+        "TITLE": "A year of faster, simpler procurement",
+        "SUBTITLE": "Purchase orders now take 2.1 days from request to approval, down from 6.4 days a year ago.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Read the Report",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Key Figures"
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "samples": [
+    {
+      "title": "soft, report with all states",
+      "mode": "report",
+      "settings": { "STYLE": "soft" },
+      "rows": [
+        { "STATE": "success", "TITLE": "Order SO-10482 shipped", "MESSAGE": "The carrier picked up 3 parcels at 14:20. Tracking is now available to the customer.", "LINK_URL": "#", "LINK_LABEL": "Track shipment" },
+        { "STATE": "warning", "TITLE": "Credit limit almost reached", "MESSAGE": "Northwind Traders has used 92% of its 50,000 SAR credit line." },
+        { "STATE": "danger", "TITLE": "Payment for INV-2041 failed", "MESSAGE": "The card was declined by the issuing bank. Ask the customer to update the payment method." },
+        { "STATE": "neutral", "TITLE": "Price list sync scheduled", "MESSAGE": "Runs tonight at 02:00 and takes about 10 minutes." }
+      ]
+    },
+    {
+      "title": "sideIcon, warning",
+      "mode": "partial",
+      "settings": { "STYLE": "sideIcon", "STATE": "warning", "TITLE": "3 invoices are overdue", "MESSAGE": "Invoices INV-2031, INV-2036 and INV-2041 passed their due date. Send reminders before the end of the month.", "LINK_URL": "#", "LINK_LABEL": "Review invoices" }
+    },
+    {
+      "title": "solid, report",
+      "mode": "report",
+      "settings": { "STYLE": "solid" },
+      "rows": [
+        { "STATE": "danger", "TITLE": "Warehouse sync stopped", "MESSAGE": "Stock levels have not updated since 09:12. Orders may be accepted for items that are out of stock.", "LINK_URL": "#", "LINK_LABEL": "Open integration log" },
+        { "STATE": "info", "TITLE": "Quarter close starts Friday", "MESSAGE": "Posting to Q3 periods will be locked at 18:00." },
+        { "STATE": "neutral", "TITLE": "Draft saved", "MESSAGE": "Purchase order PO-7713 was saved as a draft." }
+      ]
+    },
+    {
+      "title": "gradientBanner, info",
+      "mode": "partial",
+      "settings": { "STYLE": "gradientBanner", "STATE": "info", "ICON": "fa-calendar", "TITLE": "Fiscal year 2026 budgets are open", "MESSAGE": "Department heads can submit budget requests until 15 November.", "LINK_URL": "#", "LINK_LABEL": "Start budget" }
+    },
+    {
+      "title": "toastCard, report",
+      "mode": "report",
+      "settings": { "STYLE": "toastCard" },
+      "rows": [
+        { "STATE": "success", "TITLE": "Invoice INV-2058 paid", "MESSAGE": "12,480.00 SAR received from Contoso Ltd.", "META": "2 min ago", "LINK_URL": "#", "LINK_LABEL": "View receipt" },
+        { "STATE": "danger", "TITLE": "Export failed", "MESSAGE": "The customer ledger export timed out after 60 seconds.", "META": "14 min ago" },
+        { "STATE": "info", "ICON": "fa-user", "TITLE": "Sara Ahmed assigned you a task", "MESSAGE": "Approve discount for order SO-10490.", "META": "1 h ago" }
+      ]
+    },
+    {
+      "title": "announcement, success",
+      "mode": "partial",
+      "settings": { "STYLE": "announcement", "STATE": "success", "ICON": "fa-rocket", "META": "Release 24.2", "TITLE": "Recurring invoices are here", "MESSAGE": "Set up monthly or yearly billing once and the system creates, sends and tracks every invoice for you.", "LINK_URL": "#", "LINK_LABEL": "See what is new" }
+    },
+    {
+      "title": "tip, info",
+      "mode": "partial",
+      "settings": { "STYLE": "tip", "STATE": "info", "ICON": "fa-lightbulb-o", "TITLE": "Tip: bulk approve orders", "MESSAGE": "Select several orders in the grid and press Approve to process them in one step.", "LINK_URL": "#", "LINK_LABEL": "Learn more" }
+    },
+    {
+      "title": "quote, neutral",
+      "mode": "partial",
+      "settings": { "STYLE": "quote", "STATE": "neutral", "TITLE": "Omar Haddad, Finance Director", "MESSAGE": "Please attach the signed contract to every purchase order above 100,000 SAR before sending it for approval.", "META": "Policy note, 3 September" }
+    },
+    {
+      "title": "inline, report",
+      "mode": "report",
+      "settings": { "STYLE": "inline" },
+      "rows": [
+        { "STATE": "warning", "TITLE": "VAT number missing", "MESSAGE": "Required for B2B invoices.", "LINK_URL": "#", "LINK_LABEL": "Add now" },
+        { "STATE": "success", "TITLE": "Address verified", "MESSAGE": "Matches the national registry." },
+        { "STATE": "danger", "TITLE": "Duplicate customer", "MESSAGE": "Same email as CUST-0192." }
+      ]
+    },
+    {
+      "title": "panel, danger",
+      "mode": "partial",
+      "settings": { "STYLE": "panel", "STATE": "danger", "ICON": "fa-server", "TITLE": "Payment gateway unreachable", "MESSAGE": "Card payments are failing for all customers since 10:42. Orders are held in Pending Payment and will retry automatically every 5 minutes.", "META": "Incident INC-3317, opened 10:44", "LINK_URL": "#", "LINK_LABEL": "View incident" }
+    }
+  ]
+}

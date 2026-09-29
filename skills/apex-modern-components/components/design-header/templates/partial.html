@@ -1,0 +1,14 @@
+<div class="amc-DHeader amc-DHeader--#STYLE#{if ?IMAGE_URL/} amc-DHeader--hasImage{endif/}">
+  {case STYLE/}{when imageOverlay/}{if ?IMAGE_URL/}<img class="amc-DHeader-bg" src="#IMAGE_URL#" width="1600" height="640" alt="" decoding="async">{endif/}<span class="amc-DHeader-scrim" aria-hidden="true"></span>{when glassPanel/}<span class="amc-DHeader-field" aria-hidden="true"></span>{when dottedGrid/}<span class="amc-DHeader-dots" aria-hidden="true"></span>{otherwise/}{endcase/}
+  <div class="amc-DHeader-inner">
+    {if ?ICON/}<span class="amc-DHeader-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+    <div class="amc-DHeader-content">
+      {if ?EYEBROW/}<p class="amc-DHeader-eyebrow"><span class="amc-DHeader-eyebrowText">#EYEBROW#</span></p>{endif/}
+      <h2 class="amc-DHeader-title">#TITLE#</h2>
+      {if ?SUBTITLE/}<p class="amc-DHeader-subtitle">#SUBTITLE#</p>{endif/}
+    </div>
+    <div class="amc-DHeader-actions">{if ?PRIMARY_URL/}{if ?PRIMARY_LABEL/}<a class="t-Button t-Button--hot amc-DHeader-action" href="#PRIMARY_URL#"><span class="t-Button-label">#PRIMARY_LABEL#</span></a>{endif/}{endif/}{if ?SECONDARY_URL/}{if ?SECONDARY_LABEL/}<a class="t-Button amc-DHeader-action" href="#SECONDARY_URL#"><span class="t-Button-label">#SECONDARY_LABEL#</span></a>{endif/}{endif/}</div>
+    {case STYLE/}{when split/}<figure class="amc-DHeader-media">{if ?IMAGE_URL/}<img class="amc-DHeader-img" src="#IMAGE_URL#" width="640" height="480" alt="" loading="lazy">{else/}<span class="amc-DHeader-mediaIcon fa {if ?ICON/}#ICON#{else/}fa-cube{endif/}" aria-hidden="true"></span>{endif/}</figure>{otherwise/}{endcase/}
+  </div>
+  {case STYLE/}{when waveBottom/}<svg class="amc-DHeader-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="amc-DHeader-waveBack" d="M0 0H1440V50C1180 84 900 38 700 60S220 86 0 56Z"/><path class="amc-DHeader-waveFront" d="M0 0H1440V30C1200 66 960 72 720 46S240 8 0 40Z"/></svg>{otherwise/}{endcase/}
+</div>

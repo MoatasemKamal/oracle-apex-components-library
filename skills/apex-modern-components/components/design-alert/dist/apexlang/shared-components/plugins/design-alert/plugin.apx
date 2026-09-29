@@ -1,0 +1,293 @@
+plugin designAlert (
+    name: Design Alert
+    staticId: AMC_DESIGN_ALERT
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-DAlert amc-DAlert--#STYLE# {case STATE/}{when success/}amc-DAlert--success{when warning/}amc-DAlert--warning{when danger/}amc-DAlert--danger{when info/}amc-DAlert--info{otherwise/}amc-DAlert--neutral{endcase/}" {case STATE/}{when danger/}role="alert"{otherwise/}role="status"{endcase/}>
+              <span class="amc-DAlert-mark fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span>
+              <div class="amc-DAlert-inner">
+                <span class="amc-DAlert-icon" aria-hidden="true"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}"></span></span>
+                <div class="amc-DAlert-body">
+                  <span class="amc-DAlert-state">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Information{otherwise/}Notice{endcase/}</span>
+                  <h3 class="amc-DAlert-title">#TITLE#</h3>
+                  {if ?MESSAGE/}<p class="amc-DAlert-message">#MESSAGE#</p>{endif/}
+                  {if ?META/}<p class="amc-DAlert-meta">#META#</p>{endif/}
+                </div>
+                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-DAlert-link" href="#LINK_URL#"><span class="amc-DAlert-linkLabel">#LINK_LABEL#</span><span class="amc-DAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+              </div>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-DAlerts amc-DAlerts--#STYLE#">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DAlerts-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-alert.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: soft
+        }
+        help {
+            helpText:
+                ```
+                Visual design of the alert. Soft: tinted box. Side Icon: icon block on the start side. Solid: filled with the state color. Gradient Banner: wide tinted banner with a call-to-action pill. Toast Card: floating card with time stamp. Announcement: centered news block. Tip: dashed callout with a floating icon badge. Quote: quoted message with attribution. Inline: compact pill for forms. Panel: header bar with state label, body and footer link.
+                ```
+        }
+        entry soft (
+            sequence: 10
+            display: Soft
+            return: soft
+        )
+        entry sideIcon (
+            sequence: 20
+            display: Side Icon
+            return: sideIcon
+        )
+        entry solid (
+            sequence: 30
+            display: Solid
+            return: solid
+        )
+        entry gradientBanner (
+            sequence: 40
+            display: Gradient Banner
+            return: gradientBanner
+        )
+        entry toastCard (
+            sequence: 50
+            display: Toast Card
+            return: toastCard
+        )
+        entry announcement (
+            sequence: 60
+            display: Announcement
+            return: announcement
+        )
+        entry tip (
+            sequence: 70
+            display: Tip
+            return: tip
+        )
+        entry quote (
+            sequence: 80
+            display: Quote
+            return: quote
+        )
+        entry inline (
+            sequence: 90
+            display: Inline
+            return: inline
+        )
+        entry panel (
+            sequence: 100
+            display: Panel
+            return: panel
+        )
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 2
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                success, warning, danger, info or neutral. Any other or empty value renders as neutral. Danger alerts are announced immediately with role=alert.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 3
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short headline, for example Invoice INV-2041 is overdue.
+                ```
+        }
+    )
+    customAttribute MESSAGE (
+        apexlangName: message
+        attribute: 4
+        name: Message
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Supporting sentence that says what happened and what to do next. In the Quote style this is the quoted text.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-truck. Leave empty to use the state icon: check for success, triangle for warning, cross for danger, info for info, bell for neutral.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 6
+        name: Meta Text
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional small text: a time stamp for Toast Card, a release or date for Announcement, the author for Quote. Format dates in SQL with the application's NLS settings.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 7
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target, for example f?p=&APP_ID.:20:&SESSION.::NO::P20_ID:&P10_ID. or a column holding apex_page.get_url(...). Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 8
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible link text, for example Review invoice. The link renders only when both Link URL and Link Label are set.
+                ```
+        }
+    )
+    file "amc-design-alert.css" (
+        fileName: amc-design-alert.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

@@ -1,0 +1,329 @@
+plugin designHeader (
+    name: Design Header
+    staticId: AMC_DESIGN_HEADER
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+        ]
+        partial:
+            ```html
+            <div class="amc-DHeader amc-DHeader--#STYLE#{if ?IMAGE_URL/} amc-DHeader--hasImage{endif/}">
+              {case STYLE/}{when imageOverlay/}{if ?IMAGE_URL/}<img class="amc-DHeader-bg" src="#IMAGE_URL#" width="1600" height="640" alt="" decoding="async">{endif/}<span class="amc-DHeader-scrim" aria-hidden="true"></span>{when glassPanel/}<span class="amc-DHeader-field" aria-hidden="true"></span>{when dottedGrid/}<span class="amc-DHeader-dots" aria-hidden="true"></span>{otherwise/}{endcase/}
+              <div class="amc-DHeader-inner">
+                {if ?ICON/}<span class="amc-DHeader-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+                <div class="amc-DHeader-content">
+                  {if ?EYEBROW/}<p class="amc-DHeader-eyebrow"><span class="amc-DHeader-eyebrowText">#EYEBROW#</span></p>{endif/}
+                  <h2 class="amc-DHeader-title">#TITLE#</h2>
+                  {if ?SUBTITLE/}<p class="amc-DHeader-subtitle">#SUBTITLE#</p>{endif/}
+                </div>
+                <div class="amc-DHeader-actions">{if ?PRIMARY_URL/}{if ?PRIMARY_LABEL/}<a class="t-Button t-Button--hot amc-DHeader-action" href="#PRIMARY_URL#"><span class="t-Button-label">#PRIMARY_LABEL#</span></a>{endif/}{endif/}{if ?SECONDARY_URL/}{if ?SECONDARY_LABEL/}<a class="t-Button amc-DHeader-action" href="#SECONDARY_URL#"><span class="t-Button-label">#SECONDARY_LABEL#</span></a>{endif/}{endif/}</div>
+                {case STYLE/}{when split/}<figure class="amc-DHeader-media">{if ?IMAGE_URL/}<img class="amc-DHeader-img" src="#IMAGE_URL#" width="640" height="480" alt="" loading="lazy">{else/}<span class="amc-DHeader-mediaIcon fa {if ?ICON/}#ICON#{else/}fa-cube{endif/}" aria-hidden="true"></span>{endif/}</figure>{otherwise/}{endcase/}
+              </div>
+              {case STYLE/}{when waveBottom/}<svg class="amc-DHeader-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path class="amc-DHeader-waveBack" d="M0 0H1440V50C1180 84 900 38 700 60S220 86 0 56Z"/><path class="amc-DHeader-waveFront" d="M0 0H1440V30C1200 66 960 72 720 46S240 8 0 40Z"/></svg>{otherwise/}{endcase/}
+            </div>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-header.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Place at the top of a page or section, usually in a region with the Blank with Attributes template. Title renders as h2. The primary button uses t-Button--hot and the secondary a normal t-Button, so both follow the theme. The Image URL is used by the Image Overlay and Split styles only.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: gradientHero
+        }
+        help {
+            helpText:
+                ```
+                Visual design of the header. Gradient Hero: soft theme-color gradient. Split: text beside an image. Minimal: page title row with actions and a divider. Image Overlay: text over a darkened image. Dotted Grid: centered text on a fading dot grid. Card Header: record header card with icon tile. Centered Icon: large ringed icon above centered text. Wave Bottom: tinted band ending in a wave. Glass Panel: frosted panel on a color field. Eyebrow: editorial type with an accent rule.
+                ```
+        }
+        entry gradientHero (
+            sequence: 10
+            display: Gradient Hero
+            return: gradientHero
+        )
+        entry split (
+            sequence: 20
+            display: Split
+            return: split
+        )
+        entry minimal (
+            sequence: 30
+            display: Minimal
+            return: minimal
+        )
+        entry imageOverlay (
+            sequence: 40
+            display: Image Overlay
+            return: imageOverlay
+        )
+        entry dottedGrid (
+            sequence: 50
+            display: Dotted Grid
+            return: dottedGrid
+        )
+        entry cardHeader (
+            sequence: 60
+            display: Card Header
+            return: cardHeader
+        )
+        entry centeredIcon (
+            sequence: 70
+            display: Centered Icon
+            return: centeredIcon
+        )
+        entry waveBottom (
+            sequence: 80
+            display: Wave Bottom
+            return: waveBottom
+        )
+        entry glassPanel (
+            sequence: 90
+            display: Glass Panel
+            return: glassPanel
+        )
+        entry eyebrow (
+            sequence: 100
+            display: Eyebrow
+            return: eyebrow
+        )
+    )
+    customAttribute EYEBROW (
+        apexlangName: eyebrow
+        attribute: 2
+        name: Eyebrow
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short label above the title, for example Sales or Q3 2026 Review.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 3
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Main heading, rendered as h2. For example Customer Orders.
+                ```
+        }
+    )
+    customAttribute SUBTITLE (
+        apexlangName: subtitle
+        attribute: 4
+        name: Subtitle
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two sentences that explain the page or what to do next.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-shopping-cart. Most prominent in the Card Header, Centered Icon and Split styles.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 6
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Image for the Image Overlay (background) and Split (side) styles, for example #APP_FILES#hero-warehouse.jpg. Decorative: it gets an empty alt text. Must be developer-controlled. Ignored by the other styles.
+                ```
+        }
+    )
+    customAttribute PRIMARY_URL (
+        apexlangName: primaryUrl
+        attribute: 7
+        name: Primary Button URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target of the hot button, for example f?p=&APP_ID.:15:&SESSION. Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute PRIMARY_LABEL (
+        apexlangName: primaryLabel
+        attribute: 8
+        name: Primary Button Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Hot button text, for example Create Order. Renders only when URL and label are both set.
+                ```
+        }
+    )
+    customAttribute SECONDARY_URL (
+        apexlangName: secondaryUrl
+        attribute: 9
+        name: Secondary Button URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target of the normal button. Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute SECONDARY_LABEL (
+        apexlangName: secondaryLabel
+        attribute: 10
+        name: Secondary Button Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Normal button text, for example Import Orders. Renders only when URL and label are both set.
+                ```
+        }
+    )
+    file "amc-design-header.css" (
+        fileName: amc-design-header.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

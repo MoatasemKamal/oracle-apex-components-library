@@ -1,0 +1,598 @@
+/* APEX Modern Components - Design Alert (designAlert)
+ * Ten alert / callout designs chosen with the Style setting. Every color comes
+ * from Universal Theme variables, so Vita, Vita Dark, Redwood and Theme Roller
+ * styles are followed automatically. State = semantic color + icon + text label. */
+
+/* ---------- Tokens ---------- */
+.amc-DAlert,
+.amc-DAlerts {
+  --amc-da-bg: var(--ut-component-background-color, #fff);
+  --amc-da-fg: var(--ut-component-text-default-color, #262626);
+  --amc-da-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-da-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-da-radius: var(--ut-component-border-radius, .375rem);
+  --amc-da-radius-lg: clamp(.5rem, calc(var(--ut-component-border-radius, .375rem) * 2), 1rem);
+}
+
+.amc-DAlert {
+  --amc-da-tone: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-da-tone-on: var(--amc-da-auto-on);
+  /* Black or white, whichever reads better on the state color (used only when
+     the theme does not define a --ut-palette-*-contrast variable). */
+  --amc-da-auto-on: oklch(from var(--amc-da-tone) clamp(0, (.62 - l) * 1000, 1) 0 0);
+  /* Readable state-colored text on light and dark surfaces alike. */
+  --amc-da-ink: color-mix(in srgb, var(--amc-da-tone) 72%, var(--amc-da-fg));
+  --amc-da-tint: color-mix(in srgb, var(--amc-da-tone) 10%, var(--amc-da-bg));
+  --amc-da-tint-line: color-mix(in srgb, var(--amc-da-tone) 30%, var(--amc-da-bg));
+
+  position: relative;
+  box-sizing: border-box;
+  container-type: inline-size;
+  min-inline-size: 0;
+  color: var(--amc-da-fg);
+  font-size: .875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.amc-DAlert--success {
+  --amc-da-tone: var(--ut-palette-success, #278701);
+  --amc-da-tone-on: var(--ut-palette-success-contrast, var(--amc-da-auto-on));
+}
+.amc-DAlert--warning {
+  --amc-da-tone: var(--ut-palette-warning, #fbce4a);
+  --amc-da-tone-on: var(--ut-palette-warning-contrast, var(--amc-da-auto-on));
+  /* Warning palettes are light yellows or ambers: mix in more body text color. */
+  --amc-da-ink: color-mix(in srgb, var(--amc-da-tone) 45%, var(--amc-da-fg));
+}
+.amc-DAlert--danger {
+  --amc-da-tone: var(--ut-palette-danger, #cb1100);
+  --amc-da-tone-on: var(--ut-palette-danger-contrast, var(--amc-da-auto-on));
+}
+.amc-DAlert--info {
+  --amc-da-tone: var(--ut-palette-info, #0076df);
+  --amc-da-tone-on: var(--ut-palette-info-contrast, var(--amc-da-auto-on));
+}
+
+/* ---------- Shared structure ---------- */
+.amc-DAlert-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon body"
+    ".    link";
+  align-items: start;
+  column-gap: .75rem;
+  row-gap: .5rem;
+}
+
+.amc-DAlert-icon {
+  grid-area: icon;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.25rem;
+  block-size: 1.3125rem;
+  color: var(--amc-da-ink);
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.amc-DAlert-body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: .125rem;
+  min-inline-size: 0;
+}
+
+.amc-DAlert-title {
+  margin: 0;
+  color: var(--amc-da-fg);
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  unicode-bidi: isolate;
+}
+
+.amc-DAlert-message {
+  margin: 0;
+  color: color-mix(in srgb, var(--amc-da-fg) 82%, var(--amc-da-bg));
+  unicode-bidi: isolate;
+}
+
+.amc-DAlert-meta {
+  margin: 0;
+  color: var(--amc-da-muted);
+  font-size: .75rem;
+  unicode-bidi: isolate;
+}
+
+/* Visually hidden by default; some styles show it as a label. */
+.amc-DAlert-state {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.amc-DAlert-link {
+  grid-area: link;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  border-radius: .25rem;
+  color: var(--amc-da-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+.amc-DAlert-link:hover .amc-DAlert-linkLabel { text-decoration: underline; text-underline-offset: .2em; }
+.amc-DAlert-link:focus-visible {
+  outline: 2px solid var(--amc-da-ink);
+  outline-offset: 2px;
+}
+.amc-DAlert-linkIcon {
+  font-size: .75em;
+  transition: transform .15s ease;
+}
+.amc-DAlert-link:hover .amc-DAlert-linkIcon { transform: translateX(.125rem); }
+.amc-DAlert-linkIcon:dir(rtl) { transform: scaleX(-1); }
+.amc-DAlert-link:hover .amc-DAlert-linkIcon:dir(rtl) { transform: scaleX(-1) translateX(.125rem); }
+
+/* Decorative watermark icon: only the Gradient Banner shows it. */
+.amc-DAlert-mark { display: none; }
+
+/* ---------- 1. Soft: tinted box ---------- */
+.amc-DAlert--soft {
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-da-tint-line);
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-tint);
+}
+
+/* ---------- 2. Side Icon: full-height icon block on the start side ---------- */
+.amc-DAlert--sideIcon {
+  overflow: hidden;
+  border: 1px solid var(--amc-da-line);
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-da-fg) 8%, transparent);
+}
+.amc-DAlert--sideIcon .amc-DAlert-inner {
+  align-items: stretch;
+  column-gap: 0;
+  row-gap: 0;
+}
+.amc-DAlert--sideIcon .amc-DAlert-icon {
+  grid-row: 1 / -1;
+  inline-size: 3.25rem;
+  block-size: auto;
+  min-block-size: 3.5rem;
+  background-color: var(--amc-da-tone);
+  color: var(--amc-da-tone-on);
+  font-size: 1.375rem;
+}
+.amc-DAlert--sideIcon .amc-DAlert-body { padding: .875rem 1rem; }
+.amc-DAlert--sideIcon .amc-DAlert-link {
+  align-self: center;
+  margin-inline: 1rem;
+  margin-block-end: .875rem;
+}
+@container (min-width: 34rem) {
+  .amc-DAlert--sideIcon .amc-DAlert-inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "icon body link";
+  }
+  .amc-DAlert--sideIcon .amc-DAlert-link {
+    margin-block: .875rem;
+    padding: .375rem .75rem;
+    border: 1px solid var(--amc-da-tint-line);
+    border-radius: 999px;
+  }
+}
+
+/* ---------- 3. Solid: filled with the state color ---------- */
+.amc-DAlert--solid {
+  padding: .875rem 1rem;
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-tone);
+  color: var(--amc-da-tone-on);
+  box-shadow: 0 .375rem 1rem -.375rem color-mix(in srgb, var(--amc-da-tone) 55%, transparent);
+}
+.amc-DAlert--neutral.amc-DAlert--solid {
+  --amc-da-tone: var(--amc-da-fg);
+  --amc-da-tone-on: var(--amc-da-bg);
+}
+.amc-DAlert--solid .amc-DAlert-icon,
+.amc-DAlert--solid .amc-DAlert-title,
+.amc-DAlert--solid .amc-DAlert-link { color: var(--amc-da-tone-on); }
+.amc-DAlert--solid .amc-DAlert-message,
+.amc-DAlert--solid .amc-DAlert-meta { color: color-mix(in srgb, var(--amc-da-tone-on) 86%, var(--amc-da-tone)); }
+.amc-DAlert--solid .amc-DAlert-linkLabel { text-decoration: underline; text-underline-offset: .2em; }
+.amc-DAlert--solid .amc-DAlert-link:focus-visible { outline-color: var(--amc-da-tone-on); }
+
+/* ---------- 4. Gradient Banner: wide tinted banner, CTA pill, watermark ---------- */
+.amc-DAlert--gradientBanner {
+  overflow: hidden;
+  padding: 1.125rem 1.25rem;
+  border: 1px solid var(--amc-da-tint-line);
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-bg);
+  background-image:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--amc-da-tone) 30%, transparent), transparent 60%),
+    linear-gradient(100deg, color-mix(in srgb, var(--amc-da-tone) 16%, var(--amc-da-bg)), color-mix(in srgb, var(--amc-da-tone) 4%, var(--amc-da-bg)));
+}
+.amc-DAlert--gradientBanner:dir(rtl) {
+  background-image:
+    radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--amc-da-tone) 30%, transparent), transparent 60%),
+    linear-gradient(-100deg, color-mix(in srgb, var(--amc-da-tone) 16%, var(--amc-da-bg)), color-mix(in srgb, var(--amc-da-tone) 4%, var(--amc-da-bg)));
+}
+.amc-DAlert--gradientBanner .amc-DAlert-mark {
+  position: absolute;
+  inset-block-end: -1.75rem;
+  inset-inline-end: -.75rem;
+  display: block;
+  color: var(--amc-da-tone);
+  font-size: 7.5rem;
+  line-height: 1;
+  opacity: .12;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+.amc-DAlert--gradientBanner .amc-DAlert-inner { column-gap: 1rem; row-gap: .875rem; }
+.amc-DAlert--gradientBanner .amc-DAlert-icon {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--amc-da-tone);
+  color: var(--amc-da-tone-on);
+  font-size: 1.125rem;
+  box-shadow: 0 0 0 .3125rem color-mix(in srgb, var(--amc-da-tone) 18%, transparent);
+}
+.amc-DAlert--gradientBanner .amc-DAlert-title { font-size: 1.0625rem; font-weight: 700; }
+.amc-DAlert--gradientBanner .amc-DAlert-link {
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  background-color: var(--amc-da-tone);
+  color: var(--amc-da-tone-on);
+  box-shadow: 0 .25rem .75rem -.25rem color-mix(in srgb, var(--amc-da-tone) 60%, transparent);
+}
+.amc-DAlert--gradientBanner .amc-DAlert-link:focus-visible { outline-color: var(--amc-da-tone); }
+.amc-DAlert--gradientBanner .amc-DAlert-link:hover .amc-DAlert-linkLabel { text-decoration: none; }
+@container (min-width: 34rem) {
+  .amc-DAlert--gradientBanner .amc-DAlert-inner {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "icon body link";
+    align-items: center;
+  }
+  .amc-DAlert--gradientBanner { padding: 1.25rem 1.5rem; }
+}
+
+/* ---------- 5. Toast Card: floating card with time stamp ---------- */
+.amc-DAlert--toastCard {
+  max-inline-size: 26rem;
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-da-line);
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-bg);
+  box-shadow:
+    0 1px 3px color-mix(in srgb, var(--amc-da-fg) 8%, transparent),
+    0 .75rem 2rem -.5rem color-mix(in srgb, var(--amc-da-fg) 22%, transparent);
+}
+.amc-DAlert--toastCard .amc-DAlert-inner { row-gap: .375rem; }
+.amc-DAlert--toastCard .amc-DAlert-icon {
+  grid-row: 1 / -1;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-da-tone) 16%, var(--amc-da-bg));
+  color: var(--amc-da-ink);
+  font-size: 1rem;
+}
+.amc-DAlert--toastCard .amc-DAlert-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: .75rem;
+  row-gap: .125rem;
+  align-items: baseline;
+}
+.amc-DAlert--toastCard .amc-DAlert-title { grid-column: 1; grid-row: 1; font-size: .875rem; }
+.amc-DAlert--toastCard .amc-DAlert-meta { grid-column: 2; grid-row: 1; white-space: nowrap; }
+.amc-DAlert--toastCard .amc-DAlert-message { grid-column: 1 / -1; font-size: .8125rem; }
+.amc-DAlert--toastCard .amc-DAlert-link { font-size: .8125rem; }
+
+/* ---------- 6. Announcement: centered news block ---------- */
+.amc-DAlert--announcement {
+  overflow: hidden;
+  padding: 1.75rem 1.25rem 1.5rem;
+  border: 1px solid var(--amc-da-line);
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-bg);
+  background-image: radial-gradient(90% 70% at 50% 0%, color-mix(in srgb, var(--amc-da-tone) 18%, transparent), transparent 70%);
+  text-align: center;
+}
+.amc-DAlert--announcement .amc-DAlert-inner {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "icon" "body" "link";
+  justify-items: center;
+  row-gap: .75rem;
+}
+.amc-DAlert--announcement .amc-DAlert-icon {
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: 1rem;
+  background-color: var(--amc-da-bg);
+  color: var(--amc-da-ink);
+  font-size: 1.375rem;
+  box-shadow:
+    0 0 0 1px var(--amc-da-tint-line),
+    0 .5rem 1.25rem -.5rem color-mix(in srgb, var(--amc-da-tone) 55%, transparent);
+}
+.amc-DAlert--announcement .amc-DAlert-body { align-items: center; gap: .375rem; max-inline-size: 36rem; }
+.amc-DAlert--announcement .amc-DAlert-title { font-size: 1.25rem; font-weight: 700; line-height: 1.3; }
+.amc-DAlert--announcement .amc-DAlert-meta {
+  order: -1;
+  padding: .125rem .625rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-da-tone) 14%, var(--amc-da-bg));
+  color: var(--amc-da-ink);
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.amc-DAlert--announcement .amc-DAlert-link { justify-self: center; }
+
+/* ---------- 7. Tip: dashed callout with a floating icon badge ---------- */
+.amc-DAlert--tip {
+  margin-block-start: 1.25rem;
+  padding: 1.375rem 1rem .875rem;
+  border: 1.5px dashed color-mix(in srgb, var(--amc-da-tone) 60%, var(--amc-da-bg));
+  border-radius: var(--amc-da-radius-lg);
+  background-color: color-mix(in srgb, var(--amc-da-tone) 5%, var(--amc-da-bg));
+}
+.amc-DAlert--tip .amc-DAlert-inner {
+  position: static;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "body" "link";
+}
+.amc-DAlert--tip .amc-DAlert-icon {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: -1rem;
+  inset-inline-start: .875rem;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  background-color: var(--amc-da-tone);
+  color: var(--amc-da-tone-on);
+  font-size: .9375rem;
+  box-shadow: 0 0 0 .25rem var(--amc-da-bg);
+}
+.amc-DAlert--tip .amc-DAlert-title { font-size: .875rem; }
+.amc-DAlert--tip .amc-DAlert-link {
+  font-size: .8125rem;
+}
+
+/* ---------- 8. Quote: quoted message with attribution ---------- */
+.amc-DAlert--quote {
+  padding: 1rem 1.25rem 1rem 1.25rem;
+  border-radius: var(--amc-da-radius-lg);
+  background-color: color-mix(in srgb, var(--amc-da-tone) 6%, var(--amc-da-bg));
+}
+.amc-DAlert--quote::before {
+  content: "\201C";
+  position: absolute;
+  inset-block-start: .25rem;
+  inset-inline-start: .875rem;
+  color: color-mix(in srgb, var(--amc-da-tone) 45%, var(--amc-da-bg));
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.amc-DAlert--quote .amc-DAlert-inner {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "body body" ". link";
+  padding-block-start: 1.75rem;
+  row-gap: .625rem;
+}
+.amc-DAlert--quote .amc-DAlert-icon { display: none; }
+.amc-DAlert--quote .amc-DAlert-body { gap: .25rem; }
+.amc-DAlert--quote .amc-DAlert-message {
+  order: -1;
+  margin-block-end: .5rem;
+  color: var(--amc-da-fg);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+.amc-DAlert--quote .amc-DAlert-title {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8125rem;
+  color: var(--amc-da-ink);
+}
+.amc-DAlert--quote .amc-DAlert-title::before {
+  content: "";
+  flex: none;
+  inline-size: 1.25rem;
+  block-size: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+}
+.amc-DAlert--quote .amc-DAlert-meta { padding-inline-start: 1.75rem; }
+.amc-DAlert--quote .amc-DAlert-link { grid-column: 1 / -1; padding-inline-start: 1.75rem; font-size: .8125rem; }
+
+/* ---------- 9. Inline: compact pill for forms and toolbars ---------- */
+.amc-DAlert--inline {
+  container-type: normal;
+  display: inline-block;
+  max-inline-size: 100%;
+  padding: .3125rem .75rem;
+  border: 1px solid var(--amc-da-tint-line);
+  border-radius: 1rem;
+  background-color: var(--amc-da-tint);
+  font-size: .8125rem;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+.amc-DAlert--inline .amc-DAlert-inner { display: block; }
+.amc-DAlert--inline .amc-DAlert-icon {
+  display: inline-block;
+  inline-size: auto;
+  block-size: auto;
+  margin-inline-end: .375rem;
+  font-size: .875rem;
+  vertical-align: -.0625rem;
+}
+.amc-DAlert--inline .amc-DAlert-body { display: inline; }
+.amc-DAlert--inline .amc-DAlert-link { display: inline; margin-inline-start: .5rem; }
+.amc-DAlert--inline .amc-DAlert-title,
+.amc-DAlert--inline .amc-DAlert-message,
+.amc-DAlert--inline .amc-DAlert-meta {
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+}
+.amc-DAlert--inline .amc-DAlert-title { margin-inline-end: .375rem; }
+.amc-DAlert--inline .amc-DAlert-meta { margin-inline-start: .375rem; }
+.amc-DAlert--inline .amc-DAlert-linkIcon { display: none; }
+.amc-DAlert--inline .amc-DAlert-linkLabel { text-decoration: underline; text-underline-offset: .2em; }
+
+/* ---------- 10. Panel: header bar with state label, body, footer link ---------- */
+.amc-DAlert--panel {
+  overflow: hidden;
+  border: 1px solid var(--amc-da-line);
+  border-radius: var(--amc-da-radius-lg);
+  background-color: var(--amc-da-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-da-fg) 8%, transparent);
+}
+.amc-DAlert--panel .amc-DAlert-inner {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icon title state"
+    "msg  msg   msg"
+    "meta meta  meta"
+    "link link  link";
+  align-items: stretch;
+  column-gap: 0;
+  row-gap: 0;
+}
+.amc-DAlert--panel .amc-DAlert-body { display: contents; }
+.amc-DAlert--panel .amc-DAlert-icon,
+.amc-DAlert--panel .amc-DAlert-title,
+.amc-DAlert--panel .amc-DAlert-state {
+  display: flex;
+  align-items: center;
+  block-size: auto;
+  padding-block: .6875rem;
+  border-block-end: 1px solid var(--amc-da-tint-line);
+  background-color: var(--amc-da-tint);
+}
+.amc-DAlert--panel .amc-DAlert-icon {
+  grid-area: icon;
+  inline-size: auto;
+  padding-inline: 1rem .625rem;
+  font-size: 1rem;
+}
+.amc-DAlert--panel .amc-DAlert-title { grid-area: title; min-inline-size: 0; font-size: .875rem; }
+.amc-DAlert--panel .amc-DAlert-state {
+  grid-area: state;
+  position: static;
+  gap: .375rem;
+  inline-size: auto;
+  margin: 0;
+  padding-inline: .75rem 1rem;
+  overflow: visible;
+  clip: auto;
+  color: var(--amc-da-ink);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.amc-DAlert--panel .amc-DAlert-state::before {
+  content: "";
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-da-tone);
+}
+.amc-DAlert--panel .amc-DAlert-message { grid-area: msg; padding: .875rem 1rem 0; }
+.amc-DAlert--panel .amc-DAlert-meta { grid-area: meta; padding: .25rem 1rem 0; }
+.amc-DAlert--panel .amc-DAlert-inner::after {
+  content: "";
+  grid-row: 5;
+  grid-column: 1 / -1;
+  block-size: .875rem;
+}
+.amc-DAlert--panel .amc-DAlert-link {
+  grid-area: link;
+  justify-self: stretch;
+  justify-content: flex-end;
+  margin-block-start: .875rem;
+  padding: .625rem 1rem;
+  border-block-start: 1px solid var(--amc-da-line);
+  border-radius: 0;
+  background-color: color-mix(in srgb, var(--amc-da-fg) 3%, var(--amc-da-bg));
+  font-size: .8125rem;
+}
+.amc-DAlert--panel .amc-DAlert-link:focus-visible { outline-offset: -2px; }
+.amc-DAlert--panel:has(.amc-DAlert-link) .amc-DAlert-inner::after { display: none; }
+
+/* ---------- Narrow regions ---------- */
+@container (max-width: 20rem) {
+  .amc-DAlert--panel .amc-DAlert-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "icon  title"
+      "state state"
+      "msg   msg"
+      "meta  meta"
+      "link  link";
+  }
+  .amc-DAlert--panel .amc-DAlert-icon,
+  .amc-DAlert--panel .amc-DAlert-title { border-block-end: 0; padding-block-end: .25rem; }
+  .amc-DAlert--panel .amc-DAlert-title { padding-inline-end: 1rem; }
+  .amc-DAlert--panel .amc-DAlert-state { padding-block-start: 0; padding-inline: 1rem; }
+  .amc-DAlert--toastCard .amc-DAlert-body { grid-template-columns: minmax(0, 1fr); }
+  .amc-DAlert--toastCard .amc-DAlert-meta { grid-column: 1; grid-row: 2; }
+  .amc-DAlert--toastCard .amc-DAlert-message { grid-column: 1; grid-row: 3; }
+}
+
+/* ---------- Report mode: a stack of alerts ---------- */
+.amc-DAlerts {
+  display: grid;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-DAlerts-item { min-inline-size: 0; }
+.amc-DAlerts--toastCard { gap: .625rem; }
+.amc-DAlerts--tip { gap: 1.25rem; padding-block-start: .25rem; }
+.amc-DAlerts--inline { justify-items: start; gap: .5rem; }
+.amc-DAlerts--announcement {
+  grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr));
+  gap: 1rem;
+}
+
+/* ---------- Motion and high contrast ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .amc-DAlert-linkIcon { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-DAlert { border: 1px solid CanvasText; }
+  .amc-DAlert--inline .amc-DAlert-inner,
+  .amc-DAlert--quote .amc-DAlert-inner { forced-color-adjust: auto; }
+  .amc-DAlert-icon { color: CanvasText; }
+  .amc-DAlert-mark { display: none; }
+}

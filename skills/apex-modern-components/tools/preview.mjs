@@ -94,10 +94,14 @@ function sampleHtml(unit) {
   const file = path.join(unit.dir, "examples", "preview.json");
   if (!fs.existsSync(file)) return [];
   const spec = JSON.parse(fs.readFileSync(file, "utf8"));
-  return spec.samples.map((s) => ({
-    title: s.title,
-    html: s.html ?? renderComponent(unit.loaded.templates, s)
-  }));
+  return spec.samples.flatMap((s) => {
+    try {
+      return [{ title: s.title, html: s.html ?? renderComponent(unit.loaded.templates, s) }];
+    } catch (error) {
+      console.warn(`skip ${unit.slug} sample "${s.title}": ${error.message}`);
+      return [];
+    }
+  });
 }
 
 const sections = units

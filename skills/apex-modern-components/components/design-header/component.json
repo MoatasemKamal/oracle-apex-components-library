@@ -1,0 +1,146 @@
+{
+  "name": "Design Header",
+  "apexlangName": "designHeader",
+  "staticId": "AMC_DESIGN_HEADER",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["header", "hero", "page header", "banner", "title", "intro", "landing", "jumbotron", "section header", "call to action"],
+  "description": "Family of 10 compact page hero and section header designs (gradient hero, split, minimal, image overlay, dotted grid, card header, centered icon, wave bottom, glass panel, eyebrow) with eyebrow, title, subtitle, icon, optional image and up to two native Universal Theme buttons. Follows the page-header pattern of modern design systems (Oracle Redwood page header, Tailwind UI and Stripe heroes) kept compact for application pages: no full-viewport height, theme colors only, readable in light and dark styles.",
+  "helpText": "Place at the top of a page or section, usually in a region with the Blank with Attributes template. Title renders as h2. The primary button uses t-Button--hot and the secondary a normal t-Button, so both follow the theme. The Image URL is used by the Image Overlay and Split styles only.",
+  "templateComponent": {
+    "availableAs": ["partial"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": ["files/amc-design-header.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-header.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "gradientHero",
+      "sequence": 10,
+      "helpText": "Visual design of the header. Gradient Hero: soft theme-color gradient. Split: text beside an image. Minimal: page title row with actions and a divider. Image Overlay: text over a darkened image. Dotted Grid: centered text on a fading dot grid. Card Header: record header card with icon tile. Centered Icon: large ringed icon above centered text. Wave Bottom: tinted band ending in a wave. Glass Panel: frosted panel on a color field. Eyebrow: editorial type with an accent rule.",
+      "entries": [
+        { "name": "gradientHero", "display": "Gradient Hero", "return": "gradientHero", "sequence": 10 },
+        { "name": "split", "display": "Split", "return": "split", "sequence": 20 },
+        { "name": "minimal", "display": "Minimal", "return": "minimal", "sequence": 30 },
+        { "name": "imageOverlay", "display": "Image Overlay", "return": "imageOverlay", "sequence": 40 },
+        { "name": "dottedGrid", "display": "Dotted Grid", "return": "dottedGrid", "sequence": 50 },
+        { "name": "cardHeader", "display": "Card Header", "return": "cardHeader", "sequence": 60 },
+        { "name": "centeredIcon", "display": "Centered Icon", "return": "centeredIcon", "sequence": 70 },
+        { "name": "waveBottom", "display": "Wave Bottom", "return": "waveBottom", "sequence": 80 },
+        { "name": "glassPanel", "display": "Glass Panel", "return": "glassPanel", "sequence": 90 },
+        { "name": "eyebrow", "display": "Eyebrow", "return": "eyebrow", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "EYEBROW",
+      "apexlangName": "eyebrow",
+      "attribute": 2,
+      "name": "Eyebrow",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Short label above the title, for example Sales or Q3 2026 Review."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 3,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Main heading, rendered as h2. For example Customer Orders."
+    },
+    {
+      "staticId": "SUBTITLE",
+      "apexlangName": "subtitle",
+      "attribute": 4,
+      "name": "Subtitle",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "One or two sentences that explain the page or what to do next."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Optional Font APEX icon class, for example fa-shopping-cart. Most prominent in the Card Header, Centered Icon and Split styles."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 6,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Image for the Image Overlay (background) and Split (side) styles, for example #APP_FILES#hero-warehouse.jpg. Decorative: it gets an empty alt text. Must be developer-controlled. Ignored by the other styles."
+    },
+    {
+      "staticId": "PRIMARY_URL",
+      "apexlangName": "primaryUrl",
+      "attribute": 7,
+      "name": "Primary Button URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Target of the hot button, for example f?p=&APP_ID.:15:&SESSION. Must be developer-controlled, never end-user input."
+    },
+    {
+      "staticId": "PRIMARY_LABEL",
+      "apexlangName": "primaryLabel",
+      "attribute": 8,
+      "name": "Primary Button Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "Hot button text, for example Create Order. Renders only when URL and label are both set."
+    },
+    {
+      "staticId": "SECONDARY_URL",
+      "apexlangName": "secondaryUrl",
+      "attribute": 9,
+      "name": "Secondary Button URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Target of the normal button. Must be developer-controlled, never end-user input."
+    },
+    {
+      "staticId": "SECONDARY_LABEL",
+      "apexlangName": "secondaryLabel",
+      "attribute": 10,
+      "name": "Secondary Button Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Normal button text, for example Import Orders. Renders only when URL and label are both set."
+    }
+  ]
+}

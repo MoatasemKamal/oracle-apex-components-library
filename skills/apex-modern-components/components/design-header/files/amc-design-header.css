@@ -1,0 +1,503 @@
+/* APEX Modern Components - Design Header (designHeader)
+ * Ten compact page-hero / section-header designs chosen with the Style setting.
+ * Colors come only from Universal Theme variables; buttons are native
+ * t-Button / t-Button--hot, so the theme styles them. No full-viewport heights. */
+
+/* ---------- Tokens ---------- */
+.amc-DHeader {
+  --amc-dh-bg: var(--ut-component-background-color, #fff);
+  --amc-dh-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-dh-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dh-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dh-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-dh-radius: clamp(.5rem, calc(var(--ut-component-border-radius, .375rem) * 2.5), 1.25rem);
+  --amc-dh-accent: var(--ut-palette-primary, #056ac8);
+  --amc-dh-accent-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-dh-second: var(--ut-palette-info, #0076df);
+  --amc-dh-ink: color-mix(in srgb, var(--amc-dh-accent) 82%, var(--amc-dh-fg));
+  --amc-dh-tint: color-mix(in srgb, var(--amc-dh-accent) 12%, var(--amc-dh-bg));
+  /* Image Overlay needs a dark scrim and light text whatever the theme mode. */
+  --amc-dh-night: var(--amc-dh-scrim-color, #0b0d12);
+  --amc-dh-on-image: var(--amc-dh-on-image-color, #fff);
+  --amc-dh-pad-b: 2rem;
+  --amc-dh-pad-i: 2rem;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  container-type: inline-size;
+  overflow: hidden;
+  min-inline-size: 0;
+  border-radius: var(--amc-dh-radius);
+  color: var(--amc-dh-fg);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Shared structure ---------- */
+.amc-DHeader-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  gap: 1rem;
+  padding-block: clamp(1.25rem, 6cqi, var(--amc-dh-pad-b));
+  padding-inline: clamp(1rem, 5cqi, var(--amc-dh-pad-i));
+}
+
+.amc-DHeader-content {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  min-inline-size: 0;
+  max-inline-size: 46rem;
+}
+
+.amc-DHeader-eyebrow {
+  margin: 0;
+  color: var(--amc-dh-ink);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  unicode-bidi: isolate;
+}
+
+.amc-DHeader-title {
+  margin: 0;
+  color: var(--amc-dh-fg);
+  font-size: clamp(1.375rem, 1rem + 2.6cqi, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.18;
+  text-wrap: balance;
+  unicode-bidi: isolate;
+}
+
+.amc-DHeader-subtitle {
+  margin: 0;
+  max-inline-size: 40rem;
+  color: var(--amc-dh-muted);
+  font-size: clamp(.875rem, .8rem + .5cqi, 1.0625rem);
+  line-height: 1.55;
+  text-wrap: pretty;
+  unicode-bidi: isolate;
+}
+
+.amc-DHeader-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: .875rem;
+  background-color: var(--amc-dh-tint);
+  color: var(--amc-dh-ink);
+  font-size: 1.375rem;
+}
+
+.amc-DHeader-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  margin-block-start: .25rem;
+}
+.amc-DHeader-actions:empty { display: none; }
+
+/* Decorative layers, only rendered for the styles that use them. */
+.amc-DHeader-bg,
+.amc-DHeader-scrim,
+.amc-DHeader-field,
+.amc-DHeader-dots {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------- 1. Gradient Hero: soft mesh gradient from theme colors ---------- */
+.amc-DHeader--gradientHero {
+  --amc-dh-pad-b: 2.75rem;
+  --amc-dh-pad-i: 2.5rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dh-accent) 20%, var(--amc-dh-line));
+  background-color: var(--amc-dh-bg);
+  background-image:
+    radial-gradient(55% 90% at 0% 0%, color-mix(in srgb, var(--amc-dh-accent) 30%, transparent), transparent 70%),
+    radial-gradient(50% 90% at 100% 100%, color-mix(in srgb, var(--amc-dh-second) 26%, transparent), transparent 70%),
+    radial-gradient(35% 60% at 70% 10%, color-mix(in srgb, var(--amc-dh-accent) 14%, transparent), transparent 70%),
+    linear-gradient(135deg, color-mix(in srgb, var(--amc-dh-accent) 8%, var(--amc-dh-bg)), var(--amc-dh-bg));
+}
+.amc-DHeader--gradientHero:dir(rtl) {
+  background-image:
+    radial-gradient(55% 90% at 100% 0%, color-mix(in srgb, var(--amc-dh-accent) 30%, transparent), transparent 70%),
+    radial-gradient(50% 90% at 0% 100%, color-mix(in srgb, var(--amc-dh-second) 26%, transparent), transparent 70%),
+    radial-gradient(35% 60% at 30% 10%, color-mix(in srgb, var(--amc-dh-accent) 14%, transparent), transparent 70%),
+    linear-gradient(-135deg, color-mix(in srgb, var(--amc-dh-accent) 8%, var(--amc-dh-bg)), var(--amc-dh-bg));
+}
+.amc-DHeader--gradientHero .amc-DHeader-icon {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: .75rem;
+  background-color: var(--amc-dh-accent);
+  color: var(--amc-dh-accent-on);
+  font-size: 1.25rem;
+  box-shadow: 0 .5rem 1.25rem -.375rem color-mix(in srgb, var(--amc-dh-accent) 70%, transparent);
+}
+.amc-DHeader--gradientHero .amc-DHeader-title { font-size: clamp(1.5rem, 1rem + 3.2cqi, 2.375rem); font-weight: 800; }
+.amc-DHeader--gradientHero .amc-DHeader-subtitle { color: color-mix(in srgb, var(--amc-dh-fg) 72%, var(--amc-dh-bg)); }
+
+/* ---------- 2. Split: text beside an image (or an icon panel) ---------- */
+.amc-DHeader--split {
+  --amc-dh-pad-b: 1.5rem;
+  --amc-dh-pad-i: 1.5rem;
+  border: 1px solid var(--amc-dh-line);
+  background-color: var(--amc-dh-bg);
+}
+.amc-DHeader--split .amc-DHeader-inner { row-gap: .875rem; }
+.amc-DHeader--split:not(.amc-DHeader--hasImage) .amc-DHeader-inner > .amc-DHeader-icon { display: none; }
+.amc-DHeader-media {
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  justify-self: stretch;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  max-block-size: 12rem;
+  border-radius: calc(var(--amc-dh-radius) * .75);
+  background-color: var(--amc-dh-tint);
+  background-image:
+    radial-gradient(60% 80% at 30% 20%, color-mix(in srgb, var(--amc-dh-accent) 22%, transparent), transparent 70%),
+    radial-gradient(60% 80% at 80% 90%, color-mix(in srgb, var(--amc-dh-second) 18%, transparent), transparent 70%);
+}
+.amc-DHeader-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.amc-DHeader-mediaIcon {
+  color: var(--amc-dh-ink);
+  font-size: 3.5rem;
+  opacity: .9;
+}
+@container (min-width: 40rem) {
+  .amc-DHeader--split .amc-DHeader-inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    column-gap: 2rem;
+    padding-inline-end: 1rem;
+    padding-block: 1rem;
+  }
+  .amc-DHeader--split .amc-DHeader-inner > .amc-DHeader-icon { grid-column: 1; grid-row: 2; }
+  .amc-DHeader--split .amc-DHeader-content { grid-column: 1; grid-row: 3; padding-inline-start: .5rem; }
+  .amc-DHeader--split .amc-DHeader-actions { grid-column: 1; grid-row: 4; padding-inline-start: .5rem; }
+  .amc-DHeader--split .amc-DHeader-inner > .amc-DHeader-icon { margin-inline-start: .5rem; }
+  .amc-DHeader--split .amc-DHeader-media {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: stretch;
+    aspect-ratio: auto;
+    min-block-size: 13rem;
+    max-block-size: 18rem;
+  }
+}
+
+/* ---------- 3. Minimal: page-title row with actions and a divider ---------- */
+.amc-DHeader--minimal {
+  overflow: visible;
+  border-radius: 0;
+  border-block-end: 1px solid var(--amc-dh-line);
+}
+.amc-DHeader--minimal .amc-DHeader-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1rem;
+  padding: 0 0 1rem;
+}
+.amc-DHeader--minimal .amc-DHeader-icon {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: .625rem;
+  font-size: 1.125rem;
+}
+.amc-DHeader--minimal .amc-DHeader-content { flex: 1 1 14rem; gap: .125rem; }
+.amc-DHeader--minimal .amc-DHeader-eyebrow {
+  color: var(--amc-dh-muted);
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.amc-DHeader--minimal .amc-DHeader-title { font-size: clamp(1.25rem, 1rem + 1.4cqi, 1.625rem); font-weight: 600; }
+.amc-DHeader--minimal .amc-DHeader-subtitle { font-size: .875rem; }
+.amc-DHeader--minimal .amc-DHeader-actions { flex: 0 1 auto; margin: 0; margin-inline-start: auto; }
+
+/* ---------- 4. Image Overlay: text over a darkened image ---------- */
+.amc-DHeader--imageOverlay {
+  --amc-dh-pad-b: 2.25rem;
+  --amc-dh-pad-i: 2.25rem;
+  display: grid;
+  align-content: end;
+  min-block-size: 15rem;
+  background-color: var(--amc-dh-night);
+  background-image:
+    radial-gradient(70% 90% at 100% 0%, color-mix(in srgb, var(--amc-dh-accent) 70%, transparent), transparent 70%),
+    linear-gradient(135deg, color-mix(in srgb, var(--amc-dh-accent) 55%, var(--amc-dh-night)), var(--amc-dh-night));
+  color: var(--amc-dh-on-image);
+}
+.amc-DHeader-bg {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.amc-DHeader-scrim {
+  background-image: linear-gradient(to top,
+    color-mix(in srgb, var(--amc-dh-night) 88%, transparent) 0%,
+    color-mix(in srgb, var(--amc-dh-night) 55%, transparent) 55%,
+    color-mix(in srgb, var(--amc-dh-night) 20%, transparent) 100%);
+}
+.amc-DHeader--imageOverlay:not(.amc-DHeader--hasImage) .amc-DHeader-scrim { display: none; }
+.amc-DHeader--imageOverlay .amc-DHeader-eyebrow {
+  align-self: flex-start;
+  padding: .25rem .625rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dh-on-image) 30%, transparent);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dh-on-image) 14%, transparent);
+  color: var(--amc-dh-on-image);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.amc-DHeader--imageOverlay .amc-DHeader-title { color: var(--amc-dh-on-image); font-size: clamp(1.5rem, 1rem + 3cqi, 2.375rem); }
+.amc-DHeader--imageOverlay .amc-DHeader-subtitle { color: color-mix(in srgb, var(--amc-dh-on-image) 86%, transparent); }
+.amc-DHeader--imageOverlay .amc-DHeader-icon {
+  background-color: color-mix(in srgb, var(--amc-dh-on-image) 16%, transparent);
+  color: var(--amc-dh-on-image);
+}
+
+/* ---------- 5. Dotted Grid: centered text on a fading dot grid ---------- */
+.amc-DHeader--dottedGrid {
+  --amc-dh-pad-b: 3rem;
+  --amc-dh-pad-i: 2rem;
+  border: 1px solid var(--amc-dh-line);
+  background-color: var(--amc-dh-bg);
+  background-image: radial-gradient(60% 70% at 50% 0%, color-mix(in srgb, var(--amc-dh-accent) 14%, transparent), transparent 70%);
+  text-align: center;
+}
+.amc-DHeader-dots {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--amc-dh-fg) 24%, transparent) 1px, transparent 1.5px);
+  background-position: center;
+  background-size: 1.125rem 1.125rem;
+  -webkit-mask-image: radial-gradient(ellipse 65% 75% at 50% 45%, var(--amc-dh-mask, #000) 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 65% 75% at 50% 45%, var(--amc-dh-mask, #000) 20%, transparent 75%);
+}
+.amc-DHeader--dottedGrid .amc-DHeader-inner { justify-items: center; }
+.amc-DHeader--dottedGrid .amc-DHeader-content { align-items: center; }
+.amc-DHeader--dottedGrid .amc-DHeader-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .3125rem .75rem;
+  border: 1px solid var(--amc-dh-line);
+  border-radius: 999px;
+  background-color: var(--amc-dh-bg);
+  color: var(--amc-dh-fg);
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: none;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dh-fg) 8%, transparent);
+}
+.amc-DHeader--dottedGrid .amc-DHeader-eyebrow::before {
+  content: "";
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-dh-accent);
+  box-shadow: 0 0 0 .1875rem color-mix(in srgb, var(--amc-dh-accent) 25%, transparent);
+}
+.amc-DHeader--dottedGrid .amc-DHeader-title { font-size: clamp(1.5rem, 1rem + 3cqi, 2.375rem); font-weight: 800; letter-spacing: -.02em; }
+.amc-DHeader--dottedGrid .amc-DHeader-subtitle { max-inline-size: 34rem; }
+.amc-DHeader--dottedGrid .amc-DHeader-actions { justify-content: center; }
+
+/* ---------- 6. Card Header: record header card with a solid icon tile ---------- */
+.amc-DHeader--cardHeader {
+  border: 1px solid var(--amc-dh-line);
+  background-color: var(--amc-dh-bg);
+  background-image: linear-gradient(to bottom, color-mix(in srgb, var(--amc-dh-accent) 7%, var(--amc-dh-bg)), var(--amc-dh-bg) 70%);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--amc-dh-fg) 6%, transparent),
+    0 .5rem 1.5rem -.75rem color-mix(in srgb, var(--amc-dh-fg) 20%, transparent);
+}
+.amc-DHeader--cardHeader .amc-DHeader-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+  padding: clamp(1rem, 4cqi, 1.5rem);
+}
+.amc-DHeader--cardHeader .amc-DHeader-icon {
+  inline-size: 3.5rem;
+  block-size: 3.5rem;
+  border-radius: 1rem;
+  background-color: var(--amc-dh-accent);
+  background-image: linear-gradient(135deg, color-mix(in srgb, var(--amc-dh-accent-on) 18%, transparent), transparent 60%);
+  color: var(--amc-dh-accent-on);
+  font-size: 1.5rem;
+  box-shadow: 0 .375rem 1rem -.25rem color-mix(in srgb, var(--amc-dh-accent) 60%, transparent);
+}
+.amc-DHeader--cardHeader .amc-DHeader-content { flex: 1 1 15rem; gap: .25rem; }
+.amc-DHeader--cardHeader .amc-DHeader-eyebrow { color: var(--amc-dh-muted); font-size: .6875rem; }
+.amc-DHeader--cardHeader .amc-DHeader-title { font-size: clamp(1.125rem, 1rem + 1cqi, 1.375rem); font-weight: 700; }
+.amc-DHeader--cardHeader .amc-DHeader-subtitle { font-size: .875rem; }
+.amc-DHeader--cardHeader .amc-DHeader-actions { margin: 0; margin-inline-start: auto; }
+
+/* ---------- 7. Centered Icon: large ringed icon above centered text ---------- */
+.amc-DHeader--centeredIcon {
+  --amc-dh-pad-b: 2rem;
+  --amc-dh-pad-i: 1.5rem;
+  background-color: var(--amc-dh-bg);
+  text-align: center;
+}
+.amc-DHeader--centeredIcon .amc-DHeader-inner { justify-items: center; }
+.amc-DHeader--centeredIcon .amc-DHeader-icon {
+  inline-size: 4rem;
+  block-size: 4rem;
+  margin-block: .75rem .75rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-dh-accent) 16%, var(--amc-dh-bg));
+  color: var(--amc-dh-ink);
+  font-size: 1.75rem;
+  box-shadow:
+    0 0 0 .75rem color-mix(in srgb, var(--amc-dh-accent) 8%, transparent),
+    0 0 0 1.5rem color-mix(in srgb, var(--amc-dh-accent) 4%, transparent);
+}
+.amc-DHeader--centeredIcon .amc-DHeader-content { align-items: center; }
+.amc-DHeader--centeredIcon .amc-DHeader-eyebrow { color: var(--amc-dh-muted); }
+.amc-DHeader--centeredIcon .amc-DHeader-subtitle { max-inline-size: 34rem; }
+.amc-DHeader--centeredIcon .amc-DHeader-actions { justify-content: center; }
+
+/* ---------- 8. Wave Bottom: tinted band that ends in a wave ---------- */
+.amc-DHeader--waveBottom {
+  --amc-dh-pad-b: 2.5rem;
+  --amc-dh-pad-i: 2.25rem;
+  --amc-dh-wave-h: clamp(2rem, 7cqi, 4rem);
+  --amc-dh-wave-fill: color-mix(in srgb, var(--amc-dh-accent) 14%, var(--amc-dh-bg));
+  padding-block-end: var(--amc-dh-wave-h);
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+  background-image: linear-gradient(to bottom, color-mix(in srgb, var(--amc-dh-accent) 24%, var(--amc-dh-bg)), var(--amc-dh-wave-fill));
+  background-repeat: no-repeat;
+  background-size: 100% calc(100% - var(--amc-dh-wave-h));
+}
+.amc-DHeader--waveBottom .amc-DHeader-inner { padding-block-end: 1rem; }
+.amc-DHeader--waveBottom .amc-DHeader-eyebrow {
+  align-self: flex-start;
+  padding: .25rem .625rem;
+  border-radius: 999px;
+  background-color: var(--amc-dh-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dh-fg) 8%, transparent);
+}
+.amc-DHeader--waveBottom .amc-DHeader-subtitle { color: color-mix(in srgb, var(--amc-dh-fg) 72%, var(--amc-dh-bg)); }
+.amc-DHeader--waveBottom .amc-DHeader-icon { background-color: var(--amc-dh-bg); }
+.amc-DHeader-wave {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: calc(var(--amc-dh-wave-h) + 1px);
+}
+.amc-DHeader-waveFront { fill: var(--amc-dh-wave-fill); }
+.amc-DHeader-waveBack { fill: color-mix(in srgb, var(--amc-dh-accent) 9%, transparent); }
+
+/* ---------- 9. Glass Panel: frosted panel on a theme color field ---------- */
+.amc-DHeader--glassPanel {
+  --amc-dh-pad-b: 1.75rem;
+  --amc-dh-pad-i: 1.75rem;
+  padding: clamp(.75rem, 5%, 2rem);
+  background-color: color-mix(in srgb, var(--amc-dh-accent) 10%, var(--amc-dh-bg));
+}
+.amc-DHeader-field {
+  background-image:
+    radial-gradient(40% 70% at 12% 20%, color-mix(in srgb, var(--amc-dh-accent) 60%, transparent), transparent 70%),
+    radial-gradient(45% 75% at 88% 85%, color-mix(in srgb, var(--amc-dh-second) 50%, transparent), transparent 70%),
+    radial-gradient(30% 50% at 70% 15%, color-mix(in srgb, var(--amc-dh-accent) 30%, transparent), transparent 70%);
+}
+.amc-DHeader--glassPanel .amc-DHeader-inner {
+  max-inline-size: 44rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dh-bg) 55%, var(--amc-dh-line));
+  border-radius: calc(var(--amc-dh-radius) * .8);
+  background-color: color-mix(in srgb, var(--amc-dh-bg) 68%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-dh-bg) 60%, transparent),
+    0 .75rem 2rem -1rem color-mix(in srgb, var(--amc-dh-fg) 35%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+}
+.amc-DHeader--glassPanel .amc-DHeader-subtitle { color: color-mix(in srgb, var(--amc-dh-fg) 75%, var(--amc-dh-bg)); }
+.amc-DHeader--glassPanel .amc-DHeader-icon { background-color: color-mix(in srgb, var(--amc-dh-bg) 70%, transparent); }
+
+/* ---------- 10. Eyebrow: editorial type with an accent rule ---------- */
+.amc-DHeader--eyebrow {
+  overflow: visible;
+  border-radius: 0;
+}
+.amc-DHeader--eyebrow .amc-DHeader-inner {
+  gap: 1.125rem;
+  padding: clamp(.5rem, 3cqi, 1.5rem) 0;
+}
+.amc-DHeader--eyebrow .amc-DHeader-icon {
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dh-accent) 35%, var(--amc-dh-line));
+  border-radius: 50%;
+  background-color: transparent;
+  font-size: 1rem;
+}
+.amc-DHeader--eyebrow .amc-DHeader-content { gap: .75rem; }
+.amc-DHeader--eyebrow .amc-DHeader-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  letter-spacing: .14em;
+}
+.amc-DHeader--eyebrow .amc-DHeader-eyebrow::before {
+  content: "";
+  flex: none;
+  inline-size: 2rem;
+  block-size: 2px;
+  border-radius: 2px;
+  background-color: var(--amc-dh-accent);
+}
+.amc-DHeader--eyebrow .amc-DHeader-title {
+  font-size: clamp(1.625rem, 1rem + 4cqi, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.08;
+}
+.amc-DHeader--eyebrow .amc-DHeader-subtitle {
+  max-inline-size: 36rem;
+  color: color-mix(in srgb, var(--amc-dh-fg) 70%, var(--amc-dh-bg));
+  font-size: clamp(.9375rem, .85rem + .7cqi, 1.1875rem);
+}
+
+/* Narrow regions: wrapped actions line up with the text instead of the end edge. */
+@container (max-width: 36rem) {
+  .amc-DHeader--minimal .amc-DHeader-actions,
+  .amc-DHeader--cardHeader .amc-DHeader-actions { margin-inline-start: 0; }
+}
+
+/* ---------- Accessibility ---------- */
+@media (forced-colors: active) {
+  .amc-DHeader { border: 1px solid CanvasText; }
+  .amc-DHeader-dots,
+  .amc-DHeader-field,
+  .amc-DHeader-scrim,
+  .amc-DHeader-wave { display: none; }
+  .amc-DHeader--glassPanel .amc-DHeader-inner { border-color: CanvasText; }
+}
