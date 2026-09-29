@@ -1,0 +1,126 @@
+{
+  "samples": [
+    {
+      "title": "Beam rail",
+      "direction": "motion",
+      "mode": "report",
+      "settings": { "STYLE": "beamRail" },
+      "rows": [
+        { "TITLE": "Order SO-10482 out for delivery", "BODY": "Driver assigned, arrival expected before noon.", "DATE": "09:41", "STATE": "current", "TAG": "DHL Express" },
+        { "TITLE": "Customs hold released", "BODY": "Commercial invoice uploaded by Finance.", "DATE": "Yesterday", "STATE": "warning" },
+        { "TITLE": "Packed and labelled", "BODY": "3 parcels, 18.4 kg in total.", "DATE": "11 Sep", "STATE": "success" },
+        { "TITLE": "Order confirmed", "DATE": "10 Sep", "STATE": "info" }
+      ]
+    },
+    {
+      "title": "Pulse now",
+      "direction": "motion",
+      "mode": "report",
+      "settings": { "STYLE": "pulseNow" },
+      "rows": [
+        { "TITLE": "Request submitted", "BODY": "Laptop refresh for 12 sales staff.", "DATE": "2 Sep", "STATE": "success" },
+        { "TITLE": "Manager approved", "DATE": "3 Sep", "STATE": "success" },
+        { "TITLE": "Budget check by Finance", "BODY": "EUR 21,600 against the IT hardware budget.", "DATE": "Today", "STATE": "current", "TAG": "Due in 2 days" },
+        { "TITLE": "Purchase order issued", "STATE": "neutral" },
+        { "TITLE": "Devices delivered", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Perspective road",
+      "direction": "depth",
+      "mode": "report",
+      "settings": { "STYLE": "perspectiveRoad" },
+      "rows": [
+        { "TITLE": "National rollout", "BODY": "All 140 stores go live in two waves.", "DATE": "Oct 2026", "STATE": "neutral" },
+        { "TITLE": "Pilot in 3 stores", "BODY": "Feedback collected weekly from store managers.", "DATE": "Jun 2026", "STATE": "current" },
+        { "TITLE": "Data migration", "BODY": "42,000 customer records moved from the legacy CRM.", "DATE": "Mar 2026", "STATE": "success" },
+        { "TITLE": "Contract signed", "BODY": "Three-year agreement with Contoso Retail.", "DATE": "Jan 2026", "STATE": "success" }
+      ]
+    },
+    {
+      "title": "Stacked cards 3D",
+      "direction": "depth",
+      "mode": "report",
+      "settings": { "STYLE": "stackedCards3d" },
+      "rows": [
+        { "TITLE": "Ticket escalated to Tier 2", "BODY": "Duplicate charges on three invoices, assigned to Maya Chen.", "DATE": "11:20", "STATE": "danger" },
+        { "TITLE": "Refund of EUR 312.00 approved", "BODY": "Credit note CN-0098 created.", "DATE": "12:05", "STATE": "success", "TAG": "Finance" },
+        { "TITLE": "Customer replied", "BODY": "Confirms the refund arrived and closes the case.", "DATE": "15:47", "STATE": "info" },
+        { "TITLE": "Satisfaction survey sent", "DATE": "16:00", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Neo-brutal",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "neoBrutal" },
+      "rows": [
+        { "TITLE": "v2.4 released", "BODY": "Bulk invoice approval and a faster order search.", "DATE": "22 Sep", "STATE": "success", "TAG": "v2.4.0" },
+        { "TITLE": "Hotfix for VAT rounding", "BODY": "Credit notes rounded per line instead of per total.", "DATE": "14 Sep", "STATE": "warning", "TAG": "v2.3.2" },
+        { "TITLE": "Payment gateway outage", "BODY": "Card payments failed for 38 minutes.", "DATE": "9 Sep", "STATE": "danger" },
+        { "TITLE": "Beta opened to 20 customers", "DATE": "1 Sep", "STATE": "info", "TAG": "v2.4.0-beta" }
+      ]
+    },
+    {
+      "title": "Clay",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "clay" },
+      "rows": [
+        { "TITLE": "Welcome call held", "BODY": "Goals agreed with the Northwind operations team.", "DATE": "Week 1", "ICON": "fa-phone", "STATE": "success" },
+        { "TITLE": "Workspace configured", "BODY": "Roles, approval limits and branding in place.", "DATE": "Week 2", "ICON": "fa-cog", "STATE": "success" },
+        { "TITLE": "Team training", "BODY": "Two sessions for 24 users, recordings shared.", "DATE": "Week 3", "ICON": "fa-users", "STATE": "current", "TAG": "In progress" },
+        { "TITLE": "First business review", "DATE": "Week 6", "ICON": "fa-line-chart", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Kinetic years",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "kineticYears" },
+      "rows": [
+        { "TITLE": "Founded in Rotterdam", "BODY": "Three people and one warehouse serving local retailers.", "DATE": "2014", "STATE": "info" },
+        { "TITLE": "First international customer", "BODY": "Contoso Retail signs for 40 stores in Germany.", "DATE": "2018", "STATE": "success", "TAG": "Expansion" },
+        { "TITLE": "Moved to Oracle APEX", "BODY": "Order, stock and billing apps rebuilt in 9 months.", "DATE": "2022", "STATE": "success" },
+        { "TITLE": "1 million orders a year", "BODY": "Five warehouses, 180 employees.", "DATE": "2026", "STATE": "current" }
+      ]
+    },
+    {
+      "title": "Metro line",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "metroLine" },
+      "rows": [
+        { "TITLE": "Quote", "BODY": "Accepted", "DATE": "2 Sep", "STATE": "success" },
+        { "TITLE": "Order", "BODY": "SO-10482", "DATE": "4 Sep", "STATE": "success", "TAG": "ERP" },
+        { "TITLE": "Warehouse", "BODY": "Picking", "DATE": "Today", "STATE": "current" },
+        { "TITLE": "Carrier", "DATE": "Tomorrow", "STATE": "neutral", "TAG": "DHL" },
+        { "TITLE": "Customer", "DATE": "Fri", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Scroll progress",
+      "direction": "smart",
+      "mode": "report",
+      "settings": { "STYLE": "scrollProgress" },
+      "rows": [
+        { "TITLE": "Discovery workshop", "BODY": "Map the current approval process with Finance and Procurement.", "DATE": "Phase 1", "STATE": "success" },
+        { "TITLE": "Prototype in APEX", "BODY": "Clickable approval flow tested with 8 key users.", "DATE": "Phase 2", "STATE": "success", "TAG": "2 weeks" },
+        { "TITLE": "Build and integrate", "BODY": "Connect the ERP purchase order API and single sign-on.", "DATE": "Phase 3", "STATE": "current", "TAG": "6 weeks" },
+        { "TITLE": "Go live and hypercare", "BODY": "Daily check-ins for the first two weeks after launch.", "DATE": "Phase 4", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Expand steps",
+      "direction": "smart",
+      "mode": "report",
+      "settings": { "STYLE": "expandSteps" },
+      "rows": [
+        { "TITLE": "Upload documents", "BODY": "ID, proof of address and the signed contract as PDF.", "DATE": "Done 12 Sep", "STATE": "success" },
+        { "TITLE": "Identity check", "BODY": "Automatic check with the bank, usually within one hour.", "DATE": "Done 12 Sep", "STATE": "success" },
+        { "TITLE": "Credit review", "BODY": "Risk team reviews the credit limit of EUR 50,000. You will get an email when it is decided.", "DATE": "Started today", "STATE": "current", "TAG": "Risk team" },
+        { "TITLE": "Account activation", "BODY": "Your account manager sends login details and schedules onboarding.", "DATE": "Next", "STATE": "neutral" }
+      ]
+    }
+  ]
+}

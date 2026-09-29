@@ -1,0 +1,7 @@
+<span class="amc-NTimeline-marker" aria-hidden="true">{if ?ICON/}<span class="amc-NTimeline-icon fa #ICON#"></span>{endif/}</span>
+{if ?DATE/}<span class="amc-NTimeline-date">#DATE#</span>{endif/}
+<div class="amc-NTimeline-card">
+  <h3 class="amc-NTimeline-title">#TITLE#</h3>
+  {if ?BODY/}<p class="amc-NTimeline-body">#BODY#</p>{endif/}
+  <span class="amc-NTimeline-foot">{if ?TAG/}<span class="amc-NTimeline-tag">#TAG#</span>{endif/}<span class="amc-NTimeline-state">{case STATE/}{when success/}Done{when current/}In progress{when warning/}Attention{when danger/}Problem{when info/}Info{otherwise/}Pending{endcase/}</span></span>
+</div>

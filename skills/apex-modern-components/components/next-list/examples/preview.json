@@ -1,0 +1,124 @@
+{
+  "samples": [
+    {
+      "title": "Animated feed",
+      "direction": "motion",
+      "mode": "report",
+      "settings": { "STYLE": "animatedFeed" },
+      "rows": [
+        { "TITLE": "Payment received", "SUBTITLE": "Northwind Traders paid INV-2041, EUR 18,400.00", "META": "2m ago", "ICON": "fa-credit-card", "STATE": "success", "STATE_LABEL": "Paid" },
+        { "TITLE": "New order SO-10482", "SUBTITLE": "Contoso Retail ordered 24 items for Rotterdam", "META": "9m ago", "ICON": "fa-shopping-cart", "STATE": "info" },
+        { "TITLE": "Stock below reorder point", "SUBTITLE": "SKU AX-220 Barcode scanner, 6 units left", "META": "25m ago", "ICON": "fa-warning", "STATE": "warning" },
+        { "TITLE": "Maya Chen joined Finance", "SUBTITLE": "Access to Approvals and Invoices granted", "META": "1h ago", "INITIALS": "MC" }
+      ]
+    },
+    {
+      "title": "Marquee logos",
+      "direction": "motion",
+      "mode": "report",
+      "settings": { "STYLE": "marqueeLogos" },
+      "rows": [
+        { "TITLE": "Northwind", "SUBTITLE": "Logistics", "INITIALS": "NW", "LINK_URL": "#" },
+        { "TITLE": "Contoso", "SUBTITLE": "Retail", "INITIALS": "CR" },
+        { "TITLE": "Fabrikam", "SUBTITLE": "Manufacturing", "INITIALS": "FB" },
+        { "TITLE": "Tailspin Air", "SUBTITLE": "Aviation", "ICON": "fa-plane" },
+        { "TITLE": "Adventure Works", "SUBTITLE": "Outdoor", "INITIALS": "AW" }
+      ]
+    },
+    {
+      "title": "Spotlight rows",
+      "direction": "motion",
+      "mode": "report",
+      "settings": { "STYLE": "spotlightRows" },
+      "rows": [
+        { "TITLE": "Quarterly close checklist", "SUBTITLE": "14 of 18 tasks done, owner Finance Ops", "META": "Due Fri", "ICON": "fa-check-square-o", "STATE": "info", "LINK_URL": "#" },
+        { "TITLE": "Vendor onboarding: Fabrikam", "SUBTITLE": "Bank details waiting for second approval", "META": "2 days", "ICON": "fa-building-o", "STATE": "warning", "LINK_URL": "#" },
+        { "TITLE": "Travel policy 2027", "SUBTITLE": "Published to all employees", "META": "Today", "ICON": "fa-plane", "STATE": "success", "LINK_URL": "#" },
+        { "TITLE": "Expense report ER-7731", "SUBTITLE": "Rejected, missing hotel receipt", "META": "EUR 612.40", "ICON": "fa-file-text-o", "STATE": "danger", "LINK_URL": "#" }
+      ]
+    },
+    {
+      "title": "3D stack",
+      "direction": "depth",
+      "mode": "report",
+      "settings": { "STYLE": "stack3d" },
+      "rows": [
+        { "TITLE": "Approval needed: PO-5520", "SUBTITLE": "Office chairs for the Lyon site, EUR 9,860", "META": "Now", "ICON": "fa-inbox", "STATE": "warning" },
+        { "TITLE": "Contract renewed", "SUBTITLE": "Tailspin Air, 36 months", "META": "10:12", "ICON": "fa-pencil", "STATE": "success" },
+        { "TITLE": "Shipment delayed", "SUBTITLE": "Container MSKU 7788 held at customs", "META": "09:40", "ICON": "fa-truck", "STATE": "danger" },
+        { "TITLE": "Weekly sales digest ready", "SUBTITLE": "Revenue up 8.2% on last week", "META": "08:00", "ICON": "fa-line-chart", "STATE": "info" }
+      ]
+    },
+    {
+      "title": "Lift rows",
+      "direction": "depth",
+      "mode": "report",
+      "settings": { "STYLE": "liftRows" },
+      "rows": [
+        { "TITLE": "Enterprise plan", "SUBTITLE": "Contoso Retail, renews 1 Jan 2027", "META": "EUR 48,000", "INITIALS": "CR", "STATE": "success", "LINK_URL": "#" },
+        { "TITLE": "Growth plan", "SUBTITLE": "Northwind Traders, trial ends in 5 days", "META": "EUR 12,600", "INITIALS": "NW", "STATE": "warning", "LINK_URL": "#" },
+        { "TITLE": "Starter plan", "SUBTITLE": "Fabrikam, monthly billing", "META": "EUR 1,188", "INITIALS": "FB", "STATE": "info", "LINK_URL": "#" }
+      ]
+    },
+    {
+      "title": "Neo-brutal",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "neoBrutal" },
+      "rows": [
+        { "TITLE": "Migrate billing to v3 API", "SUBTITLE": "Platform team, sprint 42", "META": "8 pts", "ICON": "fa-code", "STATE": "info", "STATE_LABEL": "In progress" },
+        { "TITLE": "Fix VAT rounding on credit notes", "SUBTITLE": "Reported by 3 customers", "META": "3 pts", "ICON": "fa-bug", "STATE": "danger", "STATE_LABEL": "Blocked" },
+        { "TITLE": "Dark mode for customer portal", "SUBTITLE": "Design review passed", "META": "5 pts", "ICON": "fa-moon-o", "STATE": "success", "STATE_LABEL": "Shipped" },
+        { "TITLE": "Export invoices to SAF-T", "SUBTITLE": "Waiting for tax advisor", "META": "13 pts", "ICON": "fa-file-code-o", "STATE": "warning", "STATE_LABEL": "Review" }
+      ]
+    },
+    {
+      "title": "Clay",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "clay" },
+      "rows": [
+        { "TITLE": "Sofia Martins", "SUBTITLE": "Account executive, Iberia", "META": "142%", "INITIALS": "SM", "STATE": "success", "STATE_LABEL": "Top seller" },
+        { "TITLE": "Jonas Weber", "SUBTITLE": "Account executive, DACH", "META": "118%", "INITIALS": "JW", "STATE": "info" },
+        { "TITLE": "Amara Okafor", "SUBTITLE": "Account executive, Nordics", "META": "96%", "INITIALS": "AO", "STATE": "warning" },
+        { "TITLE": "Liam Dubois", "SUBTITLE": "Account executive, France", "META": "88%", "INITIALS": "LD", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Terminal",
+      "direction": "bold",
+      "mode": "report",
+      "settings": { "STYLE": "terminal" },
+      "rows": [
+        { "TITLE": "Nightly GL export finished", "SUBTITLE": "48,211 journal lines", "META": "02:14:07", "STATE": "success" },
+        { "TITLE": "Job SYNC_CUSTOMERS started", "SUBTITLE": "source CRM, batch 500", "META": "02:15:00", "STATE": "info" },
+        { "TITLE": "Retrying FX rate feed", "SUBTITLE": "timeout after 30s, attempt 2 of 3", "META": "02:15:31", "STATE": "warning" },
+        { "TITLE": "Invoice PDF render failed", "SUBTITLE": "INV-2044, template missing logo", "META": "02:16:02", "STATE": "danger" },
+        { "TITLE": "Queue drained", "META": "02:16:40", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Accordion rows",
+      "direction": "smart",
+      "mode": "report",
+      "settings": { "STYLE": "accordionRows" },
+      "rows": [
+        { "TITLE": "SO-10482 Contoso Retail", "SUBTITLE": "24 items, ships from Rotterdam", "META": "EUR 7,940", "ICON": "fa-shopping-cart", "STATE": "info", "STATE_LABEL": "Packing", "DETAILS": "12 barcode scanners, 8 docking stations and 4 label printers. Carrier DHL Express, pickup booked for tomorrow 09:00.", "LINK_URL": "#" },
+        { "TITLE": "SO-10479 Northwind Traders", "SUBTITLE": "3 items, backorder on one line", "META": "EUR 1,260", "ICON": "fa-shopping-cart", "STATE": "warning", "STATE_LABEL": "Backorder", "DETAILS": "Line 2, AX-220 scanner, expected from supplier on 6 Oct. Customer agreed to a split shipment.", "LINK_URL": "#" },
+        { "TITLE": "SO-10471 Fabrikam", "SUBTITLE": "Delivered and signed", "META": "EUR 22,300", "ICON": "fa-check", "STATE": "success", "STATE_LABEL": "Delivered", "DETAILS": "Signed for by R. Alvarez on 24 Sep. Invoice INV-2041 sent the same day." }
+      ]
+    },
+    {
+      "title": "Scroll reveal",
+      "direction": "smart",
+      "mode": "report",
+      "settings": { "STYLE": "scrollReveal" },
+      "rows": [
+        { "TITLE": "Connect your ERP", "SUBTITLE": "Import customers, items and open orders in one step.", "META": "5 min", "ICON": "fa-plug", "STATE": "success", "STATE_LABEL": "Done" },
+        { "TITLE": "Invite your team", "SUBTITLE": "Finance, sales and warehouse roles are ready to use.", "META": "2 min", "ICON": "fa-users", "STATE": "info" },
+        { "TITLE": "Set approval limits", "SUBTITLE": "Route purchase orders above EUR 5,000 to a manager.", "META": "3 min", "ICON": "fa-sliders", "STATE": "neutral" },
+        { "TITLE": "Go live", "SUBTITLE": "Switch the old order form off and announce the change.", "META": "1 min", "ICON": "fa-rocket", "STATE": "neutral" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+plugin nextList (
+    name: Next List
+    staticId: AMC_NEXT_LIST
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            {case STYLE/}{when accordionRows/}<details class="amc-NList-details"><summary class="amc-NList-summary">{if ?IMAGE_URL/}<span class="amc-NList-lead amc-NList-lead--img"><img class="amc-NList-img" src="#IMAGE_URL#" width="40" height="40" alt="" loading="lazy"></span>{else/}{if ?INITIALS/}<span class="amc-NList-lead" aria-hidden="true">#INITIALS#</span>{else/}{if ?ICON/}<span class="amc-NList-lead" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{endif/}{endif/}
+            <span class="amc-NList-main"><span class="amc-NList-title">#TITLE#</span>{if ?SUBTITLE/}<span class="amc-NList-sub">#SUBTITLE#</span>{endif/}</span>
+            <span class="amc-NList-state{if ?STATE_LABEL/} amc-NList-state--label{endif/}">{if ?STATE_LABEL/}#STATE_LABEL#{else/}{case STATE/}{when success/}OK{when warning/}Warn{when danger/}Error{when info/}Info{otherwise/}Log{endcase/}{endif/}</span>
+            {if ?META/}<span class="amc-NList-meta">#META#</span>{endif/}<span class="amc-NList-chevron" aria-hidden="true"></span></summary>
+            <div class="amc-NList-panel">{if ?DETAILS/}<p class="amc-NList-detailsText">#DETAILS#</p>{endif/}{if ?LINK_URL/}<a class="amc-NList-open" href="#LINK_URL#">Open<span class="amc-NList-sr"> #TITLE#</span></a>{endif/}</div></details>{otherwise/}{if ?IMAGE_URL/}<span class="amc-NList-lead amc-NList-lead--img"><img class="amc-NList-img" src="#IMAGE_URL#" width="40" height="40" alt="" loading="lazy"></span>{else/}{if ?INITIALS/}<span class="amc-NList-lead" aria-hidden="true">#INITIALS#</span>{else/}{if ?ICON/}<span class="amc-NList-lead" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{endif/}{endif/}
+            <span class="amc-NList-main"><span class="amc-NList-title">{if ?LINK_URL/}<a class="amc-NList-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</span>{if ?SUBTITLE/}<span class="amc-NList-sub">#SUBTITLE#</span>{endif/}</span>
+            <span class="amc-NList-state{if ?STATE_LABEL/} amc-NList-state--label{endif/}">{if ?STATE_LABEL/}#STATE_LABEL#{else/}{case STATE/}{when success/}OK{when warning/}Warn{when danger/}Error{when info/}Info{otherwise/}Log{endcase/}{endif/}</span>
+            {if ?META/}<span class="amc-NList-meta">#META#</span>{endif/}
+            {if ?LINK_URL/}<span class="amc-NList-go" aria-hidden="true"></span>{endif/}{endcase/}
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NList amc-NList--#STYLE#"><ul class="amc-NList-list"{case STYLE/}{when stack3d/} tabindex="0"{endcase/}>#APEX$ROWS#</ul></div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NList-item amc-NList-item--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}{if ?LINK_URL/} amc-NList-item--link{endif/}">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-list.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-list.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL, Initials or Icon for the lead, State and State Label, Details for the Accordion rows style, and Link URL. Format numbers and dates in SQL. Every style is complete without JavaScript; the plug-in file only adds pointer tracking and the seamless marquee loop, and does nothing when the user prefers reduced motion.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: animatedFeed
+        }
+        help {
+            helpText:
+                ```
+                Design of the list; the direction is given in brackets as motion, depth, bold or smart. animatedFeed [motion]: notification cards drop in one after another, newest marked live. marqueeLogos [motion]: customers or partners as an endless logo marquee that pauses on hover or focus and wraps when motion is reduced. spotlightRows [motion]: a light spot follows the pointer over the rows and lights their borders. stack3d [depth]: rows form a perspective stack that fans out on hover or focus; always open on touch screens. liftRows [depth]: rows are raised slabs that lift and tilt toward the pointer. neoBrutal [bold]: ink borders, hard offset shadows and flat state fills. clay [bold]: soft pillowy rows with clay icon blobs. terminal [bold]: a console log with time, level and a blinking cursor. accordionRows [smart]: each row opens to show Details; other rows dim while one is open. scrollReveal [smart]: numbered rows reveal as they scroll into view and switch to two columns in wide regions.
+                ```
+        }
+        entry animatedFeed (
+            sequence: 10
+            display: Animated feed
+            return: animatedFeed
+        )
+        entry marqueeLogos (
+            sequence: 20
+            display: Marquee logos
+            return: marqueeLogos
+        )
+        entry spotlightRows (
+            sequence: 30
+            display: Spotlight rows
+            return: spotlightRows
+        )
+        entry stack3d (
+            sequence: 40
+            display: 3D stack
+            return: stack3d
+        )
+        entry liftRows (
+            sequence: 50
+            display: Lift rows
+            return: liftRows
+        )
+        entry neoBrutal (
+            sequence: 60
+            display: Neo-brutal
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 70
+            display: Clay
+            return: clay
+        )
+        entry terminal (
+            sequence: 80
+            display: Terminal
+            return: terminal
+        )
+        entry accordionRows (
+            sequence: 90
+            display: Accordion rows
+            return: accordionRows
+        )
+        entry scrollReveal (
+            sequence: 100
+            display: Scroll reveal
+            return: scrollReveal
+        )
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Main text of the row, for example a customer name, an event or a task. In Marquee logos it is the company name next to the logo.
+                ```
+        }
+    )
+    customAttribute SUBTITLE (
+        apexlangName: subtitle
+        attribute: 3
+        name: Subtitle
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Secondary text, for example a role, an amount or a short message. Shown on one line in 3D stack and Terminal.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 4
+        name: Meta
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short text at the end of the row, already formatted in SQL, for example 2 min ago, 09:41:07 or EUR 4,200. Terminal shows it first as the timestamp.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 5
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Avatar or logo image URL. Must be developer-controlled, for example a URL built with apex_util.get_blob_file_src. Takes precedence over Initials and Icon.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 6
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown in the lead tile when there is no Image URL, for example NW.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 7
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class shown in the lead tile when there is no Image URL or Initials, for example fa-bell or fa-credit-card.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 8
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                One of success, warning, danger, info or neutral. Colors the lead tile, the level or the fill, and is always given as text too: visible in Terminal and Neo-brutal, read by screen readers in the others. Unknown values render as neutral.
+                ```
+        }
+    )
+    customAttribute STATE_LABEL (
+        apexlangName: stateLabel
+        attribute: 9
+        name: State Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible text for the state, for example Paid, Overdue or New. Without it, Terminal shows a level word and the other styles give screen readers a generic word for the state.
+                ```
+        }
+    )
+    customAttribute DETAILS (
+        apexlangName: details
+        attribute: 10
+        name: Details
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Longer text shown when a row is opened in the Accordion rows style, for example the order lines or the last comment. Ignored by the other styles.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 11
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target for the row, for example apex_page.get_url with p_page 10, p_items P10_ID and the row id. Must be developer-controlled. The Title becomes the link text; in Accordion rows an Open link appears inside the opened row.
+                ```
+        }
+    )
+    file "amc-next-list.css" (
+        fileName: amc-next-list.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-list.js" (
+        fileName: amc-next-list.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

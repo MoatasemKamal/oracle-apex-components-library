@@ -1,0 +1,117 @@
+{
+  "name": "Next Timeline",
+  "apexlangName": "nextTimeline",
+  "staticId": "AMC_NEXT_TIMELINE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["timeline", "history", "activity", "roadmap", "milestones", "progress", "stepper", "steps", "journey", "beam", "pulse", "perspective", "3d", "neo brutalism", "claymorphism", "kinetic type", "metro", "transit map", "scroll progress", "next collection"],
+  "description": "Next Collection family of ten current-generation timelines: beam rail, pulsing current step, perspective road, 3D card cascade, neo-brutal, clay, kinetic years, metro line, scroll progress and expanding steps. Follows the native Universal Theme Timeline pattern: one query row per event, state shown on the marker and as text, with a current value for progress-style journeys. The beam rail light pulse and border beam are adapted from Magic UI animated-beam and border-beam, MIT.",
+  "helpText": "Each query row is one event, in the order the query returns them. Pick a Style for the whole region, then map Title (required), Body, Date, Icon, State and Tag to columns. Format dates in SQL with the application's NLS settings. State accepts success, current, warning, danger, info or neutral; any other value renders as neutral. For progress journeys return success for done steps, current for the active step and neutral for steps not reached yet. Pure CSS, no JavaScript.",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-timeline.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-timeline.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "beamRail",
+      "sequence": 10,
+      "helpText": "Design of the timeline; the direction is given in brackets as motion, depth, bold or smart. beamRail [motion]: a light pulse travels down the rail and a border beam circles the current event. pulseNow [motion]: done steps glow, the current step pulses, later steps wait on a dashed rail. perspectiveRoad [depth]: events line a road that recedes in perspective and flattens on hover or focus; order the query so the nearest event comes last. stackedCards3d [depth]: tilted cards cascade in depth and come forward on hover or focus. neoBrutal [bold]: ink rail, diamond markers, hard shadows and date stickers. clay [bold]: a clay groove with soft clay markers and cards. kineticYears [bold]: oversized outlined dates carry the structure and fill on hover or focus; return short dates such as 2026 or Q3. metroLine [bold]: a transit-map line with stations, horizontal in wide regions and vertical when narrow; a Tag turns a station into an interchange. scrollProgress [smart]: the rail fills and the markers light up as the list scrolls through the page; a static fill where scroll-driven animation is not supported. expandSteps [smart]: step panels that expand on hover, focus or tap to show the Body, side by side in wide regions and stacked when narrow; the current step is open at rest.",
+      "entries": [
+        { "name": "beamRail", "display": "Beam rail", "return": "beamRail", "sequence": 10 },
+        { "name": "pulseNow", "display": "Pulse now", "return": "pulseNow", "sequence": 20 },
+        { "name": "perspectiveRoad", "display": "Perspective road", "return": "perspectiveRoad", "sequence": 30 },
+        { "name": "stackedCards3d", "display": "Stacked cards 3D", "return": "stackedCards3d", "sequence": 40 },
+        { "name": "neoBrutal", "display": "Neo-brutal", "return": "neoBrutal", "sequence": 50 },
+        { "name": "clay", "display": "Clay", "return": "clay", "sequence": 60 },
+        { "name": "kineticYears", "display": "Kinetic years", "return": "kineticYears", "sequence": 70 },
+        { "name": "metroLine", "display": "Metro line", "return": "metroLine", "sequence": 80 },
+        { "name": "scrollProgress", "display": "Scroll progress", "return": "scrollProgress", "sequence": 90 },
+        { "name": "expandSteps", "display": "Expand steps", "return": "expandSteps", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Event or step heading, for example Contract signed or Pilot in 3 stores."
+    },
+    {
+      "staticId": "BODY",
+      "apexlangName": "body",
+      "attribute": 3,
+      "name": "Body",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional description. In Expand steps it is shown when a step is opened; in Metro line keep it short."
+    },
+    {
+      "staticId": "DATE",
+      "apexlangName": "date",
+      "attribute": 4,
+      "name": "Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Date or time text, already formatted in SQL, for example 12 Sep 2026. Kinetic years shows it very large, so return a short value such as 2026, Q3 or Mar."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Font APEX icon class shown inside the marker by the styles with large markers, for example fa-check or fa-truck."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 6,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "One of success, current, warning, danger, info or neutral. Colors the marker and rail and is always given as text too. current marks the active step: it pulses, gets aria-current and is open at rest in Expand steps. neutral means not reached yet in the progress styles. Unknown values render as neutral."
+    },
+    {
+      "staticId": "TAG",
+      "apexlangName": "tag",
+      "attribute": 7,
+      "name": "Tag",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Short label shown as a chip, for example a version v2.4, a team or a line code. In Metro line it marks the station as an interchange with that code."
+    }
+  ]
+}

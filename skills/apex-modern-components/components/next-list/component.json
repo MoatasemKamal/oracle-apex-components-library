@@ -1,0 +1,162 @@
+{
+  "name": "Next List",
+  "apexlangName": "nextList",
+  "staticId": "AMC_NEXT_LIST",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["list", "feed", "activity feed", "notifications", "marquee", "logos", "customers", "partners", "spotlight", "stack", "3d", "neo brutalism", "claymorphism", "terminal", "console", "log", "accordion", "details", "scroll reveal", "next collection"],
+  "description": "Next Collection family of ten current-generation lists: animated notification feed, logo marquee, pointer spotlight rows, 3D perspective stack, lifting slabs, neo-brutal, clay, terminal log, accordion rows and scroll-reveal rows. Follows the native Universal Theme Content Row pattern: one query row per list row with a lead avatar or icon, title, subtitle, meta text, state and an optional link. Animated feed and marquee are adapted from Magic UI animated-list and marquee, MIT.",
+  "helpText": "Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL, Initials or Icon for the lead, State and State Label, Details for the Accordion rows style, and Link URL. Format numbers and dates in SQL. Every style is complete without JavaScript; the plug-in file only adds pointer tracking and the seamless marquee loop, and does nothing when the user prefers reduced motion.",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-list.css", "files/amc-next-list.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-list.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-list.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "animatedFeed",
+      "sequence": 10,
+      "helpText": "Design of the list; the direction is given in brackets as motion, depth, bold or smart. animatedFeed [motion]: notification cards drop in one after another, newest marked live. marqueeLogos [motion]: customers or partners as an endless logo marquee that pauses on hover or focus and wraps when motion is reduced. spotlightRows [motion]: a light spot follows the pointer over the rows and lights their borders. stack3d [depth]: rows form a perspective stack that fans out on hover or focus; always open on touch screens. liftRows [depth]: rows are raised slabs that lift and tilt toward the pointer. neoBrutal [bold]: ink borders, hard offset shadows and flat state fills. clay [bold]: soft pillowy rows with clay icon blobs. terminal [bold]: a console log with time, level and a blinking cursor. accordionRows [smart]: each row opens to show Details; other rows dim while one is open. scrollReveal [smart]: numbered rows reveal as they scroll into view and switch to two columns in wide regions.",
+      "entries": [
+        { "name": "animatedFeed", "display": "Animated feed", "return": "animatedFeed", "sequence": 10 },
+        { "name": "marqueeLogos", "display": "Marquee logos", "return": "marqueeLogos", "sequence": 20 },
+        { "name": "spotlightRows", "display": "Spotlight rows", "return": "spotlightRows", "sequence": 30 },
+        { "name": "stack3d", "display": "3D stack", "return": "stack3d", "sequence": 40 },
+        { "name": "liftRows", "display": "Lift rows", "return": "liftRows", "sequence": 50 },
+        { "name": "neoBrutal", "display": "Neo-brutal", "return": "neoBrutal", "sequence": 60 },
+        { "name": "clay", "display": "Clay", "return": "clay", "sequence": 70 },
+        { "name": "terminal", "display": "Terminal", "return": "terminal", "sequence": 80 },
+        { "name": "accordionRows", "display": "Accordion rows", "return": "accordionRows", "sequence": 90 },
+        { "name": "scrollReveal", "display": "Scroll reveal", "return": "scrollReveal", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Main text of the row, for example a customer name, an event or a task. In Marquee logos it is the company name next to the logo."
+    },
+    {
+      "staticId": "SUBTITLE",
+      "apexlangName": "subtitle",
+      "attribute": 3,
+      "name": "Subtitle",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Secondary text, for example a role, an amount or a short message. Shown on one line in 3D stack and Terminal."
+    },
+    {
+      "staticId": "META",
+      "apexlangName": "meta",
+      "attribute": 4,
+      "name": "Meta",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Short text at the end of the row, already formatted in SQL, for example 2 min ago, 09:41:07 or EUR 4,200. Terminal shows it first as the timestamp."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 5,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Avatar or logo image URL. Must be developer-controlled, for example a URL built with apex_util.get_blob_file_src. Takes precedence over Initials and Icon."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 6,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "One or two letters shown in the lead tile when there is no Image URL, for example NW."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 7,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Font APEX icon class shown in the lead tile when there is no Image URL or Initials, for example fa-bell or fa-credit-card."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 8,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "One of success, warning, danger, info or neutral. Colors the lead tile, the level or the fill, and is always given as text too: visible in Terminal and Neo-brutal, read by screen readers in the others. Unknown values render as neutral."
+    },
+    {
+      "staticId": "STATE_LABEL",
+      "apexlangName": "stateLabel",
+      "attribute": 9,
+      "name": "State Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "Visible text for the state, for example Paid, Overdue or New. Without it, Terminal shows a level word and the other styles give screen readers a generic word for the state."
+    },
+    {
+      "staticId": "DETAILS",
+      "apexlangName": "details",
+      "attribute": 10,
+      "name": "Details",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Longer text shown when a row is opened in the Accordion rows style, for example the order lines or the last comment. Ignored by the other styles."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 11,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "Optional target for the row, for example apex_page.get_url with p_page 10, p_items P10_ID and the row id. Must be developer-controlled. The Title becomes the link text; in Accordion rows an Open link appears inside the opened row."
+    }
+  ]
+}
