@@ -1,0 +1,57 @@
+{
+  "generatedBy": "tools/build-styles.mjs",
+  "styles": [
+    {
+      "slug": "aurora",
+      "name": "AMC Aurora",
+      "staticId": "AMC_STYLE_AURORA",
+      "apexlangId": "amc-aurora",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A bright, airy style: an aurora gradient header from deep teal to violet, a soft cool page, crisp white regions with a faint top glow and a teal primary.",
+      "keywords": [
+        "aurora",
+        "gradient",
+        "teal",
+        "violet",
+        "light",
+        "modern"
+      ],
+      "contrast": [
+        {
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 14.87,
+          "min": 4.5
+        },
+        {
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 16.12,
+          "min": 4.5
+        },
+        {
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 5.99,
+          "min": 4.5
+        },
+        {
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.46,
+          "min": 4.5
+        },
+        {
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 6.46,
+          "min": 4.5
+        },
+        {
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 6.46,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/aurora/dist/apexlang",
+      "legacySql": "theme-styles/aurora/dist/legacy/amc_style_aurora.sql"
+    }
+  ]
+}

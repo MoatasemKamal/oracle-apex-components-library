@@ -1,0 +1,50 @@
+/* AMC Aurora: Universal Theme style (light), layered on Vita. */
+:root {
+  --ut-body-background-color: #f3f6f9;
+  --ut-body-text-color: #16222e;
+  --ut-component-background-color: #ffffff;
+  --ut-component-text-default-color: #16222e;
+  --ut-component-text-muted-color: #566573;
+  --ut-component-border-color: rgba(22, 34, 46, .1);
+  --ut-component-border-radius: 10px;
+  --ut-component-box-shadow: 0 1px 2px rgba(22, 34, 46, .05), 0 8px 24px -12px rgba(15, 96, 110, .18);
+  --ut-link-text-color: #0b6875;
+  --ut-focus-outline-color: #0b6875;
+  --ut-palette-primary: #0b6875;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #2c7a3f;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #d99a1e;
+  --ut-palette-warning-contrast: #1b1406;
+  --ut-palette-danger: #c0352b;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #3a5fcd;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #0b6875;
+  --ut-header-text-color: #ffffff;
+  --ut-nav-background-color: #fbfcfd;
+  --amc-aurora-a: #0b6875;
+  --amc-aurora-b: #3a5fcd;
+  --amc-aurora-c: #7a4fc9;
+}
+.t-Header {
+  background:
+    radial-gradient(60% 140% at 85% 0%, color-mix(in srgb, var(--amc-aurora-c) 70%, transparent), transparent 70%),
+    linear-gradient(100deg, var(--amc-aurora-a), var(--amc-aurora-b) 60%, var(--amc-aurora-c));
+  color: var(--ut-header-text-color);
+  box-shadow: 0 6px 20px -10px color-mix(in srgb, var(--amc-aurora-b) 70%, transparent);
+}
+.t-Body-nav { background: var(--ut-nav-background-color); }
+.t-TreeNav .is-current > a {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--amc-aurora-a) 14%, transparent), color-mix(in srgb, var(--amc-aurora-c) 8%, transparent));
+  box-shadow: inset 3px 0 0 var(--amc-aurora-a);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -3px 0 0 var(--amc-aurora-a); }
+.t-Region { background-image: linear-gradient(180deg, color-mix(in srgb, var(--amc-aurora-b) 5%, transparent), transparent 64px); }
+.t-Button--hot {
+  background: linear-gradient(100deg, var(--amc-aurora-a), color-mix(in srgb, var(--amc-aurora-a) 55%, var(--amc-aurora-b)));
+  box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--amc-aurora-a) 80%, transparent);
+}
+@media (forced-colors: active) {
+  .t-Header, .t-Button--hot, .t-Region { background: Canvas; box-shadow: none; }
+}

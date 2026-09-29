@@ -21,6 +21,9 @@ jobs:
       - name: Validate theme templates and verify generated files are up to date
         working-directory: skills/apex-modern-components
         run: node tools/build-templates.mjs --check
+      - name: Validate theme styles (incl. WCAG contrast) and verify generated files are up to date
+        working-directory: skills/apex-modern-components
+        run: node tools/build-styles.mjs --check
       - name: Oracle apexlang offline structure checks
         run: |
           git clone --depth 1 https://github.com/oracle/skills.git /tmp/oracle-skills

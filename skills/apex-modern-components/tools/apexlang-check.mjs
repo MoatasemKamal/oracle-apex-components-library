@@ -15,6 +15,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { listComponentDirs } from "./lib/load.mjs";
 import { apexlangPath, listTemplateDirs, loadTemplate } from "./lib/theme-templates.mjs";
+import * as styles from "./lib/theme-styles.mjs";
 
 const SKILL_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -56,6 +57,21 @@ for (const dir of listTemplateDirs(path.join(SKILL_ROOT, "theme-templates"))) {
   themeTemplates.push({ t, dest });
 }
 
+// Theme styles (theme-styles/<slug>/dist/apexlang) go into the scaffold's theme styles folder.
+const themeStyles = [];
+for (const dir of styles.listStyleDirs(path.join(SKILL_ROOT, "theme-styles"))) {
+  const t = styles.loadStyle(dir);
+  const src = path.join(dir, "dist", "apexlang", styles.apexlangPath(t));
+  if (!fs.existsSync(src)) {
+    console.error(`missing build output for theme style ${t.slug}: run node tools/build-styles.mjs`);
+    process.exit(1);
+  }
+  const dest = path.join(app, styles.apexlangPath(t));
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+  themeStyles.push({ t, dest });
+}
+
 const run = (cmdArgs) => {
   try {
     return execFileSync(process.execPath, [path.join(apexlang, "tools", "apexctl.mjs"), ...cmdArgs], {
@@ -70,7 +86,7 @@ const run = (cmdArgs) => {
 
 let failed = 0;
 const format = JSON.parse(run(["apexlang", "format", "--app-path", app, "--strict-structure"]) || "{}");
-const ours = (p) => p.includes(`${path.sep}plugins${path.sep}`) || /-templates[\\/]amc-[^\\/]+\.apx$/.test(p);
+const ours = (p) => p.includes(`${path.sep}plugins${path.sep}`) || /(-templates|styles)[\\/]amc-[^\\/]+\.apx$/.test(p);
 const structural = (format.findings || []).filter((f) => ours(f.path) && f.finding !== "compact structural line expanded");
 const rewritten = (format.files || []).filter(ours);
 for (const f of [...structural.map((s) => `${s.path}: ${s.finding}`), ...rewritten.map((f) => `${f}: formatter would rewrite`)]) {
@@ -98,10 +114,17 @@ for (const { t, dest } of themeTemplates) {
   if (status !== "passed") failed += 1;
 }
 
+for (const { t, dest } of themeStyles) {
+  const out = run(["apexlang", "grammar", "audit", "--artifact-path", dest, "--components", "style"]);
+  const status = /"status":\s*"(\w+)"/.exec(out)?.[1] || "error";
+  console.log(`${status === "passed" ? "ok   " : "FAIL "} theme style ${t.slug} (formatter structure; grammar audit: ${status})`);
+  if (status !== "passed") failed += 1;
+}
+
 fs.rmSync(app, { recursive: true, force: true });
 if (failed) {
   console.error(`${failed} apexlang check(s) failed`);
   process.exit(1);
 }
-console.log(`ok    ${plugins.length} plug-in(s) and ${themeTemplates.length} theme template(s) pass apexlang offline structure checks`);
+console.log(`ok    ${plugins.length} plug-in(s) ${themeTemplates.length} theme template(s) and ${themeStyles.length} theme style(s) pass apexlang offline structure checks`);
 console.log("note  compiler-truth audit and runtime validate still need an APEX/SQLcl runtime");

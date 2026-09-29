@@ -23,6 +23,7 @@ Never bypass apexlang's gates for app artifacts.
    - **Make the app look like a design system (DESIGN.md, "make it look like X")**: section D.
    - **Add motion to native buttons, forms, reports, icons, breadcrumbs, nav bar, menu bar or menus**: section E (Motion Kit, not a component).
    - **Give native regions or lists a creative look through Appearance > Template (no plug-in)**: section F (theme templates, `assets/templates.catalog.json`).
+   - **Give the whole app a new look (a Universal Theme style like Vita or Redwood)**: section G (`assets/styles.catalog.json`).
 3. Load only the reference you need:
    - `references/apexlang-integration.md`: installing plug-ins into an APEXlang app, page usage rules, gates
    - `references/native-look-contract.md`: theme variables, UT classes, RTL, a11y, security
@@ -33,6 +34,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
    - `references/design-quality.md`: research-first quality gate and craft checklist (adapted from Refero, MIT)
    - `references/design-collection.md`: the `design*` families (100+ styles chosen with a Style setting) and their shared conventions
+   - `references/theme-styles.md`: Universal Theme styles (whole-app looks) and their contrast gate
    - `references/theme-templates.md`: creative List Templates and Region Templates (native templates, not plug-ins)
    - `references/next-collection.md`: the `next*` families (new-generation motion, 3D, bold and adaptive designs) that sit beside the Design Collection
 
@@ -129,6 +131,16 @@ Universal Theme classes (unlike components) but must keep every animation inside
    gates (the template folder and reference syntax still need compiler confirmation).
 4. New template: `node tools/new-template.mjs`, then `build-templates.mjs`,
    `preview-templates.mjs` and `apexlang-check.mjs`.
+
+## G. Theme styles (whole-app looks)
+
+1. Read `assets/styles.catalog.json` (scheme, base, contrast results) and `references/theme-styles.md`.
+2. APEX 23.1-25.x: import `theme-styles/<slug>/dist/legacy/amc_style_<slug>.sql` (or the pack
+   `theme-styles/dist/legacy/install_amc_styles.sql`), then set it as current or let users pick it.
+3. APEXlang (26.1+): copy `dist/apexlang/**`, merge the static-files snippet, and set
+   `style.currentThemeStyle: @amc-<slug>` in `theme.apx` when it should be the default.
+4. New style: copy an existing folder, edit `style.json` and the CSS, then `build-styles.mjs`
+   (contrast must pass), `preview-styles.mjs`, `apexlang-check.mjs`.
 
 ## Rules
 
