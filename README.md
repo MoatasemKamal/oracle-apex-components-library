@@ -39,6 +39,31 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Theme Styles (13 whole-app looks)
+
+Universal Theme **styles**, like Vita or Redwood, that restyle native APEX and every component and
+template in this library at once. Set one as current in Theme Roller or let users pick their own.
+Every style passes a **WCAG AA contrast gate** enforced by the build (High Contrast targets AAA), and
+the contrast table is in each style's README. Install one with its SQL file (APEX 23.1+), all of them
+with `theme-styles/dist/legacy/install_amc_styles.sql`, or as an APEXlang `style` (26.1+).
+See [`references/theme-styles.md`](skills/apex-modern-components/references/theme-styles.md).
+
+| Style | Scheme | Look |
+|---|---|---|
+| [Arabesque](skills/apex-modern-components/theme-styles/arabesque) | light | Contemporary Arabic heritage: a deep emerald header with a faint eight-point star lattice, restrained gold accents, a warm ivory page, generously rounded regions and an Arabic-first font stack. |
+| [Aurora](skills/apex-modern-components/theme-styles/aurora) | light | A bright, airy style: an aurora gradient header from deep teal to violet, a soft cool page, crisp white regions with a faint top glow and a teal primary. |
+| [Clay](skills/apex-modern-components/theme-styles/clay) | light | A soft claymorphism style: pillowy rounded regions and buttons with an inner highlight and a soft outer shadow, pressed-in fields, a gentle lavender and peach palette and a readable violet primary. |
+| [Dune](skills/apex-modern-components/theme-styles/dune) | light | A calm, warm style: sand neutrals, a deep indigo primary that leads every action, a sparing terracotta accent and soft long shadows, made for HR and hospitality apps. |
+| [Glass](skills/apex-modern-components/theme-styles/glass) | light | A frosted glass style: translucent regions with light edges over a soft multi-color gradient page, a translucent header, strong dark text and a deep ocean-blue primary. |
+| [Graphite](skills/apex-modern-components/theme-styles/graphite) | dark | A developer and operations console look: neutral charcoal surfaces, warm-grey text, an amber primary, hairline borders and monospaced tabular figures for numbers, report headings and badges. |
+| [High Contrast](skills/apex-modern-components/theme-styles/high-contrast) | light | An accessibility-first style: every text pair meets WCAG AAA (7:1), thick offset focus rings, underlined links, a visible border on every control, alerts marked by a thick start border and a symbol, and no shadows or gradients. |
+| [Midnight](skills/apex-modern-components/theme-styles/midnight) | dark | A calm, premium dark style for operations dashboards: deep navy-ink surfaces that rise in lightness instead of casting shadows, an electric-blue primary and a subtle cyan glow on focus, hot buttons and the current menu entry. |
+| [Neo Brutal](skills/apex-modern-components/theme-styles/neo-brutal) | light | A bold neo-brutalist style: ink borders, hard offset shadows, flat saturated fills, a sun-yellow header, pink and lime accents and a strong cobalt primary, with calm report rows for daily data entry. |
+| [Nordic](skills/apex-modern-components/theme-styles/nordic) | light | A cool, minimal Scandinavian style: pale grey-blue page, white regions with almost no shadow, slate text, a muted fjord-blue primary, soft 12px corners and a thin white header with a slate rule. |
+| [Paper](skills/apex-modern-components/theme-styles/paper) | light | An editorial style for reports and document-heavy apps: near-white paper, ink-black text, one strong ink-blue accent, serif headings and hairline rules instead of boxes. |
+| [Royal](skills/apex-modern-components/theme-styles/royal) | light | A formal government and enterprise style: a deep indigo header with a thin gold rule, a warm ivory page, ivory-white regions, an indigo primary, and gold kept for accents only (current menu marker, focus ring, badges). |
+| [Vita Auto](skills/apex-modern-components/theme-styles/vita-auto) | auto | The familiar Vita look that follows the operating system: Vita light by day and a Vita Dark style palette when the user's device is set to dark mode, with no page reload or user preference to manage. |
+
 ## Living Templates (12 templates that understand content and users)
 
 Beyond appearance: these native templates **read the content they wrap or adapt to the person
@@ -234,6 +259,8 @@ node tools/build-kit.mjs                                    # package the Motion
 node tools/new-template.mjs orbit-menu list "Orbit Menu"   # scaffold a theme template
 node tools/build-templates.mjs                              # validate + package theme templates
 node tools/preview-templates.mjs                            # preview/templates.html
+node tools/build-styles.mjs                                 # validate (WCAG contrast) + package theme styles
+node tools/preview-styles.mjs                               # preview/styles.html on a UT mock page
 ```
 
 See [`SKILL.md`](skills/apex-modern-components/SKILL.md) and the
