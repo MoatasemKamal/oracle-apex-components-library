@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Frecency Launcher",
+  "staticId": "AMC_TPL_FRECENCY_LAUNCHER",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A launcher that learns: it counts which destinations this user opens and how recently, and at the next page load lifts the top three into ranked Your most used tiles with a heat meter and the last time they were opened, while the rest keep the developer's order in a compact grid.",
+  "useFor": "Home pages and workspace launchpads with 6 to 20 destinations, where different users live in different corners of the app: finance opens Invoices and Month-end close, sales opens Orders and Customers.",
+  "keywords": ["frecency", "personalised", "adaptive", "launcher", "most used", "home page", "living"],
+  "helpText": "Launcher list template that adapts to each user. Every time the user opens an entry, the time is stored in this browser's localStorage under amc-tpl-frecency-launcher:<application id>:<list id> (time stamps per entry, at most 30 per entry, entries unused for 120 days are forgotten; nothing is sent to the server). At page load each entry gets a frecency score, the sum of 0.5 to the power of age divided by a half-life of 10 days over its opens, and entries opened at least twice are ranked: the top 3 move into a numbered Your most used list, the rest stay in the developer's order as a compact grid. The order only changes at page load, never under the pointer. List items are moved in the DOM, so Tab order and screen-reader order always match the screen; the new favourites are announced politely once when they change. A first-time user sees the developer's order as full tiles with a hint. Reset order clears what was learned for this list. Attribute 1 is a description, Attribute 2 a badge such as 14 overdue, Attribute 3 an optional learning key: set it when the entry link carries values that change, otherwise the link without session, checksum and clear-cache values is the key. Template options: Adapt quickly uses a half-life of 3 days, Four favourites ranks 4, Filled favourites paints the ranked tiles in the primary color, Discreet hides the heat meter and last-opened time for shared screens, Rows shows everything else as a divided list. Without JavaScript, or when storage is blocked, it is a plain grid of launch tiles. Reduced motion removes the hover lift, the meter fill and the arrival glow. English UI strings to translate in the template: the two hint sentences, Reset order, Your most used, Everything else, and the data-announce, data-reset-done and data-opened attributes on the wrapper; relative times come from Intl.RelativeTimeFormat in the page language.",
+  "attributes": { "a01": "Description", "a02": "Badge", "a03": "Learning key" },
+  "templateOptions": [
+    { "staticId": "FAST", "name": "Adapt quickly", "cssClass": "amc-TFrecencyLauncher--fast", "sequence": 10, "help": "Uses a half-life of 3 days instead of 10, so the favourites follow this week's work, for example during a month-end close." },
+    { "staticId": "FOUR", "name": "Four favourites", "cssClass": "amc-TFrecencyLauncher--four", "sequence": 20, "help": "Ranks the top 4 instead of 3, shown in one row in regions wider than about 700 pixels." },
+    { "staticId": "FILLED", "name": "Filled favourites", "cssClass": "amc-TFrecencyLauncher--filled", "sequence": 30, "help": "Paints the ranked tiles with a primary-colored gradient so the personal part of the page stands out." },
+    { "staticId": "DISCREET", "name": "Discreet", "cssClass": "amc-TFrecencyLauncher--discreet", "sequence": 40, "help": "Hides the heat meter and the last-opened time, for shared screens and kiosks; the ranking still applies." },
+    { "staticId": "ROWS", "name": "Rows", "cssClass": "amc-TFrecencyLauncher--rows", "sequence": 50, "help": "Shows the entries that are not ranked as a divided list instead of a grid, for side columns." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

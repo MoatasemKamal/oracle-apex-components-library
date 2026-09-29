@@ -1,0 +1,151 @@
+listTemplate amc-quest-list (
+    name: AMC Quest List
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TQuestList #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-mark="Mark as done" data-unmark="Mark as not done" data-by-visit="Done, you opened it" data-by-hand="Done" data-next="Next" data-progress="{done} of {total} tasks done" data-points="{points} of {max} points" data-completed="Completed:" data-all-done="All done! You earned {points} points." data-reset-done="Progress reset. All tasks are open again.">
+            <div class="amc-TQuestList-head" hidden>
+            <div class="amc-TQuestList-ring" role="img"><svg class="amc-TQuestList-ringSvg" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><circle class="amc-TQuestList-ringTrack" cx="18" cy="18" r="15.9155"></circle><circle class="amc-TQuestList-ringFill" cx="18" cy="18" r="15.9155" pathLength="100"></circle></svg><span class="amc-TQuestList-ringText" aria-hidden="true"></span><span class="amc-TQuestList-trophy fa fa-trophy" aria-hidden="true"></span></div>
+            <div class="amc-TQuestList-summary">
+            <h3 class="amc-TQuestList-title"><span class="amc-TQuestList-titleOpen">Get started</span><span class="amc-TQuestList-titleDone">You are all set</span></h3>
+            <p class="amc-TQuestList-progress"></p>
+            <p class="amc-TQuestList-points"></p>
+            </div>
+            <div class="amc-TQuestList-actions"><button type="button" class="amc-TQuestList-fold" aria-expanded="true" hidden><span class="amc-TQuestList-foldShow">Show tasks</span><span class="amc-TQuestList-foldHide">Hide tasks</span></button><button type="button" class="amc-TQuestList-reset" hidden><span class="amc-TQuestList-resetIcon fa fa-undo" aria-hidden="true"></span><span>Reset progress</span></button></div>
+            <div class="amc-TQuestList-burst" aria-hidden="true"></div>
+            </div>
+            <ol class="amc-TQuestList-list">
+            ```
+        afterEntries:
+            ```html
+            </ol>
+            <p class="amc-TQuestList-status" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TQuestList-item is-current" data-match="#A03#"><button type="button" class="amc-TQuestList-tick" aria-pressed="false" hidden><span class="amc-TQuestList-tickMark" aria-hidden="true"></span></button><a class="amc-TQuestList-link" href="#LINK#" aria-current="page"><span class="amc-TQuestList-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TQuestList-body"><span class="amc-TQuestList-label">#TEXT#</span><span class="amc-TQuestList-desc">#A01#</span><span class="amc-TQuestList-state"></span></span><span class="amc-TQuestList-pts"><span class="amc-TQuestList-ptsValue">#A02#</span> <span class="amc-TQuestList-ptsUnit">pts</span></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TQuestList-item" data-match="#A03#"><button type="button" class="amc-TQuestList-tick" aria-pressed="false" hidden><span class="amc-TQuestList-tickMark" aria-hidden="true"></span></button><a class="amc-TQuestList-link" href="#LINK#"><span class="amc-TQuestList-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TQuestList-body"><span class="amc-TQuestList-label">#TEXT#</span><span class="amc-TQuestList-desc">#A01#</span><span class="amc-TQuestList-state"></span></span><span class="amc-TQuestList-pts"><span class="amc-TQuestList-ptsValue">#A02#</span> <span class="amc-TQuestList-ptsUnit">pts</span></span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-quest-list.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-quest-list.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Points
+        a03: Completion page
+    }
+    advanced {
+        staticId: AMC_TPL_QUEST_LIST
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Onboarding list template. Each list entry is a task: its link is the page to open, Attribute 1 a description, Attribute 2 the points it is worth (a number), Attribute 3 an optional completion page: part of a page URL or alias, such as order-confirmation, that also completes the task when visited, for tasks whose link opens a dialog. A task completes itself when the user has opened its page: the same page with at least the link's item values, ignoring session, checksum and clear-cache values. The template's JavaScript records visited pages in localStorage under amc-tpl-quest-list:<application id>:visits (page keys and first-visit time, at most 300) on every page that loads it, adds the page the user came back from (the referrer, same application) and records a task link as the user follows it, so the list works when it is only on the home page. The user can also tick a task or untick one, stored with the tasks already announced and whether the celebration was shown under amc-tpl-quest-list:<application id>:<list id>. Nothing leaves the browser. The head shows a progress ring, X of Y tasks done and points earned; the first open task is marked Next; tasks completed since the last view are announced politely with their points; when all are done the ring turns into a trophy with a short burst of sparks, shown once. Reset progress forgets the ticks and the visits of this list's tasks. Template options: Manual only ignores visits, Hide points, Fold when complete folds the tasks behind Show tasks, Compact, Hero header fills the head with the primary color. Without JavaScript, or with storage blocked, it is a plain list of links. Reduced motion removes the sparks, the pop and the ring animation. English UI strings to translate in the template: Get started, You are all set, Show tasks, Hide tasks, Reset progress, pts, and the data-mark, data-by-visit, data-by-hand, data-next, data-progress, data-points, data-completed, data-all-done and data-reset-done attributes on the wrapper; {done}, {total}, {points} and {max} are filled in.
+            ```
+    }
+
+    templateOption amc-quest-list-manual (
+        name: Manual only
+        sequence: 10
+        appearance {
+            cssClasses: amc-TQuestList--manual
+        }
+        help {
+            helpText:
+                ```text
+                Tasks complete only when the user ticks them; visits are ignored. The ticks become square checkboxes.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MANUAL
+        }
+    )
+
+    templateOption amc-quest-list-no-points (
+        name: Hide points
+        sequence: 20
+        appearance {
+            cssClasses: amc-TQuestList--noPoints
+        }
+        help {
+            helpText:
+                ```text
+                Hides the points on each task and the points total, for a plain checklist.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_POINTS
+        }
+    )
+
+    templateOption amc-quest-list-fold (
+        name: Fold when complete
+        sequence: 30
+        appearance {
+            cssClasses: amc-TQuestList--fold
+        }
+        help {
+            helpText:
+                ```text
+                Once every task is done the list folds behind a Show tasks button and only the completed head remains.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FOLD
+        }
+    )
+
+    templateOption amc-quest-list-compact (
+        name: Compact
+        sequence: 40
+        appearance {
+            cssClasses: amc-TQuestList--compact
+        }
+        help {
+            helpText:
+                ```text
+                Smaller ring and ticks, no icons or descriptions, for side columns.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-quest-list-hero (
+        name: Hero header
+        sequence: 50
+        appearance {
+            cssClasses: amc-TQuestList--hero
+        }
+        help {
+            helpText:
+                ```text
+                Fills the head with a primary-colored gradient so the checklist stands out on a home page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: HERO
+        }
+    )
+)

@@ -1,0 +1,26 @@
+{
+  "samples": [
+    {
+      "title": "First week in finance, open a task or tick it",
+      "options": [],
+      "entries": [
+        { "text": "Open your orders", "link": "#orders", "icon": "fa-shopping-cart", "a01": "See what is waiting for delivery or invoicing", "a02": "10" },
+        { "text": "Create your first invoice", "link": "#invoices", "icon": "fa-file-text-o", "a01": "Pick an order and issue the invoice", "a02": "30" },
+        { "text": "Submit a timesheet", "link": "#timesheet", "icon": "fa-clock-o", "a01": "Log this week's hours by project", "a02": "20" },
+        { "text": "Approve a request", "link": "#approvals", "icon": "fa-check-circle", "a01": "Leave, expenses and purchases wait for you", "a02": "20" },
+        { "text": "Walk through month-end close", "link": "#month-end", "icon": "fa-calendar-check-o", "a01": "Accruals, reconciliations and period lock", "a02": "40" },
+        { "text": "Run the aging report", "link": "#reports", "icon": "fa-bar-chart", "a01": "Find the customers who pay late", "a02": "30" }
+      ]
+    },
+    {
+      "title": "Hero header, compact, fold when complete",
+      "options": ["amc-TQuestList--hero", "amc-TQuestList--compact", "amc-TQuestList--fold"],
+      "entries": [
+        { "text": "Complete your profile", "link": "#profile", "icon": "fa-user", "a02": "10" },
+        { "text": "Add a customer", "link": "#customers", "icon": "fa-users", "a02": "20" },
+        { "text": "Submit an expense claim", "link": "#expenses", "icon": "fa-credit-card", "a02": "20" },
+        { "text": "Explore the reports", "link": "#reports", "icon": "fa-bar-chart", "a02": "10" }
+      ]
+    }
+  ]
+}

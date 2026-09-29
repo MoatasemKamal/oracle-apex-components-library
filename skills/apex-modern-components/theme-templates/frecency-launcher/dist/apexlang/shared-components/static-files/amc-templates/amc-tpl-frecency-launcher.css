@@ -1,0 +1,330 @@
+/* Frecency Launcher: a launcher list template that learns. amc-tpl-frecency-launcher.js moves the
+   destinations this user opens most into "Your most used" (ranked tiles with a heat meter and the
+   last time they were opened); the rest stay in the developer's order as a compact grid. Without
+   JavaScript, or with storage blocked, it is a plain grid of launch tiles. */
+.amc-TFrecencyLauncher {
+  --amc-tfr-surface: var(--ut-component-background-color, #fff);
+  --amc-tfr-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-tfr-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tfr-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tfr-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tfr-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tfr-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tfr-warm: var(--ut-palette-warning, #fbce4a);
+  --amc-tfr-radius: max(var(--ut-component-border-radius, 4px) + 10px, 14px);
+  --amc-tfr-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tfr-ink) 6%, transparent), 0 10px 26px -20px color-mix(in srgb, var(--amc-tfr-ink) 40%, transparent);
+  container: amc-tfr / inline-size;
+  display: grid;
+  gap: .875rem;
+  color: var(--amc-tfr-ink);
+}
+.amc-TFrecencyLauncher [hidden] { display: none; }
+
+/* ---------------------------------------------------------------- head */
+.amc-TFrecencyLauncher-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem .875rem;
+}
+.amc-TFrecencyLauncher-hint {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex: 1 1 16rem;
+  margin: 0;
+  font-size: .8125rem;
+  line-height: 1.4;
+  color: var(--amc-tfr-muted);
+}
+.amc-TFrecencyLauncher-hintIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  font-size: .8125rem;
+  color: var(--amc-tfr-accent);
+  background: color-mix(in srgb, var(--amc-tfr-accent) 12%, transparent);
+}
+.amc-TFrecencyLauncher-hintText--learned { display: none; }
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-hintText--new { display: none; }
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-hintText--learned { display: inline; }
+.amc-TFrecencyLauncher-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  min-block-size: 2rem;
+  padding: .25rem .75rem;
+  border: 1px solid var(--amc-tfr-line);
+  border-radius: 999px;
+  background: var(--amc-tfr-surface);
+  color: var(--amc-tfr-ink);
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.amc-TFrecencyLauncher-reset:hover { border-color: color-mix(in srgb, var(--amc-tfr-accent) 50%, var(--amc-tfr-line)); color: var(--amc-tfr-accent); }
+.amc-TFrecencyLauncher-reset:focus-visible { outline: 2px solid var(--amc-tfr-accent); outline-offset: 2px; }
+.amc-TFrecencyLauncher-resetIcon { font-size: .6875rem; }
+.amc-TFrecencyLauncher-reset[hidden] { display: none; }
+
+.amc-TFrecencyLauncher-heading {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  margin: 0 0 .5rem;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--amc-tfr-muted);
+}
+.amc-TFrecencyLauncher-heading::after {
+  content: "";
+  flex: 1;
+  block-size: 1px;
+  background: var(--amc-tfr-line);
+}
+.amc-TFrecencyLauncher-heading--rest { margin-block-end: -.375rem; }
+
+/* ---------------------------------------------------------------- lists */
+.amc-TFrecencyLauncher-top,
+.amc-TFrecencyLauncher-grid {
+  display: grid;
+  gap: .625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TFrecencyLauncher-grid { grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr)); }
+.amc-TFrecencyLauncher-top { grid-template-columns: minmax(0, 1fr); }
+.amc-TFrecencyLauncher-item { min-inline-size: 0; }
+
+/* ---------------------------------------------------------------- tile (first use, no JS) */
+.amc-TFrecencyLauncher-link {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "icon body badge";
+  align-items: center;
+  gap: .75rem;
+  block-size: 100%;
+  box-sizing: border-box;
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-tfr-line);
+  border-radius: var(--amc-tfr-radius);
+  background: var(--amc-tfr-surface);
+  box-shadow: var(--amc-tfr-shadow);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+}
+.amc-TFrecencyLauncher-link:hover {
+  border-color: color-mix(in srgb, var(--amc-tfr-accent) 40%, var(--amc-tfr-line));
+  translate: 0 -2px;
+}
+.amc-TFrecencyLauncher-link:focus-visible { outline: 2px solid var(--amc-tfr-accent); outline-offset: 2px; }
+.amc-TFrecencyLauncher-icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: calc(var(--amc-tfr-radius) - 4px);
+  font-size: 1.0625rem;
+  color: var(--amc-tfr-accent);
+  background: color-mix(in srgb, var(--amc-tfr-accent) 11%, transparent);
+}
+.amc-TFrecencyLauncher-icon:not([class*="fa-"]) { visibility: hidden; }
+.amc-TFrecencyLauncher-body { grid-area: body; display: grid; gap: .125rem; min-inline-size: 0; }
+.amc-TFrecencyLauncher-label { font-size: .9375rem; font-weight: 650; line-height: 1.3; overflow-wrap: break-word; hyphens: auto; }
+.amc-TFrecencyLauncher-desc { font-size: .75rem; line-height: 1.4; color: var(--amc-tfr-muted); unicode-bidi: isolate; }
+.amc-TFrecencyLauncher-desc:empty, .amc-TFrecencyLauncher-badge:empty { display: none; }
+.amc-TFrecencyLauncher-badge {
+  grid-area: badge;
+  align-self: start;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  unicode-bidi: plaintext;
+  color: var(--amc-tfr-accent);
+  background: color-mix(in srgb, var(--amc-tfr-accent) 10%, transparent);
+}
+.amc-TFrecencyLauncher-item.is-current .amc-TFrecencyLauncher-link { border-color: var(--amc-tfr-accent); box-shadow: inset 0 0 0 1px var(--amc-tfr-accent), var(--amc-tfr-shadow); }
+
+/* ---------------------------------------------------------------- learned: most used */
+/* Narrow containers: ranked rows. From 34rem: ranked tiles side by side. */
+.amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-link {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "icon body badge" "meta meta meta";
+  gap: .625rem .75rem;
+  padding-block: .875rem .75rem;
+  padding-inline: 1rem 3.5rem;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--amc-tfr-accent) calc(var(--amc-tfr-glow, 10) * 1%), transparent), transparent 62%),
+    var(--amc-tfr-surface);
+}
+.amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-badge { align-self: center; }
+.amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-icon { inline-size: 2.75rem; block-size: 2.75rem; font-size: 1.25rem; }
+.amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-label { font-size: 1rem; }
+@container amc-tfr (max-width: 26rem) {
+  .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-link {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "icon body" "icon badge" "meta meta";
+    padding-inline: .875rem 2.25rem;
+  }
+  .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-badge { justify-self: start; }
+  .amc-TFrecencyLauncher-link { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "icon body" "icon badge"; }
+  .amc-TFrecencyLauncher-badge { justify-self: start; }
+  .amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "icon body badge"; }
+}
+@container amc-tfr (min-width: 34rem) {
+  .amc-TFrecencyLauncher-top { grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr)); }
+  .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-link {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "icon icon" "body badge" "meta meta";
+    align-items: end;
+    padding: 1rem 1.125rem .875rem;
+    padding-inline: 1.125rem;
+  }
+  .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-icon { margin-block-end: .25rem; }
+  .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-label { font-size: 1.0625rem; }
+}
+.amc-TFrecencyLauncher-rank {
+  position: absolute;
+  z-index: -1;
+  inset-block-start: -.16em;
+  inset-inline-end: .08em;
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--amc-tfr-accent) 9%, transparent);
+}
+.amc-TFrecencyLauncher-meta {
+  grid-area: meta;
+  display: grid;
+  gap: .375rem;
+  padding-block-start: .5rem;
+  border-block-start: 1px dashed var(--amc-tfr-line);
+}
+.amc-TFrecencyLauncher-heat {
+  --amc-tfr-heat: .5;
+  display: block;
+  block-size: .3125rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tfr-ink) 8%, transparent);
+  overflow: hidden;
+}
+.amc-TFrecencyLauncher-heatFill {
+  display: block;
+  block-size: 100%;
+  inline-size: calc(var(--amc-tfr-heat) * 100%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--amc-tfr-accent), color-mix(in oklab, var(--amc-tfr-accent) 55%, var(--amc-tfr-warm)));
+}
+.amc-TFrecencyLauncher-heatFill:dir(rtl) { background: linear-gradient(270deg, var(--amc-tfr-accent), color-mix(in oklab, var(--amc-tfr-accent) 55%, var(--amc-tfr-warm))); }
+.amc-TFrecencyLauncher-when { font-size: .6875rem; color: var(--amc-tfr-muted); unicode-bidi: plaintext; justify-self: start; }
+.amc-TFrecencyLauncher-top > .amc-TFrecencyLauncher-item:first-child { --amc-tfr-glow: 18; }
+
+/* ---------------------------------------------------------------- learned: everything else */
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid { grid-template-columns: repeat(auto-fill, minmax(min(12.5rem, 100%), 1fr)); gap: .5rem; }
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link {
+  gap: .625rem;
+  padding: .5rem .75rem .5rem .5rem;
+  border-radius: calc(var(--amc-tfr-radius) - 4px);
+  box-shadow: none;
+  background: color-mix(in srgb, var(--amc-tfr-surface) 70%, var(--amc-tfr-body));
+}
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-icon { inline-size: 2rem; block-size: 2rem; font-size: .875rem; border-radius: .5rem; }
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-label { font-size: .8125rem; font-weight: 600; }
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-badge { align-self: center; }
+/* Descriptions stay readable to screen readers in the compact grid. */
+.amc-TFrecencyLauncher.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-desc {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.amc-TFrecencyLauncher-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- template options */
+/* Adapt quickly and Four favourites change the JS (half-life 3 days, top 4); the classes also
+   tune the layout. */
+.amc-TFrecencyLauncher--fast .amc-TFrecencyLauncher-hintIcon { color: var(--amc-tfr-accent-ink); background: var(--amc-tfr-accent); }
+@container amc-tfr (min-width: 44rem) {
+  .amc-TFrecencyLauncher--four .amc-TFrecencyLauncher-top { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-link {
+  border-color: transparent;
+  color: var(--amc-tfr-accent-ink);
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--amc-tfr-accent-ink) 22%, transparent), transparent 60%),
+    linear-gradient(150deg, var(--amc-tfr-accent), color-mix(in oklab, var(--amc-tfr-accent) 70%, var(--amc-tfr-ink)));
+  box-shadow: 0 14px 28px -18px var(--amc-tfr-accent);
+}
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-icon,
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-badge {
+  color: var(--amc-tfr-accent-ink);
+  background: color-mix(in srgb, var(--amc-tfr-accent-ink) 18%, transparent);
+}
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-desc,
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-when { color: color-mix(in srgb, var(--amc-tfr-accent-ink) 80%, transparent); }
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-rank { color: color-mix(in srgb, var(--amc-tfr-accent-ink) 16%, transparent); }
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-meta { border-color: color-mix(in srgb, var(--amc-tfr-accent-ink) 30%, transparent); }
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-heat { background: color-mix(in srgb, var(--amc-tfr-accent-ink) 22%, transparent); }
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-heatFill { background: var(--amc-tfr-accent-ink); }
+.amc-TFrecencyLauncher--filled .amc-TFrecencyLauncher-item.is-fav .amc-TFrecencyLauncher-link:focus-visible { outline-color: var(--amc-tfr-ink); }
+/* Discreet: no heat meter and no "Opened ... ago", for shared screens and kiosks. */
+.amc-TFrecencyLauncher--discreet .amc-TFrecencyLauncher-meta { display: none; }
+/* Rows: everything else as a divided list instead of a grid. */
+.amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid,
+.amc-TFrecencyLauncher--rows.is-learned .amc-TFrecencyLauncher-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link,
+.amc-TFrecencyLauncher--rows.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link { border-radius: 0; border-width: 0 0 1px; box-shadow: none; background: transparent; }
+.amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-item:last-child .amc-TFrecencyLauncher-link { border-block-end-width: 0; }
+.amc-TFrecencyLauncher--rows.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link { background: transparent; }
+.amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link:hover { translate: none; background: color-mix(in srgb, var(--amc-tfr-accent) 6%, transparent); }
+
+/* ---------------------------------------------------------------- motion */
+@keyframes amc-tfr-arrive {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--amc-tfr-accent) 55%, transparent), var(--amc-tfr-shadow); }
+  100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--amc-tfr-accent) 0%, transparent), var(--amc-tfr-shadow); }
+}
+@keyframes amc-tfr-fill { from { inline-size: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TFrecencyLauncher-link { transition: translate .2s cubic-bezier(.2, .8, .2, 1), border-color .2s ease, background-color .2s ease; }
+  .amc-TFrecencyLauncher-reset { transition: border-color .15s ease, color .15s ease; }
+  .amc-TFrecencyLauncher-item.is-new .amc-TFrecencyLauncher-link { animation: amc-tfr-arrive 1.2s ease-out 2; }
+  .amc-TFrecencyLauncher-heatFill { animation: amc-tfr-fill .9s cubic-bezier(.2, .8, .2, 1) both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TFrecencyLauncher-link:hover { translate: none; }
+  .amc-TFrecencyLauncher-item.is-new .amc-TFrecencyLauncher-link { animation: none; }
+}
+@media (forced-colors: active) {
+  .amc-TFrecencyLauncher-link { border: 1px solid CanvasText; }
+  .amc-TFrecencyLauncher-item.is-current .amc-TFrecencyLauncher-link { border: 2px solid Highlight; }
+  .amc-TFrecencyLauncher-heat { border: 1px solid CanvasText; }
+  .amc-TFrecencyLauncher-heatFill { background: Highlight; }
+  .amc-TFrecencyLauncher-rank { color: GrayText; }
+}

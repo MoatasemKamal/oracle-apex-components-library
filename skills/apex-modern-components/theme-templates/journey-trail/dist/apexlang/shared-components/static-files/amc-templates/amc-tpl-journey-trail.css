@@ -1,0 +1,340 @@
+/* Journey Trail: list template that shows "Continue where you left off", a trail of the pages
+   this user opened in this tab (from amc-tpl-journey-trail.js, sessionStorage), above the
+   developer's destinations. The trail runs horizontally with a connecting line and turns into
+   a vertical timeline in narrow containers. Without JavaScript it is the destinations only. */
+.amc-TJourneyTrail {
+  --amc-tjt-surface: var(--ut-component-background-color, #fff);
+  --amc-tjt-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-tjt-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tjt-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tjt-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tjt-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tjt-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tjt-done: var(--ut-palette-success, #278701);
+  --amc-tjt-radius: max(var(--ut-component-border-radius, 4px) + 8px, 12px);
+  --amc-tjt-dot: .875rem;
+  container: amc-tjt / inline-size;
+  display: grid;
+  gap: .875rem;
+  color: var(--amc-tjt-ink);
+}
+.amc-TJourneyTrail [hidden] { display: none; }
+
+/* ---------------------------------------------------------------- trail panel */
+.amc-TJourneyTrail-trail {
+  display: grid;
+  gap: .5rem;
+  padding: .875rem 1rem .625rem;
+  border: 1px solid var(--amc-tjt-line);
+  border-radius: calc(var(--amc-tjt-radius) + 4px);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-tjt-accent) 6%, transparent), transparent 70%),
+    var(--amc-tjt-surface);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tjt-ink) 5%, transparent);
+  min-inline-size: 0;
+}
+.amc-TJourneyTrail-trailHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.amc-TJourneyTrail-heading {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.amc-TJourneyTrail-headIcon {
+  display: grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: .5rem;
+  font-size: .8125rem;
+  color: var(--amc-tjt-accent);
+  background: color-mix(in srgb, var(--amc-tjt-accent) 12%, transparent);
+}
+.amc-TJourneyTrail-heading--dest {
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--amc-tjt-muted);
+  margin-block-end: -.375rem;
+}
+.amc-TJourneyTrail-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  min-block-size: 1.875rem;
+  padding: .125rem .625rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--amc-tjt-muted);
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.amc-TJourneyTrail-clear:hover { color: var(--amc-tjt-ink); background: color-mix(in srgb, var(--amc-tjt-ink) 7%, transparent); }
+.amc-TJourneyTrail-clear:focus-visible { outline: 2px solid var(--amc-tjt-accent); outline-offset: 1px; }
+
+/* ---------------------------------------------------------------- steps: horizontal */
+.amc-TJourneyTrail-steps {
+  display: flex;
+  margin: 0 -.25rem;
+  padding: .25rem .25rem .5rem;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+.amc-TJourneyTrail-step {
+  position: relative;
+  flex: 1 0 var(--amc-tjt-basis, 8.5rem);
+  max-inline-size: 13rem;
+  min-inline-size: 0;
+  scroll-snap-align: end;
+}
+/* the connecting line runs through the dots */
+.amc-TJourneyTrail-step::before {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(.5rem + var(--amc-tjt-dot) / 2 - 1px);
+  inset-inline: 0;
+  block-size: 2px;
+  background: color-mix(in srgb, var(--amc-tjt-accent) 30%, var(--amc-tjt-line));
+}
+.amc-TJourneyTrail-step:first-child::before { inset-inline-start: calc(.5rem + var(--amc-tjt-dot) / 2); }
+.amc-TJourneyTrail-step:last-child::before { inset-inline-end: calc(100% - .5rem - var(--amc-tjt-dot) / 2); }
+.amc-TJourneyTrail-step.is-here::before { background: linear-gradient(90deg, color-mix(in srgb, var(--amc-tjt-accent) 30%, var(--amc-tjt-line)), var(--amc-tjt-accent)); }
+.amc-TJourneyTrail-step.is-here:dir(rtl)::before { background: linear-gradient(270deg, color-mix(in srgb, var(--amc-tjt-accent) 30%, var(--amc-tjt-line)), var(--amc-tjt-accent)); }
+.amc-TJourneyTrail-stepLink {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "dot dot" "text go";
+  align-items: end;
+  gap: .5rem .25rem;
+  block-size: 100%;
+  box-sizing: border-box;
+  padding: .5rem;
+  border-radius: calc(var(--amc-tjt-radius) - 2px);
+  color: inherit;
+  text-decoration: none;
+}
+a.amc-TJourneyTrail-stepLink:hover { background: color-mix(in srgb, var(--amc-tjt-accent) 7%, transparent); }
+a.amc-TJourneyTrail-stepLink:focus-visible { outline: 2px solid var(--amc-tjt-accent); outline-offset: -2px; }
+.amc-TJourneyTrail-stepDot {
+  grid-area: dot;
+  position: relative;
+  inline-size: var(--amc-tjt-dot);
+  block-size: var(--amc-tjt-dot);
+  box-sizing: border-box;
+  border: 2px solid color-mix(in srgb, var(--amc-tjt-accent) 45%, var(--amc-tjt-line));
+  border-radius: 50%;
+  background: var(--amc-tjt-surface);
+}
+.amc-TJourneyTrail-stepText { grid-area: text; display: grid; gap: .125rem; min-inline-size: 0; }
+.amc-TJourneyTrail-stepTitle {
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow-wrap: break-word;
+  unicode-bidi: isolate;
+}
+.amc-TJourneyTrail-stepMeta { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .375rem; }
+.amc-TJourneyTrail-stepTime { font-size: .6875rem; color: var(--amc-tjt-muted); unicode-bidi: plaintext; }
+.amc-TJourneyTrail-stepContinue {
+  padding: .0625rem .4375rem;
+  border-radius: 999px;
+  font-size: .625rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--amc-tjt-accent-ink);
+  background: var(--amc-tjt-accent);
+}
+.amc-TJourneyTrail-stepIcon { grid-area: go; font-size: .75rem; color: var(--amc-tjt-accent); }
+.amc-TJourneyTrail-stepGo:dir(rtl) { scale: -1 1; }
+/* where the user left off */
+.amc-TJourneyTrail-step.is-resume .amc-TJourneyTrail-stepLink {
+  background: color-mix(in srgb, var(--amc-tjt-accent) 8%, var(--amc-tjt-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tjt-accent) 35%, transparent);
+}
+.amc-TJourneyTrail-step.is-resume .amc-TJourneyTrail-stepDot { border-color: var(--amc-tjt-accent); background: color-mix(in srgb, var(--amc-tjt-accent) 30%, var(--amc-tjt-surface)); }
+.amc-TJourneyTrail-step.is-resume .amc-TJourneyTrail-stepTitle { color: var(--amc-tjt-accent); }
+/* the current page */
+.amc-TJourneyTrail-step.is-here { --amc-tjt-basis: 7.5rem; }
+.amc-TJourneyTrail-step.is-here .amc-TJourneyTrail-stepDot {
+  border-color: var(--amc-tjt-accent);
+  background: var(--amc-tjt-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--amc-tjt-accent) 20%, transparent);
+}
+.amc-TJourneyTrail-step.is-here .amc-TJourneyTrail-stepTitle { font-weight: 700; }
+.amc-TJourneyTrail-stepHere { font-size: .6875rem; font-weight: 600; color: var(--amc-tjt-accent); }
+
+/* ---------------------------------------------------------------- steps: vertical timeline */
+@container amc-tjt (max-width: 30rem) {
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-steps { flex-direction: column; overflow: visible; }
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-step { flex: none; max-inline-size: none; }
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-step::before {
+    inset-block: 0;
+    inset-inline: calc(.5rem + var(--amc-tjt-dot) / 2 - 1px) auto;
+    inline-size: 2px;
+    block-size: auto;
+  }
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-step:first-child::before { inset-block-start: 50%; inset-inline-start: calc(.5rem + var(--amc-tjt-dot) / 2 - 1px); }
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-step:last-child::before { inset-block-end: 50%; inset-inline-end: auto; }
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-step.is-here::before { background: linear-gradient(180deg, color-mix(in srgb, var(--amc-tjt-accent) 30%, var(--amc-tjt-line)), var(--amc-tjt-accent)); }
+  .amc-TJourneyTrail:not(.amc-TJourneyTrail--scroll) .amc-TJourneyTrail-stepLink { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "dot text go"; align-items: center; gap: .75rem; }
+}
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-steps { flex-direction: column; overflow: visible; }
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-step { flex: none; max-inline-size: none; }
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-step::before {
+  inset-block: 0;
+  inset-inline: calc(.5rem + var(--amc-tjt-dot) / 2 - 1px) auto;
+  inline-size: 2px;
+  block-size: auto;
+}
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-step:first-child::before { inset-block-start: 50%; inset-inline-start: calc(.5rem + var(--amc-tjt-dot) / 2 - 1px); }
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-step:last-child::before { inset-block-end: 50%; inset-inline-end: auto; }
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-step.is-here::before { background: linear-gradient(180deg, color-mix(in srgb, var(--amc-tjt-accent) 30%, var(--amc-tjt-line)), var(--amc-tjt-accent)); }
+.amc-TJourneyTrail--vertical .amc-TJourneyTrail-stepLink { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "dot text go"; align-items: center; gap: .75rem; }
+
+/* ---------------------------------------------------------------- destinations */
+.amc-TJourneyTrail-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr));
+  gap: .5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TJourneyTrail-item { min-inline-size: 0; }
+.amc-TJourneyTrail-link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "icon body badge" "icon seen seen";
+  align-items: center;
+  column-gap: .75rem;
+  block-size: 100%;
+  box-sizing: border-box;
+  padding: .75rem .875rem;
+  border: 1px solid var(--amc-tjt-line);
+  border-radius: var(--amc-tjt-radius);
+  background: var(--amc-tjt-surface);
+  color: inherit;
+  text-decoration: none;
+}
+.amc-TJourneyTrail-link:hover { border-color: color-mix(in srgb, var(--amc-tjt-accent) 45%, var(--amc-tjt-line)); }
+.amc-TJourneyTrail-link:focus-visible { outline: 2px solid var(--amc-tjt-accent); outline-offset: 2px; }
+.amc-TJourneyTrail-icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: .625rem;
+  font-size: .9375rem;
+  color: var(--amc-tjt-accent);
+  background: color-mix(in srgb, var(--amc-tjt-accent) 10%, transparent);
+}
+.amc-TJourneyTrail-icon:not([class*="fa-"]) { visibility: hidden; }
+.amc-TJourneyTrail-body { grid-area: body; display: grid; gap: .0625rem; min-inline-size: 0; }
+.amc-TJourneyTrail-label { font-size: .875rem; font-weight: 600; line-height: 1.3; overflow-wrap: break-word; }
+.amc-TJourneyTrail-desc { font-size: .75rem; line-height: 1.4; color: var(--amc-tjt-muted); unicode-bidi: isolate; }
+.amc-TJourneyTrail-desc:empty, .amc-TJourneyTrail-badge:empty { display: none; }
+.amc-TJourneyTrail-badge {
+  grid-area: badge;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  unicode-bidi: plaintext;
+  color: var(--amc-tjt-accent);
+  background: color-mix(in srgb, var(--amc-tjt-accent) 10%, transparent);
+}
+.amc-TJourneyTrail-seen {
+  grid-area: seen;
+  display: inline-flex;
+  align-items: center;
+  gap: .3125rem;
+  margin-block-start: .375rem;
+  font-size: .6875rem;
+  color: var(--amc-tjt-muted);
+}
+.amc-TJourneyTrail-seenText { unicode-bidi: plaintext; }
+.amc-TJourneyTrail-seenIcon {
+  display: grid;
+  place-items: center;
+  inline-size: .9375rem;
+  block-size: .9375rem;
+  border-radius: 50%;
+  font-size: .5625rem;
+  color: var(--amc-tjt-surface);
+  background: var(--amc-tjt-done);
+}
+.amc-TJourneyTrail-item.is-current .amc-TJourneyTrail-link { border-color: var(--amc-tjt-accent); box-shadow: inset 0 0 0 1px var(--amc-tjt-accent); }
+
+.amc-TJourneyTrail-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- template options */
+/* Longer trail (8 steps) is read by the JS; the class also narrows the steps. */
+.amc-TJourneyTrail--long { --amc-tjt-basis: 7.5rem; }
+.amc-TJourneyTrail--noTimes .amc-TJourneyTrail-stepLink { gap: .375rem .25rem; }
+/* Trail only: hides the destinations, for a slim "recently visited" strip on Page 0. */
+.amc-TJourneyTrail--trailOnly .amc-TJourneyTrail-list,
+.amc-TJourneyTrail--trailOnly .amc-TJourneyTrail-heading--dest { display: none; }
+/* Scrolling trail: keeps the horizontal trail (scrolling) even in narrow containers. */
+.amc-TJourneyTrail--scroll { --amc-tjt-basis: 8rem; }
+/* Rows: destinations as a divided list. */
+.amc-TJourneyTrail--rows .amc-TJourneyTrail-list { grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--amc-tjt-line); border-radius: var(--amc-tjt-radius); background: var(--amc-tjt-surface); overflow: clip; }
+.amc-TJourneyTrail--rows .amc-TJourneyTrail-link { border-width: 0; border-radius: 0; padding-block: .5rem; }
+.amc-TJourneyTrail--rows .amc-TJourneyTrail-item + .amc-TJourneyTrail-item { border-block-start: 1px solid var(--amc-tjt-line); }
+.amc-TJourneyTrail--rows .amc-TJourneyTrail-link:hover { background: color-mix(in srgb, var(--amc-tjt-accent) 6%, transparent); }
+@container amc-tjt (min-width: 36rem) {
+  .amc-TJourneyTrail--rows .amc-TJourneyTrail-link { grid-template-columns: auto minmax(0, 1fr) auto auto; grid-template-areas: "icon body seen badge"; }
+  .amc-TJourneyTrail--rows .amc-TJourneyTrail-seen { margin-block-start: 0; }
+}
+
+/* ---------------------------------------------------------------- motion */
+@keyframes amc-tjt-here {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--amc-tjt-accent) 50%, transparent); }
+  100% { box-shadow: 0 0 0 .5rem color-mix(in srgb, var(--amc-tjt-accent) 0%, transparent); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TJourneyTrail-step.is-here .amc-TJourneyTrail-stepDot { animation: amc-tjt-here 1.8s ease-out 3; }
+  .amc-TJourneyTrail-link, .amc-TJourneyTrail-stepLink { transition: border-color .15s ease, background-color .15s ease; }
+  .amc-TJourneyTrail-clear { transition: background-color .15s ease, color .15s ease; }
+  .amc-TJourneyTrail-steps { scroll-behavior: smooth; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TJourneyTrail-step.is-here .amc-TJourneyTrail-stepDot { animation: none; }
+}
+@media (forced-colors: active) {
+  .amc-TJourneyTrail-trail, .amc-TJourneyTrail-link { border: 1px solid CanvasText; }
+  .amc-TJourneyTrail-step::before { background: CanvasText; }
+  .amc-TJourneyTrail-step.is-here .amc-TJourneyTrail-stepDot { background: Highlight; border-color: Highlight; }
+  .amc-TJourneyTrail-step.is-resume .amc-TJourneyTrail-stepLink { border: 2px solid Highlight; }
+  .amc-TJourneyTrail-seenIcon { background: CanvasText; color: Canvas; }
+}

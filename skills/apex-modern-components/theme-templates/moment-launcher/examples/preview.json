@@ -1,0 +1,31 @@
+{
+  "samples": [
+    {
+      "title": "Finance home, live clock",
+      "options": [],
+      "entries": [
+        { "text": "Morning briefing", "link": "#briefing", "icon": "fa-coffee", "a01": "weekday+morning", "a02": "Overnight orders, exceptions and cash position" },
+        { "text": "Approvals", "link": "#approvals", "icon": "fa-check-circle", "a01": "weekstart", "a02": "Leave, expenses and purchase requests", "a03": "6" },
+        { "text": "Timesheet", "link": "#timesheet", "icon": "fa-clock-o", "a01": "friday+afternoon weekclose+afternoon", "a02": "Log this week's hours before the weekend" },
+        { "text": "Month-end close", "link": "#month-end", "icon": "fa-calendar-check-o", "a01": "monthend", "a02": "Accruals, reconciliations and period lock" },
+        { "text": "VAT return", "link": "#vat", "icon": "fa-percent", "a01": "quarterend", "a02": "Quarterly return to the tax authority" },
+        { "text": "Expense claims", "link": "#expenses", "icon": "fa-credit-card", "a01": "monthstart", "a02": "Submit last month's receipts", "a03": "3 drafts" },
+        { "text": "Payroll run", "link": "#payroll", "icon": "fa-money", "a01": "day25", "a02": "Salaries are paid on the 25th" },
+        { "text": "Invoices", "link": "#invoices", "icon": "fa-file-text-o", "a02": "Issue, send and chase", "a03": "14 overdue" },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "evening", "a02": "P&L, aging and cash flow" }
+      ]
+    },
+    {
+      "title": "Operations, focus on now, spotlight, compact",
+      "options": ["amc-TMomentLauncher--focus", "amc-TMomentLauncher--spotlight", "amc-TMomentLauncher--compact"],
+      "entries": [
+        { "text": "Shift handover", "link": "#handover", "icon": "fa-exchange", "a01": "morning evening", "a02": "Open issues for the next shift" },
+        { "text": "Board pack", "link": "#board", "icon": "fa-briefcase", "a01": "quarterend+workhours", "a02": "KPIs and commentary for the board" },
+        { "text": "Weekly planning", "link": "#planning", "icon": "fa-calendar", "a01": "weekstart+morning", "a02": "Capacity and priorities" },
+        { "text": "Supplier payments", "link": "#payments", "icon": "fa-university", "a01": "weekclose", "a02": "Payment run for approved invoices" },
+        { "text": "Year-end inventory", "link": "#inventory", "icon": "fa-cubes", "a01": "yearend", "a02": "Stock count and valuation" },
+        { "text": "Customers", "link": "#customers", "icon": "fa-users", "a02": "Accounts and contacts" }
+      ]
+    }
+  ]
+}

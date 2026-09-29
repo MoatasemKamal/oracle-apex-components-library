@@ -1,0 +1,128 @@
+listTemplate amc-moment-launcher (
+    name: AMC Moment Launcher
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TMomentLauncher #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-weekend="" data-l-morning="This morning" data-l-afternoon="This afternoon" data-l-evening="This evening" data-l-night="Tonight" data-l-workhours="Working hours" data-l-weekday="Working day" data-l-weekend="Weekend" data-l-weekstart="Start of the week" data-l-weekclose="Last working day of the week" data-l-monthstart="Month start" data-l-monthend="Month-end" data-l-quarterstart="Quarter start" data-l-quarterend="Quarter-end" data-l-yearend="Year-end" data-l-lastday="Last day of the month" data-left-one="{n} working day left" data-left-other="{n} working days left" data-left-last="last working day" data-next="Next" data-announce="Suggested for right now:">
+            <div class="amc-TMomentLauncher-now" hidden>
+            <div class="amc-TMomentLauncher-nowHead"><span class="amc-TMomentLauncher-pulse" aria-hidden="true"></span><h3 class="amc-TMomentLauncher-heading">Right now</h3><span class="amc-TMomentLauncher-clock"></span></div>
+            <ul class="amc-TMomentLauncher-nowList"></ul>
+            </div>
+            <div class="amc-TMomentLauncher-restHead" hidden><h3 class="amc-TMomentLauncher-heading amc-TMomentLauncher-heading--rest">Everything else</h3><button type="button" class="amc-TMomentLauncher-toggle" aria-expanded="false" hidden><span class="amc-TMomentLauncher-toggleShow">Show all</span><span class="amc-TMomentLauncher-toggleHide">Show less</span><span class="amc-TMomentLauncher-toggleIcon fa fa-chevron-down" aria-hidden="true"></span></button></div>
+            <ul class="amc-TMomentLauncher-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <p class="amc-TMomentLauncher-status" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TMomentLauncher-item is-current" data-moments="#A01#"><a class="amc-TMomentLauncher-link" href="#LINK#" aria-current="page"><span class="amc-TMomentLauncher-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMomentLauncher-body"><span class="amc-TMomentLauncher-label">#TEXT#</span><span class="amc-TMomentLauncher-desc">#A02#</span></span><span class="amc-TMomentLauncher-badge">#A03#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TMomentLauncher-item" data-moments="#A01#"><a class="amc-TMomentLauncher-link" href="#LINK#"><span class="amc-TMomentLauncher-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMomentLauncher-body"><span class="amc-TMomentLauncher-label">#TEXT#</span><span class="amc-TMomentLauncher-desc">#A02#</span></span><span class="amc-TMomentLauncher-badge">#A03#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-moment-launcher.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-moment-launcher.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Moments
+        a02: Description
+        a03: Badge
+    }
+    advanced {
+        staticId: AMC_TPL_MOMENT_LAUNCHER
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Launcher list template that follows the calendar. Attribute 1 holds the entry's moments: space-separated alternatives, each made of one or more tokens joined with a plus sign that must all match, for example monthend quarterend or friday+afternoon. Tokens: morning (5 to 12 h), afternoon (12 to 17 h), evening (17 to 22 h), night, workhours (8 to 18 h on working days), weekday, weekend, weekstart and weekclose (first and last working day of the week), monday to sunday (or mon to sun), monthstart (first 3 working days), monthend (last 3 working days), quarterstart, quarterend (last 5 working days of March, June, September, December), yearend (last 10 working days of December), lastday, and day1 to day31 (day31 means the last day in shorter months). Unknown tokens never match. Working days skip the weekend of the page locale taken from Intl week info, for example Friday and Saturday for Arabic; set data-weekend on the wrapper in the template, for example friday saturday, to fix it. Public holidays are not known. Matching entries move into the Right now panel, most specific first (a date period outranks a weekday, which outranks a time of day), with a reason chip such as Month-end, 2 working days left; the last working day is highlighted. Other entries keep the developer's order and show when they come up next. The time is the browser's local time; the set is checked again every minute and when the tab becomes visible, but items never move while focus is inside the list, and changes are announced politely. Nothing is stored. Developers can test a moment in the browser console with amcTplMomentLauncher.at 2026-09-29T15:00 as a string argument and go back with null. Attribute 2 is a description, Attribute 3 a badge. Template options: Focus on now folds the other entries behind a Show all button, Hide next times, Spotlight fills the lifted entries with the primary color, Compact. Without JavaScript it is a plain list of links. Reduced motion stops the live pulse and the hover lift. English UI strings to translate in the template: Right now, Everything else, Show all, Show less, and the data-l-*, data-left-*, data-next and data-announce attributes on the wrapper; day and date names come from Intl in the page language.
+            ```
+    }
+
+    templateOption amc-moment-launcher-focus (
+        name: Focus on now
+        sequence: 10
+        appearance {
+            cssClasses: amc-TMomentLauncher--focus
+        }
+        help {
+            helpText:
+                ```text
+                While something is lifted, the other entries fold away behind a Show all button, so the page shows only what matters at this moment.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FOCUS
+        }
+    )
+
+    templateOption amc-moment-launcher-no-next (
+        name: Hide next times
+        sequence: 20
+        appearance {
+            cssClasses: amc-TMomentLauncher--noNext
+        }
+        help {
+            helpText:
+                ```text
+                Does not show when the other entries come up next, for short lists or entries without moments.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_NEXT
+        }
+    )
+
+    templateOption amc-moment-launcher-spotlight (
+        name: Spotlight
+        sequence: 30
+        appearance {
+            cssClasses: amc-TMomentLauncher--spotlight
+        }
+        help {
+            helpText:
+                ```text
+                Fills the lifted entries with a primary-colored gradient; the last working day of a period turns the reason chip to the warning color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SPOTLIGHT
+        }
+    )
+
+    templateOption amc-moment-launcher-compact (
+        name: Compact
+        sequence: 40
+        appearance {
+            cssClasses: amc-TMomentLauncher--compact
+        }
+        help {
+            helpText:
+                ```text
+                Denser rows and smaller lifted cards, for side columns and long lists.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+)

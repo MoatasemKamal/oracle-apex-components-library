@@ -1,0 +1,150 @@
+listTemplate amc-frecency-launcher (
+    name: AMC Frecency Launcher
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TFrecencyLauncher #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-announce="Your most used destinations are now first:" data-reset-done="Order reset. Destinations are back in their original order." data-opened="Opened">
+            <div class="amc-TFrecencyLauncher-head" hidden>
+            <p class="amc-TFrecencyLauncher-hint"><span class="amc-TFrecencyLauncher-hintIcon fa fa-magic" aria-hidden="true"></span><span class="amc-TFrecencyLauncher-hintText amc-TFrecencyLauncher-hintText--new">Open what you need. The destinations you use most will move to the top, just for you.</span><span class="amc-TFrecencyLauncher-hintText amc-TFrecencyLauncher-hintText--learned">Arranged by how often and how recently you open them. Kept only in this browser.</span></p>
+            <button type="button" class="amc-TFrecencyLauncher-reset" hidden><span class="amc-TFrecencyLauncher-resetIcon fa fa-undo" aria-hidden="true"></span><span>Reset order</span></button>
+            </div>
+            <div class="amc-TFrecencyLauncher-favs" hidden>
+            <h3 class="amc-TFrecencyLauncher-heading">Your most used</h3>
+            <ol class="amc-TFrecencyLauncher-top"></ol>
+            </div>
+            <h3 class="amc-TFrecencyLauncher-heading amc-TFrecencyLauncher-heading--rest" hidden>Everything else</h3>
+            <ul class="amc-TFrecencyLauncher-grid">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <p class="amc-TFrecencyLauncher-status" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TFrecencyLauncher-item is-current" data-key="#A03#"><a class="amc-TFrecencyLauncher-link" href="#LINK#" aria-current="page"><span class="amc-TFrecencyLauncher-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TFrecencyLauncher-body"><span class="amc-TFrecencyLauncher-label">#TEXT#</span><span class="amc-TFrecencyLauncher-desc">#A01#</span></span><span class="amc-TFrecencyLauncher-badge">#A02#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TFrecencyLauncher-item" data-key="#A03#"><a class="amc-TFrecencyLauncher-link" href="#LINK#"><span class="amc-TFrecencyLauncher-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TFrecencyLauncher-body"><span class="amc-TFrecencyLauncher-label">#TEXT#</span><span class="amc-TFrecencyLauncher-desc">#A01#</span></span><span class="amc-TFrecencyLauncher-badge">#A02#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-frecency-launcher.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-frecency-launcher.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Badge
+        a03: Learning key
+    }
+    advanced {
+        staticId: AMC_TPL_FRECENCY_LAUNCHER
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Launcher list template that adapts to each user. Every time the user opens an entry, the time is stored in this browser's localStorage under amc-tpl-frecency-launcher:<application id>:<list id> (time stamps per entry, at most 30 per entry, entries unused for 120 days are forgotten; nothing is sent to the server). At page load each entry gets a frecency score, the sum of 0.5 to the power of age divided by a half-life of 10 days over its opens, and entries opened at least twice are ranked: the top 3 move into a numbered Your most used list, the rest stay in the developer's order as a compact grid. The order only changes at page load, never under the pointer. List items are moved in the DOM, so Tab order and screen-reader order always match the screen; the new favourites are announced politely once when they change. A first-time user sees the developer's order as full tiles with a hint. Reset order clears what was learned for this list. Attribute 1 is a description, Attribute 2 a badge such as 14 overdue, Attribute 3 an optional learning key: set it when the entry link carries values that change, otherwise the link without session, checksum and clear-cache values is the key. Template options: Adapt quickly uses a half-life of 3 days, Four favourites ranks 4, Filled favourites paints the ranked tiles in the primary color, Discreet hides the heat meter and last-opened time for shared screens, Rows shows everything else as a divided list. Without JavaScript, or when storage is blocked, it is a plain grid of launch tiles. Reduced motion removes the hover lift, the meter fill and the arrival glow. English UI strings to translate in the template: the two hint sentences, Reset order, Your most used, Everything else, and the data-announce, data-reset-done and data-opened attributes on the wrapper; relative times come from Intl.RelativeTimeFormat in the page language.
+            ```
+    }
+
+    templateOption amc-frecency-launcher-fast (
+        name: Adapt quickly
+        sequence: 10
+        appearance {
+            cssClasses: amc-TFrecencyLauncher--fast
+        }
+        help {
+            helpText:
+                ```text
+                Uses a half-life of 3 days instead of 10, so the favourites follow this week's work, for example during a month-end close.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FAST
+        }
+    )
+
+    templateOption amc-frecency-launcher-four (
+        name: Four favourites
+        sequence: 20
+        appearance {
+            cssClasses: amc-TFrecencyLauncher--four
+        }
+        help {
+            helpText:
+                ```text
+                Ranks the top 4 instead of 3, shown in one row in regions wider than about 700 pixels.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FOUR
+        }
+    )
+
+    templateOption amc-frecency-launcher-filled (
+        name: Filled favourites
+        sequence: 30
+        appearance {
+            cssClasses: amc-TFrecencyLauncher--filled
+        }
+        help {
+            helpText:
+                ```text
+                Paints the ranked tiles with a primary-colored gradient so the personal part of the page stands out.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FILLED
+        }
+    )
+
+    templateOption amc-frecency-launcher-discreet (
+        name: Discreet
+        sequence: 40
+        appearance {
+            cssClasses: amc-TFrecencyLauncher--discreet
+        }
+        help {
+            helpText:
+                ```text
+                Hides the heat meter and the last-opened time, for shared screens and kiosks; the ranking still applies.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DISCREET
+        }
+    )
+
+    templateOption amc-frecency-launcher-rows (
+        name: Rows
+        sequence: 50
+        appearance {
+            cssClasses: amc-TFrecencyLauncher--rows
+        }
+        help {
+            helpText:
+                ```text
+                Shows the entries that are not ranked as a divided list instead of a grid, for side columns.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ROWS
+        }
+    )
+)

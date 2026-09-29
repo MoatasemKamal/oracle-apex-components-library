@@ -1,0 +1,30 @@
+{
+  "samples": [
+    {
+      "title": "Finance workspace, learns from clicks, reload to see the ranking",
+      "options": [],
+      "entries": [
+        { "text": "Orders", "link": "#orders", "icon": "fa-shopping-cart", "a01": "Sales orders and quotes", "a02": "128 open" },
+        { "text": "Invoices", "link": "#invoices", "icon": "fa-file-text-o", "a01": "Issue, send and chase", "a02": "14 overdue" },
+        { "text": "Approvals", "link": "#approvals", "icon": "fa-check-circle", "a01": "Leave, expenses, purchases", "a02": "6" },
+        { "text": "Timesheet", "link": "#timesheet", "icon": "fa-clock-o", "a01": "Log this week's hours" },
+        { "text": "Month-end close", "link": "#month-end", "icon": "fa-calendar-check-o", "a01": "Accruals, reconciliations, lock period" },
+        { "text": "Expense claims", "link": "#expenses", "icon": "fa-credit-card", "a01": "Receipts and mileage", "a02": "3 drafts" },
+        { "text": "Customers", "link": "#customers", "icon": "fa-users", "a01": "Accounts, contacts, credit limits" },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "P&L, aging, cash flow" }
+      ]
+    },
+    {
+      "title": "Four favourites, filled, rows, adapt quickly",
+      "options": ["amc-TFrecencyLauncher--four", "amc-TFrecencyLauncher--filled", "amc-TFrecencyLauncher--rows", "amc-TFrecencyLauncher--fast"],
+      "entries": [
+        { "text": "Purchase requisitions", "link": "#requisitions", "icon": "fa-cart-arrow-down", "a01": "Request goods and services" },
+        { "text": "Suppliers", "link": "#suppliers", "icon": "fa-truck", "a01": "Vendor master and bank details" },
+        { "text": "Goods receipts", "link": "#receipts", "icon": "fa-inbox", "a01": "Book deliveries into stock", "a02": "9 due" },
+        { "text": "Stock levels", "link": "#stock", "icon": "fa-cubes", "a01": "On hand, reserved, reorder" },
+        { "text": "Contracts", "link": "#contracts", "icon": "fa-handshake-o", "a01": "Framework agreements" },
+        { "text": "Spend analysis", "link": "#spend", "icon": "fa-pie-chart", "a01": "By category and supplier" }
+      ]
+    }
+  ]
+}

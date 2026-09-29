@@ -1,0 +1,26 @@
+{
+  "samples": [
+    {
+      "title": "Sales hub, click destinations to build the trail",
+      "options": [],
+      "entries": [
+        { "text": "Orders", "link": "#orders", "icon": "fa-shopping-cart", "a01": "Sales orders and quotes", "a02": "128 open" },
+        { "text": "Customers", "link": "#customers", "icon": "fa-users", "a01": "Accounts, contacts, credit limits" },
+        { "text": "Invoices", "link": "#invoices", "icon": "fa-file-text-o", "a01": "Issue, send and chase", "a02": "14 overdue" },
+        { "text": "Approvals", "link": "#approvals", "icon": "fa-check-circle", "a01": "Discounts above 10%", "a02": "6" },
+        { "text": "Expense claims", "link": "#expenses", "icon": "fa-credit-card", "a01": "Receipts and mileage" },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "Pipeline, win rate, aging" }
+      ]
+    },
+    {
+      "title": "Vertical timeline, rows, longer trail",
+      "options": ["amc-TJourneyTrail--vertical", "amc-TJourneyTrail--rows", "amc-TJourneyTrail--long"],
+      "entries": [
+        { "text": "Month-end close", "link": "#month-end", "icon": "fa-calendar-check-o", "a01": "Accruals and period lock" },
+        { "text": "Timesheet", "link": "#timesheet", "icon": "fa-clock-o", "a01": "Log this week's hours" },
+        { "text": "Orders", "link": "#orders", "icon": "fa-shopping-cart", "a01": "Sales orders and quotes" },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "P&L, aging, cash flow" }
+      ]
+    }
+  ]
+}

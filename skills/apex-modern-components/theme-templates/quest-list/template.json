@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Quest List",
+  "staticId": "AMC_TPL_QUEST_LIST",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "An onboarding checklist that notices what the new user has already done: each task completes itself once its page has been opened, or by a tick, with a progress ring, points, the next task highlighted and a short celebration when everything is done.",
+  "useFor": "Getting-started regions on the home page of a new or newly rolled-out app, training environments, and role checklists such as first week in finance: open Orders, create an invoice, submit a timesheet, approve a request.",
+  "keywords": ["onboarding", "checklist", "getting started", "progress", "gamification", "quest", "living"],
+  "helpText": "Onboarding list template. Each list entry is a task: its link is the page to open, Attribute 1 a description, Attribute 2 the points it is worth (a number), Attribute 3 an optional completion page: part of a page URL or alias, such as order-confirmation, that also completes the task when visited, for tasks whose link opens a dialog. A task completes itself when the user has opened its page: the same page with at least the link's item values, ignoring session, checksum and clear-cache values. The template's JavaScript records visited pages in localStorage under amc-tpl-quest-list:<application id>:visits (page keys and first-visit time, at most 300) on every page that loads it, adds the page the user came back from (the referrer, same application) and records a task link as the user follows it, so the list works when it is only on the home page. The user can also tick a task or untick one, stored with the tasks already announced and whether the celebration was shown under amc-tpl-quest-list:<application id>:<list id>. Nothing leaves the browser. The head shows a progress ring, X of Y tasks done and points earned; the first open task is marked Next; tasks completed since the last view are announced politely with their points; when all are done the ring turns into a trophy with a short burst of sparks, shown once. Reset progress forgets the ticks and the visits of this list's tasks. Template options: Manual only ignores visits, Hide points, Fold when complete folds the tasks behind Show tasks, Compact, Hero header fills the head with the primary color. Without JavaScript, or with storage blocked, it is a plain list of links. Reduced motion removes the sparks, the pop and the ring animation. English UI strings to translate in the template: Get started, You are all set, Show tasks, Hide tasks, Reset progress, pts, and the data-mark, data-by-visit, data-by-hand, data-next, data-progress, data-points, data-completed, data-all-done and data-reset-done attributes on the wrapper; {done}, {total}, {points} and {max} are filled in.",
+  "attributes": { "a01": "Description", "a02": "Points", "a03": "Completion page" },
+  "templateOptions": [
+    { "staticId": "MANUAL", "name": "Manual only", "cssClass": "amc-TQuestList--manual", "sequence": 10, "help": "Tasks complete only when the user ticks them; visits are ignored. The ticks become square checkboxes." },
+    { "staticId": "NO_POINTS", "name": "Hide points", "cssClass": "amc-TQuestList--noPoints", "sequence": 20, "help": "Hides the points on each task and the points total, for a plain checklist." },
+    { "staticId": "FOLD", "name": "Fold when complete", "cssClass": "amc-TQuestList--fold", "sequence": 30, "help": "Once every task is done the list folds behind a Show tasks button and only the completed head remains." },
+    { "staticId": "COMPACT", "name": "Compact", "cssClass": "amc-TQuestList--compact", "sequence": 40, "help": "Smaller ring and ticks, no icons or descriptions, for side columns." },
+    { "staticId": "HERO", "name": "Hero header", "cssClass": "amc-TQuestList--hero", "sequence": 50, "help": "Fills the head with a primary-colored gradient so the checklist stands out on a home page." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

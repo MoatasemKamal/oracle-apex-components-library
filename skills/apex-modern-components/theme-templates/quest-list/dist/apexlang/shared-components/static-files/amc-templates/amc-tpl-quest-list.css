@@ -1,0 +1,361 @@
+/* Quest List: onboarding checklist list template. amc-tpl-quest-list.js completes tasks when the
+   user has opened their page (or ticks them), and drives the progress ring, the points and a
+   small celebration when everything is done. Without JavaScript it is a numbered list of links. */
+.amc-TQuestList {
+  --amc-tql-surface: var(--ut-component-background-color, #fff);
+  --amc-tql-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-tql-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tql-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tql-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tql-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tql-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tql-done: var(--ut-palette-success, #278701);
+  --amc-tql-done-ink: var(--ut-palette-success-contrast, #fff);
+  --amc-tql-warn: var(--ut-palette-warning, #fbce4a);
+  --amc-tql-info: var(--ut-palette-info, #0076df);
+  --amc-tql-danger: var(--ut-palette-danger, #cb1100);
+  --amc-tql-radius: max(var(--ut-component-border-radius, 4px) + 10px, 14px);
+  --amc-tql-tick: 1.75rem;
+  --amc-tql-p: 0;
+  container: amc-tql / inline-size;
+  counter-reset: amc-tql;
+  display: grid;
+  border: 1px solid var(--amc-tql-line);
+  border-radius: var(--amc-tql-radius);
+  background: var(--amc-tql-surface);
+  color: var(--amc-tql-ink);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tql-ink) 5%, transparent), 0 12px 30px -24px color-mix(in srgb, var(--amc-tql-ink) 45%, transparent);
+}
+.amc-TQuestList [hidden] { display: none; }
+
+/* ---------------------------------------------------------------- head: ring, summary, actions */
+.amc-TQuestList-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: "ring summary" "actions actions";
+  align-items: center;
+  gap: .75rem 1rem;
+  padding: 1rem 1.125rem;
+  border-block-end: 1px solid var(--amc-tql-line);
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+  background:
+    radial-gradient(90% 140% at 0% 0%, color-mix(in srgb, var(--amc-tql-accent) 12%, transparent), transparent 65%),
+    var(--amc-tql-surface);
+}
+@container amc-tql (min-width: 26rem) {
+  .amc-TQuestList-head { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "ring summary actions"; }
+}
+.amc-TQuestList-ring {
+  grid-area: ring;
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 4.25rem;
+  block-size: 4.25rem;
+}
+.amc-TQuestList-ringSvg { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; rotate: -90deg; }
+.amc-TQuestList-ringSvg:dir(rtl) { scale: 1 -1; }
+.amc-TQuestList-ringTrack { fill: none; stroke: color-mix(in srgb, var(--amc-tql-ink) 9%, transparent); stroke-width: 3.4; }
+.amc-TQuestList-ringFill {
+  fill: none;
+  stroke: var(--amc-tql-accent);
+  stroke-width: 3.4;
+  stroke-linecap: round;
+  stroke-dasharray: var(--amc-tql-p) 100;
+}
+.amc-TQuestList-ringText { font-size: .9375rem; font-weight: 750; font-variant-numeric: tabular-nums; unicode-bidi: isolate; direction: ltr; }
+.amc-TQuestList-trophy { display: none; font-size: 1.375rem; color: var(--amc-tql-done); }
+.amc-TQuestList-summary { grid-area: summary; display: grid; gap: .125rem; min-inline-size: 0; }
+.amc-TQuestList-title { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.3; }
+.amc-TQuestList-titleDone { display: none; }
+.amc-TQuestList-progress { margin: 0; font-size: .8125rem; color: var(--amc-tql-muted); unicode-bidi: plaintext; justify-self: start; }
+.amc-TQuestList-points {
+  justify-self: start;
+  margin: .25rem 0 0;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--amc-tql-accent);
+  background: color-mix(in srgb, var(--amc-tql-accent) 11%, transparent);
+  unicode-bidi: plaintext;
+}
+.amc-TQuestList-actions { grid-area: actions; display: flex; flex-wrap: wrap; gap: .375rem; justify-content: flex-end; }
+.amc-TQuestList-reset,
+.amc-TQuestList-fold {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  min-block-size: 1.875rem;
+  padding: .125rem .75rem;
+  border: 1px solid var(--amc-tql-line);
+  border-radius: 999px;
+  background: var(--amc-tql-surface);
+  color: var(--amc-tql-ink);
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.amc-TQuestList-reset:hover, .amc-TQuestList-fold:hover { border-color: color-mix(in srgb, var(--amc-tql-accent) 50%, var(--amc-tql-line)); }
+.amc-TQuestList-reset:focus-visible, .amc-TQuestList-fold:focus-visible { outline: 2px solid var(--amc-tql-accent); outline-offset: 2px; }
+.amc-TQuestList-resetIcon { font-size: .6875rem; }
+.amc-TQuestList-reset[hidden], .amc-TQuestList-fold[hidden] { display: none; }
+.amc-TQuestList-foldHide { display: none; }
+.amc-TQuestList-fold[aria-expanded="true"] .amc-TQuestList-foldShow { display: none; }
+.amc-TQuestList-fold[aria-expanded="true"] .amc-TQuestList-foldHide { display: inline; }
+
+/* complete */
+.amc-TQuestList.is-complete .amc-TQuestList-head {
+  background:
+    radial-gradient(90% 140% at 0% 0%, color-mix(in srgb, var(--amc-tql-done) 16%, transparent), transparent 65%),
+    var(--amc-tql-surface);
+}
+.amc-TQuestList.is-complete .amc-TQuestList-ringFill { stroke: var(--amc-tql-done); }
+.amc-TQuestList.is-complete .amc-TQuestList-ringText { display: none; }
+.amc-TQuestList.is-complete .amc-TQuestList-trophy { display: block; }
+.amc-TQuestList.is-complete .amc-TQuestList-titleOpen { display: none; }
+.amc-TQuestList.is-complete .amc-TQuestList-titleDone { display: inline; }
+.amc-TQuestList.is-complete .amc-TQuestList-points { color: var(--amc-tql-done); background: color-mix(in srgb, var(--amc-tql-done) 13%, transparent); }
+
+/* celebration: sparks burst from the ring (created by JS, decorative) */
+.amc-TQuestList-burst {
+  position: absolute;
+  inset-block-start: calc(1rem + 2.125rem);
+  inset-inline-start: calc(1.125rem + 2.125rem);
+  inline-size: 0;
+  block-size: 0;
+  pointer-events: none;
+}
+.amc-TQuestList-spark {
+  position: absolute;
+  inset-block-start: -.25rem;
+  inset-inline-start: -.1875rem;
+  inline-size: .375rem;
+  block-size: .625rem;
+  border-radius: 2px;
+  opacity: 0;
+  background: var(--amc-tql-c, var(--amc-tql-accent));
+  rotate: var(--amc-tql-a, 0deg);
+}
+.amc-TQuestList-spark:nth-child(1) { --amc-tql-a: 0deg; }
+.amc-TQuestList-spark:nth-child(2) { --amc-tql-a: 22.5deg; --amc-tql-c: var(--amc-tql-done); }
+.amc-TQuestList-spark:nth-child(3) { --amc-tql-a: 45deg; --amc-tql-c: var(--amc-tql-warn); }
+.amc-TQuestList-spark:nth-child(4) { --amc-tql-a: 67.5deg; --amc-tql-c: var(--amc-tql-info); }
+.amc-TQuestList-spark:nth-child(5) { --amc-tql-a: 90deg; --amc-tql-c: var(--amc-tql-danger); }
+.amc-TQuestList-spark:nth-child(6) { --amc-tql-a: 112.5deg; }
+.amc-TQuestList-spark:nth-child(7) { --amc-tql-a: 135deg; --amc-tql-c: var(--amc-tql-done); }
+.amc-TQuestList-spark:nth-child(8) { --amc-tql-a: 157.5deg; --amc-tql-c: var(--amc-tql-warn); }
+.amc-TQuestList-spark:nth-child(9) { --amc-tql-a: 180deg; --amc-tql-c: var(--amc-tql-info); }
+.amc-TQuestList-spark:nth-child(10) { --amc-tql-a: 202.5deg; --amc-tql-c: var(--amc-tql-danger); }
+.amc-TQuestList-spark:nth-child(11) { --amc-tql-a: 225deg; }
+.amc-TQuestList-spark:nth-child(12) { --amc-tql-a: 247.5deg; --amc-tql-c: var(--amc-tql-done); }
+.amc-TQuestList-spark:nth-child(13) { --amc-tql-a: 270deg; --amc-tql-c: var(--amc-tql-warn); }
+.amc-TQuestList-spark:nth-child(14) { --amc-tql-a: 292.5deg; --amc-tql-c: var(--amc-tql-info); }
+.amc-TQuestList-spark:nth-child(15) { --amc-tql-a: 315deg; --amc-tql-c: var(--amc-tql-danger); }
+.amc-TQuestList-spark:nth-child(16) { --amc-tql-a: 337.5deg; }
+
+/* ---------------------------------------------------------------- tasks */
+.amc-TQuestList-list {
+  display: grid;
+  margin: 0;
+  padding: .5rem .625rem .625rem;
+  list-style: none;
+}
+.amc-TQuestList-item {
+  counter-increment: amc-tql;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-inline-size: 0;
+  padding-inline-start: .375rem;
+  border-radius: calc(var(--amc-tql-radius) - 4px);
+}
+/* the quest path between the ticks */
+.amc-TQuestList.is-enhanced .amc-TQuestList-item + .amc-TQuestList-item::before {
+  content: "";
+  position: absolute;
+  inset-block: -50% 50%;
+  inset-inline-start: calc(.375rem + var(--amc-tql-tick) / 2 - 1px);
+  inline-size: 2px;
+  background: var(--amc-tql-line);
+  z-index: 0;
+}
+.amc-TQuestList.is-enhanced .amc-TQuestList-item.is-done + .amc-TQuestList-item::before { background: color-mix(in srgb, var(--amc-tql-done) 60%, var(--amc-tql-line)); }
+.amc-TQuestList-tick {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--amc-tql-tick);
+  block-size: var(--amc-tql-tick);
+  padding: 0;
+  border: 2px solid color-mix(in srgb, var(--amc-tql-ink) 22%, transparent);
+  border-radius: 50%;
+  background: var(--amc-tql-surface);
+  color: var(--amc-tql-muted);
+  font: inherit;
+  cursor: pointer;
+}
+.amc-TQuestList-tick[hidden] { display: none; }
+.amc-TQuestList-tick:hover { border-color: var(--amc-tql-done); }
+.amc-TQuestList-tick:focus-visible { outline: 2px solid var(--amc-tql-accent); outline-offset: 2px; }
+.amc-TQuestList-tickMark::before { content: counter(amc-tql); font-size: .75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.amc-TQuestList-item.is-done .amc-TQuestList-tick { border-color: var(--amc-tql-done); background: var(--amc-tql-done); }
+.amc-TQuestList-item.is-done .amc-TQuestList-tickMark::before {
+  content: "";
+  display: block;
+  inline-size: .3125rem;
+  block-size: .625rem;
+  margin-block-start: -.125rem;
+  border: solid var(--amc-tql-done-ink);
+  border-width: 0 2.5px 2.5px 0;
+  rotate: 45deg;
+}
+.amc-TQuestList-item.is-next .amc-TQuestList-tick { border-color: var(--amc-tql-accent); color: var(--amc-tql-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--amc-tql-accent) 16%, transparent); }
+
+.amc-TQuestList-link {
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "icon body pts";
+  align-items: center;
+  gap: .75rem;
+  min-inline-size: 0;
+  padding: .625rem .75rem;
+  border-radius: calc(var(--amc-tql-radius) - 4px);
+  color: inherit;
+  text-decoration: none;
+}
+.amc-TQuestList-link:hover { background: color-mix(in srgb, var(--amc-tql-accent) 6%, transparent); }
+.amc-TQuestList-link:focus-visible { outline: 2px solid var(--amc-tql-accent); outline-offset: -2px; }
+.amc-TQuestList-item.is-next .amc-TQuestList-link { background: color-mix(in srgb, var(--amc-tql-accent) 7%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tql-accent) 25%, transparent); }
+.amc-TQuestList-icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: .625rem;
+  font-size: .9375rem;
+  color: var(--amc-tql-accent);
+  background: color-mix(in srgb, var(--amc-tql-accent) 10%, transparent);
+}
+.amc-TQuestList-icon:not([class*="fa-"]) { display: none; }
+.amc-TQuestList-body { grid-area: body; display: grid; gap: .0625rem; min-inline-size: 0; }
+.amc-TQuestList-label { font-size: .875rem; font-weight: 600; line-height: 1.3; overflow-wrap: break-word; }
+.amc-TQuestList-desc { font-size: .75rem; line-height: 1.4; color: var(--amc-tql-muted); unicode-bidi: isolate; }
+.amc-TQuestList-desc:empty, .amc-TQuestList-state:empty { display: none; }
+.amc-TQuestList-state { margin-block-start: .1875rem; font-size: .6875rem; font-weight: 600; color: var(--amc-tql-done); }
+.amc-TQuestList-item.is-next .amc-TQuestList-state {
+  justify-self: start;
+  padding: 0 .4375rem;
+  border-radius: 999px;
+  color: var(--amc-tql-accent-ink);
+  background: var(--amc-tql-accent);
+  letter-spacing: .02em;
+}
+.amc-TQuestList-item.is-done .amc-TQuestList-label { color: var(--amc-tql-muted); }
+.amc-TQuestList-item.is-done .amc-TQuestList-icon { color: var(--amc-tql-done); background: color-mix(in srgb, var(--amc-tql-done) 11%, transparent); }
+.amc-TQuestList-pts {
+  grid-area: pts;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--amc-tql-muted);
+  background: color-mix(in srgb, var(--amc-tql-ink) 6%, transparent);
+  unicode-bidi: plaintext;
+}
+.amc-TQuestList-pts:has(.amc-TQuestList-ptsValue:empty) { display: none; }
+.amc-TQuestList-ptsValue::before { content: "+"; }
+.amc-TQuestList-item.is-done .amc-TQuestList-pts { color: var(--amc-tql-done); background: color-mix(in srgb, var(--amc-tql-done) 12%, transparent); }
+.amc-TQuestList-item.is-current .amc-TQuestList-label { color: var(--amc-tql-accent); }
+
+.amc-TQuestList-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- template options */
+/* Manual only: the JS ignores visits; the ticks look like checkboxes rather than steps. */
+.amc-TQuestList--manual .amc-TQuestList-tick { border-radius: .4375rem; }
+.amc-TQuestList--noPoints .amc-TQuestList-pts,
+.amc-TQuestList--noPoints .amc-TQuestList-points { display: none; }
+/* Fold when complete: the task list folds behind Show tasks once everything is done. */
+.amc-TQuestList--fold.is-folded .amc-TQuestList-list { display: none; }
+.amc-TQuestList--fold.is-folded .amc-TQuestList-head { border-block-end: 0; border-radius: inherit; }
+.amc-TQuestList--compact { --amc-tql-tick: 1.5rem; }
+.amc-TQuestList--compact .amc-TQuestList-link { padding-block: .375rem; }
+.amc-TQuestList--compact .amc-TQuestList-icon { display: none; }
+.amc-TQuestList--compact .amc-TQuestList-desc { display: none; }
+.amc-TQuestList--compact .amc-TQuestList-ring { inline-size: 3.25rem; block-size: 3.25rem; }
+.amc-TQuestList--compact .amc-TQuestList-burst { inset-block-start: calc(1rem + 1.625rem); inset-inline-start: calc(1.125rem + 1.625rem); }
+/* Hero header: the head is filled with the primary color. */
+.amc-TQuestList--hero .amc-TQuestList-head {
+  color: var(--amc-tql-accent-ink);
+  background:
+    radial-gradient(90% 160% at 100% 0%, color-mix(in srgb, var(--amc-tql-accent-ink) 22%, transparent), transparent 60%),
+    linear-gradient(135deg, var(--amc-tql-accent), color-mix(in oklab, var(--amc-tql-accent) 65%, var(--amc-tql-ink)));
+  border-block-end-color: transparent;
+}
+.amc-TQuestList--hero .amc-TQuestList-progress { color: color-mix(in srgb, var(--amc-tql-accent-ink) 82%, transparent); }
+.amc-TQuestList--hero .amc-TQuestList-points { color: var(--amc-tql-accent-ink); background: color-mix(in srgb, var(--amc-tql-accent-ink) 18%, transparent); }
+.amc-TQuestList--hero .amc-TQuestList-ringTrack { stroke: color-mix(in srgb, var(--amc-tql-accent-ink) 25%, transparent); }
+.amc-TQuestList--hero .amc-TQuestList-ringFill { stroke: var(--amc-tql-accent-ink); }
+.amc-TQuestList--hero .amc-TQuestList-trophy { color: var(--amc-tql-accent-ink); }
+.amc-TQuestList--hero .amc-TQuestList-reset,
+.amc-TQuestList--hero .amc-TQuestList-fold { color: var(--amc-tql-accent-ink); background: transparent; border-color: color-mix(in srgb, var(--amc-tql-accent-ink) 40%, transparent); }
+.amc-TQuestList--hero .amc-TQuestList-reset:focus-visible,
+.amc-TQuestList--hero .amc-TQuestList-fold:focus-visible { outline-color: var(--amc-tql-accent-ink); }
+
+/* ---------------------------------------------------------------- motion */
+@keyframes amc-tql-spark {
+  0% { opacity: 1; transform: translateY(-1.75rem) scale(.4); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-4.5rem) scale(1) rotate(160deg); }
+}
+@keyframes amc-tql-pop {
+  0% { scale: .6; }
+  60% { scale: 1.18; }
+  100% { scale: 1; }
+}
+@keyframes amc-tql-flash {
+  0% { background-color: color-mix(in srgb, var(--amc-tql-done) 22%, transparent); }
+  100% { background-color: transparent; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TQuestList-ringFill { transition: stroke-dasharray .8s cubic-bezier(.2, .8, .2, 1), stroke .3s ease; }
+  .amc-TQuestList-tick { transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .amc-TQuestList-link { transition: background-color .15s ease; }
+  .amc-TQuestList-reset, .amc-TQuestList-fold { transition: border-color .15s ease; }
+  .amc-TQuestList-item.is-fresh .amc-TQuestList-tick { animation: amc-tql-pop .5s cubic-bezier(.2, .8, .2, 1.4) both; }
+  .amc-TQuestList-item.is-fresh { animation: amc-tql-flash 1.6s ease-out both; }
+  .amc-TQuestList.is-celebrating .amc-TQuestList-spark { animation: amc-tql-spark 1.3s cubic-bezier(.15, .7, .3, 1) both; }
+  .amc-TQuestList.is-celebrating .amc-TQuestList-spark:nth-child(even) { animation-delay: .08s; animation-duration: 1.5s; }
+  .amc-TQuestList.is-celebrating .amc-TQuestList-trophy { animation: amc-tql-pop .7s cubic-bezier(.2, .8, .2, 1.4) .15s both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TQuestList-spark { display: none; }
+  .amc-TQuestList-item.is-fresh, .amc-TQuestList-item.is-fresh .amc-TQuestList-tick { animation: none; }
+}
+@media (forced-colors: active) {
+  .amc-TQuestList { border: 1px solid CanvasText; }
+  .amc-TQuestList-ringFill { stroke: Highlight; }
+  .amc-TQuestList-ringTrack { stroke: GrayText; }
+  .amc-TQuestList-tick { border-color: ButtonText; }
+  .amc-TQuestList-item.is-done .amc-TQuestList-tick { background: Highlight; border-color: Highlight; }
+  .amc-TQuestList-item.is-done .amc-TQuestList-tickMark::before { border-color: HighlightText; }
+  .amc-TQuestList-item.is-next .amc-TQuestList-link { outline: 1px solid Highlight; }
+}

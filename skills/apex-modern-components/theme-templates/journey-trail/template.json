@@ -1,0 +1,23 @@
+{
+  "kind": "list",
+  "name": "AMC Journey Trail",
+  "staticId": "AMC_TPL_JOURNEY_TRAIL",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A destinations list that remembers the user's path through the app in this tab and shows Continue where you left off as a trail of the recent pages with relative times, the page to resume highlighted and the current page marked, while destinations already visited get a quiet check.",
+  "useFor": "Home pages and hubs that users return to between tasks, and Page 0 as a slim recently-visited strip: order entry, case handling, approvals, any app where people jump between records and lists.",
+  "keywords": ["history", "recently visited", "breadcrumb", "continue", "resume", "trail", "living"],
+  "helpText": "List template that records the pages this user opens in this browser tab and shows them as a trail above the list entries, which act as destinations. Each page that loads this template's JavaScript is recorded in sessionStorage under amc-tpl-journey-trail:<application id>: its link without session, checksum and clear-cache values as the key, the link as opened, a title, the time and a visit count, at most 25 pages; everything is gone when the tab closes and nothing leaves the browser. The title is the text of the matching destination, else the current list entry, else document.title. When the template is only on the home page, the page the user came back from (the referrer, same application) is added too, titled from a matching destination or its page alias. Pages in modal dialogs are not recorded. To record every page, also use the list on Page 0 with the Trail only option, or add the JavaScript file to the application's JavaScript File URLs. The trail shows the last 5 pages, oldest first, with relative times from Intl.RelativeTimeFormat; the last page before this one is marked Continue, the current page You are here. It runs horizontally and becomes a vertical timeline in containers narrower than about 480px. Destinations opened in this tab get Visited and the time. Clear trail forgets the trail and moves focus to the first destination; the change is announced politely. Attribute 1 is a description, Attribute 2 a badge. Template options: Vertical timeline, Longer trail with 8 pages, Hide times, Trail only hides the destinations, Scrolling trail keeps the horizontal trail in narrow containers, Rows shows the destinations as a divided list. Without JavaScript or with storage blocked it is the list of destinations only. Reduced motion stops the pulse on the current page and smooth scrolling. English UI strings to translate in the template: Continue where you left off, Clear trail, Destinations, and the data-here, data-continue, data-visited and data-cleared attributes on the wrapper.",
+  "attributes": { "a01": "Description", "a02": "Badge" },
+  "templateOptions": [
+    { "staticId": "VERTICAL", "name": "Vertical timeline", "cssClass": "amc-TJourneyTrail--vertical", "sequence": 10, "help": "Shows the trail as a vertical timeline at every width, for side columns." },
+    { "staticId": "LONG", "name": "Longer trail", "cssClass": "amc-TJourneyTrail--long", "sequence": 20, "help": "Shows the last 8 pages instead of 5." },
+    { "staticId": "NO_TIMES", "name": "Hide times", "cssClass": "amc-TJourneyTrail--noTimes", "sequence": 30, "help": "Leaves out the relative times on the trail and on visited destinations." },
+    { "staticId": "TRAIL_ONLY", "name": "Trail only", "cssClass": "amc-TJourneyTrail--trailOnly", "sequence": 40, "help": "Hides the destinations and shows only the trail, for a recently-visited strip on Page 0 that also records every page." },
+    { "staticId": "SCROLL", "name": "Scrolling trail", "cssClass": "amc-TJourneyTrail--scroll", "sequence": 50, "help": "Keeps the horizontal trail in narrow containers; it scrolls sideways instead of turning into a vertical timeline." },
+    { "staticId": "ROWS", "name": "Rows", "cssClass": "amc-TJourneyTrail--rows", "sequence": 60, "help": "Shows the destinations as a divided list instead of a grid of tiles." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

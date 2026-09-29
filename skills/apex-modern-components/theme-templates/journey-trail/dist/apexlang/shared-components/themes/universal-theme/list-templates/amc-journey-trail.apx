@@ -1,0 +1,163 @@
+listTemplate amc-journey-trail (
+    name: AMC Journey Trail
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TJourneyTrail #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-here="You are here" data-continue="Continue" data-visited="Visited" data-cleared="Trail cleared. It starts again with the next page you open.">
+            <div class="amc-TJourneyTrail-trail" hidden>
+            <div class="amc-TJourneyTrail-trailHead"><h3 class="amc-TJourneyTrail-heading"><span class="amc-TJourneyTrail-headIcon fa fa-map-signs" aria-hidden="true"></span><span>Continue where you left off</span></h3><button type="button" class="amc-TJourneyTrail-clear"><span class="amc-TJourneyTrail-clearIcon fa fa-eraser" aria-hidden="true"></span><span>Clear trail</span></button></div>
+            <ol class="amc-TJourneyTrail-steps"></ol>
+            </div>
+            <h3 class="amc-TJourneyTrail-heading amc-TJourneyTrail-heading--dest" hidden>Destinations</h3>
+            <ul class="amc-TJourneyTrail-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <p class="amc-TJourneyTrail-status" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TJourneyTrail-item is-current"><a class="amc-TJourneyTrail-link" href="#LINK#" aria-current="page"><span class="amc-TJourneyTrail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TJourneyTrail-body"><span class="amc-TJourneyTrail-label">#TEXT#</span><span class="amc-TJourneyTrail-desc">#A01#</span></span><span class="amc-TJourneyTrail-badge">#A02#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TJourneyTrail-item"><a class="amc-TJourneyTrail-link" href="#LINK#"><span class="amc-TJourneyTrail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TJourneyTrail-body"><span class="amc-TJourneyTrail-label">#TEXT#</span><span class="amc-TJourneyTrail-desc">#A01#</span></span><span class="amc-TJourneyTrail-badge">#A02#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-journey-trail.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-journey-trail.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Badge
+    }
+    advanced {
+        staticId: AMC_TPL_JOURNEY_TRAIL
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template that records the pages this user opens in this browser tab and shows them as a trail above the list entries, which act as destinations. Each page that loads this template's JavaScript is recorded in sessionStorage under amc-tpl-journey-trail:<application id>: its link without session, checksum and clear-cache values as the key, the link as opened, a title, the time and a visit count, at most 25 pages; everything is gone when the tab closes and nothing leaves the browser. The title is the text of the matching destination, else the current list entry, else document.title. When the template is only on the home page, the page the user came back from (the referrer, same application) is added too, titled from a matching destination or its page alias. Pages in modal dialogs are not recorded. To record every page, also use the list on Page 0 with the Trail only option, or add the JavaScript file to the application's JavaScript File URLs. The trail shows the last 5 pages, oldest first, with relative times from Intl.RelativeTimeFormat; the last page before this one is marked Continue, the current page You are here. It runs horizontally and becomes a vertical timeline in containers narrower than about 480px. Destinations opened in this tab get Visited and the time. Clear trail forgets the trail and moves focus to the first destination; the change is announced politely. Attribute 1 is a description, Attribute 2 a badge. Template options: Vertical timeline, Longer trail with 8 pages, Hide times, Trail only hides the destinations, Scrolling trail keeps the horizontal trail in narrow containers, Rows shows the destinations as a divided list. Without JavaScript or with storage blocked it is the list of destinations only. Reduced motion stops the pulse on the current page and smooth scrolling. English UI strings to translate in the template: Continue where you left off, Clear trail, Destinations, and the data-here, data-continue, data-visited and data-cleared attributes on the wrapper.
+            ```
+    }
+
+    templateOption amc-journey-trail-vertical (
+        name: Vertical timeline
+        sequence: 10
+        appearance {
+            cssClasses: amc-TJourneyTrail--vertical
+        }
+        help {
+            helpText:
+                ```text
+                Shows the trail as a vertical timeline at every width, for side columns.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: VERTICAL
+        }
+    )
+
+    templateOption amc-journey-trail-long (
+        name: Longer trail
+        sequence: 20
+        appearance {
+            cssClasses: amc-TJourneyTrail--long
+        }
+        help {
+            helpText:
+                ```text
+                Shows the last 8 pages instead of 5.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LONG
+        }
+    )
+
+    templateOption amc-journey-trail-no-times (
+        name: Hide times
+        sequence: 30
+        appearance {
+            cssClasses: amc-TJourneyTrail--noTimes
+        }
+        help {
+            helpText:
+                ```text
+                Leaves out the relative times on the trail and on visited destinations.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_TIMES
+        }
+    )
+
+    templateOption amc-journey-trail-trail-only (
+        name: Trail only
+        sequence: 40
+        appearance {
+            cssClasses: amc-TJourneyTrail--trailOnly
+        }
+        help {
+            helpText:
+                ```text
+                Hides the destinations and shows only the trail, for a recently-visited strip on Page 0 that also records every page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TRAIL_ONLY
+        }
+    )
+
+    templateOption amc-journey-trail-scroll (
+        name: Scrolling trail
+        sequence: 50
+        appearance {
+            cssClasses: amc-TJourneyTrail--scroll
+        }
+        help {
+            helpText:
+                ```text
+                Keeps the horizontal trail in narrow containers; it scrolls sideways instead of turning into a vertical timeline.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCROLL
+        }
+    )
+
+    templateOption amc-journey-trail-rows (
+        name: Rows
+        sequence: 60
+        appearance {
+            cssClasses: amc-TJourneyTrail--rows
+        }
+        help {
+            helpText:
+                ```text
+                Shows the destinations as a divided list instead of a grid of tiles.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ROWS
+        }
+    )
+)
