@@ -1,0 +1,1458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motion Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Instrument+Sans:wght@400;500;600&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* =====================================================================
+   MOTION GALLERY
+   Layout: sticky toolbar, then one responsive grid of equal cards.
+   Every animation below lives in its own clearly marked block:
+     CSS  -> "/* ---- [category] id ---- *\/" in the ANIMATIONS section
+     HTML -> <article data-id="id"> in the grid
+     JS   -> JS["id"] in the script (only for JS-driven animations)
+   Copy those three pieces (plus the tokens you use) to reuse one.
+   ===================================================================== */
+
+/* ---------- Tokens (light first, dark redefines) ---------- */
+:root {
+  --bg: #edf1ef;
+  --surface: #fbfcfb;
+  --surface-2: #e2e8e5;
+  --fg: #15201e;
+  --muted: #5b6a66;
+  --line: #d2dbd7;
+  --a1: #0b7d8c;   /* teal   */
+  --a2: #df5637;   /* coral  */
+  --a3: #df9c12;   /* amber  */
+  --a4: #3a8d58;   /* green  */
+  --on-accent: #ffffff;
+  --font-display: "Unbounded", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1312; --surface: #151d1c; --surface-2: #1f2a28; --fg: #e5eeeb; --muted: #93a49f; --line: #283533;
+    --a1: #3cc4d4; --a2: #ff7b59; --a3: #f4bf45; --a4: #5ccf88; --on-accent: #07201e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1312; --surface: #151d1c; --surface-2: #1f2a28; --fg: #e5eeeb; --muted: #93a49f; --line: #283533;
+  --a1: #3cc4d4; --a2: #ff7b59; --a3: #f4bf45; --a4: #5ccf88; --on-accent: #07201e;
+  color-scheme: dark;
+}
+
+/* ---------- Page ---------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0 16px 48px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 14px/1.45 var(--font-body);
+}
+button, input { font: inherit; color: inherit; }
+
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px 24px;
+  align-items: center;
+  margin: 0 -16px 20px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.brand h1 {
+  margin: 0;
+  font: 700 22px/1.1 var(--font-display);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.brand p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.tbtn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 600;
+  cursor: pointer;
+}
+.tbtn:hover { border-color: var(--muted); }
+.tbtn .ico { width: 10px; height: 12px; background: currentColor; clip-path: polygon(0 0, 35% 0, 35% 100%, 0 100%, 0 0, 65% 0, 100% 0, 100% 100%, 65% 100%); }
+.tbtn[aria-pressed="true"] .ico { clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.speed { display: inline-flex; align-items: center; gap: 10px; font-weight: 500; }
+.speed input { width: 140px; accent-color: var(--a1); }
+.speed output { min-width: 3.4em; font: 600 13px var(--font-mono); font-variant-numeric: tabular-nums; }
+.filters { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button {
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+}
+.filters button span { margin-left: 4px; color: var(--muted); font: 500 11px var(--font-mono); }
+.filters button[aria-pressed="true"] { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+.filters button[aria-pressed="true"] span { color: inherit; opacity: .7; }
+.note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 13px; }
+:focus-visible { outline: 2px solid var(--a1); outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .bar { position: static; grid-template-columns: 1fr; }
+}
+
+/* ---------- Grid of equal cards ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: 14px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color .2s ease;
+}
+.card[hidden] { display: none; }
+.card:hover { border-color: var(--muted); }
+.card.flash { animation: card-flash .5s ease-out; }
+@keyframes card-flash { from { box-shadow: 0 0 0 3px color-mix(in srgb, var(--a1) 45%, transparent); } to { box-shadow: 0 0 0 3px transparent; } }
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 172px;
+  overflow: hidden;
+}
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  font-weight: 500;
+}
+.label .cat { color: var(--muted); font: 500 10.5px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.cv { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* =====================================================================
+   ANIMATIONS
+   ===================================================================== */
+
+/* ---- [loaders] ring ---- */
+.ld-ring { width: 56px; height: 56px; border: 5px solid var(--surface-2); border-top-color: var(--a1); border-radius: 50%; animation: ld-ring .9s linear infinite; }
+@keyframes ld-ring { to { transform: rotate(360deg); } }
+
+/* ---- [loaders] dots ---- */
+.ld-dots { display: flex; gap: 10px; }
+.ld-dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--a2); animation: ld-dots 1.2s ease-in-out infinite; }
+.ld-dots i:nth-child(2) { animation-delay: .15s; }
+.ld-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes ld-dots { 0%, 80%, 100% { transform: scale(.4); opacity: .35; } 40% { transform: scale(1); opacity: 1; } }
+
+/* ---- [loaders] bars ---- */
+.ld-bars { display: flex; align-items: flex-end; gap: 5px; height: 52px; }
+.ld-bars i { width: 8px; height: 100%; border-radius: 3px; background: var(--a3); transform-origin: bottom; animation: ld-bars 1s ease-in-out infinite; }
+.ld-bars i:nth-child(1) { animation-delay: -.1s; }
+.ld-bars i:nth-child(2) { animation-delay: -.35s; }
+.ld-bars i:nth-child(3) { animation-delay: -.6s; }
+.ld-bars i:nth-child(4) { animation-delay: -.2s; }
+.ld-bars i:nth-child(5) { animation-delay: -.45s; }
+@keyframes ld-bars { 0%, 100% { transform: scaleY(.2); } 50% { transform: scaleY(1); } }
+
+/* ---- [loaders] orbit ---- */
+.ld-orbit { position: relative; width: 88px; height: 88px; }
+.ld-orbit .core { position: absolute; inset: 36px; border-radius: 50%; background: var(--a1); }
+.ld-orbit .ring { position: absolute; border: 1px dashed var(--line); border-radius: 50%; }
+.ld-orbit .r1 { inset: 0; animation: ld-orbit 1.8s linear infinite; }
+.ld-orbit .r2 { inset: 18px; animation: ld-orbit 1.1s linear infinite reverse; }
+.ld-orbit .ring::before { content: ""; position: absolute; top: -6px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--a2); }
+.ld-orbit .r2::before { top: -4px; width: 8px; height: 8px; margin-left: -4px; background: var(--a3); }
+@keyframes ld-orbit { to { transform: rotate(360deg); } }
+
+/* ---- [loaders] dual ring ---- */
+.ld-dual { position: relative; width: 64px; height: 64px; }
+.ld-dual::before, .ld-dual::after { content: ""; position: absolute; border: 4px solid transparent; border-radius: 50%; }
+.ld-dual::before { inset: 0; border-top-color: var(--a4); border-bottom-color: var(--a4); animation: ld-dual 1.3s cubic-bezier(.6, .1, .4, .9) infinite; }
+.ld-dual::after { inset: 13px; border-left-color: var(--a2); border-right-color: var(--a2); animation: ld-dual .8s linear infinite reverse; }
+@keyframes ld-dual { to { transform: rotate(360deg); } }
+
+/* ---- [loaders] grid wave ---- */
+.ld-grid { display: grid; grid-template-columns: repeat(3, 16px); gap: 5px; }
+.ld-grid i { width: 16px; height: 16px; border-radius: 3px; background: var(--a1); animation: ld-grid 1.3s ease-in-out infinite; animation-delay: calc(var(--i) * .12s); }
+@keyframes ld-grid { 0%, 70%, 100% { transform: scale(1); opacity: 1; } 35% { transform: scale(.2); opacity: .3; } }
+
+/* ---- [loaders] indeterminate bar ---- */
+.ld-indet { position: relative; width: 150px; height: 6px; overflow: hidden; border-radius: 3px; background: var(--surface-2); }
+.ld-indet::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; border-radius: 3px; background: var(--a4); animation: ld-indet 1.4s cubic-bezier(.65, .05, .35, 1) infinite; }
+@keyframes ld-indet { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* ---- [physics] bounce ---- */
+.ph-bounce { position: relative; width: 60px; height: 124px; }
+.ph-bounce .ball { position: absolute; left: 10px; top: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--a2); transform-origin: 50% 100%; animation: ph-bounce 1s infinite; }
+.ph-bounce .shadow { position: absolute; left: 8px; bottom: 0; width: 44px; height: 8px; border-radius: 50%; background: var(--fg); animation: ph-bounce-sh 1s infinite; }
+@keyframes ph-bounce {
+  0% { transform: translateY(0) scale(1, 1); animation-timing-function: cubic-bezier(.5, 0, .9, .5); }
+  46% { transform: translateY(80px) scale(.94, 1.08); }
+  50% { transform: translateY(80px) scale(1.3, .7); animation-timing-function: cubic-bezier(.1, .5, .5, 1); }
+  56% { transform: translateY(72px) scale(.95, 1.06); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+@keyframes ph-bounce-sh {
+  0%, 100% { transform: scale(.45); opacity: .06; animation-timing-function: cubic-bezier(.5, 0, .9, .5); }
+  50% { transform: scale(1.1); opacity: .2; animation-timing-function: cubic-bezier(.1, .5, .5, 1); }
+}
+
+/* ---- [physics] elastic ---- */
+.ph-elastic { position: relative; width: 156px; height: 44px; border-bottom: 2px dashed var(--line); }
+.ph-elastic i { position: absolute; left: 0; top: 4px; width: 34px; height: 34px; border-radius: 9px; background: var(--a1); animation: ph-elastic 2.4s infinite; }
+@keyframes ph-elastic {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(0); animation-timing-function: cubic-bezier(.3, 1.8, .5, 1); animation-timing-function: linear(0, .62 10%, 1.2 24%, .92 38%, 1.05 52%, .98 66%, 1.01 80%, 1); }
+  50% { transform: translateX(122px); }
+  60% { transform: translateX(122px); animation-timing-function: cubic-bezier(.3, 1.8, .5, 1); animation-timing-function: linear(0, .62 10%, 1.2 24%, .92 38%, 1.05 52%, .98 66%, 1.01 80%, 1); }
+  100% { transform: translateX(0); }
+}
+
+/* ---- [physics] spring (JS: damped spring simulation) ---- */
+.ph-spring { position: relative; width: 190px; height: 60px; }
+.ph-spring .wall { position: absolute; left: 0; top: 4px; width: 6px; height: 52px; border-radius: 2px; background: var(--muted); }
+.ph-spring .coil { position: absolute; left: 6px; top: 20px; width: 80px; height: 20px; overflow: visible; transform-origin: 0 50%; }
+.ph-spring .coil polyline { fill: none; stroke: var(--a3); stroke-width: 2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.ph-spring .mass { position: absolute; left: 86px; top: 10px; width: 40px; height: 40px; border-radius: 8px; background: var(--a1); }
+
+/* ---- [physics] pendulum ---- */
+.ph-pend { position: relative; width: 140px; height: 130px; }
+.ph-pend .pivot { position: absolute; left: 50%; top: 6px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--muted); }
+.ph-pend .arm { position: absolute; left: 50%; top: 11px; width: 2px; height: 84px; margin-left: -1px; background: var(--muted); transform-origin: 50% 0; animation: ph-pend 1.5s ease-in-out infinite alternate; }
+.ph-pend .arm::after { content: ""; position: absolute; left: 50%; bottom: -16px; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; background: var(--a2); }
+@keyframes ph-pend { from { transform: rotate(40deg); } to { transform: rotate(-40deg); } }
+
+/* ---- [physics] newton's cradle ---- */
+.ph-cradle { position: relative; display: flex; padding-top: 5px; }
+.ph-cradle::before { content: ""; position: absolute; top: 0; left: -10px; right: -10px; height: 4px; border-radius: 2px; background: var(--muted); }
+.ph-cradle i { position: relative; width: 22px; height: 94px; transform-origin: 50% 0; }
+.ph-cradle i::before { content: ""; position: absolute; left: 50%; top: 0; width: 1.5px; height: 72px; background: var(--muted); }
+.ph-cradle i::after { content: ""; position: absolute; left: 0; bottom: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--a4); }
+.ph-cradle i:first-child { animation: ph-cradle-l 1.2s infinite; }
+.ph-cradle i:last-child { animation: ph-cradle-r 1.2s infinite; }
+@keyframes ph-cradle-l { 0% { transform: rotate(0); animation-timing-function: ease-out; } 25% { transform: rotate(34deg); animation-timing-function: ease-in; } 50%, 100% { transform: rotate(0); } }
+@keyframes ph-cradle-r { 0%, 50% { transform: rotate(0); animation-timing-function: ease-out; } 75% { transform: rotate(-34deg); animation-timing-function: ease-in; } 100% { transform: rotate(0); } }
+
+/* ---- [physics] gravity drop (JS: gravity + restitution) ---- */
+.ph-drop { position: relative; display: flex; justify-content: space-around; align-items: flex-end; width: 176px; height: 130px; border-bottom: 2px solid var(--line); }
+.ph-drop .b { width: 18px; height: 18px; border-radius: 50%; background: var(--a1); }
+.ph-drop .b:nth-child(2) { background: var(--a2); }
+.ph-drop .b:nth-child(3) { background: var(--a3); }
+.ph-drop .b:nth-child(4) { background: var(--a4); }
+.ph-drop .b:nth-child(5) { background: var(--a2); }
+
+/* ---- [physics] jelly ---- */
+.ph-jelly { width: 64px; height: 64px; border-radius: 12px; background: var(--a3); animation: ph-jelly 1.8s infinite; }
+@keyframes ph-jelly {
+  0%, 45%, 100% { transform: scale(1, 1); }
+  10% { transform: scale(1.28, .72); }
+  17% { transform: scale(.76, 1.24); }
+  24% { transform: scale(1.15, .86); }
+  31% { transform: scale(.94, 1.06); }
+  38% { transform: scale(1.04, .96); }
+}
+
+/* ---- [morph] circle to square ---- */
+.mo-cs { width: 70px; height: 70px; background: var(--a1); animation: mo-cs 2.4s ease-in-out infinite; }
+@keyframes mo-cs {
+  0%, 100% { border-radius: 50%; transform: rotate(0); background: var(--a1); }
+  50% { border-radius: 10%; transform: rotate(180deg); background: var(--a4); }
+}
+
+/* ---- [morph] blob ---- */
+.mo-blob { width: 96px; height: 96px; background: linear-gradient(135deg, var(--a2), var(--a3)); animation: mo-blob 6s ease-in-out infinite; }
+@keyframes mo-blob {
+  0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: rotate(0); }
+  33% { border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%; transform: rotate(60deg); }
+  66% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; transform: rotate(-40deg); }
+}
+
+/* ---- [morph] polygon morph ---- */
+.mo-poly { width: 86px; height: 86px; background: var(--a4); animation: mo-poly 4.5s ease-in-out infinite; }
+@keyframes mo-poly {
+  0%, 100% { clip-path: polygon(50% 5%, 50% 5%, 95% 90%, 95% 90%, 5% 90%, 5% 90%); transform: rotate(0); }
+  33% { clip-path: polygon(10% 10%, 90% 10%, 90% 50%, 90% 90%, 10% 90%, 10% 50%); transform: rotate(120deg); }
+  66% { clip-path: polygon(25% 7%, 75% 7%, 100% 50%, 75% 93%, 25% 93%, 0% 50%); transform: rotate(240deg); }
+}
+
+/* ---- [morph] rotating polygons ---- */
+.mo-spin polygon { fill: none; stroke-width: 3; stroke-linejoin: round; transform-box: fill-box; transform-origin: center; }
+.mo-spin .p1 { stroke: var(--a1); animation: mo-spin 7s linear infinite; }
+.mo-spin .p2 { stroke: var(--a2); animation: mo-spin 4.5s linear infinite reverse; }
+.mo-spin .p3 { stroke: var(--a3); animation: mo-spin 2.6s linear infinite; }
+@keyframes mo-spin { to { transform: rotate(360deg); } }
+
+/* ---- [morph] gooey merge (SVG filter #goo) ---- */
+.mo-goo { position: relative; width: 150px; height: 90px; filter: url(#goo); }
+.mo-goo i { position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--a1); }
+.mo-goo i:nth-child(1) { animation: mo-goo-a 2.6s ease-in-out infinite alternate; }
+.mo-goo i:nth-child(2) { animation: mo-goo-b 2.6s ease-in-out infinite alternate; }
+.mo-goo i:nth-child(3) { width: 22px; height: 22px; margin: -11px 0 0 -11px; animation: mo-goo-c 1.9s linear infinite; }
+@keyframes mo-goo-a { from { transform: translateX(-44px); } to { transform: translateX(8px); } }
+@keyframes mo-goo-b { from { transform: translateX(44px); } to { transform: translateX(-8px); } }
+@keyframes mo-goo-c { from { transform: rotate(0) translateX(38px); } to { transform: rotate(360deg) translateX(38px); } }
+
+/* ---- [morph] pill, dot, ring ---- */
+.mo-shift { box-sizing: border-box; width: 96px; height: 12px; border-radius: 999px; background: var(--a3); animation: mo-shift 3.2s ease-in-out infinite; }
+@keyframes mo-shift {
+  0%, 100% { width: 96px; height: 12px; border: 0 solid var(--a3); border-radius: 999px; background: var(--a3); }
+  33% { width: 36px; height: 36px; border: 0 solid var(--a3); border-radius: 50%; background: var(--a3); }
+  66% { width: 76px; height: 76px; border: 9px solid var(--a3); border-radius: 50%; background: transparent; }
+}
+
+/* ---- [text] typewriter (JS types and deletes) ---- */
+.tx-type { font: 600 16px var(--font-mono); }
+.tx-type .caret { display: inline-block; width: 2px; height: 1.15em; margin-left: 2px; vertical-align: -3px; background: var(--a1); animation: tx-caret 1s steps(1) infinite; }
+@keyframes tx-caret { 50% { opacity: 0; } }
+
+/* ---- [text] wave letters ---- */
+.tx-wave { font: 700 26px var(--font-display); letter-spacing: .02em; }
+.tx-wave span { display: inline-block; animation: tx-wave 1.5s ease-in-out infinite; animation-delay: calc(var(--i) * .08s); }
+@keyframes tx-wave { 0%, 60%, 100% { transform: translateY(0); color: var(--fg); } 30% { transform: translateY(-14px); color: var(--a1); } }
+
+/* ---- [text] glitch ---- */
+.tx-glitch { position: relative; font: 600 34px var(--font-mono); letter-spacing: .04em; animation: tx-glitch 2.2s steps(1) infinite; }
+.tx-glitch::before, .tx-glitch::after { content: attr(data-text); position: absolute; inset: 0; }
+.tx-glitch::before { color: var(--a2); animation: tx-glitch-a 2.2s steps(1) infinite; }
+.tx-glitch::after { color: var(--a1); animation: tx-glitch-b 2.2s steps(1) infinite; }
+@keyframes tx-glitch { 0%, 100% { transform: none; } 10% { transform: skewX(-10deg); } 13% { transform: none; } 62% { transform: skewX(6deg); } 64% { transform: none; } }
+@keyframes tx-glitch-a {
+  0%, 20%, 58%, 70%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  10% { clip-path: inset(10% 0 60% 0); transform: translate(-5px, 1px); }
+  14% { clip-path: inset(55% 0 18% 0); transform: translate(4px, -1px); }
+  62% { clip-path: inset(30% 0 42% 0); transform: translate(6px, 0); }
+}
+@keyframes tx-glitch-b {
+  0%, 22%, 60%, 72%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  11% { clip-path: inset(62% 0 8% 0); transform: translate(5px, 1px); }
+  16% { clip-path: inset(20% 0 55% 0); transform: translate(-4px, 0); }
+  64% { clip-path: inset(70% 0 4% 0); transform: translate(-6px, -1px); }
+}
+
+/* ---- [text] word reveal ---- */
+.tx-reveal { margin: 0; font: 600 22px/1.25 var(--font-body); text-align: center; }
+.tx-reveal .w { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.tx-reveal .w > span { display: inline-block; animation: tx-reveal 3.4s cubic-bezier(.2, .8, .2, 1) infinite; animation-delay: calc(var(--i) * .12s); }
+@keyframes tx-reveal { 0% { transform: translateY(110%); } 25%, 72% { transform: translateY(0); } 97%, 100% { transform: translateY(-110%); } }
+
+/* ---- [text] flip letters ---- */
+.tx-flip { font: 700 30px var(--font-display); perspective: 300px; }
+.tx-flip span { display: inline-block; color: var(--a4); animation: tx-flip 2.6s ease-in-out infinite; animation-delay: calc(var(--i) * .1s); }
+@keyframes tx-flip { 0% { transform: rotateX(90deg); opacity: 0; } 15%, 70% { transform: rotateX(0); opacity: 1; } 85%, 100% { transform: rotateX(-90deg); opacity: 0; } }
+
+/* ---- [text] scramble (JS decodes random glyphs) ---- */
+.tx-scr { font: 600 28px var(--font-mono); letter-spacing: .12em; color: var(--a2); }
+
+/* ---- [particles] canvas effects: see JS (confetti, starfield, fireworks, network, flow, galaxy) ---- */
+
+/* ---- [interaction] shared button ---- */
+.ix-btn { padding: 12px 22px; border: 0; border-radius: 10px; background: var(--a1); color: var(--on-accent); font-weight: 600; cursor: pointer; }
+
+/* ---- [interaction] ripple (JS adds a ripple per click) ---- */
+.ix-ripple { position: relative; overflow: hidden; }
+.ix-ripple .rp { position: absolute; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: currentColor; opacity: .35; pointer-events: none; animation: ix-ripple .7s ease-out forwards; }
+@keyframes ix-ripple { to { transform: scale(14); opacity: 0; } }
+
+/* ---- [interaction] magnetic (JS spring toward pointer) ---- */
+.ix-mag { background: var(--a2); will-change: transform; }
+.ix-mag span { display: inline-block; }
+
+/* ---- [interaction] tilt card (JS pointer to rotateX/Y) ---- */
+.ix-tiltwrap { perspective: 500px; }
+.ix-tilt { position: relative; display: grid; place-items: center; width: 112px; height: 142px; border-radius: 14px; background: linear-gradient(145deg, var(--a4), var(--a1)); transform-style: preserve-3d; box-shadow: 0 14px 30px -12px color-mix(in srgb, var(--fg) 40%, transparent); }
+.ix-tilt b { color: var(--on-accent); font: 700 16px var(--font-display); transform: translateZ(28px); }
+.ix-tilt .glare { position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, .45), transparent 55%); pointer-events: none; }
+
+/* ---- [interaction] squish ---- */
+.ix-squish { background: var(--a3); color: #1c1606; transition: transform .55s cubic-bezier(.2, 1.9, .4, 1); }
+.ix-squish:active, .ix-squish.pressed { transform: scale(1.14, .78); transition-duration: .08s; }
+
+/* ---- [interaction] spotlight ---- */
+.ix-spot { position: absolute; inset: 12px; display: grid; place-items: center; overflow: hidden; border-radius: 10px; background-image: radial-gradient(var(--line) 1.2px, transparent 1.2px); background-size: 14px 14px; color: var(--muted); font-weight: 500; }
+.ix-spot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(110px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--a3) 50%, transparent), transparent 70%); }
+.ix-spot span { position: relative; }
+
+/* ---- [interaction] heart burst ---- */
+.ix-heart { position: relative; width: 72px; height: 72px; padding: 14px; border: 0; background: transparent; cursor: pointer; }
+.ix-heart svg { width: 100%; height: 100%; overflow: visible; }
+.ix-heart path { fill: transparent; stroke: var(--fg); stroke-width: 1.6; transition: fill .2s ease, stroke .2s ease; }
+.ix-heart.on path { fill: var(--a2); stroke: var(--a2); }
+.ix-heart.on svg { animation: ix-heart .5s cubic-bezier(.2, 1.7, .4, 1); }
+.ix-heart .dot { position: absolute; top: 50%; left: 50%; width: 7px; height: 7px; margin: -3.5px; border-radius: 50%; background: var(--a3); opacity: 0; }
+.ix-heart .dot:nth-of-type(even) { background: var(--a1); }
+.ix-heart.burst .dot { animation: ix-dot .6s ease-out; }
+@keyframes ix-heart { 0% { transform: scale(.3); } 100% { transform: scale(1); } }
+@keyframes ix-dot { from { transform: rotate(var(--a)) translateY(-10px) scale(1); opacity: 1; } to { transform: rotate(var(--a)) translateY(-42px) scale(0); opacity: 0; } }
+
+/* ---- [svg] signature draw ---- */
+.sv-sign path { fill: none; stroke: var(--a1); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 2; stroke-dashoffset: 1.01; animation: sv-sign 3.4s ease-in-out infinite; }
+@keyframes sv-sign { 0% { stroke-dashoffset: 1.01; } 45%, 72% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1.01; } }
+
+/* ---- [svg] marching ants ---- */
+.sv-ants rect, .sv-ants circle { fill: none; stroke-width: 2; }
+.sv-ants rect { stroke: var(--fg); stroke-dasharray: 6 5; animation: sv-ants .8s linear infinite; }
+.sv-ants circle { stroke: var(--a2); stroke-width: 3; stroke-dasharray: 3 6; stroke-linecap: round; animation: sv-ants-c 1.4s linear infinite; }
+.sv-ants .h { fill: var(--surface); stroke: var(--fg); stroke-width: 1.5; }
+@keyframes sv-ants { to { stroke-dashoffset: -22; } }
+@keyframes sv-ants-c { to { stroke-dashoffset: 18; } }
+
+/* ---- [svg] check draw ---- */
+.sv-check { animation: sv-check-pop 2.8s infinite; }
+.sv-check .c, .sv-check .k { fill: none; stroke: var(--a4); stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 2; stroke-dashoffset: 1.01; }
+.sv-check .c { stroke-width: 4; animation: sv-check-c 2.8s ease-out infinite; }
+.sv-check .k { stroke-width: 5; animation: sv-check-k 2.8s ease-out infinite; }
+@keyframes sv-check-c { 0% { stroke-dashoffset: 1.01; opacity: 1; } 30%, 85% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes sv-check-k { 0%, 30% { stroke-dashoffset: 1.01; opacity: 1; } 48%, 85% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes sv-check-pop { 0%, 46% { transform: scale(1); } 55% { transform: scale(1.14); } 64%, 100% { transform: scale(1); } }
+
+/* ---- [svg] path morph (JS interpolates the d attribute) ---- */
+.sv-morph path { stroke: var(--fg); stroke-width: 1.5; stroke-opacity: .25; }
+
+/* ---- [svg] motion path ---- */
+.sv-mp { position: relative; width: 200px; height: 120px; }
+.sv-mp svg { position: absolute; inset: 0; }
+.sv-mp path { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 4 6; }
+.sv-mp .mover { position: absolute; top: 0; left: 0; width: 18px; height: 14px; background: var(--a2); clip-path: polygon(0 0, 100% 50%, 0 100%, 28% 50%); offset-path: path("M10 90 C 60 0, 140 120, 190 30"); offset-rotate: auto; animation: sv-mp 2.6s ease-in-out infinite alternate; }
+@keyframes sv-mp { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+
+/* ---- [svg] heartbeat line ---- */
+.sv-ecg polyline { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.sv-ecg .base { stroke: var(--line); }
+.sv-ecg .pulse { stroke: var(--a2); stroke-dasharray: .22 1; animation: sv-ecg 1.8s linear infinite; }
+@keyframes sv-ecg { from { stroke-dashoffset: .22; } to { stroke-dashoffset: -1; } }
+
+/* ---- [3d] flip card ---- */
+.d3-flip { width: 104px; height: 136px; perspective: 600px; }
+.d3-flip .inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; animation: d3-flip 3.2s ease-in-out infinite; }
+.d3-flip .face { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 12px; backface-visibility: hidden; -webkit-backface-visibility: hidden; color: var(--on-accent); font: 700 15px var(--font-display); }
+.d3-flip .front { background: var(--a1); }
+.d3-flip .back { background: var(--a2); transform: rotateY(180deg); }
+@keyframes d3-flip { 0%, 30% { transform: rotateY(0); } 50%, 80% { transform: rotateY(180deg); } 100% { transform: rotateY(360deg); } }
+
+/* ---- [3d] rotating cube ---- */
+.d3-cube { width: 60px; height: 60px; perspective: 500px; }
+.d3-cube .cube { position: relative; width: 60px; height: 60px; transform-style: preserve-3d; animation: d3-cube 7s linear infinite; }
+.d3-cube .cube i { position: absolute; inset: 0; border: 2px solid var(--a1); background: color-mix(in srgb, var(--a1) 16%, transparent); }
+.d3-cube .cube i:nth-child(1) { transform: translateZ(30px); }
+.d3-cube .cube i:nth-child(2) { transform: rotateY(180deg) translateZ(30px); }
+.d3-cube .cube i:nth-child(3) { transform: rotateY(90deg) translateZ(30px); }
+.d3-cube .cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(30px); }
+.d3-cube .cube i:nth-child(5) { transform: rotateX(90deg) translateZ(30px); }
+.d3-cube .cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(30px); }
+@keyframes d3-cube { from { transform: rotateX(0) rotateY(0); } to { transform: rotateX(360deg) rotateY(720deg); } }
+
+/* ---- [3d] carousel ring ---- */
+.d3-carousel { perspective: 420px; }
+.d3-carousel .tilt { transform: rotateX(-12deg); transform-style: preserve-3d; }
+.d3-carousel .ring { position: relative; width: 42px; height: 58px; transform-style: preserve-3d; animation: d3-carousel 8s linear infinite; }
+.d3-carousel .ring i { position: absolute; inset: 0; border-radius: 7px; background: var(--a1); opacity: .9; transform: rotateY(calc(var(--i) * 60deg)) translateZ(66px); }
+.d3-carousel .ring i:nth-child(4n+2) { background: var(--a2); }
+.d3-carousel .ring i:nth-child(4n+3) { background: var(--a3); }
+.d3-carousel .ring i:nth-child(4n+4) { background: var(--a4); }
+@keyframes d3-carousel { to { transform: rotateY(-360deg); } }
+
+/* ---- [3d] accordion fold ---- */
+.d3-fold { width: 112px; height: 130px; perspective: 500px; }
+.d3-fold .s { position: relative; width: 112px; height: 27px; border-radius: 3px; background: var(--a4); transform-origin: 50% 0; transform-style: preserve-3d; }
+.d3-fold .s .s { position: absolute; top: 100%; left: 0; }
+.d3-fold .s2, .d3-fold .s4 { background: color-mix(in srgb, var(--a4) 70%, var(--fg)); }
+.d3-fold .s1 { animation: d3-fold-1 2.4s ease-in-out infinite alternate; }
+.d3-fold .s2, .d3-fold .s4 { animation: d3-fold-2 2.4s ease-in-out infinite alternate; }
+.d3-fold .s3 { animation: d3-fold-3 2.4s ease-in-out infinite alternate; }
+@keyframes d3-fold-1 { to { transform: rotateX(-62deg); } }
+@keyframes d3-fold-2 { to { transform: rotateX(124deg); } }
+@keyframes d3-fold-3 { to { transform: rotateX(-124deg); } }
+
+/* ---- [3d] coin toss ---- */
+.d3-coin { position: relative; width: 70px; height: 130px; perspective: 500px; }
+.d3-coin .coin { position: absolute; left: 3px; bottom: 16px; width: 64px; height: 64px; transform-style: preserve-3d; animation: d3-coin 2.2s infinite; }
+.d3-coin .face { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; backface-visibility: hidden; -webkit-backface-visibility: hidden; font: 700 20px var(--font-display); color: #3a2a02; }
+.d3-coin .front { background: var(--a3); box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--a3) 70%, #000); }
+.d3-coin .back { background: color-mix(in srgb, var(--a3) 80%, #fff); box-shadow: inset 0 0 0 4px color-mix(in srgb, var(--a3) 70%, #000); transform: rotateY(180deg); }
+.d3-coin .sh { position: absolute; left: 13px; bottom: 6px; width: 44px; height: 8px; border-radius: 50%; background: var(--fg); animation: d3-coin-sh 2.2s infinite; }
+@keyframes d3-coin {
+  0% { transform: translateY(0) rotateY(0); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+  50% { transform: translateY(-52px) rotateY(900deg); animation-timing-function: cubic-bezier(.6, 0, .8, .3); }
+  100% { transform: translateY(0) rotateY(1800deg); }
+}
+@keyframes d3-coin-sh {
+  0%, 100% { transform: scale(1); opacity: .2; animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+  50% { transform: scale(.55); opacity: .07; animation-timing-function: cubic-bezier(.6, 0, .8, .3); }
+}
+
+/* ---- [3d] exploded stack ---- */
+.d3-stack { perspective: 800px; }
+.d3-stack .st { position: relative; width: 96px; height: 64px; transform: rotateX(56deg) rotateZ(-38deg); transform-style: preserve-3d; }
+.d3-stack .st i { position: absolute; inset: 0; border: 1.5px solid color-mix(in srgb, var(--fg) 25%, transparent); border-radius: 9px; background: var(--a1); opacity: .88; animation: d3-stack 2.6s ease-in-out infinite alternate; }
+.d3-stack .st i:nth-child(2) { background: var(--a4); }
+.d3-stack .st i:nth-child(3) { background: var(--a3); }
+.d3-stack .st i:nth-child(4) { background: var(--a2); }
+@keyframes d3-stack { from { transform: translateZ(0); } to { transform: translateZ(calc(var(--i) * 20px)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .ix-squish { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Shared SVG filter for the gooey merge animation -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
+    </filter>
+  </defs>
+</svg>
+
+<header class="bar">
+  <div class="brand">
+    <h1>Motion Gallery</h1>
+    <p><span id="count">50</span> animations built with CSS keyframes and vanilla JavaScript. Click a card to replay it.</p>
+  </div>
+  <div class="controls">
+    <button id="playAll" class="tbtn" type="button" aria-pressed="false"><span class="ico" aria-hidden="true"></span><span class="txt">Pause all</span></button>
+    <label class="speed" for="speed">Speed
+      <input id="speed" type="range" min="0.25" max="3" step="0.25" value="1">
+      <output id="speedOut" for="speed">1.00×</output>
+    </label>
+  </div>
+  <nav class="filters" id="filters" aria-label="Filter by category"></nav>
+  <p class="note" id="rmNote" hidden>Paused because your system asks for reduced motion. Press Play all to start.</p>
+</header>
+
+<main class="grid" id="grid">
+
+  <!-- ===================== LOADERS ===================== -->
+  <article class="card" data-cat="loaders" data-id="ring" tabindex="0">
+    <div class="stage"><div class="ld-ring"></div></div>
+    <p class="label"><span>Ring spinner</span><span class="cat">Loader</span></p>
+  </article>
+
+  <article class="card" data-cat="loaders" data-id="dots" tabindex="0">
+    <div class="stage"><div class="ld-dots"><i></i><i></i><i></i></div></div>
+    <p class="label"><span>Pulsing dots</span><span class="cat">Loader</span></p>
+  </article>
+
+  <article class="card" data-cat="loaders" data-id="bars" tabindex="0">
+    <div class="stage"><div class="ld-bars"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <p class="label"><span>Equalizer bars</span><span class="cat">Loader</span></p>
+  </article>
+
+  <article class="card" data-cat="loaders" data-id="orbit" tabindex="0">
+    <div class="stage"><div class="ld-orbit"><i class="ring r1"></i><i class="ring r2"></i><i class="core"></i></div></div>
+    <p class="label"><span>Orbiting moons</span><span class="cat">Loader</span></p>
+  </article>
+
+  <article class="card" data-cat="loaders" data-id="dualring" tabindex="0">
+    <div class="stage"><div class="ld-dual"></div></div>
+    <p class="label"><span>Counter-rotating arcs</span><span class="cat">Loader</span></p>
+  </article>
+
+  <article class="card" data-cat="loaders" data-id="gridwave" tabindex="0">
+    <div class="stage"><div class="ld-grid">
+      <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i>
+      <i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i>
+      <i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i>
+    </div></div>
+    <p class="label"><span>Diagonal grid wave</span><span class="cat">Loader</span></p>
+  </article>
+
+  <article class="card" data-cat="loaders" data-id="indeterminate" tabindex="0">
+    <div class="stage"><div class="ld-indet"></div></div>
+    <p class="label"><span>Indeterminate bar</span><span class="cat">Loader</span></p>
+  </article>
+
+  <!-- ===================== PHYSICS ===================== -->
+  <article class="card" data-cat="physics" data-id="bounce" tabindex="0">
+    <div class="stage"><div class="ph-bounce"><i class="shadow"></i><i class="ball"></i></div></div>
+    <p class="label"><span>Squash and bounce</span><span class="cat">Physics</span></p>
+  </article>
+
+  <article class="card" data-cat="physics" data-id="elastic" tabindex="0">
+    <div class="stage"><div class="ph-elastic"><i></i></div></div>
+    <p class="label"><span>Elastic overshoot</span><span class="cat">Physics</span></p>
+  </article>
+
+  <article class="card" data-cat="physics" data-id="spring" tabindex="0">
+    <div class="stage"><div class="ph-spring">
+      <i class="wall"></i>
+      <svg class="coil" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,10 6,10 11,2 20,18 29,2 38,18 47,2 56,18 65,2 74,18 83,2 89,10 100,10"/></svg>
+      <i class="mass"></i>
+    </div></div>
+    <p class="label"><span>Damped spring</span><span class="cat">Physics</span></p>
+  </article>
+
+  <article class="card" data-cat="physics" data-id="pendulum" tabindex="0">
+    <div class="stage"><div class="ph-pend"><i class="arm"></i><i class="pivot"></i></div></div>
+    <p class="label"><span>Pendulum</span><span class="cat">Physics</span></p>
+  </article>
+
+  <article class="card" data-cat="physics" data-id="cradle" tabindex="0">
+    <div class="stage"><div class="ph-cradle"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <p class="label"><span>Newton's cradle</span><span class="cat">Physics</span></p>
+  </article>
+
+  <article class="card" data-cat="physics" data-id="gravity" tabindex="0">
+    <div class="stage"><div class="ph-drop"><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div></div>
+    <p class="label"><span>Gravity drop</span><span class="cat">Physics</span></p>
+  </article>
+
+  <article class="card" data-cat="physics" data-id="jelly" tabindex="0">
+    <div class="stage"><div class="ph-jelly"></div></div>
+    <p class="label"><span>Jelly wobble</span><span class="cat">Physics</span></p>
+  </article>
+
+  <!-- ===================== MORPHING ===================== -->
+  <article class="card" data-cat="morph" data-id="circlesquare" tabindex="0">
+    <div class="stage"><div class="mo-cs"></div></div>
+    <p class="label"><span>Circle to square</span><span class="cat">Morph</span></p>
+  </article>
+
+  <article class="card" data-cat="morph" data-id="blob" tabindex="0">
+    <div class="stage"><div class="mo-blob"></div></div>
+    <p class="label"><span>Liquid blob</span><span class="cat">Morph</span></p>
+  </article>
+
+  <article class="card" data-cat="morph" data-id="polygon" tabindex="0">
+    <div class="stage"><div class="mo-poly"></div></div>
+    <p class="label"><span>Triangle, square, hexagon</span><span class="cat">Morph</span></p>
+  </article>
+
+  <article class="card" data-cat="morph" data-id="polyspin" tabindex="0">
+    <div class="stage">
+      <svg class="mo-spin" width="130" height="130" viewBox="-62 -62 124 124" aria-hidden="true">
+        <polygon class="p1" points="50,0 25,43.3 -25,43.3 -50,0 -25,-43.3 25,-43.3"/>
+        <polygon class="p2" points="-26,-26 26,-26 26,26 -26,26"/>
+        <polygon class="p3" points="0,-24 20.8,12 -20.8,12"/>
+      </svg>
+    </div>
+    <p class="label"><span>Nested rotating polygons</span><span class="cat">Morph</span></p>
+  </article>
+
+  <article class="card" data-cat="morph" data-id="goo" tabindex="0">
+    <div class="stage"><div class="mo-goo"><i></i><i></i><i></i></div></div>
+    <p class="label"><span>Gooey merge</span><span class="cat">Morph</span></p>
+  </article>
+
+  <article class="card" data-cat="morph" data-id="pillring" tabindex="0">
+    <div class="stage"><div class="mo-shift"></div></div>
+    <p class="label"><span>Pill, dot, ring</span><span class="cat">Morph</span></p>
+  </article>
+
+  <!-- ===================== TEXT ===================== -->
+  <article class="card" data-cat="text" data-id="typewriter" tabindex="0">
+    <div class="stage"><div class="tx-type"><span class="tx-text">Hello, motion.</span><span class="caret"></span></div></div>
+    <p class="label"><span>Typewriter</span><span class="cat">Text</span></p>
+  </article>
+
+  <article class="card" data-cat="text" data-id="wave" tabindex="0">
+    <div class="stage"><div class="tx-wave" aria-label="MOTION"><span style="--i:0">M</span><span style="--i:1">O</span><span style="--i:2">T</span><span style="--i:3">I</span><span style="--i:4">O</span><span style="--i:5">N</span></div></div>
+    <p class="label"><span>Wave letters</span><span class="cat">Text</span></p>
+  </article>
+
+  <article class="card" data-cat="text" data-id="glitch" tabindex="0">
+    <div class="stage"><div class="tx-glitch" data-text="GLITCH">GLITCH</div></div>
+    <p class="label"><span>Glitch</span><span class="cat">Text</span></p>
+  </article>
+
+  <article class="card" data-cat="text" data-id="reveal" tabindex="0">
+    <div class="stage"><p class="tx-reveal">
+      <span class="w"><span style="--i:0">Reveal</span></span> <span class="w"><span style="--i:1">every</span></span><br>
+      <span class="w"><span style="--i:2">word</span></span> <span class="w"><span style="--i:3">in</span></span> <span class="w"><span style="--i:4">turn</span></span>
+    </p></div>
+    <p class="label"><span>Masked word reveal</span><span class="cat">Text</span></p>
+  </article>
+
+  <article class="card" data-cat="text" data-id="flip" tabindex="0">
+    <div class="stage"><div class="tx-flip" aria-label="FLIP IT"><span style="--i:0">F</span><span style="--i:1">L</span><span style="--i:2">I</span><span style="--i:3">P</span>&nbsp;<span style="--i:4">I</span><span style="--i:5">T</span></div></div>
+    <p class="label"><span>3D letter flip</span><span class="cat">Text</span></p>
+  </article>
+
+  <article class="card" data-cat="text" data-id="scramble" tabindex="0">
+    <div class="stage"><div class="tx-scr">DECODE</div></div>
+    <p class="label"><span>Decode scramble</span><span class="cat">Text</span></p>
+  </article>
+
+  <!-- ===================== PARTICLES (canvas) ===================== -->
+  <article class="card" data-cat="particles" data-id="confetti" tabindex="0">
+    <div class="stage"></div>
+    <p class="label"><span>Confetti burst</span><span class="cat">Particles</span></p>
+  </article>
+
+  <article class="card" data-cat="particles" data-id="starfield" tabindex="0">
+    <div class="stage"></div>
+    <p class="label"><span>Warp starfield</span><span class="cat">Particles</span></p>
+  </article>
+
+  <article class="card" data-cat="particles" data-id="fireworks" tabindex="0">
+    <div class="stage"></div>
+    <p class="label"><span>Fireworks</span><span class="cat">Particles</span></p>
+  </article>
+
+  <article class="card" data-cat="particles" data-id="network" tabindex="0">
+    <div class="stage"></div>
+    <p class="label"><span>Drifting network</span><span class="cat">Particles</span></p>
+  </article>
+
+  <article class="card" data-cat="particles" data-id="flow" tabindex="0">
+    <div class="stage"></div>
+    <p class="label"><span>Flow field</span><span class="cat">Particles</span></p>
+  </article>
+
+  <article class="card" data-cat="particles" data-id="galaxy" tabindex="0">
+    <div class="stage"></div>
+    <p class="label"><span>Spiral galaxy</span><span class="cat">Particles</span></p>
+  </article>
+
+  <!-- ===================== INTERACTION ===================== -->
+  <article class="card" data-cat="interact" data-id="ripple" data-live tabindex="0">
+    <div class="stage"><button class="ix-btn ix-ripple" type="button">Click me</button></div>
+    <p class="label"><span>Ripple click</span><span class="cat">Interaction</span></p>
+  </article>
+
+  <article class="card" data-cat="interact" data-id="magnetic" data-live tabindex="0">
+    <div class="stage"><button class="ix-btn ix-mag" type="button"><span>Magnetic</span></button></div>
+    <p class="label"><span>Magnetic button</span><span class="cat">Interaction</span></p>
+  </article>
+
+  <article class="card" data-cat="interact" data-id="tilt" data-live tabindex="0">
+    <div class="stage"><div class="ix-tiltwrap"><div class="ix-tilt"><span class="glare"></span><b>Tilt</b></div></div></div>
+    <p class="label"><span>Tilt card</span><span class="cat">Interaction</span></p>
+  </article>
+
+  <article class="card" data-cat="interact" data-id="squish" data-live tabindex="0">
+    <div class="stage"><button class="ix-btn ix-squish" type="button">Press</button></div>
+    <p class="label"><span>Squish press</span><span class="cat">Interaction</span></p>
+  </article>
+
+  <article class="card" data-cat="interact" data-id="spotlight" data-live tabindex="0">
+    <div class="stage"><div class="ix-spot"><span>Move your pointer</span></div></div>
+    <p class="label"><span>Cursor spotlight</span><span class="cat">Interaction</span></p>
+  </article>
+
+  <article class="card" data-cat="interact" data-id="heart" data-live tabindex="0">
+    <div class="stage">
+      <button class="ix-heart" type="button" aria-pressed="false" aria-label="Like">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 4.4 2.5.8-1.3 2.3-2.5 4.4-2.5 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+        <i class="dot" style="--a:0deg"></i><i class="dot" style="--a:45deg"></i><i class="dot" style="--a:90deg"></i><i class="dot" style="--a:135deg"></i>
+        <i class="dot" style="--a:180deg"></i><i class="dot" style="--a:225deg"></i><i class="dot" style="--a:270deg"></i><i class="dot" style="--a:315deg"></i>
+      </button>
+    </div>
+    <p class="label"><span>Like burst</span><span class="cat">Interaction</span></p>
+  </article>
+
+  <!-- ===================== SVG ===================== -->
+  <article class="card" data-cat="svg" data-id="signature" tabindex="0">
+    <div class="stage">
+      <svg class="sv-sign" width="200" height="100" viewBox="0 0 200 100" aria-hidden="true">
+        <path pathLength="1" d="M10 70 C 30 18, 48 18, 54 58 S 74 92, 84 50 S 108 18, 120 56 S 146 88, 158 46 S 184 28, 190 62"/>
+      </svg>
+    </div>
+    <p class="label"><span>Line drawing</span><span class="cat">SVG</span></p>
+  </article>
+
+  <article class="card" data-cat="svg" data-id="ants" tabindex="0">
+    <div class="stage">
+      <svg class="sv-ants" width="150" height="100" viewBox="0 0 150 100" aria-hidden="true">
+        <rect x="10" y="10" width="130" height="80" rx="4"/>
+        <circle cx="75" cy="50" r="22"/>
+        <rect class="h" x="6" y="6" width="8" height="8"/><rect class="h" x="136" y="6" width="8" height="8"/>
+        <rect class="h" x="6" y="86" width="8" height="8"/><rect class="h" x="136" y="86" width="8" height="8"/>
+      </svg>
+    </div>
+    <p class="label"><span>Marching ants</span><span class="cat">SVG</span></p>
+  </article>
+
+  <article class="card" data-cat="svg" data-id="check" tabindex="0">
+    <div class="stage">
+      <svg class="sv-check" width="84" height="84" viewBox="0 0 80 80" aria-hidden="true">
+        <circle class="c" pathLength="1" cx="40" cy="40" r="30" transform="rotate(-90 40 40)"/>
+        <path class="k" pathLength="1" d="M26 41 L36 51 L56 29"/>
+      </svg>
+    </div>
+    <p class="label"><span>Success check</span><span class="cat">SVG</span></p>
+  </article>
+
+  <article class="card" data-cat="svg" data-id="pathmorph" tabindex="0">
+    <div class="stage">
+      <svg class="sv-morph" width="130" height="130" viewBox="-62 -62 124 124" aria-hidden="true">
+        <defs><linearGradient id="morphFill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--a1)"/><stop offset="1" style="stop-color:var(--a4)"/></linearGradient></defs>
+        <path fill="url(#morphFill)" d="M0 -40 Z"/>
+      </svg>
+    </div>
+    <p class="label"><span>Path morph</span><span class="cat">SVG</span></p>
+  </article>
+
+  <article class="card" data-cat="svg" data-id="motionpath" tabindex="0">
+    <div class="stage">
+      <div class="sv-mp">
+        <svg width="200" height="120" viewBox="0 0 200 120" aria-hidden="true"><path d="M10 90 C 60 0, 140 120, 190 30"/></svg>
+        <i class="mover"></i>
+      </div>
+    </div>
+    <p class="label"><span>Motion along a path</span><span class="cat">SVG</span></p>
+  </article>
+
+  <article class="card" data-cat="svg" data-id="ecg" tabindex="0">
+    <div class="stage">
+      <svg class="sv-ecg" width="200" height="100" viewBox="0 0 200 100" aria-hidden="true">
+        <polyline class="base" points="0,55 44,55 52,55 58,40 66,72 74,14 83,88 91,55 124,55 132,55 138,46 144,55 200,55"/>
+        <polyline class="pulse" pathLength="1" points="0,55 44,55 52,55 58,40 66,72 74,14 83,88 91,55 124,55 132,55 138,46 144,55 200,55"/>
+      </svg>
+    </div>
+    <p class="label"><span>Heartbeat line</span><span class="cat">SVG</span></p>
+  </article>
+
+  <!-- ===================== 3D ===================== -->
+  <article class="card" data-cat="three" data-id="flipcard" tabindex="0">
+    <div class="stage"><div class="d3-flip"><div class="inner"><div class="face front">Front</div><div class="face back">Back</div></div></div></div>
+    <p class="label"><span>Flipping card</span><span class="cat">3D</span></p>
+  </article>
+
+  <article class="card" data-cat="three" data-id="cube" tabindex="0">
+    <div class="stage"><div class="d3-cube"><div class="cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+    <p class="label"><span>Tumbling cube</span><span class="cat">3D</span></p>
+  </article>
+
+  <article class="card" data-cat="three" data-id="carousel" tabindex="0">
+    <div class="stage"><div class="d3-carousel"><div class="tilt"><div class="ring">
+      <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
+    </div></div></div></div>
+    <p class="label"><span>Carousel ring</span><span class="cat">3D</span></p>
+  </article>
+
+  <article class="card" data-cat="three" data-id="fold" tabindex="0">
+    <div class="stage"><div class="d3-fold"><div class="s s1"><div class="s s2"><div class="s s3"><div class="s s4"></div></div></div></div></div></div>
+    <p class="label"><span>Accordion fold</span><span class="cat">3D</span></p>
+  </article>
+
+  <article class="card" data-cat="three" data-id="coin" tabindex="0">
+    <div class="stage"><div class="d3-coin"><i class="sh"></i><div class="coin"><div class="face front">1</div><div class="face back">★</div></div></div></div>
+    <p class="label"><span>Coin toss</span><span class="cat">3D</span></p>
+  </article>
+
+  <article class="card" data-cat="three" data-id="stack" tabindex="0">
+    <div class="stage"><div class="d3-stack"><div class="st"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i></div></div></div>
+    <p class="label"><span>Exploded layers</span><span class="cat">3D</span></p>
+  </article>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* =====================================================================
+     Engine: speed, pause, replay, filters. CSS animations are controlled
+     through the Web Animations API; JS animations get a scaled delta time.
+     ===================================================================== */
+  var root = document.documentElement;
+  var grid = document.getElementById("grid");
+  var state = { speed: 1, paused: false };
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Theme colors for canvas drawing, refreshed when the theme changes.
+  var colors = {};
+  function toRGB(color) {
+    var probe = document.createElement("span");
+    probe.style.color = color;
+    document.body.appendChild(probe);
+    var v = getComputedStyle(probe).color;
+    probe.remove();
+    return (v.match(/[\d.]+/g) || [0, 0, 0]).slice(0, 3).join(",");
+  }
+  function readColors() {
+    var cs = getComputedStyle(root);
+    ["fg", "muted", "surface", "line", "a1", "a2", "a3", "a4"].forEach(function (k) {
+      colors[k] = cs.getPropertyValue("--" + k).trim();
+    });
+    colors.surfaceRGB = toRGB(colors.surface);
+  }
+  readColors();
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", readColors);
+  new MutationObserver(readColors).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+
+  // Canvas helper: a crisp canvas that fills the stage and follows its size.
+  function canvas(stage) {
+    var c = document.createElement("canvas");
+    c.className = "cv";
+    stage.appendChild(c);
+    var ctx = c.getContext("2d");
+    var s = { el: c, ctx: ctx, w: 0, h: 0 };
+    function fit() {
+      var r = stage.getBoundingClientRect();
+      if (r.width < 1 || r.height < 1) return; // hidden by a filter: keep the last size
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      s.w = r.width; s.h = r.height;
+      c.width = Math.max(1, Math.round(r.width * dpr));
+      c.height = Math.max(1, Math.round(r.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    fit();
+    new ResizeObserver(fit).observe(stage);
+    return s;
+  }
+  // Trail effect: erase a little of the previous frame toward transparency, so the
+  // card background shows through in any theme.
+  function fade(c, alpha) {
+    var ctx = c.ctx;
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.fillStyle = "rgba(0,0,0," + alpha.toFixed(3) + ")";
+    ctx.fillRect(0, 0, c.w, c.h);
+    ctx.restore();
+  }
+  var rand = function (a, b) { return a + Math.random() * (b - a); };
+  var palette = function () { return [colors.a1, colors.a2, colors.a3, colors.a4]; };
+
+  /* =====================================================================
+     JS-driven animations. Each entry receives its stage element and
+     returns { tick(dt), replay(), live }. dt is in seconds, already
+     multiplied by the speed setting. "live" ones keep responding to the
+     pointer while everything else is paused.
+     ===================================================================== */
+  var JS = {};
+
+  /* ---- [physics] spring: damped harmonic oscillator ---- */
+  JS.spring = function (stage) {
+    var coil = stage.querySelector(".coil"), mass = stage.querySelector(".mass");
+    var x, v, rest;
+    function reset() { x = 46; v = 0; rest = 0; }
+    reset();
+    return {
+      tick: function (dt) {
+        for (var i = 0; i < 4; i++) { var h = dt / 4; v += (-90 * x - 3.2 * v) * h; x += v * h; }
+        if (Math.abs(x) < .4 && Math.abs(v) < .4) { rest += dt; if (rest > .7) { x = Math.random() < .5 ? 46 : -34; v = 0; rest = 0; } }
+        mass.style.transform = "translateX(" + x + "px)";
+        coil.style.transform = "scaleX(" + (80 + x) / 80 + ")";
+      },
+      replay: reset
+    };
+  };
+
+  /* ---- [physics] gravity: falling balls with restitution ---- */
+  JS.gravity = function (stage) {
+    var els = Array.prototype.slice.call(stage.querySelectorAll(".b"));
+    var balls = [], rest = 0;
+    function drop() {
+      balls = els.map(function (el, i) { return { el: el, y: rand(70, 108), vy: 0, delay: i * .12 }; });
+      rest = 0;
+    }
+    drop();
+    return {
+      tick: function (dt) {
+        var moving = false;
+        balls.forEach(function (b) {
+          if (b.delay > 0) { b.delay -= dt; moving = true; }
+          else {
+            b.vy -= 900 * dt; b.y += b.vy * dt;
+            if (b.y <= 0) { b.y = 0; b.vy = -b.vy * .62; if (b.vy < 45) b.vy = 0; }
+            if (b.y > 0 || b.vy !== 0) moving = true;
+          }
+          b.el.style.transform = "translateY(" + (-b.y) + "px)";
+        });
+        if (!moving) { rest += dt; if (rest > .8) drop(); }
+      },
+      replay: drop
+    };
+  };
+
+  /* ---- [text] typewriter: type, hold, delete, next phrase ---- */
+  JS.typewriter = function (stage) {
+    var out = stage.querySelector(".tx-text");
+    var phrases = ["Hello, motion.", "Type. Pause. Delete.", "Plain JavaScript."];
+    var p = 0, i = phrases[0].length, mode = "hold", t = 0;
+    return {
+      tick: function (dt) {
+        t += dt;
+        var s = phrases[p];
+        if (mode === "type" && t > .07) { t = 0; i++; out.textContent = s.slice(0, i); if (i >= s.length) mode = "hold"; }
+        else if (mode === "hold" && t > 1.4) { t = 0; mode = "del"; }
+        else if (mode === "del" && t > .035) { t = 0; i--; out.textContent = s.slice(0, i); if (i <= 0) { mode = "type"; p = (p + 1) % phrases.length; } }
+      },
+      replay: function () { p = 0; i = 0; t = 0; mode = "type"; out.textContent = ""; }
+    };
+  };
+
+  /* ---- [text] scramble: random glyphs resolve left to right ---- */
+  JS.scramble = function (stage) {
+    var el = stage.querySelector(".tx-scr");
+    var words = ["DECODE", "SIGNAL", "CIPHER", "MOTION"];
+    var glyphs = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&*+=?";
+    var w = 0, t = 0, flick = 0;
+    return {
+      tick: function (dt) {
+        t += dt; flick += dt;
+        if (t > 3.2) { t = 0; w = (w + 1) % words.length; }
+        if (flick < .05) return;
+        flick = 0;
+        var word = words[w], s = "";
+        for (var k = 0; k < word.length; k++) s += t > .25 + k * .14 ? word[k] : glyphs[Math.random() * glyphs.length | 0];
+        el.textContent = s;
+      },
+      replay: function () { w = 0; t = 0; }
+    };
+  };
+
+  /* ---- [particles] confetti: bursts with gravity, drag and spin ---- */
+  JS.confetti = function (stage) {
+    var c = canvas(stage), parts = [], timer = 0;
+    function burst() {
+      var cols = palette();
+      for (var i = 0; i < 80; i++) {
+        var a = -Math.PI / 2 + rand(-.7, .7), sp = rand(200, 330);
+        parts.push({ x: c.w / 2, y: c.h + 6, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: rand(0, 6), vr: rand(-7, 7), w: rand(5, 10), h: rand(8, 14), col: cols[i % 4] });
+      }
+      timer = 0;
+    }
+    burst();
+    return {
+      tick: function (dt) {
+        timer += dt;
+        if (timer > .4 && parts.length < 10) burst(); // next burst as the last one falls away
+        var ctx = c.ctx;
+        ctx.clearRect(0, 0, c.w, c.h);
+        parts.forEach(function (p) {
+          p.vy += 520 * dt; p.vx *= 1 - 1.2 * dt;
+          p.x += p.vx * dt; p.y += p.vy * dt; p.r += p.vr * dt;
+          var squeeze = Math.abs(Math.cos(p.r * 1.3));
+          ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+          ctx.fillStyle = p.col; ctx.fillRect(-p.w / 2, -p.h * squeeze / 2, p.w, p.h * squeeze + 1);
+          ctx.restore();
+        });
+        parts = parts.filter(function (p) { return p.y < c.h + 40; });
+      },
+      replay: function () { parts = []; burst(); }
+    };
+  };
+
+  /* ---- [particles] starfield: perspective projection with streaks ---- */
+  JS.starfield = function (stage) {
+    var c = canvas(stage), stars = [];
+    function star(z) { return { x: rand(-1, 1), y: rand(-1, 1), z: z == null ? rand(.05, 1) : z }; }
+    function reset() { stars = []; for (var i = 0; i < 170; i++) stars.push(star()); }
+    reset();
+    return {
+      tick: function (dt) {
+        var ctx = c.ctx, cx = c.w / 2, cy = c.h / 2, f = Math.min(c.w, c.h) * .5;
+        ctx.clearRect(0, 0, c.w, c.h);
+        ctx.lineCap = "round"; ctx.strokeStyle = colors.fg;
+        stars.forEach(function (s) {
+          var pz = s.z;
+          s.z -= dt * .45;
+          if (s.z <= .02) { var n = star(1); s.x = n.x; s.y = n.y; s.z = 1; return; }
+          var a = 1 - s.z;
+          ctx.globalAlpha = a; ctx.lineWidth = a * 2.4 + .3;
+          ctx.beginPath(); ctx.moveTo(cx + s.x / pz * f, cy + s.y / pz * f); ctx.lineTo(cx + s.x / s.z * f, cy + s.y / s.z * f); ctx.stroke();
+        });
+        ctx.globalAlpha = 1;
+      },
+      replay: reset
+    };
+  };
+
+  /* ---- [particles] fireworks: rockets, radial bursts, fading trails ---- */
+  JS.fireworks = function (stage) {
+    var c = canvas(stage), rockets = [], sparks = [], timer = 0;
+    function launch() { var cols = palette(); rockets.push({ x: c.w * rand(.2, .8), y: c.h, vy: -rand(150, 190), col: cols[Math.random() * 4 | 0] }); }
+    function reset() { rockets = []; sparks = []; timer = 0; c.ctx.clearRect(0, 0, c.w, c.h); launch(); }
+    reset();
+    return {
+      tick: function (dt) {
+        var ctx = c.ctx;
+        timer += dt;
+        if (timer > .9) { timer = 0; launch(); }
+        fade(c, Math.min(1, dt * 10));
+        rockets.forEach(function (r) {
+          r.vy += 160 * dt; r.y += r.vy * dt;
+          ctx.fillStyle = r.col; ctx.fillRect(r.x - 1, r.y, 2, 5);
+          if (r.vy > -30) {
+            r.dead = true;
+            for (var i = 0; i < 46; i++) { var a = i / 46 * Math.PI * 2, sp = rand(50, 110); sparks.push({ x: r.x, y: r.y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, col: r.col }); }
+          }
+        });
+        rockets = rockets.filter(function (r) { return !r.dead; });
+        sparks.forEach(function (s) {
+          s.vy += 60 * dt; s.vx *= 1 - .9 * dt; s.vy *= 1 - .9 * dt;
+          s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt * .8;
+          ctx.globalAlpha = Math.max(0, s.life); ctx.fillStyle = s.col; ctx.fillRect(s.x - 1, s.y - 1, 2.2, 2.2);
+        });
+        ctx.globalAlpha = 1;
+        sparks = sparks.filter(function (s) { return s.life > 0; });
+      },
+      replay: reset
+    };
+  };
+
+  /* ---- [particles] network: drifting nodes linked by distance ---- */
+  JS.network = function (stage) {
+    var c = canvas(stage), pts = [];
+    function reset() { pts = []; for (var i = 0; i < 26; i++) pts.push({ x: rand(0, c.w), y: rand(0, c.h), vx: rand(-22, 22), vy: rand(-22, 22) }); }
+    reset();
+    return {
+      tick: function (dt) {
+        var ctx = c.ctx, w = c.w, h = c.h;
+        ctx.clearRect(0, 0, w, h);
+        pts.forEach(function (p) {
+          p.x += p.vx * dt; p.y += p.vy * dt;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+          p.x = Math.max(0, Math.min(w, p.x)); p.y = Math.max(0, Math.min(h, p.y));
+        });
+        ctx.strokeStyle = colors.a1; ctx.lineWidth = 1;
+        for (var i = 0; i < pts.length; i++) for (var j = i + 1; j < pts.length; j++) {
+          var d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
+          if (d < 74) { ctx.globalAlpha = (1 - d / 74) * .7; ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); }
+        }
+        ctx.globalAlpha = 1; ctx.fillStyle = colors.a1;
+        pts.forEach(function (p) { ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2); ctx.fill(); });
+      },
+      replay: reset
+    };
+  };
+
+  /* ---- [particles] flow field: particles follow a moving vector field ---- */
+  JS.flow = function (stage) {
+    var c = canvas(stage), ps = [], time = 0;
+    function spawn(p) { p.x = rand(0, c.w); p.y = rand(0, c.h); p.life = rand(1, 3); return p; }
+    function reset() { ps = []; time = 0; for (var i = 0; i < 220; i++) ps.push(spawn({ alt: i % 2 })); c.ctx.clearRect(0, 0, c.w, c.h); }
+    reset();
+    return {
+      tick: function (dt) {
+        var ctx = c.ctx, w = c.w, h = c.h;
+        time += dt;
+        fade(c, Math.min(1, Math.max(.06, dt * 4)));
+        ctx.lineWidth = 1.2;
+        ps.forEach(function (p) {
+          var a = (Math.sin(p.x * .018 + time * .4) + Math.cos(p.y * .022 - time * .3)) * Math.PI;
+          var nx = p.x + Math.cos(a) * 38 * dt, ny = p.y + Math.sin(a) * 38 * dt;
+          ctx.strokeStyle = p.alt ? colors.a4 : colors.a1;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
+          p.x = nx; p.y = ny; p.life -= dt;
+          if (p.life < 0 || p.x < 0 || p.x > w || p.y < 0 || p.y > h) spawn(p);
+        });
+      },
+      replay: reset
+    };
+  };
+
+  /* ---- [particles] galaxy: three arms with differential rotation ---- */
+  JS.galaxy = function (stage) {
+    var c = canvas(stage), st = [];
+    function reset() {
+      st = [];
+      for (var i = 0; i < 420; i++) {
+        var r = Math.pow(Math.random(), .7), arm = Math.random() * 3 | 0;
+        st.push({ r: r, a: arm * 2.094 + r * 5 + rand(-.3, .3), s: rand(.6, 1.8) });
+      }
+    }
+    reset();
+    return {
+      tick: function (dt) {
+        var ctx = c.ctx, cx = c.w / 2, cy = c.h / 2, R = Math.min(c.w, c.h) * .62;
+        ctx.clearRect(0, 0, c.w, c.h);
+        st.forEach(function (p) {
+          p.a += dt * (.25 + .9 * (1 - p.r));
+          ctx.fillStyle = p.r < .35 ? colors.a3 : p.r < .7 ? colors.a2 : colors.a1;
+          ctx.globalAlpha = .35 + .65 * (1 - p.r);
+          ctx.fillRect(cx + Math.cos(p.a) * p.r * R, cy + Math.sin(p.a) * p.r * R * .6, p.s, p.s);
+        });
+        ctx.globalAlpha = 1;
+      },
+      replay: reset
+    };
+  };
+
+  /* ---- [interaction] ripple: expanding circle from the click point ---- */
+  JS.ripple = function (stage) {
+    var btn = stage.querySelector("button");
+    function make(x, y) {
+      var r = document.createElement("span");
+      r.className = "rp"; r.style.left = x + "px"; r.style.top = y + "px";
+      btn.appendChild(r);
+      r.addEventListener("animationend", function () { r.remove(); });
+    }
+    function demo() { make(btn.offsetWidth / 2, btn.offsetHeight / 2); }
+    btn.addEventListener("pointerdown", function (e) { var b = btn.getBoundingClientRect(); make(e.clientX - b.left, e.clientY - b.top); });
+    btn.addEventListener("click", function (e) { if (e.detail === 0) demo(); }); // keyboard activation
+    return { live: true, replay: demo };
+  };
+
+  /* ---- [interaction] magnetic: spring toward the pointer when close ---- */
+  JS.magnetic = function (stage) {
+    var btn = stage.querySelector(".ix-mag"), label = btn.querySelector("span");
+    var x = 0, y = 0, vx = 0, vy = 0, tx = 0, ty = 0, demoT = -1;
+    stage.addEventListener("pointermove", function (e) {
+      var b = btn.getBoundingClientRect();
+      var dx = e.clientX - (b.left + b.width / 2 - x), dy = e.clientY - (b.top + b.height / 2 - y);
+      if (Math.hypot(dx, dy) < 120) { tx = dx * .4; ty = dy * .4; } else { tx = ty = 0; }
+      demoT = -1;
+    });
+    stage.addEventListener("pointerleave", function () { tx = ty = 0; });
+    return {
+      live: true,
+      tick: function (dt) {
+        if (demoT >= 0) { demoT += dt; tx = Math.cos(demoT * 6) * 24; ty = Math.sin(demoT * 6) * 14; if (demoT > 1.6) { demoT = -1; tx = ty = 0; } }
+        for (var i = 0; i < 3; i++) { var h = dt / 3; vx += (180 * (tx - x) - 16 * vx) * h; vy += (180 * (ty - y) - 16 * vy) * h; x += vx * h; y += vy * h; }
+        btn.style.transform = "translate(" + x + "px," + y + "px)";
+        label.style.transform = "translate(" + x * .35 + "px," + y * .35 + "px)";
+      },
+      replay: function () { demoT = 0; }
+    };
+  };
+
+  /* ---- [interaction] tilt: pointer position to rotateX/rotateY + glare ---- */
+  JS.tilt = function (stage) {
+    var card = stage.querySelector(".ix-tilt");
+    var rx = 0, ry = 0, trx = 0, tryy = 0, gx = 50, gy = 30, demoT = -1;
+    stage.addEventListener("pointermove", function (e) {
+      var b = stage.getBoundingClientRect(), px = (e.clientX - b.left) / b.width, py = (e.clientY - b.top) / b.height;
+      trx = (.5 - py) * 26; tryy = (px - .5) * 30; gx = px * 100; gy = py * 100; demoT = -1;
+    });
+    stage.addEventListener("pointerleave", function () { trx = tryy = 0; gx = 50; gy = 30; });
+    return {
+      live: true,
+      tick: function (dt) {
+        if (demoT >= 0) { demoT += dt; tryy = Math.sin(demoT * 4) * 24; trx = Math.cos(demoT * 4) * 10; gx = 50 + tryy * 1.5; gy = 50 - trx * 2; if (demoT > 1.6) { demoT = -1; trx = tryy = 0; gx = 50; gy = 30; } }
+        var k = 1 - Math.exp(-dt * 10);
+        rx += (trx - rx) * k; ry += (tryy - ry) * k;
+        card.style.transform = "rotateX(" + rx + "deg) rotateY(" + ry + "deg)";
+        card.style.setProperty("--gx", gx + "%"); card.style.setProperty("--gy", gy + "%");
+      },
+      replay: function () { demoT = 0; }
+    };
+  };
+
+  /* ---- [interaction] squish: press state with a springy release ---- */
+  JS.squish = function (stage) {
+    var btn = stage.querySelector("button");
+    return { live: true, replay: function () { btn.classList.add("pressed"); setTimeout(function () { btn.classList.remove("pressed"); }, 160 / state.speed); } };
+  };
+
+  /* ---- [interaction] spotlight: radial light follows the pointer ---- */
+  JS.spotlight = function (stage) {
+    var panel = stage.querySelector(".ix-spot"), demoT = -1;
+    function set(x, y) { panel.style.setProperty("--mx", x + "px"); panel.style.setProperty("--my", y + "px"); }
+    stage.addEventListener("pointermove", function (e) { var b = panel.getBoundingClientRect(); set(e.clientX - b.left, e.clientY - b.top); demoT = -1; });
+    return {
+      live: true,
+      tick: function (dt) {
+        if (demoT < 0) return;
+        demoT += dt;
+        var w = panel.clientWidth, h = panel.clientHeight;
+        set(w / 2 + Math.sin(demoT * 2.2) * w * .38, h / 2 + Math.sin(demoT * 3.1) * h * .32);
+        if (demoT > 2.6) demoT = -1;
+      },
+      replay: function () { demoT = 0; }
+    };
+  };
+
+  /* ---- [interaction] heart: toggle with pop and particle ring ---- */
+  JS.heart = function (stage) {
+    var btn = stage.querySelector(".ix-heart");
+    function setOn(on) {
+      btn.classList.remove("on", "burst");
+      btn.setAttribute("aria-pressed", String(on));
+      if (!on) return;
+      void btn.offsetWidth; // restart the CSS animations
+      btn.classList.add("on", "burst");
+    }
+    btn.addEventListener("click", function () { setOn(!btn.classList.contains("on")); });
+    return { live: true, replay: function () { setOn(true); } };
+  };
+
+  /* ---- [svg] path morph: interpolate radial shapes into the d attribute ---- */
+  JS.pathmorph = function (stage) {
+    var path = stage.querySelector("path");
+    var N = 96;
+    var shapes = [
+      function () { return 42; },
+      function (t) { return 40 + 14 * Math.cos(5 * t); },
+      function (t) { return 36 + 10 * Math.cos(8 * t); },
+      function (t) { return 38 / Math.pow(Math.pow(Math.abs(Math.cos(t)), 4) + Math.pow(Math.abs(Math.sin(t)), 4), .25); }
+    ];
+    var i = 0, t = 0;
+    function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+    function d(fa, fb, k) {
+      var s = "";
+      for (var n = 0; n < N; n++) {
+        var th = n / N * Math.PI * 2 - Math.PI / 2, r = fa(th) * (1 - k) + fb(th) * k;
+        s += (n ? "L" : "M") + (Math.cos(th) * r).toFixed(2) + " " + (Math.sin(th) * r).toFixed(2);
+      }
+      return s + "Z";
+    }
+    return {
+      tick: function (dt) {
+        t += dt;
+        var hold = .6, morph = 1.1;
+        if (t > hold + morph) { t = 0; i = (i + 1) % shapes.length; }
+        var k = t > hold ? Math.min(1, (t - hold) / morph) : 0;
+        path.setAttribute("d", d(shapes[i], shapes[(i + 1) % shapes.length], ease(k)));
+      },
+      replay: function () { i = 0; t = 0; }
+    };
+  };
+
+  /* =====================================================================
+     Wiring
+     ===================================================================== */
+  var cards = Array.prototype.slice.call(grid.querySelectorAll(".card"));
+  var instances = [];
+
+  cards.forEach(function (card) {
+    var name = card.querySelector(".label span").textContent;
+    card.setAttribute("aria-label", name + ". Press Enter to replay.");
+    var factory = JS[card.dataset.id];
+    if (factory) {
+      var inst = factory(card.querySelector(".stage"));
+      inst.card = card;
+      card._inst = inst;
+      instances.push(inst);
+      if (inst.tick) {
+        // Particle effects get a short warm-up so the card is never empty at rest.
+        if (card.dataset.cat === "particles") for (var w = 0; w < 40; w++) inst.tick(1 / 60);
+        else inst.tick(0);
+        // Resizing a canvas clears it: redraw right after each resize.
+        new ResizeObserver(function () { inst.tick(0); }).observe(card.querySelector(".stage"));
+      }
+    }
+    card.addEventListener("click", function (e) {
+      if (e.target.closest("button")) return; // interactive controls handle their own clicks
+      replay(card);
+    });
+    card.addEventListener("keydown", function (e) {
+      if (e.target === card && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); replay(card); }
+    });
+  });
+
+  // Only animate JS cards that are on screen.
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { en.target.dataset.visible = en.isIntersecting ? "1" : "0"; });
+  });
+  cards.forEach(function (c) { io.observe(c); });
+
+  // CSS animations: apply speed and pause through the Web Animations API.
+  function isLive(anim) {
+    var t = anim.effect && anim.effect.target;
+    return !!(t && t.closest && t.closest("[data-live]"));
+  }
+  function syncAnim(anim) {
+    if (typeof CSSAnimation !== "undefined" && !(anim instanceof CSSAnimation)) return;
+    if (anim.playbackRate !== state.speed) anim.playbackRate = state.speed;
+    var pause = state.paused && !isLive(anim);
+    if (pause && anim.playState !== "paused") anim.pause();
+    else if (!pause && anim.playState === "paused") anim.play();
+  }
+  function syncAll() { grid.getAnimations({ subtree: true }).forEach(syncAnim); }
+  grid.addEventListener("animationstart", function (e) { e.target.getAnimations({ subtree: true }).forEach(syncAnim); }, true);
+
+  function replay(card) {
+    card.getAnimations({ subtree: true }).forEach(function (a) {
+      if (typeof CSSAnimation !== "undefined" && !(a instanceof CSSAnimation)) return;
+      if (a.animationName === "card-flash") return;
+      a.cancel(); a.play(); syncAnim(a);
+    });
+    if (card._inst && card._inst.replay) { card._inst.replay(); if (card._inst.tick) card._inst.tick(0); }
+    card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+  }
+
+  // Frame loop for JS animations.
+  var last = performance.now();
+  function frame(now) {
+    var raw = Math.min(.05, (now - last) / 1000);
+    last = now;
+    var dt = raw * state.speed;
+    instances.forEach(function (inst) {
+      if (!inst.tick || inst.card.hidden || inst.card.dataset.visible !== "1") return;
+      if (state.paused && !inst.live) return;
+      inst.tick(dt);
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  // Toolbar: play/pause, speed, filters.
+  var playBtn = document.getElementById("playAll");
+  function setPaused(p) {
+    state.paused = p;
+    playBtn.setAttribute("aria-pressed", String(p));
+    playBtn.querySelector(".txt").textContent = p ? "Play all" : "Pause all";
+    if (!p) document.getElementById("rmNote").hidden = true;
+    syncAll();
+  }
+  playBtn.addEventListener("click", function () { setPaused(!state.paused); });
+
+  var speed = document.getElementById("speed"), speedOut = document.getElementById("speedOut");
+  speed.addEventListener("input", function () {
+    state.speed = parseFloat(speed.value);
+    speedOut.textContent = state.speed.toFixed(2) + "×";
+    syncAll();
+  });
+
+  var cats = [["all", "All"], ["loaders", "Loaders"], ["physics", "Physics"], ["morph", "Morphing"], ["text", "Text"], ["particles", "Particles"], ["interact", "Interaction"], ["svg", "SVG paths"], ["three", "3D"]];
+  var filters = document.getElementById("filters");
+  cats.forEach(function (c) {
+    var n = c[0] === "all" ? cards.length : cards.filter(function (k) { return k.dataset.cat === c[0]; }).length;
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.filter = c[0];
+    b.setAttribute("aria-pressed", String(c[0] === "all"));
+    b.innerHTML = c[1] + "<span>" + n + "</span>";
+    filters.appendChild(b);
+  });
+  filters.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    filters.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+    var f = b.dataset.filter, shown = 0;
+    cards.forEach(function (card) { card.hidden = f !== "all" && card.dataset.cat !== f; if (!card.hidden) shown++; });
+    document.getElementById("count").textContent = shown;
+  });
+  document.getElementById("count").textContent = cards.length;
+
+  // Respect reduced motion: start paused, frozen partway so every card shows something.
+  if (reduceMotion) {
+    document.getElementById("rmNote").hidden = false;
+    grid.getAnimations({ subtree: true }).forEach(function (a) {
+      var timing = a.effect && a.effect.getComputedTiming();
+      if (timing && isFinite(timing.duration)) a.currentTime = timing.duration * .45;
+    });
+    instances.forEach(function (inst) { if (inst.tick && !inst.live) inst.tick(.8); });
+    setPaused(true);
+  } else {
+    syncAll();
+  }
+})();
+</script>
+</body>
+</html>
