@@ -1,0 +1,138 @@
+regionTemplate amc-island-groups (
+    name: AMC Island Groups
+    region {
+        template:
+            ```html
+            <section class="amc-TIslandGroups #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <header class="amc-TIslandGroups-header">
+                <span class="amc-TIslandGroups-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                <h2 class="amc-TIslandGroups-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                <div class="amc-TIslandGroups-actions">#HELP##EDIT##CHANGE##COPY##CREATE#</div>
+              </header>
+              <div class="amc-TIslandGroups-grid">
+                <div class="amc-TIslandGroups-body">#BODY#</div>
+                <div class="amc-TIslandGroups-subs">#SUB_REGIONS#</div>
+              </div>
+              <footer class="amc-TIslandGroups-footer">#PREVIOUS##CLOSE##DELETE##NEXT#</footer>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-island-groups.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-island-groups.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_ISLAND_GROUPS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template that lays out groups. Its islands are the sub regions of the region, found through the APEX grid wrappers, and any direct child of the region text that carries the attribute data-amc-island, for example <div data-amc-island><h3>Leave dates</h3>...</div> in Static Content.
+            PRINCIPLES APPLIED. Law of common region: every island sits on one shared tinted ground with rounded corners and no border or shadow, the weakest container that still bounds the group; containment stops at two levels, so groups inside an island are made by spacing alone. Law of proximity: inside an island the label sits 8px from its content and the content packs at 18px, while islands are 24px apart, so the gap between islands is always wider than any gap inside one. Sequence rule: numbers are drawn only with the Numbered sequence option, for islands that are real steps.
+            SUB REGIONS AS ISLANDS. Give a sub region this same template and it becomes an island: its card disappears, its title turns into the island label, its buttons stay beside the label. Sub regions with Blank with Attributes are islands without a label. Universal Theme card templates such as Standard keep their own look inside the grid, which doubles the boundary; avoid them here.
+            GRID. 12 columns, read from the region's own width with container queries, so the same region lays out the same in a side column or full width. Under 560px every island takes the full row. From 560px islands go two per row, a last odd island or a wide island takes the whole row. From 900px the spans come, in order, from the island's own Custom Attribute data-amc-span="8", allowed 3, 4, 5, 6, 7, 8, 9 and 12, then from the APEX Column Span of the sub region, then from a balanced layout computed by the script: 1 island full width, 2 or 4 as halves, otherwise rows of three with the last one or two rows in halves, so 5 islands are 3 + 2 and 7 are 3 + 2 + 2. Hidden sub regions, for example by a dynamic action, are left out and the rest rebalance. Without JavaScript islands take a third of the row from 900px.
+            The script re-runs after apexafterrefresh and when islands are added, removed, shown or hidden; it writes data-amc-island-span and data-amc-island-md on the islands and data-amc-islands, the count, on the region, and never changes their content. JavaScript API: amcTplIslandGroups.refresh(element) and islands(element).
+            KEYBOARD AND MOTION. Nothing moves; reading and tab order follow the DOM order of the sub regions, which the grid never reorders. In forced-colors mode islands get a system border. Islands avoid page breaks when printed.
+            ```
+    }
+
+    templateOption amc-island-groups-sequence (
+        name: Numbered sequence
+        sequence: 10
+        appearance {
+            cssClasses: amc-TIslandGroups--sequence
+        }
+        help {
+            helpText:
+                ```text
+                Draws 1, 2, 3 before the island labels in DOM order. Only for islands that are real steps, such as onboarding or a request that is filled in order; leave it off for record pages and dashboards, where numbers would suggest an order that does not exist.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SEQUENCE
+        }
+    )
+
+    templateOption amc-island-groups-on-page (
+        name: On page
+        sequence: 20
+        appearance {
+            cssClasses: amc-TIslandGroups--onPage
+        }
+        help {
+            helpText:
+                ```text
+                No outer card: the region title and the islands sit directly on the page background, and the islands become surface-colored panels. For dashboards and pages whose only content is this region.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ON_PAGE
+        }
+    )
+
+    templateOption amc-island-groups-dense (
+        name: Dense
+        sequence: 30
+        appearance {
+            cssClasses: amc-TIslandGroups--dense
+        }
+        help {
+            helpText:
+                ```text
+                12px between islands and inside them, for dashboards with many small islands such as KPI tiles. Inside space stays equal to or smaller than the gap between islands.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DENSE
+        }
+    )
+
+    templateOption amc-island-groups-accent (
+        name: Accent ground
+        sequence: 40
+        appearance {
+            cssClasses: amc-TIslandGroups--accent
+        }
+        help {
+            helpText:
+                ```text
+                Tints the islands with the primary color instead of a neutral grey, for a region that should stand out from neighbouring regions on the same page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ACCENT
+        }
+    )
+
+    templateOption amc-island-groups-pairs (
+        name: Pairs
+        sequence: 50
+        appearance {
+            cssClasses: amc-TIslandGroups--pairs
+        }
+        help {
+            helpText:
+                ```text
+                At most two islands per row on wide regions, for form sections and side-by-side comparisons whose fields need room. An island with data-amc-span 12 still takes the whole row.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PAIRS
+        }
+    )
+)

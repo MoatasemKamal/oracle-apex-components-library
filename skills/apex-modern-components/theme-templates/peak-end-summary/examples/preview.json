@@ -1,0 +1,54 @@
+{
+  "samples": [
+    {
+      "title": "Order submitted: count-up peak, recap, next steps",
+      "regionTitle": "Order SO-55140 is placed",
+      "icon": "fa-check",
+      "options": [],
+      "body": "<p data-amc-peak><span>Order total</span>SAR 48,300.00<small>Paid by bank transfer, VAT included</small></p><dl><div><dt>Customer</dt><dd>Al Noor Trading Co.</dd></div><div><dt>Deliver to</dt><dd>Sulay warehouse, Riyadh</dd></div><div><dt>Items</dt><dd>14 lines, 326 units</dd></div><div><dt>Expected delivery</dt><dd>Thursday 8 October</dd></div><div><dt>Reference</dt><dd>PO-7781-AN</dd></div></dl><h3>What happens next</h3><ol data-amc-next><li><strong>Picking starts today</strong>The Riyadh warehouse prepares the order before 18:00.</li><li><strong>Driver calls ahead</strong>You get an SMS with the driver's number the morning of delivery.</li><li><strong>Invoice by email</strong>The ZATCA e-invoice goes to accounts payable once the order ships.</li></ol><p data-amc-end>A confirmation is on its way to purchasing@alnoor-trading.sa. Nothing else is needed from you.</p>",
+      "buttons": {
+        "PREVIOUS": "Back to orders",
+        "NEXT": "Track this order"
+      }
+    },
+    {
+      "title": "Month closed: info tone, receipt recap",
+      "regionTitle": "September 2026 is closed",
+      "icon": "fa-lock",
+      "options": [
+        "amc-TPeakEndSummary--info",
+        "amc-TPeakEndSummary--receipt"
+      ],
+      "body": "<p data-amc-peak><span>Net profit, September</span>SAR 1,284,650<small>Up 4.2% on August</small></p><dl><div><dt>Revenue</dt><dd>SAR 9,412,300</dd></div><div><dt>Cost of sales</dt><dd>SAR 6,105,870</dd></div><div><dt>Operating expenses</dt><dd>SAR 2,021,780</dd></div><div><dt>Net profit</dt><dd>SAR 1,284,650</dd></div></dl><h3>Next steps</h3><ol data-amc-next><li>Management accounts go to the CFO tomorrow at 9:00.</li><li>October opens for posting on Sunday.</li></ol><p data-amc-end>Closed by Hessa Al Mutairi on 5 October 2026 at 14:20. All 212 journals are locked.</p>",
+      "buttons": {
+        "NEXT": "Open management accounts"
+      }
+    },
+    {
+      "title": "Leave request in Arabic: centered, Arabic-Indic digits",
+      "regionTitle": "تم إرسال طلب الإجازة",
+      "icon": "fa-check",
+      "options": [
+        "amc-TPeakEndSummary--center"
+      ],
+      "body": "<p data-amc-peak dir=\"rtl\" lang=\"ar\"><span>مدة الإجازة</span>١٢ يوماً<small>من ١٢ إلى ٢٧ أكتوبر</small></p><dl><div><dt>نوع الإجازة</dt><dd>سنوية</dd></div><div><dt>الموظف البديل</dt><dd>نورة الحربي</dd></div><div><dt>الرصيد بعد الإجازة</dt><dd>٩ أيام</dd></div></dl><h3>الخطوات التالية</h3><ol data-amc-next lang=\"ar\"><li>يعتمد مديرك المباشر الطلب خلال يومي عمل.</li><li>تصلك رسالة عند الاعتماد.</li></ol><p data-amc-end>يمكنك متابعة الطلب من صفحة طلباتي.</p>",
+      "buttons": {
+        "NEXT": "طلباتي"
+      }
+    },
+    {
+      "title": "Payroll with exceptions: warning tone, still",
+      "regionTitle": "Payroll ran with 3 exceptions",
+      "icon": "fa-exclamation",
+      "options": [
+        "amc-TPeakEndSummary--warning",
+        "amc-TPeakEndSummary--still"
+      ],
+      "body": "<p data-amc-peak><span>Paid to 409 of 412 employees</span>SAR 3,918,240.50</p><dl><div><dt>Pay date</dt><dd>27 September 2026</dd></div><div><dt>Bank file</dt><dd>WPS-2026-09.sif, accepted</dd></div><div><dt>Held</dt><dd>3 employees, SAR 41,900</dd></div></dl><h3>Resolve before the next run</h3><ol data-amc-next><li>Add a valid IBAN for 2 employees in Riyadh.</li><li>Confirm the end-of-service settlement for Omar Al Zahrani.</li></ol><p data-amc-end>The payroll team has the exception list. Held salaries are paid in an off-cycle run once fixed.</p>",
+      "buttons": {
+        "PREVIOUS": "Close",
+        "NEXT": "Review exceptions"
+      }
+    }
+  ]
+}

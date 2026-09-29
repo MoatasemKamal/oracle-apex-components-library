@@ -1,0 +1,179 @@
+/* Empty Aware: living region template. The script watches the native content of the region
+   (APEX no-data messages, report tables without rows, card lists without cards) and, when there
+   is nothing to show, sets that dead end aside and shows a designed empty state in its place:
+   a drawn illustration as the figure on a dotted ground, a message from a data attribute or
+   from the region's own no-data text, and the region's Create button moved into the empty state
+   as the next action. When a refresh brings rows back, the native content returns and the button
+   goes back to the header. Without JavaScript the region is a plain frame with the native
+   no-data message. */
+.amc-TEmptyAware {
+  --amc-tea-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tea-surface: var(--ut-component-background-color, #fff);
+  --amc-tea-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tea-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-tea-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tea-radius: calc(var(--ut-component-border-radius, 4px) + 8px);
+  --amc-tea-ground: color-mix(in srgb, var(--amc-tea-ink) 3%, var(--amc-tea-surface));
+  --amc-tea-dot: color-mix(in srgb, var(--amc-tea-ink) 14%, transparent);
+  margin-block-end: 16px;
+  color: var(--amc-tea-ink);
+}
+.amc-TEmptyAware-surface {
+  border-radius: var(--amc-tea-radius);
+  background: var(--amc-tea-surface);
+  box-shadow: 0 0 0 1px var(--amc-tea-line);
+}
+.amc-TEmptyAware-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-inline-size: 0;
+  padding-block: 14px 10px;
+  padding-inline: 18px;
+}
+.amc-TEmptyAware-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--amc-tea-accent) 12%, transparent);
+  color: var(--amc-tea-accent);
+  font-size: 14px;
+}
+.amc-TEmptyAware-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TEmptyAware-title { flex: 1; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TEmptyAware-actions, .amc-TEmptyAware-create, .amc-TEmptyAware-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TEmptyAware-actions:empty, .amc-TEmptyAware-create:empty, .amc-TEmptyAware-footer:empty, .amc-TEmptyAware-more:empty { display: none; }
+.amc-TEmptyAware-footer { padding-block: 0 14px; padding-inline: 18px; }
+.amc-TEmptyAware-more { padding-inline: 18px; }
+
+.amc-TEmptyAware-stage { padding-block: 0 16px; padding-inline: 18px; }
+.amc-TEmptyAware-body { min-inline-size: 0; overflow-x: auto; }
+/* The native no-data message and header-only tables are set aside while the empty state shows. */
+.amc-TEmptyAware [data-amc-empty-hidden] { display: none; }
+.amc-TEmptyAware.is-bare .amc-TEmptyAware-body { display: none; }
+
+/* The empty state: figure (drawing, message, action) on a dotted ground that fades out. */
+.amc-TEmptyAware-empty {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding-block: 28px 30px;
+  padding-inline: 20px;
+  border-radius: calc(var(--amc-tea-radius) - 2px);
+  background: var(--amc-tea-ground);
+  text-align: center;
+  animation: amc-tea-in .24s ease-out 1 both;
+}
+.amc-TEmptyAware-empty[hidden] { display: none; }
+.amc-TEmptyAware-empty::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: radial-gradient(var(--amc-tea-dot) 1.2px, transparent 1.6px);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 38%, var(--amc-tea-ink, #000) 0, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 38%, var(--amc-tea-ink, #000) 0, transparent 70%);
+}
+@keyframes amc-tea-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.amc-TEmptyAware-art { display: none; inline-size: 132px; block-size: auto; margin-block-end: 6px; overflow: visible; }
+.amc-TEmptyAware-art--tray { display: block; }
+.amc-TEmptyAware--search .amc-TEmptyAware-art--tray,
+.amc-TEmptyAware--docs .amc-TEmptyAware-art--tray { display: none; }
+.amc-TEmptyAware--search .amc-TEmptyAware-art--search,
+.amc-TEmptyAware--docs .amc-TEmptyAware-art--docs { display: block; }
+.amc-TEmptyAware-artGround { fill: color-mix(in srgb, var(--amc-tea-ink) 8%, transparent); }
+.amc-TEmptyAware-artFill { fill: color-mix(in srgb, var(--amc-tea-accent) 14%, var(--amc-tea-surface)); }
+.amc-TEmptyAware-artPaper { fill: var(--amc-tea-surface); }
+.amc-TEmptyAware-artLine {
+  fill: none;
+  stroke: color-mix(in srgb, var(--amc-tea-accent) 75%, var(--amc-tea-ink));
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.amc-TEmptyAware-artThick { stroke-width: 7; }
+.amc-TEmptyAware-artAccent { fill: var(--amc-tea-accent); }
+.amc-TEmptyAware-artPlus { fill: none; stroke: var(--ut-palette-primary-contrast, #fff); stroke-width: 3; stroke-linecap: round; }
+.amc-TEmptyAware-emptyText { display: grid; justify-items: inherit; gap: 6px; min-inline-size: 0; }
+.amc-TEmptyAware-emptyTitle {
+  max-inline-size: 36ch;
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  line-height: 1.35;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+.amc-TEmptyAware-emptyHint {
+  max-inline-size: 48ch;
+  margin: 0;
+  color: var(--amc-tea-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+.amc-TEmptyAware-emptyHint[hidden] { display: none; }
+.amc-TEmptyAware-emptyAction { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block-start: 10px; }
+.amc-TEmptyAware-emptyAction:empty { display: none; }
+
+.amc-TEmptyAware-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Option: Compact. Drawing beside the text in one short row, for small dashboard regions. */
+.amc-TEmptyAware--compact .amc-TEmptyAware-empty {
+  grid-template-columns: auto minmax(0, 1fr);
+  justify-items: start;
+  align-items: center;
+  column-gap: 16px;
+  padding-block: 16px;
+  text-align: start;
+}
+.amc-TEmptyAware--compact .amc-TEmptyAware-art { inline-size: 76px; margin: 0; }
+.amc-TEmptyAware--compact .amc-TEmptyAware-emptyText { display: grid; justify-items: inherit; gap: 6px; min-inline-size: 0; }
+.amc-TEmptyAware-emptyTitle { font-size: .9375rem; }
+.amc-TEmptyAware--compact .amc-TEmptyAware-emptyAction { justify-content: flex-start; margin-block-start: 4px; }
+.amc-TEmptyAware--compact .amc-TEmptyAware-empty::before { -webkit-mask-image: radial-gradient(ellipse at 12% 50%, var(--amc-tea-ink, #000) 0, transparent 60%); mask-image: radial-gradient(ellipse at 12% 50%, var(--amc-tea-ink, #000) 0, transparent 60%); }
+
+/* Option: Dashed. A dashed outline marks the space as one to be filled. */
+.amc-TEmptyAware--dashed .amc-TEmptyAware-empty {
+  background: none;
+  outline: 2px dashed color-mix(in srgb, var(--amc-tea-accent) 35%, var(--amc-tea-line));
+  outline-offset: -2px;
+}
+
+/* Option: Frameless. No card of its own, for regions inside dashboards and other frames. */
+.amc-TEmptyAware--frameless .amc-TEmptyAware-surface { background: none; box-shadow: none; }
+.amc-TEmptyAware--frameless .amc-TEmptyAware-header,
+.amc-TEmptyAware--frameless .amc-TEmptyAware-stage,
+.amc-TEmptyAware--frameless .amc-TEmptyAware-footer,
+.amc-TEmptyAware--frameless .amc-TEmptyAware-more { padding-inline: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TEmptyAware-empty { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TEmptyAware-empty { border: 1px solid CanvasText; }
+  .amc-TEmptyAware-empty::before { display: none; }
+  .amc-TEmptyAware-artLine { stroke: CanvasText; }
+  .amc-TEmptyAware-artFill, .amc-TEmptyAware-artGround, .amc-TEmptyAware-artAccent { fill: Canvas; }
+}

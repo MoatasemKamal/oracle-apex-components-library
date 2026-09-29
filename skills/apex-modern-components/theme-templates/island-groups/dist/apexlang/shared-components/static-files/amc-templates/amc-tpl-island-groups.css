@@ -1,0 +1,211 @@
+/* Island Groups: region template that turns its sub regions, and body blocks marked
+   data-amc-island, into bounded "islands" on a 12-column grid that answers to the region's own
+   width (container queries). Law of proximity: tight spacing inside an island, a wide gutter
+   between islands. Law of common region: each island is a shared tinted ground, the weakest
+   container that works, never a border. A sub region that also uses this template becomes an
+   island whose title turns into the island label; a third level is grouped by spacing only.
+   Numbering appears only with the Numbered sequence option. */
+.amc-TIslandGroups {
+  --amc-tig-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tig-surface: var(--ut-component-background-color, #fff);
+  --amc-tig-page: var(--ut-body-background-color, #f4f4f4);
+  --amc-tig-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tig-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-tig-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tig-radius: calc(var(--ut-component-border-radius, 4px) + 8px);
+  --amc-tig-ground: color-mix(in srgb, var(--amc-tig-ink) 4.5%, var(--amc-tig-surface));
+  --amc-tig-between: 24px;
+  --amc-tig-inside: 18px;
+  --amc-tig-tight: 8px;
+  container: amc-tig / inline-size;
+  margin-block-end: 16px;
+  padding: clamp(14px, 2.4vw, 24px);
+  border-radius: var(--amc-tig-radius);
+  background: var(--amc-tig-surface);
+  box-shadow: 0 0 0 1px var(--amc-tig-line);
+  color: var(--amc-tig-ink);
+}
+
+.amc-TIslandGroups-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-inline-size: 0;
+  margin-block-end: calc(var(--amc-tig-between) - 6px);
+}
+.amc-TIslandGroups-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--amc-tig-accent) 12%, transparent);
+  color: var(--amc-tig-accent);
+  font-size: 14px;
+}
+.amc-TIslandGroups-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TIslandGroups-title { flex: 1; min-inline-size: 0; margin: 0; font-size: 1.125rem; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TIslandGroups-actions, .amc-TIslandGroups-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TIslandGroups-actions:empty, .amc-TIslandGroups-footer:empty { display: none; }
+.amc-TIslandGroups-footer { margin-block-start: var(--amc-tig-between); }
+
+/* The grid: 12 columns, one island per row until the region is wide enough. */
+.amc-TIslandGroups-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--amc-tig-between);
+  counter-reset: amc-tig;
+}
+.amc-TIslandGroups-body { grid-column: 1 / -1; min-inline-size: 0; }
+.amc-TIslandGroups-body:empty, .amc-TIslandGroups-subs:empty { display: none; }
+/* Body islands and sub regions join the grid; APEX grid wrappers (container, row, col, which
+   carry no id) step aside so the regions themselves are the islands. */
+.amc-TIslandGroups-body:has(> [data-amc-island]),
+.amc-TIslandGroups-subs,
+.amc-TIslandGroups-subs > div:not([id]),
+.amc-TIslandGroups-subs > div:not([id]) > div:not([id]),
+.amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) { display: contents; }
+
+/* Islands */
+.amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) {
+  --amc-tig-span: 12;
+  grid-column: span var(--amc-tig-span);
+  min-inline-size: 0;
+  margin: 0;
+  padding: var(--amc-tig-inside);
+  border-radius: calc(var(--amc-tig-radius) - 2px);
+  background: var(--amc-tig-ground);
+  box-shadow: none;
+  counter-increment: amc-tig;
+}
+@container amc-tig (min-width: 560px) {
+  .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) { --amc-tig-span: 6; }
+  .amc-TIslandGroups-grid :where([data-amc-island-md="12"]) { --amc-tig-span: 12; }
+}
+@container amc-tig (min-width: 900px) {
+  .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) { --amc-tig-span: 4; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="3"]) { --amc-tig-span: 3; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="4"]) { --amc-tig-span: 4; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="5"]) { --amc-tig-span: 5; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="6"]) { --amc-tig-span: 6; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="7"]) { --amc-tig-span: 7; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="8"]) { --amc-tig-span: 8; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="9"]) { --amc-tig-span: 9; }
+  .amc-TIslandGroups-grid :where([data-amc-island-span="12"]) { --amc-tig-span: 12; }
+}
+
+/* A sub region using this template is an island: no card of its own, its title is the label,
+   kept tight to the content it names. */
+.amc-TIslandGroups .amc-TIslandGroups {
+  --amc-tig-ground: inherit;
+  --amc-tig-between: inherit;
+  --amc-tig-inside: inherit;
+  --amc-tig-tight: inherit;
+  padding: var(--amc-tig-inside);
+  background: var(--amc-tig-ground);
+  box-shadow: none;
+}
+.amc-TIslandGroups .amc-TIslandGroups .amc-TIslandGroups-header { margin-block-end: var(--amc-tig-tight); gap: 8px; }
+.amc-TIslandGroups .amc-TIslandGroups .amc-TIslandGroups-title { font-size: .9375rem; font-weight: 650; }
+.amc-TIslandGroups .amc-TIslandGroups .amc-TIslandGroups-icon { inline-size: 24px; block-size: 24px; border-radius: 7px; font-size: 12px; background: none; }
+.amc-TIslandGroups .amc-TIslandGroups .amc-TIslandGroups-grid { gap: var(--amc-tig-inside); }
+.amc-TIslandGroups .amc-TIslandGroups .amc-TIslandGroups-footer { margin-block-start: var(--amc-tig-inside); }
+/* Inside an island, groups are made by spacing only: never a region in a region in a region. */
+.amc-TIslandGroups .amc-TIslandGroups .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) { padding: 0; background: none; box-shadow: none; }
+
+/* Body islands written in Static Content: the first heading is the label. */
+.amc-TIslandGroups-body > [data-amc-island] > :is(h2, h3, h4):first-child {
+  margin-block: 0 var(--amc-tig-tight);
+  font-size: .9375rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+.amc-TIslandGroups-body > [data-amc-island] > :last-child { margin-block-end: 0; }
+
+/* Option: Numbered sequence. Labels carry 1, 2, 3 only when the islands are real steps. */
+.amc-TIslandGroups--sequence > .amc-TIslandGroups-grid > .amc-TIslandGroups-subs .amc-TIslandGroups-title::before,
+.amc-TIslandGroups--sequence > .amc-TIslandGroups-grid > .amc-TIslandGroups-body > [data-amc-island] > .amc-TIslandGroups-header > .amc-TIslandGroups-title::before,
+.amc-TIslandGroups--sequence .amc-TIslandGroups-body > [data-amc-island] > :is(h2, h3, h4):first-child::before {
+  content: counter(amc-tig);
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.6em;
+  block-size: 1.6em;
+  margin-inline-end: .5em;
+  border-radius: 50%;
+  background: var(--amc-tig-accent);
+  color: var(--ut-palette-primary-contrast, #fff);
+  font-size: .8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  vertical-align: .05em;
+}
+.amc-TIslandGroups--sequence .amc-TIslandGroups--sequence .amc-TIslandGroups-title::before { content: none; }
+
+/* Option: On page. No outer card: islands are surfaces on the page background. */
+.amc-TIslandGroups--onPage { padding: 0; background: none; box-shadow: none; }
+.amc-TIslandGroups--onPage { --amc-tig-ground: var(--amc-tig-surface); }
+.amc-TIslandGroups--onPage .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) {
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tig-ink) 8%, transparent);
+}
+
+/* Option: Dense. Tighter gutter and padding for dashboards with many small islands. */
+.amc-TIslandGroups--dense { --amc-tig-between: 12px; --amc-tig-inside: 12px; --amc-tig-tight: 6px; }
+
+/* Option: Accent ground. Islands tinted with the primary color instead of neutral. */
+.amc-TIslandGroups--accent { --amc-tig-ground: color-mix(in srgb, var(--amc-tig-accent) 7%, var(--amc-tig-surface)); }
+
+/* Option: Pairs. At most two islands per row, for form sections and side-by-side comparisons. */
+@container amc-tig (min-width: 900px) {
+  .amc-TIslandGroups--pairs > .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]):not([data-amc-island-span="12"]) { --amc-tig-span: 6; }
+  .amc-TIslandGroups--pairs > .amc-TIslandGroups-grid [data-amc-island-md="12"] { --amc-tig-span: 12; }
+}
+
+@media (forced-colors: active) {
+  .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) { border: 1px solid CanvasText; }
+}
+@media print {
+  .amc-TIslandGroups { box-shadow: none; }
+  .amc-TIslandGroups-grid :where(
+  .amc-TIslandGroups-body > [data-amc-island],
+  .amc-TIslandGroups-subs > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > [id],
+  .amc-TIslandGroups-subs > div:not([id]) > div:not([id]) > div:not([id]) > [id]) { break-inside: avoid; }
+}

@@ -1,0 +1,265 @@
+/* Peak End Summary: region template for the end of a business flow (order submitted,
+   application finished, month closed). Peak-end rule: one peak, the key figure of the flow,
+   arrives once (the script counts it up while a light blooms behind it and an accent bar draws
+   under it); everything else is still: a recap list, the next steps as a real sequence, and a
+   calm last line before the actions. Feedback patterns: the outcome is stated in text, never by
+   color alone, and announced once. The figure is complete at rest; under reduced motion, with
+   the Still option or without JavaScript the final state shows at once.
+   Body conventions (Static Content): [data-amc-peak] the key figure with an optional span label,
+   dl the recap, ol[data-amc-next] (or h3 + ol) the next steps, [data-amc-end] the closing line. */
+.amc-TPeakEndSummary {
+  --amc-tpe-tone: var(--ut-palette-success, #278701);
+  --amc-tpe-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tpe-surface: var(--ut-component-background-color, #fff);
+  --amc-tpe-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tpe-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-tpe-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tpe-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-tpe-ms: 1100ms;
+  container: amc-tpe / inline-size;
+  margin-block-end: 16px;
+  color: var(--amc-tpe-ink);
+}
+.amc-TPeakEndSummary-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 20px;
+  padding: clamp(18px, 3.5vw, 36px);
+  border-radius: var(--amc-tpe-radius);
+  background: var(--amc-tpe-surface);
+  box-shadow: 0 0 0 1px var(--amc-tpe-line), 0 18px 40px -30px color-mix(in srgb, var(--amc-tpe-ink) 45%, transparent);
+}
+/* Decorative light behind the peak area, on the frame, never on the body. */
+.amc-TPeakEndSummary-glow {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: -1;
+  inline-size: min(560px, 90%);
+  block-size: 300px;
+  border-start-start-radius: var(--amc-tpe-radius);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--amc-tpe-tone) 16%, transparent), transparent);
+  opacity: .9;
+  pointer-events: none;
+  animation: amc-tpe-bloom calc(var(--amc-tpe-ms) + 500ms) cubic-bezier(.2, .7, .2, 1) 1 both;
+}
+@keyframes amc-tpe-bloom {
+  0% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: .9; }
+}
+
+.amc-TPeakEndSummary-header { display: flex; align-items: center; gap: 12px; min-inline-size: 0; }
+.amc-TPeakEndSummary-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  background: var(--amc-tpe-tone);
+  color: var(--ut-palette-success-contrast, #fff);
+  font-size: 16px;
+}
+.amc-TPeakEndSummary-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TPeakEndSummary-title { flex: 1; min-inline-size: 0; margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; text-wrap: balance; }
+.amc-TPeakEndSummary-tools, .amc-TPeakEndSummary-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.amc-TPeakEndSummary-tools:empty, .amc-TPeakEndSummary-actions:empty, .amc-TPeakEndSummary-more:empty { display: none; }
+.amc-TPeakEndSummary-actions { padding-block-start: 4px; }
+
+/* Body: peak, recap, next steps, ending. Stacked; side by side when the region is wide. */
+.amc-TPeakEndSummary-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  min-inline-size: 0;
+}
+.amc-TPeakEndSummary-body > * { margin: 0; min-inline-size: 0; }
+@container amc-tpe (min-width: 720px) {
+  .amc-TPeakEndSummary-body { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 48px; align-items: start; }
+  .amc-TPeakEndSummary-body > * { grid-column: 2; }
+  .amc-TPeakEndSummary-body > [data-amc-peak],
+  .amc-TPeakEndSummary-body > [data-amc-end] { grid-column: 1 / -1; }
+  .amc-TPeakEndSummary-body > dl { grid-column: 1; grid-row: 2 / span 2; }
+}
+@container amc-tpe (min-width: 480px) {
+  .amc-TPeakEndSummary-body > [data-amc-peak] { white-space: nowrap; overflow-wrap: normal; }
+}
+
+/* The peak: the one loud thing. */
+.amc-TPeakEndSummary-body > [data-amc-peak] {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  padding-block-end: 16px;
+  font-size: clamp(2.25rem, 1.4rem + 3.2cqi, 3.5rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: plaintext;
+  overflow-wrap: anywhere;
+}
+.amc-TPeakEndSummary-body > [data-amc-peak] > :is(span, small) {
+  order: -1;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--amc-tpe-muted);
+  white-space: normal;
+  unicode-bidi: isolate;
+}
+.amc-TPeakEndSummary-body > [data-amc-peak] > :is(span, small) + :is(span, small) { order: 1; font-weight: 400; }
+.amc-TPeakEndSummary-body > [data-amc-peak]::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 56px;
+  block-size: 5px;
+  border-radius: 5px;
+  background: var(--amc-tpe-tone);
+  transform-origin: 0 50%;
+  animation: amc-tpe-bar 520ms cubic-bezier(.2, .9, .3, 1.2) var(--amc-tpe-ms) 1 both;
+}
+.amc-TPeakEndSummary-body > [data-amc-peak]:dir(rtl)::after { transform-origin: 100% 50%; }
+@keyframes amc-tpe-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Recap: quiet rows, label and value on one line, values aligned at the inline end. */
+.amc-TPeakEndSummary-body > dl { display: grid; align-content: start; }
+.amc-TPeakEndSummary-body > dl > div,
+.amc-TPeakEndSummary-body > dl > dt { display: flex; }
+.amc-TPeakEndSummary-body > dl > div {
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 10px;
+  border-block-end: 1px solid var(--amc-tpe-line);
+}
+.amc-TPeakEndSummary-body > dl > div:first-child { padding-block-start: 0; }
+.amc-TPeakEndSummary-body > dl dt { color: var(--amc-tpe-muted); font-size: .875rem; }
+.amc-TPeakEndSummary-body > dl dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  overflow-wrap: anywhere;
+}
+
+/* Next steps: a real sequence, so it is numbered. */
+.amc-TPeakEndSummary-body > h3 { font-size: .9375rem; font-weight: 700; margin-block-end: -12px; }
+.amc-TPeakEndSummary-body > ol {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+  counter-reset: amc-tpe;
+}
+.amc-TPeakEndSummary-body > ol > li {
+  position: relative;
+  min-block-size: 28px;
+  padding-inline-start: 40px;
+  padding-block-start: 3px;
+  line-height: 1.45;
+  counter-increment: amc-tpe;
+}
+.amc-TPeakEndSummary-body > ol > li::before {
+  content: counter(amc-tpe);
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-tpe-accent) 12%, transparent);
+  color: var(--amc-tpe-accent);
+  font-size: .8125rem;
+  font-weight: 700;
+}
+.amc-TPeakEndSummary-body > ol > li > strong:first-child { display: block; }
+.amc-TPeakEndSummary-body > ol:lang(ar) > li::before { content: counter(amc-tpe, arabic-indic); }
+.amc-TPeakEndSummary-body > [data-amc-peak]:lang(ar) { letter-spacing: 0; line-height: 1.35; }
+
+/* The end: calm, quiet, final. */
+.amc-TPeakEndSummary-body > [data-amc-end] {
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--amc-tpe-line);
+  color: var(--amc-tpe-muted);
+  font-size: .875rem;
+  line-height: 1.55;
+}
+
+.amc-TPeakEndSummary-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* A new figure after a refresh: the script restarts the bloom and the bar by removing them for
+   one frame. */
+.amc-TPeakEndSummary.is-replay .amc-TPeakEndSummary-glow,
+.amc-TPeakEndSummary.is-replay .amc-TPeakEndSummary-body > [data-amc-peak]::after { animation: none; }
+
+/* Tones: the outcome color of the peak bar, the light and the icon. */
+.amc-TPeakEndSummary--info { --amc-tpe-tone: var(--ut-palette-info, #0076df); }
+.amc-TPeakEndSummary--info .amc-TPeakEndSummary-icon { color: var(--ut-palette-info-contrast, #fff); }
+.amc-TPeakEndSummary--warning { --amc-tpe-tone: var(--ut-palette-warning, #fbce4a); }
+.amc-TPeakEndSummary--warning .amc-TPeakEndSummary-icon { color: var(--ut-palette-warning-contrast, #262626); }
+
+/* Option: Receipt recap. Dotted leaders tie each label to its value, like a printed receipt. */
+.amc-TPeakEndSummary--receipt .amc-TPeakEndSummary-body > dl > div { border-block-end: 0; padding-block: 6px; }
+.amc-TPeakEndSummary--receipt .amc-TPeakEndSummary-body > dl > div::after {
+  content: "";
+  order: 1;
+  flex: 1;
+  min-inline-size: 16px;
+  border-block-end: 2px dotted color-mix(in srgb, var(--amc-tpe-muted) 55%, transparent);
+  transform: translateY(-4px);
+}
+.amc-TPeakEndSummary--receipt .amc-TPeakEndSummary-body > dl dd { order: 2; }
+.amc-TPeakEndSummary--receipt .amc-TPeakEndSummary-body > dl > div:last-child { margin-block-start: 6px; padding-block-start: 12px; border-block-start: 2px solid var(--amc-tpe-ink); }
+.amc-TPeakEndSummary--receipt .amc-TPeakEndSummary-body > dl > div:last-child::after { border-block-end-color: transparent; }
+.amc-TPeakEndSummary--receipt .amc-TPeakEndSummary-body > dl > div:last-child dd { font-size: 1.0625rem; font-weight: 750; }
+
+/* Option: Centered. A single stacked column with the peak centered, for short outcomes. */
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-card { max-inline-size: 640px; margin-inline: auto; }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-glow { inset-inline: 0; margin-inline: auto; inline-size: 100%; border-start-end-radius: var(--amc-tpe-radius); }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-header { flex-direction: column; text-align: center; }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-body { grid-template-columns: minmax(0, 1fr); }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-body > * { grid-column: 1; grid-row: auto; }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-body > [data-amc-peak] { justify-items: center; text-align: center; }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-body > [data-amc-peak]::after { inset-inline: 0; margin-inline: auto; transform-origin: 50% 50%; }
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-body > [data-amc-end],
+.amc-TPeakEndSummary--center .amc-TPeakEndSummary-actions { justify-content: center; text-align: center; }
+
+/* Option: Still. No count, no bloom, no bar drawing: the calm final state from the start. */
+.amc-TPeakEndSummary--still .amc-TPeakEndSummary-glow,
+.amc-TPeakEndSummary--still .amc-TPeakEndSummary-body > [data-amc-peak]::after { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TPeakEndSummary-glow,
+  .amc-TPeakEndSummary-body > [data-amc-peak]::after { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TPeakEndSummary-card { border: 1px solid CanvasText; }
+  .amc-TPeakEndSummary-glow { display: none; }
+  .amc-TPeakEndSummary-body > [data-amc-peak]::after,
+  .amc-TPeakEndSummary-body > ol > li::before { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+}
+@media print {
+  .amc-TPeakEndSummary-card { box-shadow: none; border: 1px solid; }
+  .amc-TPeakEndSummary-glow, .amc-TPeakEndSummary-actions, .amc-TPeakEndSummary-tools { display: none; }
+}

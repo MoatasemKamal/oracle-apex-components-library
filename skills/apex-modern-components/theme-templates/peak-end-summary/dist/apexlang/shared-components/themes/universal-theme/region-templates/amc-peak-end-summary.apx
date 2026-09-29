@@ -1,0 +1,139 @@
+regionTemplate amc-peak-end-summary (
+    name: AMC Peak End Summary
+    region {
+        template:
+            ```html
+            <section class="amc-TPeakEndSummary #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-ms="1100">
+              <div class="amc-TPeakEndSummary-card">
+                <span class="amc-TPeakEndSummary-glow" aria-hidden="true"></span>
+                <header class="amc-TPeakEndSummary-header">
+                  <span class="amc-TPeakEndSummary-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TPeakEndSummary-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TPeakEndSummary-tools">#HELP##EDIT##COPY#</div>
+                </header>
+                <div class="amc-TPeakEndSummary-body">#BODY#</div>
+                <div class="amc-TPeakEndSummary-more">#SUB_REGIONS#</div>
+                <div class="amc-TPeakEndSummary-actions">#PREVIOUS##CLOSE##DELETE##CHANGE##CREATE##NEXT#</div>
+                <p class="amc-TPeakEndSummary-live" role="status" aria-live="polite"></p>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-peak-end-summary.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-peak-end-summary.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_PEAK_END_SUMMARY
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template for the end of a flow. Write the region text with four optional parts, in this order: an element with the attribute data-amc-peak holding the key figure, for example <p data-amc-peak><span>Order total</span>SAR &P30_TOTAL.<small>Paid by bank transfer</small></p> - the first span or small is the label shown above the figure, a second one the note below it; a dl recap, one div per dt and dd; an h3 heading and an ol for the next steps; an element with data-amc-end holding the closing line. The region title is the outcome, stated in words, for example Order SO-55140 is placed. Next or Create is the primary action, Previous and Close the way back; Help, Edit and Copy sit beside the title.
+            PRINCIPLES APPLIED. Peak-end rule: a flow is remembered by its peak and its end, so the template spends all motion on one peak, the figure, and ends on a calm, quiet line and clear actions, never on a transitional state. Feedback patterns: the outcome is in the title and the tone color is never the only signal, the figure is announced once through a polite status, and the next steps say what the system does now, numbered because they are a real sequence.
+            THE MOMENT. With the script the number in the peak counts up from zero over 1.1 seconds, ease out, keeping the currency text, group separator, decimals and Western or Arabic-Indic digits of the original; a soft light in the tone color blooms behind the peak and an accent bar draws under it as the count lands. At the end the text is set back to exactly the original string. It runs once per figure: a refresh that shows the same figure does not replay, a new figure does. A peak without a number, such as Approved, gets only the light and the bar. Set the duration with the Custom Attribute data-amc-ms="1600", 300 to 4000; override the announced text with data-amc-text-announce="Order total %0" where %0 is the peak text.
+            LAYOUT. Stacked on narrow regions; from 720px of region width the peak and next steps sit in the left column and the recap in the right, with the closing line across both. Right-to-left pages mirror.
+            MOTION AND ACCESSIBILITY. Under reduced motion, with the Still option or without JavaScript, the final state shows at once: nothing counts, blooms or draws. aria-busy is set on the peak while it counts. The peak and recap values use tabular figures and plain bidi so mixed Arabic and Latin text reads correctly. In forced-colors mode the light is removed and the bar uses Highlight. JavaScript API: amcTplPeakEndSummary.replay(element), finish(element) and parse(element).
+            ```
+    }
+
+    templateOption amc-peak-end-summary-tone-info (
+        name: Tone - Info
+        sequence: 10
+        appearance {
+            cssClasses: amc-TPeakEndSummary--info
+        }
+        help {
+            helpText:
+                ```text
+                Info color for the icon, light and bar, for neutral completions such as a closed period or a finished import. Leave all tones unticked for success.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TONE_INFO
+        }
+    )
+
+    templateOption amc-peak-end-summary-tone-warning (
+        name: Tone - Warning
+        sequence: 20
+        appearance {
+            cssClasses: amc-TPeakEndSummary--warning
+        }
+        help {
+            helpText:
+                ```text
+                Warning color for flows that finished with exceptions, such as a payroll run with held salaries. Say what needs attention in the title and list the fixes as next steps.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TONE_WARNING
+        }
+    )
+
+    templateOption amc-peak-end-summary-receipt (
+        name: Receipt recap
+        sequence: 30
+        appearance {
+            cssClasses: amc-TPeakEndSummary--receipt
+        }
+        help {
+            helpText:
+                ```text
+                Dotted leaders tie each recap label to its value and the last row is set as a total under a rule, like a printed receipt. For money breakdowns whose last row is the sum.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: RECEIPT
+        }
+    )
+
+    templateOption amc-peak-end-summary-center (
+        name: Centered
+        sequence: 40
+        appearance {
+            cssClasses: amc-TPeakEndSummary--center
+        }
+        help {
+            helpText:
+                ```text
+                One centered column at most 640px wide with the peak in the middle, for short outcomes with a small recap, such as a submitted request.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CENTER
+        }
+    )
+
+    templateOption amc-peak-end-summary-still (
+        name: Still
+        sequence: 50
+        appearance {
+            cssClasses: amc-TPeakEndSummary--still
+        }
+        help {
+            helpText:
+                ```text
+                No count, light or bar drawing: the final state from the start. For outcomes that are not a success to celebrate, such as a run with exceptions, and for pages users revisit often.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STILL
+        }
+    )
+)

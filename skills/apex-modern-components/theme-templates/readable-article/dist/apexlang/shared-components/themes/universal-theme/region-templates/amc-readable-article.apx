@@ -1,0 +1,150 @@
+regionTemplate amc-readable-article (
+    name: AMC Readable Article
+    region {
+        template:
+            ```html
+            <section class="amc-TReadableArticle #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-text-minutes="%0 min read" data-amc-text-anchor="Copy link to section: %0" data-amc-text-copied="Link to %0 copied" data-amc-text-sections="%0 sections">
+              <div class="amc-TReadableArticle-progress" aria-hidden="true"><span class="amc-TReadableArticle-progressBar"></span></div>
+              <header class="amc-TReadableArticle-header">
+                <span class="amc-TReadableArticle-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                <div class="amc-TReadableArticle-heading">
+                  <h2 class="amc-TReadableArticle-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <p class="amc-TReadableArticle-meta" hidden></p>
+                </div>
+                <div class="amc-TReadableArticle-actions">#HELP##EDIT##CHANGE##COPY##CREATE#</div>
+              </header>
+              <div class="amc-TReadableArticle-layout">
+                <nav class="amc-TReadableArticle-toc" aria-labelledby="#REGION_STATIC_ID#_toc" hidden>
+                  <details class="amc-TReadableArticle-details">
+                    <summary class="amc-TReadableArticle-summary"><span id="#REGION_STATIC_ID#_toc">Contents</span></summary>
+                    <ol class="amc-TReadableArticle-list"></ol>
+                  </details>
+                </nav>
+                <div class="amc-TReadableArticle-body">#BODY#</div>
+              </div>
+              <div class="amc-TReadableArticle-more">#SUB_REGIONS#</div>
+              <footer class="amc-TReadableArticle-footer">#PREVIOUS##CLOSE##DELETE##NEXT#</footer>
+              <p class="amc-TReadableArticle-live" role="status" aria-live="polite"></p>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-readable-article.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-readable-article.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_READABLE_ARTICLE
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template for long text. The region title is the article title; the region text, Static Content or the HTML of a Dynamic Content region, is the article. Buttons: Help, Edit, Change, Copy and Create sit beside the title, Previous, Close, Delete and Next under the text; sub regions follow the text.
+            PRINCIPLES APPLIED. Readable measure: the text column is capped at 68ch, 62ch with Serif text, 60ch for Arabic and for Compact, and leading grows with the measure, 1.7 for sans, 1.78 for serif, 1.95 for Arabic. Typography scale: body h2 1.5625rem, h3 1.25rem and h4 1rem on a 1.25 major-third ratio under a 1.5 to 2rem title in weight 750, body text 1rem, meta 0.8125rem, so every level differs by at least one step.
+            WITH THE SCRIPT. Every h2, h3 and h4 in the body gets an id when it has none, region static id plus the heading text, and a quiet # anchor after its text: clicking it moves to the section and copies the section link, the # turns into a check and a polite status says Link to <section> copied. When the body has at least two top-level headings, h2 or h3 when the text starts at h3, a Contents list of the top two levels is built. Region wider than 880px: the contents stand sticky at the inline end of the text, open, with a rail that fills with reading progress and a marker on the current section. Narrower: the contents are a collapsed Contents block above the text that closes again after a pick, and a 3px progress hairline sticks to the top of the region while it is being read. Progress shows only when the text is taller than 1.25 screens. A contents link moves focus to its heading. The header shows the reading time, words divided by 220 words per minute, 180 for Arabic, override with the Custom Attribute data-amc-wpm="200". When most letters in the body are Arabic the region gets taller leading, a shorter measure and no tracking, in either page direction. If the page opens with a section hash the section is scrolled to. The script rebuilds after apexafterrefresh and when the body changes. Without JavaScript the article is fully readable, without contents, anchors or reading time.
+            STICKY OFFSET. Under a fixed Universal Theme header, set the CSS variable --amc-sticky-offset for the page, for example Page > CSS > Inline :root{--amc-sticky-offset:48px}, so the sticky contents, the progress hairline and anchor jumps clear the header.
+            STRINGS to translate, on the section element in the template or per region as Custom Attributes, where %0 is the value: data-amc-text-minutes "%0 min read", data-amc-text-anchor "Copy link to section: %0", data-amc-text-copied "Link to %0 copied", and the Contents label inside the summary element.
+            PRINT. Contents, progress, anchors, icon and buttons are hidden; text prints full width in 11pt black with external link addresses after the link text.
+            KEYBOARD AND MOTION. Contents is a native details element: Enter or Space opens it, links follow in reading order, focus moves to the chosen heading. Anchors are links with a spoken label. Under reduced motion scrolling jumps instead of gliding and the target highlight does not fade; in forced-colors mode progress uses Highlight. JavaScript API: amcTplReadableArticle.refresh(element) and state(element).
+            ```
+    }
+
+    templateOption amc-readable-article-serif (
+        name: Serif text
+        sequence: 10
+        appearance {
+            cssClasses: amc-TReadableArticle--serif
+        }
+        help {
+            helpText:
+                ```text
+                Sets the body in a book face, Charter, Cambria or Georgia, with a shorter 62ch measure and 1.78 leading; Arabic text uses Noto Naskh Arabic or Traditional Arabic with 2.0 leading. For terms, contracts and long policies read in one sitting. Override the faces with --amc-tra-serif and --amc-tra-serif-ar.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SERIF
+        }
+    )
+
+    templateOption amc-readable-article-numbered (
+        name: Numbered sections
+        sequence: 20
+        appearance {
+            cssClasses: amc-TReadableArticle--numbered
+        }
+        help {
+            helpText:
+                ```text
+                Numbers h2 sections 1, 2, 3 and h3 subsections 1.1, 1.2 in the text and in the contents. Only for text that is a real sequence of clauses, such as terms of use or a contract; leave it off for help pages and announcements.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NUMBERED
+        }
+    )
+
+    templateOption amc-readable-article-compact (
+        name: Compact announcement
+        sequence: 30
+        appearance {
+            cssClasses: amc-TReadableArticle--compact
+        }
+        help {
+            helpText:
+                ```text
+                Smaller title, 60ch measure, no contents and no progress, reading time still shown. For short announcements and notices on a home page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-readable-article-no-toc (
+        name: No contents
+        sequence: 40
+        appearance {
+            cssClasses: amc-TReadableArticle--noToc
+        }
+        help {
+            helpText:
+                ```text
+                Keeps the measure, the scale, the anchors, the reading time and the progress hairline, but builds no contents list; the progress hairline shows at every width. For long text whose sections are already listed elsewhere on the page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_TOC
+        }
+    )
+
+    templateOption amc-readable-article-plain (
+        name: Plain page
+        sequence: 50
+        appearance {
+            cssClasses: amc-TReadableArticle--plain
+        }
+        help {
+            helpText:
+                ```text
+                No card: the article sits directly on the page background with a rule under the title. For full help pages and knowledge base articles that are the only content of the page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PLAIN
+        }
+    )
+)

@@ -1,0 +1,55 @@
+{
+  "samples": [
+    {
+      "title": "Classic Report with no rows: message from the region, Create promoted",
+      "regionTitle": "Open purchase requests",
+      "icon": "fa-file-text-o",
+      "options": [],
+      "body": "<span class=\"nodatafound\">No open purchase requests.</span>",
+      "buttons": {
+        "CREATE": "New purchase request"
+      }
+    },
+    {
+      "title": "Filtered Interactive Report: search art, toolbar kept",
+      "regionTitle": "Supplier invoices",
+      "icon": "fa-search",
+      "options": [
+        "amc-TEmptyAware--search"
+      ],
+      "body": "<div class=\"pv-toolbar\" style=\"display:flex;gap:8px;margin-block-end:12px\"><input aria-label=\"Search invoices\" value=\"Al Waha\" readonly><button type=\"button\" class=\"t-Button\">Go</button></div><div class=\"a-IRR-noDataMsg\"><span class=\"a-IRR-noDataMsg-text\">No invoices match your search.</span></div>"
+    },
+    {
+      "title": "Cards region with zero cards: documents art, dashed",
+      "regionTitle": "Contract documents",
+      "icon": "fa-folder-open-o",
+      "options": [
+        "amc-TEmptyAware--docs",
+        "amc-TEmptyAware--dashed"
+      ],
+      "body": "<ul class=\"t-Cards\"></ul>",
+      "buttons": {
+        "CREATE": "Upload document"
+      }
+    },
+    {
+      "title": "Dashboard tile, compact and frameless: header-only table",
+      "regionTitle": "Overdue deliveries",
+      "options": [
+        "amc-TEmptyAware--compact",
+        "amc-TEmptyAware--frameless"
+      ],
+      "body": "<table class=\"pv-report\"><thead><tr><th>Delivery</th><th>Customer</th><th class=\"pv-num\">Days late</th></tr></thead><tbody></tbody></table>"
+    },
+    {
+      "title": "With data: a plain frame, Create stays in the header",
+      "regionTitle": "Open orders",
+      "icon": "fa-shopping-cart",
+      "options": [],
+      "bodyKind": "report",
+      "buttons": {
+        "CREATE": "New order"
+      }
+    }
+  ]
+}

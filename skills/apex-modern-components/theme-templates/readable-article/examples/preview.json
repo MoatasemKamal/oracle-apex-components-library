@@ -1,0 +1,54 @@
+{
+  "samples": [
+    {
+      "title": "Long policy, contents and reading progress",
+      "regionTitle": "Travel and expense policy",
+      "icon": "fa-plane",
+      "options": [],
+      "body": "<p>This policy explains what Northwind Gulf Trading pays for when you travel on company business, how to book, and how to claim your expenses back. It applies to all employees and contractors in Saudi Arabia, the UAE and Bahrain from 1 October 2026.</p>\n<h2>Before you travel</h2>\n<p>Every trip needs an approved travel request before anything is booked. Raise the request in the Travel app at least ten working days before departure, or five for trips inside the Kingdom. Your line manager approves trips up to SAR 15,000; above that the department head approves as well.</p>\n<h3>Booking flights</h3>\n<p>Book all flights through the travel desk so that fares count towards our corporate agreements. Economy class is the standard for flights under six hours. Business class is allowed for flights of six hours or more, or when you present to a client on the day you land.</p>\n<h3>Booking hotels</h3>\n<p>Choose a hotel from the approved list for the city. If none is available within 5 km of your meeting, the travel desk books the nearest hotel at or under the city cap. Riyadh and Dubai are capped at SAR 900 a night, all other cities at SAR 650.</p>\n<h2>While you are away</h2>\n<p>You receive a daily allowance for meals and local transport instead of claiming receipts for them. The allowance is SAR 350 a day inside the GCC and SAR 450 a day elsewhere, paid for every night away plus the day you return.</p>\n<ul><li>Ride-hailing and taxis between the airport, hotel and client sites are covered by the allowance.</li><li>Car hire needs a line manager's approval in the travel request.</li><li>Personal side trips are at your own cost, including extra hotel nights.</li></ul>\n<h3>Client entertainment</h3>\n<p>Meals with clients are claimed separately with an itemised receipt and the names of the guests. Keep the cost per person under SAR 250 unless your department head agreed a higher amount in advance.</p>\n<h2>Claiming your expenses</h2>\n<p>Submit your claim in the Expenses app within 30 days of returning. Attach a clear photo of every receipt over SAR 100 and say which project or cost centre pays. Finance reimburses approved claims in the next payroll run.</p>\n<blockquote>Claims submitted more than 60 days after the trip are paid only with the CFO's approval.</blockquote>\n<h3>Lost receipts</h3>\n<p>If you lose a receipt, complete the missing receipt declaration in the claim. You can use it for up to two items per trip.</p>\n<h2>Questions</h2>\n<p>Write to the travel desk at <a href=\"mailto:travel@northwind.sa\">travel@northwind.sa</a> or call extension 4410 between 8:00 and 16:00, Sunday to Thursday.</p>",
+      "buttons": {
+        "EDIT": "Edit policy"
+      }
+    },
+    {
+      "title": "Arabic policy, numbered sections",
+      "regionTitle": "سياسة الإجازة السنوية",
+      "icon": "fa-calendar",
+      "options": [
+        "amc-TReadableArticle--numbered"
+      ],
+      "body": "<div lang=\"ar\" dir=\"rtl\"><p>توضح هذه السياسة حق الموظف في الإجازة السنوية المدفوعة الأجر، وطريقة طلبها واعتمادها، وما يحدث للأيام غير المستخدمة في نهاية السنة. تسري على جميع موظفي الشركة في المملكة العربية السعودية اعتباراً من الأول من أكتوبر ٢٠٢٦.</p>\n<h2>الاستحقاق</h2>\n<p>يستحق الموظف إجازة سنوية مدتها واحد وعشرون يوماً، تزيد إلى ثلاثين يوماً بعد إكمال خمس سنوات متصلة في الخدمة. تُحتسب الإجازة بأيام العمل، ولا تدخل فيها العطلات الرسمية التي تقع خلالها.</p>\n<h2>طلب الإجازة</h2>\n<p>يقدَّم طلب الإجازة عبر تطبيق الخدمات الذاتية قبل موعدها بأسبوعين على الأقل. يعتمد المدير المباشر الطلبات حتى عشرة أيام، ويعتمد مدير الإدارة ما يزيد على ذلك.</p>\n<h3>الإجازة في مواسم الذروة</h3>\n<p>في شهر رمضان وفترة إقفال نهاية السنة المالية تُعطى الأولوية لمن لم يحصل على إجازة في الموسم نفسه من العام السابق، ولا يغيب أكثر من ثلث الفريق في الوقت نفسه.</p>\n<h2>الأيام غير المستخدمة</h2>\n<p>يجوز ترحيل عشرة أيام بحد أقصى إلى السنة التالية، على أن تُستخدم قبل نهاية الربع الأول منها. أما ما زاد على ذلك فيُصرف مقابله نقداً بحسب الأجر الأساسي عند انتهاء الخدمة فقط.</p>\n<h2>التواصل</h2>\n<p>لأي استفسار راسل إدارة الموارد البشرية على <a href=\"mailto:hr@northwind.sa\">hr@northwind.sa</a>.</p></div>"
+    },
+    {
+      "title": "Terms of use, serif and numbered",
+      "regionTitle": "Supplier portal terms of use",
+      "icon": "fa-balance-scale",
+      "options": [
+        "amc-TReadableArticle--serif",
+        "amc-TReadableArticle--numbered"
+      ],
+      "body": "<p>These terms apply when you use the Northwind supplier portal to receive purchase orders, submit invoices and track payments. By signing in you accept them on behalf of your company.</p>\n<h2>Definitions</h2>\n<p>\"Portal\" means the website at suppliers.northwind.sa. \"Supplier\" means the company registered in the Portal and every user it invites. \"Purchase order\" means an order issued to the Supplier through the Portal.</p>\n<h2>Accounts and access</h2>\n<h3>Registration</h3>\n<p>The Supplier registers with a valid commercial registration and VAT number and keeps them current. Northwind may suspend an account whose documents have expired.</p>\n<h3>User accounts</h3>\n<p>Each user signs in with their own account. The Supplier removes users who leave the company within five working days and is responsible for everything done with its accounts.</p>\n<h2>Invoices and payment</h2>\n<p>Invoices must match an open purchase order and meet ZATCA e-invoicing requirements. Northwind pays approved invoices 45 days after receipt unless the purchase order states other terms.</p>\n<h2>Changes to these terms</h2>\n<p>We announce changes in the Portal at least 30 days before they apply. Using the Portal after that date means you accept the new terms.</p>",
+      "buttons": {
+        "NEXT": "Accept terms"
+      }
+    },
+    {
+      "title": "Compact announcement",
+      "regionTitle": "Ramadan working hours",
+      "icon": "fa-moon-o",
+      "options": [
+        "amc-TReadableArticle--compact"
+      ],
+      "body": "<p>From 19 February until the end of Ramadan, office hours are 9:30 to 15:30, Sunday to Thursday. The customer service line stays open from 9:00 to 17:00 and the Riyadh and Jeddah warehouses keep their normal shifts.</p>\n<p>Book meetings with other teams inside the new hours, and set your out-of-office reply with the hours if you work with customers abroad.</p>"
+    },
+    {
+      "title": "Plain help page without contents",
+      "regionTitle": "How to raise a purchase request",
+      "options": [
+        "amc-TReadableArticle--plain",
+        "amc-TReadableArticle--noToc"
+      ],
+      "body": "<p>Use a purchase request when you need goods or services that are not in the catalogue. Procurement turns approved requests into purchase orders.</p>\n<h2>Fill in the request</h2>\n<p>Open Purchasing, choose New request and describe what you need in words a supplier would understand. Add the quantity, the date you need it by and the delivery site.</p>\n<h2>Add quotes</h2>\n<p>For anything over SAR 20,000 attach two quotes from different suppliers. Procurement can source the quotes for you if you tick Request sourcing.</p>\n<h2>Track approval</h2>\n<p>Your request goes to your manager and then to the budget owner. You see each step on the request page and get an email when it is approved or sent back.</p>"
+    }
+  ]
+}
