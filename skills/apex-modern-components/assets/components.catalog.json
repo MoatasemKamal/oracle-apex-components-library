@@ -242,6 +242,1336 @@
       }
     },
     {
+      "slug": "design-alert",
+      "name": "Design Alert",
+      "apexlangName": "designAlert",
+      "staticId": "AMC_DESIGN_ALERT",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designAlert",
+      "apexlangItemType": null,
+      "keywords": [
+        "alert",
+        "notice",
+        "banner",
+        "callout",
+        "message",
+        "notification",
+        "toast",
+        "announcement",
+        "tip",
+        "status",
+        "warning",
+        "error",
+        "success"
+      ],
+      "description": "Family of 10 alert and callout designs (soft, side icon, solid, gradient banner, toast card, announcement, tip, quote, inline, panel) with success, warning, danger, info and neutral states. Follows the inline alert pattern of Universal Theme and modern design systems: the state is shown by semantic color plus an icon and a text label, never by color alone. Renders one alert (partial) or a stack of alerts from a query (report).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "soft",
+            "sideIcon",
+            "solid",
+            "gradientBanner",
+            "toastCard",
+            "announcement",
+            "tip",
+            "quote",
+            "inline",
+            "panel"
+          ]
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "message",
+          "staticId": "MESSAGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-alert/README.md",
+        "example": "components/design-alert/examples",
+        "apexlang": "components/design-alert/dist/apexlang/shared-components/plugins/design-alert",
+        "legacySql": "components/design-alert/dist/legacy/amc_design_alert.sql"
+      }
+    },
+    {
+      "slug": "design-avatar",
+      "name": "Design Avatar",
+      "apexlangName": "designAvatar",
+      "staticId": "AMC_DESIGN_AVATAR",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designAvatar",
+      "apexlangItemType": null,
+      "keywords": [
+        "avatar",
+        "user",
+        "person",
+        "profile picture",
+        "initials",
+        "presence",
+        "status",
+        "team",
+        "people",
+        "design collection"
+      ],
+      "description": "Person avatars in 8 designs (ring, status dot, squircle, gradient ring, soft initials, with name, count badge, square tile), following the presence and identity patterns of Universal Theme Avatar, Slack and Microsoft Teams. One avatar (partial) or a wrapping row, list or tile grid of people (report).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "ring",
+            "statusDot",
+            "squircle",
+            "gradientRing",
+            "initialsSoft",
+            "withName",
+            "countBadge",
+            "squareTile"
+          ]
+        },
+        {
+          "apexlangName": "name",
+          "staticId": "NAME",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "status",
+          "staticId": "STATUS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "count",
+          "staticId": "COUNT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "subtitle",
+          "staticId": "SUBTITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large",
+            "xlarge"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/design-avatar/README.md",
+        "example": "components/design-avatar/examples",
+        "apexlang": "components/design-avatar/dist/apexlang/shared-components/plugins/design-avatar",
+        "legacySql": "components/design-avatar/dist/legacy/amc_design_avatar.sql"
+      }
+    },
+    {
+      "slug": "design-badge",
+      "name": "Design Badge",
+      "apexlangName": "designBadge",
+      "staticId": "AMC_DESIGN_BADGE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designBadge",
+      "apexlangItemType": null,
+      "keywords": [
+        "badge",
+        "status",
+        "tag",
+        "label",
+        "pill",
+        "chip",
+        "lozenge",
+        "counter",
+        "live",
+        "ribbon",
+        "design collection"
+      ],
+      "description": "Status badges in 12 designs (soft, solid, outline, dot, live, gradient pill, counter, icon tag, chip, ribbon, code, status bar), following the lozenge and chip patterns of Universal Theme Badge, GitHub labels and shields-style split tags. One badge (partial) or an inline wrapping group (report).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "soft",
+            "solid",
+            "outline",
+            "dot",
+            "live",
+            "gradientPill",
+            "counter",
+            "iconTag",
+            "chip",
+            "ribbon",
+            "code",
+            "statusBar"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-badge/README.md",
+        "example": "components/design-badge/examples",
+        "apexlang": "components/design-badge/dist/apexlang/shared-components/plugins/design-badge",
+        "legacySql": "components/design-badge/dist/legacy/amc_design_badge.sql"
+      }
+    },
+    {
+      "slug": "design-button",
+      "name": "Design Button",
+      "apexlangName": "designButton",
+      "staticId": "AMC_DESIGN_BUTTON",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designButton",
+      "apexlangItemType": null,
+      "keywords": [
+        "button",
+        "link button",
+        "call to action",
+        "cta",
+        "action bar",
+        "hover",
+        "gradient button",
+        "pill",
+        "design collection"
+      ],
+      "description": "Link and action buttons in 12 designs (soft, gradient, glass, outline draw, pill arrow, icon circle, 3D press, shimmer, underline, ghost glow, split icon, neon border). Follows the call-to-action patterns of current design systems, built only from the theme palette so each design stays native to Universal Theme. Report mode renders a wrapping action bar.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "soft",
+            "gradient",
+            "glass",
+            "outlineDraw",
+            "pillArrow",
+            "iconCircle",
+            "press3d",
+            "shimmer",
+            "underline",
+            "ghostGlow",
+            "splitIcon",
+            "neonBorder"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/design-button/README.md",
+        "example": "components/design-button/examples",
+        "apexlang": "components/design-button/dist/apexlang/shared-components/plugins/design-button",
+        "legacySql": "components/design-button/dist/legacy/amc_design_button.sql"
+      }
+    },
+    {
+      "slug": "design-card",
+      "name": "Design Card",
+      "apexlangName": "designCard",
+      "staticId": "AMC_DESIGN_CARD",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designCard",
+      "apexlangItemType": null,
+      "keywords": [
+        "card",
+        "tile",
+        "design",
+        "record",
+        "image card",
+        "ticket",
+        "glass",
+        "gradient",
+        "content card",
+        "design collection"
+      ],
+      "description": "Design Collection card family: one record (order, project, invoice, customer) as a card in 12 distinct styles, from a quiet elevated or outlined card to image, horizontal media, ticket, stacked-paper and corner-icon layouts. Follows the Universal Theme Cards pattern (eyebrow, title, body, footer with figure and action) and takes every color from the active theme style.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "elevated",
+            "outline",
+            "glass",
+            "gradientBorder",
+            "imageTop",
+            "imageOverlay",
+            "horizontal",
+            "accentTop",
+            "ticket",
+            "stackedPaper",
+            "softInset",
+            "cornerIcon"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "eyebrow",
+          "staticId": "EYEBROW",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "badge",
+          "staticId": "BADGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "valueLabel",
+          "staticId": "VALUE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "columns",
+          "staticId": "COLUMNS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "two",
+            "three",
+            "four"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/design-card/README.md",
+        "example": "components/design-card/examples",
+        "apexlang": "components/design-card/dist/apexlang/shared-components/plugins/design-card",
+        "legacySql": "components/design-card/dist/legacy/amc_design_card.sql"
+      }
+    },
+    {
+      "slug": "design-divider",
+      "name": "Design Divider",
+      "apexlangName": "designDivider",
+      "staticId": "AMC_DESIGN_DIVIDER",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/designDivider",
+      "apexlangItemType": null,
+      "keywords": [
+        "divider",
+        "separator",
+        "section title",
+        "section header",
+        "rule",
+        "hr",
+        "heading",
+        "design collection"
+      ],
+      "description": "Design Collection divider family: a section break or section heading in 8 distinct styles, from a hairline with a centered title to an eyebrow heading, a glowing gradient rule, an icon medallion, a pill label, an accent underline, a dotted scene break and a side label with a count. Follows the Universal Theme heading and separator pattern and takes every color from the active theme style.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "lineTitle",
+            "eyebrowTitle",
+            "gradientLine",
+            "iconCenter",
+            "pillLabel",
+            "accentUnderline",
+            "dotted",
+            "sideLabel"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "eyebrow",
+          "staticId": "EYEBROW",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "align",
+          "staticId": "ALIGN",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "start",
+            "center",
+            "end"
+          ]
+        },
+        {
+          "apexlangName": "spacing",
+          "staticId": "SPACING",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "compact",
+            "normal",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/design-divider/README.md",
+        "example": "components/design-divider/examples",
+        "apexlang": "components/design-divider/dist/apexlang/shared-components/plugins/design-divider",
+        "legacySql": "components/design-divider/dist/legacy/amc_design_divider.sql"
+      }
+    },
+    {
+      "slug": "design-header",
+      "name": "Design Header",
+      "apexlangName": "designHeader",
+      "staticId": "AMC_DESIGN_HEADER",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/designHeader",
+      "apexlangItemType": null,
+      "keywords": [
+        "header",
+        "hero",
+        "page header",
+        "banner",
+        "title",
+        "intro",
+        "landing",
+        "jumbotron",
+        "section header",
+        "call to action"
+      ],
+      "description": "Family of 10 compact page hero and section header designs (gradient hero, split, minimal, image overlay, dotted grid, card header, centered icon, wave bottom, glass panel, eyebrow) with eyebrow, title, subtitle, icon, optional image and up to two native Universal Theme buttons. Follows the page-header pattern of modern design systems (Oracle Redwood page header, Tailwind UI and Stripe heroes) kept compact for application pages: no full-viewport height, theme colors only, readable in light and dark styles.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "gradientHero",
+            "split",
+            "minimal",
+            "imageOverlay",
+            "dottedGrid",
+            "cardHeader",
+            "centeredIcon",
+            "waveBottom",
+            "glassPanel",
+            "eyebrow"
+          ]
+        },
+        {
+          "apexlangName": "eyebrow",
+          "staticId": "EYEBROW",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "subtitle",
+          "staticId": "SUBTITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "primaryUrl",
+          "staticId": "PRIMARY_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "primaryLabel",
+          "staticId": "PRIMARY_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "secondaryUrl",
+          "staticId": "SECONDARY_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "secondaryLabel",
+          "staticId": "SECONDARY_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-header/README.md",
+        "example": "components/design-header/examples",
+        "apexlang": "components/design-header/dist/apexlang/shared-components/plugins/design-header",
+        "legacySql": "components/design-header/dist/legacy/amc_design_header.sql"
+      }
+    },
+    {
+      "slug": "design-kpi",
+      "name": "Design KPI",
+      "apexlangName": "designKpi",
+      "staticId": "AMC_DESIGN_KPI",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designKpi",
+      "apexlangItemType": null,
+      "keywords": [
+        "kpi",
+        "metric",
+        "stat",
+        "figure",
+        "dashboard",
+        "tile",
+        "trend",
+        "delta",
+        "target",
+        "gauge",
+        "ring",
+        "sparkline",
+        "comparison",
+        "design collection"
+      ],
+      "description": "Design Collection family of ten KPI tile designs chosen with Style: big number, delta chip, glass, gradient, compare, target bar, ring, spark bars, icon left and minimal. Follows the dashboard metric patterns of modern design systems (hero figure first, trend as colored text plus arrow, target as a native progress bar) while every color comes from the Universal Theme palette. One tile (partial) or a responsive grid of tiles (report).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "bigNumber",
+            "deltaChip",
+            "glass",
+            "gradient",
+            "compare",
+            "targetBar",
+            "ring",
+            "sparkBars",
+            "iconLeft",
+            "minimal"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "unit",
+          "staticId": "UNIT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "change",
+          "staticId": "CHANGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "trend",
+          "staticId": "TREND",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "invertTrend",
+          "staticId": "INVERT_TREND",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "percent",
+          "staticId": "PERCENT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "series",
+          "staticId": "SERIES",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "compareValue",
+          "staticId": "COMPARE_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "compareLabel",
+          "staticId": "COMPARE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-kpi/README.md",
+        "example": "components/design-kpi/examples",
+        "apexlang": "components/design-kpi/dist/apexlang/shared-components/plugins/design-kpi",
+        "legacySql": "components/design-kpi/dist/legacy/amc_design_kpi.sql"
+      }
+    },
+    {
+      "slug": "design-list",
+      "name": "Design List",
+      "apexlangName": "designList",
+      "staticId": "AMC_DESIGN_LIST",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designList",
+      "apexlangItemType": null,
+      "keywords": [
+        "list",
+        "content row",
+        "media list",
+        "avatar list",
+        "files",
+        "checklist",
+        "tasks",
+        "leaderboard",
+        "ranking",
+        "contacts",
+        "people",
+        "settings",
+        "notifications",
+        "inbox",
+        "messages",
+        "metrics",
+        "bars",
+        "chips",
+        "design collection"
+      ],
+      "description": "Design Collection family of eleven data-driven lists (avatar rows, files, checklist, leaderboard, contacts, settings, notifications, inbox, metric rows, compact, pills). Follows the native Universal Theme Content Row and Media List pattern: one query row per list row, with avatar or icon, title, subtitle, meta text and an optional link.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "avatarRows",
+            "fileRows",
+            "checklist",
+            "leaderboard",
+            "contacts",
+            "settings",
+            "notifications",
+            "inbox",
+            "metricRows",
+            "compact",
+            "pills"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "subtitle",
+          "staticId": "SUBTITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "valueMax",
+          "staticId": "VALUE_MAX",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stateLabel",
+          "staticId": "STATE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-list/README.md",
+        "example": "components/design-list/examples",
+        "apexlang": "components/design-list/dist/apexlang/shared-components/plugins/design-list",
+        "legacySql": "components/design-list/dist/legacy/amc_design_list.sql"
+      }
+    },
+    {
+      "slug": "design-pricing",
+      "name": "Design Pricing",
+      "apexlangName": "designPricing",
+      "staticId": "AMC_DESIGN_PRICING",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designPricing",
+      "apexlangItemType": null,
+      "keywords": [
+        "pricing",
+        "plan",
+        "tier",
+        "subscription",
+        "price table",
+        "package",
+        "offer",
+        "billing",
+        "comparison",
+        "design collection"
+      ],
+      "description": "Pricing plan cards in 10 designs (classic, highlighted, glass, gradient header, minimal, horizontal, checklist, compact, dark enterprise, outline bold). Follows the common SaaS pricing-table pattern: plan, price with currency and period, short pitch, feature checklist and one call to action, with one plan highlighted.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "classic",
+            "highlighted",
+            "glass",
+            "gradientHeader",
+            "minimal",
+            "horizontal",
+            "checklist",
+            "compact",
+            "darkEnterprise",
+            "outlineBold"
+          ]
+        },
+        {
+          "apexlangName": "plan",
+          "staticId": "PLAN",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "price",
+          "staticId": "PRICE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "currency",
+          "staticId": "CURRENCY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "period",
+          "staticId": "PERIOD",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "features",
+          "staticId": "FEATURES",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "ctaLabel",
+          "staticId": "CTA_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "ctaUrl",
+          "staticId": "CTA_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "badge",
+          "staticId": "BADGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "highlight",
+          "staticId": "HIGHLIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-pricing/README.md",
+        "example": "components/design-pricing/examples",
+        "apexlang": "components/design-pricing/dist/apexlang/shared-components/plugins/design-pricing",
+        "legacySql": "components/design-pricing/dist/legacy/amc_design_pricing.sql"
+      }
+    },
+    {
+      "slug": "design-profile",
+      "name": "Design Profile",
+      "apexlangName": "designProfile",
+      "staticId": "AMC_DESIGN_PROFILE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designProfile",
+      "apexlangItemType": null,
+      "keywords": [
+        "profile",
+        "person",
+        "user",
+        "employee",
+        "contact",
+        "team member",
+        "avatar",
+        "people directory",
+        "business card",
+        "author",
+        "assignee",
+        "design collection"
+      ],
+      "description": "Design Collection family of ten person/profile designs chosen with Style: centered, cover, horizontal, glass, minimal, stats, gradient ring, business card, chip and compact row. Follows the people-card patterns of modern design systems (avatar with presence, name as heading, role, optional stats and a single whole-card link) while every color comes from the Universal Theme palette. One profile (partial) or a responsive grid, wrap or list of profiles (report).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "centered",
+            "cover",
+            "horizontal",
+            "glass",
+            "minimal",
+            "stats",
+            "gradientRing",
+            "businessCard",
+            "chip",
+            "compactRow"
+          ]
+        },
+        {
+          "apexlangName": "name",
+          "staticId": "NAME",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "role",
+          "staticId": "ROLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "bio",
+          "staticId": "BIO",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "status",
+          "staticId": "STATUS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat1Value",
+          "staticId": "STAT1_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat1Label",
+          "staticId": "STAT1_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat2Value",
+          "staticId": "STAT2_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat2Label",
+          "staticId": "STAT2_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat3Value",
+          "staticId": "STAT3_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat3Label",
+          "staticId": "STAT3_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "coverUrl",
+          "staticId": "COVER_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "email",
+          "staticId": "EMAIL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "phone",
+          "staticId": "PHONE",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-profile/README.md",
+        "example": "components/design-profile/examples",
+        "apexlang": "components/design-profile/dist/apexlang/shared-components/plugins/design-profile",
+        "legacySql": "components/design-profile/dist/legacy/amc_design_profile.sql"
+      }
+    },
+    {
+      "slug": "design-timeline",
+      "name": "Design Timeline",
+      "apexlangName": "designTimeline",
+      "staticId": "AMC_DESIGN_TIMELINE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/designTimeline",
+      "apexlangItemType": null,
+      "keywords": [
+        "timeline",
+        "history",
+        "activity",
+        "audit",
+        "log",
+        "changelog",
+        "release notes",
+        "milestones",
+        "roadmap",
+        "events",
+        "design collection"
+      ],
+      "description": "Design Collection family of ten chronological timelines (dots, icon rail, alternating, cards, log, milestones, changelog, numbered, date blocks, branch). Follows the native Universal Theme Timeline pattern: one query row per event, state shown on the marker and as text.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "dots",
+            "iconRail",
+            "alternating",
+            "cards",
+            "log",
+            "milestones",
+            "changelog",
+            "numbered",
+            "dateBlocks",
+            "branch"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "body",
+          "staticId": "BODY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "date",
+          "staticId": "DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "tag",
+          "staticId": "TAG",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/design-timeline/README.md",
+        "example": "components/design-timeline/examples",
+        "apexlang": "components/design-timeline/dist/apexlang/shared-components/plugins/design-timeline",
+        "legacySql": "components/design-timeline/dist/legacy/amc_design_timeline.sql"
+      }
+    },
+    {
       "slug": "empty-state",
       "name": "Empty State",
       "apexlangName": "emptyState",

@@ -1,0 +1,265 @@
+plugin designTimeline (
+    name: Design Timeline
+    staticId: AMC_DESIGN_TIMELINE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <span class="amc-DTimeline-marker" aria-hidden="true">{if ?ICON/}<span class="amc-DTimeline-icon fa #ICON#"></span>{endif/}</span>
+            <div class="amc-DTimeline-content">
+              <h3 class="amc-DTimeline-title">#TITLE#</h3>
+              {if ?BODY/}<p class="amc-DTimeline-body">#BODY#</p>{endif/}
+            </div>
+            {if ?DATE/}<span class="amc-DTimeline-date">#DATE#</span>{endif/}
+            {if ?TAG/}<span class="amc-DTimeline-tag">#TAG#</span>{endif/}
+            <span class="amc-DTimeline-level">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Info{otherwise/}Note{endcase/}</span>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-DTimeline amc-DTimeline--#STYLE#"><ol class="amc-DTimeline-list">#APEX$ROWS#</ol></div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DTimeline-item amc-DTimeline-item--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-timeline.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row is one event, in the order the query returns them. Pick a Style for the whole region, then map Title (required), Body, Date, Icon, State and Tag to columns. Format dates in SQL with the application's NLS settings. State accepts success, warning, danger, info or neutral; any other value renders as neutral.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: dots
+        }
+        help {
+            helpText:
+                ```
+                Design of the timeline. dots: classic rail with state dots. iconRail: icon circles on a rail, date at the end. alternating: events alternate around a center line and collapse to one column when narrow. cards: each event in an elevated card. log: dense audit log with a visible level column. milestones: horizontal roadmap with diamond markers, vertical when narrow. changelog: release notes with the Tag as a version label. numbered: large sequence numbers. dateBlocks: calendar tiles built from the Date. branch: tree connectors, like a thread or commit history.
+                ```
+        }
+        entry dots (
+            sequence: 10
+            display: Dots
+            return: dots
+        )
+        entry iconRail (
+            sequence: 20
+            display: Icon rail
+            return: iconRail
+        )
+        entry alternating (
+            sequence: 30
+            display: Alternating
+            return: alternating
+        )
+        entry cards (
+            sequence: 40
+            display: Cards
+            return: cards
+        )
+        entry log (
+            sequence: 50
+            display: Log
+            return: log
+        )
+        entry milestones (
+            sequence: 60
+            display: Milestones
+            return: milestones
+        )
+        entry changelog (
+            sequence: 70
+            display: Changelog
+            return: changelog
+        )
+        entry numbered (
+            sequence: 80
+            display: Numbered
+            return: numbered
+        )
+        entry dateBlocks (
+            sequence: 90
+            display: Date blocks
+            return: dateBlocks
+        )
+        entry branch (
+            sequence: 100
+            display: Branch
+            return: branch
+        )
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Event heading, for example Invoice INV-2041 approved.
+                ```
+        }
+    )
+    customAttribute BODY (
+        apexlangName: body
+        attribute: 3
+        name: Body
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional description under the title, for example who did it and why.
+                ```
+        }
+    )
+    customAttribute DATE (
+        apexlangName: date
+        attribute: 4
+        name: Date
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Date or time text, already formatted in SQL, for example 12 Sep 2026 or 09:41. In the Date blocks style the first word is shown large, so return the day first, for example 12 Sep.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-check or fa-truck. Shown by the Icon rail and Alternating styles.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 6
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                One of success, warning, danger, info or neutral. Colors the marker and is also given as text: visible in the Log and Cards styles, read by screen readers in the others. In Milestones, neutral means not reached yet. Unknown values render as neutral.
+                ```
+        }
+    )
+    customAttribute TAG (
+        apexlangName: tag
+        attribute: 7
+        name: Tag
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short label shown as a chip, for example a version (v2.4.0), a document number or a team. The Changelog style shows it as the release version.
+                ```
+        }
+    )
+    file "amc-design-timeline.css" (
+        fileName: amc-design-timeline.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

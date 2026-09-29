@@ -1,0 +1,9 @@
+{case STYLE/}{when checklist/}<span class="amc-DList-check" aria-hidden="true"></span>{otherwise/}{if ?IMAGE_URL/}<span class="amc-DList-avatar"><img class="amc-DList-img" src="#IMAGE_URL#" width="40" height="40" alt="" loading="lazy"></span>{else/}{if ?INITIALS/}<span class="amc-DList-avatar amc-DList-avatar--initials" aria-hidden="true">#INITIALS#</span>{else/}{if ?ICON/}<span class="amc-DList-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{endif/}{endif/}{endcase/}
+<span class="amc-DList-main">
+  <span class="amc-DList-title">{if ?LINK_URL/}<a class="amc-DList-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</span>
+  {if ?SUBTITLE/}<span class="amc-DList-sub">#SUBTITLE#</span>{endif/}
+  {if ?VALUE/}<progress class="amc-DList-bar" value="#VALUE#" max="{if ?VALUE_MAX/}#VALUE_MAX#{else/}100{endif/}" aria-label="#TITLE!ATTR#"></progress>{endif/}
+</span>
+{case STYLE/}{when checklist/}<span class="amc-DList-state">{if ?STATE_LABEL/}#STATE_LABEL#{else/}{case STATE/}{when done/}Done{when success/}Done{otherwise/}Open{endcase/}{endif/}</span>{otherwise/}{if ?STATE_LABEL/}<span class="amc-DList-state">#STATE_LABEL#</span>{else/}{case STATE/}{when success/}<span class="amc-DList-sr">Success</span>{when warning/}<span class="amc-DList-sr">Warning</span>{when danger/}<span class="amc-DList-sr">Critical</span>{when info/}<span class="amc-DList-sr">Information</span>{otherwise/}{endcase/}{endif/}{endcase/}
+{if ?META/}<span class="amc-DList-meta">#META#</span>{endif/}
+{if ?LINK_URL/}<span class="amc-DList-chevron" aria-hidden="true"></span>{endif/}

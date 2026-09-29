@@ -1,0 +1,113 @@
+{
+  "samples": [
+    {
+      "title": "Dots",
+      "mode": "report",
+      "settings": { "STYLE": "dots" },
+      "rows": [
+        { "TITLE": "Order SO-10482 delivered", "BODY": "Signed for by R. Alvarez at the Rotterdam warehouse.", "DATE": "Today, 09:41", "STATE": "success", "TAG": "DHL Express" },
+        { "TITLE": "Out for delivery", "BODY": "Driver assigned, estimated arrival before noon.", "DATE": "Today, 06:15", "STATE": "info" },
+        { "TITLE": "Customs hold released", "BODY": "Missing commercial invoice uploaded by Finance.", "DATE": "Yesterday, 16:02", "STATE": "warning" },
+        { "TITLE": "Order packed and labelled", "DATE": "11 Sep 2026", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Icon rail",
+      "mode": "report",
+      "settings": { "STYLE": "iconRail" },
+      "rows": [
+        { "TITLE": "Invoice INV-2041 paid", "BODY": "EUR 18,400.00 received by bank transfer.", "DATE": "09:12", "ICON": "fa-check", "STATE": "success" },
+        { "TITLE": "Payment reminder sent", "BODY": "Second reminder to accounts@northwind.example.", "DATE": "Mon", "ICON": "fa-envelope", "STATE": "info", "TAG": "Automated" },
+        { "TITLE": "Due date passed", "BODY": "Invoice is 5 days overdue.", "DATE": "3 Sep", "ICON": "fa-clock-o", "STATE": "warning" },
+        { "TITLE": "Invoice issued", "DATE": "4 Aug", "ICON": "fa-file-text-o", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Alternating",
+      "mode": "report",
+      "settings": { "STYLE": "alternating" },
+      "rows": [
+        { "TITLE": "Contract signed", "BODY": "Three-year enterprise agreement with Contoso Retail.", "DATE": "Jan 2026", "ICON": "fa-pencil", "STATE": "success", "TAG": "Sales" },
+        { "TITLE": "Data migration", "BODY": "42,000 customer records moved from the legacy CRM.", "DATE": "Mar 2026", "ICON": "fa-database", "STATE": "success" },
+        { "TITLE": "Pilot in 3 stores", "BODY": "Store managers trained, feedback collected weekly.", "DATE": "Jun 2026", "ICON": "fa-users", "STATE": "info", "TAG": "Ops" },
+        { "TITLE": "National rollout", "BODY": "All 140 stores go live in two waves.", "DATE": "Oct 2026", "ICON": "fa-flag", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Cards",
+      "mode": "report",
+      "settings": { "STYLE": "cards" },
+      "rows": [
+        { "TITLE": "Ticket escalated to Tier 2", "BODY": "Customer reports duplicate charges on three invoices. Assigned to Maya Chen.", "DATE": "Today, 11:20", "STATE": "danger", "TAG": "P1" },
+        { "TITLE": "Refund approved", "BODY": "USD 1,248.00 refund approved by the billing lead.", "DATE": "Today, 10:05", "STATE": "success" },
+        { "TITLE": "Customer replied", "BODY": "Attached bank statement for March.", "DATE": "Yesterday", "STATE": "neutral", "TAG": "Email" }
+      ]
+    },
+    {
+      "title": "Log",
+      "mode": "report",
+      "settings": { "STYLE": "log" },
+      "rows": [
+        { "TITLE": "Nightly ledger sync", "BODY": "12,408 rows in 42 s", "DATE": "02:00:03", "STATE": "success", "TAG": "ETL" },
+        { "TITLE": "Currency rates stale", "BODY": "ECB feed returned yesterday's rates", "DATE": "02:00:47", "STATE": "warning", "TAG": "FX" },
+        { "TITLE": "Payroll export failed", "BODY": "SFTP host refused connection", "DATE": "02:15:10", "STATE": "danger", "TAG": "HR" },
+        { "TITLE": "Retry scheduled", "BODY": "Next attempt at 02:45", "DATE": "02:15:11", "STATE": "info", "TAG": "HR" },
+        { "TITLE": "Cache warmed", "DATE": "02:20:00", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Milestones",
+      "mode": "report",
+      "settings": { "STYLE": "milestones" },
+      "rows": [
+        { "TITLE": "Discovery", "BODY": "Requirements signed off", "DATE": "Q1 2026", "STATE": "success" },
+        { "TITLE": "Build", "BODY": "Core modules delivered", "DATE": "Q2 2026", "STATE": "success" },
+        { "TITLE": "User testing", "BODY": "2 blocking issues open", "DATE": "Q3 2026", "STATE": "warning", "TAG": "At risk" },
+        { "TITLE": "Go-live", "BODY": "All regions", "DATE": "Q4 2026", "STATE": "neutral" }
+      ]
+    },
+    {
+      "title": "Changelog",
+      "mode": "report",
+      "settings": { "STYLE": "changelog" },
+      "rows": [
+        { "TITLE": "Bulk invoice approval", "BODY": "Approve up to 200 invoices at once from the Payables page, with an audit entry per invoice.", "DATE": "22 Sep 2026", "TAG": "v4.2.0", "STATE": "success" },
+        { "TITLE": "Faster order search", "BODY": "Order search now uses Oracle Text and returns results in under 300 ms.", "DATE": "8 Sep 2026", "TAG": "v4.1.3" },
+        { "TITLE": "Supplier portal", "BODY": "Suppliers can upload delivery notes and track payments.", "DATE": "19 Aug 2026", "TAG": "v4.1.0" }
+      ]
+    },
+    {
+      "title": "Numbered",
+      "mode": "report",
+      "settings": { "STYLE": "numbered" },
+      "rows": [
+        { "TITLE": "Create the purchase requisition", "BODY": "Requester enters items, cost center and delivery date.", "DATE": "Requester", "STATE": "success" },
+        { "TITLE": "Budget check", "BODY": "Automatic check against the cost center budget.", "DATE": "System", "STATE": "success" },
+        { "TITLE": "Manager approval", "BODY": "Required above USD 5,000.", "DATE": "Line manager", "STATE": "warning", "TAG": "Waiting 2 days" },
+        { "TITLE": "Purchase order issued", "DATE": "Procurement" }
+      ]
+    },
+    {
+      "title": "Date blocks",
+      "mode": "report",
+      "settings": { "STYLE": "dateBlocks" },
+      "rows": [
+        { "TITLE": "Quarterly business review", "BODY": "Acme Logistics, board room 4 and Teams.", "DATE": "14 Oct", "STATE": "info", "TAG": "10:00" },
+        { "TITLE": "Renewal deadline", "BODY": "Contract CT-3391 auto-renews unless cancelled.", "DATE": "21 Oct", "STATE": "danger", "TAG": "Action needed" },
+        { "TITLE": "Invoice run", "BODY": "Monthly billing for 1,240 subscriptions.", "DATE": "1 Nov" },
+        { "TITLE": "Year-end freeze starts", "DATE": "15 Dec", "STATE": "warning" }
+      ]
+    },
+    {
+      "title": "Branch",
+      "mode": "report",
+      "settings": { "STYLE": "branch" },
+      "rows": [
+        { "TITLE": "Quote Q-7710 created", "BODY": "Three line items, 12% volume discount.", "DATE": "2 Sep, Priya Nair", "TAG": "Q-7710", "STATE": "neutral" },
+        { "TITLE": "Discount exceeds policy", "BODY": "Sent to the regional sales director.", "DATE": "3 Sep, Workflow", "STATE": "warning" },
+        { "TITLE": "Discount approved", "DATE": "4 Sep, Tom Becker", "STATE": "success" },
+        { "TITLE": "Converted to order SO-10511", "DATE": "5 Sep, Priya Nair", "TAG": "SO-10511", "STATE": "success" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,439 @@
+{
+  "samples": [
+    {
+      "title": "Avatar rows",
+      "mode": "report",
+      "settings": {
+        "STYLE": "avatarRows"
+      },
+      "rows": [
+        {
+          "TITLE": "Maya Chen",
+          "SUBTITLE": "Account Executive, EMEA",
+          "META": "USD 412,300",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%236b8fb3%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%2334506e%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2780%27%20height%3D%2780%27%20fill%3D%27url%28%23g%29%27/%3E%3Ccircle%20cx%3D%2740%27%20cy%3D%2732%27%20r%3D%2714%27%20fill%3D%27%23fff%27%20fill-opacity%3D%27.85%27/%3E%3Cpath%20d%3D%27M14%2076c4-16%2016-24%2026-24s22%208%2026%2024z%27%20fill%3D%27%23fff%27%20fill-opacity%3D%27.85%27/%3E%3C/svg%3E",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Tom Becker",
+          "SUBTITLE": "Regional Sales Director",
+          "META": "USD 388,950",
+          "INITIALS": "TB",
+          "STATE": "success",
+          "STATE_LABEL": "Quota met",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Priya Nair",
+          "SUBTITLE": "Account Executive, APAC",
+          "META": "USD 251,040",
+          "INITIALS": "PN",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Luis Ortega",
+          "SUBTITLE": "Sales Development",
+          "META": "USD 96,700",
+          "INITIALS": "LO",
+          "STATE": "warning",
+          "STATE_LABEL": "On leave"
+        }
+      ]
+    },
+    {
+      "title": "File rows",
+      "mode": "report",
+      "settings": {
+        "STYLE": "fileRows"
+      },
+      "rows": [
+        {
+          "TITLE": "Q3-2026-board-pack-final-approved.pdf",
+          "SUBTITLE": "4.2 MB, uploaded by Finance",
+          "META": "Today",
+          "ICON": "fa-file-pdf-o",
+          "STATE": "danger"
+        },
+        {
+          "TITLE": "Supplier-price-list-2026.xlsx",
+          "SUBTITLE": "820 KB",
+          "META": "12 Sep",
+          "ICON": "fa-file-excel-o",
+          "STATE": "success",
+          "STATE_LABEL": "Shared"
+        },
+        {
+          "TITLE": "Warehouse-layout-v3.dwg",
+          "SUBTITLE": "Uploading, 64% of 18 MB",
+          "META": "Now",
+          "ICON": "fa-file-o",
+          "VALUE": "64",
+          "STATE": "info"
+        },
+        {
+          "TITLE": "Contract-CT-3391-signed.docx",
+          "SUBTITLE": "156 KB",
+          "META": "2 Sep",
+          "ICON": "fa-file-word-o",
+          "STATE": "info"
+        }
+      ]
+    },
+    {
+      "title": "Checklist",
+      "mode": "report",
+      "settings": {
+        "STYLE": "checklist"
+      },
+      "rows": [
+        {
+          "TITLE": "Verify supplier bank details",
+          "SUBTITLE": "Call-back to the number on file",
+          "META": "Done 12 Sep",
+          "STATE": "done"
+        },
+        {
+          "TITLE": "Match invoice to purchase order PO-5520",
+          "META": "Done 13 Sep",
+          "STATE": "done"
+        },
+        {
+          "TITLE": "Approve payment run above USD 50,000",
+          "SUBTITLE": "Needs CFO sign-off",
+          "META": "Due today",
+          "STATE": "warning",
+          "STATE_LABEL": "Due today"
+        },
+        {
+          "TITLE": "Archive remittance advice",
+          "META": "Due 20 Sep",
+          "STATE": "open"
+        }
+      ]
+    },
+    {
+      "title": "Leaderboard",
+      "mode": "report",
+      "settings": {
+        "STYLE": "leaderboard"
+      },
+      "rows": [
+        {
+          "TITLE": "Maya Chen",
+          "SUBTITLE": "EMEA, 38 deals",
+          "META": "12,480",
+          "INITIALS": "MC",
+          "VALUE": "12480",
+          "VALUE_MAX": "12480"
+        },
+        {
+          "TITLE": "Tom Becker",
+          "SUBTITLE": "DACH, 31 deals",
+          "META": "10,905",
+          "INITIALS": "TB",
+          "VALUE": "10905",
+          "VALUE_MAX": "12480"
+        },
+        {
+          "TITLE": "Priya Nair",
+          "SUBTITLE": "APAC, 27 deals",
+          "META": "9,310",
+          "INITIALS": "PN",
+          "VALUE": "9310",
+          "VALUE_MAX": "12480"
+        },
+        {
+          "TITLE": "Luis Ortega",
+          "SUBTITLE": "LATAM, 19 deals",
+          "META": "6,002",
+          "INITIALS": "LO",
+          "VALUE": "6002",
+          "VALUE_MAX": "12480"
+        },
+        {
+          "TITLE": "Grace Okafor",
+          "SUBTITLE": "Nordics, 14 deals",
+          "META": "4,870",
+          "INITIALS": "GO",
+          "VALUE": "4870",
+          "VALUE_MAX": "12480"
+        }
+      ]
+    },
+    {
+      "title": "Contacts",
+      "mode": "report",
+      "settings": {
+        "STYLE": "contacts"
+      },
+      "rows": [
+        {
+          "TITLE": "Grace Okafor",
+          "SUBTITLE": "Procurement Lead, Acme Logistics",
+          "META": "grace.okafor@acme.example",
+          "INITIALS": "GO",
+          "STATE": "success",
+          "STATE_LABEL": "Available",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Daniel Weiss",
+          "SUBTITLE": "CFO, Northwind Traders",
+          "META": "+49 30 5550 1720",
+          "INITIALS": "DW",
+          "STATE": "warning",
+          "STATE_LABEL": "In a meeting",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Aiko Tanaka",
+          "SUBTITLE": "IT Manager, Contoso Retail",
+          "META": "aiko.tanaka@contoso.example",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%238fb39b%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233f6e52%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2780%27%20height%3D%2780%27%20fill%3D%27url%28%23g%29%27/%3E%3Ccircle%20cx%3D%2740%27%20cy%3D%2732%27%20r%3D%2714%27%20fill%3D%27%23fff%27%20fill-opacity%3D%27.85%27/%3E%3Cpath%20d%3D%27M14%2076c4-16%2016-24%2026-24s22%208%2026%2024z%27%20fill%3D%27%23fff%27%20fill-opacity%3D%27.85%27/%3E%3C/svg%3E",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "Settings",
+      "mode": "report",
+      "settings": {
+        "STYLE": "settings"
+      },
+      "rows": [
+        {
+          "TITLE": "Invoice approval limit",
+          "SUBTITLE": "Above this amount a second approver is needed",
+          "META": "USD 50,000",
+          "ICON": "fa-money",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Payment reminders",
+          "META": "On",
+          "ICON": "fa-bell",
+          "STATE": "success",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Overdue escalation",
+          "META": "After 14 days",
+          "ICON": "fa-exclamation-triangle",
+          "STATE": "danger",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Default currency",
+          "META": "EUR",
+          "ICON": "fa-globe",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "Notifications",
+      "mode": "report",
+      "settings": {
+        "STYLE": "notifications"
+      },
+      "rows": [
+        {
+          "TITLE": "Payment failed for INV-2044",
+          "SUBTITLE": "The card on file for Contoso Retail was declined.",
+          "META": "2 min ago",
+          "ICON": "fa-exclamation",
+          "STATE": "danger",
+          "STATE_LABEL": "Action needed"
+        },
+        {
+          "TITLE": "Order SO-10482 delivered",
+          "SUBTITLE": "Signed for at the Rotterdam warehouse.",
+          "META": "1 h ago",
+          "ICON": "fa-check",
+          "STATE": "success"
+        },
+        {
+          "TITLE": "Budget 82% used",
+          "SUBTITLE": "Marketing cost center MK-200 for Q3.",
+          "META": "Yesterday",
+          "ICON": "fa-pie-chart",
+          "STATE": "warning"
+        },
+        {
+          "TITLE": "Weekly sales report is ready",
+          "META": "Mon",
+          "ICON": "fa-file-text-o",
+          "STATE": "neutral"
+        }
+      ]
+    },
+    {
+      "title": "Inbox",
+      "mode": "report",
+      "settings": {
+        "STYLE": "inbox"
+      },
+      "rows": [
+        {
+          "TITLE": "Daniel Weiss",
+          "SUBTITLE": "Re: Renewal terms for CT-3391 - we can accept the 3-year option if the price holds",
+          "META": "09:24",
+          "INITIALS": "DW",
+          "STATE": "info",
+          "STATE_LABEL": "Unread",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Accounts Payable",
+          "SUBTITLE": "Remittance advice for payment run 2026-37",
+          "META": "08:02",
+          "INITIALS": "AP",
+          "STATE": "info",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Grace Okafor",
+          "SUBTITLE": "Updated delivery schedule for October",
+          "META": "Yesterday",
+          "INITIALS": "GO",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Aiko Tanaka",
+          "SUBTITLE": "SSO rollout checklist attached",
+          "META": "Mon",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%238fb39b%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233f6e52%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2780%27%20height%3D%2780%27%20fill%3D%27url%28%23g%29%27/%3E%3Ccircle%20cx%3D%2740%27%20cy%3D%2732%27%20r%3D%2714%27%20fill%3D%27%23fff%27%20fill-opacity%3D%27.85%27/%3E%3Cpath%20d%3D%27M14%2076c4-16%2016-24%2026-24s22%208%2026%2024z%27%20fill%3D%27%23fff%27%20fill-opacity%3D%27.85%27/%3E%3C/svg%3E",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "Metric rows",
+      "mode": "report",
+      "settings": {
+        "STYLE": "metricRows"
+      },
+      "rows": [
+        {
+          "TITLE": "Orders shipped on time",
+          "META": "94%",
+          "VALUE": "94",
+          "STATE": "success",
+          "SUBTITLE": "Target 92%"
+        },
+        {
+          "TITLE": "Invoices paid within terms",
+          "META": "71%",
+          "VALUE": "71",
+          "SUBTITLE": "Target 85%",
+          "STATE": "warning",
+          "STATE_LABEL": "Below target"
+        },
+        {
+          "TITLE": "Quarterly revenue goal",
+          "META": "USD 3.1 M",
+          "VALUE": "3.1",
+          "VALUE_MAX": "4.0",
+          "SUBTITLE": "of USD 4.0 M"
+        },
+        {
+          "TITLE": "Open support tickets",
+          "META": "38",
+          "VALUE": "38",
+          "VALUE_MAX": "50",
+          "STATE": "danger",
+          "SUBTITLE": "Limit 50"
+        }
+      ]
+    },
+    {
+      "title": "Compact",
+      "mode": "report",
+      "settings": {
+        "STYLE": "compact"
+      },
+      "rows": [
+        {
+          "TITLE": "SO-10511",
+          "SUBTITLE": "Contoso Retail, 14 lines",
+          "META": "USD 18,240",
+          "STATE": "success",
+          "STATE_LABEL": "Shipped",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "SO-10510",
+          "SUBTITLE": "Northwind Traders, 3 lines",
+          "META": "USD 2,915",
+          "STATE": "warning",
+          "STATE_LABEL": "Backorder",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "SO-10509",
+          "SUBTITLE": "Acme Logistics, 22 lines",
+          "META": "USD 41,008",
+          "STATE": "info",
+          "STATE_LABEL": "Packing",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "SO-10508",
+          "SUBTITLE": "Fabrikam, 1 line",
+          "META": "USD 480",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "SO-10507",
+          "SUBTITLE": "Tailspin Toys, 6 lines",
+          "META": "USD 7,730",
+          "STATE": "danger",
+          "STATE_LABEL": "On hold",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "Pills",
+      "mode": "report",
+      "settings": {
+        "STYLE": "pills"
+      },
+      "rows": [
+        {
+          "TITLE": "Maya Chen",
+          "SUBTITLE": "Account Executive",
+          "META": "12",
+          "INITIALS": "MC",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Finance",
+          "META": "48",
+          "ICON": "fa-money",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Tom Becker",
+          "INITIALS": "TB",
+          "STATE": "success",
+          "STATE_LABEL": "Online",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Overdue",
+          "META": "7",
+          "STATE": "danger",
+          "LINK_URL": "#"
+        },
+        {
+          "TITLE": "Priya Nair",
+          "SUBTITLE": "Account Executive",
+          "META": "3",
+          "INITIALS": "PN",
+          "LINK_URL": "#"
+        }
+      ]
+    }
+  ]
+}

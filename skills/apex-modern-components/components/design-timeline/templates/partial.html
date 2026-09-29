@@ -1,0 +1,8 @@
+<span class="amc-DTimeline-marker" aria-hidden="true">{if ?ICON/}<span class="amc-DTimeline-icon fa #ICON#"></span>{endif/}</span>
+<div class="amc-DTimeline-content">
+  <h3 class="amc-DTimeline-title">#TITLE#</h3>
+  {if ?BODY/}<p class="amc-DTimeline-body">#BODY#</p>{endif/}
+</div>
+{if ?DATE/}<span class="amc-DTimeline-date">#DATE#</span>{endif/}
+{if ?TAG/}<span class="amc-DTimeline-tag">#TAG#</span>{endif/}
+<span class="amc-DTimeline-level">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Info{otherwise/}Note{endcase/}</span>

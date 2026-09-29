@@ -1,0 +1,172 @@
+{
+  "name": "Design List",
+  "apexlangName": "designList",
+  "staticId": "AMC_DESIGN_LIST",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["list", "content row", "media list", "avatar list", "files", "checklist", "tasks", "leaderboard", "ranking", "contacts", "people", "settings", "notifications", "inbox", "messages", "metrics", "bars", "chips", "design collection"],
+  "description": "Design Collection family of eleven data-driven lists (avatar rows, files, checklist, leaderboard, contacts, settings, notifications, inbox, metric rows, compact, pills). Follows the native Universal Theme Content Row and Media List pattern: one query row per list row, with avatar or icon, title, subtitle, meta text and an optional link.",
+  "helpText": "Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL or Initials (avatar), Icon, Value and Maximum (bars in leaderboard and metricRows), State and State Label, Link URL. Format numbers and dates in SQL.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-design-list.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-list.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "avatarRows",
+      "sequence": 10,
+      "helpText": "Design of the list. avatarRows: people rows with avatar and meta. fileRows: documents with a file-type tile. checklist: tasks with a check box and a Done or Open label. leaderboard: ranked rows with rank number and score bar. contacts: grid of people with presence. settings: grouped inset rows with icon tiles, value and chevron. notifications: tinted rows with state icon. inbox: message rows with sender, preview and time. metricRows: label, value and bar. compact: dense single-line rows. pills: wrapping chips.",
+      "entries": [
+        { "name": "avatarRows", "display": "Avatar rows", "return": "avatarRows", "sequence": 10 },
+        { "name": "fileRows", "display": "File rows", "return": "fileRows", "sequence": 20 },
+        { "name": "checklist", "display": "Checklist", "return": "checklist", "sequence": 30 },
+        { "name": "leaderboard", "display": "Leaderboard", "return": "leaderboard", "sequence": 40 },
+        { "name": "contacts", "display": "Contacts", "return": "contacts", "sequence": 50 },
+        { "name": "settings", "display": "Settings", "return": "settings", "sequence": 60 },
+        { "name": "notifications", "display": "Notifications", "return": "notifications", "sequence": 70 },
+        { "name": "inbox", "display": "Inbox", "return": "inbox", "sequence": 80 },
+        { "name": "metricRows", "display": "Metric rows", "return": "metricRows", "sequence": 90 },
+        { "name": "compact", "display": "Compact", "return": "compact", "sequence": 100 },
+        { "name": "pills", "display": "Pills", "return": "pills", "sequence": 110 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Main text of the row, for example a customer name, a file name or a task."
+    },
+    {
+      "staticId": "SUBTITLE",
+      "apexlangName": "subtitle",
+      "attribute": 3,
+      "name": "Subtitle",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Secondary text, for example a role, file size or message preview. The Inbox style shows it on one line."
+    },
+    {
+      "staticId": "META",
+      "apexlangName": "meta",
+      "attribute": 4,
+      "name": "Meta",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Short text at the end of the row, already formatted in SQL: a time, an amount, a score or a count."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 5,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Avatar image URL. Must be developer-controlled, for example a URL built with apex_util.get_blob_file_src. Takes precedence over Initials and Icon."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 6,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "One or two letters shown in the avatar circle when there is no Image URL, for example MC."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 7,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Font APEX icon class shown when there is no Image URL or Initials, for example fa-file-pdf-o or fa-bell."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 8,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Plain number, without formatting, drawn as a bar in the Leaderboard and Metric rows styles, for example 72. Show the formatted value with Meta."
+    },
+    {
+      "staticId": "VALUE_MAX",
+      "apexlangName": "valueMax",
+      "attribute": 9,
+      "name": "Maximum",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Plain number for a full bar. Defaults to 100. For a leaderboard return the top score, for example max score over the whole query."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 10,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "One of success, warning, danger, info or neutral; colors the status dot, icon tile or bar and is also given as text. In the Checklist style return done for a completed task (success also counts as done) and anything else for an open task. Unknown values render as neutral."
+    },
+    {
+      "staticId": "STATE_LABEL",
+      "apexlangName": "stateLabel",
+      "attribute": 11,
+      "name": "State Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Visible text for the state, for example Online, Overdue, Unread or Shared. Without it, screen readers get a generic word for the state, and the Checklist style shows Done or Open."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 12,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 120,
+      "helpText": "Optional target for the whole row, for example apex_page.get_url(p_page => 10, p_items => 'P10_ID', p_values => id). Must be developer-controlled. The Title becomes the link text."
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "name": "Design Timeline",
+  "apexlangName": "designTimeline",
+  "staticId": "AMC_DESIGN_TIMELINE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["timeline", "history", "activity", "audit", "log", "changelog", "release notes", "milestones", "roadmap", "events", "design collection"],
+  "description": "Design Collection family of ten chronological timelines (dots, icon rail, alternating, cards, log, milestones, changelog, numbered, date blocks, branch). Follows the native Universal Theme Timeline pattern: one query row per event, state shown on the marker and as text.",
+  "helpText": "Each query row is one event, in the order the query returns them. Pick a Style for the whole region, then map Title (required), Body, Date, Icon, State and Tag to columns. Format dates in SQL with the application's NLS settings. State accepts success, warning, danger, info or neutral; any other value renders as neutral.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-design-timeline.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-timeline.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "dots",
+      "sequence": 10,
+      "helpText": "Design of the timeline. dots: classic rail with state dots. iconRail: icon circles on a rail, date at the end. alternating: events alternate around a center line and collapse to one column when narrow. cards: each event in an elevated card. log: dense audit log with a visible level column. milestones: horizontal roadmap with diamond markers, vertical when narrow. changelog: release notes with the Tag as a version label. numbered: large sequence numbers. dateBlocks: calendar tiles built from the Date. branch: tree connectors, like a thread or commit history.",
+      "entries": [
+        { "name": "dots", "display": "Dots", "return": "dots", "sequence": 10 },
+        { "name": "iconRail", "display": "Icon rail", "return": "iconRail", "sequence": 20 },
+        { "name": "alternating", "display": "Alternating", "return": "alternating", "sequence": 30 },
+        { "name": "cards", "display": "Cards", "return": "cards", "sequence": 40 },
+        { "name": "log", "display": "Log", "return": "log", "sequence": 50 },
+        { "name": "milestones", "display": "Milestones", "return": "milestones", "sequence": 60 },
+        { "name": "changelog", "display": "Changelog", "return": "changelog", "sequence": 70 },
+        { "name": "numbered", "display": "Numbered", "return": "numbered", "sequence": 80 },
+        { "name": "dateBlocks", "display": "Date blocks", "return": "dateBlocks", "sequence": 90 },
+        { "name": "branch", "display": "Branch", "return": "branch", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Event heading, for example Invoice INV-2041 approved."
+    },
+    {
+      "staticId": "BODY",
+      "apexlangName": "body",
+      "attribute": 3,
+      "name": "Body",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional description under the title, for example who did it and why."
+    },
+    {
+      "staticId": "DATE",
+      "apexlangName": "date",
+      "attribute": 4,
+      "name": "Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Date or time text, already formatted in SQL, for example 12 Sep 2026 or 09:41. In the Date blocks style the first word is shown large, so return the day first, for example 12 Sep."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Font APEX icon class, for example fa-check or fa-truck. Shown by the Icon rail and Alternating styles."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 6,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "One of success, warning, danger, info or neutral. Colors the marker and is also given as text: visible in the Log and Cards styles, read by screen readers in the others. In Milestones, neutral means not reached yet. Unknown values render as neutral."
+    },
+    {
+      "staticId": "TAG",
+      "apexlangName": "tag",
+      "attribute": 7,
+      "name": "Tag",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Short label shown as a chip, for example a version (v2.4.0), a document number or a team. The Changelog style shows it as the release version."
+    }
+  ]
+}

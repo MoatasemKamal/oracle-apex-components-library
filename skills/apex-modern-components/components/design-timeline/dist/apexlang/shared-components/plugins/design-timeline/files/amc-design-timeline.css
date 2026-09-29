@@ -1,0 +1,855 @@
+/* APEX Modern Components - Design Timeline (Design Collection)
+ * Ten chronological designs selected by the Style setting. Every color comes from
+ * Universal Theme variables, so the timeline follows Vita, Vita Dark, Redwood and
+ * Theme Roller. Layout uses logical properties (RTL) and container queries, so a
+ * style adapts to the width of its region, not the viewport.
+ *
+ * Grid areas per item: marker, content (title + body), date, tag, level (state text). */
+
+.amc-DTimeline {
+  --amc-dtl-bg: var(--ut-component-background-color, #fff);
+  --amc-dtl-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-dtl-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dtl-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dtl-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-dtl-radius: var(--ut-component-border-radius, .5rem);
+  --amc-dtl-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .05), 0 4px 12px rgba(0, 0, 0, .06));
+  --amc-dtl-accent: var(--ut-palette-primary, #056ac8);
+  --amc-dtl-success: var(--ut-palette-success, #278701);
+  --amc-dtl-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-dtl-danger: var(--ut-palette-danger, #cb1100);
+  --amc-dtl-info: var(--ut-palette-info, #0076df);
+
+  /* layout knobs each style overrides */
+  --amc-dtl-col: 1rem;        /* marker column width */
+  --amc-dtl-mk: .75rem;       /* marker size */
+  --amc-dtl-mk-top: .3125rem; /* marker offset from the item top */
+  --amc-dtl-cy: calc(var(--amc-dtl-mk-top) + var(--amc-dtl-mk) / 2); /* rail joins here */
+  --amc-dtl-rail: 2px;
+  --amc-dtl-gap: 1.5rem;
+
+  container-type: inline-size;
+  color: var(--amc-dtl-fg);
+  font-size: .875rem;
+  line-height: 1.45;
+}
+
+.amc-DTimeline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-DTimeline-item {
+  --amc-dtl-tone: var(--amc-dtl-muted);
+  --amc-dtl-tone-text: color-mix(in srgb, var(--amc-dtl-tone) 45%, var(--amc-dtl-fg));
+  --amc-dtl-tone-tint: color-mix(in srgb, var(--amc-dtl-tone) 14%, var(--amc-dtl-bg));
+
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr) auto;
+  grid-template-areas:
+    "marker date tag"
+    "marker content content";
+  column-gap: .875rem;
+  align-items: start;
+  min-inline-size: 0;
+  padding-block-end: var(--amc-dtl-gap);
+}
+
+.amc-DTimeline-item:last-child { padding-block-end: 0; }
+
+.amc-DTimeline-item--success { --amc-dtl-tone: var(--amc-dtl-success); }
+.amc-DTimeline-item--warning {
+  --amc-dtl-tone: var(--amc-dtl-warning);
+  --amc-dtl-tone-text: color-mix(in srgb, var(--amc-dtl-tone) 40%, var(--amc-dtl-fg));
+}
+.amc-DTimeline-item--danger { --amc-dtl-tone: var(--amc-dtl-danger); }
+.amc-DTimeline-item--info { --amc-dtl-tone: var(--amc-dtl-info); }
+.amc-DTimeline-item--neutral {
+  --amc-dtl-tone-text: var(--amc-dtl-muted);
+  --amc-dtl-tone-tint: color-mix(in srgb, var(--amc-dtl-fg) 6%, var(--amc-dtl-bg));
+}
+
+/* Rail: runs through the marker column and joins the markers of the first and last item */
+.amc-DTimeline-item::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--amc-dtl-col) / 2 - var(--amc-dtl-rail) / 2);
+  inline-size: var(--amc-dtl-rail);
+  background-color: var(--amc-dtl-line);
+}
+
+.amc-DTimeline-item:first-child::before { inset-block-start: var(--amc-dtl-cy); }
+.amc-DTimeline-item:last-child::before { inset-block-end: auto; block-size: var(--amc-dtl-cy); }
+.amc-DTimeline-item:only-child::before { display: none; }
+
+.amc-DTimeline-marker {
+  position: relative;
+  z-index: 1;
+  grid-area: marker;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: var(--amc-dtl-mk);
+  block-size: var(--amc-dtl-mk);
+  margin-block-start: var(--amc-dtl-mk-top);
+  border-radius: 50%;
+  background-color: var(--amc-dtl-tone);
+  color: var(--amc-dtl-tone-text);
+  box-shadow: 0 0 0 3px var(--amc-dtl-bg);
+}
+
+.amc-DTimeline-icon { display: none; font-size: .875rem; line-height: 1; }
+
+.amc-DTimeline-content {
+  grid-area: content;
+  min-inline-size: 0;
+}
+
+.amc-DTimeline-title {
+  margin: 0;
+  color: var(--amc-dtl-fg);
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.amc-DTimeline-body {
+  margin: .25rem 0 0;
+  color: var(--amc-dtl-muted);
+  font-size: .8125rem;
+  overflow-wrap: anywhere;
+}
+
+.amc-DTimeline-date {
+  grid-area: date;
+  min-inline-size: 0;
+  margin-block-end: .125rem;
+  color: var(--amc-dtl-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+
+.amc-DTimeline-tag {
+  grid-area: tag;
+  justify-self: end;
+  align-self: start;
+  max-inline-size: 12rem;
+  overflow: hidden;
+  padding: .0625rem .5rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dtl-accent) 12%, transparent);
+  color: color-mix(in srgb, var(--amc-dtl-accent) 70%, var(--amc-dtl-fg));
+  font-size: .6875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+/* State text: read by screen readers everywhere, visible in log and cards */
+.amc-DTimeline-level {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.amc-DTimeline--log .amc-DTimeline-level,
+.amc-DTimeline--cards .amc-DTimeline-item:not(.amc-DTimeline-item--neutral) .amc-DTimeline-level {
+  position: static;
+  grid-area: level;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  justify-self: start;
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  color: var(--amc-dtl-tone-text);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1.5;
+}
+
+.amc-DTimeline--log .amc-DTimeline-level::before,
+.amc-DTimeline--cards .amc-DTimeline-level::before {
+  content: "";
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-dtl-tone);
+}
+
+/* ---------------------------------------------------------------- dots */
+.amc-DTimeline--dots .amc-DTimeline-marker {
+  box-shadow: 0 0 0 3px var(--amc-dtl-bg), 0 0 0 5px color-mix(in srgb, var(--amc-dtl-tone) 28%, transparent);
+}
+
+.amc-DTimeline--dots .amc-DTimeline-item--neutral .amc-DTimeline-marker {
+  border: 2px solid var(--amc-dtl-muted);
+  background-color: var(--amc-dtl-bg);
+}
+
+/* ----------------------------------------------------------- iconRail */
+.amc-DTimeline--iconRail {
+  --amc-dtl-col: 2.5rem;
+  --amc-dtl-mk: 2.5rem;
+  --amc-dtl-mk-top: 0rem;
+  --amc-dtl-gap: 1.25rem;
+}
+
+.amc-DTimeline--iconRail .amc-DTimeline-item {
+  grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr) auto;
+  grid-template-areas:
+    "marker content date"
+    "marker content tag";
+  grid-template-rows: auto 1fr;
+}
+
+.amc-DTimeline--iconRail .amc-DTimeline-marker {
+  background-color: var(--amc-dtl-tone-tint);
+  border: 1px solid color-mix(in srgb, var(--amc-dtl-tone) 30%, transparent);
+  box-shadow: 0 0 0 4px var(--amc-dtl-bg);
+}
+
+.amc-DTimeline--iconRail .amc-DTimeline-marker:empty::after {
+  content: "";
+  inline-size: .625rem;
+  block-size: .625rem;
+  border-radius: 50%;
+  background-color: var(--amc-dtl-tone);
+}
+
+.amc-DTimeline--iconRail .amc-DTimeline-icon { display: inline-block; font-size: 1rem; }
+.amc-DTimeline--iconRail .amc-DTimeline-content { padding-block-start: .5rem; }
+.amc-DTimeline--iconRail .amc-DTimeline-date {
+  margin-block: .5625rem 0;
+  font-weight: 500;
+  text-align: end;
+  white-space: nowrap;
+}
+.amc-DTimeline--iconRail .amc-DTimeline-tag { margin-block-start: .25rem; }
+
+@container (max-width: 28rem) {
+  .amc-DTimeline--iconRail .amc-DTimeline-item {
+    grid-template-columns: var(--amc-dtl-col) auto minmax(0, 1fr);
+    grid-template-areas:
+      "marker content content"
+      "marker date tag";
+    grid-template-rows: auto auto;
+  }
+
+  .amc-DTimeline--iconRail .amc-DTimeline-date { margin-block: .25rem 0; text-align: start; white-space: normal; }
+  .amc-DTimeline--iconRail .amc-DTimeline-tag { justify-self: start; margin-block-start: .25rem; }
+}
+
+/* -------------------------------------------------------- alternating */
+.amc-DTimeline--alternating {
+  --amc-dtl-col: 2.25rem;
+  --amc-dtl-mk: 2.25rem;
+  --amc-dtl-mk-top: .25rem;
+  --amc-dtl-gap: 1.25rem;
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-item {
+  grid-template-columns: minmax(0, 1fr) var(--amc-dtl-col) minmax(0, 1fr);
+  grid-template-areas:
+    "date marker content"
+    "tag marker content";
+  grid-template-rows: auto 1fr;
+  column-gap: 1rem;
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) {
+  grid-template-areas:
+    "content marker date"
+    "content marker tag";
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-item::before {
+  inset-inline-start: calc(50% - var(--amc-dtl-rail) / 2);
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-marker {
+  background-color: var(--amc-dtl-bg);
+  border: 2px solid var(--amc-dtl-tone);
+  box-shadow: 0 0 0 4px var(--amc-dtl-bg);
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-marker:empty::after {
+  content: "";
+  inline-size: .625rem;
+  block-size: .625rem;
+  border-radius: 50%;
+  background-color: var(--amc-dtl-tone);
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-icon { display: inline-block; }
+
+.amc-DTimeline--alternating .amc-DTimeline-date {
+  justify-self: end;
+  margin-block: .625rem 0;
+  color: var(--amc-dtl-fg);
+  font-size: .8125rem;
+  text-align: end;
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-tag { margin-block-start: .375rem; }
+
+.amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) .amc-DTimeline-date,
+.amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) .amc-DTimeline-tag {
+  justify-self: start;
+  text-align: start;
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-content {
+  padding: .75rem 1rem;
+  border: 1px solid var(--amc-dtl-line);
+  border-radius: var(--amc-dtl-radius);
+  background-color: color-mix(in srgb, var(--amc-dtl-page) 55%, var(--amc-dtl-bg));
+}
+
+.amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) .amc-DTimeline-content { text-align: end; }
+
+@container (max-width: 34rem) {
+  .amc-DTimeline--alternating .amc-DTimeline-item,
+  .amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) {
+    grid-template-columns: var(--amc-dtl-col) auto minmax(0, 1fr);
+    grid-template-areas:
+      "marker date tag"
+      "marker content content";
+    grid-template-rows: auto auto;
+    column-gap: .75rem;
+  }
+
+  .amc-DTimeline--alternating .amc-DTimeline-item::before {
+    inset-inline-start: calc(var(--amc-dtl-col) / 2 - var(--amc-dtl-rail) / 2);
+  }
+
+  .amc-DTimeline--alternating .amc-DTimeline-date,
+  .amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) .amc-DTimeline-date {
+    justify-self: start;
+    margin-block: .6875rem .5rem;
+    text-align: start;
+  }
+
+  .amc-DTimeline--alternating .amc-DTimeline-tag,
+  .amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) .amc-DTimeline-tag {
+    justify-self: end;
+    margin-block-start: .6875rem;
+  }
+
+  .amc-DTimeline--alternating .amc-DTimeline-item:nth-child(even) .amc-DTimeline-content { text-align: start; }
+}
+
+/* -------------------------------------------------------------- cards */
+.amc-DTimeline--cards {
+  --amc-dtl-col: 1rem;
+  --amc-dtl-mk: 1rem;
+  --amc-dtl-mk-top: .125rem;
+  --amc-dtl-gap: 1.25rem;
+}
+
+.amc-DTimeline--cards .amc-DTimeline-item {
+  grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "marker date level tag"
+    "marker content content content";
+  column-gap: .75rem;
+}
+
+.amc-DTimeline--cards .amc-DTimeline-marker {
+  border: 3px solid var(--amc-dtl-tone);
+  background-color: var(--amc-dtl-bg);
+}
+
+.amc-DTimeline--cards .amc-DTimeline-date { margin-block: .125rem 0; }
+
+.amc-DTimeline--cards .amc-DTimeline-content {
+  margin-block-start: .5rem;
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-dtl-line);
+  border-radius: calc(var(--amc-dtl-radius) + .25rem);
+  background-color: var(--amc-dtl-bg);
+  box-shadow: var(--amc-dtl-shadow);
+}
+
+.amc-DTimeline--cards .amc-DTimeline-body { margin-block-start: .375rem; }
+
+.amc-DTimeline--cards .amc-DTimeline-level { margin-inline-end: .25rem; }
+
+@container (max-width: 24rem) {
+  .amc-DTimeline--cards .amc-DTimeline-item {
+    grid-template-columns: var(--amc-dtl-col) auto minmax(0, 1fr);
+    grid-template-areas:
+      "marker date date"
+      "marker level tag"
+      "marker content content";
+  }
+}
+
+/* ---------------------------------------------------------------- log */
+.amc-DTimeline--log {
+  overflow: hidden;
+  border: 1px solid var(--amc-dtl-line);
+  border-radius: var(--amc-dtl-radius);
+  font-size: .8125rem;
+}
+
+.amc-DTimeline--log .amc-DTimeline-item {
+  grid-template-columns: 7rem 5.5rem minmax(0, 1fr) auto;
+  grid-template-areas: "date level content tag";
+  align-items: baseline;
+  column-gap: .75rem;
+  padding: .5rem .875rem;
+  border-block-end: 1px solid var(--amc-dtl-line);
+}
+
+.amc-DTimeline--log .amc-DTimeline-item:last-child { border-block-end: 0; padding-block-end: .5rem; }
+.amc-DTimeline--log .amc-DTimeline-item:nth-child(even) { background-color: color-mix(in srgb, var(--amc-dtl-fg) 3%, transparent); }
+.amc-DTimeline--log .amc-DTimeline-item::before,
+.amc-DTimeline--log .amc-DTimeline-marker { display: none; }
+
+.amc-DTimeline--log .amc-DTimeline-date {
+  margin: 0;
+  color: var(--amc-dtl-muted);
+  font-weight: 500;
+}
+
+.amc-DTimeline--log .amc-DTimeline-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: .5rem;
+}
+
+.amc-DTimeline--log .amc-DTimeline-title { font-size: .8125rem; }
+.amc-DTimeline--log .amc-DTimeline-body { margin: 0; }
+
+.amc-DTimeline--log .amc-DTimeline-tag {
+  border: 1px solid var(--amc-dtl-line);
+  border-radius: .25rem;
+  background-color: transparent;
+  color: var(--amc-dtl-muted);
+}
+
+@container (max-width: 32rem) {
+  .amc-DTimeline--log .amc-DTimeline-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "level date"
+      "content tag";
+    column-gap: .5rem;
+    row-gap: .25rem;
+    padding-inline: .625rem;
+  }
+
+  .amc-DTimeline--log .amc-DTimeline-date { justify-self: end; }
+}
+
+/* --------------------------------------------------------- milestones */
+.amc-DTimeline--milestones {
+  --amc-dtl-mk: .875rem;
+  --amc-dtl-gap: 0;
+}
+
+.amc-DTimeline--milestones .amc-DTimeline-list {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+}
+
+.amc-DTimeline--milestones .amc-DTimeline-item {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "date"
+    "marker"
+    "content"
+    "tag";
+  grid-template-rows: 1.5rem auto auto auto;
+  padding-inline-end: 1rem;
+}
+
+/* horizontal track through the diamonds; the part after a reached milestone is colored */
+.amc-DTimeline--milestones .amc-DTimeline-item::before,
+.amc-DTimeline--milestones .amc-DTimeline-item:first-child::before,
+.amc-DTimeline--milestones .amc-DTimeline-item:last-child::before {
+  inset-block: calc(1.5rem + .5rem + var(--amc-dtl-mk) / 2 - 2px) auto;
+  inset-inline: 0;
+  inline-size: auto;
+  block-size: 4px;
+  border-radius: 2px;
+}
+
+.amc-DTimeline--milestones .amc-DTimeline-item:last-child::before { display: none; }
+.amc-DTimeline--milestones .amc-DTimeline-item--success::before { background-color: var(--amc-dtl-success); }
+
+.amc-DTimeline--milestones .amc-DTimeline-marker {
+  justify-self: start;
+  margin-block: .5rem .75rem;
+  margin-inline-start: .125rem;
+  border-radius: .1875rem;
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 4px var(--amc-dtl-bg);
+}
+
+.amc-DTimeline--milestones .amc-DTimeline-item--neutral .amc-DTimeline-marker {
+  border: 2px solid var(--amc-dtl-muted);
+  background-color: var(--amc-dtl-bg);
+}
+
+.amc-DTimeline--milestones .amc-DTimeline-date {
+  align-self: end;
+  margin: 0;
+  color: var(--amc-dtl-tone-text);
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.amc-DTimeline--milestones .amc-DTimeline-item--neutral .amc-DTimeline-date { color: var(--amc-dtl-muted); }
+.amc-DTimeline--milestones .amc-DTimeline-title { font-size: .875rem; }
+.amc-DTimeline--milestones .amc-DTimeline-tag { justify-self: start; margin-block-start: .5rem; }
+
+@container (max-width: 40rem) {
+  .amc-DTimeline--milestones .amc-DTimeline-list { grid-auto-flow: row; }
+
+  .amc-DTimeline--milestones .amc-DTimeline-item {
+    --amc-dtl-gap: 1.25rem;
+    --amc-dtl-mk-top: .25rem;
+    --amc-dtl-cy: calc(.25rem + var(--amc-dtl-mk) / 2);
+
+    grid-template-columns: 1rem minmax(0, 1fr) auto;
+    grid-template-areas:
+      "marker date tag"
+      "marker content content";
+    grid-template-rows: auto auto;
+    padding-inline-end: 0;
+  }
+
+  .amc-DTimeline--milestones .amc-DTimeline-item::before,
+  .amc-DTimeline--milestones .amc-DTimeline-item:first-child::before,
+  .amc-DTimeline--milestones .amc-DTimeline-item:last-child::before {
+    inset-block: 0;
+    inset-inline: calc(.5rem - 2px) auto;
+    inline-size: 4px;
+    block-size: auto;
+  }
+
+  .amc-DTimeline--milestones .amc-DTimeline-item:first-child::before { inset-block-start: var(--amc-dtl-cy); }
+  .amc-DTimeline--milestones .amc-DTimeline-item:last-child::before { display: block; inset-block-end: auto; block-size: var(--amc-dtl-cy); }
+  .amc-DTimeline--milestones .amc-DTimeline-item:only-child::before { display: none; }
+
+  .amc-DTimeline--milestones .amc-DTimeline-marker { justify-self: center; margin: var(--amc-dtl-mk-top) 0 0; }
+  .amc-DTimeline--milestones .amc-DTimeline-date { align-self: start; margin-block-end: .125rem; }
+  .amc-DTimeline--milestones .amc-DTimeline-tag { justify-self: end; margin: 0; }
+}
+
+/* ---------------------------------------------------------- changelog */
+.amc-DTimeline--changelog {
+  --amc-dtl-col: .75rem;
+  --amc-dtl-mk: .625rem;
+  --amc-dtl-mk-top: .5rem;
+  --amc-dtl-gap: 1.75rem;
+}
+
+.amc-DTimeline--changelog .amc-DTimeline-item {
+  grid-template-columns: 7.5rem var(--amc-dtl-col) minmax(0, 1fr);
+  grid-template-areas:
+    "tag marker content"
+    "date marker content";
+  grid-template-rows: auto 1fr;
+  column-gap: 1.25rem;
+}
+
+.amc-DTimeline--changelog .amc-DTimeline-item::before {
+  inset-inline-start: calc(7.5rem + 1.25rem + var(--amc-dtl-col) / 2 - var(--amc-dtl-rail) / 2);
+}
+
+.amc-DTimeline--changelog .amc-DTimeline-marker {
+  background-color: var(--amc-dtl-bg);
+  border: 2px solid var(--amc-dtl-accent);
+}
+
+.amc-DTimeline--changelog .amc-DTimeline-item:first-child .amc-DTimeline-marker { background-color: var(--amc-dtl-accent); }
+
+.amc-DTimeline--changelog .amc-DTimeline-tag {
+  justify-self: end;
+  padding: .125rem .625rem;
+  border-radius: .375rem;
+  background-color: color-mix(in srgb, var(--amc-dtl-accent) 14%, transparent);
+  font-size: .8125rem;
+  font-weight: 700;
+}
+
+.amc-DTimeline--changelog .amc-DTimeline-date {
+  justify-self: end;
+  margin-block: .375rem 0;
+  font-weight: 500;
+  text-align: end;
+}
+
+.amc-DTimeline--changelog .amc-DTimeline-title { font-size: 1rem; font-weight: 700; }
+.amc-DTimeline--changelog .amc-DTimeline-body { margin-block-start: .375rem; font-size: .875rem; }
+
+@container (max-width: 30rem) {
+  .amc-DTimeline--changelog .amc-DTimeline-item {
+    grid-template-columns: var(--amc-dtl-col) auto minmax(0, 1fr);
+    grid-template-areas:
+      "marker tag date"
+      "marker content content";
+    grid-template-rows: auto auto;
+    column-gap: .75rem;
+  }
+
+  .amc-DTimeline--changelog .amc-DTimeline-item::before {
+    inset-inline-start: calc(var(--amc-dtl-col) / 2 - var(--amc-dtl-rail) / 2);
+  }
+
+  .amc-DTimeline--changelog .amc-DTimeline-tag { justify-self: start; }
+  .amc-DTimeline--changelog .amc-DTimeline-date { align-self: center; justify-self: start; margin: 0; text-align: start; }
+  .amc-DTimeline--changelog .amc-DTimeline-content { margin-block-start: .5rem; }
+}
+
+/* ----------------------------------------------------------- numbered */
+.amc-DTimeline--numbered {
+  --amc-dtl-col: 3rem;
+  --amc-dtl-gap: 1rem;
+
+  counter-reset: amc-dtl;
+}
+
+.amc-DTimeline--numbered .amc-DTimeline-item {
+  grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr) auto;
+  grid-template-areas:
+    "marker content tag"
+    "marker date date";
+  column-gap: 1rem;
+  padding-block: 1rem;
+  border-block-start: 1px solid var(--amc-dtl-line);
+  counter-increment: amc-dtl;
+}
+
+.amc-DTimeline--numbered .amc-DTimeline-item:first-child { border-block-start: 0; padding-block-start: 0; }
+.amc-DTimeline--numbered .amc-DTimeline-item:last-child { padding-block-end: 0; }
+.amc-DTimeline--numbered .amc-DTimeline-item::before { display: none; }
+.amc-DTimeline--numbered .amc-DTimeline-item--neutral { --amc-dtl-tone: var(--amc-dtl-accent); --amc-dtl-tone-text: color-mix(in srgb, var(--amc-dtl-accent) 75%, var(--amc-dtl-fg)); }
+
+.amc-DTimeline--numbered .amc-DTimeline-marker {
+  justify-self: start;
+  flex-direction: column;
+  align-items: flex-start;
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--amc-dtl-tone-text);
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.amc-DTimeline--numbered .amc-DTimeline-marker::before { content: counter(amc-dtl, decimal-leading-zero); }
+
+.amc-DTimeline--numbered .amc-DTimeline-marker::after {
+  content: "";
+  inline-size: 1.25rem;
+  block-size: 3px;
+  margin-block-start: .375rem;
+  border-radius: 2px;
+  background-color: var(--amc-dtl-tone);
+}
+
+.amc-DTimeline--numbered .amc-DTimeline-date { margin-block: .375rem 0; font-weight: 500; }
+
+@container (max-width: 26rem) {
+  .amc-DTimeline--numbered .amc-DTimeline-item {
+    --amc-dtl-col: 2.5rem;
+
+    grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr);
+    grid-template-areas:
+      "marker content"
+      "marker tag"
+      "marker date";
+    column-gap: .75rem;
+  }
+
+  .amc-DTimeline--numbered .amc-DTimeline-marker { font-size: 1.5rem; }
+  .amc-DTimeline--numbered .amc-DTimeline-tag { justify-self: start; margin-block-start: .375rem; }
+}
+
+/* --------------------------------------------------------- dateBlocks */
+.amc-DTimeline--dateBlocks {
+  --amc-dtl-col: 3.75rem;
+  --amc-dtl-cy: 1.75rem;
+  --amc-dtl-gap: 1rem;
+}
+
+.amc-DTimeline--dateBlocks .amc-DTimeline-item {
+  grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr) auto;
+  grid-template-areas: "date content tag";
+  column-gap: 1rem;
+}
+
+.amc-DTimeline--dateBlocks .amc-DTimeline-marker { display: none; }
+
+/* The first word of Date (the day) becomes the large number of the calendar tile */
+.amc-DTimeline--dateBlocks .amc-DTimeline-date {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  inline-size: var(--amc-dtl-col);
+  margin: 0;
+  padding: .375rem .25rem .4375rem;
+  border: 1px solid var(--amc-dtl-line);
+  border-block-start: 3px solid var(--amc-dtl-tone);
+  border-radius: .5rem;
+  background-color: var(--amc-dtl-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dtl-fg) 8%, transparent);
+  color: var(--amc-dtl-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.25;
+  text-align: center;
+  word-spacing: 4rem;
+}
+
+.amc-DTimeline--dateBlocks .amc-DTimeline-item--neutral .amc-DTimeline-date { border-block-start-color: var(--amc-dtl-accent); }
+
+.amc-DTimeline--dateBlocks .amc-DTimeline-date::first-line {
+  color: var(--amc-dtl-fg);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.15;
+}
+
+.amc-DTimeline--dateBlocks .amc-DTimeline-content { padding-block-start: .25rem; }
+
+@container (max-width: 20rem) {
+  .amc-DTimeline--dateBlocks .amc-DTimeline-item {
+    grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr);
+    grid-template-areas:
+      "date content"
+      "date tag";
+  }
+
+  .amc-DTimeline--dateBlocks .amc-DTimeline-tag { justify-self: start; margin-block-start: .375rem; }
+}
+
+/* ------------------------------------------------------------- branch */
+.amc-DTimeline--branch {
+  --amc-dtl-col: 2rem;
+  --amc-dtl-mk: .625rem;
+  --amc-dtl-mk-top: .5rem;
+  --amc-dtl-trunk: .375rem; /* trunk position inside the marker column */
+  --amc-dtl-gap: .875rem;
+}
+
+.amc-DTimeline--branch .amc-DTimeline-item {
+  grid-template-columns: var(--amc-dtl-col) minmax(0, 1fr) auto;
+  grid-template-areas:
+    "marker content tag"
+    "marker date date";
+  column-gap: .5rem;
+}
+
+.amc-DTimeline--branch .amc-DTimeline-item::before,
+.amc-DTimeline--branch .amc-DTimeline-item:first-child::before {
+  inset-block: 0;
+  inset-inline-start: var(--amc-dtl-trunk);
+  background-color: color-mix(in srgb, var(--amc-dtl-accent) 35%, var(--amc-dtl-line));
+}
+
+.amc-DTimeline--branch .amc-DTimeline-item:last-child::before { display: none; }
+
+/* elbow from the trunk to the node */
+.amc-DTimeline--branch .amc-DTimeline-item::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: var(--amc-dtl-trunk);
+  box-sizing: border-box;
+  inline-size: calc(var(--amc-dtl-col) - var(--amc-dtl-trunk) - var(--amc-dtl-mk) + 1px);
+  block-size: calc(var(--amc-dtl-cy) + 1px);
+  border-inline-start: 2px solid color-mix(in srgb, var(--amc-dtl-accent) 35%, var(--amc-dtl-line));
+  border-block-end: 2px solid color-mix(in srgb, var(--amc-dtl-accent) 35%, var(--amc-dtl-line));
+  border-end-start-radius: .625rem;
+}
+
+.amc-DTimeline--branch .amc-DTimeline-marker {
+  justify-self: end;
+  border: 2px solid var(--amc-dtl-tone);
+  background-color: var(--amc-dtl-bg);
+  box-shadow: none;
+}
+
+.amc-DTimeline--branch .amc-DTimeline-item--neutral .amc-DTimeline-marker { border-color: var(--amc-dtl-accent); }
+
+.amc-DTimeline--branch .amc-DTimeline-content {
+  padding: .3125rem .75rem .4375rem;
+  border: 1px solid var(--amc-dtl-line);
+  border-radius: .5rem;
+  background-color: color-mix(in srgb, var(--amc-dtl-page) 60%, var(--amc-dtl-bg));
+}
+
+.amc-DTimeline--branch .amc-DTimeline-title { font-size: .875rem; }
+.amc-DTimeline--branch .amc-DTimeline-body { margin-block-start: .125rem; }
+
+.amc-DTimeline--branch .amc-DTimeline-date {
+  margin: .25rem .75rem 0;
+  font-weight: 500;
+}
+
+.amc-DTimeline--branch .amc-DTimeline-tag {
+  align-self: start;
+  margin-block-start: .375rem;
+  margin-inline-start: .5rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dtl-accent) 35%, transparent);
+  border-radius: .25rem;
+  background-color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+@container (max-width: 22rem) {
+  .amc-DTimeline--branch .amc-DTimeline-item {
+    grid-template-areas:
+      "marker content content"
+      "marker date date"
+      "marker tag tag";
+  }
+
+  .amc-DTimeline--branch .amc-DTimeline-tag { justify-self: start; margin: .25rem .75rem 0; }
+}
+
+/* ------------------------------------------------------ accessibility */
+@media (forced-colors: active) {
+  .amc-DTimeline-item::before,
+  .amc-DTimeline--branch .amc-DTimeline-item::after { background-color: CanvasText; border-color: CanvasText; }
+  .amc-DTimeline-marker { border: 2px solid CanvasText; forced-color-adjust: none; background-color: Canvas; }
+  .amc-DTimeline--milestones .amc-DTimeline-item--success .amc-DTimeline-marker,
+  .amc-DTimeline--dots .amc-DTimeline-item:not(.amc-DTimeline-item--neutral) .amc-DTimeline-marker { background-color: CanvasText; }
+  .amc-DTimeline--dateBlocks .amc-DTimeline-date,
+  .amc-DTimeline-tag { border: 1px solid CanvasText; }
+}

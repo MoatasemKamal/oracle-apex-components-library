@@ -1,0 +1,381 @@
+plugin designList (
+    name: Design List
+    staticId: AMC_DESIGN_LIST
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            {case STYLE/}{when checklist/}<span class="amc-DList-check" aria-hidden="true"></span>{otherwise/}{if ?IMAGE_URL/}<span class="amc-DList-avatar"><img class="amc-DList-img" src="#IMAGE_URL#" width="40" height="40" alt="" loading="lazy"></span>{else/}{if ?INITIALS/}<span class="amc-DList-avatar amc-DList-avatar--initials" aria-hidden="true">#INITIALS#</span>{else/}{if ?ICON/}<span class="amc-DList-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{endif/}{endif/}{endcase/}
+            <span class="amc-DList-main">
+              <span class="amc-DList-title">{if ?LINK_URL/}<a class="amc-DList-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</span>
+              {if ?SUBTITLE/}<span class="amc-DList-sub">#SUBTITLE#</span>{endif/}
+              {if ?VALUE/}<progress class="amc-DList-bar" value="#VALUE#" max="{if ?VALUE_MAX/}#VALUE_MAX#{else/}100{endif/}" aria-label="#TITLE!ATTR#"></progress>{endif/}
+            </span>
+            {case STYLE/}{when checklist/}<span class="amc-DList-state">{if ?STATE_LABEL/}#STATE_LABEL#{else/}{case STATE/}{when done/}Done{when success/}Done{otherwise/}Open{endcase/}{endif/}</span>{otherwise/}{if ?STATE_LABEL/}<span class="amc-DList-state">#STATE_LABEL#</span>{else/}{case STATE/}{when success/}<span class="amc-DList-sr">Success</span>{when warning/}<span class="amc-DList-sr">Warning</span>{when danger/}<span class="amc-DList-sr">Critical</span>{when info/}<span class="amc-DList-sr">Information</span>{otherwise/}{endcase/}{endif/}{endcase/}
+            {if ?META/}<span class="amc-DList-meta">#META#</span>{endif/}
+            {if ?LINK_URL/}<span class="amc-DList-chevron" aria-hidden="true"></span>{endif/}
+            ```
+        reportBody:
+            ```html
+            <div class="amc-DList amc-DList--#STYLE#"><ul class="amc-DList-list">#APEX$ROWS#</ul></div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DList-item amc-DList-item--{case STATE/}{when success/}success{when done/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}{if ?LINK_URL/} amc-DList-item--link{endif/}">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-list.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL or Initials (avatar), Icon, Value and Maximum (bars in leaderboard and metricRows), State and State Label, Link URL. Format numbers and dates in SQL.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: avatarRows
+        }
+        help {
+            helpText:
+                ```
+                Design of the list. avatarRows: people rows with avatar and meta. fileRows: documents with a file-type tile. checklist: tasks with a check box and a Done or Open label. leaderboard: ranked rows with rank number and score bar. contacts: grid of people with presence. settings: grouped inset rows with icon tiles, value and chevron. notifications: tinted rows with state icon. inbox: message rows with sender, preview and time. metricRows: label, value and bar. compact: dense single-line rows. pills: wrapping chips.
+                ```
+        }
+        entry avatarRows (
+            sequence: 10
+            display: Avatar rows
+            return: avatarRows
+        )
+        entry fileRows (
+            sequence: 20
+            display: File rows
+            return: fileRows
+        )
+        entry checklist (
+            sequence: 30
+            display: Checklist
+            return: checklist
+        )
+        entry leaderboard (
+            sequence: 40
+            display: Leaderboard
+            return: leaderboard
+        )
+        entry contacts (
+            sequence: 50
+            display: Contacts
+            return: contacts
+        )
+        entry settings (
+            sequence: 60
+            display: Settings
+            return: settings
+        )
+        entry notifications (
+            sequence: 70
+            display: Notifications
+            return: notifications
+        )
+        entry inbox (
+            sequence: 80
+            display: Inbox
+            return: inbox
+        )
+        entry metricRows (
+            sequence: 90
+            display: Metric rows
+            return: metricRows
+        )
+        entry compact (
+            sequence: 100
+            display: Compact
+            return: compact
+        )
+        entry pills (
+            sequence: 110
+            display: Pills
+            return: pills
+        )
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Main text of the row, for example a customer name, a file name or a task.
+                ```
+        }
+    )
+    customAttribute SUBTITLE (
+        apexlangName: subtitle
+        attribute: 3
+        name: Subtitle
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Secondary text, for example a role, file size or message preview. The Inbox style shows it on one line.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 4
+        name: Meta
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short text at the end of the row, already formatted in SQL: a time, an amount, a score or a count.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 5
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Avatar image URL. Must be developer-controlled, for example a URL built with apex_util.get_blob_file_src. Takes precedence over Initials and Icon.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 6
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown in the avatar circle when there is no Image URL, for example MC.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 7
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class shown when there is no Image URL or Initials, for example fa-file-pdf-o or fa-bell.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 8
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Plain number, without formatting, drawn as a bar in the Leaderboard and Metric rows styles, for example 72. Show the formatted value with Meta.
+                ```
+        }
+    )
+    customAttribute VALUE_MAX (
+        apexlangName: valueMax
+        attribute: 9
+        name: Maximum
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Plain number for a full bar. Defaults to 100. For a leaderboard return the top score, for example max score over the whole query.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 10
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                One of success, warning, danger, info or neutral; colors the status dot, icon tile or bar and is also given as text. In the Checklist style return done for a completed task (success also counts as done) and anything else for an open task. Unknown values render as neutral.
+                ```
+        }
+    )
+    customAttribute STATE_LABEL (
+        apexlangName: stateLabel
+        attribute: 11
+        name: State Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible text for the state, for example Online, Overdue, Unread or Shared. Without it, screen readers get a generic word for the state, and the Checklist style shows Done or Open.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 12
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target for the whole row, for example apex_page.get_url(p_page => 10, p_items => 'P10_ID', p_values => id). Must be developer-controlled. The Title becomes the link text.
+                ```
+        }
+    )
+    file "amc-design-list.css" (
+        fileName: amc-design-list.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)
