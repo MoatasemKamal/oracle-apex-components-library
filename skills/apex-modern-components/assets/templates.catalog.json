@@ -142,6 +142,195 @@
       "legacySql": "theme-templates/aurora-header/dist/legacy/amc_tpl_aurora_header.sql"
     },
     {
+      "slug": "auth-card",
+      "kind": "region",
+      "name": "AMC Auth Card",
+      "staticId": "AMC_TPL_AUTH_CARD",
+      "apexlangId": "amc-auth-card",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A motion-rich authentication card for login, sign-up, forgot-password, OTP and reset pages: seven looks, seven full-screen scenes drawn behind the page, and opt-in field behaviour by item CSS class, while items, validations and processes stay native.",
+      "useFor": "The Static Content region that holds the page items and buttons of an authentication page: the app's Login page, Create account, Forgot password, OTP verification and Reset password.",
+      "keywords": [
+        "login",
+        "sign in",
+        "sign up",
+        "register",
+        "forgot password",
+        "reset password",
+        "otp",
+        "one-time code",
+        "2fa",
+        "authentication",
+        "aurora",
+        "meteors",
+        "glassmorphism"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Look - Split brand panel",
+          "cssClass": "amc-TAuthCard--split"
+        },
+        {
+          "name": "Look - Neo-brutal",
+          "cssClass": "amc-TAuthCard--brutal"
+        },
+        {
+          "name": "Look - Clay",
+          "cssClass": "amc-TAuthCard--clay"
+        },
+        {
+          "name": "Look - Minimal",
+          "cssClass": "amc-TAuthCard--minimal"
+        },
+        {
+          "name": "Look - Neon",
+          "cssClass": "amc-TAuthCard--neon"
+        },
+        {
+          "name": "Look - Paper",
+          "cssClass": "amc-TAuthCard--paper"
+        },
+        {
+          "name": "Scene - Meteors",
+          "cssClass": "amc-TAuthCard--sceneMeteors"
+        },
+        {
+          "name": "Scene - Grid spotlight",
+          "cssClass": "amc-TAuthCard--sceneGrid"
+        },
+        {
+          "name": "Scene - Mesh and grain",
+          "cssClass": "amc-TAuthCard--sceneMesh"
+        },
+        {
+          "name": "Scene - Retro grid",
+          "cssClass": "amc-TAuthCard--sceneRetro"
+        },
+        {
+          "name": "Scene - Particles",
+          "cssClass": "amc-TAuthCard--sceneParticles"
+        },
+        {
+          "name": "Scene - None",
+          "cssClass": "amc-TAuthCard--sceneNone"
+        },
+        {
+          "name": "Stage - scene inside the region",
+          "cssClass": "amc-TAuthCard--stage"
+        },
+        {
+          "name": "Auto-submit OTP",
+          "cssClass": "amc-TAuthCard--otpAutoSubmit"
+        }
+      ],
+      "apexlang": "theme-templates/auth-card/dist/apexlang",
+      "legacySql": "theme-templates/auth-card/dist/legacy/amc_tpl_auth_card.sql"
+    },
+    {
+      "slug": "auth-result",
+      "kind": "region",
+      "name": "AMC Auth Result",
+      "staticId": "AMC_TPL_AUTH_RESULT",
+      "apexlangId": "amc-auth-result",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "An outcome screen for authentication and other flows whose inline SVG symbol draws itself inside a glowing orbit ring, a checkmark in a filling ring, a paper plane landing on an envelope, a shield, a door, a draining hourglass, a shaking cross or a latching lock, over optional full-page aurora, meteor, grid, mesh, retro or particle scenes, with an optional countdown redirect.",
+      "useFor": "A Static Content region on a confirmation page or after a branch from a process: Account created, Password changed, Reset link sent, Email verified, Signed out, Link expired, Something went wrong, Access denied. Region title is the heading, region text is the message with native links, Next or Create is the primary action and Previous or Close the secondary one.",
+      "keywords": [
+        "authentication",
+        "confirmation",
+        "success",
+        "outcome",
+        "check your email",
+        "password reset",
+        "verified",
+        "signed out",
+        "expired",
+        "error",
+        "access denied",
+        "countdown redirect",
+        "confetti",
+        "svg draw"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Outcome - Email sent",
+          "cssClass": "amc-TAuthResult--email"
+        },
+        {
+          "name": "Outcome - Verified",
+          "cssClass": "amc-TAuthResult--verified"
+        },
+        {
+          "name": "Outcome - Signed out",
+          "cssClass": "amc-TAuthResult--signedOut"
+        },
+        {
+          "name": "Outcome - Link expired",
+          "cssClass": "amc-TAuthResult--expired"
+        },
+        {
+          "name": "Outcome - Error",
+          "cssClass": "amc-TAuthResult--error"
+        },
+        {
+          "name": "Outcome - Access denied",
+          "cssClass": "amc-TAuthResult--denied"
+        },
+        {
+          "name": "Look - Minimal",
+          "cssClass": "amc-TAuthResult--minimal"
+        },
+        {
+          "name": "Look - Split",
+          "cssClass": "amc-TAuthResult--split"
+        },
+        {
+          "name": "Look - Brutal",
+          "cssClass": "amc-TAuthResult--brutal"
+        },
+        {
+          "name": "Scene - Aurora",
+          "cssClass": "amc-TAuthResult--aurora"
+        },
+        {
+          "name": "Scene - Meteors",
+          "cssClass": "amc-TAuthResult--meteors"
+        },
+        {
+          "name": "Scene - Grid",
+          "cssClass": "amc-TAuthResult--grid"
+        },
+        {
+          "name": "Scene - Mesh",
+          "cssClass": "amc-TAuthResult--mesh"
+        },
+        {
+          "name": "Scene - Retro",
+          "cssClass": "amc-TAuthResult--retro"
+        },
+        {
+          "name": "Scene - Particles",
+          "cssClass": "amc-TAuthResult--particles"
+        },
+        {
+          "name": "Confetti burst",
+          "cssClass": "amc-TAuthResult--confetti"
+        },
+        {
+          "name": "Redirect after countdown",
+          "cssClass": "amc-TAuthResult--countdown"
+        }
+      ],
+      "apexlang": "theme-templates/auth-result/dist/apexlang",
+      "legacySql": "theme-templates/auth-result/dist/legacy/amc_tpl_auth_result.sql"
+    },
+    {
       "slug": "beam-frame",
       "kind": "region",
       "name": "AMC Beam Frame",

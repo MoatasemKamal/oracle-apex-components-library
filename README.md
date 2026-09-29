@@ -39,6 +39,17 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Authentication and messages (plugin-free)
+
+| Part | What it is | What it does |
+|---|---|---|
+| [Auth Card](skills/apex-modern-components/theme-templates/auth-card) | Region template | Login, create account, forgot password, OTP verification and reset password: 7 looks, 7 animated full-screen scenes, and opt-in field behaviours by item CSS class (show/hide password, Caps Lock, strength meter, match check, OTP boxes with paste and auto-submit, resend countdown, loading state, error shake). Five page examples with server-side security checklists |
+| [Auth Result](skills/apex-modern-components/theme-templates/auth-result) | Region template | Confirmation and outcome screens (success, email sent, verified, signed out, expired, error, denied) with self-drawing symbols, optional confetti and an accessible countdown redirect |
+| [Message Kit](skills/apex-modern-components/message-kit) | App-wide static files | APEX success and error messages as animated toasts and an error panel with links to fields, restyled alert and confirm dialogs, and `amcMessageKit.toast()` for Dynamic Actions |
+
+None of these is a plug-in: companies that block plug-ins can still use them. Security (OTP expiry, attempt
+limits, rate limiting, password policy, neutral wording) stays in your validations and processes.
+
 ## App navigation (Navigation Menu and Navigation Bar)
 
 Two templates for the application-level slots in User Interface, set once for the whole app:

@@ -1,0 +1,380 @@
+regionTemplate amc-auth-result (
+    name: AMC Auth Result
+    region {
+        template:
+            ```html
+            <section class="amc-TAuthResult #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-text-continuing="Continuing in %0…" data-amc-text-paused="Paused" data-amc-text-cancel="Stay on this page" data-amc-text-cancelled="Automatic redirect cancelled." data-amc-text-announce="You will continue automatically in %0 seconds. Press Stay on this page or Escape to cancel.">
+              <span class="amc-TAuthResult-scene" aria-hidden="true"><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span><span class="amc-TAuthResult-fx"></span></span>
+              <div class="amc-TAuthResult-card">
+                <span class="amc-TAuthResult-glass" aria-hidden="true"></span>
+                <div class="amc-TAuthResult-visual" aria-hidden="true">
+                  <span class="amc-TAuthResult-halo"></span>
+                  <span class="amc-TAuthResult-orbit"></span>
+                  <span class="amc-TAuthResult-pulse"></span>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--success" viewBox="0 0 96 96" focusable="false"><circle class="amc-TAuthResult-fill" cx="48" cy="48" r="38"/><circle class="amc-TAuthResult-draw amc-TAuthResult-d1" cx="48" cy="48" r="38" pathLength="1" transform="rotate(-90 48 48)"/><path class="amc-TAuthResult-draw amc-TAuthResult-d2 amc-TAuthResult-heavy" d="M31 49 L43 61 L66 36" pathLength="1"/></svg>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--email" viewBox="0 0 96 96" focusable="false"><path class="amc-TAuthResult-draw amc-TAuthResult-d1 amc-TAuthResult-trail" d="M8 86 C22 82 26 62 40 58 C56 54 60 40 70 22" pathLength="1"/><g class="amc-TAuthResult-env"><rect class="amc-TAuthResult-fill amc-TAuthResult-draw amc-TAuthResult-d2" x="16" y="34" width="56" height="40" rx="7" pathLength="1"/><path class="amc-TAuthResult-flap amc-TAuthResult-draw amc-TAuthResult-d3" d="M19 38 L44 57 L69 38" pathLength="1"/></g><g class="amc-TAuthResult-plane"><path class="amc-TAuthResult-solid" d="M62 20 L90 8 L80 36 L73 26 Z"/><path class="amc-TAuthResult-draw amc-TAuthResult-thin" d="M73 26 L90 8" pathLength="1"/></g></svg>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--verified" viewBox="0 0 96 96" focusable="false"><path class="amc-TAuthResult-fill amc-TAuthResult-draw amc-TAuthResult-d1" d="M48 9 L78 20 V44 C78 63 66 77 48 86 C30 77 18 63 18 44 V20 Z" pathLength="1"/><path class="amc-TAuthResult-draw amc-TAuthResult-d2 amc-TAuthResult-heavy" d="M34 47 L44 57 L63 37" pathLength="1"/><path class="amc-TAuthResult-spark amc-TAuthResult-thin" d="M84 10 V20 M79 15 H89"/><path class="amc-TAuthResult-spark amc-TAuthResult-thin" d="M10 60 V68 M6 64 H14"/><path class="amc-TAuthResult-spark amc-TAuthResult-thin" d="M86 70 V76 M83 73 H89"/></svg>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--signedOut" viewBox="0 0 96 96" focusable="false"><path class="amc-TAuthResult-fill amc-TAuthResult-draw amc-TAuthResult-d1" d="M50 16 H26 C22 16 20 18 20 22 V74 C20 78 22 80 26 80 H50" pathLength="1"/><path class="amc-TAuthResult-door" d="M20 16 L44 24 V88 L20 80 Z"/><g class="amc-TAuthResult-exit"><path class="amc-TAuthResult-draw amc-TAuthResult-d2 amc-TAuthResult-heavy" d="M46 48 H82" pathLength="1"/><path class="amc-TAuthResult-draw amc-TAuthResult-d3 amc-TAuthResult-heavy" d="M70 35 L83 48 L70 61" pathLength="1"/></g><path class="amc-TAuthResult-spark amc-TAuthResult-thin" d="M62 26 H74 M66 70 H78"/></svg>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--expired" viewBox="0 0 96 96" focusable="false"><g class="amc-TAuthResult-glassTilt"><path class="amc-TAuthResult-draw amc-TAuthResult-d1 amc-TAuthResult-heavy" d="M26 10 H70 M26 86 H70" pathLength="1"/><path class="amc-TAuthResult-draw amc-TAuthResult-d1" d="M31 10 C31 32 45 40 45 48 C45 56 31 64 31 86 M65 10 C65 32 51 40 51 48 C51 56 65 64 65 86" pathLength="1"/><path class="amc-TAuthResult-sandTop amc-TAuthResult-solid" d="M36 18 H60 C58 28 52 34 48 40 C44 34 38 28 36 18 Z"/><path class="amc-TAuthResult-stream amc-TAuthResult-thin" d="M48 42 V78"/><path class="amc-TAuthResult-sandBottom amc-TAuthResult-solid" d="M35 82 C37 70 44 66 48 66 C52 66 59 70 61 82 Z"/></g></svg>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--error" viewBox="0 0 96 96" focusable="false"><circle class="amc-TAuthResult-fill" cx="48" cy="48" r="38"/><circle class="amc-TAuthResult-draw amc-TAuthResult-d1" cx="48" cy="48" r="38" pathLength="1" transform="rotate(-90 48 48)"/><path class="amc-TAuthResult-draw amc-TAuthResult-d2 amc-TAuthResult-heavy" d="M35 35 L61 61" pathLength="1"/><path class="amc-TAuthResult-draw amc-TAuthResult-d3 amc-TAuthResult-heavy" d="M61 35 L35 61" pathLength="1"/></svg>
+                  <svg class="amc-TAuthResult-sym amc-TAuthResult-sym--denied" viewBox="0 0 96 96" focusable="false"><path class="amc-TAuthResult-shackle amc-TAuthResult-draw amc-TAuthResult-d2 amc-TAuthResult-heavy" d="M33 44 V32 C33 23 40 16 48 16 C56 16 63 23 63 32 V44" pathLength="1"/><rect class="amc-TAuthResult-fill amc-TAuthResult-draw amc-TAuthResult-d1" x="22" y="42" width="52" height="40" rx="9" pathLength="1"/><circle class="amc-TAuthResult-solid" cx="48" cy="58" r="5"/><path class="amc-TAuthResult-draw amc-TAuthResult-d3 amc-TAuthResult-heavy" d="M48 62 V70" pathLength="1"/></svg>
+                  <span class="amc-TAuthResult-confetti"><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span><span class="amc-TAuthResult-bit"></span></span>
+                </div>
+                <div class="amc-TAuthResult-main">
+                  <div class="amc-TAuthResult-announce" role="status" aria-atomic="true">
+                    <p class="amc-TAuthResult-kicker"><span class="amc-TAuthResult-k amc-TAuthResult-k--success">Done</span><span class="amc-TAuthResult-k amc-TAuthResult-k--email">Email sent</span><span class="amc-TAuthResult-k amc-TAuthResult-k--verified">Verified</span><span class="amc-TAuthResult-k amc-TAuthResult-k--signedOut">Signed out</span><span class="amc-TAuthResult-k amc-TAuthResult-k--expired">Expired</span><span class="amc-TAuthResult-k amc-TAuthResult-k--error">Error</span><span class="amc-TAuthResult-k amc-TAuthResult-k--denied">Access denied</span></p>
+                    <h2 class="amc-TAuthResult-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                    <div class="amc-TAuthResult-body">#BODY#</div>
+                  </div>
+                  <div class="amc-TAuthResult-countdown" hidden>
+                    <svg class="amc-TAuthResult-ring" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><circle class="amc-TAuthResult-ringTrack" cx="18" cy="18" r="15"/><circle class="amc-TAuthResult-ringValue" cx="18" cy="18" r="15" pathLength="1" transform="rotate(-90 18 18)"/></svg>
+                    <span class="amc-TAuthResult-count" aria-hidden="true"></span>
+                    <span class="amc-TAuthResult-countText" tabindex="-1"></span>
+                    <button type="button" class="amc-TAuthResult-cancel"></button>
+                    <span class="amc-TAuthResult-live" aria-live="polite"></span>
+                  </div>
+                  <div class="amc-TAuthResult-actions">#PREVIOUS##CLOSE##HELP##EDIT##CHANGE##COPY##DELETE##CREATE##NEXT#</div>
+                  <div class="amc-TAuthResult-more">#SUB_REGIONS#</div>
+                </div>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-auth-result.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-auth-result.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_AUTH_RESULT
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template for confirmation and outcome screens. The region title is the heading, the region text is the message (use neutral wording such as 'If an account exists for m••••@example.com, we sent a reset link'), links and buttons in the text stay native, Next or Create is the primary action and Previous or Close the secondary one; Help, Edit, Change, Copy and Delete also render in the action bar. Sub regions render in a row below the actions, separated by a dashed line: use one for 'Didn't get it? Resend' on the email outcome.
+            OUTCOME, tick at most one: none = Success, a checkmark drawn inside a ring that fills. Email sent = a paper plane flies in along its trail and lands on an envelope. Verified = a shield with a check and sparkles. Signed out = a door swings open and an arrow leaves. Link expired = the last sand drains through an hourglass, which then tilts. Error = a cross is drawn in a ring, then a gentle shake. Access denied = a lock whose shackle drops shut, then a shake. Each outcome also shows a text kicker above the heading - Done, Email sent, Verified, Signed out, Expired, Error, Access denied - so the state never depends on color; translate the kickers in the template markup. The symbols are decorative and hidden from assistive technology.
+            LIVE REGION: title, kicker and text sit in a wrapper with role status. With JavaScript, the Link expired, Error and Access denied outcomes switch it to role alert; without JavaScript it stays role status.
+            LOOK: none = Glass, a frosted card with a light top edge and outcome-colored glow. Minimal = no card, only symbol and text. Split = a two-part card with the symbol on a gradient panel, stacking on narrow widths. Brutal = ink border, hard offset shadow, bold heading.
+            SCENE, at most one: Aurora, Meteors, Grid, Mesh, Retro or Particles draw a decorative layer fixed behind the whole page, so the Login page template needs no changes; none = no scene. Scenes never receive clicks.
+            CONFETTI: a small burst from the symbol after it is drawn, for the Success and Verified outcomes only.
+            REDIRECT AFTER COUNTDOWN: needs the script file. Shows a progress ring and 'Continuing in 5…' and then activates the first link or button in the region text, otherwise the primary button of the region. Set the seconds with Custom Attributes data-amc-seconds="8" - default 5, 1 to 3600. The countdown pauses while the pointer is over the card, while keyboard focus is inside it and while the browser tab is hidden. A visible 'Stay on this page' button and the Escape key cancel it; the cancel button is always shown, also under reduced motion.
+            STRINGS, overridable with the region Custom Attributes because the first attribute wins: data-amc-text-continuing="Continuing in %0…", data-amc-text-paused="Paused", data-amc-text-cancel="Stay on this page", data-amc-text-cancelled="Automatic redirect cancelled.", data-amc-text-announce="You will continue automatically in %0 seconds. Press Stay on this page or Escape to cancel." - %0 is the number of seconds.
+            MOTION AND ACCESSIBILITY: every symbol is complete at rest; the animations only start from an earlier state. Under reduced motion nothing moves, confetti and the pulse ring are not shown and scenes are still. In forced-colors mode scenes and glow are removed and the symbol uses system colors. Keyboard: all actions are native links and buttons in DOM order; the heading is an h2 referenced by the region. Security stays server side: token checks, expiry, rate limits and neutral wording belong to page processes and validations.
+            ```
+    }
+
+    templateOption amc-auth-result-outcome-email (
+        name: Outcome - Email sent
+        sequence: 10
+        appearance {
+            cssClasses: amc-TAuthResult--email
+        }
+        help {
+            helpText:
+                ```text
+                Envelope with a paper plane landing on it, primary tone, kicker 'Email sent'. For reset links, verification mails and magic links. Leave all outcomes unticked for Success.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OUTCOME_EMAIL
+        }
+    )
+
+    templateOption amc-auth-result-outcome-verified (
+        name: Outcome - Verified
+        sequence: 20
+        appearance {
+            cssClasses: amc-TAuthResult--verified
+        }
+        help {
+            helpText:
+                ```text
+                Shield with a check and sparkles, success tone, kicker 'Verified'. For email, phone or identity verification.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OUTCOME_VERIFIED
+        }
+    )
+
+    templateOption amc-auth-result-outcome-signed-out (
+        name: Outcome - Signed out
+        sequence: 30
+        appearance {
+            cssClasses: amc-TAuthResult--signedOut
+        }
+        help {
+            helpText:
+                ```text
+                Door with a leaving arrow, mirrored in right-to-left pages, info tone, kicker 'Signed out'.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OUTCOME_SIGNED_OUT
+        }
+    )
+
+    templateOption amc-auth-result-outcome-expired (
+        name: Outcome - Link expired
+        sequence: 40
+        appearance {
+            cssClasses: amc-TAuthResult--expired
+        }
+        help {
+            helpText:
+                ```text
+                Hourglass that has run out, warning tone, kicker 'Expired', role alert. For expired or already used links and codes.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OUTCOME_EXPIRED
+        }
+    )
+
+    templateOption amc-auth-result-outcome-error (
+        name: Outcome - Error
+        sequence: 50
+        appearance {
+            cssClasses: amc-TAuthResult--error
+        }
+        help {
+            helpText:
+                ```text
+                Cross in a ring with a gentle shake, danger tone, kicker 'Error', role alert. Say what happened and how to fix it.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OUTCOME_ERROR
+        }
+    )
+
+    templateOption amc-auth-result-outcome-denied (
+        name: Outcome - Access denied
+        sequence: 60
+        appearance {
+            cssClasses: amc-TAuthResult--denied
+        }
+        help {
+            helpText:
+                ```text
+                Lock whose shackle drops shut, danger tone, kicker 'Access denied', role alert.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OUTCOME_DENIED
+        }
+    )
+
+    templateOption amc-auth-result-look-minimal (
+        name: Look - Minimal
+        sequence: 110
+        appearance {
+            cssClasses: amc-TAuthResult--minimal
+        }
+        help {
+            helpText:
+                ```text
+                No card: only the symbol, heading, text and actions on the page background. Leave the looks unticked for the default glass card.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_MINIMAL
+        }
+    )
+
+    templateOption amc-auth-result-look-split (
+        name: Look - Split
+        sequence: 120
+        appearance {
+            cssClasses: amc-TAuthResult--split
+        }
+        help {
+            helpText:
+                ```text
+                Two-part card: the symbol on an outcome-colored gradient panel beside the text; the parts stack on narrow widths.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_SPLIT
+        }
+    )
+
+    templateOption amc-auth-result-look-brutal (
+        name: Look - Brutal
+        sequence: 130
+        appearance {
+            cssClasses: amc-TAuthResult--brutal
+        }
+        help {
+            helpText:
+                ```text
+                Neo-brutal card with an ink border, hard offset shadow, tilted symbol block and a bold heading.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_BRUTAL
+        }
+    )
+
+    templateOption amc-auth-result-scene-aurora (
+        name: Scene - Aurora
+        sequence: 210
+        appearance {
+            cssClasses: amc-TAuthResult--aurora
+        }
+        help {
+            helpText:
+                ```text
+                Slowly drifting aurora light in the outcome and primary colors behind the whole page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_AURORA
+        }
+    )
+
+    templateOption amc-auth-result-scene-meteors (
+        name: Scene - Meteors
+        sequence: 220
+        appearance {
+            cssClasses: amc-TAuthResult--meteors
+        }
+        help {
+            helpText:
+                ```text
+                Meteors streak diagonally across the page background.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_METEORS
+        }
+    )
+
+    templateOption amc-auth-result-scene-grid (
+        name: Scene - Grid
+        sequence: 230
+        appearance {
+            cssClasses: amc-TAuthResult--grid
+        }
+        help {
+            helpText:
+                ```text
+                A fine panning line grid that fades out towards the edges, with an outcome-colored glow in the middle.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_GRID
+        }
+    )
+
+    templateOption amc-auth-result-scene-mesh (
+        name: Scene - Mesh
+        sequence: 240
+        appearance {
+            cssClasses: amc-TAuthResult--mesh
+        }
+        help {
+            helpText:
+                ```text
+                A soft mesh gradient of the outcome, primary and info colors that shifts slowly.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_MESH
+        }
+    )
+
+    templateOption amc-auth-result-scene-retro (
+        name: Scene - Retro
+        sequence: 250
+        appearance {
+            cssClasses: amc-TAuthResult--retro
+        }
+        help {
+            helpText:
+                ```text
+                A retro perspective grid floor moving towards the viewer under a striped setting sun.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_RETRO
+        }
+    )
+
+    templateOption amc-auth-result-scene-particles (
+        name: Scene - Particles
+        sequence: 260
+        appearance {
+            cssClasses: amc-TAuthResult--particles
+        }
+        help {
+            helpText:
+                ```text
+                Soft glowing dots drift upwards behind the page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_PARTICLES
+        }
+    )
+
+    templateOption amc-auth-result-confetti (
+        name: Confetti burst
+        sequence: 310
+        appearance {
+            cssClasses: amc-TAuthResult--confetti
+        }
+        help {
+            helpText:
+                ```text
+                A short confetti burst from the symbol after it is drawn, for the Success and Verified outcomes only; never under reduced motion.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CONFETTI
+        }
+    )
+
+    templateOption amc-auth-result-countdown (
+        name: Redirect after countdown
+        sequence: 320
+        appearance {
+            cssClasses: amc-TAuthResult--countdown
+        }
+        help {
+            helpText:
+                ```text
+                Needs the template script. After data-amc-seconds seconds, default 5, activates the first link or button in the region text, else the primary button. Pauses on hover, focus and hidden tab; a visible Stay on this page button and Escape cancel it.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COUNTDOWN
+        }
+    )
+)
