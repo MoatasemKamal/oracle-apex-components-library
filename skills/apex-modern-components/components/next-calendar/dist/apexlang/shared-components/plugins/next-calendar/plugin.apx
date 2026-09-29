@@ -1,0 +1,609 @@
+plugin nextCalendar (
+    name: Next Calendar
+    staticId: AMC_NEXT_CALENDAR
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <time class="amc-NCalendar-when" datetime="#START_DATE#">{if ?DATE_LABEL/}#DATE_LABEL#{else/}#START_DATE#{endif/}</time>
+            <div class="amc-NCalendar-what">
+              <h3 class="amc-NCalendar-title">{if ?LINK_URL/}<a class="amc-NCalendar-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+              {if ?DESCRIPTION/}<p class="amc-NCalendar-desc">#DESCRIPTION#</p>{endif/}
+              <p class="amc-NCalendar-meta">{if ?CATEGORY/}<span class="amc-NCalendar-cat">#CATEGORY#</span>{endif/}<span class="amc-NCalendar-state">{case STATE/}{when success/}Confirmed{when warning/}Attention{when danger/}Critical{when info/}Info{otherwise/}Scheduled{endcase/}</span></p>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NCalendar amc-NCalendar--#STYLE#" data-view="#STYLE#" data-first-day="#FIRST_DAY#" data-initial-date="#INITIAL_DATE#" data-calendar="#CALENDAR_SYSTEM#" data-day-start="#DAY_START#" data-day-end="#DAY_END#" data-zoom="#LANE_ZOOM#" data-count="#UPCOMING_COUNT#">
+              <span class="amc-NCalendar-i18n" hidden data-prev="Previous" data-next="Next" data-more="more" data-all-day="All day" data-close="Close" data-no-events="No events" data-none-upcoming="No upcoming events" data-now="Happening now" data-day="Day" data-week="Week" data-month="Month" data-legend-low="Less" data-legend-high="More" data-other="Other" data-event-one="event" data-event-other="events" data-next-up="Next up" data-starts-in="Starts in" data-zoom="Zoom" data-total="Total" data-busiest="Busiest day" data-next-event="Next"></span>
+              <ol class="amc-NCalendar-source">#APEX$ROWS#</ol>
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NCalendar-event amc-NCalendar-event--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}" data-start="#START_DATE#" data-end="#END_DATE#" data-category="#CATEGORY!ATTR#" data-all-day="#ALL_DAY#" data-value="#VALUE#" data-state="{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-calendar.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-calendar.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            One query row per event. Map Start Date (required) and Title (required); return dates as text in ISO form with TO_CHAR(date_col, 'YYYY-MM-DD"T"HH24:MI'), or 'YYYY-MM-DD' for all-day events. End Date is exclusive for timed events and the last day for all-day events. Category groups events by color and makes the lanes of Timeline Lanes. State accepts success, warning, danger, info or neutral. Value is a number that drives the Heatmap intensity instead of the event count. Without JavaScript the rows show as a readable agenda list; the runtime file builds the chosen view, keyboard navigation and live updates, and rebuilds after a region refresh.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: month
+        }
+        help {
+            helpText:
+                ```
+                Calendar view; the direction is given in brackets as motion, depth, bold or smart. month [smart]: month grid with event chips, a +N more popover and a today ring; in narrow regions it becomes a dot calendar with the selected day's agenda. agenda [smart]: events grouped by day under sticky day headers with Today and Tomorrow labels and durations; the date moves beside the events in wide regions. week [depth]: seven day columns on an hour grid, events placed by time, overlapping events side by side, all-day row and a live now line. heatmap [bold]: a year of days colored by the number of events, or by the sum of Value, with month labels, legend, busiest day and day tooltips. timelineLanes [smart]: a resource schedule with one lane per Category on a time scale that zooms between day, week and month. posterDay [bold]: a giant date poster for today or the Initial Date with that day's events beside it, for home pages and kiosks. flipDate [depth]: a desk tear-off calendar whose page flips in 3D to the next or previous day, with the day's events written on the page. countdown [motion]: live tiles counting down days, hours and minutes to the next events, updated every minute. circularYear [bold]: the year as a ring of month arcs with events as dots; selecting a month lists its events in the centre. miniDots [motion]: a compact mini calendar with category dots, a sliding selection and a smooth reveal of the selected day's events, for sidebars.
+                ```
+        }
+        entry month (
+            sequence: 10
+            display: Month
+            return: month
+        )
+        entry agenda (
+            sequence: 20
+            display: Agenda
+            return: agenda
+        )
+        entry week (
+            sequence: 30
+            display: Week
+            return: week
+        )
+        entry heatmap (
+            sequence: 40
+            display: Year heatmap
+            return: heatmap
+        )
+        entry timelineLanes (
+            sequence: 50
+            display: Timeline lanes
+            return: timelineLanes
+        )
+        entry posterDay (
+            sequence: 60
+            display: Poster day
+            return: posterDay
+        )
+        entry flipDate (
+            sequence: 70
+            display: Flip date
+            return: flipDate
+        )
+        entry countdown (
+            sequence: 80
+            display: Countdown
+            return: countdown
+        )
+        entry circularYear (
+            sequence: 90
+            display: Circular year
+            return: circularYear
+        )
+        entry miniDots (
+            sequence: 100
+            display: Mini dots
+            return: miniDots
+        )
+    )
+    customAttribute START_DATE (
+        apexlangName: startDate
+        attribute: 2
+        name: Start Date
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Event start as ISO text: TO_CHAR(start_col, 'YYYY-MM-DD"T"HH24:MI') for timed events or TO_CHAR(start_col, 'YYYY-MM-DD') for all-day events. Seconds are ignored; time zones are not converted, so return the time users should see. Rows with an unreadable date are left out of the calendar views but stay in the list shown without JavaScript.
+                ```
+        }
+    )
+    customAttribute END_DATE (
+        apexlangName: endDate
+        attribute: 3
+        name: End Date
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional event end in the same ISO form as Start Date. For timed events it is the moment the event ends. For all-day events return the last day, inclusive, for example 2026-10-09 for leave that ends on Friday the 9th. Without an end, timed events are shown as starting points and all-day events cover one day.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 4
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Event title shown on chips, bars and tiles, for example Board meeting or Payroll run. Keep it short; the Description holds details.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 5
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional detail shown in the day popover, agenda rows, the poster and the flip page, for example a room, an owner or an order number.
+                ```
+        }
+    )
+    customAttribute CATEGORY (
+        apexlangName: category
+        attribute: 6
+        name: Category
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional group such as Finance, Warehouse or HR. Each distinct category gets one of eight theme colors, assigned in alphabetical order so colors stay stable, and becomes one lane in Timeline Lanes. Rows without a category use a neutral color and the Other lane.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 7
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                One of success, warning, danger, info or neutral, for example success for confirmed and danger for critical or overdue. It is always shown as text, as Confirmed, Attention, Critical, Info or Scheduled, and marks chips and bars with a state accent. Unknown values render as neutral.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 8
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target that turns the event into a link wherever it appears, usually built in SQL with apex_page.get_url. The URL must come from the developer, not from user input; javascript, data and vbscript URLs are ignored.
+                ```
+        }
+    )
+    customAttribute ALL_DAY (
+        apexlangName: allDay
+        attribute: 9
+        name: All Day
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Y or N per row. Y shows the event as an all-day event whatever the times are. When left empty, events whose Start Date has no time are all-day events.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 10
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional number per event, with a period as decimal separator, for example the order amount or hours booked. When any row has a Value, Heatmap colors each day by the sum of the values that start on that day instead of by the number of events.
+                ```
+        }
+    )
+    customAttribute DATE_LABEL (
+        apexlangName: dateLabel
+        attribute: 11
+        name: Date Text
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional date text formatted in SQL with the application's NLS settings, for example TO_CHAR(start_col, 'Dy DD Mon HH24:MI'). It is only shown in the plain agenda list that appears without JavaScript; otherwise that list shows the ISO Start Date.
+                ```
+        }
+    )
+    customAttribute FIRST_DAY (
+        apexlangName: firstDay
+        attribute: 12
+        name: First Day of Week
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 120
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: monday
+        }
+        help {
+            helpText:
+                ```
+                Day that starts each week row in Month, Mini Dots, Week, Heatmap and the week zoom of Timeline Lanes: monday, sunday or saturday.
+                ```
+        }
+        entry monday (
+            sequence: 10
+            display: Monday
+            return: monday
+        )
+        entry sunday (
+            sequence: 20
+            display: Sunday
+            return: sunday
+        )
+        entry saturday (
+            sequence: 30
+            display: Saturday
+            return: saturday
+        )
+    )
+    customAttribute INITIAL_DATE (
+        apexlangName: initialDate
+        attribute: 13
+        name: Initial Date
+        scope: component
+        type: text
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional date the calendar opens on, as YYYY-MM-DD, for example 2026-10-01 or a page item reference such as &P10_DATE. formatted that way. Leave empty to open on today. Poster Day and Flip Date show this day; the other views show the month, week or year that contains it.
+                ```
+        }
+    )
+    customAttribute CALENDAR_SYSTEM (
+        apexlangName: calendarSystem
+        attribute: 14
+        name: Calendar System
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 140
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: gregory
+        }
+        help {
+            helpText:
+                ```
+                gregory for the Gregorian calendar or islamicUmalqura for the Islamic Umm al-Qura calendar. With the Islamic calendar the month grids, years and names follow Hijri months through the browser's Intl support, and Month, Poster Day and Flip Date also show the Gregorian date. Your data stays in Gregorian ISO dates either way.
+                ```
+        }
+        entry gregory (
+            sequence: 10
+            display: Gregorian
+            return: gregory
+        )
+        entry islamicUmalqura (
+            sequence: 20
+            display: Islamic Umm al-Qura
+            return: islamic-umalqura
+        )
+    )
+    customAttribute DAY_START (
+        apexlangName: dayStart
+        attribute: 15
+        name: Day Starts At
+        scope: component
+        type: integer
+        appearance {
+            sequence: 150
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 7
+        }
+        dependingOn {
+            attribute: @STYLE
+            conditionType: =
+            value: week
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                First hour shown on the Week hour grid, 0 to 23. The grid grows automatically when an event starts earlier.
+                ```
+        }
+    )
+    customAttribute DAY_END (
+        apexlangName: dayEnd
+        attribute: 16
+        name: Day Ends At
+        scope: component
+        type: integer
+        appearance {
+            sequence: 160
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 19
+        }
+        dependingOn {
+            attribute: @STYLE
+            conditionType: =
+            value: week
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Last hour shown on the Week hour grid, 1 to 24. The grid grows automatically when an event ends later.
+                ```
+        }
+    )
+    customAttribute LANE_ZOOM (
+        apexlangName: laneZoom
+        attribute: 17
+        name: Initial Zoom
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 170
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: week
+        }
+        dependingOn {
+            attribute: @STYLE
+            conditionType: =
+            value: timelineLanes
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Time scale Timeline Lanes opens with: day shows hours, week shows seven days, month shows the days of the month. Users can switch zoom on the page.
+                ```
+        }
+        entry day (
+            sequence: 10
+            display: Day
+            return: day
+        )
+        entry week (
+            sequence: 20
+            display: Week
+            return: week
+        )
+        entry month (
+            sequence: 30
+            display: Month
+            return: month
+        )
+    )
+    customAttribute UPCOMING_COUNT (
+        apexlangName: upcomingCount
+        attribute: 18
+        name: Upcoming Events
+        scope: component
+        type: integer
+        appearance {
+            sequence: 180
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 4
+        }
+        dependingOn {
+            attribute: @STYLE
+            conditionType: =
+            value: countdown
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Number of countdown tiles, 1 to 12. Countdown shows the next events that have not ended yet, in start order; events in progress show Happening now.
+                ```
+        }
+    )
+    file "amc-next-calendar.css" (
+        fileName: amc-next-calendar.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-calendar.js" (
+        fileName: amc-next-calendar.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

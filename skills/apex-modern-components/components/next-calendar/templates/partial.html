@@ -1,0 +1,6 @@
+<time class="amc-NCalendar-when" datetime="#START_DATE#">{if ?DATE_LABEL/}#DATE_LABEL#{else/}#START_DATE#{endif/}</time>
+<div class="amc-NCalendar-what">
+  <h3 class="amc-NCalendar-title">{if ?LINK_URL/}<a class="amc-NCalendar-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+  {if ?DESCRIPTION/}<p class="amc-NCalendar-desc">#DESCRIPTION#</p>{endif/}
+  <p class="amc-NCalendar-meta">{if ?CATEGORY/}<span class="amc-NCalendar-cat">#CATEGORY#</span>{endif/}<span class="amc-NCalendar-state">{case STATE/}{when success/}Confirmed{when warning/}Attention{when danger/}Critical{when info/}Info{otherwise/}Scheduled{endcase/}</span></p>
+</div>
