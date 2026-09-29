@@ -1,0 +1,129 @@
+regionTemplate amc-ticket-stub (
+    name: AMC Ticket Stub
+    region {
+        template:
+            ```html
+            <section class="amc-TTicketStub #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <div class="amc-TTicketStub-stub">
+                <div class="amc-TTicketStub-stubInner">
+                  <span class="amc-TTicketStub-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TTicketStub-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TTicketStub-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                  <div class="amc-TTicketStub-nav">#PREVIOUS##CLOSE##NEXT#</div>
+                  <span class="amc-TTicketStub-code" aria-hidden="true"></span>
+                  <span class="amc-TTicketStub-perf" aria-hidden="true"></span>
+                </div>
+              </div>
+              <div class="amc-TTicketStub-body">#BODY##SUB_REGIONS#</div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-ticket-stub.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_TICKET_STUB
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template shaped like a ticket. The stub holds the region icon, the title and every button position (Help, Edit, Change, Copy, Delete, Create, then Previous, Close, Next) and a decorative barcode; a dashed perforation with punched semicircle notches separates it from the body. When the region is wide the stub sits at the start side; below about 36rem of region width it moves on top and lays out in a row, without media queries, so it adapts inside narrow columns and dialogs. Only the stub is a query container, so popups, sticky report headers and date pickers in the body are unaffected. Template options put the stub at the end side, keep it on top at every width, color it success or danger, or remove the body padding. The perforation drifts gently on hover or focus; under reduced motion it stays still. The notches are painted in the page background color, so place the region directly on the page body.
+            ```
+    }
+
+    templateOption amc-ticket-stub-stub-end (
+        name: Stub at end
+        sequence: 10
+        appearance {
+            cssClasses: amc-TTicketStub--stubEnd
+        }
+        help {
+            helpText:
+                ```text
+                On wide regions the stub sits at the end side; on narrow regions it stays on top.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STUB_END
+        }
+    )
+
+    templateOption amc-ticket-stub-stub-top (
+        name: Stub always on top
+        sequence: 20
+        appearance {
+            cssClasses: amc-TTicketStub--top
+        }
+        help {
+            helpText:
+                ```text
+                Keeps the stub on top as a row at every width, like a voucher header.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STUB_TOP
+        }
+    )
+
+    templateOption amc-ticket-stub-success (
+        name: Success stub
+        sequence: 30
+        appearance {
+            cssClasses: amc-TTicketStub--success
+        }
+        help {
+            helpText:
+                ```text
+                Stub tint and icon use the success palette color, for confirmed bookings and paid vouchers.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SUCCESS
+        }
+    )
+
+    templateOption amc-ticket-stub-danger (
+        name: Danger stub
+        sequence: 40
+        appearance {
+            cssClasses: amc-TTicketStub--danger
+        }
+        help {
+            helpText:
+                ```text
+                Stub tint and icon use the danger palette color, for cancelled or expired records.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DANGER
+        }
+    )
+
+    templateOption amc-ticket-stub-no-body-padding (
+        name: No body padding
+        sequence: 50
+        appearance {
+            cssClasses: amc-TTicketStub--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes body padding so reports run edge to edge next to the stub.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

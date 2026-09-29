@@ -1,0 +1,145 @@
+regionTemplate amc-brutal-block (
+    name: AMC Brutal Block
+    region {
+        template:
+            ```html
+            <section class="amc-TBrutalBlock #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <header class="amc-TBrutalBlock-header">
+                <div class="amc-TBrutalBlock-label">
+                  <span class="amc-TBrutalBlock-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TBrutalBlock-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                </div>
+                <div class="amc-TBrutalBlock-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+              </header>
+              <div class="amc-TBrutalBlock-body">#BODY##SUB_REGIONS#</div>
+              <footer class="amc-TBrutalBlock-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-brutal-block.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_BRUTAL_BLOCK
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template in neo-brutalist style. The ink border and hard shadow use the theme text color, so they invert in dark styles; the shadow falls to the end side and flips in right-to-left pages. The title and icon sit in a tilted label that breaks out of the top edge; Help, Edit, Change, Copy, Delete and Create buttons sit in the header band, Previous, Close and Next in the footer. Template options color the band warning, success, danger or ink, move the shadow to the start side, or remove the body padding. The label straightens and the shadow grows while the region has hover or keyboard focus; under reduced motion the change is instant. In forced-colors mode the shadow is removed and the borders use system colors.
+            ```
+    }
+
+    templateOption amc-brutal-block-warning-band (
+        name: Warning band
+        sequence: 10
+        appearance {
+            cssClasses: amc-TBrutalBlock--warning
+        }
+        help {
+            helpText:
+                ```text
+                Header band in the warning palette color, for caution notices and pending work.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: WARNING_BAND
+        }
+    )
+
+    templateOption amc-brutal-block-success-band (
+        name: Success band
+        sequence: 20
+        appearance {
+            cssClasses: amc-TBrutalBlock--success
+        }
+        help {
+            helpText:
+                ```text
+                Header band in the success palette color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SUCCESS_BAND
+        }
+    )
+
+    templateOption amc-brutal-block-danger-band (
+        name: Danger band
+        sequence: 30
+        appearance {
+            cssClasses: amc-TBrutalBlock--danger
+        }
+        help {
+            helpText:
+                ```text
+                Header band in the danger palette color, for blockers and escalations.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DANGER_BAND
+        }
+    )
+
+    templateOption amc-brutal-block-ink-band (
+        name: Ink band
+        sequence: 40
+        appearance {
+            cssClasses: amc-TBrutalBlock--ink
+        }
+        help {
+            helpText:
+                ```text
+                Solid ink header band with the label as a light sticker on top; the strongest variant.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: INK_BAND
+        }
+    )
+
+    templateOption amc-brutal-block-shadow-start (
+        name: Shadow to start side
+        sequence: 50
+        appearance {
+            cssClasses: amc-TBrutalBlock--shadowStart
+        }
+        help {
+            helpText:
+                ```text
+                Moves the hard shadow to the start side, for regions in an end-side column.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SHADOW_START
+        }
+    )
+
+    templateOption amc-brutal-block-no-body-padding (
+        name: No body padding
+        sequence: 60
+        appearance {
+            cssClasses: amc-TBrutalBlock--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes body padding so reports run edge to edge inside the ink border.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

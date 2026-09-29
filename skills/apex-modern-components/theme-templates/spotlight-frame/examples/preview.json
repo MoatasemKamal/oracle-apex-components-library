@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Classic Report", "regionTitle": "Shipments at risk", "icon": "fa-truck", "bodyKind": "report", "options": ["amc-TSpotlightFrame--noPadding"], "buttons": { "EDIT": "Filters", "CREATE": "Escalate" } },
+    { "title": "Wide light, dots, around a Chart", "regionTitle": "Weekly throughput", "icon": "fa-line-chart", "bodyKind": "chart", "options": ["amc-TSpotlightFrame--wide", "amc-TSpotlightFrame--dots"] },
+    { "title": "Danger light around a Form", "regionTitle": "Payment exception", "icon": "fa-exclamation-circle", "bodyKind": "form", "options": ["amc-TSpotlightFrame--danger"], "buttons": { "PREVIOUS": "Cancel", "NEXT": "Approve override" } }
+  ]
+}

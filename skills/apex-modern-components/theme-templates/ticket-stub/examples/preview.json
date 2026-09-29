@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Form, wide", "regionTitle": "Booking RUH to JED", "icon": "fa-plane", "bodyKind": "form", "options": [], "buttons": { "EDIT": "Change seat", "NEXT": "Check in" } },
+    { "title": "Success stub, no body padding, around a Classic Report", "regionTitle": "Voucher V-2291 lines", "icon": "fa-ticket", "bodyKind": "report", "options": ["amc-TTicketStub--success", "amc-TTicketStub--noPadding"], "buttons": { "COPY": "Duplicate" } },
+    { "title": "Stub always on top around a Chart", "regionTitle": "Gate scans per hour", "icon": "fa-qrcode", "bodyKind": "chart", "options": ["amc-TTicketStub--top"], "buttons": { "HELP": "Legend" } }
+  ]
+}

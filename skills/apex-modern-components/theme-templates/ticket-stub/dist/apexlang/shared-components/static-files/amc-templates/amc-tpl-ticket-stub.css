@@ -1,0 +1,209 @@
+/* Ticket Stub: region template for Universal Theme. The region is a flex row that wraps below
+   --amc-tticket-break (flex-basis threshold, no containment on any ancestor of the body, so
+   fixed-position popups and sticky report headers keep working). Only the stub is an
+   inline-size query container: it reads its own width to know whether it sits at the side or
+   on top, and moves the perforation, notches and barcode accordingly. */
+.amc-TTicketStub {
+  --amc-tticket-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tticket-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tticket-surface: var(--ut-component-background-color, #fff);
+  --amc-tticket-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-tticket-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tticket-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tticket-edge: color-mix(in srgb, var(--amc-tticket-ink) 20%, var(--amc-tticket-surface));
+  --amc-tticket-stubbg: color-mix(in srgb, var(--amc-tticket-accent) 9%, var(--amc-tticket-surface));
+  --amc-tticket-bw: 1.5px;
+  --amc-tticket-notch: 22px;
+  --amc-tticket-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-tticket-break: 36rem;
+  --amc-tticket-dash: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-block-end: 18px;
+  border: var(--amc-tticket-bw) solid var(--amc-tticket-edge);
+  border-radius: var(--amc-tticket-radius);
+  background: var(--amc-tticket-surface);
+  color: var(--amc-tticket-ink);
+  box-shadow: 0 14px 28px -22px color-mix(in srgb, var(--amc-tticket-ink) 60%, transparent);
+}
+
+/* Stub: side column when the region is wide, full-width row when it wraps */
+.amc-TTicketStub-stub {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 calc((var(--amc-tticket-break) - 100%) * 999);
+  min-inline-size: 11rem;
+  max-inline-size: max(12.5rem, calc((var(--amc-tticket-break) - 100%) * 999));
+  container: amc-tticket / inline-size;
+}
+.amc-TTicketStub-body {
+  flex: 999 1 calc((var(--amc-tticket-break) - 100%) * 999);
+  min-inline-size: 0;
+  padding: 18px 20px 20px;
+  overflow-x: auto;
+}
+
+/* Side layout (default): vertical stub, perforation on its end edge */
+.amc-TTicketStub-stubInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  inline-size: 100%;
+  padding: 18px 18px 16px;
+  border-start-start-radius: calc(var(--amc-tticket-radius) - var(--amc-tticket-bw));
+  border-end-start-radius: calc(var(--amc-tticket-radius) - var(--amc-tticket-bw));
+  background:
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--amc-tticket-accent) 22%, transparent) 1px, transparent 1.5px) 0 0 / 10px 10px,
+    var(--amc-tticket-stubbg);
+}
+.amc-TTicketStub-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 50%;
+  font-size: 17px;
+  color: var(--amc-tticket-accent-fg);
+  background: var(--amc-tticket-accent);
+  box-shadow: 0 0 0 4px var(--amc-tticket-surface), 0 0 0 5px color-mix(in srgb, var(--amc-tticket-accent) 35%, transparent);
+}
+.amc-TTicketStub-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TTicketStub-title {
+  min-width: 0;
+  max-inline-size: 100%;
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.amc-TTicketStub-actions, .amc-TTicketStub-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TTicketStub-actions:empty, .amc-TTicketStub-nav:empty { display: none; }
+/* Decorative barcode */
+.amc-TTicketStub-code {
+  align-self: stretch;
+  margin-block-start: auto;
+  block-size: 30px;
+  opacity: .75;
+  background: repeating-linear-gradient(90deg,
+    var(--amc-tticket-ink) 0 2px, transparent 2px 4px, var(--amc-tticket-ink) 4px 5px, transparent 5px 8px,
+    var(--amc-tticket-ink) 8px 11px, transparent 11px 12px, var(--amc-tticket-ink) 12px 13px, transparent 13px 17px);
+}
+/* Perforation with punched notches (notches are page-colored circles, clipped to the inner half) */
+.amc-TTicketStub-perf {
+  position: absolute;
+  inset-block: calc(var(--amc-tticket-notch) / 2 + 4px);
+  inset-inline-end: -1px;
+  inline-size: 2px;
+  background: repeating-linear-gradient(to bottom, var(--amc-tticket-edge) 0 7px, transparent 7px 12px);
+  background-position: 0 var(--amc-tticket-dash);
+}
+.amc-TTicketStub-perf::before,
+.amc-TTicketStub-perf::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(1px - var(--amc-tticket-notch) / 2);
+  inline-size: var(--amc-tticket-notch);
+  block-size: var(--amc-tticket-notch);
+  box-sizing: border-box;
+  border: var(--amc-tticket-bw) solid var(--amc-tticket-edge);
+  border-radius: 50%;
+  background: var(--amc-tticket-page);
+}
+.amc-TTicketStub-perf::before {
+  inset-block-start: calc(-1 * (var(--amc-tticket-notch) + 4px + var(--amc-tticket-bw) / 2));
+  clip-path: inset(calc(50% - var(--amc-tticket-bw)) -2px -2px -2px);
+}
+.amc-TTicketStub-perf::after {
+  inset-block-end: calc(-1 * (var(--amc-tticket-notch) + 4px + var(--amc-tticket-bw) / 2));
+  clip-path: inset(-2px -2px calc(50% - var(--amc-tticket-bw)) -2px);
+}
+
+/* Stub at the end side (wide) */
+.amc-TTicketStub--stubEnd { flex-direction: row-reverse; }
+.amc-TTicketStub--stubEnd .amc-TTicketStub-stubInner {
+  border-radius: 0 calc(var(--amc-tticket-radius) - var(--amc-tticket-bw)) calc(var(--amc-tticket-radius) - var(--amc-tticket-bw)) 0;
+}
+.amc-TTicketStub--stubEnd:dir(rtl) .amc-TTicketStub-stubInner {
+  border-radius: calc(var(--amc-tticket-radius) - var(--amc-tticket-bw)) 0 0 calc(var(--amc-tticket-radius) - var(--amc-tticket-bw));
+}
+.amc-TTicketStub--stubEnd .amc-TTicketStub-perf { inset-inline: -1px auto; }
+.amc-TTicketStub--top .amc-TTicketStub-stub { flex-basis: 100%; max-inline-size: none; }
+.amc-TTicketStub--top .amc-TTicketStub-body { flex-basis: 100%; }
+
+/* Top layout: the stub reads its own width, so this also applies inside narrow columns */
+@container amc-tticket (min-width: 13rem) {
+  .amc-TTicketStub .amc-TTicketStub-stubInner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    padding: 14px 18px 16px;
+    border-radius: calc(var(--amc-tticket-radius) - var(--amc-tticket-bw)) calc(var(--amc-tticket-radius) - var(--amc-tticket-bw)) 0 0;
+  }
+  .amc-TTicketStub .amc-TTicketStub-title { flex: 1 1 10rem; }
+  .amc-TTicketStub .amc-TTicketStub-code {
+    align-self: center;
+    flex: none;
+    margin: 0;
+    margin-inline-start: auto;
+    inline-size: 54px;
+    block-size: 22px;
+  }
+  .amc-TTicketStub .amc-TTicketStub-perf {
+    inset-block: auto -1px;
+    inset-inline: calc(var(--amc-tticket-notch) / 2 + 4px);
+    inline-size: auto;
+    block-size: 2px;
+    background: repeating-linear-gradient(to right, var(--amc-tticket-edge) 0 7px, transparent 7px 12px);
+    background-position: var(--amc-tticket-dash) 0;
+  }
+  .amc-TTicketStub .amc-TTicketStub-perf::before,
+  .amc-TTicketStub .amc-TTicketStub-perf::after {
+    inset-block: auto calc(1px - var(--amc-tticket-notch) / 2);
+  }
+  .amc-TTicketStub .amc-TTicketStub-perf::before {
+    inset-inline-start: calc(-1 * (var(--amc-tticket-notch) + 4px + var(--amc-tticket-bw) / 2));
+    clip-path: inset(-2px -2px -2px calc(50% - var(--amc-tticket-bw)));
+  }
+  .amc-TTicketStub .amc-TTicketStub-perf::after {
+    inset-inline: auto calc(-1 * (var(--amc-tticket-notch) + 4px + var(--amc-tticket-bw) / 2));
+    clip-path: inset(-2px calc(50% - var(--amc-tticket-bw)) -2px -2px);
+  }
+  .amc-TTicketStub:dir(rtl) .amc-TTicketStub-perf::before { clip-path: inset(-2px calc(50% - var(--amc-tticket-bw)) -2px -2px); }
+  .amc-TTicketStub:dir(rtl) .amc-TTicketStub-perf::after { clip-path: inset(-2px -2px -2px calc(50% - var(--amc-tticket-bw))); }
+}
+
+/* Hover and focus: stub tint deepens, the perforation drifts like a tear line */
+.amc-TTicketStub:hover, .amc-TTicketStub:focus-within {
+  --amc-tticket-stubbg: color-mix(in srgb, var(--amc-tticket-accent) 14%, var(--amc-tticket-surface));
+  --amc-tticket-edge: color-mix(in srgb, var(--amc-tticket-accent) 45%, var(--amc-tticket-surface));
+}
+
+/* Template options */
+.amc-TTicketStub--success { --amc-tticket-accent: var(--ut-palette-success, #278701); --amc-tticket-accent-fg: var(--ut-palette-success-contrast, #fff); }
+.amc-TTicketStub--danger { --amc-tticket-accent: var(--ut-palette-danger, #cb1100); --amc-tticket-accent-fg: var(--ut-palette-danger-contrast, #fff); }
+.amc-TTicketStub--noPadding .amc-TTicketStub-body { padding: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TTicketStub:hover .amc-TTicketStub-perf,
+  .amc-TTicketStub:focus-within .amc-TTicketStub-perf { animation: amc-tticket-tear 1.2s linear infinite; }
+}
+@keyframes amc-tticket-tear { to { --amc-tticket-dash: 12px; } }
+@property --amc-tticket-dash { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@media (prefers-reduced-motion: reduce) {
+  .amc-TTicketStub-perf { animation: none; }
+}
+@media (forced-colors: active) {
+  .amc-TTicketStub { border-color: CanvasText; }
+  .amc-TTicketStub-stubInner { background: Canvas; }
+  .amc-TTicketStub-perf { background: repeating-linear-gradient(to bottom, CanvasText 0 7px, transparent 7px 12px); }
+  .amc-TTicketStub-perf::before, .amc-TTicketStub-perf::after { border-color: CanvasText; background: Canvas; }
+  .amc-TTicketStub-icon { background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
+  .amc-TTicketStub-code { background: none; }
+}

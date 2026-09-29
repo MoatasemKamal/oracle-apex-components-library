@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Glass Depth",
+  "staticId": "AMC_TPL_GLASS_DEPTH",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "A frosted-glass panel with a light top edge and layered depth shadow floats over soft colored light drawn on the region frame, with a second glass sheet peeking out beneath it, while the body sits on a calm readable sheet.",
+  "useFor": "Hero or summary regions on dashboards and home pages: a KPI Cards region, a Chart, a short Classic Report or a Form that should feel lifted off the page.",
+  "keywords": ["glassmorphism", "frosted glass", "depth", "floating panel", "blob backdrop", "layered"],
+  "helpText": "Region template with a floating frosted-glass panel. The frame draws soft palette-colored light behind the panel; the panel blurs it, has a light top edge and a layered depth shadow, and a second glass sheet peeks out underneath. Title and icon sit on the glass; the body keeps an almost opaque surface so reports and forms stay readable. Help, Edit, Change, Copy, Delete and Create buttons sit in the header, Previous, Close and Next in the footer. Template options tint the light with the success, danger or warning palette colors, float the panel higher, or remove the body padding. The light drifts slowly and the panel lifts a little more on hover or focus; under reduced motion everything stays still. In forced-colors mode the glass is replaced by a plain system border.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "SUCCESS_TINT", "name": "Success tint", "cssClass": "amc-TGlassDepth--success", "sequence": 10, "help": "Backdrop light uses the success and info palette colors, for healthy or completed states." },
+    { "staticId": "DANGER_TINT", "name": "Danger tint", "cssClass": "amc-TGlassDepth--danger", "sequence": 20, "help": "Backdrop light uses the danger and warning palette colors, for regions that need attention." },
+    { "staticId": "WARM_TINT", "name": "Warm tint", "cssClass": "amc-TGlassDepth--warm", "sequence": 30, "help": "Warm backdrop light from the warning and primary palette colors." },
+    { "staticId": "DEEP_FLOAT", "name": "Deep float", "cssClass": "amc-TGlassDepth--deep", "sequence": 40, "help": "More backdrop around the panel, a deeper shadow and two stacked sheets beneath it." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TGlassDepth--noPadding", "sequence": 50, "help": "Removes the padding inside the body sheet so reports run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

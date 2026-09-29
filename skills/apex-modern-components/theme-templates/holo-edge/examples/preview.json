@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Cards region", "regionTitle": "Gold member benefits", "icon": "fa-diamond", "bodyKind": "cards", "options": [], "buttons": { "CREATE": "Redeem" } },
+    { "title": "Thick sunset foil around a Chart", "regionTitle": "2026 in review", "icon": "fa-star", "bodyKind": "chart", "options": ["amc-THoloEdge--thick", "amc-THoloEdge--sunset"] },
+    { "title": "Brand foil around a Form", "regionTitle": "Upgrade your plan", "icon": "fa-certificate", "bodyKind": "form", "options": ["amc-THoloEdge--brand"], "buttons": { "PREVIOUS": "Compare plans", "NEXT": "Upgrade" } }
+  ]
+}

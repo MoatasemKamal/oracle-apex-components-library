@@ -1,0 +1,23 @@
+{
+  "kind": "region",
+  "name": "AMC Brutal Block",
+  "staticId": "AMC_TPL_BRUTAL_BLOCK",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "A neo-brutalist region: thick ink border, hard offset shadow, a flat striped palette band and the title in a tilted sticker label that breaks out of the top edge.",
+  "useFor": "Regions that should shout on internal tools and admin pages: a work queue Classic Report, a checklist Form, a Chart on a status board or a Static Content notice.",
+  "keywords": ["neo brutalism", "brutalist", "hard shadow", "sticker", "bold", "flat"],
+  "helpText": "Region template in neo-brutalist style. The ink border and hard shadow use the theme text color, so they invert in dark styles; the shadow falls to the end side and flips in right-to-left pages. The title and icon sit in a tilted label that breaks out of the top edge; Help, Edit, Change, Copy, Delete and Create buttons sit in the header band, Previous, Close and Next in the footer. Template options color the band warning, success, danger or ink, move the shadow to the start side, or remove the body padding. The label straightens and the shadow grows while the region has hover or keyboard focus; under reduced motion the change is instant. In forced-colors mode the shadow is removed and the borders use system colors.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "WARNING_BAND", "name": "Warning band", "cssClass": "amc-TBrutalBlock--warning", "sequence": 10, "help": "Header band in the warning palette color, for caution notices and pending work." },
+    { "staticId": "SUCCESS_BAND", "name": "Success band", "cssClass": "amc-TBrutalBlock--success", "sequence": 20, "help": "Header band in the success palette color." },
+    { "staticId": "DANGER_BAND", "name": "Danger band", "cssClass": "amc-TBrutalBlock--danger", "sequence": 30, "help": "Header band in the danger palette color, for blockers and escalations." },
+    { "staticId": "INK_BAND", "name": "Ink band", "cssClass": "amc-TBrutalBlock--ink", "sequence": 40, "help": "Solid ink header band with the label as a light sticker on top; the strongest variant." },
+    { "staticId": "SHADOW_START", "name": "Shadow to start side", "cssClass": "amc-TBrutalBlock--shadowStart", "sequence": 50, "help": "Moves the hard shadow to the start side, for regions in an end-side column." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TBrutalBlock--noPadding", "sequence": 60, "help": "Removes body padding so reports run edge to edge inside the ink border." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

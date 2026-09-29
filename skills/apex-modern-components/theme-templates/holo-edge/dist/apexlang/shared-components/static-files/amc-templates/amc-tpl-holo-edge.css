@@ -1,0 +1,171 @@
+/* Holo Edge: region template for Universal Theme. A holographic foil (repeating gradient of
+   palette colors softened toward the surface) forms a masked edge ring and the header strip.
+   The sheen position is drift (--amc-thol-t, animated) plus pointer (--amc-thol-px/py, set by
+   amc-tpl-holo-edge.js). Foil and glint layering inspired by Magic UI shine-border and
+   neon-gradient-card (MIT, https://github.com/magicuidesign/magicui). */
+@property --amc-thol-t { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --amc-thol-px { syntax: "<number>"; inherits: true; initial-value: 50; }
+@property --amc-thol-py { syntax: "<number>"; inherits: true; initial-value: 50; }
+
+.amc-THoloEdge {
+  --amc-thol-surface: var(--ut-component-background-color, #fff);
+  --amc-thol-ink: var(--ut-component-text-default-color, #262626);
+  --amc-thol-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-thol-light: var(--amc-thol-light-color, #fff);
+  --amc-thol-shade: var(--amc-thol-shade-color, #000);
+  --amc-thol-1: var(--ut-palette-primary, #056ac8);
+  --amc-thol-2: var(--ut-palette-info, #0076df);
+  --amc-thol-3: var(--ut-palette-danger, #cb1100);
+  --amc-thol-4: var(--ut-palette-warning, #fbce4a);
+  --amc-thol-5: var(--ut-palette-success, #278701);
+  --amc-thol-6: color-mix(in oklab, var(--ut-palette-primary, #056ac8) 50%, var(--ut-palette-danger, #cb1100));
+  --amc-thol-soft: 70%;
+  --amc-thol-edge: 2.5px;
+  --amc-thol-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-thol-foil: repeating-linear-gradient(115deg,
+    color-mix(in oklab, var(--amc-thol-1) var(--amc-thol-soft), var(--amc-thol-surface)) 0%,
+    color-mix(in oklab, var(--amc-thol-2) var(--amc-thol-soft), var(--amc-thol-surface)) 7%,
+    color-mix(in oklab, var(--amc-thol-6) var(--amc-thol-soft), var(--amc-thol-surface)) 14%,
+    color-mix(in oklab, var(--amc-thol-3) var(--amc-thol-soft), var(--amc-thol-surface)) 21%,
+    color-mix(in oklab, var(--amc-thol-4) var(--amc-thol-soft), var(--amc-thol-surface)) 28%,
+    color-mix(in oklab, var(--amc-thol-5) var(--amc-thol-soft), var(--amc-thol-surface)) 35%,
+    color-mix(in oklab, var(--amc-thol-1) var(--amc-thol-soft), var(--amc-thol-surface)) 42%);
+  --amc-thol-pos: calc((var(--amc-thol-t) + var(--amc-thol-px)) * 1%) calc((var(--amc-thol-t) * .6 + var(--amc-thol-py)) * 1%);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  margin-block-end: 18px;
+  border-radius: var(--amc-thol-radius);
+  background: var(--amc-thol-surface);
+  color: var(--amc-thol-ink);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--amc-thol-shade) 8%, transparent),
+    0 18px 36px -24px color-mix(in oklab, var(--amc-thol-1) 55%, var(--amc-thol-3));
+}
+
+/* Foil edge ring */
+.amc-THoloEdge-foil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: var(--amc-thol-edge);
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, transparent 38%, color-mix(in srgb, var(--amc-thol-light) 80%, transparent) 50%, transparent 62%),
+    var(--amc-thol-foil);
+  background-size: 260% 100%, 300% 300%;
+  background-position: var(--amc-thol-pos), var(--amc-thol-pos);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+}
+
+.amc-THoloEdge-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px 18px 15px;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+}
+/* Header strip: veiled foil, fine diagonal texture, moving glint, foil rule at the bottom */
+.amc-THoloEdge-strip {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--amc-thol-light) 45%, transparent) 48%, transparent 60%),
+    repeating-linear-gradient(55deg, color-mix(in srgb, var(--amc-thol-light) 16%, transparent) 0 1px, transparent 1px 5px),
+    linear-gradient(color-mix(in srgb, var(--amc-thol-surface) 52%, transparent), color-mix(in srgb, var(--amc-thol-surface) 52%, transparent)),
+    var(--amc-thol-foil);
+  background-size: 260% 100%, auto, auto, 300% 300%;
+  background-position: var(--amc-thol-pos), 0 0, 0 0, var(--amc-thol-pos);
+}
+.amc-THoloEdge-strip::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 2px;
+  background: var(--amc-thol-foil);
+  background-size: 300% 300%;
+  background-position: var(--amc-thol-pos);
+}
+/* Foil chip for the region icon */
+.amc-THoloEdge-chip {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 40px;
+  block-size: 30px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--amc-thol-ink);
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--amc-thol-shade) 10%, transparent) 0 1px, transparent 1px 7px),
+    var(--amc-thol-foil);
+  background-size: auto, 300% 300%;
+  background-position: 0 0, var(--amc-thol-pos);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-thol-ink) 22%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-thol-light) 60%, transparent),
+    0 4px 10px -4px color-mix(in srgb, var(--amc-thol-shade) 35%, transparent);
+}
+.amc-THoloEdge-chip.fa:not([class*="fa-"]) { display: none; }
+.amc-THoloEdge-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 750;
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.amc-THoloEdge-actions, .amc-THoloEdge-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-THoloEdge-actions:empty, .amc-THoloEdge-footer:empty { display: none; }
+.amc-THoloEdge-body { position: relative; z-index: 1; min-width: 0; padding: 16px 18px 18px; overflow-x: auto; }
+.amc-THoloEdge-footer { position: relative; z-index: 1; justify-content: flex-end; padding: 0 18px 16px; }
+
+/* Keyboard focus shifts the sheen too */
+.amc-THoloEdge:focus-within { --amc-thol-px: 78; --amc-thol-py: 64; }
+
+/* Template options */
+.amc-THoloEdge--thick { --amc-thol-edge: 5px; }
+.amc-THoloEdge--thick .amc-THoloEdge-header { padding-block: 22px 20px; }
+.amc-THoloEdge--thick .amc-THoloEdge-title { font-size: 1.25rem; font-weight: 800; }
+.amc-THoloEdge--brand {
+  --amc-thol-3: color-mix(in oklab, var(--ut-palette-primary, #056ac8) 60%, var(--ut-component-background-color, #fff));
+  --amc-thol-4: var(--ut-palette-info, #0076df);
+  --amc-thol-5: color-mix(in oklab, var(--ut-palette-info, #0076df) 50%, var(--ut-palette-success, #278701));
+  --amc-thol-6: color-mix(in oklab, var(--ut-palette-primary, #056ac8) 70%, var(--ut-component-text-default-color, #262626));
+}
+.amc-THoloEdge--sunset {
+  --amc-thol-1: var(--ut-palette-danger, #cb1100);
+  --amc-thol-2: var(--ut-palette-warning, #fbce4a);
+  --amc-thol-5: color-mix(in oklab, var(--ut-palette-warning, #fbce4a) 60%, var(--ut-palette-danger, #cb1100));
+  --amc-thol-6: color-mix(in oklab, var(--ut-palette-danger, #cb1100) 55%, var(--ut-palette-primary, #056ac8));
+}
+.amc-THoloEdge--static { --amc-thol-t: 12; }
+.amc-THoloEdge--noPadding .amc-THoloEdge-body { padding: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-THoloEdge { transition: --amc-thol-px .5s cubic-bezier(.2, .8, .2, 1), --amc-thol-py .5s cubic-bezier(.2, .8, .2, 1); animation: amc-thol-drift 14s ease-in-out infinite alternate; }
+  .amc-THoloEdge.amc-is-tracking { animation-play-state: paused; transition-duration: .12s; }
+  .amc-THoloEdge--static { animation: none; }
+}
+@keyframes amc-thol-drift { from { --amc-thol-t: -40; } to { --amc-thol-t: 60; } }
+@media (prefers-reduced-motion: reduce) {
+  .amc-THoloEdge { animation: none; transition: none; --amc-thol-t: 12; }
+}
+@media (forced-colors: active) {
+  .amc-THoloEdge { border: 2px solid CanvasText; }
+  .amc-THoloEdge-foil, .amc-THoloEdge-strip { display: none; }
+  .amc-THoloEdge-header { border-block-end: 1px solid CanvasText; }
+  .amc-THoloEdge-chip { background: Canvas; border: 1px solid CanvasText; }
+}

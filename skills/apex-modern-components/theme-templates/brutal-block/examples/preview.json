@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Classic Report", "regionTitle": "Tickets breaching SLA", "icon": "fa-bolt", "bodyKind": "report", "options": ["amc-TBrutalBlock--noPadding"], "buttons": { "CREATE": "Assign all" } },
+    { "title": "Warning band around a Form", "regionTitle": "Pre-release checklist", "icon": "fa-check-square-o", "bodyKind": "form", "options": ["amc-TBrutalBlock--warning"], "buttons": { "PREVIOUS": "Save draft", "NEXT": "Sign off" } },
+    { "title": "Ink band, shadow to start, around a Chart", "regionTitle": "Deploys per week", "icon": "fa-rocket", "bodyKind": "chart", "options": ["amc-TBrutalBlock--ink", "amc-TBrutalBlock--shadowStart"] }
+  ]
+}

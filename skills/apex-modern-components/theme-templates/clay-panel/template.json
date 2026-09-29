@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Clay Panel",
+  "staticId": "AMC_TPL_CLAY_PANEL",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "A claymorphism region: a pillowy, softly lit panel with the title in a raised clay pill, the icon in a glossy clay bubble and the native content in a gently pressed tray.",
+  "useFor": "Friendly, consumer-style pages: a self-service portal Form, a Cards or KPI region, a Chart on a personal dashboard, or a short Classic Report.",
+  "keywords": ["claymorphism", "clay", "soft ui", "pillowy", "3d", "friendly"],
+  "helpText": "Region template in claymorphism style. Its inner and outer shadows are mixed from the palette color and the page background, so the clay follows the theme and dark styles. The title sits in a raised pill and the region icon in a glossy bubble; the native region sits in a slightly pressed tray with a solid surface so reports and forms stay readable. Help, Edit, Change, Copy, Delete and Create buttons sit in the header, Previous, Close and Next in the footer. Template options tint the clay success, danger, warm or neutral, or remove the tray padding. On hover or focus the panel puffs up and the bubble squishes; under reduced motion nothing moves. In forced-colors mode the shadows are replaced by system borders.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "SUCCESS", "name": "Success clay", "cssClass": "amc-TClayPanel--success", "sequence": 10, "help": "Clay, pill and bubble use the success palette color." },
+    { "staticId": "DANGER", "name": "Danger clay", "cssClass": "amc-TClayPanel--danger", "sequence": 20, "help": "Clay, pill and bubble use the danger palette color, for alerts that still feel friendly." },
+    { "staticId": "WARM", "name": "Warm clay", "cssClass": "amc-TClayPanel--warm", "sequence": 30, "help": "Warm clay from the warning palette color." },
+    { "staticId": "NEUTRAL", "name": "Neutral clay", "cssClass": "amc-TClayPanel--neutral", "sequence": 40, "help": "Uncolored clay mixed from the text and page colors; keeps the icon bubble in the primary color." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TClayPanel--noPadding", "sequence": 50, "help": "Removes padding inside the tray so reports run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

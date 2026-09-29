@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Cards region", "regionTitle": "Today at a glance", "icon": "fa-sun-o", "bodyKind": "cards", "options": [], "buttons": { "HELP": "About these figures" } },
+    { "title": "Success tint, deep float, around a Chart", "regionTitle": "Collections this month", "icon": "fa-line-chart", "bodyKind": "chart", "options": ["amc-TGlassDepth--success", "amc-TGlassDepth--deep"] },
+    { "title": "Warm tint, no body padding, around a Classic Report", "regionTitle": "Orders awaiting pickup", "icon": "fa-archive", "bodyKind": "report", "options": ["amc-TGlassDepth--warm", "amc-TGlassDepth--noPadding"], "buttons": { "CREATE": "Book courier" } }
+  ]
+}

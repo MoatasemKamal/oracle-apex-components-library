@@ -1,0 +1,119 @@
+/* Clay Panel: claymorphism region template for Universal Theme. All clay shadows are
+   color-mix() of the palette color with the page background and surface, so they follow the
+   theme style and dark mode. The body tray is solid and never transformed. */
+.amc-TClayPanel {
+  --amc-tclay-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tclay-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tclay-tone: var(--amc-tclay-accent);
+  --amc-tclay-surface: var(--ut-component-background-color, #fff);
+  --amc-tclay-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-tclay-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tclay-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tclay-light: var(--amc-tclay-light-color, #fff);
+  --amc-tclay-shade: var(--amc-tclay-shade-color, #000);
+  --amc-tclay-hi: color-mix(in srgb, var(--amc-tclay-light) 40%, var(--amc-tclay-surface));
+  --amc-tclay-body: color-mix(in srgb, var(--amc-tclay-tone) 9%, var(--amc-tclay-surface));
+  --amc-tclay-radius: 30px;
+  --amc-tclay-puff: 0px;
+  position: relative;
+  display: grid;
+  margin-block-end: 22px;
+  border-radius: var(--amc-tclay-radius);
+  background: var(--amc-tclay-body);
+  color: var(--amc-tclay-ink);
+  box-shadow:
+    0 calc(18px + var(--amc-tclay-puff)) calc(34px + var(--amc-tclay-puff)) -16px color-mix(in srgb, var(--amc-tclay-tone) 45%, var(--amc-tclay-page)),
+    0 4px 10px -4px color-mix(in srgb, var(--amc-tclay-shade) 14%, transparent),
+    inset 0 -10px 18px color-mix(in srgb, var(--amc-tclay-tone) 16%, transparent),
+    inset 0 8px 14px color-mix(in srgb, var(--amc-tclay-hi) 75%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tclay-hi) 35%, transparent);
+}
+
+.amc-TClayPanel-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  min-width: 0;
+  padding: 16px 18px 14px;
+}
+/* Glossy clay bubble for the region icon */
+.amc-TClayPanel-bubble {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 46px;
+  block-size: 46px;
+  border-radius: 50%;
+  font-size: 18px;
+  color: var(--amc-tclay-accent-fg);
+  background: radial-gradient(circle at 32% 26%, color-mix(in srgb, var(--amc-tclay-light) 55%, var(--amc-tclay-accent)) 0 18%, var(--amc-tclay-accent) 62%, color-mix(in srgb, var(--amc-tclay-accent) 80%, var(--amc-tclay-shade)) 100%);
+  box-shadow:
+    0 10px 18px -8px color-mix(in srgb, var(--amc-tclay-accent) 75%, var(--amc-tclay-page)),
+    inset 0 -4px 8px color-mix(in srgb, var(--amc-tclay-shade) 22%, transparent),
+    inset 0 3px 6px color-mix(in srgb, var(--amc-tclay-light) 45%, transparent);
+}
+.amc-TClayPanel-bubble.fa:not([class*="fa-"]) { display: none; }
+/* Title in a raised clay pill */
+.amc-TClayPanel-title {
+  min-width: 0;
+  max-inline-size: 100%;
+  margin: 0;
+  margin-inline-end: auto;
+  padding: 9px 18px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tclay-tone) 5%, var(--amc-tclay-surface));
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: -.005em;
+  overflow-wrap: anywhere;
+  box-shadow:
+    0 6px 12px -6px color-mix(in srgb, var(--amc-tclay-tone) 50%, var(--amc-tclay-page)),
+    inset 0 -3px 6px color-mix(in srgb, var(--amc-tclay-tone) 14%, transparent),
+    inset 0 3px 5px color-mix(in srgb, var(--amc-tclay-hi) 80%, transparent);
+}
+.amc-TClayPanel-actions, .amc-TClayPanel-footer { display: flex; flex-wrap: wrap; gap: 8px; }
+.amc-TClayPanel-actions:empty, .amc-TClayPanel-footer:empty { display: none; }
+
+/* Softly pressed tray: solid surface for readable native content */
+.amc-TClayPanel-body {
+  min-width: 0;
+  margin: 0 12px 12px;
+  padding: 16px;
+  border-radius: calc(var(--amc-tclay-radius) - 10px);
+  background: var(--amc-tclay-surface);
+  box-shadow:
+    inset 0 4px 10px color-mix(in srgb, var(--amc-tclay-tone) 16%, transparent),
+    inset 0 1px 2px color-mix(in srgb, var(--amc-tclay-shade) 10%, transparent),
+    0 1px 0 color-mix(in srgb, var(--amc-tclay-hi) 80%, transparent);
+  overflow-x: auto;
+}
+.amc-TClayPanel-footer { justify-content: flex-end; padding: 2px 20px 16px; }
+
+/* Hover and focus: the panel puffs up, the bubble squishes */
+.amc-TClayPanel:hover, .amc-TClayPanel:focus-within { --amc-tclay-puff: 8px; }
+.amc-TClayPanel:hover .amc-TClayPanel-bubble,
+.amc-TClayPanel:focus-within .amc-TClayPanel-bubble { transform: scale(1.08, .94); }
+
+/* Template options */
+.amc-TClayPanel--success { --amc-tclay-accent: var(--ut-palette-success, #278701); --amc-tclay-accent-fg: var(--ut-palette-success-contrast, #fff); }
+.amc-TClayPanel--danger { --amc-tclay-accent: var(--ut-palette-danger, #cb1100); --amc-tclay-accent-fg: var(--ut-palette-danger-contrast, #fff); }
+.amc-TClayPanel--warm { --amc-tclay-accent: var(--ut-palette-warning, #fbce4a); --amc-tclay-accent-fg: var(--ut-palette-warning-contrast, #262626); }
+.amc-TClayPanel--neutral { --amc-tclay-tone: color-mix(in srgb, var(--amc-tclay-ink) 55%, var(--amc-tclay-page)); --amc-tclay-body: color-mix(in srgb, var(--amc-tclay-ink) 5%, var(--amc-tclay-surface)); }
+.amc-TClayPanel--noPadding .amc-TClayPanel-body { padding: 4px 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TClayPanel { transition: box-shadow .4s cubic-bezier(.2, .8, .2, 1); }
+  .amc-TClayPanel-bubble { transition: transform .45s cubic-bezier(.3, 1.8, .5, 1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TClayPanel, .amc-TClayPanel-bubble { transition: none; }
+  .amc-TClayPanel:hover .amc-TClayPanel-bubble,
+  .amc-TClayPanel:focus-within .amc-TClayPanel-bubble { transform: none; }
+}
+@media (forced-colors: active) {
+  .amc-TClayPanel { border: 2px solid CanvasText; box-shadow: none; }
+  .amc-TClayPanel-title, .amc-TClayPanel-body { box-shadow: none; border: 1px solid CanvasText; }
+  .amc-TClayPanel-bubble { box-shadow: none; background: Canvas; color: CanvasText; border: 1px solid CanvasText; }
+}

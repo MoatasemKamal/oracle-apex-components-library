@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Form", "regionTitle": "Your delivery address", "icon": "fa-home", "bodyKind": "form", "options": [], "buttons": { "PREVIOUS": "Back", "NEXT": "Save address" } },
+    { "title": "Success clay around a Cards region", "regionTitle": "Your savings", "icon": "fa-leaf", "bodyKind": "cards", "options": ["amc-TClayPanel--success"], "buttons": { "HELP": "How we count" } },
+    { "title": "Warm clay, no body padding, around a Classic Report", "regionTitle": "Upcoming bookings", "icon": "fa-calendar", "bodyKind": "report", "options": ["amc-TClayPanel--warm", "amc-TClayPanel--noPadding"], "buttons": { "CREATE": "Book" } }
+  ]
+}

@@ -1,0 +1,117 @@
+/* Brutal Block: neo-brutalist region template for Universal Theme. Ink = theme text color, so
+   border and hard shadow invert in dark styles. The shadow is a box-shadow (no transform on
+   any ancestor of the body) and flips in RTL. */
+.amc-TBrutalBlock {
+  --amc-tbrut-ink: var(--ut-component-text-default-color, #1a1a1a);
+  --amc-tbrut-surface: var(--ut-component-background-color, #fff);
+  --amc-tbrut-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tbrut-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tbrut-band-color: var(--amc-tbrut-accent);
+  --amc-tbrut-band: color-mix(in srgb, var(--amc-tbrut-band-color) 34%, var(--amc-tbrut-surface));
+  --amc-tbrut-band-ink: var(--amc-tbrut-ink);
+  --amc-tbrut-border: 3px;
+  --amc-tbrut-hard: 7px;
+  --amc-tbrut-dir: 1;
+  --amc-tbrut-tilt: -2.5deg;
+  --amc-tbrut-radius: min(var(--ut-component-border-radius, 4px), 6px);
+  position: relative;
+  display: grid;
+  --amc-tbrut-room: 10px;
+  margin-block: 30px calc(var(--amc-tbrut-room) + 16px);
+  margin-inline-end: var(--amc-tbrut-room);
+  border: var(--amc-tbrut-border) solid var(--amc-tbrut-ink);
+  border-radius: var(--amc-tbrut-radius);
+  background: var(--amc-tbrut-surface);
+  color: var(--amc-tbrut-ink);
+  box-shadow: calc(var(--amc-tbrut-hard) * var(--amc-tbrut-dir)) var(--amc-tbrut-hard) 0 var(--amc-tbrut-ink);
+}
+.amc-TBrutalBlock:dir(rtl) { --amc-tbrut-dir: -1; --amc-tbrut-tilt: 2.5deg; }
+
+/* Flat palette band with a printed diagonal stripe */
+.amc-TBrutalBlock-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 14px;
+  min-width: 0;
+  padding: 0 14px 12px;
+  border-block-end: var(--amc-tbrut-border) solid var(--amc-tbrut-ink);
+  border-start-start-radius: calc(var(--amc-tbrut-radius) - 2px);
+  border-start-end-radius: calc(var(--amc-tbrut-radius) - 2px);
+  background:
+    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--amc-tbrut-band-ink) 9%, transparent) 0 2px, transparent 2px 9px),
+    var(--amc-tbrut-band);
+  color: var(--amc-tbrut-band-ink);
+}
+/* Title sticker: tilted, bordered, breaking out of the top edge */
+.amc-TBrutalBlock-label {
+  display: inline-flex;
+  align-items: stretch;
+  max-inline-size: 100%;
+  min-width: 0;
+  margin-block-start: -18px;
+  margin-inline-end: auto;
+  border: var(--amc-tbrut-border) solid var(--amc-tbrut-ink);
+  background: var(--amc-tbrut-surface);
+  color: var(--amc-tbrut-ink);
+  box-shadow: calc(4px * var(--amc-tbrut-dir)) 4px 0 var(--amc-tbrut-ink);
+  transform: rotate(var(--amc-tbrut-tilt));
+  transform-origin: 0 100%;
+}
+.amc-TBrutalBlock:dir(rtl) .amc-TBrutalBlock-label { transform-origin: 100% 100%; }
+.amc-TBrutalBlock-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 36px;
+  border-inline-end: var(--amc-tbrut-border) solid var(--amc-tbrut-ink);
+  background: var(--amc-tbrut-band-color);
+  color: var(--amc-tbrut-accent-fg);
+  font-size: 15px;
+}
+.amc-TBrutalBlock-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TBrutalBlock-title {
+  min-width: 0;
+  margin: 0;
+  padding: 6px 12px 7px;
+  font-size: 1.0625rem;
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.amc-TBrutalBlock-actions, .amc-TBrutalBlock-footer { display: flex; flex-wrap: wrap; gap: 8px; }
+.amc-TBrutalBlock-actions { padding-block-start: 10px; }
+.amc-TBrutalBlock-actions:empty, .amc-TBrutalBlock-footer:empty { display: none; }
+.amc-TBrutalBlock-body { min-width: 0; padding: 16px; overflow-x: auto; }
+.amc-TBrutalBlock-footer {
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-block-start: 2px dashed var(--amc-tbrut-ink);
+}
+
+/* Hover and focus: sticker straightens, shadow grows */
+.amc-TBrutalBlock:hover, .amc-TBrutalBlock:focus-within { --amc-tbrut-hard: 10px; --amc-tbrut-tilt: 0deg; }
+
+/* Template options */
+.amc-TBrutalBlock--warning { --amc-tbrut-band-color: var(--ut-palette-warning, #fbce4a); --amc-tbrut-band: var(--amc-tbrut-band-color); --amc-tbrut-band-ink: var(--ut-palette-warning-contrast, #1a1a1a); --amc-tbrut-accent-fg: var(--ut-palette-warning-contrast, #1a1a1a); }
+.amc-TBrutalBlock--success { --amc-tbrut-band-color: var(--ut-palette-success, #278701); --amc-tbrut-accent-fg: var(--ut-palette-success-contrast, #fff); }
+.amc-TBrutalBlock--danger { --amc-tbrut-band-color: var(--ut-palette-danger, #cb1100); --amc-tbrut-accent-fg: var(--ut-palette-danger-contrast, #fff); }
+.amc-TBrutalBlock--ink { --amc-tbrut-band: var(--amc-tbrut-ink); --amc-tbrut-band-ink: var(--amc-tbrut-surface); }
+.amc-TBrutalBlock--ink .amc-TBrutalBlock-label { box-shadow: calc(4px * var(--amc-tbrut-dir)) 4px 0 var(--amc-tbrut-band-color); }
+.amc-TBrutalBlock--shadowStart { --amc-tbrut-dir: -1; margin-inline: var(--amc-tbrut-room) 0; }
+.amc-TBrutalBlock--shadowStart:dir(rtl) { --amc-tbrut-dir: 1; }
+.amc-TBrutalBlock--noPadding .amc-TBrutalBlock-body { padding: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TBrutalBlock { transition: box-shadow .15s steps(3, end); }
+  .amc-TBrutalBlock-label { transition: transform .2s cubic-bezier(.3, 1.6, .5, 1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TBrutalBlock, .amc-TBrutalBlock-label { transition: none; }
+}
+@media (forced-colors: active) {
+  .amc-TBrutalBlock, .amc-TBrutalBlock-label { box-shadow: none; border-color: CanvasText; }
+  .amc-TBrutalBlock-header { background: Canvas; border-color: CanvasText; }
+  .amc-TBrutalBlock-icon { background: Canvas; color: CanvasText; border-color: CanvasText; }
+}

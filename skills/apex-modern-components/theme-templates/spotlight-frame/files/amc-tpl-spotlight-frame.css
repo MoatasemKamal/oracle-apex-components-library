@@ -1,0 +1,175 @@
+/* Spotlight Frame: region template for Universal Theme. A pointer spotlight and a border glow
+   follow the mouse (radial gradients at --amc-tspot-x / --amc-tspot-y, the border one masked to
+   a 1px ring); a faint grid shows inside the light in the header only. Technique adapted from
+   Magic UI magic-card and grid-pattern (MIT, https://github.com/magicuidesign/magicui). */
+@property --amc-tspot-x { syntax: "<length-percentage>"; inherits: true; initial-value: 0px; }
+@property --amc-tspot-y { syntax: "<length-percentage>"; inherits: true; initial-value: 0px; }
+@property --amc-tspot-size { syntax: "<length>"; inherits: true; initial-value: 240px; }
+
+.amc-TSpotlightFrame {
+  --amc-tspot-color: var(--ut-palette-primary, #056ac8);
+  --amc-tspot-color-2: var(--ut-palette-info, #0076df);
+  --amc-tspot-surface: var(--ut-component-background-color, #fff);
+  --amc-tspot-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tspot-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tspot-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tspot-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-tspot-strength: 55%;
+  --amc-tspot-fill: 9%;
+  --amc-tspot-x: 18%;
+  --amc-tspot-y: 0%;
+  --amc-tspot-size: 240px;
+  --amc-tspot-cell: 18px;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  margin-block-end: 16px;
+  border-radius: var(--amc-tspot-radius);
+  background: var(--amc-tspot-surface);
+  color: var(--amc-tspot-ink);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--amc-tspot-ink) 6%, transparent),
+    0 16px 36px -24px color-mix(in srgb, var(--amc-tspot-color) 60%, transparent);
+}
+.amc-TSpotlightFrame:dir(rtl) { --amc-tspot-x: 82%; }
+
+/* Light that follows the pointer across the whole frame, under the content */
+.amc-TSpotlightFrame-light {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(calc(var(--amc-tspot-size) * 1.6) circle at var(--amc-tspot-x) var(--amc-tspot-y),
+    color-mix(in srgb, var(--amc-tspot-color) var(--amc-tspot-fill), transparent),
+    transparent 70%);
+}
+
+/* Border glow: the ring is lit where the pointer is and falls back to the theme border */
+.amc-TSpotlightFrame-rim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: radial-gradient(var(--amc-tspot-size) circle at var(--amc-tspot-x) var(--amc-tspot-y),
+    var(--amc-tspot-color),
+    color-mix(in srgb, var(--amc-tspot-color-2) var(--amc-tspot-strength), var(--amc-tspot-line)) 45%,
+    var(--amc-tspot-line) 100%);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+}
+
+.amc-TSpotlightFrame-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px 18px 14px;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+}
+/* Hairline under the header, brightest straight below the pointer */
+.amc-TSpotlightFrame-header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 1px;
+  background: radial-gradient(var(--amc-tspot-size) 60px at var(--amc-tspot-x) 50%,
+    color-mix(in srgb, var(--amc-tspot-color) 70%, transparent),
+    var(--amc-tspot-line) 100%);
+}
+/* Grid pattern revealed only inside the light */
+.amc-TSpotlightFrame-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--amc-tspot-color) 34%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--amc-tspot-color) 34%, transparent) 1px, transparent 1px);
+  background-size: var(--amc-tspot-cell) var(--amc-tspot-cell);
+  background-position: -1px -1px;
+  -webkit-mask: radial-gradient(var(--amc-tspot-size) circle at var(--amc-tspot-x) var(--amc-tspot-y), black, transparent 75%);
+  mask: radial-gradient(var(--amc-tspot-size) circle at var(--amc-tspot-x) var(--amc-tspot-y), black, transparent 75%);
+  opacity: .7;
+}
+.amc-TSpotlightFrame-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--amc-tspot-color);
+  background: var(--amc-tspot-surface);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tspot-color) 35%, var(--amc-tspot-line)),
+    0 0 0 4px color-mix(in srgb, var(--amc-tspot-color) 9%, transparent),
+    0 6px 16px -6px color-mix(in srgb, var(--amc-tspot-color) 70%, transparent);
+}
+.amc-TSpotlightFrame-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TSpotlightFrame-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.amc-TSpotlightFrame-actions, .amc-TSpotlightFrame-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TSpotlightFrame-actions:empty, .amc-TSpotlightFrame-footer:empty { display: none; }
+.amc-TSpotlightFrame-body {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 14px 18px 18px;
+  overflow-x: auto;
+}
+.amc-TSpotlightFrame-footer {
+  position: relative;
+  z-index: 1;
+  justify-content: flex-end;
+  padding: 0 18px 16px;
+}
+
+/* Lit state: set by the script while the pointer is over the region or a field has focus */
+.amc-TSpotlightFrame.amc-is-lit,
+.amc-TSpotlightFrame:focus-within { --amc-tspot-strength: 85%; --amc-tspot-fill: 11%; }
+.amc-TSpotlightFrame.amc-is-lit .amc-TSpotlightFrame-grid { opacity: 1; }
+
+/* Template options */
+.amc-TSpotlightFrame--success { --amc-tspot-color: var(--ut-palette-success, #278701); --amc-tspot-color-2: color-mix(in srgb, var(--ut-palette-success, #278701) 60%, var(--ut-palette-info, #0076df)); }
+.amc-TSpotlightFrame--danger { --amc-tspot-color: var(--ut-palette-danger, #cb1100); --amc-tspot-color-2: var(--ut-palette-warning, #fbce4a); }
+.amc-TSpotlightFrame--wide { --amc-tspot-size: 380px; --amc-tspot-cell: 22px; }
+.amc-TSpotlightFrame--dots .amc-TSpotlightFrame-grid {
+  background-image: radial-gradient(circle at center, color-mix(in srgb, var(--amc-tspot-color) 55%, transparent) 1.2px, transparent 1.6px);
+  background-size: 12px 12px;
+  background-position: 0 0;
+}
+.amc-TSpotlightFrame--noPadding .amc-TSpotlightFrame-body { padding: 0; }
+.amc-TSpotlightFrame--noPadding .amc-TSpotlightFrame-footer { padding-block-start: 12px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TSpotlightFrame {
+    transition: --amc-tspot-x .22s ease-out, --amc-tspot-y .22s ease-out, --amc-tspot-size .4s ease;
+  }
+  .amc-TSpotlightFrame-grid { transition: opacity .3s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSpotlightFrame, .amc-TSpotlightFrame-grid { transition: none; }
+}
+@media (forced-colors: active) {
+  .amc-TSpotlightFrame { border: 1px solid CanvasText; }
+  .amc-TSpotlightFrame-light, .amc-TSpotlightFrame-rim, .amc-TSpotlightFrame-grid { display: none; }
+  .amc-TSpotlightFrame-header::after { background: CanvasText; }
+}

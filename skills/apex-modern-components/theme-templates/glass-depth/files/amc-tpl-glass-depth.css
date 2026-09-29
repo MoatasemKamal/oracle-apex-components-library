@@ -1,0 +1,203 @@
+/* Glass Depth: region template for Universal Theme. The frame paints soft palette light; a
+   frosted pane (its own layer, so the body is never inside a backdrop-filter or transform and
+   fixed-position popups keep working) floats over it with a light top edge, a layered depth
+   shadow and a second sheet peeking out beneath. */
+.amc-TGlassDepth {
+  --amc-tglass-a: var(--ut-palette-primary, #056ac8);
+  --amc-tglass-b: var(--ut-palette-info, #0076df);
+  --amc-tglass-c: var(--ut-palette-success, #278701);
+  --amc-tglass-surface: var(--ut-component-background-color, #fff);
+  --amc-tglass-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-tglass-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tglass-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tglass-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tglass-light: var(--amc-tglass-light-color, #fff);
+  --amc-tglass-shade: var(--amc-tglass-shade-color, #0b1020);
+  --amc-tglass-radius: calc(var(--ut-component-border-radius, 4px) + 14px);
+  --amc-tglass-pad: 14px;
+  --amc-tglass-lift: 22px;
+  position: relative;
+  isolation: isolate;
+  margin-block-end: 18px;
+  padding: var(--amc-tglass-pad) var(--amc-tglass-pad) var(--amc-tglass-lift);
+  border-radius: var(--amc-tglass-radius);
+  color: var(--amc-tglass-ink);
+}
+
+/* Colored light drawn on the frame, behind everything */
+.amc-TGlassDepth-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--amc-tglass-a) 6%, var(--amc-tglass-page));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tglass-a) 12%, transparent);
+}
+.amc-TGlassDepth-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(34% 46% at 14% 20%, color-mix(in srgb, var(--amc-tglass-a) 70%, transparent), transparent 70%),
+    radial-gradient(30% 42% at 88% 14%, color-mix(in srgb, var(--amc-tglass-b) 55%, transparent), transparent 70%),
+    radial-gradient(38% 40% at 70% 92%, color-mix(in srgb, var(--amc-tglass-c) 50%, transparent), transparent 72%),
+    radial-gradient(26% 34% at 30% 96%, color-mix(in srgb, var(--amc-tglass-b) 45%, transparent), transparent 70%);
+  background-size: 120% 120%;
+  background-position: 0% 0%;
+  filter: blur(18px) saturate(140%);
+}
+
+/* A second glass sheet peeking out below the panel */
+.amc-TGlassDepth-sheet,
+.amc-TGlassDepth-sheet::before {
+  position: absolute;
+  z-index: 1;
+  border-radius: calc(var(--amc-tglass-radius) - 6px);
+  background: color-mix(in srgb, var(--amc-tglass-surface) 45%, transparent);
+  box-shadow:
+    inset 0 -1px 0 color-mix(in srgb, var(--amc-tglass-light) 40%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tglass-light) 22%, transparent),
+    0 10px 20px -12px color-mix(in srgb, var(--amc-tglass-shade) 40%, transparent);
+  pointer-events: none;
+}
+.amc-TGlassDepth-sheet {
+  inset-inline: calc(var(--amc-tglass-pad) + 18px);
+  inset-block-end: calc(var(--amc-tglass-lift) - 12px);
+  block-size: 48px;
+}
+.amc-TGlassDepth-sheet::before {
+  content: "";
+  display: none;
+  inset-inline: 18px;
+  inset-block-end: -9px;
+  block-size: 40px;
+  opacity: .7;
+}
+
+.amc-TGlassDepth-panel {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-width: 0;
+  border-radius: calc(var(--amc-tglass-radius) - 4px);
+}
+/* The frosted pane: backdrop blur on a sibling layer, never on an ancestor of the body */
+.amc-TGlassDepth-glass {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-tglass-light) 16%, transparent), transparent 42%),
+    color-mix(in srgb, var(--amc-tglass-surface) 58%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tglass-light) 75%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tglass-light) 30%, var(--amc-tglass-line)),
+    0 1px 2px color-mix(in srgb, var(--amc-tglass-shade) 10%, transparent),
+    0 10px 22px -10px color-mix(in srgb, var(--amc-tglass-shade) 26%, transparent),
+    0 32px 56px -28px color-mix(in srgb, var(--amc-tglass-a) 55%, transparent);
+}
+
+.amc-TGlassDepth-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 16px 12px;
+}
+.amc-TGlassDepth-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--amc-tglass-a);
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--amc-tglass-light) 55%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-tglass-a) 16%, var(--amc-tglass-surface));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tglass-light) 80%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tglass-a) 22%, transparent),
+    0 8px 18px -8px color-mix(in srgb, var(--amc-tglass-a) 70%, transparent);
+}
+.amc-TGlassDepth-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TGlassDepth-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -.015em;
+  overflow-wrap: anywhere;
+}
+.amc-TGlassDepth-actions, .amc-TGlassDepth-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TGlassDepth-actions:empty, .amc-TGlassDepth-footer:empty { display: none; }
+
+/* Readable sheet for native content: almost opaque, no blur, no transform */
+.amc-TGlassDepth-body {
+  min-width: 0;
+  margin: 0 8px 8px;
+  padding: 14px;
+  border-radius: calc(var(--amc-tglass-radius) - 8px);
+  background: color-mix(in srgb, var(--amc-tglass-surface) 94%, transparent);
+  box-shadow:
+    inset 0 0 0 1px var(--amc-tglass-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tglass-shade) 8%, transparent);
+  overflow-x: auto;
+}
+.amc-TGlassDepth-footer { justify-content: flex-end; padding: 2px 12px 12px; }
+
+/* Template options */
+.amc-TGlassDepth--success { --amc-tglass-a: var(--ut-palette-success, #278701); --amc-tglass-b: var(--ut-palette-info, #0076df); --amc-tglass-c: color-mix(in srgb, var(--ut-palette-success, #278701) 55%, var(--ut-palette-warning, #fbce4a)); }
+.amc-TGlassDepth--danger { --amc-tglass-a: var(--ut-palette-danger, #cb1100); --amc-tglass-b: var(--ut-palette-warning, #fbce4a); --amc-tglass-c: color-mix(in srgb, var(--ut-palette-danger, #cb1100) 60%, var(--ut-palette-primary, #056ac8)); }
+.amc-TGlassDepth--warm { --amc-tglass-a: var(--ut-palette-warning, #fbce4a); --amc-tglass-b: color-mix(in srgb, var(--ut-palette-danger, #cb1100) 70%, var(--ut-palette-warning, #fbce4a)); --amc-tglass-c: var(--ut-palette-primary, #056ac8); }
+.amc-TGlassDepth--warm .amc-TGlassDepth-icon { color: color-mix(in srgb, var(--amc-tglass-a) 45%, var(--amc-tglass-ink)); }
+.amc-TGlassDepth--deep { --amc-tglass-pad: 22px; --amc-tglass-lift: 36px; }
+.amc-TGlassDepth--deep .amc-TGlassDepth-sheet::before { display: block; }
+.amc-TGlassDepth--deep .amc-TGlassDepth-glass {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tglass-light) 75%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tglass-light) 30%, var(--amc-tglass-line)),
+    0 2px 4px color-mix(in srgb, var(--amc-tglass-shade) 10%, transparent),
+    0 18px 30px -12px color-mix(in srgb, var(--amc-tglass-shade) 30%, transparent),
+    0 48px 72px -30px color-mix(in srgb, var(--amc-tglass-a) 65%, transparent);
+}
+.amc-TGlassDepth--noPadding .amc-TGlassDepth-body { padding: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TGlassDepth-backdrop::before { animation: amc-tglass-drift 18s ease-in-out infinite alternate; }
+  .amc-TGlassDepth-glass, .amc-TGlassDepth-sheet { transition: box-shadow .35s ease, inset .35s ease; }
+  .amc-TGlassDepth:hover .amc-TGlassDepth-sheet,
+  .amc-TGlassDepth:focus-within .amc-TGlassDepth-sheet { inset-block-end: calc(var(--amc-tglass-lift) - 16px); }
+}
+@keyframes amc-tglass-drift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 40%; }
+  100% { background-position: 40% 100%; }
+}
+.amc-TGlassDepth:hover .amc-TGlassDepth-glass,
+.amc-TGlassDepth:focus-within .amc-TGlassDepth-glass {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tglass-light) 85%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tglass-a) 30%, var(--amc-tglass-line)),
+    0 2px 4px color-mix(in srgb, var(--amc-tglass-shade) 10%, transparent),
+    0 16px 30px -12px color-mix(in srgb, var(--amc-tglass-shade) 32%, transparent),
+    0 40px 64px -28px color-mix(in srgb, var(--amc-tglass-a) 65%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TGlassDepth-backdrop::before { animation: none; }
+  .amc-TGlassDepth-glass, .amc-TGlassDepth-sheet { transition: none; }
+}
+@media (forced-colors: active) {
+  .amc-TGlassDepth { border: 1px solid CanvasText; }
+  .amc-TGlassDepth-backdrop, .amc-TGlassDepth-sheet { display: none; }
+  .amc-TGlassDepth-glass { backdrop-filter: none; background: Canvas; box-shadow: none; }
+  .amc-TGlassDepth-body { box-shadow: none; border: 1px solid CanvasText; }
+}

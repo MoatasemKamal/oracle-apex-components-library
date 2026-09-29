@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Ticket Stub",
+  "staticId": "AMC_TPL_TICKET_STUB",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "smart",
+  "description": "The region is a ticket: a tinted stub with icon, title, buttons and a barcode is torn off from the body by a perforated line with punched notches, and the stub moves from the side to the top when the region gets narrow.",
+  "useFor": "Record-centric regions: a booking, voucher, shipment or approval Form, a Classic Report of one order's lines, a Cards region of passes, or a Chart for one event.",
+  "keywords": ["ticket", "voucher", "boarding pass", "perforation", "stub", "responsive layout"],
+  "helpText": "Region template shaped like a ticket. The stub holds the region icon, the title and every button position (Help, Edit, Change, Copy, Delete, Create, then Previous, Close, Next) and a decorative barcode; a dashed perforation with punched semicircle notches separates it from the body. When the region is wide the stub sits at the start side; below about 36rem of region width it moves on top and lays out in a row, without media queries, so it adapts inside narrow columns and dialogs. Only the stub is a query container, so popups, sticky report headers and date pickers in the body are unaffected. Template options put the stub at the end side, keep it on top at every width, color it success or danger, or remove the body padding. The perforation drifts gently on hover or focus; under reduced motion it stays still. The notches are painted in the page background color, so place the region directly on the page body.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "STUB_END", "name": "Stub at end", "cssClass": "amc-TTicketStub--stubEnd", "sequence": 10, "help": "On wide regions the stub sits at the end side; on narrow regions it stays on top." },
+    { "staticId": "STUB_TOP", "name": "Stub always on top", "cssClass": "amc-TTicketStub--top", "sequence": 20, "help": "Keeps the stub on top as a row at every width, like a voucher header." },
+    { "staticId": "SUCCESS", "name": "Success stub", "cssClass": "amc-TTicketStub--success", "sequence": 30, "help": "Stub tint and icon use the success palette color, for confirmed bookings and paid vouchers." },
+    { "staticId": "DANGER", "name": "Danger stub", "cssClass": "amc-TTicketStub--danger", "sequence": 40, "help": "Stub tint and icon use the danger palette color, for cancelled or expired records." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TTicketStub--noPadding", "sequence": 50, "help": "Removes body padding so reports run edge to edge next to the stub." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

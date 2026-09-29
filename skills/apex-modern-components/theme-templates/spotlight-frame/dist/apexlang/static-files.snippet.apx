@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-spotlight-frame.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-spotlight-frame.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

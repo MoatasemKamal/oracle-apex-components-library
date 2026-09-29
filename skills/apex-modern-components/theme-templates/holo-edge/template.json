@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Holo Edge",
+  "staticId": "AMC_TPL_HOLO_EDGE",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "A holographic foil edge and header strip built from the theme palette, with a sheen that shifts with the pointer or drifts slowly, around a calm, plain body.",
+  "useFor": "Premium or celebratory regions: a membership or entitlement Form, a rewards Cards region, a year-in-review Chart or a Static Content announcement; also a single featured Classic Report.",
+  "keywords": ["holographic", "foil", "iridescent", "sheen", "premium", "rainbow border"],
+  "helpText": "Region template with a holographic foil edge and header strip. The foil is a repeating gradient of the theme palette colors, softened toward the surface color so the title stays readable; a fine diagonal texture and a glint sit on top. The sheen follows the mouse over the region and drifts slowly otherwise; keyboard focus shifts it as well. The body is a plain surface. Help, Edit, Change, Copy, Delete and Create buttons sit in the header, Previous, Close and Next in the footer. Template options thicken the edge, switch to a brand foil in primary and info tones or a sunset foil in danger and warning tones, stop the drift, or remove the body padding. Without JavaScript the foil still drifts; under reduced motion it stays still. In forced-colors mode the foil is replaced by a system border.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "THICK_EDGE", "name": "Thick edge", "cssClass": "amc-THoloEdge--thick", "sequence": 10, "help": "A 5px foil edge and a taller header strip, for a single hero region." },
+    { "staticId": "BRAND_FOIL", "name": "Brand foil", "cssClass": "amc-THoloEdge--brand", "sequence": 20, "help": "Foil in primary and info tones only, for on-brand pages." },
+    { "staticId": "SUNSET_FOIL", "name": "Sunset foil", "cssClass": "amc-THoloEdge--sunset", "sequence": 30, "help": "Warm foil from the danger, warning and primary palette colors." },
+    { "staticId": "STATIC_FOIL", "name": "Static foil", "cssClass": "amc-THoloEdge--static", "sequence": 40, "help": "Stops the slow drift; the sheen moves only with the pointer." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-THoloEdge--noPadding", "sequence": 50, "help": "Removes side padding so reports run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}
