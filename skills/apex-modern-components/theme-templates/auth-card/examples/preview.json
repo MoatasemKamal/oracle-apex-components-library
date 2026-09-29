@@ -1,0 +1,110 @@
+{
+  "samples": [
+    {
+      "title": "Login, glass look, aurora scene (stage)",
+      "regionTitle": "Sign in to Northwind",
+      "icon": "fa-lock",
+      "options": [
+        "amc-TAuthCard--stage"
+      ],
+      "body": "<style>/* preview only: rough stand-in for Universal Theme item markup */\n.t-Form-fieldContainer{margin:0 0 14px}.t-Form-label{display:block;margin:0 0 5px;font-size:12px;font-weight:600;color:var(--ut-component-text-muted-color)}\n.t-Form-itemWrapper{display:flex}.apex-item-text{flex:1;min-width:0;box-sizing:border-box;font:inherit;font-size:15px;padding:10px 12px;border-radius:8px;border:1px solid var(--ut-component-border-color);background:var(--ut-component-background-color);color:var(--ut-component-text-default-color)}\n.apex-item-text:focus{outline:2px solid var(--ut-palette-primary);outline-offset:-1px}.t-Form-fieldContainer.is-error .apex-item-text{border-color:var(--ut-palette-danger)}\n.t-Form-error{color:var(--ut-palette-danger);font-size:12px;margin-top:4px}.t-Button{justify-content:center;min-height:40px;font-size:14px;font-weight:600;border-radius:8px}\n.t-Button--link{border:0;background:none;color:var(--ut-palette-primary);min-height:0;padding:4px}.pv-links{margin:4px 0 0;font-size:13px;text-align:center}.pv-links a{color:var(--ut-palette-primary)}\n.pv-check{display:flex;gap:8px;align-items:center;font-size:13px}.pv-p{margin:0 0 14px;font-size:14px;color:var(--ut-component-text-muted-color);text-align:center}</style><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Email or username</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"text\" class=\"text_field apex-item-text \" value=\"\" autocomplete=\"username\"></div><span class=\"a-Form-error\"></span></div></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password\" value=\"\" autocomplete=\"current-password\"></div><span class=\"a-Form-error\"></span></div></div><label class=\"pv-check\"><input type=\"checkbox\"> Remember me</label><p class=\"pv-links\"><a href=\"#\">Forgot password?</a> &middot; <a href=\"#\">Create account</a></p>",
+      "buttons": {
+        "NEXT": "Sign in"
+      },
+      "direction": "motion"
+    },
+    {
+      "title": "Create account, split look, mesh scene",
+      "regionTitle": "Create your account",
+      "icon": "fa-user-plus",
+      "options": [
+        "amc-TAuthCard--split",
+        "amc-TAuthCard--sceneMesh",
+        "amc-TAuthCard--stage"
+      ],
+      "body": "<div class=\"amc-auth-brand\"><h3>Orders, invoices and stock in one place</h3><p>Free for up to five users. No card needed.</p></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Work email</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"email\" class=\"text_field apex-item-text \" value=\"mona@northwind.sa\" autocomplete=\"email\"></div><span class=\"a-Form-error\"></span></div></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password amc-auth-strength\" value=\"Bluecat77river\" autocomplete=\"new-password\"></div><span class=\"a-Form-error\"></span></div></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Confirm password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password amc-auth-match\" value=\"Bluecat77\" autocomplete=\"new-password\"></div><span class=\"a-Form-error\"></span></div></div>",
+      "buttons": {
+        "CREATE": "Create account",
+        "PREVIOUS": "I already have an account"
+      },
+      "direction": "motion"
+    },
+    {
+      "title": "Forgot password, clay look, particles",
+      "regionTitle": "Forgot your password?",
+      "icon": "fa-key",
+      "options": [
+        "amc-TAuthCard--clay",
+        "amc-TAuthCard--sceneParticles",
+        "amc-TAuthCard--stage"
+      ],
+      "body": "<p class=\"pv-p\">Enter the email you sign in with. If it belongs to an account, we will send a link to choose a new password.</p><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Email</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"email\" class=\"text_field apex-item-text \" value=\"\" autocomplete=\"email\"></div><span class=\"a-Form-error\"></span></div></div>",
+      "buttons": {
+        "NEXT": "Send reset link",
+        "PREVIOUS": "Back to sign in"
+      },
+      "direction": "motion"
+    },
+    {
+      "title": "OTP verification, neon look, grid spotlight",
+      "regionTitle": "Enter the 6-digit code",
+      "icon": "fa-shield",
+      "options": [
+        "amc-TAuthCard--neon",
+        "amc-TAuthCard--sceneGrid",
+        "amc-TAuthCard--stage",
+        "amc-TAuthCard--otpAutoSubmit"
+      ],
+      "body": "<p class=\"pv-p\">We sent a code to m&bull;&bull;&bull;&bull;@northwind.sa. It expires in 5 minutes.</p><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Verification code</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"text\" class=\"text_field apex-item-text amc-auth-otp\" value=\"4172\" maxlength=\"6\" data-amc-length=\"6\"></div><span class=\"a-Form-error\"></span></div></div><p class=\"pv-links\"><button type=\"button\" class=\"t-Button t-Button--link amc-auth-resend\" data-amc-seconds=\"30\"><span class=\"t-Button-label\">Resend code</span></button></p>",
+      "buttons": {
+        "NEXT": "Verify"
+      },
+      "direction": "motion"
+    },
+    {
+      "title": "Reset password, paper look, retro grid",
+      "regionTitle": "Choose a new password",
+      "icon": "fa-unlock-alt",
+      "options": [
+        "amc-TAuthCard--paper",
+        "amc-TAuthCard--sceneRetro",
+        "amc-TAuthCard--stage"
+      ],
+      "body": "<div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">New password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password amc-auth-strength\" value=\"Xk9#mP2$vL7q\" autocomplete=\"new-password\"></div><span class=\"a-Form-error\"></span></div></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Confirm new password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password amc-auth-match\" value=\"Xk9#mP2$vL7q\" autocomplete=\"new-password\"></div><span class=\"a-Form-error\"></span></div></div>",
+      "buttons": {
+        "NEXT": "Save new password"
+      },
+      "direction": "motion"
+    },
+    {
+      "title": "Login, neo-brutal look, meteors",
+      "regionTitle": "Welcome back",
+      "icon": "fa-sign-in",
+      "options": [
+        "amc-TAuthCard--brutal",
+        "amc-TAuthCard--sceneMeteors",
+        "amc-TAuthCard--stage"
+      ],
+      "body": "<div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Email or username</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"text\" class=\"text_field apex-item-text \" value=\"\" autocomplete=\"username\"></div><span class=\"a-Form-error\"></span></div></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password\" value=\"\" autocomplete=\"current-password\"></div><span class=\"a-Form-error\"></span></div></div><label class=\"pv-check\"><input type=\"checkbox\"> Remember me</label><p class=\"pv-links\"><a href=\"#\">Forgot password?</a> &middot; <a href=\"#\">Create account</a></p>",
+      "buttons": {
+        "NEXT": "Sign in"
+      },
+      "direction": "motion"
+    },
+    {
+      "title": "Login, minimal look, no scene",
+      "regionTitle": "Sign in",
+      "icon": "fa-circle-o",
+      "options": [
+        "amc-TAuthCard--minimal",
+        "amc-TAuthCard--sceneNone",
+        "amc-TAuthCard--stage"
+      ],
+      "body": "<div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Email or username</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"text\" class=\"text_field apex-item-text \" value=\"\" autocomplete=\"username\"></div><span class=\"a-Form-error\"></span></div></div><div class=\"t-Form-fieldContainer apex-item-wrapper\"><div class=\"t-Form-labelContainer\"><label class=\"t-Form-label\">Password</label></div><div class=\"t-Form-inputContainer\"><div class=\"t-Form-itemWrapper\"><input type=\"password\" class=\"text_field apex-item-text amc-auth-password\" value=\"\" autocomplete=\"current-password\"></div><span class=\"a-Form-error\"></span></div></div><label class=\"pv-check\"><input type=\"checkbox\"> Remember me</label><p class=\"pv-links\"><a href=\"#\">Forgot password?</a> &middot; <a href=\"#\">Create account</a></p>",
+      "buttons": {
+        "NEXT": "Continue"
+      },
+      "direction": "motion"
+    }
+  ]
+}

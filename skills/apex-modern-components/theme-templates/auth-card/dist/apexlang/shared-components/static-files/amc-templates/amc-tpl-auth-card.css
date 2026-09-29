@@ -1,0 +1,1102 @@
+/* APEX Modern Components - Auth Card: region template for authentication pages (login, create
+ * account, forgot password, OTP verification, reset password). Seven looks and seven full-screen
+ * scenes are template options. The scene is a decorative fixed layer behind the page
+ * (pointer-events: none), the card frames the native items and buttons, and the body keeps no
+ * transform, filter or overflow so native popups work. Border beam, shimmer, aurora, meteors,
+ * grid spotlight and retro grid adapt Magic UI designs (https://github.com/magicuidesign/magicui),
+ * MIT License, (c) Magic UI. Complete at rest; every animation stops under reduced motion. */
+
+@property --amc-ta-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@property --amc-ta-dx { syntax: "<percentage>"; inherits: true; initial-value: 30%; }
+@property --amc-ta-dy { syntax: "<percentage>"; inherits: true; initial-value: 28%; }
+
+/* ---------- Tokens ---------- */
+.amc-TAuthCard {
+  --amc-ta-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-ta-surface: var(--ut-component-background-color, #fff);
+  --amc-ta-fg: var(--ut-component-text-default-color, #262626);
+  --amc-ta-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ta-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-ta-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ta-base: var(--ut-palette-primary, #056ac8);
+  --amc-ta-accent-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-ta-success: var(--ut-palette-success, #278701);
+  --amc-ta-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-ta-danger: var(--ut-palette-danger, #cb1100);
+  --amc-ta-info: var(--ut-palette-info, #0076df);
+  --amc-ta-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .08));
+  --amc-ta-radius: clamp(.875rem, calc(var(--ut-component-border-radius, .375rem) * 3), 1.5rem);
+  --amc-ta-a2: color-mix(in srgb, var(--amc-ta-accent) 55%, var(--amc-ta-info));
+  --amc-ta-a3: color-mix(in srgb, var(--amc-ta-accent) 70%, var(--amc-ta-fg));
+  --amc-ta-ok-text: color-mix(in srgb, var(--amc-ta-success) 72%, var(--amc-ta-fg));
+  --amc-ta-bad-text: color-mix(in srgb, var(--amc-ta-danger) 78%, var(--amc-ta-fg));
+  --amc-ta-warn-text: color-mix(in srgb, var(--amc-ta-warning) 40%, var(--amc-ta-fg));
+  --amc-ta-width: 27rem;
+  --amc-ta-dir: 1;
+  --amc-ta-travel: 115vh;
+  position: relative;
+  box-sizing: border-box;
+  inline-size: 100%;
+  margin-block: 0 1rem;
+  color: var(--amc-ta-fg);
+}
+@supports (color: oklch(from red l c h)) {
+  .amc-TAuthCard {
+    --amc-ta-a2: oklch(from var(--amc-ta-accent) calc(l + .04) c calc(h - 48));
+    --amc-ta-a3: oklch(from var(--amc-ta-accent) calc(l + .02) calc(c * 1.1) calc(h + 40));
+  }
+}
+.amc-TAuthCard:dir(rtl) { --amc-ta-dir: -1; }
+[dir="rtl"] .amc-TAuthCard { --amc-ta-dir: -1; }
+
+/* =====================================================================
+ * Scene: a fixed decorative layer behind the whole page.
+ * ================================================================== */
+.amc-TAuthCard-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  direction: ltr;
+  pointer-events: none;
+  contain: paint;
+  background: color-mix(in srgb, var(--amc-ta-accent) 5%, var(--amc-ta-page));
+}
+.amc-TAuthCard-sceneA,
+.amc-TAuthCard-sceneB,
+.amc-TAuthCard-sceneC,
+.amc-TAuthCard-fx {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.amc-TAuthCard-dot { position: absolute; display: block; }
+/* Only the first Auth Card on a page draws a scene (JS marks the others). */
+.amc-TAuthCard.is-sceneless .amc-TAuthCard-scene { display: none; }
+.amc-TAuthCard-sceneHost { isolation: isolate; }
+
+/* ---------- Aurora (default: no scene option set) ---------- */
+.amc-TAuthCard:not([class*="amc-TAuthCard--scene"]) .amc-TAuthCard-sceneA,
+.amc-TAuthCard:not([class*="amc-TAuthCard--scene"]) .amc-TAuthCard-sceneB {
+  display: block;
+  inset: -35% -15% 20%;
+  background-image: repeating-linear-gradient(100deg,
+    var(--amc-ta-accent) 0%,
+    var(--amc-ta-a2) 7%,
+    color-mix(in srgb, var(--amc-ta-a2) 25%, var(--amc-ta-page)) 11%,
+    var(--amc-ta-a3) 16%,
+    var(--amc-ta-accent) 24%);
+  background-size: 200% 100%;
+  opacity: .5;
+  filter: blur(44px) saturate(1.25);
+  will-change: transform;
+  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 0%, var(--amc-ta-fg) 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 90% at 50% 0%, var(--amc-ta-fg) 25%, transparent 75%);
+}
+.amc-TAuthCard:not([class*="amc-TAuthCard--scene"]) .amc-TAuthCard-sceneB {
+  inset: -10% -30% 35%;
+  background-size: 260% 100%;
+  opacity: .32;
+}
+.amc-TAuthCard:not([class*="amc-TAuthCard--scene"]) .amc-TAuthCard-sceneC {
+  display: block;
+  background-image: radial-gradient(color-mix(in srgb, var(--amc-ta-fg) 14%, transparent) 1px, transparent 1.5px);
+  background-size: 1.375rem 1.375rem;
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 100%, var(--amc-ta-fg), transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 100%, var(--amc-ta-fg), transparent 80%);
+}
+
+/* ---------- Meteors ---------- */
+.amc-TAuthCard--sceneMeteors .amc-TAuthCard-scene {
+  background:
+    radial-gradient(120% 60% at 50% 110%, color-mix(in srgb, var(--amc-ta-accent) 22%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-ta-accent) 7%, var(--amc-ta-page));
+}
+.amc-TAuthCard--sceneMeteors .amc-TAuthCard-sceneA {
+  display: block;
+  background-image:
+    radial-gradient(color-mix(in srgb, var(--amc-ta-fg) 45%, transparent) 1px, transparent 1.4px),
+    radial-gradient(color-mix(in srgb, var(--amc-ta-accent) 55%, transparent) 1px, transparent 1.4px);
+  background-size: 9.3rem 7.1rem, 5.7rem 6.3rem;
+  background-position: 1.1rem 2.3rem, 3.2rem .6rem;
+  opacity: .6;
+  -webkit-mask-image: linear-gradient(to bottom, var(--amc-ta-fg), transparent 85%);
+  mask-image: linear-gradient(to bottom, var(--amc-ta-fg), transparent 85%);
+}
+.amc-TAuthCard--sceneMeteors .amc-TAuthCard-sceneB {
+  display: block;
+  inset: auto -25% -140% -25%;
+  block-size: 160%;
+  border-radius: 50%;
+  box-shadow:
+    0 -1px 0 color-mix(in srgb, var(--amc-ta-accent) 60%, transparent),
+    0 -1rem 3rem color-mix(in srgb, var(--amc-ta-accent) 40%, transparent),
+    0 -3rem 9rem color-mix(in srgb, var(--amc-ta-a2) 30%, transparent);
+}
+.amc-TAuthCard--sceneMeteors .amc-TAuthCard-fx { display: block; }
+.amc-TAuthCard--sceneMeteors .amc-TAuthCard-dot {
+  inset-block-start: -2%;
+  inset-inline-start: var(--amc-ta-l, 50%);
+  inline-size: 3px;
+  block-size: 3px;
+  border-radius: 50%;
+  background: var(--amc-ta-fg);
+  box-shadow: 0 0 .75rem 2px color-mix(in srgb, var(--amc-ta-accent) 75%, transparent);
+  transform: rotate(215deg) translateX(calc(var(--amc-ta-p, 20) * -1vmin));
+  opacity: .9;
+}
+.amc-TAuthCard--sceneMeteors .amc-TAuthCard-dot::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 1px;
+  inline-size: 7rem;
+  block-size: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--amc-ta-accent) 55%, transparent) 70%, var(--amc-ta-fg));
+}
+.amc-TAuthCard-dot:nth-child(1) { --amc-ta-l: 12%; --amc-ta-t: 7s; --amc-ta-d: -1.2s; --amc-ta-p: 18; --amc-ta-s: 6px; --amc-ta-y: 14%; }
+.amc-TAuthCard-dot:nth-child(2) { --amc-ta-l: 24%; --amc-ta-t: 9s; --amc-ta-d: -6.5s; --amc-ta-p: 34; --amc-ta-s: 9px; --amc-ta-y: 62%; }
+.amc-TAuthCard-dot:nth-child(3) { --amc-ta-l: 37%; --amc-ta-t: 6s; --amc-ta-d: -2.8s; --amc-ta-p: 9; --amc-ta-s: 5px; --amc-ta-y: 38%; }
+.amc-TAuthCard-dot:nth-child(4) { --amc-ta-l: 49%; --amc-ta-t: 11s; --amc-ta-d: -4.1s; --amc-ta-p: 26; --amc-ta-s: 11px; --amc-ta-y: 80%; }
+.amc-TAuthCard-dot:nth-child(5) { --amc-ta-l: 58%; --amc-ta-t: 8s; --amc-ta-d: -7.3s; --amc-ta-p: 42; --amc-ta-s: 7px; --amc-ta-y: 22%; }
+.amc-TAuthCard-dot:nth-child(6) { --amc-ta-l: 67%; --amc-ta-t: 7.5s; --amc-ta-d: -.6s; --amc-ta-p: 14; --amc-ta-s: 4px; --amc-ta-y: 55%; }
+.amc-TAuthCard-dot:nth-child(7) { --amc-ta-l: 76%; --amc-ta-t: 10s; --amc-ta-d: -8.8s; --amc-ta-p: 30; --amc-ta-s: 8px; --amc-ta-y: 70%; }
+.amc-TAuthCard-dot:nth-child(8) { --amc-ta-l: 85%; --amc-ta-t: 6.5s; --amc-ta-d: -3.4s; --amc-ta-p: 22; --amc-ta-s: 6px; --amc-ta-y: 32%; }
+.amc-TAuthCard-dot:nth-child(9) { --amc-ta-l: 93%; --amc-ta-t: 12s; --amc-ta-d: -5.2s; --amc-ta-p: 38; --amc-ta-s: 10px; --amc-ta-y: 88%; }
+.amc-TAuthCard-dot:nth-child(10) { --amc-ta-l: 104%; --amc-ta-t: 8.5s; --amc-ta-d: -2s; --amc-ta-p: 48; --amc-ta-s: 5px; --amc-ta-y: 46%; }
+.amc-TAuthCard-dot:nth-child(11) { --amc-ta-l: 115%; --amc-ta-t: 9.5s; --amc-ta-d: -9.6s; --amc-ta-p: 56; --amc-ta-s: 7px; --amc-ta-y: 8%; }
+.amc-TAuthCard-dot:nth-child(12) { --amc-ta-l: 4%; --amc-ta-t: 13s; --amc-ta-d: -11s; --amc-ta-p: 6; --amc-ta-s: 9px; --amc-ta-y: 74%; }
+
+/* ---------- Grid spotlight (follows the pointer, drifts when idle) ---------- */
+.amc-TAuthCard--sceneGrid .amc-TAuthCard-scene {
+  --amc-ta-sx: var(--amc-ta-mx, var(--amc-ta-dx));
+  --amc-ta-sy: var(--amc-ta-my, var(--amc-ta-dy));
+  --amc-ta-cell: 3rem;
+}
+.amc-TAuthCard--sceneGrid .amc-TAuthCard-sceneA,
+.amc-TAuthCard--sceneGrid .amc-TAuthCard-sceneB {
+  display: block;
+  background-image:
+    linear-gradient(var(--amc-ta-gl) 1px, transparent 1px),
+    linear-gradient(90deg, var(--amc-ta-gl) 1px, transparent 1px);
+  background-size: var(--amc-ta-cell) var(--amc-ta-cell);
+  background-position: 50% 50%;
+}
+.amc-TAuthCard--sceneGrid .amc-TAuthCard-sceneA {
+  --amc-ta-gl: color-mix(in srgb, var(--amc-ta-fg) 7%, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, var(--amc-ta-fg) 30%, transparent);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, var(--amc-ta-fg) 30%, transparent);
+}
+.amc-TAuthCard--sceneGrid .amc-TAuthCard-sceneB {
+  --amc-ta-gl: color-mix(in srgb, var(--amc-ta-accent) 75%, transparent);
+  -webkit-mask-image: radial-gradient(circle 15rem at var(--amc-ta-sx) var(--amc-ta-sy), var(--amc-ta-fg), transparent);
+  mask-image: radial-gradient(circle 15rem at var(--amc-ta-sx) var(--amc-ta-sy), var(--amc-ta-fg), transparent);
+}
+.amc-TAuthCard--sceneGrid .amc-TAuthCard-sceneC {
+  display: block;
+  background: radial-gradient(circle 26rem at var(--amc-ta-sx) var(--amc-ta-sy), color-mix(in srgb, var(--amc-ta-accent) 16%, transparent), transparent 70%);
+}
+
+/* ---------- Mesh + grain ---------- */
+.amc-TAuthCard--sceneMesh .amc-TAuthCard-scene {
+  background: color-mix(in srgb, var(--amc-ta-accent) 12%, var(--amc-ta-page));
+}
+.amc-TAuthCard--sceneMesh .amc-TAuthCard-sceneA {
+  display: block;
+  inset: -25%;
+  background:
+    radial-gradient(34% 40% at 18% 22%, color-mix(in srgb, var(--amc-ta-accent) 50%, transparent), transparent 72%),
+    radial-gradient(30% 38% at 82% 16%, color-mix(in srgb, var(--amc-ta-a3) 52%, transparent), transparent 72%),
+    radial-gradient(40% 44% at 76% 84%, color-mix(in srgb, var(--amc-ta-a2) 55%, transparent), transparent 72%),
+    radial-gradient(34% 40% at 22% 86%, color-mix(in srgb, var(--amc-ta-a3) 34%, transparent), transparent 72%),
+    radial-gradient(30% 30% at 52% 50%, color-mix(in srgb, var(--amc-ta-page) 60%, transparent), transparent 80%);
+}
+.amc-TAuthCard--sceneMesh .amc-TAuthCard-sceneB {
+  display: block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.1 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 11.25rem 11.25rem;
+  opacity: .5;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Retro grid ---------- */
+.amc-TAuthCard--sceneRetro .amc-TAuthCard-scene {
+  --amc-ta-floor: 42%;
+  background: linear-gradient(to bottom, var(--amc-ta-page) 30%, color-mix(in srgb, var(--amc-ta-accent) 12%, var(--amc-ta-page)));
+}
+.amc-TAuthCard--sceneRetro .amc-TAuthCard-sceneA {
+  display: block;
+  inset: auto 0 0;
+  block-size: var(--amc-ta-floor);
+  overflow: hidden;
+  perspective: 16rem;
+  perspective-origin: 50% 0;
+  -webkit-mask-image: linear-gradient(to top, var(--amc-ta-fg) 30%, transparent);
+  mask-image: linear-gradient(to top, var(--amc-ta-fg) 30%, transparent);
+}
+.amc-TAuthCard--sceneRetro .amc-TAuthCard-sceneA::before {
+  --amc-ta-gs: 4rem;
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: -150%;
+  inline-size: 400%;
+  block-size: 600%;
+  transform-origin: 50% 0;
+  transform: rotateX(64deg);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--amc-ta-accent) 65%, transparent) 2px, transparent 2px),
+    linear-gradient(90deg, color-mix(in srgb, var(--amc-ta-accent) 50%, transparent) 2px, transparent 2px);
+  background-size: var(--amc-ta-gs) var(--amc-ta-gs);
+  background-position: 50% 0;
+}
+.amc-TAuthCard--sceneRetro .amc-TAuthCard-sceneB {
+  display: block;
+  inset: auto auto var(--amc-ta-floor) 50%;
+  inline-size: clamp(9rem, 28vw, 20rem);
+  aspect-ratio: 2;
+  translate: -50% 0;
+  border-start-start-radius: 999rem;
+  border-start-end-radius: 999rem;
+  background: linear-gradient(to bottom, var(--amc-ta-a3), var(--amc-ta-accent) 55%, var(--amc-ta-a2));
+  opacity: .55;
+  -webkit-mask-image: repeating-linear-gradient(to top, transparent 0 4%, var(--amc-ta-fg) 4% 9%, transparent 9% 11%, var(--amc-ta-fg) 11% 20%);
+  mask-image: repeating-linear-gradient(to top, transparent 0 4%, var(--amc-ta-fg) 4% 9%, transparent 9% 11%, var(--amc-ta-fg) 11% 20%);
+}
+.amc-TAuthCard--sceneRetro .amc-TAuthCard-sceneC {
+  display: block;
+  inset: auto 0 var(--amc-ta-floor);
+  block-size: 2px;
+  background: linear-gradient(90deg, transparent, var(--amc-ta-accent) 30%, var(--amc-ta-a3) 70%, transparent);
+  box-shadow: 0 0 1.25rem color-mix(in srgb, var(--amc-ta-accent) 60%, transparent);
+}
+
+/* ---------- Particles (CSS only) ---------- */
+.amc-TAuthCard--sceneParticles .amc-TAuthCard-scene {
+  background:
+    radial-gradient(60% 50% at 20% 100%, color-mix(in srgb, var(--amc-ta-accent) 14%, transparent), transparent 70%),
+    radial-gradient(50% 40% at 85% 0%, color-mix(in srgb, var(--amc-ta-a2) 12%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-ta-accent) 4%, var(--amc-ta-page));
+}
+.amc-TAuthCard--sceneParticles .amc-TAuthCard-fx { display: block; }
+.amc-TAuthCard--sceneParticles .amc-TAuthCard-dot {
+  inset-block-start: var(--amc-ta-y, 50%);
+  inset-inline-start: calc(var(--amc-ta-l, 50%) * .9);
+  inline-size: var(--amc-ta-s, 6px);
+  block-size: var(--amc-ta-s, 6px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--amc-ta-a2) 40%, var(--amc-ta-surface)), var(--amc-ta-accent) 70%);
+  box-shadow: 0 0 1rem 2px color-mix(in srgb, var(--amc-ta-accent) 45%, transparent);
+  opacity: .7;
+}
+.amc-TAuthCard--sceneParticles .amc-TAuthCard-dot:nth-child(3n) { background: var(--amc-ta-a3); opacity: .5; }
+.amc-TAuthCard--sceneParticles .amc-TAuthCard-dot:nth-child(4n) { filter: blur(1.5px); }
+
+.amc-TAuthCard--sceneNone .amc-TAuthCard-scene { display: none; }
+
+/* =====================================================================
+ * Card (default look: glass)
+ * ================================================================== */
+.amc-TAuthCard-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: var(--amc-ta-width);
+  margin-inline: auto;
+  border-radius: var(--amc-ta-radius);
+  color: var(--amc-ta-fg);
+}
+.amc-TAuthCard-surface {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: inherit;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--amc-ta-surface) 55%, transparent), transparent 45%),
+    color-mix(in srgb, var(--amc-ta-surface) 72%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-ta-surface) 90%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-ta-fg) 10%, transparent),
+    0 2rem 4rem -1.5rem color-mix(in srgb, var(--amc-ta-accent) 32%, transparent),
+    var(--amc-ta-shadow);
+}
+.amc-TAuthCard-beam {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--amc-ta-angle), transparent 0 62%, color-mix(in srgb, var(--amc-ta-accent) 35%, transparent) 76%, var(--amc-ta-accent) 88%, var(--amc-ta-a3) 94%, transparent 100%);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+.amc-TAuthCard-card:focus-within > .amc-TAuthCard-beam { opacity: 1; }
+.amc-TAuthCard-card.is-error > .amc-TAuthCard-beam {
+  opacity: 1;
+  background: conic-gradient(from var(--amc-ta-angle), transparent 0 50%, var(--amc-ta-danger) 80%, var(--amc-ta-warning) 92%, transparent 100%);
+}
+
+.amc-TAuthCard-brand { display: none; }
+
+.amc-TAuthCard-main {
+  display: flex;
+  flex: 1 1 19rem;
+  flex-direction: column;
+  gap: 1.125rem;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: clamp(1.25rem, 5vw, 2.25rem) clamp(1rem, 5vw, 2rem) clamp(1.25rem, 4vw, 1.75rem);
+}
+
+/* ---------- Header: icon badge with pulse ring, title ---------- */
+.amc-TAuthCard-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .875rem;
+  text-align: center;
+}
+.amc-TAuthCard-logo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  border-radius: 1rem;
+  font-size: 1.375rem;
+  color: var(--amc-ta-accent-on);
+  background: linear-gradient(135deg, var(--amc-ta-accent), var(--amc-ta-a2));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-ta-accent-on) 35%, transparent),
+    0 .75rem 1.5rem -.5rem color-mix(in srgb, var(--amc-ta-accent) 70%, transparent);
+}
+.amc-TAuthCard-logo::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--amc-ta-accent) 55%, transparent);
+  opacity: 0;
+}
+.amc-TAuthCard-logo.fa:not([class*="fa-"]),
+.amc-TAuthCard-artIcon.fa:not([class*="fa-"]) { display: none; }
+.amc-TAuthCard-title {
+  margin: 0;
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+/* ---------- Body, buttons, sub regions ---------- */
+.amc-TAuthCard-body { min-inline-size: 0; }
+.amc-TAuthCard-actions {
+  display: grid;
+  gap: .625rem;
+}
+.amc-TAuthCard-actions > * {
+  box-sizing: border-box;
+  inline-size: 100%;
+  justify-content: center;
+}
+.amc-TAuthCard-secondary,
+.amc-TAuthCard-help {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .375rem 1rem;
+}
+.amc-TAuthCard-help { font-size: .875rem; }
+.amc-TAuthCard-sub { display: grid; gap: .75rem; min-inline-size: 0; }
+.amc-TAuthCard-actions:empty,
+.amc-TAuthCard-secondary:empty,
+.amc-TAuthCard-sub:empty,
+.amc-TAuthCard-help:empty { display: none; }
+
+/* Primary button (JS adds amc-TAuthCard-primary, a shine and a spinner). */
+.amc-TAuthCard-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.amc-TAuthCard-shine {
+  position: absolute;
+  inset-block: -50%;
+  inset-inline-start: 0;
+  z-index: -1;
+  inline-size: 40%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--amc-ta-accent-on) 35%, transparent) 50%, transparent);
+  transform: translateX(-160%) skewX(-20deg);
+  pointer-events: none;
+}
+.amc-TAuthCard-spin {
+  display: none;
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  margin-inline-end: .5em;
+  box-sizing: border-box;
+  border: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+  border-block-start-color: currentColor;
+  border-radius: 50%;
+}
+.amc-TAuthCard-primary.is-loading .amc-TAuthCard-spin { display: inline-block; }
+.amc-TAuthCard-primary.is-loading { cursor: progress; }
+
+/* ---------- Field emphasis (JS marks containers and wrappers) ---------- */
+.amc-TAuthCard-field:focus-within label { color: var(--amc-ta-accent); }
+.amc-TAuthCard-fieldWrap { position: relative; }
+.amc-TAuthCard-fieldWrap::after {
+  content: "";
+  position: absolute;
+  inset-inline: .5rem;
+  inset-block-end: -1px;
+  block-size: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--amc-ta-accent), var(--amc-ta-a3));
+  transform: scaleX(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .2s ease;
+}
+.amc-TAuthCard-fieldWrap:focus-within::after { transform: scaleX(1); opacity: 1; }
+.amc-TAuthCard-fieldWrap--reveal > input { padding-inline-end: 2.75rem; }
+
+.amc-TAuthCard-reveal {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: .25rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  margin-block: auto;
+  padding: 0;
+  border: 0;
+  border-radius: .625rem;
+  background: transparent;
+  color: var(--amc-ta-muted);
+  font: inherit;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
+}
+.amc-TAuthCard-reveal:hover { background: color-mix(in srgb, var(--amc-ta-accent) 10%, transparent); color: var(--amc-ta-fg); }
+.amc-TAuthCard-reveal:focus-visible { outline: 2px solid var(--amc-ta-accent); outline-offset: 1px; }
+.amc-TAuthCard-reveal[aria-pressed="true"] { color: var(--amc-ta-accent); }
+.amc-TAuthCard-reveal > span { font-size: 1rem; }
+
+/* Messages under a field: Caps Lock, match state, strength label. Empty = no box. */
+.amc-TAuthCard-caps,
+.amc-TAuthCard-status {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  font-size: .8125rem;
+  line-height: 1.35;
+}
+.amc-TAuthCard-caps:not(:empty) {
+  margin-block-start: .375rem;
+  padding: .25rem .625rem;
+  inline-size: fit-content;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-ta-warning) 22%, transparent);
+  color: var(--amc-ta-warn-text);
+}
+.amc-TAuthCard-caps:not(:empty)::before { content: "\21EA"; content: "\21EA" / ""; font-weight: 700; }
+.amc-TAuthCard-status:not(:empty) { margin-block-start: .375rem; }
+.amc-TAuthCard-status:not(:empty)::before {
+  content: "";
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+.amc-TAuthCard-status.is-ok { color: var(--amc-ta-ok-text); }
+.amc-TAuthCard-status.is-bad { color: var(--amc-ta-bad-text); }
+
+/* ---------- Strength meter ---------- */
+.amc-TAuthCard-meter {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: .625rem;
+  margin-block-start: .5rem;
+  font-size: .8125rem;
+}
+.amc-TAuthCard-meterBar { display: grid; grid-template-columns: repeat(4, 1fr); gap: .25rem; }
+.amc-TAuthCard-meterSeg {
+  position: relative;
+  overflow: hidden;
+  block-size: .3125rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-ta-fg) 12%, transparent);
+  transition: background-color .3s ease;
+}
+.amc-TAuthCard-meterLabel { min-inline-size: 3.5rem; font-weight: 600; text-align: end; color: var(--amc-ta-muted); }
+.amc-TAuthCard-meter.is-weak { --amc-ta-level: var(--amc-ta-danger); }
+.amc-TAuthCard-meter.is-fair { --amc-ta-level: var(--amc-ta-warning); }
+.amc-TAuthCard-meter.is-good { --amc-ta-level: var(--amc-ta-info); }
+.amc-TAuthCard-meter.is-strong { --amc-ta-level: var(--amc-ta-success); }
+.amc-TAuthCard-meter.is-weak .amc-TAuthCard-meterSeg:nth-child(-n+1),
+.amc-TAuthCard-meter.is-fair .amc-TAuthCard-meterSeg:nth-child(-n+2),
+.amc-TAuthCard-meter.is-good .amc-TAuthCard-meterSeg:nth-child(-n+3),
+.amc-TAuthCard-meter.is-strong .amc-TAuthCard-meterSeg { background: var(--amc-ta-level); }
+.amc-TAuthCard-meter.is-weak .amc-TAuthCard-meterLabel { color: var(--amc-ta-bad-text); }
+.amc-TAuthCard-meter.is-fair .amc-TAuthCard-meterLabel { color: var(--amc-ta-warn-text); }
+.amc-TAuthCard-meter.is-good .amc-TAuthCard-meterLabel { color: color-mix(in srgb, var(--amc-ta-info) 75%, var(--amc-ta-fg)); }
+.amc-TAuthCard-meter.is-strong .amc-TAuthCard-meterLabel { color: var(--amc-ta-ok-text); }
+.amc-TAuthCard-meter.is-strong .amc-TAuthCard-meterSeg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--amc-ta-surface) 70%, transparent), transparent);
+  transform: translateX(-100%);
+}
+
+/* ---------- OTP boxes ---------- */
+.amc-TAuthCard-otpReal {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
+}
+.amc-TAuthCard-otp {
+  display: grid;
+  grid-template-columns: repeat(var(--amc-ta-n, 6), minmax(0, 3.25rem));
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  justify-content: center;
+  gap: clamp(.25rem, 1.8vw, .625rem);
+  direction: ltr;
+  margin-block: .25rem;
+}
+.amc-TAuthCard-otpBox {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  block-size: 3.5rem;
+  margin: 0;
+  padding: 0;
+  border: 1.5px solid color-mix(in srgb, var(--amc-ta-fg) 34%, transparent);
+  border-radius: .875rem;
+  background: color-mix(in srgb, var(--amc-ta-surface) 85%, transparent);
+  color: var(--amc-ta-fg);
+  caret-color: var(--amc-ta-accent);
+  font: inherit;
+  font-size: 1.5rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+/* Even codes of 6+ digits get a divider between the halves (JS sets --amc-ta-h = n / 2). */
+.amc-TAuthCard-otp--split {
+  grid-template-columns: repeat(var(--amc-ta-h, 3), minmax(0, 3.25rem)) minmax(0, .625rem) repeat(var(--amc-ta-h, 3), minmax(0, 3.25rem));
+}
+.amc-TAuthCard-otpSep {
+  align-self: center;
+  block-size: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--amc-ta-fg) 30%, transparent);
+}
+.amc-TAuthCard-otpBox:focus {
+  outline: none;
+  border-color: var(--amc-ta-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--amc-ta-accent) 22%, transparent);
+}
+.amc-TAuthCard-otpBox:focus-visible { outline: 2px solid transparent; }
+.amc-TAuthCard-otpBox.is-filled {
+  border-color: color-mix(in srgb, var(--amc-ta-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--amc-ta-accent) 8%, var(--amc-ta-surface));
+}
+.amc-TAuthCard-otp.is-complete .amc-TAuthCard-otpBox {
+  border-color: var(--amc-ta-success);
+  background: color-mix(in srgb, var(--amc-ta-success) 8%, var(--amc-ta-surface));
+}
+.amc-TAuthCard-otp.is-error .amc-TAuthCard-otpBox {
+  border-color: var(--amc-ta-danger);
+  background: color-mix(in srgb, var(--amc-ta-danger) 6%, var(--amc-ta-surface));
+}
+.amc-TAuthCard-otpBox:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ---------- Resend countdown ---------- */
+.amc-TAuthCard-resend { font-variant-numeric: tabular-nums; }
+.amc-TAuthCard-resend[aria-disabled="true"] { opacity: .6; cursor: not-allowed; }
+
+.amc-TAuthCard-srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* =====================================================================
+ * Looks
+ * ================================================================== */
+
+/* ---------- Split: brand panel beside the form ---------- */
+.amc-TAuthCard--split { --amc-ta-width: 58rem; }
+.amc-TAuthCard--split .amc-TAuthCard-brand {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex: 1 1 18rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-sizing: border-box;
+  min-block-size: 11rem;
+  margin: .5rem;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  overflow: hidden;
+  border-radius: calc(var(--amc-ta-radius) - .375rem);
+  color: var(--amc-ta-accent-on);
+  background:
+    radial-gradient(60% 55% at 15% 15%, color-mix(in srgb, var(--amc-ta-a2) 80%, transparent), transparent 70%),
+    radial-gradient(55% 60% at 90% 90%, color-mix(in srgb, var(--amc-ta-a3) 85%, transparent), transparent 70%),
+    var(--amc-ta-accent);
+}
+.amc-TAuthCard--split .amc-TAuthCard-brand { container: amc-ta-brand / inline-size; }
+/* Stacked above the form on a wide column: the art moves beside the headline. */
+@container amc-ta-brand (min-width: 30rem) {
+  .amc-TAuthCard-art { position: absolute; inset-block-start: 50%; inset-inline-end: 1.5rem; inline-size: 7rem; margin: 0; translate: 0 -50%; }
+  .amc-TAuthCard-brandSlot { padding-inline-end: 8.5rem; }
+}
+@media (max-width: 40rem) {
+  .amc-TAuthCard--split .amc-TAuthCard-brand { flex-direction: row; align-items: center; min-block-size: 0; gap: 1rem; }
+  .amc-TAuthCard--split .amc-TAuthCard-art { flex: none; inline-size: 5.5rem; margin: 0; }
+  .amc-TAuthCard--split .amc-TAuthCard-artIcon { inline-size: 2.75rem; block-size: 2.75rem; font-size: 1.25rem; border-radius: .875rem; }
+  .amc-TAuthCard--split .amc-TAuthCard-chip { inline-size: 1.75rem; block-size: .625rem; }
+  .amc-TAuthCard--split .amc-TAuthCard-chip--2 { inline-size: 1rem; block-size: 1rem; }
+  .amc-TAuthCard-brandSlot h1,
+  .amc-TAuthCard-brandSlot h2,
+  .amc-TAuthCard-brandSlot h3 { font-size: 1.25rem; }
+  .amc-TAuthCard-brandSlot p { font-size: .875rem; }
+}
+.amc-TAuthCard--split .amc-TAuthCard-brand::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .35;
+  mix-blend-mode: soft-light;
+}
+.amc-TAuthCard--split .amc-TAuthCard-main { flex-basis: 21rem; padding-block: clamp(1.25rem, 5vw, 2.75rem); }
+.amc-TAuthCard--split .amc-TAuthCard-header { align-items: flex-start; text-align: start; }
+.amc-TAuthCard--split .amc-TAuthCard-logo { display: none; }
+.amc-TAuthCard-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 9rem;
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+.amc-TAuthCard-orbit {
+  position: absolute;
+  inset: 0;
+  border: 1.5px dashed color-mix(in srgb, var(--amc-ta-accent-on) 45%, transparent);
+  border-radius: 50%;
+}
+.amc-TAuthCard-orbit--2 { inset: 22%; border-style: solid; border-color: color-mix(in srgb, var(--amc-ta-accent-on) 25%, transparent); }
+.amc-TAuthCard-artIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 3.75rem;
+  block-size: 3.75rem;
+  border-radius: 1.125rem;
+  font-size: 1.625rem;
+  background: color-mix(in srgb, var(--amc-ta-accent-on) 18%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-ta-accent-on) 45%, transparent), 0 1rem 2rem -1rem color-mix(in srgb, var(--amc-ta-fg) 60%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.amc-TAuthCard-chip {
+  position: absolute;
+  inset-block-start: 6%;
+  inset-inline-end: -4%;
+  inline-size: 2.75rem;
+  block-size: .875rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-ta-accent-on) 70%, transparent);
+  box-shadow: 0 .5rem 1rem -.5rem color-mix(in srgb, var(--amc-ta-fg) 60%, transparent);
+}
+.amc-TAuthCard-chip--2 { inset-block: auto 10%; inset-inline: -6% auto; inline-size: 1.5rem; block-size: 1.5rem; border-radius: .5rem; background: color-mix(in srgb, var(--amc-ta-accent-on) 35%, transparent); }
+.amc-TAuthCard-brandSlot { position: relative; min-inline-size: 0; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
+.amc-TAuthCard-brandSlot:empty { display: none; }
+.amc-TAuthCard-brandSlot h1,
+.amc-TAuthCard-brandSlot h2,
+.amc-TAuthCard-brandSlot h3 { margin: 0 0 .5rem; color: inherit; font-size: clamp(1.375rem, 3vw, 2rem); line-height: 1.1; letter-spacing: -.03em; }
+.amc-TAuthCard-brandSlot p { margin: 0; opacity: .88; }
+.amc-TAuthCard-brandSlot a { color: inherit; }
+
+/* ---------- Brutal: ink border, hard offset shadow ---------- */
+.amc-TAuthCard--brutal { --amc-ta-radius: calc(var(--ut-component-border-radius, .25rem) + 2px); }
+.amc-TAuthCard--brutal .amc-TAuthCard-surface {
+  background: var(--amc-ta-surface);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 3px solid var(--amc-ta-fg);
+  box-shadow: calc(8px * var(--amc-ta-dir)) 8px 0 var(--amc-ta-fg);
+}
+.amc-TAuthCard--brutal .amc-TAuthCard-beam { display: none; }
+.amc-TAuthCard--brutal .amc-TAuthCard-header { align-items: flex-start; text-align: start; }
+.amc-TAuthCard--brutal .amc-TAuthCard-logo {
+  border: 2.5px solid var(--amc-ta-fg);
+  border-radius: .375rem;
+  background: var(--amc-ta-accent);
+  box-shadow: calc(4px * var(--amc-ta-dir)) 4px 0 var(--amc-ta-fg);
+}
+.amc-TAuthCard--brutal .amc-TAuthCard-logo::after { display: none; }
+.amc-TAuthCard--brutal .amc-TAuthCard-title { font-size: 1.875rem; font-weight: 800; letter-spacing: -.035em; }
+.amc-TAuthCard--brutal .amc-TAuthCard-primary {
+  border: 2.5px solid var(--amc-ta-fg);
+  box-shadow: calc(4px * var(--amc-ta-dir)) 4px 0 var(--amc-ta-fg);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.amc-TAuthCard--brutal .amc-TAuthCard-primary:hover,
+.amc-TAuthCard--brutal .amc-TAuthCard-primary:focus-visible {
+  transform: translate(calc(-2px * var(--amc-ta-dir)), -2px);
+  box-shadow: calc(6px * var(--amc-ta-dir)) 6px 0 var(--amc-ta-fg);
+}
+.amc-TAuthCard--brutal .amc-TAuthCard-otpBox { border: 2.5px solid var(--amc-ta-fg); border-radius: .375rem; box-shadow: calc(3px * var(--amc-ta-dir)) 3px 0 var(--amc-ta-fg); }
+.amc-TAuthCard--brutal .amc-TAuthCard-meterSeg { block-size: .5rem; border-radius: 0; outline: 1.5px solid var(--amc-ta-fg); }
+.amc-TAuthCard--brutal .amc-TAuthCard-fieldWrap::after { inset-inline: 0; block-size: 4px; border-radius: 0; background: var(--amc-ta-fg); }
+
+/* ---------- Clay: pillowy radius, soft inner and outer shadows ---------- */
+.amc-TAuthCard--clay { --amc-ta-radius: 2rem; }
+.amc-TAuthCard--clay .amc-TAuthCard-surface {
+  background: color-mix(in srgb, var(--amc-ta-accent) 7%, var(--amc-ta-surface));
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow:
+    0 1.75rem 3.5rem -1.25rem color-mix(in srgb, var(--amc-ta-accent) 38%, transparent),
+    0 .5rem 1rem -.5rem color-mix(in srgb, var(--amc-ta-accent) 25%, transparent),
+    inset 0 -.75rem 1.5rem color-mix(in srgb, var(--amc-ta-accent) 12%, transparent),
+    inset 0 .5rem 1rem color-mix(in srgb, var(--amc-ta-surface) 85%, transparent);
+}
+.amc-TAuthCard--clay .amc-TAuthCard-logo {
+  inline-size: 4rem;
+  block-size: 4rem;
+  border-radius: 1.5rem;
+  box-shadow:
+    inset 0 -.375rem .75rem color-mix(in srgb, var(--amc-ta-fg) 22%, transparent),
+    inset 0 .375rem .5rem color-mix(in srgb, var(--amc-ta-accent-on) 40%, transparent),
+    0 .875rem 1.5rem -.5rem color-mix(in srgb, var(--amc-ta-accent) 70%, transparent);
+}
+.amc-TAuthCard--clay .amc-TAuthCard-logo::after { border-radius: 1.5rem; }
+.amc-TAuthCard--clay .amc-TAuthCard-otpBox {
+  border-color: color-mix(in srgb, var(--amc-ta-accent) 30%, transparent);
+  border-radius: 1.125rem;
+  background: color-mix(in srgb, var(--amc-ta-accent) 6%, var(--amc-ta-surface));
+  box-shadow: inset 0 .25rem .5rem color-mix(in srgb, var(--amc-ta-accent) 16%, transparent), inset 0 -.125rem .25rem color-mix(in srgb, var(--amc-ta-surface) 90%, transparent);
+}
+.amc-TAuthCard--clay .amc-TAuthCard-meterSeg { block-size: .5rem; box-shadow: inset 0 1px 2px color-mix(in srgb, var(--amc-ta-fg) 20%, transparent); }
+
+/* ---------- Minimal: borderless, big type ---------- */
+.amc-TAuthCard--minimal { --amc-ta-width: 26rem; }
+.amc-TAuthCard--minimal .amc-TAuthCard-beam { display: none; }
+/* No card, only a soft halo of the page color so text stays readable over any scene. */
+.amc-TAuthCard--minimal .amc-TAuthCard-surface {
+  inset: -2.5rem -3rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--amc-ta-page) 88%, transparent) 55%, transparent);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+.amc-TAuthCard--minimal .amc-TAuthCard-main { gap: 1.5rem; padding-inline: .25rem; }
+.amc-TAuthCard--minimal .amc-TAuthCard-header { align-items: flex-start; text-align: start; gap: 1.25rem; }
+.amc-TAuthCard--minimal .amc-TAuthCard-logo {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  box-shadow: none;
+}
+.amc-TAuthCard--minimal .amc-TAuthCard-title {
+  font-size: clamp(2.25rem, 9vw, 3.25rem);
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+.amc-TAuthCard--minimal .amc-TAuthCard-otp { justify-content: flex-start; }
+.amc-TAuthCard--minimal .amc-TAuthCard-otpBox {
+  border-width: 0 0 2px;
+  border-radius: 0;
+  background: transparent;
+}
+.amc-TAuthCard--minimal .amc-TAuthCard-otpBox:focus { box-shadow: 0 2px 0 var(--amc-ta-accent); }
+.amc-TAuthCard--minimal .amc-TAuthCard-secondary,
+.amc-TAuthCard--minimal .amc-TAuthCard-help { justify-content: flex-start; }
+
+/* ---------- Neon: dark card with a glowing edge beam ---------- */
+.amc-TAuthCard--neon .amc-TAuthCard-beam { opacity: 1; padding: 2px; }
+.amc-TAuthCard--neon .amc-TAuthCard-beam::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(10px);
+  opacity: .8;
+}
+.amc-TAuthCard--neon .amc-TAuthCard-beam {
+  background: conic-gradient(from var(--amc-ta-angle), var(--amc-ta-accent), var(--amc-ta-a3) 25%, transparent 40% 55%, var(--amc-ta-a2) 75%, var(--amc-ta-accent));
+}
+.amc-TAuthCard--neon .amc-TAuthCard-surface {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-ta-accent) 30%, transparent),
+    0 0 4rem -1rem color-mix(in srgb, var(--amc-ta-accent) 60%, transparent),
+    0 2rem 4rem -1.5rem color-mix(in srgb, var(--amc-ta-a3) 45%, transparent);
+}
+.amc-TAuthCard--neon .amc-TAuthCard-title { text-shadow: 0 0 1.25rem color-mix(in srgb, var(--amc-ta-accent) 60%, transparent); }
+.amc-TAuthCard--neon .amc-TAuthCard-logo { box-shadow: 0 0 1.5rem color-mix(in srgb, var(--amc-ta-accent) 80%, transparent); }
+.amc-TAuthCard--neon .amc-TAuthCard-otpBox:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-ta-accent) 35%, transparent), 0 0 1.25rem color-mix(in srgb, var(--amc-ta-accent) 55%, transparent); }
+/* The dark card needs relative colors; older browsers keep the theme surface plus the beam. */
+@supports (color: oklch(from red l c h)) {
+  .amc-TAuthCard--neon .amc-TAuthCard-card {
+    --amc-ta-surface: oklch(from var(--amc-ta-base) .2 calc(c * .4) h);
+    --amc-ta-fg: oklch(from var(--amc-ta-base) .97 .012 h);
+    --amc-ta-muted: oklch(from var(--amc-ta-base) .8 .04 h);
+    --amc-ta-line: oklch(from var(--amc-ta-base) .5 calc(c * .5) h / .55);
+    --amc-ta-field: oklch(from var(--amc-ta-base) .26 calc(c * .4) h);
+    --amc-ta-accent: oklch(from var(--amc-ta-base) max(l, .72) c h);
+    --amc-ta-accent-on: oklch(from var(--amc-ta-base) .18 calc(c * .4) h);
+    --ut-palette-primary: var(--amc-ta-accent);
+    --ut-palette-primary-contrast: var(--amc-ta-accent-on);
+    --amc-ta-ok-text: color-mix(in srgb, var(--amc-ta-success) 55%, var(--amc-ta-fg));
+    --amc-ta-bad-text: color-mix(in srgb, var(--amc-ta-danger) 55%, var(--amc-ta-fg));
+    --amc-ta-warn-text: color-mix(in srgb, var(--amc-ta-warning) 70%, var(--amc-ta-fg));
+    /* Universal Theme tokens, so the native items inside follow the dark card. */
+    --ut-component-background-color: var(--amc-ta-surface);
+    --ut-component-text-default-color: var(--amc-ta-fg);
+    --ut-component-text-muted-color: var(--amc-ta-muted);
+    --ut-component-border-color: var(--amc-ta-line);
+    --ut-body-text-color: var(--amc-ta-fg);
+    --ut-field-background-color: var(--amc-ta-field);
+    --ut-field-text-color: var(--amc-ta-fg);
+    --ut-field-border-color: var(--amc-ta-line);
+    --ut-field-label-text-color: var(--amc-ta-muted);
+    --a-field-input-background-color: var(--amc-ta-field);
+    --a-field-input-text-color: var(--amc-ta-fg);
+    --a-field-input-border-color: var(--amc-ta-line);
+    --a-field-input-placeholder-color: var(--amc-ta-muted);
+    color-scheme: dark;
+    color: var(--amc-ta-fg);
+  }
+  .amc-TAuthCard--neon .amc-TAuthCard-surface {
+    background:
+      radial-gradient(90% 60% at 50% 0%, color-mix(in srgb, var(--amc-ta-accent) 22%, transparent), transparent 70%),
+      color-mix(in srgb, var(--amc-ta-surface) 94%, transparent);
+  }
+}
+
+/* ---------- Paper: editorial sheet, ruled lines, stacked pages ---------- */
+.amc-TAuthCard--paper { --amc-ta-radius: .25rem; }
+.amc-TAuthCard--paper .amc-TAuthCard-card { --amc-ta-paper: color-mix(in srgb, var(--amc-ta-surface) 93%, var(--amc-ta-warning)); }
+.amc-TAuthCard--paper .amc-TAuthCard-surface {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .4 0 0 0 0 .3 0 0 0 .6 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    var(--amc-ta-paper);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: inset 0 0 0 1px var(--amc-ta-line), 0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--amc-ta-fg) 35%, transparent);
+}
+.amc-TAuthCard--paper .amc-TAuthCard-surface::before,
+.amc-TAuthCard--paper .amc-TAuthCard-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--amc-ta-paper);
+  box-shadow: inset 0 0 0 1px var(--amc-ta-line), 0 .5rem 1.5rem -1rem color-mix(in srgb, var(--amc-ta-fg) 40%, transparent);
+  transform: rotate(-2.2deg) translateY(.375rem);
+}
+.amc-TAuthCard--paper .amc-TAuthCard-surface::after { transform: rotate(1.6deg) translateY(.25rem); }
+.amc-TAuthCard--paper .amc-TAuthCard-beam { display: none; }
+.amc-TAuthCard--paper .amc-TAuthCard-header {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-block-end: .875rem;
+  border-block-end: 3px double var(--amc-ta-fg);
+  text-align: start;
+}
+.amc-TAuthCard--paper .amc-TAuthCard-title { order: -1; font-size: clamp(1.75rem, 6vw, 2.25rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.05; }
+.amc-TAuthCard--paper .amc-TAuthCard-logo {
+  flex: none;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border: 1.5px solid var(--amc-ta-fg);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--amc-ta-fg);
+  font-size: 1.125rem;
+  box-shadow: inset 0 0 0 3px var(--amc-ta-paper), inset 0 0 0 4px var(--amc-ta-fg);
+}
+.amc-TAuthCard--paper .amc-TAuthCard-logo::after { display: none; }
+.amc-TAuthCard--paper .amc-TAuthCard-otpBox { border-width: 0 0 2px; border-radius: 0; background: transparent; border-color: var(--amc-ta-fg); }
+.amc-TAuthCard--paper .amc-TAuthCard-fieldWrap::after { background: var(--amc-ta-fg); inset-inline: 0; block-size: 1px; }
+
+/* =====================================================================
+ * Stage: scene contained in the region (dialogs, normal pages, previews)
+ * ================================================================== */
+.amc-TAuthCard--stage {
+  isolation: isolate;
+  padding: clamp(1.5rem, 6vw, 3.5rem) clamp(.75rem, 4vw, 2rem);
+  border-radius: var(--amc-ta-radius);
+  --amc-ta-travel: 34rem;
+}
+.amc-TAuthCard--stage .amc-TAuthCard-scene { position: absolute; border-radius: inherit; }
+
+/* Auto-submit only changes behaviour (JS). The option marks complete codes with a beam. */
+.amc-TAuthCard--otpAutoSubmit .amc-TAuthCard-otp.is-complete { border-radius: 1rem; }
+
+/* =====================================================================
+ * Motion (only when the user has not asked for less)
+ * ================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TAuthCard:not([class*="amc-TAuthCard--scene"]) .amc-TAuthCard-sceneA { animation: amc-ta-aurora 22s ease-in-out infinite alternate; }
+  .amc-TAuthCard:not([class*="amc-TAuthCard--scene"]) .amc-TAuthCard-sceneB { animation: amc-ta-aurora 31s ease-in-out -9s infinite alternate-reverse; }
+  .amc-TAuthCard--sceneMeteors .amc-TAuthCard-dot { animation: amc-ta-meteor var(--amc-ta-t, 8s) linear var(--amc-ta-d, 0s) infinite; }
+  .amc-TAuthCard--sceneGrid .amc-TAuthCard-scene { animation: amc-ta-drift 18s ease-in-out infinite alternate; }
+  .amc-TAuthCard--sceneMesh .amc-TAuthCard-sceneA { animation: amc-ta-mesh 26s ease-in-out infinite alternate; }
+  .amc-TAuthCard--sceneRetro .amc-TAuthCard-sceneA::before { animation: amc-ta-floor 1.8s linear infinite; will-change: transform; }
+  .amc-TAuthCard--sceneParticles .amc-TAuthCard-dot {
+    inset-block-start: 102%;
+    animation: amc-ta-rise calc(var(--amc-ta-t, 8s) * 2.2) linear var(--amc-ta-d, 0s) infinite;
+  }
+  .amc-TAuthCard-beam { animation: amc-ta-spin 6s linear infinite; }
+  .amc-TAuthCard--neon .amc-TAuthCard-beam { animation-duration: 5s; }
+  .amc-TAuthCard-logo::after { animation: amc-ta-pulse 3.2s ease-out infinite; }
+  .amc-TAuthCard-primary .amc-TAuthCard-shine { animation: amc-ta-sweep 5s cubic-bezier(.6, 0, .3, 1) 1.2s infinite; }
+  .amc-TAuthCard-primary.is-loading .amc-TAuthCard-shine { animation-duration: 1.2s; animation-delay: 0s; }
+  .amc-TAuthCard-spin { animation: amc-ta-spin-ring .7s linear infinite; }
+  .amc-TAuthCard-orbit { animation: amc-ta-rotate 24s linear infinite; }
+  .amc-TAuthCard-orbit--2 { animation-duration: 16s; animation-direction: reverse; }
+  .amc-TAuthCard-chip { animation: amc-ta-float 6s ease-in-out infinite alternate; }
+  .amc-TAuthCard-chip--2 { animation-duration: 7.5s; animation-delay: -3s; }
+  .amc-TAuthCard-otpBox.is-pop { animation: amc-ta-pop .22s ease-out; }
+  .amc-TAuthCard-meter.is-strong .amc-TAuthCard-meterSeg::after { animation: amc-ta-meterSheen 2.4s ease-in-out infinite; }
+  .amc-TAuthCard-card.is-shake { animation: amc-ta-shake .5s cubic-bezier(.36, .07, .19, .97) both; }
+  .amc-TAuthCard-caps:not(:empty),
+  .amc-TAuthCard-status:not(:empty) { animation: amc-ta-in .25s ease-out; }
+}
+@keyframes amc-ta-aurora {
+  from { transform: translate3d(-12%, 0, 0) skewX(-4deg); }
+  to { transform: translate3d(12%, 3%, 0) skewX(4deg); }
+}
+@keyframes amc-ta-meteor {
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(calc(var(--amc-ta-travel) * -1.1)); opacity: 0; }
+}
+@keyframes amc-ta-drift {
+  0% { --amc-ta-dx: 24%; --amc-ta-dy: 26%; }
+  50% { --amc-ta-dx: 76%; --amc-ta-dy: 58%; }
+  100% { --amc-ta-dx: 58%; --amc-ta-dy: 18%; }
+}
+@keyframes amc-ta-mesh {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(4%, -3%) rotate(8deg) scale(1.06); }
+  100% { transform: translate(-3%, 3%) rotate(-6deg) scale(1); }
+}
+@keyframes amc-ta-floor { from { transform: rotateX(64deg) translateY(-4rem); } to { transform: rotateX(64deg) translateY(0); } }
+@keyframes amc-ta-rise {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  10% { opacity: .75; }
+  50% { transform: translate3d(1.5rem, calc(var(--amc-ta-travel) * -.55), 0); }
+  90% { opacity: .6; }
+  100% { transform: translate3d(-.5rem, calc(var(--amc-ta-travel) * -1.1), 0); opacity: 0; }
+}
+@keyframes amc-ta-spin { to { --amc-ta-angle: 360deg; } }
+@keyframes amc-ta-pulse {
+  0% { transform: scale(1); opacity: .7; }
+  70%, 100% { transform: scale(1.45); opacity: 0; }
+}
+@keyframes amc-ta-sweep {
+  0% { transform: translateX(-160%) skewX(-20deg); }
+  40%, 100% { transform: translateX(360%) skewX(-20deg); }
+}
+@keyframes amc-ta-spin-ring { to { transform: rotate(360deg); } }
+@keyframes amc-ta-rotate { to { transform: rotate(360deg); } }
+@keyframes amc-ta-float { from { transform: translateY(-.375rem); } to { transform: translateY(.5rem); } }
+@keyframes amc-ta-pop { 0% { transform: scale(1); } 50% { transform: scale(1.09); } 100% { transform: scale(1); } }
+@keyframes amc-ta-meterSheen { 0% { transform: translateX(-100%); } 60%, 100% { transform: translateX(100%); } }
+@keyframes amc-ta-shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}
+@keyframes amc-ta-in { from { opacity: 0; transform: translateY(-.25rem); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TAuthCard-scene *,
+  .amc-TAuthCard-scene *::before,
+  .amc-TAuthCard-scene,
+  .amc-TAuthCard-card,
+  .amc-TAuthCard-card * { animation: none !important; }
+  .amc-TAuthCard-beam { --amc-ta-angle: 210deg; }
+  .amc-TAuthCard-fieldWrap::after,
+  .amc-TAuthCard-reveal,
+  .amc-TAuthCard-meterSeg,
+  .amc-TAuthCard-otpBox,
+  .amc-TAuthCard-beam { transition: none !important; }
+  .amc-TAuthCard--brutal .amc-TAuthCard-primary { transition: none !important; }
+  .amc-TAuthCard--brutal .amc-TAuthCard-primary:hover,
+  .amc-TAuthCard--brutal .amc-TAuthCard-primary:focus-visible { transform: none; }
+  /* A static loading state: a full ring instead of a spinning one. */
+  .amc-TAuthCard-spin { border-color: currentColor; border-inline-end-color: transparent; }
+}
+
+@media (forced-colors: active) {
+  .amc-TAuthCard-scene,
+  .amc-TAuthCard-beam,
+  .amc-TAuthCard-shine,
+  .amc-TAuthCard-fieldWrap::after,
+  .amc-TAuthCard-art { display: none !important; }
+  .amc-TAuthCard-surface { border: 1px solid CanvasText; background: Canvas; box-shadow: none; }
+  .amc-TAuthCard--minimal .amc-TAuthCard-surface { display: none; }
+  .amc-TAuthCard-card.is-error .amc-TAuthCard-surface { border: 2px solid Mark; }
+  .amc-TAuthCard--split .amc-TAuthCard-brand { border: 1px solid CanvasText; background: Canvas; color: CanvasText; }
+  .amc-TAuthCard-logo { border: 1px solid CanvasText; background: Canvas; color: CanvasText; box-shadow: none; forced-color-adjust: none; }
+  .amc-TAuthCard-logo::after { display: none; }
+  .amc-TAuthCard-meterSeg { border: 1px solid CanvasText; background: Canvas; }
+  .amc-TAuthCard-meter.is-weak .amc-TAuthCard-meterSeg:nth-child(-n+1),
+  .amc-TAuthCard-meter.is-fair .amc-TAuthCard-meterSeg:nth-child(-n+2),
+  .amc-TAuthCard-meter.is-good .amc-TAuthCard-meterSeg:nth-child(-n+3),
+  .amc-TAuthCard-meter.is-strong .amc-TAuthCard-meterSeg { background: Highlight; forced-color-adjust: none; }
+  .amc-TAuthCard-otpBox { border: 2px solid ButtonText; }
+  .amc-TAuthCard-otpBox:focus { outline: 3px solid Highlight; }
+  .amc-TAuthCard-caps:not(:empty) { border: 1px solid CanvasText; }
+}

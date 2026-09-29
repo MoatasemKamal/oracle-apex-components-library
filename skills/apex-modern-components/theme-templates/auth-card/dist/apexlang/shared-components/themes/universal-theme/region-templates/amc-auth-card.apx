@@ -1,0 +1,305 @@
+regionTemplate amc-auth-card (
+    name: AMC Auth Card
+    region {
+        template:
+            ```html
+            <section class="amc-TAuthCard #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-show="Show password" data-amc-hide="Hide password" data-amc-caps="Caps Lock is on" data-amc-strength="Password strength: %0" data-amc-weak="Weak" data-amc-fair="Fair" data-amc-good="Good" data-amc-strong="Strong" data-amc-match="Passwords match" data-amc-mismatch="Passwords do not match" data-amc-digit="Digit %0 of %1" data-amc-resend="Resend in %0" data-amc-resend-ready="You can request a new code now" data-amc-busy="Please wait">
+              <div class="amc-TAuthCard-scene" aria-hidden="true"><span class="amc-TAuthCard-sceneA"></span><span class="amc-TAuthCard-sceneB"></span><span class="amc-TAuthCard-sceneC"></span><span class="amc-TAuthCard-fx"><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span><span class="amc-TAuthCard-dot"></span></span></div>
+              <div class="amc-TAuthCard-card">
+                <span class="amc-TAuthCard-surface" aria-hidden="true"></span>
+                <span class="amc-TAuthCard-beam" aria-hidden="true"></span>
+                <div class="amc-TAuthCard-brand">
+                  <div class="amc-TAuthCard-art" aria-hidden="true"><span class="amc-TAuthCard-orbit"></span><span class="amc-TAuthCard-orbit amc-TAuthCard-orbit--2"></span><span class="amc-TAuthCard-artIcon fa #ICON_CSS_CLASSES#"></span><span class="amc-TAuthCard-chip"></span><span class="amc-TAuthCard-chip amc-TAuthCard-chip--2"></span></div>
+                  <div class="amc-TAuthCard-brandSlot"></div>
+                </div>
+                <div class="amc-TAuthCard-main">
+                  <header class="amc-TAuthCard-header">
+                    <span class="amc-TAuthCard-logo fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                    <h2 class="amc-TAuthCard-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  </header>
+                  <div class="amc-TAuthCard-body">#BODY#</div>
+                  <div class="amc-TAuthCard-actions">#CREATE##NEXT#</div>
+                  <div class="amc-TAuthCard-secondary">#PREVIOUS##CLOSE#</div>
+                  <div class="amc-TAuthCard-sub">#SUB_REGIONS#</div>
+                  <div class="amc-TAuthCard-help">#HELP#</div>
+                </div>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-auth-card.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-auth-card.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_AUTH_CARD
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template for authentication pages: Login, Create account, Forgot password, OTP verification and Reset password. The region title becomes the card heading and the region icon a logo badge. Put native page items and buttons in the region: buttons in Create or Next are the full-width primary actions, Previous and Close are secondary, Help renders as a link row, and sub regions sit below the buttons (social sign-in, 'Forgot password? / Create account' links). LOOKS (pick one; none selected = Glass, a frosted card): Split (brand panel beside the form; a sub region with CSS class amc-auth-brand is moved into the panel as its headline, stacks on phones), Brutal, Clay, Minimal (borderless, big type), Neon (dark card with a glowing edge beam), Paper (editorial sheet). Focused fields get an animated underline and an accent label in every look. SCENES (pick one; none selected = Aurora): Meteors, Grid spotlight (follows the pointer, drifts when idle), Mesh and grain, Retro grid, Particles, No scene. The scene is a fixed decorative layer behind the page, pointer-events none; only the first Auth Card on a page draws one. Stage contains the scene inside the region for use in dialogs or normal pages. FIELD BEHAVIOUR is opt-in by Page Item > Advanced > CSS Classes: amc-auth-password (show/hide toggle button with aria-pressed, Caps Lock warning), amc-auth-strength (live strength meter Weak/Fair/Good/Strong; informative only), amc-auth-match (match state against the previous amc-auth-password item), amc-auth-otp (the one real text item is shown as N boxes; N from Custom Attribute data-amc-length or the item's Maximum Length, default 6; inputmode numeric, autocomplete one-time-code, paste fills all boxes, arrow keys, Backspace, Home and End move between boxes, the real item always holds the code so session state and validations are unchanged; use label template Optional - Above or Required - Above). On a button, CSS class amc-auth-resend disables it with a countdown; seconds from Custom Attribute data-amc-seconds, default 30. Template option Auto-submit OTP presses the first primary button once the code is complete. The primary button shows a spinner and aria-busy while the page submits; it never prevents the submit. When the page shows APEX errors the card shakes once and focuses the first invalid item. SECURITY stays server-side: the template is UI only. Write validations and processes for the password policy, neutral forgot-password wording, OTP expiry and attempt limits, rate limiting and token checks. TRANSLATION: English strings are data attributes on the region element in the template markup; edit them there: data-amc-show 'Show password', data-amc-hide 'Hide password', data-amc-caps 'Caps Lock is on', data-amc-strength 'Password strength: %0', data-amc-weak 'Weak', data-amc-fair 'Fair', data-amc-good 'Good', data-amc-strong 'Strong', data-amc-match 'Passwords match', data-amc-mismatch 'Passwords do not match', data-amc-digit 'Digit %0 of %1', data-amc-resend 'Resend in %0', data-amc-resend-ready 'You can request a new code now', data-amc-busy 'Please wait'. KEYBOARD AND MOTION: every control is a real button or input in DOM order; the OTP boxes keep left-to-right digit order in RTL. Under reduced motion scenes are static, beams stop as a static gradient, there is no shake and the spinner becomes a static ring. In forced-colors mode scenes and beams are hidden and the card becomes a plain system border.
+            ```
+    }
+
+    templateOption amc-auth-card-look-split (
+        name: Look - Split brand panel
+        sequence: 10
+        appearance {
+            cssClasses: amc-TAuthCard--split
+        }
+        help {
+            helpText:
+                ```text
+                Brand panel with an illustration beside the form; a sub region with CSS class amc-auth-brand becomes its headline. Stacks above the form on narrow screens. Pick one look only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_SPLIT
+        }
+    )
+
+    templateOption amc-auth-card-look-brutal (
+        name: Look - Neo-brutal
+        sequence: 20
+        appearance {
+            cssClasses: amc-TAuthCard--brutal
+        }
+        help {
+            helpText:
+                ```text
+                Ink border, hard offset shadow and heavy title. Pick one look only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_BRUTAL
+        }
+    )
+
+    templateOption amc-auth-card-look-clay (
+        name: Look - Clay
+        sequence: 30
+        appearance {
+            cssClasses: amc-TAuthCard--clay
+        }
+        help {
+            helpText:
+                ```text
+                Pillowy radius with soft inner and outer shadows tinted by the primary color. Pick one look only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_CLAY
+        }
+    )
+
+    templateOption amc-auth-card-look-minimal (
+        name: Look - Minimal
+        sequence: 40
+        appearance {
+            cssClasses: amc-TAuthCard--minimal
+        }
+        help {
+            helpText:
+                ```text
+                No card surface; oversized heading and underlined code boxes straight on the scene. Pick one look only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_MINIMAL
+        }
+    )
+
+    templateOption amc-auth-card-look-neon (
+        name: Look - Neon
+        sequence: 50
+        appearance {
+            cssClasses: amc-TAuthCard--neon
+        }
+        help {
+            helpText:
+                ```text
+                Dark card with a glowing border beam; native items inside follow the dark card through theme variables. Pick one look only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_NEON
+        }
+    )
+
+    templateOption amc-auth-card-look-paper (
+        name: Look - Paper
+        sequence: 60
+        appearance {
+            cssClasses: amc-TAuthCard--paper
+        }
+        help {
+            helpText:
+                ```text
+                Editorial paper sheet with grain, stacked pages and a double rule under the heading. Pick one look only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LOOK_PAPER
+        }
+    )
+
+    templateOption amc-auth-card-scene-meteors (
+        name: Scene - Meteors
+        sequence: 110
+        appearance {
+            cssClasses: amc-TAuthCard--sceneMeteors
+        }
+        help {
+            helpText:
+                ```text
+                Meteor shower over faint stars with a glowing horizon. Pick one scene only; none selected shows Aurora.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_METEORS
+        }
+    )
+
+    templateOption amc-auth-card-scene-grid (
+        name: Scene - Grid spotlight
+        sequence: 120
+        appearance {
+            cssClasses: amc-TAuthCard--sceneGrid
+        }
+        help {
+            helpText:
+                ```text
+                Grid lines lit by a spotlight that follows the pointer and drifts when idle. Pick one scene only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_GRID
+        }
+    )
+
+    templateOption amc-auth-card-scene-mesh (
+        name: Scene - Mesh and grain
+        sequence: 130
+        appearance {
+            cssClasses: amc-TAuthCard--sceneMesh
+        }
+        help {
+            helpText:
+                ```text
+                Slow mesh gradient from the primary hues with film grain. Pick one scene only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_MESH
+        }
+    )
+
+    templateOption amc-auth-card-scene-retro (
+        name: Scene - Retro grid
+        sequence: 140
+        appearance {
+            cssClasses: amc-TAuthCard--sceneRetro
+        }
+        help {
+            helpText:
+                ```text
+                Perspective floor scrolling toward a striped sun. Pick one scene only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_RETRO
+        }
+    )
+
+    templateOption amc-auth-card-scene-particles (
+        name: Scene - Particles
+        sequence: 150
+        appearance {
+            cssClasses: amc-TAuthCard--sceneParticles
+        }
+        help {
+            helpText:
+                ```text
+                Glowing particles rising slowly, CSS only. Pick one scene only.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_PARTICLES
+        }
+    )
+
+    templateOption amc-auth-card-scene-none (
+        name: Scene - None
+        sequence: 160
+        appearance {
+            cssClasses: amc-TAuthCard--sceneNone
+        }
+        help {
+            helpText:
+                ```text
+                No scene; the page background of the theme shows.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCENE_NONE
+        }
+    )
+
+    templateOption amc-auth-card-stage (
+        name: Stage - scene inside the region
+        sequence: 200
+        appearance {
+            cssClasses: amc-TAuthCard--stage
+        }
+        help {
+            helpText:
+                ```text
+                Draws the scene inside the region instead of behind the whole page, for dialogs, normal pages or several cards on one page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STAGE
+        }
+    )
+
+    templateOption amc-auth-card-otp-auto-submit (
+        name: Auto-submit OTP
+        sequence: 210
+        appearance {
+            cssClasses: amc-TAuthCard--otpAutoSubmit
+        }
+        help {
+            helpText:
+                ```text
+                Presses the first primary button once every OTP box is filled. Validation still runs on the server.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OTP_AUTO_SUBMIT
+        }
+    )
+)

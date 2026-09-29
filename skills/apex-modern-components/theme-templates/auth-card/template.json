@@ -1,0 +1,134 @@
+{
+  "kind": "region",
+  "name": "AMC Auth Card",
+  "staticId": "AMC_TPL_AUTH_CARD",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "A motion-rich authentication card for login, sign-up, forgot-password, OTP and reset pages: seven looks, seven full-screen scenes drawn behind the page, and opt-in field behaviour by item CSS class, while items, validations and processes stay native.",
+  "useFor": "The Static Content region that holds the page items and buttons of an authentication page: the app's Login page, Create account, Forgot password, OTP verification and Reset password.",
+  "keywords": [
+    "login",
+    "sign in",
+    "sign up",
+    "register",
+    "forgot password",
+    "reset password",
+    "otp",
+    "one-time code",
+    "2fa",
+    "authentication",
+    "aurora",
+    "meteors",
+    "glassmorphism"
+  ],
+  "helpText": "Region template for authentication pages: Login, Create account, Forgot password, OTP verification and Reset password. The region title becomes the card heading and the region icon a logo badge. Put native page items and buttons in the region: buttons in Create or Next are the full-width primary actions, Previous and Close are secondary, Help renders as a link row, and sub regions sit below the buttons (social sign-in, 'Forgot password? / Create account' links). LOOKS (pick one; none selected = Glass, a frosted card): Split (brand panel beside the form; a sub region with CSS class amc-auth-brand is moved into the panel as its headline, stacks on phones), Brutal, Clay, Minimal (borderless, big type), Neon (dark card with a glowing edge beam), Paper (editorial sheet). Focused fields get an animated underline and an accent label in every look. SCENES (pick one; none selected = Aurora): Meteors, Grid spotlight (follows the pointer, drifts when idle), Mesh and grain, Retro grid, Particles, No scene. The scene is a fixed decorative layer behind the page, pointer-events none; only the first Auth Card on a page draws one. Stage contains the scene inside the region for use in dialogs or normal pages. FIELD BEHAVIOUR is opt-in by Page Item > Advanced > CSS Classes: amc-auth-password (show/hide toggle button with aria-pressed, Caps Lock warning), amc-auth-strength (live strength meter Weak/Fair/Good/Strong; informative only), amc-auth-match (match state against the previous amc-auth-password item), amc-auth-otp (the one real text item is shown as N boxes; N from Custom Attribute data-amc-length or the item's Maximum Length, default 6; inputmode numeric, autocomplete one-time-code, paste fills all boxes, arrow keys, Backspace, Home and End move between boxes, the real item always holds the code so session state and validations are unchanged; use label template Optional - Above or Required - Above). On a button, CSS class amc-auth-resend disables it with a countdown; seconds from Custom Attribute data-amc-seconds, default 30. Template option Auto-submit OTP presses the first primary button once the code is complete. The primary button shows a spinner and aria-busy while the page submits; it never prevents the submit. When the page shows APEX errors the card shakes once and focuses the first invalid item. SECURITY stays server-side: the template is UI only. Write validations and processes for the password policy, neutral forgot-password wording, OTP expiry and attempt limits, rate limiting and token checks. TRANSLATION: English strings are data attributes on the region element in the template markup; edit them there: data-amc-show 'Show password', data-amc-hide 'Hide password', data-amc-caps 'Caps Lock is on', data-amc-strength 'Password strength: %0', data-amc-weak 'Weak', data-amc-fair 'Fair', data-amc-good 'Good', data-amc-strong 'Strong', data-amc-match 'Passwords match', data-amc-mismatch 'Passwords do not match', data-amc-digit 'Digit %0 of %1', data-amc-resend 'Resend in %0', data-amc-resend-ready 'You can request a new code now', data-amc-busy 'Please wait'. KEYBOARD AND MOTION: every control is a real button or input in DOM order; the OTP boxes keep left-to-right digit order in RTL. Under reduced motion scenes are static, beams stop as a static gradient, there is no shake and the spinner becomes a static ring. In forced-colors mode scenes and beams are hidden and the card becomes a plain system border.",
+  "landmarkType": "region",
+  "source": {
+    "url": "https://github.com/magicuidesign/magicui",
+    "author": "Magic UI",
+    "license": "MIT"
+  },
+  "templateOptions": [
+    {
+      "staticId": "LOOK_SPLIT",
+      "name": "Look - Split brand panel",
+      "cssClass": "amc-TAuthCard--split",
+      "sequence": 10,
+      "help": "Brand panel with an illustration beside the form; a sub region with CSS class amc-auth-brand becomes its headline. Stacks above the form on narrow screens. Pick one look only."
+    },
+    {
+      "staticId": "LOOK_BRUTAL",
+      "name": "Look - Neo-brutal",
+      "cssClass": "amc-TAuthCard--brutal",
+      "sequence": 20,
+      "help": "Ink border, hard offset shadow and heavy title. Pick one look only."
+    },
+    {
+      "staticId": "LOOK_CLAY",
+      "name": "Look - Clay",
+      "cssClass": "amc-TAuthCard--clay",
+      "sequence": 30,
+      "help": "Pillowy radius with soft inner and outer shadows tinted by the primary color. Pick one look only."
+    },
+    {
+      "staticId": "LOOK_MINIMAL",
+      "name": "Look - Minimal",
+      "cssClass": "amc-TAuthCard--minimal",
+      "sequence": 40,
+      "help": "No card surface; oversized heading and underlined code boxes straight on the scene. Pick one look only."
+    },
+    {
+      "staticId": "LOOK_NEON",
+      "name": "Look - Neon",
+      "cssClass": "amc-TAuthCard--neon",
+      "sequence": 50,
+      "help": "Dark card with a glowing border beam; native items inside follow the dark card through theme variables. Pick one look only."
+    },
+    {
+      "staticId": "LOOK_PAPER",
+      "name": "Look - Paper",
+      "cssClass": "amc-TAuthCard--paper",
+      "sequence": 60,
+      "help": "Editorial paper sheet with grain, stacked pages and a double rule under the heading. Pick one look only."
+    },
+    {
+      "staticId": "SCENE_METEORS",
+      "name": "Scene - Meteors",
+      "cssClass": "amc-TAuthCard--sceneMeteors",
+      "sequence": 110,
+      "help": "Meteor shower over faint stars with a glowing horizon. Pick one scene only; none selected shows Aurora."
+    },
+    {
+      "staticId": "SCENE_GRID",
+      "name": "Scene - Grid spotlight",
+      "cssClass": "amc-TAuthCard--sceneGrid",
+      "sequence": 120,
+      "help": "Grid lines lit by a spotlight that follows the pointer and drifts when idle. Pick one scene only."
+    },
+    {
+      "staticId": "SCENE_MESH",
+      "name": "Scene - Mesh and grain",
+      "cssClass": "amc-TAuthCard--sceneMesh",
+      "sequence": 130,
+      "help": "Slow mesh gradient from the primary hues with film grain. Pick one scene only."
+    },
+    {
+      "staticId": "SCENE_RETRO",
+      "name": "Scene - Retro grid",
+      "cssClass": "amc-TAuthCard--sceneRetro",
+      "sequence": 140,
+      "help": "Perspective floor scrolling toward a striped sun. Pick one scene only."
+    },
+    {
+      "staticId": "SCENE_PARTICLES",
+      "name": "Scene - Particles",
+      "cssClass": "amc-TAuthCard--sceneParticles",
+      "sequence": 150,
+      "help": "Glowing particles rising slowly, CSS only. Pick one scene only."
+    },
+    {
+      "staticId": "SCENE_NONE",
+      "name": "Scene - None",
+      "cssClass": "amc-TAuthCard--sceneNone",
+      "sequence": 160,
+      "help": "No scene; the page background of the theme shows."
+    },
+    {
+      "staticId": "STAGE",
+      "name": "Stage - scene inside the region",
+      "cssClass": "amc-TAuthCard--stage",
+      "sequence": 200,
+      "help": "Draws the scene inside the region instead of behind the whole page, for dialogs, normal pages or several cards on one page."
+    },
+    {
+      "staticId": "OTP_AUTO_SUBMIT",
+      "name": "Auto-submit OTP",
+      "cssClass": "amc-TAuthCard--otpAutoSubmit",
+      "sequence": 210,
+      "help": "Presses the first primary button once every OTP box is filled. Validation still runs on the server."
+    }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}
