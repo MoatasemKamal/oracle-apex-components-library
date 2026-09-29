@@ -1,0 +1,129 @@
+{
+  "name": "Design Avatar",
+  "apexlangName": "designAvatar",
+  "staticId": "AMC_DESIGN_AVATAR",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["avatar", "user", "person", "profile picture", "initials", "presence", "status", "team", "people", "design collection"],
+  "description": "Person avatars in 8 designs (ring, status dot, squircle, gradient ring, soft initials, with name, count badge, square tile), following the presence and identity patterns of Universal Theme Avatar, Slack and Microsoft Teams. One avatar (partial) or a wrapping row, list or tile grid of people (report).",
+  "helpText": "Map Name (always required, it is the accessible name), then Image URL or Initials. The image is used when present, otherwise the initials, otherwise a person icon. Status accepts online, away, busy or offline and is announced to screen readers. Count shows a notification bubble.",
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-design-avatar.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-avatar.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "ring",
+      "sequence": 10,
+      "helpText": "Avatar design. With Name and Square Tile also show the name and subtitle as text; the other styles show the picture only, with the name as its accessible label and tooltip.",
+      "entries": [
+        { "name": "ring", "display": "Ring", "return": "ring", "sequence": 10 },
+        { "name": "statusDot", "display": "Status Dot", "return": "statusDot", "sequence": 20 },
+        { "name": "squircle", "display": "Squircle", "return": "squircle", "sequence": 30 },
+        { "name": "gradientRing", "display": "Gradient Ring", "return": "gradientRing", "sequence": 40 },
+        { "name": "initialsSoft", "display": "Soft Initials", "return": "initialsSoft", "sequence": 50 },
+        { "name": "withName", "display": "With Name", "return": "withName", "sequence": 60 },
+        { "name": "countBadge", "display": "Count Badge", "return": "countBadge", "sequence": 70 },
+        { "name": "squareTile", "display": "Square Tile", "return": "squareTile", "sequence": 80 }
+      ]
+    },
+    {
+      "staticId": "NAME",
+      "apexlangName": "name",
+      "attribute": 2,
+      "name": "Name",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Full name of the person, for example Sara Al-Harbi. Used as the accessible name and tooltip, and shown as text in With Name and Square Tile."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 3,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Optional photo URL, square images work best. Must be a developer-controlled URL, for example an APEX_UTIL.GET_BLOB_FILE_SRC result or a static application file. Leave empty to show Initials."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 4,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "One or two letters shown when there is no image, for example upper(substr(first_name, 1, 1) || substr(last_name, 1, 1)). When both are empty a person icon is shown."
+    },
+    {
+      "staticId": "STATUS",
+      "apexlangName": "status",
+      "attribute": 5,
+      "name": "Status",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Optional presence: online, away, busy or offline. Any other non-empty value renders as offline; empty hides the indicator. Each value has its own shape and a screen-reader label, so it is not shown by color alone."
+    },
+    {
+      "staticId": "COUNT",
+      "apexlangName": "count",
+      "attribute": 6,
+      "name": "Count",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional short number shown in a bubble on the top corner, for example unread messages or open tasks (3, 12, 99+). Empty hides it."
+    },
+    {
+      "staticId": "SUBTITLE",
+      "apexlangName": "subtitle",
+      "attribute": 7,
+      "name": "Subtitle",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Optional second line in With Name and Square Tile, for example the job title or department."
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 8,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Avatar size. Leave empty for Medium, 2.75rem.",
+      "entries": [
+        { "name": "small", "display": "Small", "return": "small", "sequence": 10 },
+        { "name": "large", "display": "Large", "return": "large", "sequence": 20 },
+        { "name": "xlarge", "display": "Extra Large", "return": "xlarge", "sequence": 30 }
+      ]
+    }
+  ]
+}

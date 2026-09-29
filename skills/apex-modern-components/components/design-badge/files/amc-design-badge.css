@@ -1,0 +1,409 @@
+/* APEX Modern Components - Design Badge
+ * Twelve badge designs. Every color resolves from Universal Theme variables
+ * (--ut-*), so badges follow Vita, Vita Dark, Redwood, Theme Roller and custom
+ * styles. State colors come from the palette; tints are color-mix() of them.
+ * Override any --amc-dbadge-* token on a parent to restyle. */
+
+.amc-DBadge,
+.amc-DBadges {
+  --amc-dbadge-surface: var(--ut-component-background-color, #fff);
+  --amc-dbadge-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dbadge-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dbadge-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-dbadge-radius: .375rem;
+  --amc-dbadge-gap: .5rem;
+}
+
+/* ---- State tokens: tone (fill), on (text on fill), ink (text on tint) ---- */
+
+.amc-DBadge {
+  --amc-dbadge-tone: var(--amc-dbadge-muted);
+  --amc-dbadge-on: var(--amc-dbadge-surface);
+  --amc-dbadge-inkMix: 70%;
+  --amc-dbadge-ink: color-mix(in srgb, var(--amc-dbadge-tone) var(--amc-dbadge-inkMix), var(--amc-dbadge-fg));
+}
+
+.amc-DBadge--success {
+  --amc-dbadge-tone: var(--ut-palette-success, #278701);
+  --amc-dbadge-on: var(--ut-palette-success-contrast, #fff);
+}
+
+.amc-DBadge--warning {
+  --amc-dbadge-tone: var(--ut-palette-warning, #fbce4a);
+  --amc-dbadge-on: var(--ut-palette-warning-contrast, #1f1a0b);
+  --amc-dbadge-inkMix: 42%;
+}
+
+.amc-DBadge--danger {
+  --amc-dbadge-tone: var(--ut-palette-danger, #cb1100);
+  --amc-dbadge-on: var(--ut-palette-danger-contrast, #fff);
+}
+
+/* Info usually shares lightness with primary, so it borrows primary's contrast. */
+.amc-DBadge--info {
+  --amc-dbadge-tone: var(--ut-palette-info, #0076df);
+  --amc-dbadge-on: var(--ut-palette-info-contrast, var(--ut-palette-primary-contrast, #fff));
+}
+
+.amc-DBadge--neutral {
+  --amc-dbadge-inkMix: 0%;
+}
+
+/* ---- Base ---- */
+
+.amc-DBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-block-size: 1.375rem;
+  padding: .125rem .5rem;
+  border: 1px solid transparent;
+  border-radius: var(--amc-dbadge-radius);
+  color: var(--amc-dbadge-ink);
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  vertical-align: middle;
+  white-space: normal;
+}
+
+.amc-DBadge-label {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  unicode-bidi: isolate;
+}
+
+.amc-DBadge-value {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  opacity: .8;
+  unicode-bidi: plaintext;
+}
+
+.amc-DBadge-icon {
+  flex-shrink: 0;
+  font-size: .75rem;
+  line-height: 1;
+}
+
+/* 1. Soft: pale tint of the state, quiet default for tables */
+.amc-DBadge--soft {
+  border-color: color-mix(in srgb, var(--amc-dbadge-tone) 22%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dbadge-tone) 13%, transparent);
+}
+
+/* 2. Solid: filled state color, strongest emphasis */
+.amc-DBadge--solid {
+  border-radius: .25rem;
+  background-color: var(--amc-dbadge-tone);
+  color: var(--amc-dbadge-on);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--amc-dbadge-fg) 18%, transparent);
+}
+
+/* 3. Outline: full pill drawn with a state-colored stroke */
+.amc-DBadge--outline {
+  padding-inline: .625rem;
+  border: 1.5px solid color-mix(in srgb, var(--amc-dbadge-tone) 75%, transparent);
+  border-radius: 999px;
+  background-color: transparent;
+  font-weight: 500;
+}
+
+/* 4. Dot: neutral pill, only the marker carries the color */
+.amc-DBadge--dot {
+  padding-inline: .5rem .625rem;
+  border-color: var(--amc-dbadge-line);
+  border-radius: 999px;
+  background-color: var(--amc-dbadge-surface);
+  color: var(--amc-dbadge-fg);
+  font-weight: 500;
+}
+
+.amc-DBadge-dot {
+  flex-shrink: 0;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-dbadge-tone);
+  box-shadow: 0 0 0 .1875rem color-mix(in srgb, var(--amc-dbadge-tone) 20%, transparent);
+}
+
+/* 5. Live: small caps label with a pulsing beacon */
+.amc-DBadge--live {
+  gap: .4375rem;
+  padding-inline: .5rem .5625rem;
+  border-radius: .25rem;
+  background-color: color-mix(in srgb, var(--amc-dbadge-tone) 12%, transparent);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.amc-DBadge-pulse {
+  position: relative;
+  flex-shrink: 0;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-dbadge-tone);
+}
+
+.amc-DBadge-pulse::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--amc-dbadge-tone);
+  content: "";
+  animation: amc-dbadge-pulse 1.6s cubic-bezier(0, 0, .2, 1) infinite;
+}
+
+.amc-DBadge--live .amc-DBadge-value {
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+
+@keyframes amc-dbadge-pulse {
+  from { opacity: .7; transform: scale(1); }
+  to { opacity: 0; transform: scale(2.6); }
+}
+
+/* 6. Gradient Pill: raised pill, state color deepening across the fill */
+.amc-DBadge--gradientPill {
+  padding: .1875rem .75rem;
+  border: 0;
+  border-radius: 999px;
+  background-image: linear-gradient(120deg,
+    color-mix(in srgb, var(--amc-dbadge-tone) 88%, var(--amc-dbadge-surface)),
+    var(--amc-dbadge-tone) 45%,
+    color-mix(in srgb, var(--amc-dbadge-tone) 68%, var(--amc-dbadge-fg)));
+  background-color: var(--amc-dbadge-tone);
+  color: var(--amc-dbadge-on);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-dbadge-surface) 30%, transparent),
+    0 .25rem .625rem -.25rem color-mix(in srgb, var(--amc-dbadge-tone) 70%, transparent);
+}
+
+/* 7. Counter: label pill with a filled number bubble at the end */
+.amc-DBadge--counter {
+  gap: .5rem;
+  padding-block: .125rem;
+  padding-inline: .625rem .1875rem;
+  border-color: var(--amc-dbadge-line);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dbadge-fg) 4%, var(--amc-dbadge-surface));
+  color: var(--amc-dbadge-fg);
+  font-weight: 500;
+}
+
+.amc-DBadge--counter .amc-DBadge-icon { color: var(--amc-dbadge-ink); }
+
+.amc-DBadge--counter .amc-DBadge-value {
+  min-inline-size: 1.125rem;
+  padding: 0 .375rem;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background-color: var(--amc-dbadge-tone);
+  color: var(--amc-dbadge-on);
+  font-size: .6875rem;
+  font-weight: 700;
+  line-height: 1.125rem;
+  text-align: center;
+  opacity: 1;
+}
+
+/* 8. Icon Tag: solid icon block joined to a tinted label */
+.amc-DBadge--iconTag {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--amc-dbadge-tone) 35%, transparent);
+  border-radius: .3125rem;
+  background-color: color-mix(in srgb, var(--amc-dbadge-tone) 12%, transparent);
+  align-items: stretch;
+}
+
+.amc-DBadge--iconTag .amc-DBadge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 1.5rem;
+  padding-inline: .3125rem;
+  box-sizing: border-box;
+  background-color: var(--amc-dbadge-tone);
+  color: var(--amc-dbadge-on);
+}
+
+.amc-DBadge--iconTag .amc-DBadge-label,
+.amc-DBadge--iconTag .amc-DBadge-value {
+  align-self: center;
+  padding: .1875rem .5rem;
+}
+
+.amc-DBadge--iconTag .amc-DBadge-value {
+  padding-inline-start: 0;
+}
+
+/* 9. Chip: larger surface chip with a round icon avatar */
+.amc-DBadge--chip {
+  gap: .5rem;
+  min-block-size: 2rem;
+  padding-block: .25rem;
+  padding-inline: .25rem .875rem;
+  border-color: var(--amc-dbadge-line);
+  border-radius: 999px;
+  background-color: var(--amc-dbadge-surface);
+  color: var(--amc-dbadge-fg);
+  font-size: .8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dbadge-fg) 8%, transparent);
+}
+
+.amc-DBadge--chip:not(:has(.amc-DBadge-icon)) {
+  padding-inline-start: .875rem;
+}
+
+.amc-DBadge--chip .amc-DBadge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-dbadge-tone) 16%, transparent);
+  color: var(--amc-dbadge-ink);
+}
+
+.amc-DBadge--chip .amc-DBadge-value {
+  padding-inline-start: .5rem;
+  border-inline-start: 1px solid var(--amc-dbadge-line);
+  color: var(--amc-dbadge-muted);
+  opacity: 1;
+}
+
+/* 10. Ribbon: flag with a notched tail, for callouts such as New or Featured */
+.amc-DBadge--ribbon {
+  --amc-dbadge-notch: .4375rem;
+  padding-block: .1875rem;
+  padding-inline: .625rem calc(.625rem + var(--amc-dbadge-notch));
+  border: 0;
+  border-radius: 0;
+  border-start-start-radius: .1875rem;
+  border-end-start-radius: .1875rem;
+  background-color: var(--amc-dbadge-tone);
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--amc-dbadge-surface) 14%, transparent), transparent 60%);
+  color: var(--amc-dbadge-on);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--amc-dbadge-notch)) 50%, 100% 100%, 0 100%);
+}
+
+.amc-DBadge--ribbon:dir(rtl) {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, var(--amc-dbadge-notch) 50%);
+}
+
+/* 11. Code: monospace key and value segments, for references and versions */
+.amc-DBadge--code {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  border-color: var(--amc-dbadge-line);
+  border-radius: .25rem;
+  background-color: color-mix(in srgb, var(--amc-dbadge-fg) 7%, var(--amc-dbadge-surface));
+  color: var(--amc-dbadge-fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .75rem;
+  font-weight: 500;
+  align-items: stretch;
+}
+
+.amc-DBadge--code .amc-DBadge-icon {
+  align-self: center;
+  padding-inline-start: .4375rem;
+  color: var(--amc-dbadge-ink);
+}
+
+.amc-DBadge--code .amc-DBadge-label,
+.amc-DBadge--code .amc-DBadge-value {
+  padding: .125rem .4375rem;
+}
+
+.amc-DBadge--code .amc-DBadge-value {
+  border-inline-start: 1px solid var(--amc-dbadge-line);
+  background-color: color-mix(in srgb, var(--amc-dbadge-tone) 16%, var(--amc-dbadge-surface));
+  color: var(--amc-dbadge-ink);
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* 12. Status Bar: rectangular tag with a state bar on the start edge */
+.amc-DBadge--statusBar {
+  position: relative;
+  gap: .5rem;
+  padding-block: .25rem;
+  padding-inline: .875rem .625rem;
+  border-color: var(--amc-dbadge-line);
+  border-radius: .25rem;
+  background-color: var(--amc-dbadge-surface);
+  color: var(--amc-dbadge-fg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dbadge-fg) 6%, transparent);
+}
+
+.amc-DBadge--statusBar::before {
+  position: absolute;
+  inset-block: .25rem;
+  inset-inline-start: .3125rem;
+  inline-size: .1875rem;
+  border-radius: 999px;
+  background-color: var(--amc-dbadge-tone);
+  content: "";
+}
+
+.amc-DBadge--statusBar .amc-DBadge-icon { color: var(--amc-dbadge-ink); }
+
+.amc-DBadge--statusBar .amc-DBadge-value {
+  color: var(--amc-dbadge-muted);
+  opacity: 1;
+}
+
+/* ---- Report: inline wrapping group ---- */
+
+.amc-DBadges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--amc-dbadge-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-DBadges-item {
+  display: inline-flex;
+  max-inline-size: 100%;
+  margin: 0;
+}
+
+.amc-DBadges--chip { --amc-dbadge-gap: .625rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-DBadge-pulse::after { animation: none; opacity: 0; }
+}
+
+@media (forced-colors: active) {
+  .amc-DBadge { border: 1px solid CanvasText; }
+  .amc-DBadge--ribbon { clip-path: none; }
+  .amc-DBadge-dot,
+  .amc-DBadge-pulse,
+  .amc-DBadge--statusBar::before {
+    background-color: CanvasText;
+    forced-color-adjust: none;
+  }
+}

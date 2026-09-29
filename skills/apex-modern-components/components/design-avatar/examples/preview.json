@@ -1,0 +1,193 @@
+{
+ "samples": [
+  {
+   "title": "Ring, project team",
+   "mode": "report",
+   "settings": {
+    "STYLE": "ring"
+   },
+   "rows": [
+    {
+     "NAME": "Sara Al-Harbi",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23dfe7f2'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%232f5d8a'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23c89274'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23c89274'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%232b1d16'/%3E%3C/svg%3E"
+    },
+    {
+     "NAME": "Omar Nasser",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23dcebe2'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%233d6b4f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%239c6b4f'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%239c6b4f'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23161210'/%3E%3C/svg%3E"
+    },
+    {
+     "NAME": "Lina Haddad",
+     "INITIALS": "LH"
+    },
+    {
+     "NAME": "Daniel Brooks",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e8e2f0'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%234a4f5c'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23f0c8a8'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23f0c8a8'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23b5793d'/%3E%3C/svg%3E"
+    }
+   ]
+  },
+  {
+   "title": "Status Dot, support agents",
+   "mode": "report",
+   "settings": {
+    "STYLE": "statusDot"
+   },
+   "rows": [
+    {
+     "NAME": "Sara Al-Harbi",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23dfe7f2'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%232f5d8a'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23c89274'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23c89274'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%232b1d16'/%3E%3C/svg%3E",
+     "STATUS": "online"
+    },
+    {
+     "NAME": "Omar Nasser",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23dcebe2'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%233d6b4f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%239c6b4f'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%239c6b4f'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23161210'/%3E%3C/svg%3E",
+     "STATUS": "away"
+    },
+    {
+     "NAME": "Maya Chen",
+     "INITIALS": "MC",
+     "STATUS": "busy"
+    },
+    {
+     "NAME": "Daniel Brooks",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e8e2f0'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%234a4f5c'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23f0c8a8'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23f0c8a8'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23b5793d'/%3E%3C/svg%3E",
+     "STATUS": "offline"
+    }
+   ]
+  },
+  {
+   "title": "Squircle, account managers",
+   "mode": "report",
+   "settings": {
+    "STYLE": "squircle",
+    "SIZE": "large"
+   },
+   "rows": [
+    {
+     "NAME": "Noura Saleh",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23efe3d6'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%238a3b2f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23e3b594'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23e3b594'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%236b4a2e'/%3E%3C/svg%3E",
+     "STATUS": "online"
+    },
+    {
+     "NAME": "Khalid Rahman",
+     "INITIALS": "KR"
+    },
+    {
+     "NAME": "Daniel Brooks",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e8e2f0'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%234a4f5c'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23f0c8a8'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23f0c8a8'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23b5793d'/%3E%3C/svg%3E"
+    }
+   ]
+  },
+  {
+   "title": "Gradient Ring, partial",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "gradientRing",
+    "SIZE": "xlarge",
+    "NAME": "Noura Saleh",
+    "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23efe3d6'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%238a3b2f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23e3b594'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23e3b594'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%236b4a2e'/%3E%3C/svg%3E",
+    "STATUS": "online"
+   }
+  },
+  {
+   "title": "Soft Initials, approvers",
+   "mode": "report",
+   "settings": {
+    "STYLE": "initialsSoft"
+   },
+   "rows": [
+    {
+     "NAME": "Ahmed Youssef",
+     "INITIALS": "AY"
+    },
+    {
+     "NAME": "Rana Kassem",
+     "INITIALS": "RK",
+     "STATUS": "online"
+    },
+    {
+     "NAME": "Tom Wright",
+     "INITIALS": "TW"
+    },
+    {
+     "NAME": "Finance Team"
+    }
+   ]
+  },
+  {
+   "title": "With Name, order owners",
+   "mode": "report",
+   "settings": {
+    "STYLE": "withName"
+   },
+   "rows": [
+    {
+     "NAME": "Sara Al-Harbi",
+     "SUBTITLE": "Sales Manager, Riyadh",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23dfe7f2'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%232f5d8a'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23c89274'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23c89274'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%232b1d16'/%3E%3C/svg%3E",
+     "STATUS": "online"
+    },
+    {
+     "NAME": "Omar Nasser",
+     "SUBTITLE": "Procurement Lead",
+     "INITIALS": "ON",
+     "STATUS": "busy"
+    },
+    {
+     "NAME": "Alexandra Montgomery-Whitfield",
+     "SUBTITLE": "Accounts Receivable Specialist",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e8e2f0'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%234a4f5c'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23f0c8a8'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23f0c8a8'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23b5793d'/%3E%3C/svg%3E"
+    }
+   ]
+  },
+  {
+   "title": "Count Badge, reviewers",
+   "mode": "report",
+   "settings": {
+    "STYLE": "countBadge"
+   },
+   "rows": [
+    {
+     "NAME": "Maya Chen",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23efe3d6'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%238a3b2f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23e3b594'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23e3b594'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%236b4a2e'/%3E%3C/svg%3E",
+     "COUNT": "3"
+    },
+    {
+     "NAME": "Khalid Rahman",
+     "INITIALS": "KR",
+     "COUNT": "12"
+    },
+    {
+     "NAME": "Omar Nasser",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23dcebe2'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%233d6b4f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%239c6b4f'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%239c6b4f'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23161210'/%3E%3C/svg%3E",
+     "COUNT": "99+"
+    }
+   ]
+  },
+  {
+   "title": "Square Tile, customer contacts",
+   "mode": "report",
+   "settings": {
+    "STYLE": "squareTile"
+   },
+   "rows": [
+    {
+     "NAME": "Noura Saleh",
+     "SUBTITLE": "CFO, Al Noor Trading",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23efe3d6'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%238a3b2f'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23e3b594'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23e3b594'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%236b4a2e'/%3E%3C/svg%3E",
+     "STATUS": "online"
+    },
+    {
+     "NAME": "Khalid Rahman",
+     "SUBTITLE": "Buyer",
+     "INITIALS": "KR"
+    },
+    {
+     "NAME": "Daniel Brooks",
+     "SUBTITLE": "IT Director",
+     "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e8e2f0'/%3E%3Cpath d='M14 96c2-20 16-30 34-30s32 10 34 30z' fill='%234a4f5c'/%3E%3Crect x='41' y='52' width='14' height='16' rx='6' fill='%23f0c8a8'/%3E%3Ccircle cx='48' cy='40' r='17' fill='%23f0c8a8'/%3E%3Cpath d='M30 40c0-13 8-20 18-20s19 6 18 21c-4-7-10-11-18-11s-14 3-18 10z' fill='%23b5793d'/%3E%3C/svg%3E",
+     "STATUS": "away"
+    }
+   ]
+  }
+ ]
+}

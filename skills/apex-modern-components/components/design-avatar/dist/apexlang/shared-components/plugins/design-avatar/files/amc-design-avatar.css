@@ -1,0 +1,373 @@
+/* APEX Modern Components - Design Avatar
+ * Eight avatar designs. Every color resolves from Universal Theme variables
+ * (--ut-*), so avatars follow Vita, Vita Dark, Redwood, Theme Roller and custom
+ * styles. Override any --amc-dav-* token on a parent to restyle. */
+
+.amc-DAvatar,
+.amc-DAvatars {
+  --amc-dav-surface: var(--ut-component-background-color, #fff);
+  --amc-dav-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dav-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dav-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-dav-radius: var(--ut-component-border-radius, .5rem);
+  --amc-dav-primary: var(--ut-palette-primary, #056ac8);
+  --amc-dav-online: var(--ut-palette-success, #278701);
+  --amc-dav-away: var(--ut-palette-warning, #fbce4a);
+  --amc-dav-busy: var(--ut-palette-danger, #cb1100);
+  --amc-dav-alert: var(--ut-palette-danger, #cb1100);
+  --amc-dav-alert-on: var(--ut-palette-danger-contrast, #fff);
+  --amc-dav-size: 2.75rem;
+}
+
+.amc-DAvatar--small,
+.amc-DAvatars--small { --amc-dav-size: 2rem; }
+.amc-DAvatar--large,
+.amc-DAvatars--large { --amc-dav-size: 3.5rem; }
+.amc-DAvatar--xlarge,
+.amc-DAvatars--xlarge { --amc-dav-size: 4.5rem; }
+
+/* ---- Base ---- */
+
+.amc-DAvatar {
+  --amc-dav-shape: 50%;
+  --amc-dav-media-bg: color-mix(in srgb, var(--amc-dav-fg) 9%, var(--amc-dav-surface));
+  --amc-dav-media-fg: var(--amc-dav-fg);
+  --amc-dav-dot: max(.625rem, calc(var(--amc-dav-size) * .27));
+  --amc-dav-dot-offset: 0rem;
+
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  color: var(--amc-dav-fg);
+  vertical-align: middle;
+}
+
+.amc-DAvatar-frame {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: var(--amc-dav-shape);
+}
+
+.amc-DAvatar-media {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: var(--amc-dav-size);
+  block-size: var(--amc-dav-size);
+  overflow: hidden;
+  border-radius: var(--amc-dav-shape);
+  position: relative;
+  background: var(--amc-dav-media-bg);
+  color: var(--amc-dav-media-fg);
+}
+
+/* Inner edge drawn above the photo, set per style with --amc-dav-edge */
+.amc-DAvatar-media::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--amc-dav-edge, none);
+  content: "";
+  pointer-events: none;
+}
+
+.amc-DAvatar-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.amc-DAvatar-initials {
+  font-size: calc(var(--amc-dav-size) * .36);
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1;
+  text-transform: uppercase;
+  unicode-bidi: isolate;
+}
+
+.amc-DAvatar-icon {
+  font-size: calc(var(--amc-dav-size) * .42);
+  opacity: .7;
+}
+
+/* Presence: each value has its own shape, not only its own color */
+.amc-DAvatar-status {
+  position: absolute;
+  inset-block-end: var(--amc-dav-dot-offset);
+  inset-inline-end: var(--amc-dav-dot-offset);
+  box-sizing: border-box;
+  inline-size: var(--amc-dav-dot);
+  block-size: var(--amc-dav-dot);
+  border: .125rem solid var(--amc-dav-surface);
+  border-radius: 50%;
+  background-color: var(--amc-dav-muted);
+}
+
+.amc-DAvatar-status--online { background-color: var(--amc-dav-online); }
+
+/* Away: a crescent (clock-like notch) */
+.amc-DAvatar-status--away {
+  background-color: var(--amc-dav-away);
+  background-image: radial-gradient(circle at 30% 30%, var(--amc-dav-surface) 0 28%, transparent 30%);
+}
+
+/* Busy: a bar across the dot */
+.amc-DAvatar-status--busy {
+  background-color: var(--amc-dav-busy);
+  background-image: linear-gradient(var(--amc-dav-surface), var(--amc-dav-surface));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 56% 22%;
+}
+
+/* Offline: hollow ring */
+.amc-DAvatar-status--offline {
+  background-color: var(--amc-dav-surface);
+  box-shadow: inset 0 0 0 .125rem var(--amc-dav-muted);
+}
+
+.amc-DAvatar-count {
+  position: absolute;
+  inset-block-start: -.3125rem;
+  inset-inline-end: -.375rem;
+  box-sizing: border-box;
+  min-inline-size: 1.25rem;
+  padding-inline: .3125rem;
+  border: .125rem solid var(--amc-dav-surface);
+  border-radius: 999px;
+  background-color: var(--amc-dav-alert);
+  color: var(--amc-dav-alert-on);
+  font-size: .6875rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1rem;
+  text-align: center;
+  unicode-bidi: plaintext;
+}
+
+.amc-DAvatar-text {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  gap: .125rem;
+}
+
+.amc-DAvatar-name,
+.amc-DAvatar-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+.amc-DAvatar-name {
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
+.amc-DAvatar-sub {
+  color: var(--amc-dav-muted);
+  font-size: .75rem;
+  line-height: 1rem;
+}
+
+.amc-DAvatar-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+/* 1. Ring: photo inside a primary ring separated by a surface gap */
+.amc-DAvatar--ring .amc-DAvatar-frame {
+  margin: .25rem;
+  box-shadow:
+    0 0 0 .125rem var(--amc-dav-surface),
+    0 0 0 .25rem var(--amc-dav-primary);
+}
+
+/* 2. Status Dot: plain photo with a hairline edge and a large presence dot */
+.amc-DAvatar--statusDot {
+  --amc-dav-dot: max(.75rem, calc(var(--amc-dav-size) * .32));
+  --amc-dav-dot-offset: calc(var(--amc-dav-size) * -.02);
+  --amc-dav-edge: inset 0 0 0 1px var(--amc-dav-line);
+}
+
+
+/* 3. Squircle: rounded-square photo with a soft tonal fill and inner edge */
+.amc-DAvatar--squircle {
+  --amc-dav-shape: 32%;
+  --amc-dav-dot-offset: calc(var(--amc-dav-size) * -.06);
+  --amc-dav-media-bg: linear-gradient(150deg,
+    color-mix(in srgb, var(--amc-dav-fg) 5%, var(--amc-dav-surface)),
+    color-mix(in srgb, var(--amc-dav-fg) 16%, var(--amc-dav-surface)));
+}
+
+.amc-DAvatar--squircle .amc-DAvatar-media {
+  --amc-dav-edge: inset 0 0 0 1px color-mix(in srgb, var(--amc-dav-fg) 10%, transparent);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dav-fg) 12%, transparent);
+}
+
+/* 4. Gradient Ring: story-style conic ring in shades of the primary color */
+.amc-DAvatar--gradientRing .amc-DAvatar-frame {
+  padding: .1875rem;
+  background-image: conic-gradient(from 210deg,
+    var(--amc-dav-primary),
+    color-mix(in srgb, var(--amc-dav-primary) 40%, var(--amc-dav-surface)),
+    color-mix(in srgb, var(--amc-dav-primary) 65%, var(--amc-dav-fg)),
+    var(--amc-dav-primary));
+}
+
+/* Where relative color syntax exists, sweep the hue around the theme primary. */
+@supports (color: lch(from currentColor l c h)) {
+  .amc-DAvatar--gradientRing .amc-DAvatar-frame {
+    background-image: conic-gradient(from 210deg,
+      var(--amc-dav-primary),
+      lch(from var(--amc-dav-primary) l c calc(h + 50)),
+      lch(from var(--amc-dav-primary) l c calc(h - 40)),
+      var(--amc-dav-primary));
+  }
+}
+
+.amc-DAvatar--gradientRing .amc-DAvatar-media {
+  border: .125rem solid var(--amc-dav-surface);
+}
+
+.amc-DAvatar--gradientRing .amc-DAvatar-status {
+  inset-block-end: .0625rem;
+  inset-inline-end: .0625rem;
+}
+
+/* 5. Soft Initials: primary-tinted monogram, for directories without photos */
+.amc-DAvatar--initialsSoft {
+  --amc-dav-media-bg: color-mix(in srgb, var(--amc-dav-primary) 14%, var(--amc-dav-surface));
+  --amc-dav-media-fg: color-mix(in srgb, var(--amc-dav-primary) 78%, var(--amc-dav-fg));
+}
+
+.amc-DAvatar--initialsSoft .amc-DAvatar-media {
+  --amc-dav-edge: inset 0 0 0 1px color-mix(in srgb, var(--amc-dav-primary) 28%, transparent);
+}
+
+.amc-DAvatar--initialsSoft .amc-DAvatar-initials {
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+/* 6. With Name: avatar followed by name and subtitle */
+.amc-DAvatar--withName .amc-DAvatar-media {
+  --amc-dav-edge: inset 0 0 0 1px var(--amc-dav-line);
+}
+
+/* 7. Count Badge: photo with a notification bubble on the top corner */
+.amc-DAvatar--countBadge .amc-DAvatar-frame {
+  margin-block-start: .3125rem;
+  margin-inline-end: .375rem;
+}
+
+.amc-DAvatar--countBadge .amc-DAvatar-media {
+  box-shadow: 0 0 0 1px var(--amc-dav-line), 0 .125rem .375rem color-mix(in srgb, var(--amc-dav-fg) 14%, transparent);
+}
+
+.amc-DAvatar--countBadge .amc-DAvatar-count {
+  box-shadow: 0 .125rem .25rem color-mix(in srgb, var(--amc-dav-alert) 40%, transparent);
+}
+
+/* 8. Square Tile: large rounded tile with the name centered below */
+.amc-DAvatar--squareTile {
+  --amc-dav-tile: calc(var(--amc-dav-size) * 1.75);
+  --amc-dav-shape: calc(var(--amc-dav-radius) * 1.5);
+  --amc-dav-dot-offset: .3125rem;
+  --amc-dav-media-bg: linear-gradient(160deg,
+    color-mix(in srgb, var(--amc-dav-primary) 10%, var(--amc-dav-surface)),
+    color-mix(in srgb, var(--amc-dav-primary) 26%, var(--amc-dav-surface)));
+  --amc-dav-media-fg: color-mix(in srgb, var(--amc-dav-primary) 75%, var(--amc-dav-fg));
+
+  flex-direction: column;
+  gap: .5rem;
+  inline-size: calc(var(--amc-dav-tile) + 1.5rem);
+  text-align: center;
+}
+
+.amc-DAvatar--squareTile .amc-DAvatar-media {
+  inline-size: var(--amc-dav-tile);
+  block-size: var(--amc-dav-tile);
+  --amc-dav-edge: inset 0 0 0 1px var(--amc-dav-line);
+}
+
+.amc-DAvatar--squareTile .amc-DAvatar-initials {
+  font-size: calc(var(--amc-dav-tile) * .32);
+}
+
+.amc-DAvatar--squareTile .amc-DAvatar-text {
+  inline-size: 100%;
+  align-items: center;
+}
+
+.amc-DAvatar--squareTile .amc-DAvatar-name,
+.amc-DAvatar--squareTile .amc-DAvatar-sub {
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.amc-DAvatar--squareTile .amc-DAvatar-name {
+  font-size: .8125rem;
+  line-height: 1.125rem;
+}
+
+/* ---- Report: row of avatars, list of people or tile grid ---- */
+
+.amc-DAvatars {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-DAvatars-item {
+  display: flex;
+  min-inline-size: 0;
+  margin: 0;
+}
+
+.amc-DAvatars--withName {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(13rem, 100%), 1fr));
+  gap: .875rem 1.25rem;
+}
+
+.amc-DAvatars--squareTile {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(calc(var(--amc-dav-size) * 1.75 + 1.5rem), 100%), 1fr));
+  gap: 1rem .75rem;
+}
+
+.amc-DAvatars--squareTile .amc-DAvatar--squareTile {
+  inline-size: 100%;
+}
+
+.amc-DAvatars--ring,
+.amc-DAvatars--gradientRing { gap: .875rem; }
+
+@media (forced-colors: active) {
+  .amc-DAvatar-media,
+  .amc-DAvatar-status,
+  .amc-DAvatar-count { border: 1px solid CanvasText; }
+  .amc-DAvatar--ring .amc-DAvatar-frame,
+  .amc-DAvatar--gradientRing .amc-DAvatar-frame { outline: 2px solid CanvasText; }
+}

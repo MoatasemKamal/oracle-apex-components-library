@@ -1,0 +1,225 @@
+plugin designBadge (
+    name: Design Badge
+    staticId: AMC_DESIGN_BADGE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <span class="amc-DBadge amc-DBadge--#STYLE# {case STATE/}{when success/}amc-DBadge--success{when warning/}amc-DBadge--warning{when danger/}amc-DBadge--danger{when info/}amc-DBadge--info{otherwise/}amc-DBadge--neutral{endcase/}">{case STYLE/}{when dot/}<span class="amc-DBadge-dot" aria-hidden="true"></span>{when live/}<span class="amc-DBadge-pulse" aria-hidden="true"></span>{otherwise/}{if ?ICON/}<span class="amc-DBadge-icon fa #ICON#" aria-hidden="true"></span>{endif/}{endcase/}<span class="amc-DBadge-label">#LABEL#</span>{if ?VALUE/}<span class="amc-DBadge-value">#VALUE#</span>{endif/}</span>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-DBadges amc-DBadges--#STYLE#">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DBadges-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-badge.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Choose a Style, map Label to the text and State to a column returning success, warning, danger, info or neutral (anything else renders as neutral). The label itself must carry the meaning (for example Paid or Overdue), so state is never shown by color alone. Value adds a second segment: the count in Counter, the value half in Code, trailing text elsewhere.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: soft
+        }
+        help {
+            helpText:
+                ```
+                Badge design. Soft, Solid and Outline are general lozenges; Dot and Status Bar are quiet table statuses; Live pulses for real-time items; Counter and Code show a Value segment; Icon Tag, Chip and Ribbon are for categories and callouts.
+                ```
+        }
+        entry soft (
+            sequence: 10
+            display: Soft
+            return: soft
+        )
+        entry solid (
+            sequence: 20
+            display: Solid
+            return: solid
+        )
+        entry outline (
+            sequence: 30
+            display: Outline
+            return: outline
+        )
+        entry dot (
+            sequence: 40
+            display: Dot
+            return: dot
+        )
+        entry live (
+            sequence: 50
+            display: Live
+            return: live
+        )
+        entry gradientPill (
+            sequence: 60
+            display: Gradient Pill
+            return: gradientPill
+        )
+        entry counter (
+            sequence: 70
+            display: Counter
+            return: counter
+        )
+        entry iconTag (
+            sequence: 80
+            display: Icon Tag
+            return: iconTag
+        )
+        entry chip (
+            sequence: 90
+            display: Chip
+            return: chip
+        )
+        entry ribbon (
+            sequence: 100
+            display: Ribbon
+            return: ribbon
+        )
+        entry code (
+            sequence: 110
+            display: Code
+            return: code
+        )
+        entry statusBar (
+            sequence: 120
+            display: Status Bar
+            return: statusBar
+        )
+    )
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 2
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Badge text, for example Paid, Overdue or In Review. Keep it short; it must convey the state in words.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 3
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Semantic color: success, warning, danger, info or neutral. Empty or any other value renders as neutral. Can be static text or a column.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 4
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-check or fa-truck. Shown before the label in every style except Dot and Live, which draw their own marker. Icon Tag shows it in a colored block.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 5
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional second segment after the label: the number in Counter (for example 24), the value half in Code (for example v2.4.1), muted trailing text in other styles. Format numbers in SQL.
+                ```
+        }
+    )
+    file "amc-design-badge.css" (
+        fileName: amc-design-badge.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

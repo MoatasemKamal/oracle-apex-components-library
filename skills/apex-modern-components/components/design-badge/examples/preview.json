@@ -1,0 +1,63 @@
+{
+  "samples": [
+    { "title": "Soft, order status", "mode": "report", "settings": { "STYLE": "soft" }, "rows": [
+      { "LABEL": "Paid", "STATE": "success", "ICON": "fa-check" },
+      { "LABEL": "Awaiting payment", "STATE": "warning" },
+      { "LABEL": "Overdue", "STATE": "danger", "ICON": "fa-exclamation" },
+      { "LABEL": "Draft", "STATE": "neutral" }
+    ] },
+    { "title": "Solid, invoice status", "mode": "report", "settings": { "STYLE": "solid" }, "rows": [
+      { "LABEL": "Approved", "STATE": "success" },
+      { "LABEL": "On hold", "STATE": "warning" },
+      { "LABEL": "Rejected", "STATE": "danger" },
+      { "LABEL": "Submitted", "STATE": "info" }
+    ] },
+    { "title": "Outline, project phase", "mode": "report", "settings": { "STYLE": "outline" }, "rows": [
+      { "LABEL": "Discovery", "STATE": "info" },
+      { "LABEL": "Build", "STATE": "success" },
+      { "LABEL": "Blocked", "STATE": "danger" },
+      { "LABEL": "Archived", "STATE": "neutral" }
+    ] },
+    { "title": "Dot, service health", "mode": "report", "settings": { "STYLE": "dot" }, "rows": [
+      { "LABEL": "Operational", "STATE": "success" },
+      { "LABEL": "Degraded", "STATE": "warning" },
+      { "LABEL": "Outage", "STATE": "danger" }
+    ] },
+    { "title": "Live, partial", "mode": "partial", "settings": { "STYLE": "live", "LABEL": "Live", "STATE": "danger", "VALUE": "128 viewers" } },
+    { "title": "Gradient Pill, customer tier", "mode": "report", "settings": { "STYLE": "gradientPill" }, "rows": [
+      { "LABEL": "Enterprise", "STATE": "info", "ICON": "fa-star" },
+      { "LABEL": "Renewed", "STATE": "success" },
+      { "LABEL": "Standard", "STATE": "neutral" }
+    ] },
+    { "title": "Counter, queues", "mode": "report", "settings": { "STYLE": "counter" }, "rows": [
+      { "LABEL": "Open orders", "STATE": "info", "VALUE": "24" },
+      { "LABEL": "Escalations", "STATE": "danger", "VALUE": "3" },
+      { "LABEL": "Pending review", "STATE": "warning", "VALUE": "112" }
+    ] },
+    { "title": "Icon Tag, shipment", "mode": "report", "settings": { "STYLE": "iconTag" }, "rows": [
+      { "LABEL": "Shipped", "STATE": "success", "ICON": "fa-truck" },
+      { "LABEL": "Customs hold", "STATE": "warning", "ICON": "fa-clock-o" },
+      { "LABEL": "Returned", "STATE": "danger", "ICON": "fa-undo" }
+    ] },
+    { "title": "Chip, account filters", "mode": "report", "settings": { "STYLE": "chip" }, "rows": [
+      { "LABEL": "Riyadh region", "STATE": "info", "ICON": "fa-map-marker", "VALUE": "86" },
+      { "LABEL": "Key accounts", "STATE": "success", "ICON": "fa-building-o" },
+      { "LABEL": "Churn risk", "STATE": "danger", "VALUE": "7" }
+    ] },
+    { "title": "Ribbon, product callouts", "mode": "report", "settings": { "STYLE": "ribbon" }, "rows": [
+      { "LABEL": "New", "STATE": "info" },
+      { "LABEL": "Best seller", "STATE": "success" },
+      { "LABEL": "Low stock", "STATE": "warning" }
+    ] },
+    { "title": "Code, references", "mode": "report", "settings": { "STYLE": "code" }, "rows": [
+      { "LABEL": "release", "STATE": "info", "VALUE": "v2.4.1" },
+      { "LABEL": "build", "STATE": "success", "VALUE": "passing" },
+      { "LABEL": "INV-2026-00418", "STATE": "neutral" }
+    ] },
+    { "title": "Status Bar, approval", "mode": "report", "settings": { "STYLE": "statusBar" }, "rows": [
+      { "LABEL": "Approved", "STATE": "success", "VALUE": "2 of 2" },
+      { "LABEL": "In review", "STATE": "warning", "VALUE": "Finance" },
+      { "LABEL": "Declined", "STATE": "danger" }
+    ] }
+  ]
+}

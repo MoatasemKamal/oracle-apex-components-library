@@ -1,0 +1,296 @@
+plugin designAvatar (
+    name: Design Avatar
+    staticId: AMC_DESIGN_AVATAR
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-DAvatar amc-DAvatar--#STYLE#{if ?SIZE/} amc-DAvatar--#SIZE#{endif/}">
+              <span class="amc-DAvatar-frame">
+                <span class="amc-DAvatar-media" {case STYLE/}{when withName/}aria-hidden="true"{when squareTile/}aria-hidden="true"{otherwise/}role="img" aria-label="#NAME!ATTR#" title="#NAME!ATTR#"{endcase/}>{if ?IMAGE_URL/}<img class="amc-DAvatar-img" src="#IMAGE_URL#" alt="" width="96" height="96" loading="lazy">{elseif ?INITIALS/}<span class="amc-DAvatar-initials">#INITIALS#</span>{else/}<span class="amc-DAvatar-icon fa fa-user"></span>{endif/}</span>
+                {if ?STATUS/}<span class="amc-DAvatar-status {case STATUS/}{when online/}amc-DAvatar-status--online{when away/}amc-DAvatar-status--away{when busy/}amc-DAvatar-status--busy{otherwise/}amc-DAvatar-status--offline{endcase/}"><span class="amc-DAvatar-sr">{case STATUS/}{when online/}Online{when away/}Away{when busy/}Busy{otherwise/}Offline{endcase/}</span></span>{endif/}
+                {if ?COUNT/}<span class="amc-DAvatar-count">#COUNT#</span>{endif/}
+              </span>
+              {case STYLE/}{when withName/}<span class="amc-DAvatar-text"><span class="amc-DAvatar-name">#NAME#</span>{if ?SUBTITLE/}<span class="amc-DAvatar-sub">#SUBTITLE#</span>{endif/}</span>{when squareTile/}<span class="amc-DAvatar-text"><span class="amc-DAvatar-name">#NAME#</span>{if ?SUBTITLE/}<span class="amc-DAvatar-sub">#SUBTITLE#</span>{endif/}</span>{endcase/}
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-DAvatars amc-DAvatars--#STYLE#{if ?SIZE/} amc-DAvatars--#SIZE#{endif/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DAvatars-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-avatar.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Map Name (always required, it is the accessible name), then Image URL or Initials. The image is used when present, otherwise the initials, otherwise a person icon. Status accepts online, away, busy or offline and is announced to screen readers. Count shows a notification bubble.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: ring
+        }
+        help {
+            helpText:
+                ```
+                Avatar design. With Name and Square Tile also show the name and subtitle as text; the other styles show the picture only, with the name as its accessible label and tooltip.
+                ```
+        }
+        entry ring (
+            sequence: 10
+            display: Ring
+            return: ring
+        )
+        entry statusDot (
+            sequence: 20
+            display: Status Dot
+            return: statusDot
+        )
+        entry squircle (
+            sequence: 30
+            display: Squircle
+            return: squircle
+        )
+        entry gradientRing (
+            sequence: 40
+            display: Gradient Ring
+            return: gradientRing
+        )
+        entry initialsSoft (
+            sequence: 50
+            display: Soft Initials
+            return: initialsSoft
+        )
+        entry withName (
+            sequence: 60
+            display: With Name
+            return: withName
+        )
+        entry countBadge (
+            sequence: 70
+            display: Count Badge
+            return: countBadge
+        )
+        entry squareTile (
+            sequence: 80
+            display: Square Tile
+            return: squareTile
+        )
+    )
+    customAttribute NAME (
+        apexlangName: name
+        attribute: 2
+        name: Name
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Full name of the person, for example Sara Al-Harbi. Used as the accessible name and tooltip, and shown as text in With Name and Square Tile.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 3
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional photo URL, square images work best. Must be a developer-controlled URL, for example an APEX_UTIL.GET_BLOB_FILE_SRC result or a static application file. Leave empty to show Initials.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 4
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no image, for example upper(substr(first_name, 1, 1) || substr(last_name, 1, 1)). When both are empty a person icon is shown.
+                ```
+        }
+    )
+    customAttribute STATUS (
+        apexlangName: status
+        attribute: 5
+        name: Status
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional presence: online, away, busy or offline. Any other non-empty value renders as offline; empty hides the indicator. Each value has its own shape and a screen-reader label, so it is not shown by color alone.
+                ```
+        }
+    )
+    customAttribute COUNT (
+        apexlangName: count
+        attribute: 6
+        name: Count
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short number shown in a bubble on the top corner, for example unread messages or open tasks (3, 12, 99+). Empty hides it.
+                ```
+        }
+    )
+    customAttribute SUBTITLE (
+        apexlangName: subtitle
+        attribute: 7
+        name: Subtitle
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional second line in With Name and Square Tile, for example the job title or department.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 8
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 80
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Avatar size. Leave empty for Medium, 2.75rem.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small
+            return: small
+        )
+        entry large (
+            sequence: 20
+            display: Large
+            return: large
+        )
+        entry xlarge (
+            sequence: 30
+            display: Extra Large
+            return: xlarge
+        )
+    )
+    file "amc-design-avatar.css" (
+        fileName: amc-design-avatar.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

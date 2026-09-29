@@ -1,0 +1,95 @@
+{
+  "name": "Design Badge",
+  "apexlangName": "designBadge",
+  "staticId": "AMC_DESIGN_BADGE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["badge", "status", "tag", "label", "pill", "chip", "lozenge", "counter", "live", "ribbon", "design collection"],
+  "description": "Status badges in 12 designs (soft, solid, outline, dot, live, gradient pill, counter, icon tag, chip, ribbon, code, status bar), following the lozenge and chip patterns of Universal Theme Badge, GitHub labels and shields-style split tags. One badge (partial) or an inline wrapping group (report).",
+  "helpText": "Choose a Style, map Label to the text and State to a column returning success, warning, danger, info or neutral (anything else renders as neutral). The label itself must carry the meaning (for example Paid or Overdue), so state is never shown by color alone. Value adds a second segment: the count in Counter, the value half in Code, trailing text elsewhere.",
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-design-badge.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-badge.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "soft",
+      "sequence": 10,
+      "helpText": "Badge design. Soft, Solid and Outline are general lozenges; Dot and Status Bar are quiet table statuses; Live pulses for real-time items; Counter and Code show a Value segment; Icon Tag, Chip and Ribbon are for categories and callouts.",
+      "entries": [
+        { "name": "soft", "display": "Soft", "return": "soft", "sequence": 10 },
+        { "name": "solid", "display": "Solid", "return": "solid", "sequence": 20 },
+        { "name": "outline", "display": "Outline", "return": "outline", "sequence": 30 },
+        { "name": "dot", "display": "Dot", "return": "dot", "sequence": 40 },
+        { "name": "live", "display": "Live", "return": "live", "sequence": 50 },
+        { "name": "gradientPill", "display": "Gradient Pill", "return": "gradientPill", "sequence": 60 },
+        { "name": "counter", "display": "Counter", "return": "counter", "sequence": 70 },
+        { "name": "iconTag", "display": "Icon Tag", "return": "iconTag", "sequence": 80 },
+        { "name": "chip", "display": "Chip", "return": "chip", "sequence": 90 },
+        { "name": "ribbon", "display": "Ribbon", "return": "ribbon", "sequence": 100 },
+        { "name": "code", "display": "Code", "return": "code", "sequence": 110 },
+        { "name": "statusBar", "display": "Status Bar", "return": "statusBar", "sequence": 120 }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Badge text, for example Paid, Overdue or In Review. Keep it short; it must convey the state in words."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 3,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Semantic color: success, warning, danger, info or neutral. Empty or any other value renders as neutral. Can be static text or a column."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 4,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Optional Font APEX icon class, for example fa-check or fa-truck. Shown before the label in every style except Dot and Live, which draw their own marker. Icon Tag shows it in a colored block."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 5,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional second segment after the label: the number in Counter (for example 24), the value half in Code (for example v2.4.1), muted trailing text in other styles. Format numbers in SQL."
+    }
+  ]
+}

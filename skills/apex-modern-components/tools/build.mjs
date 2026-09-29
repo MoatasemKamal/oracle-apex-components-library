@@ -33,9 +33,21 @@ const catalog = [];
 let failed = false;
 
 for (const dir of listComponentDirs(COMPONENTS)) {
-  const unit = loadComponent(dir);
+  if (only) {
+    // Filter before loading, so an unfinished component elsewhere cannot break --only.
+    let meta = null;
+    try { meta = JSON.parse(fs.readFileSync(path.join(dir, "component.json"), "utf8")); } catch (e) { /* not ready */ }
+    if (!meta || (meta.apexlangName !== only && path.basename(dir) !== only)) continue;
+  }
+  let unit;
+  try {
+    unit = loadComponent(dir);
+  } catch (error) {
+    console.error(`error ${path.basename(dir)}: cannot load (${error.message})`);
+    failed = true;
+    continue;
+  }
   const { component: c, loaded, slug } = unit;
-  if (only && c.apexlangName !== only && slug !== only) continue;
 
   const { errors, warnings } = validateComponent(unit);
   warnings.forEach((w) => console.warn(`warn  ${w}`));

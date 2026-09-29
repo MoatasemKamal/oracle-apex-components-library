@@ -1,0 +1,8 @@
+<div class="amc-DAvatar amc-DAvatar--#STYLE#{if ?SIZE/} amc-DAvatar--#SIZE#{endif/}">
+  <span class="amc-DAvatar-frame">
+    <span class="amc-DAvatar-media" {case STYLE/}{when withName/}aria-hidden="true"{when squareTile/}aria-hidden="true"{otherwise/}role="img" aria-label="#NAME!ATTR#" title="#NAME!ATTR#"{endcase/}>{if ?IMAGE_URL/}<img class="amc-DAvatar-img" src="#IMAGE_URL#" alt="" width="96" height="96" loading="lazy">{elseif ?INITIALS/}<span class="amc-DAvatar-initials">#INITIALS#</span>{else/}<span class="amc-DAvatar-icon fa fa-user"></span>{endif/}</span>
+    {if ?STATUS/}<span class="amc-DAvatar-status {case STATUS/}{when online/}amc-DAvatar-status--online{when away/}amc-DAvatar-status--away{when busy/}amc-DAvatar-status--busy{otherwise/}amc-DAvatar-status--offline{endcase/}"><span class="amc-DAvatar-sr">{case STATUS/}{when online/}Online{when away/}Away{when busy/}Busy{otherwise/}Offline{endcase/}</span></span>{endif/}
+    {if ?COUNT/}<span class="amc-DAvatar-count">#COUNT#</span>{endif/}
+  </span>
+  {case STYLE/}{when withName/}<span class="amc-DAvatar-text"><span class="amc-DAvatar-name">#NAME#</span>{if ?SUBTITLE/}<span class="amc-DAvatar-sub">#SUBTITLE#</span>{endif/}</span>{when squareTile/}<span class="amc-DAvatar-text"><span class="amc-DAvatar-name">#NAME#</span>{if ?SUBTITLE/}<span class="amc-DAvatar-sub">#SUBTITLE#</span>{endif/}</span>{endcase/}
+</div>

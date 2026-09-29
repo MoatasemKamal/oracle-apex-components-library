@@ -83,7 +83,10 @@ if (fs.existsSync(STYLES_DIR)) {
   }
 }
 
-const units = listComponentDirs(path.join(SKILL_ROOT, "components")).map(loadComponent);
+// Skip components that cannot load (for example one still being written).
+const units = listComponentDirs(path.join(SKILL_ROOT, "components")).flatMap((dir) => {
+  try { return [loadComponent(dir)]; } catch (error) { console.warn(`skip ${path.basename(dir)}: ${error.message}`); return []; }
+});
 const js = units.flatMap((u) => u.loaded.files.filter((f) => f.fileName.endsWith(".js")).map((f) => f.content.toString("utf8")));
 const css = units.flatMap((u) => u.loaded.files.filter((f) => f.fileName.endsWith(".css")).map((f) => f.content.toString("utf8")));
 
