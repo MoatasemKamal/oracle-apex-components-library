@@ -41,7 +41,7 @@ plugin motionText (
         ]
     }
     information {
-        version: 1.0.1
+        version: 1.0.2
         helpText:
             ```
             For Typewriter and Scramble, separate several phrases with |, for example Welcome back|Your orders are ready. Screen readers get the plain text; users with reduced motion see it without animation.

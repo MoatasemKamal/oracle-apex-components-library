@@ -19,15 +19,36 @@
       .filter(Boolean);
   }
 
+  // Scripts whose letters join or shape together (Arabic, Syriac, Thaana, N'Ko, Indic,
+  // Thai, Lao, Tibetan, Myanmar, Khmer, Mongolian): splitting them into letters breaks
+  // the words, so letter effects animate whole words instead.
+  var JOINING = /[\u0590-\u08FF\u0900-\u0DFF\u0E00-\u0EFF\u0F00-\u109F\u1780-\u18AF\uFB1D-\uFDFF\uFE70-\uFEFF]/;
+
+  // Visible characters (keeps accents, emoji and flags whole where Intl.Segmenter exists).
+  function graphemes(text) {
+    if (window.Intl && Intl.Segmenter) {
+      var out = [];
+      var it = new Intl.Segmenter(undefined, { granularity: "grapheme" }).segment(text)[Symbol.iterator]();
+      for (var r = it.next(); !r.done; r = it.next()) { out.push(r.value.segment); }
+      return out;
+    }
+    return Array.prototype.slice.call(text);
+  }
+
   function splitLetters(el) {
     var text = el.textContent;
     el.setAttribute("aria-label", text);
+    // Order the pieces by the text's own direction, not the page's: inline-block pieces
+    // are laid out in the paragraph direction, which reversed Latin text on RTL pages.
+    el.setAttribute("dir", "auto");
     el.textContent = "";
-    Array.prototype.forEach.call(text, function (ch, i) {
+    var pieces = JOINING.test(text) ? text.split(/(\s+)/).filter(Boolean) : graphemes(text);
+    var n = 0;
+    pieces.forEach(function (piece) {
       var span = document.createElement("span");
       span.setAttribute("aria-hidden", "true");
-      span.textContent = ch === " " ? " " : ch;
-      span.style.setProperty("--i", String(i));
+      span.textContent = /^\s+$/.test(piece) ? "\u00a0" : piece;
+      span.style.setProperty("--i", String(n++));
       el.appendChild(span);
     });
   }
@@ -35,6 +56,7 @@
   function splitWords(el) {
     var words = el.textContent.trim().split(/\s+/);
     el.setAttribute("aria-label", words.join(" "));
+    el.setAttribute("dir", "auto");
     el.textContent = "";
     words.forEach(function (word, i) {
       var mask = document.createElement("span");
@@ -88,6 +110,8 @@
       if (flick < 0.05) { return; }
       flick = 0;
       var word = words[w];
+      // Joining scripts would be torn apart letter by letter: show them whole.
+      if (JOINING.test(word)) { if (el.textContent !== word) { el.textContent = word; } return; }
       var s = "";
       for (var k = 0; k < word.length; k++) {
         s += word[k] === " " || t > 0.25 + k * 0.1 ? word[k] : glyphs[Math.random() * glyphs.length | 0];
