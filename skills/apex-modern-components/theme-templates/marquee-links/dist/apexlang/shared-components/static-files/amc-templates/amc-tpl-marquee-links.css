@@ -1,0 +1,226 @@
+/* Marquee Links: ticker list template for Universal Theme. Seamless loop technique (identical
+   groups that each move by their own width plus the gap) adapted from Magic UI marquee
+   (MIT, https://github.com/magicuidesign/magicui). The groups are repeated by
+   amc-tpl-marquee-links.js; without it, and under reduced motion, the links wrap as a static row. */
+.amc-TMarqueeLinks {
+  --amc-tmq-surface: var(--ut-component-background-color, #fff);
+  --amc-tmq-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tmq-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tmq-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tmq-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tmq-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tmq-bg: var(--amc-tmq-surface);
+  --amc-tmq-fg: var(--amc-tmq-ink);
+  --amc-tmq-mark: var(--amc-tmq-accent);
+  --amc-tmq-gap: 1.75rem;
+  --amc-tmq-pps: 48;
+  --amc-tmq-duration: 30s;
+  --amc-tmq-dir: 1;
+  --amc-tmq-glow: 90deg;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-inline-size: 0;
+  padding-block: .4375rem;
+  padding-inline: .875rem .4375rem;
+  border: 1px solid var(--amc-tmq-line);
+  border-radius: calc(var(--ut-component-border-radius, 4px) + 12px);
+  background:
+    linear-gradient(var(--amc-tmq-glow), color-mix(in srgb, var(--amc-tmq-mark) 7%, transparent), transparent 30%),
+    var(--amc-tmq-bg);
+  color: var(--amc-tmq-fg);
+}
+.amc-TMarqueeLinks:dir(rtl) { --amc-tmq-dir: -1; --amc-tmq-glow: 270deg; }
+.amc-TMarqueeLinks.is-looping { border-radius: 999px; }
+
+/* Live pulse at the start of the strip. */
+.amc-TMarqueeLinks-pulse {
+  position: relative;
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background: var(--amc-tmq-mark);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-tmq-mark) 22%, transparent);
+}
+.amc-TMarqueeLinks-pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--amc-tmq-mark);
+  opacity: 0;
+}
+
+.amc-TMarqueeLinks-viewport {
+  display: flex;
+  flex: 1;
+  gap: var(--amc-tmq-gap);
+  min-inline-size: 0;
+  overflow: hidden;
+  padding-block: .1875rem;
+}
+.amc-TMarqueeLinks-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem var(--amc-tmq-gap);
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TMarqueeLinks-item { position: relative; display: flex; align-items: center; flex: 0 1 auto; min-inline-size: 0; }
+.amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-item { flex: none; }
+/* Diamond divider between entries (also between repeated groups). */
+.amc-TMarqueeLinks-item + .amc-TMarqueeLinks-item::before,
+.amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-item:first-child::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc(var(--amc-tmq-gap) / -2 - .1875rem);
+  inline-size: .375rem;
+  block-size: .375rem;
+  margin-block-start: -.1875rem;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--amc-tmq-mark) 70%, transparent);
+  rotate: 45deg;
+}
+
+.amc-TMarqueeLinks-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .25rem .375rem;
+  border-radius: 999px;
+  color: inherit;
+  font-size: .875rem;
+  font-weight: 550;
+  text-decoration: none;
+}
+.amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-link { white-space: nowrap; }
+.amc-TMarqueeLinks-link:hover .amc-TMarqueeLinks-label {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--amc-tmq-mark) 70%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.amc-TMarqueeLinks-link:focus-visible {
+  outline: 2px solid var(--amc-tmq-mark);
+  outline-offset: 0;
+}
+.amc-TMarqueeLinks-icon { flex: none; font-size: .9375rem; color: var(--amc-tmq-mark); }
+.amc-TMarqueeLinks-icon:not([class*="fa-"]) { display: none; }
+.amc-TMarqueeLinks-label { unicode-bidi: isolate; }
+.amc-TMarqueeLinks-tag {
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--amc-tmq-mark);
+  background: color-mix(in srgb, var(--amc-tmq-mark) 13%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tmq-mark) 28%, transparent);
+}
+.amc-TMarqueeLinks-tag:empty { display: none; }
+.amc-TMarqueeLinks-item.is-current .amc-TMarqueeLinks-link { color: var(--amc-tmq-mark); font-weight: 700; }
+
+/* Pause / play toggle, revealed by the script once the strip loops. */
+.amc-TMarqueeLinks-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 1.875rem;
+  block-size: 1.875rem;
+  padding: 0;
+  border: 1px solid var(--amc-tmq-line);
+  border-radius: 50%;
+  background: var(--amc-tmq-bg);
+  color: inherit;
+  cursor: pointer;
+}
+.amc-TMarqueeLinks-toggle[hidden] { display: none; }
+.amc-TMarqueeLinks-toggle:hover { border-color: var(--amc-tmq-mark); color: var(--amc-tmq-mark); }
+.amc-TMarqueeLinks-toggle:focus-visible { outline: 2px solid var(--amc-tmq-mark); outline-offset: 2px; }
+/* Pause icon: two bars. */
+.amc-TMarqueeLinks-toggleIcon {
+  inline-size: .5rem;
+  block-size: .625rem;
+  border-inline: 3px solid currentColor;
+  box-sizing: border-box;
+}
+/* Play icon: a triangle that points in the reading direction. */
+.amc-TMarqueeLinks-toggle[aria-pressed="true"] .amc-TMarqueeLinks-toggleIcon {
+  inline-size: .5625rem;
+  block-size: .625rem;
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  translate: 1px 0;
+}
+.amc-TMarqueeLinks-toggle[aria-pressed="true"]:dir(rtl) .amc-TMarqueeLinks-toggleIcon { clip-path: polygon(100% 0, 0 50%, 100% 100%); translate: -1px 0; }
+.amc-TMarqueeLinks-toggleLabel {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- looping state (set by JS) */
+.amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-viewport {
+  -webkit-mask: linear-gradient(90deg, transparent, black 2.5rem, black calc(100% - 2.5rem), transparent);
+  mask: linear-gradient(90deg, transparent, black 2.5rem, black calc(100% - 2.5rem), transparent);
+}
+.amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-group { flex: none; flex-wrap: nowrap; }
+
+/* ---------------------------------------------------------------- template options */
+.amc-TMarqueeLinks--slow { --amc-tmq-pps: 28; }
+.amc-TMarqueeLinks--fast { --amc-tmq-pps: 80; }
+.amc-TMarqueeLinks--reverse .amc-TMarqueeLinks-group { animation-direction: reverse; }
+.amc-TMarqueeLinks--band {
+  --amc-tmq-bg: var(--amc-tmq-accent);
+  --amc-tmq-fg: var(--amc-tmq-accent-ink);
+  --amc-tmq-mark: var(--amc-tmq-accent-ink);
+  border-color: transparent;
+  background:
+    repeating-linear-gradient(calc(var(--amc-tmq-glow) + 45deg), color-mix(in srgb, var(--amc-tmq-accent-ink) 7%, transparent) 0 1px, transparent 1px 7px),
+    var(--amc-tmq-accent);
+  box-shadow: 0 10px 24px -14px var(--amc-tmq-accent);
+}
+.amc-TMarqueeLinks--band .amc-TMarqueeLinks-tag { color: var(--amc-tmq-accent); background: var(--amc-tmq-accent-ink); box-shadow: none; }
+.amc-TMarqueeLinks--band .amc-TMarqueeLinks-toggle { border-color: color-mix(in srgb, var(--amc-tmq-accent-ink) 40%, transparent); }
+.amc-TMarqueeLinks--plain { padding-inline: 0; border-color: transparent; background: transparent; }
+.amc-TMarqueeLinks--plain .amc-TMarqueeLinks-pulse { display: none; }
+.amc-TMarqueeLinks--plain .amc-TMarqueeLinks-toggle { background: transparent; }
+
+/* ---------------------------------------------------------------- motion */
+@keyframes amc-tmq-scroll { to { transform: translateX(calc(var(--amc-tmq-dir) * (-100% - var(--amc-tmq-gap)))); } }
+@keyframes amc-tmq-ping { 0% { opacity: .6; scale: 1; } 80%, 100% { opacity: 0; scale: 3; } }
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-group { animation: amc-tmq-scroll var(--amc-tmq-duration) linear infinite; }
+  .amc-TMarqueeLinks--reverse.is-looping .amc-TMarqueeLinks-group { animation-direction: reverse; }
+  .amc-TMarqueeLinks.is-looping:hover .amc-TMarqueeLinks-group,
+  .amc-TMarqueeLinks.is-looping.is-paused .amc-TMarqueeLinks-group { animation-play-state: paused; }
+  /* A keyboard user gets the strip back at its start so the focused link can scroll into view. */
+  .amc-TMarqueeLinks.is-looping:has(.amc-TMarqueeLinks-link:focus-visible) .amc-TMarqueeLinks-group { animation: none; }
+  .amc-TMarqueeLinks.is-looping:not(.is-paused) .amc-TMarqueeLinks-pulse::after { animation: amc-tmq-ping 1.8s cubic-bezier(0, 0, .2, 1) infinite; }
+  .amc-TMarqueeLinks-toggle { transition: border-color .15s ease, color .15s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TMarqueeLinks-group { animation: none !important; }
+  .amc-TMarqueeLinks-group[aria-hidden="true"] { display: none; }
+  .amc-TMarqueeLinks-toggle { display: none; }
+  .amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-group { flex: 1; flex-wrap: wrap; }
+  .amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-viewport { -webkit-mask: none; mask: none; }
+}
+@media (forced-colors: active) {
+  .amc-TMarqueeLinks { border: 1px solid CanvasText; }
+  .amc-TMarqueeLinks-item + .amc-TMarqueeLinks-item::before,
+  .amc-TMarqueeLinks.is-looping .amc-TMarqueeLinks-item:first-child::before,
+  .amc-TMarqueeLinks-pulse { background: CanvasText; }
+  .amc-TMarqueeLinks-tag { border: 1px solid CanvasText; }
+}

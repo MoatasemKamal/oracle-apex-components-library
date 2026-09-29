@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Metro Steps",
+  "staticId": "AMC_TPL_METRO_STEPS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "Wizard progress drawn as a transit line: completed stations are ticked on a solid colored line, the current station is a large pulsing stop with a station sign, and stations still to come sit on a dashed planned line.",
+  "useFor": "Wizard progress lists and process steps: order checkout, employee onboarding, approval chains, goods receipt, month-end close. Best with 3 to 8 entries.",
+  "keywords": ["wizard", "steps", "progress", "metro", "transit", "stepper", "process"],
+  "helpText": "List template for wizard progress and process steps, drawn as a metro line. The current list entry is the current station; every entry before it is shown as completed (solid line, check mark) and every entry after it as planned (dashed line, station number). The current station shows the entry icon, pulses gently and carries its label on a station sign. Use the Caption attribute (A01) for a short line under the label such as a date or owner. The line runs horizontally in wide regions and switches to a vertical line when the region is narrower than about 36rem. Template options: Vertical always draws the line vertically, Staggered labels alternates labels above and below a horizontal line for long names, Compact makes stations smaller and hides captions, Numbers only shows the step number instead of the icon on the current station, and Calm turns off the pulse. The current entry has aria-current set to step. Completed states rely on the CSS :has selector (all current browsers); without it earlier stations look planned. Under reduced motion nothing pulses; in forced-colors mode stations and lines use system colors.",
+  "attributes": { "a01": "Caption" },
+  "templateOptions": [
+    { "staticId": "VERTICAL", "name": "Vertical", "cssClass": "amc-TMetroSteps--vertical", "sequence": 10, "help": "Always draws the line vertically with labels beside the stations, for side columns." },
+    { "staticId": "STAGGERED", "name": "Staggered labels", "cssClass": "amc-TMetroSteps--staggered", "sequence": 20, "help": "On a horizontal line, every second label sits above the line, leaving twice the width for long station names." },
+    { "staticId": "COMPACT", "name": "Compact", "cssClass": "amc-TMetroSteps--compact", "sequence": 30, "help": "Smaller stations and a thinner line; captions are hidden." },
+    { "staticId": "NUMBERS_ONLY", "name": "Numbers only", "cssClass": "amc-TMetroSteps--numbers", "sequence": 40, "help": "Shows the step number on the current station instead of the entry icon." },
+    { "staticId": "CALM", "name": "Calm", "cssClass": "amc-TMetroSteps--calm", "sequence": 50, "help": "Turns off the pulse around the current station." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

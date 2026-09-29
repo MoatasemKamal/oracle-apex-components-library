@@ -1,0 +1,131 @@
+listTemplate amc-clay-menu (
+    name: AMC Clay Menu
+    list {
+        beforeEntries:
+            ```html
+            <ul class="amc-TClayMenu #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TClayMenu-item is-current"><a class="amc-TClayMenu-pill" href="#LINK#" aria-current="page"><span class="amc-TClayMenu-bubble fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TClayMenu-label">#TEXT#</span><span class="amc-TClayMenu-badge">#A01#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TClayMenu-item"><a class="amc-TClayMenu-pill" href="#LINK#"><span class="amc-TClayMenu-bubble fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TClayMenu-label">#TEXT#</span><span class="amc-TClayMenu-badge">#A01#</span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-clay-menu.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Badge
+    }
+    advanced {
+        staticId: AMC_TPL_CLAY_MENU
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template that shows entries as soft clay pills sitting on a tray. Each pill has a glossy icon bubble whose color rotates through the palette, and the current entry is pressed into the tray. Pills wrap onto more rows when space runs out. Use the Badge attribute (A01) for a short count shown in a small bubble. Template options: Vertical stacks full-width pills for side columns, Large makes pills taller for touch screens, Single color uses the primary color for every bubble, Icons only hides the labels visually (they stay available to screen readers, so give every entry an icon), and Fill row stretches pills to share the row. Keyboard focus shows a ring around the pill. Under reduced motion pills do not move; in forced-colors mode pills get system borders and the current entry a highlight border.
+            ```
+    }
+
+    templateOption amc-clay-menu-vertical (
+        name: Vertical
+        sequence: 10
+        appearance {
+            cssClasses: amc-TClayMenu--vertical
+        }
+        help {
+            helpText:
+                ```text
+                Stacks the pills as full-width rows, for side columns and navigation panels.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: VERTICAL
+        }
+    )
+
+    templateOption amc-clay-menu-large (
+        name: Large
+        sequence: 20
+        appearance {
+            cssClasses: amc-TClayMenu--large
+        }
+        help {
+            helpText:
+                ```text
+                Taller pills and bigger icon bubbles for touch screens and kiosks.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LARGE
+        }
+    )
+
+    templateOption amc-clay-menu-single-color (
+        name: Single color
+        sequence: 30
+        appearance {
+            cssClasses: amc-TClayMenu--mono
+        }
+        help {
+            helpText:
+                ```text
+                Every icon bubble uses the primary color instead of rotating through the palette.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SINGLE_COLOR
+        }
+    )
+
+    templateOption amc-clay-menu-icons-only (
+        name: Icons only
+        sequence: 40
+        appearance {
+            cssClasses: amc-TClayMenu--iconsOnly
+        }
+        help {
+            helpText:
+                ```text
+                Shows round icon pills only; labels stay available to screen readers as the link name. Every entry needs an icon.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ICONS_ONLY
+        }
+    )
+
+    templateOption amc-clay-menu-fill-row (
+        name: Fill row
+        sequence: 50
+        appearance {
+            cssClasses: amc-TClayMenu--fill
+        }
+        help {
+            helpText:
+                ```text
+                Pills grow to share the full width of the row, like a segmented control.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FILL_ROW
+        }
+    )
+)

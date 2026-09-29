@@ -1,0 +1,186 @@
+/* Clay Menu: claymorphism list template for Universal Theme. Pills and bubbles are lit from the
+   top start corner: a lighter highlight and a darker shade are derived from the theme's own
+   surface and page colors (relative color syntax where supported), so the clay reads in light
+   and dark styles alike. The current entry is pressed into the tray. */
+.amc-TClayMenu {
+  --amc-tclay-surface: var(--ut-component-background-color, #fff);
+  --amc-tclay-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-tclay-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tclay-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tclay-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tclay-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tclay-tray: color-mix(in srgb, var(--amc-tclay-body) 94%, var(--amc-tclay-accent));
+  --amc-tclay-light: var(--amc-tclay-surface);
+  --amc-tclay-dark: color-mix(in srgb, var(--ut-component-text-default-color, #262626) 16%, transparent);
+  --amc-tclay-h: 2.875rem;
+  --amc-tclay-bubble: 2.125rem;
+  --amc-tclay-dx: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin: 0;
+  padding: .75rem;
+  list-style: none;
+  border-radius: 1.75rem;
+  background: var(--amc-tclay-tray);
+  box-shadow:
+    inset calc(var(--amc-tclay-dx) * 3px) 3px 8px var(--amc-tclay-dark),
+    inset calc(var(--amc-tclay-dx) * -3px) -3px 8px var(--amc-tclay-light);
+  color: var(--amc-tclay-ink);
+}
+.amc-TClayMenu:dir(rtl) { --amc-tclay-dx: -1; }
+@supports (color: oklch(from currentColor l c h)) {
+  .amc-TClayMenu {
+    --amc-tclay-tray: oklch(from color-mix(in srgb, var(--amc-tclay-body) 94%, var(--amc-tclay-accent)) calc(l - .02) c h);
+    --amc-tclay-light: oklch(from var(--amc-tclay-surface) calc(l + .06) c h / .9);
+    --amc-tclay-dark: oklch(from var(--amc-tclay-body) calc(l * .45) calc(c + .02) h / .38);
+  }
+  /* Black or white glyph, whichever reads better on the bubble color. */
+  .amc-TClayMenu .amc-TClayMenu-bubble { color: oklch(from var(--amc-tclay-hue) clamp(0, (.7 - l) * 1000, 1) 0 0); }
+}
+
+.amc-TClayMenu-item {
+  --amc-tclay-hue: var(--ut-palette-primary, #056ac8);
+  display: flex;
+  min-inline-size: 0;
+}
+.amc-TClayMenu-item:nth-child(5n+2) { --amc-tclay-hue: var(--ut-palette-success, #278701); }
+.amc-TClayMenu-item:nth-child(5n+3) { --amc-tclay-hue: var(--ut-palette-warning, #fbce4a); }
+.amc-TClayMenu-item:nth-child(5n+4) { --amc-tclay-hue: var(--ut-palette-danger, #cb1100); }
+.amc-TClayMenu-item:nth-child(5n+5) { --amc-tclay-hue: var(--ut-palette-info, #0076df); }
+
+.amc-TClayMenu-pill {
+  --amc-tclay-lift: 0px;
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: .625rem;
+  min-inline-size: 0;
+  min-block-size: var(--amc-tclay-h);
+  box-sizing: border-box;
+  padding-block: .375rem;
+  padding-inline: .375rem 1.125rem;
+  border-radius: 999px;
+  background:
+    radial-gradient(120% 90% at 30% 0%, var(--amc-tclay-light), transparent 70%),
+    color-mix(in srgb, var(--amc-tclay-surface) 92%, var(--amc-tclay-hue));
+  box-shadow:
+    calc(var(--amc-tclay-dx) * 6px) 8px 16px -4px var(--amc-tclay-dark),
+    calc(var(--amc-tclay-dx) * -4px) -4px 10px -2px var(--amc-tclay-light),
+    inset calc(var(--amc-tclay-dx) * 2px) 2px 3px var(--amc-tclay-light),
+    inset calc(var(--amc-tclay-dx) * -3px) -4px 8px color-mix(in srgb, var(--amc-tclay-hue) 16%, transparent);
+  transform: translateY(var(--amc-tclay-lift));
+  color: var(--amc-tclay-ink);
+  font-size: .875rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.amc-TClayMenu-pill:hover { --amc-tclay-lift: -2px; }
+.amc-TClayMenu-pill:active { --amc-tclay-lift: 1px; }
+.amc-TClayMenu-pill:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--amc-tclay-accent) 70%, transparent);
+  outline-offset: 3px;
+}
+
+.amc-TClayMenu-bubble {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--amc-tclay-bubble);
+  block-size: var(--amc-tclay-bubble);
+  border-radius: 50%;
+  font-size: .9375rem;
+  color: var(--amc-tclay-surface);
+  background:
+    radial-gradient(circle at 32% 26%, color-mix(in srgb, var(--amc-tclay-surface) 70%, transparent) 0 14%, transparent 42%),
+    radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--amc-tclay-hue) 78%, var(--amc-tclay-surface)), var(--amc-tclay-hue));
+  box-shadow:
+    inset calc(var(--amc-tclay-dx) * -3px) -4px 6px color-mix(in srgb, var(--amc-tclay-hue) 60%, var(--amc-tclay-ink) 18%),
+    inset calc(var(--amc-tclay-dx) * 2px) 2px 4px color-mix(in srgb, var(--amc-tclay-surface) 55%, transparent),
+    calc(var(--amc-tclay-dx) * 2px) 4px 8px -2px color-mix(in srgb, var(--amc-tclay-hue) 55%, transparent);
+  text-shadow: 0 1px 1px color-mix(in srgb, var(--amc-tclay-hue) 70%, var(--amc-tclay-ink) 30%);
+}
+.amc-TClayMenu-bubble:not([class*="fa-"]) { display: none; }
+.amc-TClayMenu-bubble:not([class*="fa-"]) ~ .amc-TClayMenu-label { padding-inline-start: .75rem; }
+
+.amc-TClayMenu-label { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
+.amc-TClayMenu-badge {
+  display: grid;
+  place-items: center;
+  min-inline-size: 1.375rem;
+  block-size: 1.375rem;
+  box-sizing: border-box;
+  padding-inline: .375rem;
+  margin-inline-start: auto;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  color: var(--amc-tclay-ink);
+  background: var(--amc-tclay-tray);
+  box-shadow:
+    inset calc(var(--amc-tclay-dx) * 1px) 2px 3px var(--amc-tclay-dark),
+    inset calc(var(--amc-tclay-dx) * -1px) -1px 2px var(--amc-tclay-light);
+}
+.amc-TClayMenu-badge:empty { display: none; }
+
+/* Current entry: pressed into the tray. */
+.amc-TClayMenu-item.is-current .amc-TClayMenu-pill {
+  --amc-tclay-lift: 1px;
+  background: color-mix(in srgb, var(--amc-tclay-tray) 86%, var(--amc-tclay-accent));
+  box-shadow:
+    inset calc(var(--amc-tclay-dx) * 5px) 6px 12px var(--amc-tclay-dark),
+    inset calc(var(--amc-tclay-dx) * -4px) -4px 9px var(--amc-tclay-light),
+    0 0 0 1px color-mix(in srgb, var(--amc-tclay-accent) 22%, transparent);
+  color: var(--amc-tclay-accent);
+  font-weight: 700;
+}
+.amc-TClayMenu-item.is-current .amc-TClayMenu-bubble { scale: .9; filter: saturate(.85); }
+
+/* ---------------------------------------------------------------- template options */
+.amc-TClayMenu--vertical { flex-direction: column; flex-wrap: nowrap; }
+.amc-TClayMenu--vertical .amc-TClayMenu-pill { flex: 1 1 auto; }
+.amc-TClayMenu--large { --amc-tclay-h: 3.625rem; --amc-tclay-bubble: 2.75rem; gap: 1rem; padding: 1rem; border-radius: 2.25rem; }
+.amc-TClayMenu--large .amc-TClayMenu-pill { font-size: 1rem; padding-inline-end: 1.375rem; }
+.amc-TClayMenu--large .amc-TClayMenu-bubble { font-size: 1.1875rem; }
+.amc-TClayMenu--mono .amc-TClayMenu-item { --amc-tclay-hue: var(--ut-palette-primary, #056ac8); }
+.amc-TClayMenu--iconsOnly { padding: .625rem; }
+.amc-TClayMenu--iconsOnly .amc-TClayMenu-pill { position: relative; flex: none; padding: .375rem; }
+.amc-TClayMenu--iconsOnly .amc-TClayMenu-label {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-TClayMenu--iconsOnly .amc-TClayMenu-badge {
+  position: absolute;
+  inset-block-start: -.25rem;
+  inset-inline-end: -.25rem;
+  margin: 0;
+}
+.amc-TClayMenu--fill .amc-TClayMenu-item { flex: 1 1 auto; }
+.amc-TClayMenu--fill .amc-TClayMenu-pill { justify-content: center; }
+.amc-TClayMenu--fill .amc-TClayMenu-badge { margin-inline-start: 0; }
+
+/* ---------------------------------------------------------------- motion */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TClayMenu-pill { transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), box-shadow .25s ease, background-color .25s ease; }
+  .amc-TClayMenu-pill:active { transition-duration: .08s; }
+  .amc-TClayMenu-bubble { transition: scale .3s cubic-bezier(.34, 1.56, .64, 1); }
+  .amc-TClayMenu-pill:hover .amc-TClayMenu-bubble, .amc-TClayMenu-pill:focus-visible .amc-TClayMenu-bubble { scale: 1.08; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TClayMenu-pill:hover, .amc-TClayMenu-pill:active { --amc-tclay-lift: 0px; }
+}
+@media (forced-colors: active) {
+  .amc-TClayMenu { border: 1px solid CanvasText; }
+  .amc-TClayMenu-pill { border: 1px solid CanvasText; }
+  .amc-TClayMenu-item.is-current .amc-TClayMenu-pill { border: 3px solid Highlight; }
+  .amc-TClayMenu-bubble { border: 1px solid CanvasText; }
+}

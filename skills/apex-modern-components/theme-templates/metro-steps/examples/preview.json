@@ -1,0 +1,48 @@
+{
+  "samples": [
+    {
+      "title": "Order checkout wizard",
+      "options": [],
+      "entries": [
+        { "text": "Customer", "link": "#", "icon": "fa-user", "a01": "Al Noor Trading" },
+        { "text": "Items", "link": "#", "icon": "fa-list", "a01": "14 lines" },
+        { "text": "Delivery", "link": "#", "icon": "fa-truck", "current": true, "a01": "Choose a slot" },
+        { "text": "Payment", "link": "#", "icon": "fa-credit-card", "a01": "Net 30" },
+        { "text": "Review", "link": "#", "icon": "fa-check-circle" }
+      ]
+    },
+    {
+      "title": "Employee onboarding, staggered labels",
+      "options": ["amc-TMetroSteps--staggered"],
+      "entries": [
+        { "text": "Offer accepted", "link": "#", "icon": "fa-handshake-o", "a01": "2 Sep" },
+        { "text": "Background and document checks", "link": "#", "icon": "fa-id-card-o", "a01": "HR team" },
+        { "text": "Laptop and badge", "link": "#", "icon": "fa-laptop", "a01": "IT" },
+        { "text": "Payroll and bank details", "link": "#", "icon": "fa-money", "current": true, "a01": "Due 30 Sep" },
+        { "text": "Safety induction", "link": "#", "icon": "fa-shield", "a01": "Riyadh site" },
+        { "text": "First day", "link": "#", "icon": "fa-flag", "a01": "5 Oct" }
+      ]
+    },
+    {
+      "title": "Vertical, numbers only",
+      "options": ["amc-TMetroSteps--vertical", "amc-TMetroSteps--numbers"],
+      "entries": [
+        { "text": "Request submitted", "link": "#", "a01": "Sara Al-Qahtani, 12 Sep" },
+        { "text": "Line manager approval", "link": "#", "a01": "Approved by Omar Haddad" },
+        { "text": "Finance review", "link": "#", "current": true, "a01": "Waiting since 2 days" },
+        { "text": "Purchase order issued", "link": "#" },
+        { "text": "Goods received", "link": "#" }
+      ]
+    },
+    {
+      "title": "Compact, calm",
+      "options": ["amc-TMetroSteps--compact", "amc-TMetroSteps--calm"],
+      "entries": [
+        { "text": "Count", "link": "#", "icon": "fa-calculator" },
+        { "text": "Reconcile", "link": "#", "icon": "fa-balance-scale", "current": true },
+        { "text": "Post", "link": "#", "icon": "fa-upload" },
+        { "text": "Close", "link": "#", "icon": "fa-lock" }
+      ]
+    }
+  ]
+}

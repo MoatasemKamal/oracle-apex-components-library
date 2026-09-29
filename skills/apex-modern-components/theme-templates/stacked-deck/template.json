@@ -1,0 +1,21 @@
+{
+  "kind": "list",
+  "name": "AMC Stacked Deck",
+  "staticId": "AMC_TPL_STACKED_DECK",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "List entries rest as a deck of cards stacked in perspective, each one peeking out behind the one in front, and fan out into a readable list while the deck has hover or keyboard focus.",
+  "useFor": "Short lists of 3 to 8 entries on dashboards and home pages: pending approvals, recent orders, inbox shortcuts, quick actions next to a chart.",
+  "keywords": ["stack", "deck", "cards", "perspective", "fan out", "notifications", "3d"],
+  "helpText": "List template that shows the entries as a stack of cards. At rest the first entry is in front and up to three more peek out behind it, smaller and shaded; hovering the deck or tabbing into it fans the cards out into a full list, so every link is reachable by mouse and keyboard. On touch screens the deck is always fanned out. Use the Description attribute (A01) for a one-line summary and the Meta attribute (A02) for a short value such as a count or amount shown as a chip. Template options: Always open keeps the list fanned out (no layout change on hover), Tilted deck lays the stack back in 3D, Compact reduces card height, and Solid current fills the current entry with the primary color. Under reduced motion the deck opens and closes without animation; in forced-colors mode cards get system borders.",
+  "attributes": { "a01": "Description", "a02": "Meta" },
+  "templateOptions": [
+    { "staticId": "ALWAYS_OPEN", "name": "Always open", "cssClass": "amc-TStackedDeck--open", "sequence": 10, "help": "Shows the cards fanned out as a list all the time, keeping the depth styling. Use it where a layout change on hover is not wanted." },
+    { "staticId": "TILTED", "name": "Tilted deck", "cssClass": "amc-TStackedDeck--tilt", "sequence": 20, "help": "Lays the resting stack back in 3D perspective; it straightens as it fans out." },
+    { "staticId": "COMPACT", "name": "Compact", "cssClass": "amc-TStackedDeck--compact", "sequence": 30, "help": "Smaller cards with a single text line, for narrow side columns." },
+    { "staticId": "SOLID_CURRENT", "name": "Solid current", "cssClass": "amc-TStackedDeck--solidCurrent", "sequence": 40, "help": "Fills the current entry with the primary color instead of an outline ring." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

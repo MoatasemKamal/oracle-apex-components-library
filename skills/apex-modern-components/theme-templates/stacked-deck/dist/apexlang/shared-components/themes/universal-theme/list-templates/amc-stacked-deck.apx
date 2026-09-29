@@ -1,0 +1,114 @@
+listTemplate amc-stacked-deck (
+    name: AMC Stacked Deck
+    list {
+        beforeEntries:
+            ```html
+            <ul class="amc-TStackedDeck #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TStackedDeck-item is-current"><a class="amc-TStackedDeck-card" href="#LINK#" aria-current="page"><span class="amc-TStackedDeck-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TStackedDeck-text"><span class="amc-TStackedDeck-label">#TEXT#</span><span class="amc-TStackedDeck-desc">#A01#</span></span><span class="amc-TStackedDeck-meta">#A02#</span><span class="amc-TStackedDeck-chevron" aria-hidden="true"></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TStackedDeck-item"><a class="amc-TStackedDeck-card" href="#LINK#"><span class="amc-TStackedDeck-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TStackedDeck-text"><span class="amc-TStackedDeck-label">#TEXT#</span><span class="amc-TStackedDeck-desc">#A01#</span></span><span class="amc-TStackedDeck-meta">#A02#</span><span class="amc-TStackedDeck-chevron" aria-hidden="true"></span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-stacked-deck.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Meta
+    }
+    advanced {
+        staticId: AMC_TPL_STACKED_DECK
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template that shows the entries as a stack of cards. At rest the first entry is in front and up to three more peek out behind it, smaller and shaded; hovering the deck or tabbing into it fans the cards out into a full list, so every link is reachable by mouse and keyboard. On touch screens the deck is always fanned out. Use the Description attribute (A01) for a one-line summary and the Meta attribute (A02) for a short value such as a count or amount shown as a chip. Template options: Always open keeps the list fanned out (no layout change on hover), Tilted deck lays the stack back in 3D, Compact reduces card height, and Solid current fills the current entry with the primary color. Under reduced motion the deck opens and closes without animation; in forced-colors mode cards get system borders.
+            ```
+    }
+
+    templateOption amc-stacked-deck-always-open (
+        name: Always open
+        sequence: 10
+        appearance {
+            cssClasses: amc-TStackedDeck--open
+        }
+        help {
+            helpText:
+                ```text
+                Shows the cards fanned out as a list all the time, keeping the depth styling. Use it where a layout change on hover is not wanted.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ALWAYS_OPEN
+        }
+    )
+
+    templateOption amc-stacked-deck-tilted (
+        name: Tilted deck
+        sequence: 20
+        appearance {
+            cssClasses: amc-TStackedDeck--tilt
+        }
+        help {
+            helpText:
+                ```text
+                Lays the resting stack back in 3D perspective; it straightens as it fans out.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TILTED
+        }
+    )
+
+    templateOption amc-stacked-deck-compact (
+        name: Compact
+        sequence: 30
+        appearance {
+            cssClasses: amc-TStackedDeck--compact
+        }
+        help {
+            helpText:
+                ```text
+                Smaller cards with a single text line, for narrow side columns.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-stacked-deck-solid-current (
+        name: Solid current
+        sequence: 40
+        appearance {
+            cssClasses: amc-TStackedDeck--solidCurrent
+        }
+        help {
+            helpText:
+                ```text
+                Fills the current entry with the primary color instead of an outline ring.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SOLID_CURRENT
+        }
+    )
+)

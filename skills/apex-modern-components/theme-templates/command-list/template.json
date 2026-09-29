@@ -1,0 +1,21 @@
+{
+  "kind": "list",
+  "name": "AMC Command List",
+  "staticId": "AMC_TPL_COMMAND_LIST",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "smart",
+  "description": "A command-palette list: a search box filters the entries as you type and highlights the match, arrow keys move between commands, and each row shows an icon, a description and its keyboard-shortcut chip.",
+  "useFor": "Action menus and power-user navigation: a Quick actions region on a dashboard, a task list on a record page, an admin or settings index with many entries.",
+  "keywords": ["command palette", "command menu", "search", "filter", "kbd", "shortcuts", "quick actions"],
+  "helpText": "List template shaped like a command palette. The search box filters entries by their label and description as you type and highlights the matching text; Enter in the box opens the first match, Arrow Down moves into the list, Arrow Up and Arrow Down, Home and End move between visible commands, and Escape returns to the box or clears it. Use the Description attribute (A01) for a one-line explanation and the Shortcut attribute (A02) for a keyboard shortcut shown as a key chip, for example Ctrl+N (separate keys with a plus sign; the shortcut is only displayed, not bound). The layout adapts to its container: in narrow columns the shortcut chips hide and descriptions move under the label. Template options: Compact rows, Hide search keeps arrow-key navigation without the box, Elevated floats the palette on a shadow with a glowing edge, and Two columns splits commands into two columns in wide containers. Without JavaScript it is a plain list of links and the search box stays hidden. The placeholder, the no-match message and the result count words are English text in the template; translate them there if needed.",
+  "attributes": { "a01": "Description", "a02": "Shortcut" },
+  "templateOptions": [
+    { "staticId": "COMPACT", "name": "Compact", "cssClass": "amc-TCommandList--compact", "sequence": 10, "help": "Denser rows with smaller icons, for long command lists." },
+    { "staticId": "HIDE_SEARCH", "name": "Hide search", "cssClass": "amc-TCommandList--noSearch", "sequence": 20, "help": "Hides the search box; arrow-key navigation still works in the list." },
+    { "staticId": "ELEVATED", "name": "Elevated", "cssClass": "amc-TCommandList--elevated", "sequence": 30, "help": "Floats the palette on a deep shadow with a primary-colored glow along its edge, like an open command menu." },
+    { "staticId": "TWO_COLUMNS", "name": "Two columns", "cssClass": "amc-TCommandList--columns", "sequence": 40, "help": "Splits the commands into two columns when the region is wider than about 720 pixels." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

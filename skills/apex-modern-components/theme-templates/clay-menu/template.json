@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Clay Menu",
+  "staticId": "AMC_TPL_CLAY_MENU",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "A claymorphism pill menu on a soft tray: pillowy pills with glossy icon bubbles, soft inner and outer shadows, and the current entry pressed into the tray.",
+  "useFor": "Page-level menus and filters with 3 to 10 entries: module sub-navigation, report views, status filters, a toolbar of quick actions above a report.",
+  "keywords": ["claymorphism", "clay", "pills", "menu", "soft ui", "tabs", "navigation"],
+  "helpText": "List template that shows entries as soft clay pills sitting on a tray. Each pill has a glossy icon bubble whose color rotates through the palette, and the current entry is pressed into the tray. Pills wrap onto more rows when space runs out. Use the Badge attribute (A01) for a short count shown in a small bubble. Template options: Vertical stacks full-width pills for side columns, Large makes pills taller for touch screens, Single color uses the primary color for every bubble, Icons only hides the labels visually (they stay available to screen readers, so give every entry an icon), and Fill row stretches pills to share the row. Keyboard focus shows a ring around the pill. Under reduced motion pills do not move; in forced-colors mode pills get system borders and the current entry a highlight border.",
+  "attributes": { "a01": "Badge" },
+  "templateOptions": [
+    { "staticId": "VERTICAL", "name": "Vertical", "cssClass": "amc-TClayMenu--vertical", "sequence": 10, "help": "Stacks the pills as full-width rows, for side columns and navigation panels." },
+    { "staticId": "LARGE", "name": "Large", "cssClass": "amc-TClayMenu--large", "sequence": 20, "help": "Taller pills and bigger icon bubbles for touch screens and kiosks." },
+    { "staticId": "SINGLE_COLOR", "name": "Single color", "cssClass": "amc-TClayMenu--mono", "sequence": 30, "help": "Every icon bubble uses the primary color instead of rotating through the palette." },
+    { "staticId": "ICONS_ONLY", "name": "Icons only", "cssClass": "amc-TClayMenu--iconsOnly", "sequence": 40, "help": "Shows round icon pills only; labels stay available to screen readers as the link name. Every entry needs an icon." },
+    { "staticId": "FILL_ROW", "name": "Fill row", "cssClass": "amc-TClayMenu--fill", "sequence": 50, "help": "Pills grow to share the full width of the row, like a segmented control." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

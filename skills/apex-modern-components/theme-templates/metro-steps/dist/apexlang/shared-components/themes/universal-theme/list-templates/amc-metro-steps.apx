@@ -1,0 +1,133 @@
+listTemplate amc-metro-steps (
+    name: AMC Metro Steps
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TMetroSteps #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <ol class="amc-TMetroSteps-line">
+            ```
+        afterEntries:
+            ```html
+            </ol>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TMetroSteps-station is-current"><a class="amc-TMetroSteps-link" href="#LINK#" aria-current="step"><span class="amc-TMetroSteps-marker" aria-hidden="true"><span class="amc-TMetroSteps-icon fa #ICON_CSS_CLASSES#"></span></span><span class="amc-TMetroSteps-text"><span class="amc-TMetroSteps-label">#TEXT#</span><span class="amc-TMetroSteps-caption">#A01#</span></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TMetroSteps-station"><a class="amc-TMetroSteps-link" href="#LINK#"><span class="amc-TMetroSteps-marker" aria-hidden="true"><span class="amc-TMetroSteps-icon fa #ICON_CSS_CLASSES#"></span></span><span class="amc-TMetroSteps-text"><span class="amc-TMetroSteps-label">#TEXT#</span><span class="amc-TMetroSteps-caption">#A01#</span></span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-metro-steps.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Caption
+    }
+    advanced {
+        staticId: AMC_TPL_METRO_STEPS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for wizard progress and process steps, drawn as a metro line. The current list entry is the current station; every entry before it is shown as completed (solid line, check mark) and every entry after it as planned (dashed line, station number). The current station shows the entry icon, pulses gently and carries its label on a station sign. Use the Caption attribute (A01) for a short line under the label such as a date or owner. The line runs horizontally in wide regions and switches to a vertical line when the region is narrower than about 36rem. Template options: Vertical always draws the line vertically, Staggered labels alternates labels above and below a horizontal line for long names, Compact makes stations smaller and hides captions, Numbers only shows the step number instead of the icon on the current station, and Calm turns off the pulse. The current entry has aria-current set to step. Completed states rely on the CSS :has selector (all current browsers); without it earlier stations look planned. Under reduced motion nothing pulses; in forced-colors mode stations and lines use system colors.
+            ```
+    }
+
+    templateOption amc-metro-steps-vertical (
+        name: Vertical
+        sequence: 10
+        appearance {
+            cssClasses: amc-TMetroSteps--vertical
+        }
+        help {
+            helpText:
+                ```text
+                Always draws the line vertically with labels beside the stations, for side columns.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: VERTICAL
+        }
+    )
+
+    templateOption amc-metro-steps-staggered (
+        name: Staggered labels
+        sequence: 20
+        appearance {
+            cssClasses: amc-TMetroSteps--staggered
+        }
+        help {
+            helpText:
+                ```text
+                On a horizontal line, every second label sits above the line, leaving twice the width for long station names.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STAGGERED
+        }
+    )
+
+    templateOption amc-metro-steps-compact (
+        name: Compact
+        sequence: 30
+        appearance {
+            cssClasses: amc-TMetroSteps--compact
+        }
+        help {
+            helpText:
+                ```text
+                Smaller stations and a thinner line; captions are hidden.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-metro-steps-numbers-only (
+        name: Numbers only
+        sequence: 40
+        appearance {
+            cssClasses: amc-TMetroSteps--numbers
+        }
+        help {
+            helpText:
+                ```text
+                Shows the step number on the current station instead of the entry icon.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NUMBERS_ONLY
+        }
+    )
+
+    templateOption amc-metro-steps-calm (
+        name: Calm
+        sequence: 50
+        appearance {
+            cssClasses: amc-TMetroSteps--calm
+        }
+        help {
+            helpText:
+                ```text
+                Turns off the pulse around the current station.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CALM
+        }
+    )
+)

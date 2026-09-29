@@ -1,0 +1,47 @@
+{
+  "samples": [
+    {
+      "title": "Order views",
+      "options": [],
+      "entries": [
+        { "text": "All orders", "link": "#", "icon": "fa-inbox", "a01": "128" },
+        { "text": "To pick", "link": "#", "icon": "fa-cubes", "current": true, "a01": "24" },
+        { "text": "Awaiting payment", "link": "#", "icon": "fa-credit-card", "a01": "9" },
+        { "text": "On hold", "link": "#", "icon": "fa-pause-circle", "a01": "3" },
+        { "text": "Shipped", "link": "#", "icon": "fa-truck" },
+        { "text": "Returns", "link": "#", "icon": "fa-undo", "a01": "7" }
+      ]
+    },
+    {
+      "title": "Vertical, single color",
+      "options": ["amc-TClayMenu--vertical", "amc-TClayMenu--mono"],
+      "entries": [
+        { "text": "My profile", "link": "#", "icon": "fa-user" },
+        { "text": "Leave requests", "link": "#", "icon": "fa-plane", "current": true, "a01": "2" },
+        { "text": "Payslips", "link": "#", "icon": "fa-money" },
+        { "text": "Training", "link": "#", "icon": "fa-graduation-cap", "a01": "1" },
+        { "text": "Documents", "link": "#", "icon": "fa-folder-open-o" }
+      ]
+    },
+    {
+      "title": "Icons only, large",
+      "options": ["amc-TClayMenu--iconsOnly", "amc-TClayMenu--large"],
+      "entries": [
+        { "text": "Dashboard", "link": "#", "icon": "fa-dashboard", "current": true },
+        { "text": "Customers", "link": "#", "icon": "fa-users" },
+        { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "14" },
+        { "text": "Warehouse", "link": "#", "icon": "fa-archive" },
+        { "text": "Settings", "link": "#", "icon": "fa-cog" }
+      ]
+    },
+    {
+      "title": "Fill row",
+      "options": ["amc-TClayMenu--fill"],
+      "entries": [
+        { "text": "Today", "link": "#", "icon": "fa-clock-o", "current": true },
+        { "text": "This week", "link": "#", "icon": "fa-calendar" },
+        { "text": "This quarter", "link": "#", "icon": "fa-bar-chart" }
+      ]
+    }
+  ]
+}

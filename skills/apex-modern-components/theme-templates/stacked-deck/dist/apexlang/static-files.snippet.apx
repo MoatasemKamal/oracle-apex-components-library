@@ -1,0 +1,4 @@
+file "amc-templates/amc-tpl-stacked-deck.css" (
+    mimeType: text/css
+    charSet: utf-8
+)

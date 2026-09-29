@@ -1,0 +1,227 @@
+/* Metro Steps: wizard progress list template for Universal Theme, drawn as a transit line.
+   Stations before the current entry are completed (found with :has on the following current
+   station), the current one pulses, later ones sit on a dashed planned line. The wrapper is a
+   size container: the line turns vertical below 36rem or with the Vertical option. */
+.amc-TMetroSteps {
+  --amc-tms-surface: var(--ut-component-background-color, #fff);
+  --amc-tms-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tms-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tms-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tms-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tms-track: color-mix(in srgb, var(--ut-component-text-default-color, #262626) 24%, transparent);
+  --amc-tms-slot: 2.5rem;
+  --amc-tms-t: 6px;
+  --amc-tms-m: 1.625rem;
+  --amc-tms-m-current: 2.5rem;
+  --amc-tms-top: 0rem;
+  --amc-tms-grad: 90deg;
+  container: amc-tms / inline-size;
+  color: var(--amc-tms-ink);
+}
+.amc-TMetroSteps:dir(rtl) { --amc-tms-grad: 270deg; }
+.amc-TMetroSteps-line {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: amc-tms;
+}
+.amc-TMetroSteps-station { position: relative; min-inline-size: 0; counter-increment: amc-tms; }
+
+/* Line segment from this station to the next one: planned (dashed) by default. */
+.amc-TMetroSteps-station::before {
+  content: "";
+  position: absolute;
+  inset-block-start: calc(var(--amc-tms-top) + var(--amc-tms-slot) / 2 - var(--amc-tms-t) / 2);
+  inset-inline-start: 50%;
+  inline-size: 100%;
+  block-size: var(--amc-tms-t);
+  border-radius: var(--amc-tms-t);
+  background: repeating-linear-gradient(var(--amc-tms-grad), var(--amc-tms-track) 0 10px, transparent 10px 16px);
+}
+.amc-TMetroSteps-station:last-child::before { display: none; }
+.amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current)::before { background: var(--amc-tms-accent); }
+.amc-TMetroSteps-station.is-current::before {
+  background:
+    linear-gradient(var(--amc-tms-grad), var(--amc-tms-accent) 0 42%, transparent 42%),
+    repeating-linear-gradient(var(--amc-tms-grad), var(--amc-tms-track) 0 10px, transparent 10px 16px);
+}
+
+.amc-TMetroSteps-link {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: .5rem;
+  padding: var(--amc-tms-top) .375rem .25rem;
+  border-radius: calc(var(--ut-component-border-radius, 4px) + 4px);
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+.amc-TMetroSteps-link:focus-visible { outline: 2px solid var(--amc-tms-accent); outline-offset: 2px; }
+.amc-TMetroSteps-link:hover .amc-TMetroSteps-label { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Stations */
+.amc-TMetroSteps-marker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--amc-tms-m);
+  block-size: var(--amc-tms-m);
+  margin-block: calc((var(--amc-tms-slot) - var(--amc-tms-m)) / 2);
+  border: 3px solid color-mix(in srgb, var(--amc-tms-ink) 34%, var(--amc-tms-surface));
+  border-radius: 50%;
+  background: var(--amc-tms-surface);
+  color: var(--amc-tms-muted);
+  font-size: .6875rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+.amc-TMetroSteps-marker::after { content: counter(amc-tms); line-height: 1; }
+.amc-TMetroSteps-icon { display: none; }
+.amc-TMetroSteps-link:hover .amc-TMetroSteps-marker { scale: 1.1; }
+
+.amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current) .amc-TMetroSteps-marker { border-color: var(--amc-tms-accent); color: var(--amc-tms-accent); }
+.amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current) .amc-TMetroSteps-marker::after {
+  content: "";
+  inline-size: .75rem;
+  block-size: .75rem;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 12.5 5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 12.5 5 5L20 6.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker {
+  --amc-tms-m: var(--amc-tms-m-current);
+  border: 0;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--amc-tms-accent-ink) 25%, transparent), transparent 60%), var(--amc-tms-accent);
+  color: var(--amc-tms-accent-ink);
+  font-size: .875rem;
+  box-shadow: 0 0 0 3px var(--amc-tms-surface), 0 0 0 5px color-mix(in srgb, var(--amc-tms-accent) 45%, transparent), 0 8px 18px -6px var(--amc-tms-accent);
+}
+.amc-TMetroSteps-station.is-current .amc-TMetroSteps-icon[class*="fa-"] { display: block; font-size: 1rem; }
+.amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker:has(.amc-TMetroSteps-icon[class*="fa-"])::after { display: none; }
+/* Pulse ring */
+.amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--amc-tms-accent);
+  opacity: 0;
+}
+
+.amc-TMetroSteps-text { display: grid; gap: .125rem; min-inline-size: 0; justify-items: center; }
+.amc-TMetroSteps-label {
+  font-size: .875rem;
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  color: color-mix(in srgb, var(--amc-tms-ink) 78%, transparent);
+}
+.amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current) .amc-TMetroSteps-label { color: var(--amc-tms-ink); }
+.amc-TMetroSteps-caption { font-size: .75rem; line-height: 1.3; color: var(--amc-tms-muted); unicode-bidi: isolate; }
+.amc-TMetroSteps-caption:empty { display: none; }
+/* Station sign on the current stop. */
+.amc-TMetroSteps-station.is-current .amc-TMetroSteps-label {
+  padding: .1875rem .5rem;
+  border-radius: .3125rem;
+  background: var(--amc-tms-ink);
+  color: var(--amc-tms-surface);
+  box-shadow: inset 0 -3px 0 var(--amc-tms-accent);
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------- template options */
+.amc-TMetroSteps--staggered { --amc-tms-top: 3.75rem; }
+/* Neighbours leave the space above or below free, so each label may use two columns. */
+.amc-TMetroSteps--staggered .amc-TMetroSteps-text { margin-inline: -50%; }
+.amc-TMetroSteps--staggered .amc-TMetroSteps-station:nth-child(even) .amc-TMetroSteps-text {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: -40%;
+  margin-inline: 0;
+  block-size: calc(var(--amc-tms-top) - .375rem);
+  align-content: end;
+}
+.amc-TMetroSteps--staggered .amc-TMetroSteps-station:first-child .amc-TMetroSteps-text,
+.amc-TMetroSteps--staggered .amc-TMetroSteps-station:last-child .amc-TMetroSteps-text { margin-inline: 0; inset-inline: .25rem; }
+.amc-TMetroSteps--compact { --amc-tms-slot: 1.75rem; --amc-tms-t: 4px; --amc-tms-m: 1.125rem; --amc-tms-m-current: 1.75rem; }
+.amc-TMetroSteps--compact .amc-TMetroSteps-marker { border-width: 2px; font-size: 0; }
+.amc-TMetroSteps--compact .amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker { font-size: .75rem; }
+.amc-TMetroSteps--compact .amc-TMetroSteps-station.is-current .amc-TMetroSteps-icon[class*="fa-"] { font-size: .75rem; }
+.amc-TMetroSteps--compact .amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current) .amc-TMetroSteps-marker::after { inline-size: .5625rem; block-size: .5625rem; }
+.amc-TMetroSteps--compact .amc-TMetroSteps-caption { display: none; }
+.amc-TMetroSteps--compact .amc-TMetroSteps-label { font-size: .8125rem; }
+.amc-TMetroSteps--numbers .amc-TMetroSteps-station.is-current .amc-TMetroSteps-icon[class*="fa-"] { display: none; }
+.amc-TMetroSteps--numbers .amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker:has(.amc-TMetroSteps-icon)::after { display: block; }
+.amc-TMetroSteps--calm .amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker::before { display: none; }
+.amc-TMetroSteps--vertical { --amc-tms-top: 0rem; }
+
+/* ---------------------------------------------------------------- vertical line */
+.amc-TMetroSteps--vertical .amc-TMetroSteps-line { grid-auto-flow: row; grid-auto-columns: auto; }
+.amc-TMetroSteps--vertical .amc-TMetroSteps-station { --amc-tms-grad: 180deg; }
+.amc-TMetroSteps--vertical .amc-TMetroSteps-station::before {
+  inset-block-start: calc(var(--amc-tms-slot) / 2);
+  inset-inline-start: calc(var(--amc-tms-slot) / 2 + .375rem - var(--amc-tms-t) / 2);
+  inline-size: var(--amc-tms-t);
+  block-size: 100%;
+}
+.amc-TMetroSteps--vertical .amc-TMetroSteps-link {
+  grid-template-columns: var(--amc-tms-slot) minmax(0, 1fr);
+  justify-items: start;
+  column-gap: .875rem;
+  padding: 0 .375rem 1.25rem;
+  text-align: start;
+}
+.amc-TMetroSteps--vertical .amc-TMetroSteps-marker { justify-self: center; }
+.amc-TMetroSteps--vertical .amc-TMetroSteps-text { justify-items: start; padding-block-start: calc(var(--amc-tms-slot) / 2 - .625rem); }
+.amc-TMetroSteps--vertical .amc-TMetroSteps-station:last-child .amc-TMetroSteps-link { padding-block-end: .25rem; }
+.amc-TMetroSteps--vertical.amc-TMetroSteps--staggered .amc-TMetroSteps-station:nth-child(even) .amc-TMetroSteps-text { position: static; block-size: auto; }
+.amc-TMetroSteps--vertical.amc-TMetroSteps--staggered .amc-TMetroSteps-station .amc-TMetroSteps-text { margin-inline: 0; }
+
+@container amc-tms (max-width: 36rem) {
+  .amc-TMetroSteps-station { --amc-tms-top: 0rem; --amc-tms-grad: 180deg; }
+  .amc-TMetroSteps-line { grid-auto-flow: row; grid-auto-columns: auto; }
+  .amc-TMetroSteps-station::before {
+    inset-block-start: calc(var(--amc-tms-slot) / 2);
+    inset-inline-start: calc(var(--amc-tms-slot) / 2 + .375rem - var(--amc-tms-t) / 2);
+    inline-size: var(--amc-tms-t);
+    block-size: 100%;
+  }
+  .amc-TMetroSteps-link {
+    grid-template-columns: var(--amc-tms-slot) minmax(0, 1fr);
+    justify-items: start;
+    column-gap: .875rem;
+    padding: 0 .375rem 1.25rem;
+    text-align: start;
+  }
+  .amc-TMetroSteps-marker { justify-self: center; }
+  .amc-TMetroSteps-text { justify-items: start; padding-block-start: calc(var(--amc-tms-slot) / 2 - .625rem); }
+  .amc-TMetroSteps-station:last-child .amc-TMetroSteps-link { padding-block-end: .25rem; }
+  .amc-TMetroSteps--staggered .amc-TMetroSteps-station:nth-child(even) .amc-TMetroSteps-text { position: static; block-size: auto; }
+  .amc-TMetroSteps--staggered .amc-TMetroSteps-station .amc-TMetroSteps-text { margin-inline: 0; }
+}
+
+/* ---------------------------------------------------------------- motion */
+@keyframes amc-tms-pulse { 0% { opacity: .75; scale: 1; } 70%, 100% { opacity: 0; scale: 1.9; } }
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker::before { animation: amc-tms-pulse 2.2s cubic-bezier(0, 0, .2, 1) infinite; }
+  .amc-TMetroSteps-marker { transition: scale .2s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TMetroSteps-link:hover .amc-TMetroSteps-marker { scale: none; }
+}
+@media (forced-colors: active) {
+  .amc-TMetroSteps-station::before { background: GrayText; }
+  .amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current)::before, .amc-TMetroSteps-station.is-current::before { background: Highlight; }
+  .amc-TMetroSteps-marker { border-color: CanvasText; }
+  .amc-TMetroSteps-station.is-current .amc-TMetroSteps-marker { background: Highlight; color: HighlightText; }
+  .amc-TMetroSteps-station:has(~ .amc-TMetroSteps-station.is-current) .amc-TMetroSteps-marker::after { background: CanvasText; }
+  .amc-TMetroSteps-station.is-current .amc-TMetroSteps-label { border: 1px solid CanvasText; }
+}

@@ -1,0 +1,36 @@
+{
+  "samples": [
+    {
+      "title": "Module launchpad",
+      "options": [],
+      "entries": [
+        { "text": "Sales orders", "link": "#", "icon": "fa-shopping-cart", "a01": "Create quotes, confirm orders and track shipments." },
+        { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "Issue, send and chase customer invoices." },
+        { "text": "Warehouse", "link": "#", "icon": "fa-cubes", "current": true, "a01": "Stock levels, picking waves and transfers." },
+        { "text": "Customers", "link": "#", "icon": "fa-users", "a01": "Accounts, contacts and credit limits." },
+        { "text": "Approvals", "link": "#", "icon": "fa-check-square-o", "a01": "Everything waiting for your decision." },
+        { "text": "People", "link": "#", "icon": "fa-id-badge", "a01": "Leave, payroll and the team directory." }
+      ]
+    },
+    {
+      "title": "Sticker tilt, heavy",
+      "options": ["amc-TBrutalLinks--sticker", "amc-TBrutalLinks--heavy"],
+      "entries": [
+        { "text": "Request leave", "link": "#", "icon": "fa-plane", "a01": "Takes two minutes." },
+        { "text": "Submit an expense", "link": "#", "icon": "fa-credit-card", "a01": "Snap the receipt, we do the rest." },
+        { "text": "Book a meeting room", "link": "#", "icon": "fa-calendar", "a01": "12 rooms free this afternoon." },
+        { "text": "IT help desk", "link": "#", "icon": "fa-life-ring", "a01": "Average reply in 3.4 hours." }
+      ]
+    },
+    {
+      "title": "Rows, monochrome",
+      "options": ["amc-TBrutalLinks--rows", "amc-TBrutalLinks--mono"],
+      "entries": [
+        { "text": "Aged receivables report", "link": "#", "icon": "fa-bar-chart", "a01": "Open balances by customer and ageing bucket." },
+        { "text": "Stock valuation", "link": "#", "icon": "fa-balance-scale", "current": true, "a01": "Weighted average cost per warehouse." },
+        { "text": "Supplier scorecard", "link": "#", "icon": "fa-truck", "a01": "On-time delivery and quality by supplier." },
+        { "text": "Headcount by department", "link": "#", "icon": "fa-sitemap" }
+      ]
+    }
+  ]
+}

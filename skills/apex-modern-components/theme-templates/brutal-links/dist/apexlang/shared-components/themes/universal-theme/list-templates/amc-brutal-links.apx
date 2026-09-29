@@ -1,0 +1,113 @@
+listTemplate amc-brutal-links (
+    name: AMC Brutal Links
+    list {
+        beforeEntries:
+            ```html
+            <ul class="amc-TBrutalLinks #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TBrutalLinks-item is-current"><a class="amc-TBrutalLinks-card" href="#LINK#" aria-current="page"><span class="amc-TBrutalLinks-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TBrutalLinks-text"><span class="amc-TBrutalLinks-label">#TEXT#</span><span class="amc-TBrutalLinks-desc">#A01#</span></span><span class="amc-TBrutalLinks-arrow" aria-hidden="true"></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TBrutalLinks-item"><a class="amc-TBrutalLinks-card" href="#LINK#"><span class="amc-TBrutalLinks-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TBrutalLinks-text"><span class="amc-TBrutalLinks-label">#TEXT#</span><span class="amc-TBrutalLinks-desc">#A01#</span></span><span class="amc-TBrutalLinks-arrow" aria-hidden="true"></span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-brutal-links.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+    }
+    advanced {
+        staticId: AMC_TPL_BRUTAL_LINKS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template that renders each entry as a neo-brutalist card: a thick border in the theme's text color, a hard offset shadow (mirrored in right-to-left languages), a flat tinted fill that cycles through the primary, warning, success, danger and a warning-danger orange palette tint, the entry icon in a square badge and a large arrow. Hover lifts the card, clicking presses it flat into its shadow. The current entry is inverted. Use the Description attribute (A01) for one or two lines of explanation. Template options: Sticker tilt rotates the cards slightly like stickers, Monochrome drops the rotating fills, Rows lays entries out as full-width rows, and Heavy uses thicker borders and deeper shadows. Keyboard focus shows the same lift as hover plus a focus ring. Under reduced motion cards change without movement; in forced-colors mode shadows are replaced by system borders.
+            ```
+    }
+
+    templateOption amc-brutal-links-sticker (
+        name: Sticker tilt
+        sequence: 10
+        appearance {
+            cssClasses: amc-TBrutalLinks--sticker
+        }
+        help {
+            helpText:
+                ```text
+                Rotates alternating cards by a degree or two, like stickers on a board. Cards straighten on hover and focus.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STICKER
+        }
+    )
+
+    templateOption amc-brutal-links-monochrome (
+        name: Monochrome
+        sequence: 20
+        appearance {
+            cssClasses: amc-TBrutalLinks--mono
+        }
+        help {
+            helpText:
+                ```text
+                All cards use the plain surface color; only the current entry and the icon badges use the primary color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MONOCHROME
+        }
+    )
+
+    templateOption amc-brutal-links-rows (
+        name: Rows
+        sequence: 30
+        appearance {
+            cssClasses: amc-TBrutalLinks--rows
+        }
+        help {
+            helpText:
+                ```text
+                One full-width row per entry with the icon, text and arrow on one line, for side columns and long descriptions.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ROWS
+        }
+    )
+
+    templateOption amc-brutal-links-heavy (
+        name: Heavy
+        sequence: 40
+        appearance {
+            cssClasses: amc-TBrutalLinks--heavy
+        }
+        help {
+            helpText:
+                ```text
+                Thicker 3px borders, deeper shadows and larger titles for poster-like landing pages.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: HEAVY
+        }
+    )
+)

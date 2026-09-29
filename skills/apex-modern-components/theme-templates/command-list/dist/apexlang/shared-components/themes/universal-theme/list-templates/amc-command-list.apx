@@ -1,0 +1,128 @@
+listTemplate amc-command-list (
+    name: AMC Command List
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TCommandList #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <div class="amc-TCommandList-search" hidden>
+            <span class="amc-TCommandList-searchIcon" aria-hidden="true"></span>
+            <input type="search" class="amc-TCommandList-input" placeholder="Type a command or search" aria-label="Filter commands" autocomplete="off" spellcheck="false">
+            <kbd class="amc-TCommandList-escKey" aria-hidden="true">Esc</kbd>
+            </div>
+            <ul class="amc-TCommandList-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <p class="amc-TCommandList-empty" hidden>No matching commands</p>
+            <p class="amc-TCommandList-status" role="status" aria-live="polite" data-results="results"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TCommandList-item is-current"><a class="amc-TCommandList-link" href="#LINK#" aria-current="page"><span class="amc-TCommandList-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandList-text"><span class="amc-TCommandList-label">#TEXT#</span><span class="amc-TCommandList-desc">#A01#</span></span><kbd class="amc-TCommandList-kbd">#A02#</kbd><span class="amc-TCommandList-enter" aria-hidden="true"></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TCommandList-item"><a class="amc-TCommandList-link" href="#LINK#"><span class="amc-TCommandList-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandList-text"><span class="amc-TCommandList-label">#TEXT#</span><span class="amc-TCommandList-desc">#A01#</span></span><kbd class="amc-TCommandList-kbd">#A02#</kbd><span class="amc-TCommandList-enter" aria-hidden="true"></span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-command-list.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-command-list.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Shortcut
+    }
+    advanced {
+        staticId: AMC_TPL_COMMAND_LIST
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template shaped like a command palette. The search box filters entries by their label and description as you type and highlights the matching text; Enter in the box opens the first match, Arrow Down moves into the list, Arrow Up and Arrow Down, Home and End move between visible commands, and Escape returns to the box or clears it. Use the Description attribute (A01) for a one-line explanation and the Shortcut attribute (A02) for a keyboard shortcut shown as a key chip, for example Ctrl+N (separate keys with a plus sign; the shortcut is only displayed, not bound). The layout adapts to its container: in narrow columns the shortcut chips hide and descriptions move under the label. Template options: Compact rows, Hide search keeps arrow-key navigation without the box, Elevated floats the palette on a shadow with a glowing edge, and Two columns splits commands into two columns in wide containers. Without JavaScript it is a plain list of links and the search box stays hidden. The placeholder, the no-match message and the result count words are English text in the template; translate them there if needed.
+            ```
+    }
+
+    templateOption amc-command-list-compact (
+        name: Compact
+        sequence: 10
+        appearance {
+            cssClasses: amc-TCommandList--compact
+        }
+        help {
+            helpText:
+                ```text
+                Denser rows with smaller icons, for long command lists.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-command-list-hide-search (
+        name: Hide search
+        sequence: 20
+        appearance {
+            cssClasses: amc-TCommandList--noSearch
+        }
+        help {
+            helpText:
+                ```text
+                Hides the search box; arrow-key navigation still works in the list.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: HIDE_SEARCH
+        }
+    )
+
+    templateOption amc-command-list-elevated (
+        name: Elevated
+        sequence: 30
+        appearance {
+            cssClasses: amc-TCommandList--elevated
+        }
+        help {
+            helpText:
+                ```text
+                Floats the palette on a deep shadow with a primary-colored glow along its edge, like an open command menu.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ELEVATED
+        }
+    )
+
+    templateOption amc-command-list-two-columns (
+        name: Two columns
+        sequence: 40
+        appearance {
+            cssClasses: amc-TCommandList--columns
+        }
+        help {
+            helpText:
+                ```text
+                Splits the commands into two columns when the region is wider than about 720 pixels.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TWO_COLUMNS
+        }
+    )
+)

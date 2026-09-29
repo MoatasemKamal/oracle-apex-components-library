@@ -1,0 +1,277 @@
+/* Stacked Deck: list template for Universal Theme. At rest the entries are a deck of cards in
+   perspective (front card first, up to three peeking out behind it, smaller and shaded); hover or
+   keyboard focus fans the deck out into a readable list. Touch screens always see the list.
+   Base rules describe the open list; the resting stack is layered on only for hover devices. */
+.amc-TStackedDeck {
+  --amc-tdeck-surface: var(--ut-component-background-color, #fff);
+  --amc-tdeck-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-tdeck-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tdeck-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tdeck-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tdeck-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tdeck-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tdeck-shadow: color-mix(in srgb, var(--ut-component-text-default-color, #262626) 20%, transparent);
+  --amc-tdeck-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-tdeck-h: 4.5rem;
+  --amc-tdeck-peek: .75rem;
+  --amc-tdeck-gap: .5rem;
+  --amc-tdeck-ease: cubic-bezier(.2, .8, .2, 1);
+  position: relative;
+  display: grid;
+  margin: 0;
+  padding: 0 0 .25rem;
+  list-style: none;
+  counter-reset: amc-tdeck;
+  perspective: 900px;
+  perspective-origin: 50% 0;
+  color: var(--amc-tdeck-ink);
+}
+@supports (color: oklch(from currentColor l c h)) {
+  /* A shadow that is darker than the page in light and dark styles alike. */
+  .amc-TStackedDeck { --amc-tdeck-shadow: oklch(from var(--amc-tdeck-body) calc(l * .25) c h / .55); }
+}
+
+.amc-TStackedDeck-item {
+  --amc-tdeck-i: 8;
+  position: relative;
+  z-index: calc(20 - var(--amc-tdeck-i));
+  counter-increment: amc-tdeck;
+  margin-block-start: var(--amc-tdeck-gap);
+  transform-origin: 50% 100%;
+}
+.amc-TStackedDeck-item:first-child { margin-block-start: 0; }
+.amc-TStackedDeck-item:nth-child(1) { --amc-tdeck-i: 0; }
+.amc-TStackedDeck-item:nth-child(2) { --amc-tdeck-i: 1; }
+.amc-TStackedDeck-item:nth-child(3) { --amc-tdeck-i: 2; }
+.amc-TStackedDeck-item:nth-child(4) { --amc-tdeck-i: 3; }
+.amc-TStackedDeck-item:nth-child(5) { --amc-tdeck-i: 4; }
+.amc-TStackedDeck-item:nth-child(6) { --amc-tdeck-i: 5; }
+.amc-TStackedDeck-item:nth-child(7) { --amc-tdeck-i: 6; }
+
+.amc-TStackedDeck-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .875rem;
+  box-sizing: border-box;
+  min-block-size: var(--amc-tdeck-h);
+  max-block-size: 14rem;
+  padding: .75rem 1rem;
+  overflow: hidden;
+  border: 1px solid var(--amc-tdeck-line);
+  border-radius: var(--amc-tdeck-radius);
+  background: linear-gradient(180deg, var(--amc-tdeck-surface), color-mix(in srgb, var(--amc-tdeck-surface) 96%, var(--amc-tdeck-ink)));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tdeck-surface) 60%, transparent),
+    0 1px 2px color-mix(in srgb, var(--amc-tdeck-shadow) 30%, transparent),
+    0 14px 28px -18px var(--amc-tdeck-shadow);
+  color: inherit;
+  text-decoration: none;
+}
+/* Shade that darkens cards further back in the deck. */
+.amc-TStackedDeck-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--amc-tdeck-body);
+  opacity: 0;
+  pointer-events: none;
+}
+.amc-TStackedDeck-card:hover {
+  border-color: color-mix(in srgb, var(--amc-tdeck-accent) 35%, var(--amc-tdeck-line));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tdeck-surface) 60%, transparent),
+    0 2px 4px color-mix(in srgb, var(--amc-tdeck-shadow) 30%, transparent),
+    0 22px 36px -20px var(--amc-tdeck-shadow);
+  transform: translateY(-2px);
+}
+.amc-TStackedDeck-card:focus-visible {
+  outline: 2px solid var(--amc-tdeck-accent);
+  outline-offset: 3px;
+}
+
+.amc-TStackedDeck-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: calc(var(--amc-tdeck-radius) - 3px);
+  font-size: 1rem;
+  color: var(--amc-tdeck-accent);
+  background:
+    radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--amc-tdeck-surface) 70%, transparent), transparent 60%),
+    color-mix(in srgb, var(--amc-tdeck-accent) 14%, var(--amc-tdeck-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tdeck-accent) 22%, transparent);
+}
+.amc-TStackedDeck-icon:not([class*="fa-"]) { display: none; }
+
+.amc-TStackedDeck-text { display: grid; flex: 1; min-inline-size: 0; gap: .125rem; }
+.amc-TStackedDeck-label {
+  font-size: .9375rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.005em;
+  overflow-wrap: anywhere;
+}
+.amc-TStackedDeck-desc {
+  font-size: .8125rem;
+  line-height: 1.35;
+  color: var(--amc-tdeck-muted);
+  unicode-bidi: isolate;
+}
+.amc-TStackedDeck-desc:empty, .amc-TStackedDeck-meta:empty { display: none; }
+.amc-TStackedDeck-meta {
+  flex: none;
+  padding: .1875rem .5rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  color: var(--amc-tdeck-ink);
+  background: color-mix(in srgb, var(--amc-tdeck-ink) 7%, transparent);
+  box-shadow: inset 0 0 0 1px var(--amc-tdeck-line);
+  white-space: nowrap;
+}
+.amc-TStackedDeck-chevron {
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  margin-inline: .125rem .25rem;
+  border-block-start: 2px solid var(--amc-tdeck-muted);
+  border-inline-end: 2px solid var(--amc-tdeck-muted);
+  transform: rotate(45deg);
+}
+.amc-TStackedDeck-chevron:dir(rtl) { transform: rotate(-45deg); }
+.amc-TStackedDeck-card:hover .amc-TStackedDeck-chevron,
+.amc-TStackedDeck-card:focus-visible .amc-TStackedDeck-chevron {
+  border-color: var(--amc-tdeck-accent);
+  translate: .1875rem 0;
+}
+.amc-TStackedDeck-card:hover .amc-TStackedDeck-chevron:dir(rtl),
+.amc-TStackedDeck-card:focus-visible .amc-TStackedDeck-chevron:dir(rtl) { translate: -.1875rem 0; }
+
+/* Current entry: accent ring and filled icon. */
+.amc-TStackedDeck-item.is-current .amc-TStackedDeck-card {
+  border-color: color-mix(in srgb, var(--amc-tdeck-accent) 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--amc-tdeck-accent) 16%, transparent),
+    0 14px 28px -18px var(--amc-tdeck-shadow);
+}
+.amc-TStackedDeck-item.is-current .amc-TStackedDeck-icon {
+  color: var(--amc-tdeck-accent-ink);
+  background: var(--amc-tdeck-accent);
+  box-shadow: 0 6px 14px -6px var(--amc-tdeck-accent);
+}
+.amc-TStackedDeck-item.is-current .amc-TStackedDeck-label { color: var(--amc-tdeck-accent); }
+
+/* Card count badge on the resting deck, from a CSS counter. */
+.amc-TStackedDeck::after {
+  content: counter(amc-tdeck);
+  content: counter(amc-tdeck) / "";
+  position: absolute;
+  inset-block-start: -.5rem;
+  inset-inline-end: -.375rem;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  min-inline-size: 1.375rem;
+  block-size: 1.375rem;
+  padding-inline: .3125rem;
+  box-sizing: border-box;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--amc-tdeck-accent-ink);
+  background: var(--amc-tdeck-accent);
+  box-shadow: 0 0 0 2px var(--amc-tdeck-body);
+  opacity: 0;
+  scale: .6;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- resting deck (hover devices) */
+@media (hover: hover) {
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-card {
+    max-block-size: var(--amc-tdeck-h);
+  }
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-label,
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-desc {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-item:nth-child(n+2) {
+    margin-block-start: calc(var(--amc-tdeck-peek) - var(--amc-tdeck-h));
+    transform: translateZ(calc(var(--amc-tdeck-i) * -40px)) scale(calc(1 - var(--amc-tdeck-i) * .045));
+  }
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-item:nth-child(n+2) .amc-TStackedDeck-card::after {
+    opacity: calc(.1 + var(--amc-tdeck-i) * .1);
+  }
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-item:nth-child(n+5) {
+    margin-block-start: calc(-1 * var(--amc-tdeck-h));
+    opacity: 0;
+  }
+  .amc-TStackedDeck:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within)::after { opacity: 1; scale: 1; }
+
+  /* Tilted deck: the resting stack lies back in 3D. */
+  .amc-TStackedDeck--tilt:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-item:nth-child(n) {
+    transform: rotateX(24deg) translateZ(calc(var(--amc-tdeck-i) * -40px)) scale(calc(1 - var(--amc-tdeck-i) * .045));
+  }
+  .amc-TStackedDeck--tilt:not(.amc-TStackedDeck--open):not(:hover):not(:focus-within) .amc-TStackedDeck-item:first-child .amc-TStackedDeck-card {
+    box-shadow: 0 26px 30px -22px var(--amc-tdeck-shadow);
+  }
+}
+
+/* ---------------------------------------------------------------- template options */
+.amc-TStackedDeck--open { perspective: none; }
+.amc-TStackedDeck--open .amc-TStackedDeck-item:nth-child(n+2) .amc-TStackedDeck-card::after { opacity: 0; }
+.amc-TStackedDeck--tilt { perspective: 700px; perspective-origin: 50% -40%; }
+.amc-TStackedDeck--compact { --amc-tdeck-h: 3.375rem; --amc-tdeck-peek: .5rem; --amc-tdeck-gap: .375rem; }
+.amc-TStackedDeck--compact .amc-TStackedDeck-card { gap: .625rem; padding: .5rem .75rem; }
+.amc-TStackedDeck--compact .amc-TStackedDeck-icon { inline-size: 2rem; block-size: 2rem; font-size: .875rem; }
+.amc-TStackedDeck--compact .amc-TStackedDeck-label { font-size: .875rem; }
+.amc-TStackedDeck--compact .amc-TStackedDeck-desc { font-size: .75rem; }
+.amc-TStackedDeck--solidCurrent .amc-TStackedDeck-item.is-current .amc-TStackedDeck-card {
+  border-color: transparent;
+  color: var(--amc-tdeck-accent-ink);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--amc-tdeck-accent-ink) 18%, transparent), transparent 55%),
+    var(--amc-tdeck-accent);
+  box-shadow: 0 16px 30px -16px var(--amc-tdeck-accent);
+}
+.amc-TStackedDeck--solidCurrent .amc-TStackedDeck-item.is-current .amc-TStackedDeck-label { color: inherit; }
+.amc-TStackedDeck--solidCurrent .amc-TStackedDeck-item.is-current .amc-TStackedDeck-desc { color: color-mix(in srgb, var(--amc-tdeck-accent-ink) 80%, transparent); }
+.amc-TStackedDeck--solidCurrent .amc-TStackedDeck-item.is-current .amc-TStackedDeck-icon {
+  color: var(--amc-tdeck-accent);
+  background: var(--amc-tdeck-accent-ink);
+}
+.amc-TStackedDeck--solidCurrent .amc-TStackedDeck-item.is-current .amc-TStackedDeck-meta {
+  color: inherit;
+  background: color-mix(in srgb, var(--amc-tdeck-accent-ink) 18%, transparent);
+  box-shadow: none;
+}
+.amc-TStackedDeck--solidCurrent .amc-TStackedDeck-item.is-current .amc-TStackedDeck-chevron { border-color: currentColor; }
+
+/* ---------------------------------------------------------------- motion */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TStackedDeck-item {
+    transition: margin-block-start .42s var(--amc-tdeck-ease), transform .42s var(--amc-tdeck-ease), opacity .3s ease;
+    transition-delay: calc(var(--amc-tdeck-i) * 28ms);
+  }
+  .amc-TStackedDeck-card { transition: max-block-size .42s var(--amc-tdeck-ease), transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .amc-TStackedDeck-card::after { transition: opacity .3s ease; }
+  .amc-TStackedDeck-chevron { transition: translate .2s ease, border-color .2s ease; }
+  .amc-TStackedDeck::after { transition: opacity .2s ease, scale .3s var(--amc-tdeck-ease); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TStackedDeck-card:hover { transform: none; }
+}
+@media (forced-colors: active) {
+  .amc-TStackedDeck-card { border: 1px solid CanvasText; }
+  .amc-TStackedDeck-card::after { display: none; }
+  .amc-TStackedDeck-item.is-current .amc-TStackedDeck-card { border: 3px solid Highlight; }
+  .amc-TStackedDeck-chevron { border-color: CanvasText; }
+}

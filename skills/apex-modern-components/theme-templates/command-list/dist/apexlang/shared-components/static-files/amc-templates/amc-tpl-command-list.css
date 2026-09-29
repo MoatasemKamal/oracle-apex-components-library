@@ -1,0 +1,259 @@
+/* Command List: command-palette list template for Universal Theme. The search box and arrow-key
+   navigation come from amc-tpl-command-list.js; without it the template is a plain list of links.
+   The row layout follows the container: shortcut chips appear from 28rem, descriptions go inline
+   from 44rem, and the Two columns option splits the list from 45rem. */
+.amc-TCommandList {
+  --amc-tcmd-surface: var(--ut-component-background-color, #fff);
+  --amc-tcmd-body: var(--ut-body-background-color, #f8f8f8);
+  --amc-tcmd-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tcmd-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tcmd-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tcmd-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tcmd-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tcmd-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-tcmd-row: 3.25rem;
+  --amc-tcmd-icon: 2.125rem;
+  container-type: inline-size;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border: 1px solid var(--amc-tcmd-line);
+  border-radius: var(--amc-tcmd-radius);
+  background: var(--amc-tcmd-surface);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tcmd-ink) 6%, transparent), 0 12px 32px -20px color-mix(in srgb, var(--amc-tcmd-ink) 30%, transparent);
+  color: var(--amc-tcmd-ink);
+}
+.amc-TCommandList:has(.amc-TCommandList-input:focus-visible) {
+  border-color: color-mix(in srgb, var(--amc-tcmd-accent) 55%, var(--amc-tcmd-line));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--amc-tcmd-accent) 14%, transparent), 0 12px 32px -20px color-mix(in srgb, var(--amc-tcmd-ink) 30%, transparent);
+}
+
+/* ---------------------------------------------------------------- search */
+.amc-TCommandList-search {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .875rem;
+  border-block-end: 1px solid var(--amc-tcmd-line);
+}
+.amc-TCommandList-search[hidden] { display: none; }
+.amc-TCommandList-searchIcon {
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  background: var(--amc-tcmd-muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m15.5 15.5 5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m15.5 15.5 5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.amc-TCommandList:has(.amc-TCommandList-input:focus) .amc-TCommandList-searchIcon { background: var(--amc-tcmd-accent); }
+.amc-TCommandList-input {
+  flex: 1;
+  min-inline-size: 0;
+  block-size: 2.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  outline: none;
+}
+.amc-TCommandList-input::placeholder { color: var(--amc-tcmd-muted); opacity: 1; }
+.amc-TCommandList-input::-webkit-search-cancel-button { display: none; }
+
+.amc-TCommandList-kbd, .amc-TCommandList-escKey {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 1.375rem;
+  block-size: 1.375rem;
+  box-sizing: border-box;
+  padding-inline: .3125rem;
+  border: 1px solid var(--amc-tcmd-line);
+  border-block-end-width: 2px;
+  border-radius: .3125rem;
+  background: color-mix(in srgb, var(--amc-tcmd-body) 70%, var(--amc-tcmd-surface));
+  color: var(--amc-tcmd-muted);
+  font: inherit;
+  font-size: .6875rem;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+  direction: ltr;
+}
+.amc-TCommandList-escKey { flex: none; }
+
+/* ---------------------------------------------------------------- list */
+.amc-TCommandList-list {
+  display: grid;
+  gap: .125rem;
+  margin: 0;
+  padding: .375rem;
+  list-style: none;
+}
+.amc-TCommandList-item[hidden] { display: none; }
+.amc-TCommandList-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-block-size: var(--amc-tcmd-row);
+  box-sizing: border-box;
+  padding: .4375rem .625rem;
+  border-radius: calc(var(--amc-tcmd-radius) - 5px);
+  color: inherit;
+  text-decoration: none;
+  scroll-margin: .5rem;
+}
+.amc-TCommandList-link:hover,
+.amc-TCommandList-link:focus-visible,
+.amc-TCommandList-item.is-first .amc-TCommandList-link {
+  background: color-mix(in srgb, var(--amc-tcmd-accent) 9%, transparent);
+}
+.amc-TCommandList-link:focus-visible {
+  outline: 2px solid var(--amc-tcmd-accent);
+  outline-offset: -2px;
+}
+.amc-TCommandList-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--amc-tcmd-icon);
+  block-size: var(--amc-tcmd-icon);
+  border-radius: .5625rem;
+  font-size: .9375rem;
+  color: var(--amc-tcmd-muted);
+  background: color-mix(in srgb, var(--amc-tcmd-ink) 5%, transparent);
+  box-shadow: inset 0 0 0 1px var(--amc-tcmd-line);
+}
+.amc-TCommandList-icon:not([class*="fa-"]) { display: none; }
+.amc-TCommandList-link:hover .amc-TCommandList-icon,
+.amc-TCommandList-link:focus-visible .amc-TCommandList-icon,
+.amc-TCommandList-item.is-first .amc-TCommandList-icon {
+  color: var(--amc-tcmd-accent-ink);
+  background: var(--amc-tcmd-accent);
+  box-shadow: 0 4px 10px -4px var(--amc-tcmd-accent);
+}
+.amc-TCommandList-text { display: grid; flex: 1; min-inline-size: 0; gap: .0625rem; }
+.amc-TCommandList-label { font-size: .875rem; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TCommandList-desc { font-size: .75rem; line-height: 1.35; color: var(--amc-tcmd-muted); unicode-bidi: isolate; }
+.amc-TCommandList-desc:empty { display: none; }
+.amc-TCommandList-mark {
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--amc-tcmd-accent) 24%, transparent);
+  color: inherit;
+  box-shadow: 0 2px 0 -1px var(--amc-tcmd-accent);
+}
+.amc-TCommandList-kbd { display: none; }
+.amc-TCommandList-kbd:empty { display: none; }
+.amc-TCommandList-keys { display: none; flex: none; gap: .1875rem; direction: ltr; unicode-bidi: isolate; }
+
+/* Return-key hint on the active row. */
+.amc-TCommandList-enter {
+  flex: none;
+  inline-size: 1rem;
+  block-size: 1rem;
+  background: var(--amc-tcmd-accent);
+  opacity: 0;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 5v7a3 3 0 0 1-3 3H5'/%3E%3Cpath d='m9 11-4 4 4 4'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 5v7a3 3 0 0 1-3 3H5'/%3E%3Cpath d='m9 11-4 4 4 4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.amc-TCommandList-enter:dir(rtl) { scale: -1 1; }
+.amc-TCommandList-link:hover .amc-TCommandList-enter,
+.amc-TCommandList-link:focus-visible .amc-TCommandList-enter,
+.amc-TCommandList-item.is-first .amc-TCommandList-enter { opacity: 1; }
+
+/* Current entry: accent label and a filled dot on the icon. */
+.amc-TCommandList-item.is-current .amc-TCommandList-label { color: var(--amc-tcmd-accent); }
+.amc-TCommandList-item.is-current .amc-TCommandList-icon { color: var(--amc-tcmd-accent); box-shadow: inset 0 0 0 1.5px var(--amc-tcmd-accent); }
+
+.amc-TCommandList-empty {
+  margin: 0;
+  padding: 1.5rem 1rem 1.75rem;
+  text-align: center;
+  font-size: .875rem;
+  color: var(--amc-tcmd-muted);
+}
+.amc-TCommandList-empty[hidden] { display: none; }
+.amc-TCommandList-status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- container-driven layout */
+@container (max-width: 20rem) {
+  .amc-TCommandList-escKey { display: none; }
+}
+@container (min-width: 28rem) {
+  .amc-TCommandList-kbd { display: inline-grid; }
+  .amc-TCommandList-kbd:empty { display: none; }
+  .amc-TCommandList-keys { display: inline-flex; }
+}
+@container (min-width: 44rem) {
+  .amc-TCommandList:not(.amc-TCommandList--columns) .amc-TCommandList-text {
+    display: flex;
+    align-items: baseline;
+    gap: .625rem;
+  }
+  .amc-TCommandList:not(.amc-TCommandList--columns) .amc-TCommandList-label { flex: none; max-inline-size: 45%; }
+  .amc-TCommandList:not(.amc-TCommandList--columns) .amc-TCommandList-desc {
+    min-inline-size: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .amc-TCommandList:not(.amc-TCommandList--columns) .amc-TCommandList-desc::before {
+    content: "";
+    display: inline-block;
+    inline-size: .25rem;
+    block-size: .25rem;
+    margin-inline-end: .625rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    background: currentColor;
+    opacity: .5;
+  }
+}
+@container (min-width: 45rem) {
+  .amc-TCommandList--columns .amc-TCommandList-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: .375rem; }
+}
+
+/* ---------------------------------------------------------------- template options */
+.amc-TCommandList--compact { --amc-tcmd-row: 2.5rem; --amc-tcmd-icon: 1.625rem; }
+.amc-TCommandList--compact .amc-TCommandList-link { gap: .625rem; padding-block: .25rem; }
+.amc-TCommandList--compact .amc-TCommandList-icon { font-size: .8125rem; border-radius: .4375rem; }
+.amc-TCommandList--noSearch .amc-TCommandList-search { display: none; }
+.amc-TCommandList--elevated {
+  border-color: color-mix(in srgb, var(--amc-tcmd-accent) 30%, var(--amc-tcmd-line));
+  background:
+    radial-gradient(90% 60% at 50% 0%, color-mix(in srgb, var(--amc-tcmd-accent) 8%, transparent), transparent 70%),
+    var(--amc-tcmd-surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-tcmd-accent) 10%, transparent),
+    0 -1px 24px -6px color-mix(in srgb, var(--amc-tcmd-accent) 35%, transparent),
+    0 30px 60px -24px color-mix(in srgb, var(--amc-tcmd-ink) 45%, transparent);
+}
+.amc-TCommandList--elevated .amc-TCommandList-search { padding-block: .75rem; }
+.amc-TCommandList--columns .amc-TCommandList-list { align-items: start; }
+
+/* ---------------------------------------------------------------- motion */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TCommandList-link { transition: background-color .12s ease; }
+  .amc-TCommandList-icon { transition: background-color .15s ease, color .15s ease, box-shadow .15s ease; }
+  .amc-TCommandList-enter { transition: opacity .15s ease, translate .15s ease; }
+  .amc-TCommandList { transition: border-color .15s ease, box-shadow .2s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TCommandList-enter { translate: none; }
+}
+@media (forced-colors: active) {
+  .amc-TCommandList { border: 1px solid CanvasText; }
+  .amc-TCommandList-link:hover, .amc-TCommandList-item.is-first .amc-TCommandList-link { outline: 1px solid Highlight; }
+  .amc-TCommandList-mark { background: Mark; color: MarkText; }
+  .amc-TCommandList-searchIcon, .amc-TCommandList-enter { background: CanvasText; }
+}

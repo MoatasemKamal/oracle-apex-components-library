@@ -1,0 +1,142 @@
+listTemplate amc-marquee-links (
+    name: AMC Marquee Links
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TMarqueeLinks #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <span class="amc-TMarqueeLinks-pulse" aria-hidden="true"></span>
+            <div class="amc-TMarqueeLinks-viewport">
+            <ul class="amc-TMarqueeLinks-group">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            <button type="button" class="amc-TMarqueeLinks-toggle" aria-pressed="false" hidden><span class="amc-TMarqueeLinks-toggleIcon" aria-hidden="true"></span><span class="amc-TMarqueeLinks-toggleLabel">Pause scrolling</span></button>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TMarqueeLinks-item is-current"><a class="amc-TMarqueeLinks-link" href="#LINK#" aria-current="page"><span class="amc-TMarqueeLinks-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMarqueeLinks-tag">#A01#</span><span class="amc-TMarqueeLinks-label">#TEXT#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TMarqueeLinks-item"><a class="amc-TMarqueeLinks-link" href="#LINK#"><span class="amc-TMarqueeLinks-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMarqueeLinks-tag">#A01#</span><span class="amc-TMarqueeLinks-label">#TEXT#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-marquee-links.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-marquee-links.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Tag
+    }
+    advanced {
+        staticId: AMC_TPL_MARQUEE_LINKS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for an announcement or quick-link ticker. The entries scroll sideways in a seamless loop (the JavaScript file repeats the entries with copies that are hidden from screen readers and skipped by the Tab key), reverse direction in right-to-left languages, and pause while the pointer is over the strip, while a link has keyboard focus, or after the pause button is pressed. Use the Tag attribute (A01) for a short label such as New, Due today or Partner shown as a chip before the text. Template options: Slow and Fast change the speed, Reverse scrolls the other way, Band paints a solid primary-color strip, and Plain removes the frame for use inside a page header. Without JavaScript, and under reduced motion, the entries sit still as a wrapped row of links. The pause button label is English text in the After List Entries template; translate it there if needed.
+            ```
+    }
+
+    templateOption amc-marquee-links-slow (
+        name: Slow
+        sequence: 10
+        appearance {
+            cssClasses: amc-TMarqueeLinks--slow
+        }
+        help {
+            helpText:
+                ```text
+                Scrolls at about 60 percent of the normal speed, for longer texts.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SLOW
+        }
+    )
+
+    templateOption amc-marquee-links-fast (
+        name: Fast
+        sequence: 20
+        appearance {
+            cssClasses: amc-TMarqueeLinks--fast
+        }
+        help {
+            helpText:
+                ```text
+                Scrolls at about 1.7 times the normal speed, for short logos and names.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FAST
+        }
+    )
+
+    templateOption amc-marquee-links-reverse (
+        name: Reverse
+        sequence: 30
+        appearance {
+            cssClasses: amc-TMarqueeLinks--reverse
+        }
+        help {
+            helpText:
+                ```text
+                Scrolls in the opposite direction.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: REVERSE
+        }
+    )
+
+    templateOption amc-marquee-links-band (
+        name: Band
+        sequence: 40
+        appearance {
+            cssClasses: amc-TMarqueeLinks--band
+        }
+        help {
+            helpText:
+                ```text
+                A solid strip in the primary color with contrast text, like a news band.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: BAND
+        }
+    )
+
+    templateOption amc-marquee-links-plain (
+        name: Plain
+        sequence: 50
+        appearance {
+            cssClasses: amc-TMarqueeLinks--plain
+        }
+        help {
+            helpText:
+                ```text
+                No background, border or pulse; the ticker blends into a page header or hero.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PLAIN
+        }
+    )
+)

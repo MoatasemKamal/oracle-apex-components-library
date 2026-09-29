@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-command-list.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-command-list.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

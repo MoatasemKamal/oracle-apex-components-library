@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Marquee Links",
+  "staticId": "AMC_TPL_MARQUEE_LINKS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "An announcement ticker: the list's links glide past in a seamless loop with faded edges and a live pulse, and pause on hover, keyboard focus or the pause button.",
+  "useFor": "A single strip of announcements, quick links or partner and supplier links at the top of a home page, portal or dashboard; 4 to 12 short entries.",
+  "keywords": ["marquee", "ticker", "announcements", "news", "quick links", "partners", "loop"],
+  "helpText": "List template for an announcement or quick-link ticker. The entries scroll sideways in a seamless loop (the JavaScript file repeats the entries with copies that are hidden from screen readers and skipped by the Tab key), reverse direction in right-to-left languages, and pause while the pointer is over the strip, while a link has keyboard focus, or after the pause button is pressed. Use the Tag attribute (A01) for a short label such as New, Due today or Partner shown as a chip before the text. Template options: Slow and Fast change the speed, Reverse scrolls the other way, Band paints a solid primary-color strip, and Plain removes the frame for use inside a page header. Without JavaScript, and under reduced motion, the entries sit still as a wrapped row of links. The pause button label is English text in the After List Entries template; translate it there if needed.",
+  "attributes": { "a01": "Tag" },
+  "templateOptions": [
+    { "staticId": "SLOW", "name": "Slow", "cssClass": "amc-TMarqueeLinks--slow", "sequence": 10, "help": "Scrolls at about 60 percent of the normal speed, for longer texts." },
+    { "staticId": "FAST", "name": "Fast", "cssClass": "amc-TMarqueeLinks--fast", "sequence": 20, "help": "Scrolls at about 1.7 times the normal speed, for short logos and names." },
+    { "staticId": "REVERSE", "name": "Reverse", "cssClass": "amc-TMarqueeLinks--reverse", "sequence": 30, "help": "Scrolls in the opposite direction." },
+    { "staticId": "BAND", "name": "Band", "cssClass": "amc-TMarqueeLinks--band", "sequence": 40, "help": "A solid strip in the primary color with contrast text, like a news band." },
+    { "staticId": "PLAIN", "name": "Plain", "cssClass": "amc-TMarqueeLinks--plain", "sequence": 50, "help": "No background, border or pulse; the ticker blends into a page header or hero." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

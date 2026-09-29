@@ -1,0 +1,37 @@
+{
+  "samples": [
+    {
+      "title": "Announcements",
+      "options": [],
+      "entries": [
+        { "text": "Quarter close: post supplier invoices by 27 September", "link": "#", "icon": "fa-calendar-check-o", "a01": "Due soon" },
+        { "text": "New credit policy for wholesale customers", "link": "#", "icon": "fa-file-text-o", "a01": "New" },
+        { "text": "Jeddah warehouse moves to two shifts", "link": "#", "icon": "fa-cubes" },
+        { "text": "Open enrollment for health insurance", "link": "#", "icon": "fa-heartbeat", "a01": "HR" },
+        { "text": "Approval app now on mobile", "link": "#", "icon": "fa-mobile", "a01": "New" }
+      ]
+    },
+    {
+      "title": "Band, fast",
+      "options": ["amc-TMarqueeLinks--band", "amc-TMarqueeLinks--fast"],
+      "entries": [
+        { "text": "Al Noor Trading", "link": "#", "icon": "fa-building-o", "a01": "Partner" },
+        { "text": "Gulf Medical Supplies", "link": "#", "icon": "fa-medkit" },
+        { "text": "Red Sea Logistics", "link": "#", "icon": "fa-truck", "a01": "Carrier" },
+        { "text": "Desert Rose Retail", "link": "#", "icon": "fa-shopping-bag" },
+        { "text": "Najd Steel Works", "link": "#", "icon": "fa-industry" },
+        { "text": "Horizon Payments", "link": "#", "icon": "fa-credit-card", "a01": "Bank" }
+      ]
+    },
+    {
+      "title": "Plain, slow, reverse",
+      "options": ["amc-TMarqueeLinks--plain", "amc-TMarqueeLinks--slow", "amc-TMarqueeLinks--reverse"],
+      "entries": [
+        { "text": "Create order", "link": "#", "icon": "fa-plus-circle" },
+        { "text": "Record payment", "link": "#", "icon": "fa-money", "current": true },
+        { "text": "Receive goods", "link": "#", "icon": "fa-dropbox" },
+        { "text": "Request leave", "link": "#", "icon": "fa-plane" }
+      ]
+    }
+  ]
+}

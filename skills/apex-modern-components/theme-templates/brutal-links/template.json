@@ -1,0 +1,21 @@
+{
+  "kind": "list",
+  "name": "AMC Brutal Links",
+  "staticId": "AMC_TPL_BRUTAL_LINKS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "Neo-brutalist link cards with ink borders, hard offset shadows, flat palette fills that rotate per entry, an oversized arrow and a press-down click.",
+  "useFor": "Launchpads and quick links on home pages and landing dashboards: module shortcuts, report hubs, self-service portals, onboarding steps.",
+  "keywords": ["neo-brutalism", "brutalist", "link cards", "launchpad", "hard shadow", "quick links"],
+  "helpText": "List template that renders each entry as a neo-brutalist card: a thick border in the theme's text color, a hard offset shadow (mirrored in right-to-left languages), a flat tinted fill that cycles through the primary, warning, success, danger and a warning-danger orange palette tint, the entry icon in a square badge and a large arrow. Hover lifts the card, clicking presses it flat into its shadow. The current entry is inverted. Use the Description attribute (A01) for one or two lines of explanation. Template options: Sticker tilt rotates the cards slightly like stickers, Monochrome drops the rotating fills, Rows lays entries out as full-width rows, and Heavy uses thicker borders and deeper shadows. Keyboard focus shows the same lift as hover plus a focus ring. Under reduced motion cards change without movement; in forced-colors mode shadows are replaced by system borders.",
+  "attributes": { "a01": "Description" },
+  "templateOptions": [
+    { "staticId": "STICKER", "name": "Sticker tilt", "cssClass": "amc-TBrutalLinks--sticker", "sequence": 10, "help": "Rotates alternating cards by a degree or two, like stickers on a board. Cards straighten on hover and focus." },
+    { "staticId": "MONOCHROME", "name": "Monochrome", "cssClass": "amc-TBrutalLinks--mono", "sequence": 20, "help": "All cards use the plain surface color; only the current entry and the icon badges use the primary color." },
+    { "staticId": "ROWS", "name": "Rows", "cssClass": "amc-TBrutalLinks--rows", "sequence": 30, "help": "One full-width row per entry with the icon, text and arrow on one line, for side columns and long descriptions." },
+    { "staticId": "HEAVY", "name": "Heavy", "cssClass": "amc-TBrutalLinks--heavy", "sequence": 40, "help": "Thicker 3px borders, deeper shadows and larger titles for poster-like landing pages." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

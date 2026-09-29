@@ -1,0 +1,37 @@
+{
+  "samples": [
+    {
+      "title": "Approvals deck, fans out on hover",
+      "options": [],
+      "entries": [
+        { "text": "Purchase requisitions", "link": "#", "icon": "fa-shopping-cart", "a01": "3 waiting for your approval since Monday", "a02": "3" },
+        { "text": "Supplier invoices", "link": "#", "icon": "fa-file-text-o", "a01": "Two invoices past the 30-day term", "a02": "SAR 48,300" },
+        { "text": "Leave requests", "link": "#", "icon": "fa-calendar", "current": true, "a01": "Annual leave for the Riyadh warehouse team", "a02": "5" },
+        { "text": "Expense claims", "link": "#", "icon": "fa-credit-card", "a01": "Travel claims from the Q3 sales conference", "a02": "12" },
+        { "text": "Credit limit changes", "link": "#", "icon": "fa-line-chart", "a01": "Al Noor Trading asks for SAR 400,000", "a02": "1" },
+        { "text": "New customer accounts", "link": "#", "icon": "fa-user-plus", "a01": "KYC documents uploaded, awaiting review", "a02": "4" }
+      ]
+    },
+    {
+      "title": "Always open, solid current",
+      "options": ["amc-TStackedDeck--open", "amc-TStackedDeck--solidCurrent"],
+      "entries": [
+        { "text": "Open orders", "link": "#", "icon": "fa-inbox", "current": true, "a01": "128 orders not yet shipped", "a02": "128" },
+        { "text": "Picking waves", "link": "#", "icon": "fa-cubes", "a01": "Wave 14 starts at 13:00 in zone B", "a02": "Zone B" },
+        { "text": "Returns to inspect", "link": "#", "icon": "fa-undo", "a01": "Damaged in transit, customer photos attached", "a02": "7" },
+        { "text": "Low stock alerts", "link": "#", "icon": "fa-exclamation-triangle", "a01": "Below reorder point in the Jeddah warehouse", "a02": "23" }
+      ]
+    },
+    {
+      "title": "Tilted, compact",
+      "options": ["amc-TStackedDeck--tilt", "amc-TStackedDeck--compact"],
+      "entries": [
+        { "text": "Onboarding checklist", "link": "#", "icon": "fa-check-square-o", "a01": "Laptop, badge and payroll setup", "a02": "4/9" },
+        { "text": "Payslips", "link": "#", "icon": "fa-money", "a01": "September payslip is ready" },
+        { "text": "Team directory", "link": "#", "icon": "fa-users", "a01": "142 colleagues in 9 departments" },
+        { "text": "Training plan", "link": "#", "icon": "fa-graduation-cap", "a01": "Safety induction due Thursday", "a02": "Due" },
+        { "text": "Help desk", "link": "#", "icon": "fa-life-ring", "a01": "Two tickets waiting for your reply", "a02": "2" }
+      ]
+    }
+  ]
+}

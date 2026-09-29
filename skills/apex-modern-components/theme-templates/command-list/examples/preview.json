@@ -1,0 +1,38 @@
+{
+  "samples": [
+    {
+      "title": "Quick actions",
+      "options": [],
+      "entries": [
+        { "text": "Create sales order", "link": "#", "icon": "fa-cart-plus", "a01": "Start a quote or order for a customer", "a02": "Ctrl+Shift+O" },
+        { "text": "Record customer payment", "link": "#", "icon": "fa-money", "a01": "Match a bank transfer to open invoices", "a02": "Ctrl+Shift+P" },
+        { "text": "Issue credit note", "link": "#", "icon": "fa-file-text-o", "a01": "Refund or correct a posted invoice" },
+        { "text": "Find customer", "link": "#", "icon": "fa-search", "current": true, "a01": "Search by name, VAT number or phone", "a02": "/" },
+        { "text": "Receive purchase order", "link": "#", "icon": "fa-truck", "a01": "Book goods into the Riyadh warehouse", "a02": "Ctrl+Shift+R" },
+        { "text": "Approve pending requests", "link": "#", "icon": "fa-check-circle", "a01": "Leave, expenses and purchase requisitions", "a02": "G then A" },
+        { "text": "Add employee", "link": "#", "icon": "fa-user-plus", "a01": "Hire, transfer or rehire a colleague" }
+      ]
+    },
+    {
+      "title": "Elevated, two columns, compact",
+      "options": ["amc-TCommandList--elevated", "amc-TCommandList--columns", "amc-TCommandList--compact"],
+      "entries": [
+        { "text": "Users and roles", "link": "#", "icon": "fa-users", "a01": "Access control lists" },
+        { "text": "Number sequences", "link": "#", "icon": "fa-sort-numeric-asc", "a01": "Order, invoice and PO numbers" },
+        { "text": "Tax codes", "link": "#", "icon": "fa-percent", "a01": "VAT 15% and exemptions" },
+        { "text": "Warehouses", "link": "#", "icon": "fa-building-o", "a01": "Sites, zones and bins" },
+        { "text": "Payment terms", "link": "#", "icon": "fa-calendar-o", "a01": "Net 30, Net 60, cash" },
+        { "text": "Email templates", "link": "#", "icon": "fa-envelope-o", "a01": "Invoice and reminder emails" }
+      ]
+    },
+    {
+      "title": "Hide search",
+      "options": ["amc-TCommandList--noSearch"],
+      "entries": [
+        { "text": "Export to Excel", "link": "#", "icon": "fa-file-excel-o", "a02": "Ctrl+E" },
+        { "text": "Print picking list", "link": "#", "icon": "fa-print", "a02": "Ctrl+P" },
+        { "text": "Email to customer", "link": "#", "icon": "fa-envelope-o", "a02": "Ctrl+M" }
+      ]
+    }
+  ]
+}
