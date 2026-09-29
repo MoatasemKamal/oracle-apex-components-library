@@ -1,0 +1,410 @@
+/* =========================================================================
+   APEX Modern Components - Message Kit
+   Turns the native APEX page messages (success, errors) into toasts and
+   restyles the apex.message.alert / confirm dialogs. Plug-in free.
+
+   How it is scoped
+   - Toasts live in a stack that amc-message-kit.js creates; the native
+     message is hidden only after its toast exists (class
+     "amc-msg-is-mirrored"). Without the script the page is unchanged.
+   - Dialogs get "amc-msg-dialog" from the script, and only
+     apex.message.alert/confirm dialogs (never modal pages).
+   - Position and look come from classes on <html>:
+     amc-msg--pos-{top-end|top-center|bottom-end|bottom-center}
+     amc-msg--look-{soft|glass|solid|brutal|minimal}
+   - Every animation and transition lives inside
+     @media (prefers-reduced-motion: no-preference).
+   - Colors come from Universal Theme variables (every theme style, Theme
+     Roller and dark mode); literal colors are fallbacks only.
+   ========================================================================= */
+
+.amc-msg-stack,
+.amc-msg-dialog {
+  --amc-msg-bg: var(--ut-component-background-color, #fff);
+  --amc-msg-fg: var(--ut-component-text-default-color, #262626);
+  --amc-msg-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-msg-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-msg-radius: calc(var(--ut-component-border-radius, .25rem) + .5rem);
+  --amc-msg-primary: var(--ut-palette-primary, #056ac8);
+  --amc-msg-primary-contrast: var(--ut-palette-primary-contrast, #fff);
+  --amc-msg-success: var(--ut-palette-success, #278701);
+  --amc-msg-success-contrast: var(--ut-palette-success-contrast, #fff);
+  --amc-msg-info: var(--ut-palette-info, #0076df);
+  --amc-msg-info-contrast: var(--ut-palette-info-contrast, #fff);
+  --amc-msg-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-msg-warning-contrast: var(--ut-palette-warning-contrast, #443302);
+  --amc-msg-danger: var(--ut-palette-danger, #cb1100);
+  --amc-msg-danger-contrast: var(--ut-palette-danger-contrast, #fff);
+  --amc-msg-shadow: 0 1rem 2.5rem -1rem color-mix(in srgb, var(--amc-msg-fg) 38%, transparent), 0 .125rem .375rem -.125rem color-mix(in srgb, var(--amc-msg-fg) 16%, transparent);
+  --amc-msg-ease: cubic-bezier(.2, .8, .2, 1);
+  --amc-msg-spring: cubic-bezier(.2, 1.4, .4, 1);
+}
+
+/* Native message the kit has mirrored into a toast (APEX still owns it) */
+.amc-msg-is-mirrored { display: none !important; }
+
+/* ---- Stack --------------------------------------------------------------- */
+.amc-msg-stack {
+  --amc-msg-offset: 1rem;
+  --amc-msg-dir: 1;
+  position: fixed;
+  z-index: var(--amc-msg-z, 1200);
+  inset-block-start: var(--amc-msg-offset);
+  inset-inline-end: var(--amc-msg-offset);
+  display: flex;
+  flex-direction: column-reverse;
+  gap: .625rem;
+  inline-size: min(25rem, calc(100vw - 2 * var(--amc-msg-offset)));
+  max-block-size: calc(100vh - 2 * var(--amc-msg-offset));
+  overflow: visible;
+  pointer-events: none;
+}
+.amc-msg-stack:empty { display: none; }
+[dir="rtl"] .amc-msg-stack, .amc-msg-stack[dir="rtl"] { --amc-msg-dir: -1; }
+
+.amc-msg--pos-top-center .amc-msg-stack { inset-inline: 0; margin-inline: auto; }
+.amc-msg--pos-bottom-end .amc-msg-stack { inset-block: auto var(--amc-msg-offset); flex-direction: column; }
+.amc-msg--pos-bottom-center .amc-msg-stack { inset-block: auto var(--amc-msg-offset); inset-inline: 0; margin-inline: auto; flex-direction: column; }
+/* Small screens: every position spans the width */
+@media (max-width: 30rem) {
+  .amc-msg-stack { --amc-msg-offset: .75rem; inset-inline: var(--amc-msg-offset); inline-size: auto; }
+}
+
+/* ---- Toast --------------------------------------------------------------- */
+.amc-msg-toast {
+  --amc-msg-tone: var(--amc-msg-info);
+  --amc-msg-tone-contrast: var(--amc-msg-info-contrast);
+  --amc-msg-t-bg: color-mix(in srgb, var(--amc-msg-tone) 9%, var(--amc-msg-bg));
+  --amc-msg-t-fg: var(--amc-msg-fg);
+  --amc-msg-t-muted: var(--amc-msg-muted);
+  --amc-msg-t-border: 1px solid color-mix(in srgb, var(--amc-msg-tone) 30%, var(--amc-msg-bg));
+  --amc-msg-t-icon-bg: var(--amc-msg-tone);
+  --amc-msg-t-icon-fg: var(--amc-msg-tone-contrast);
+  --amc-msg-t-bar: var(--amc-msg-tone);
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .75rem;
+  padding-block: .875rem;
+  padding-inline: 1rem .75rem;
+  overflow: hidden;
+  border: var(--amc-msg-t-border);
+  border-radius: var(--amc-msg-radius);
+  background: var(--amc-msg-t-bg);
+  color: var(--amc-msg-t-fg);
+  box-shadow: var(--amc-msg-shadow);
+  font-size: .875rem;
+  line-height: 1.45;
+  pointer-events: auto;
+  touch-action: pan-y;
+  overflow-wrap: anywhere;
+  unicode-bidi: isolate;
+}
+.amc-msg-toast--success { --amc-msg-tone: var(--amc-msg-success); --amc-msg-tone-contrast: var(--amc-msg-success-contrast); }
+.amc-msg-toast--warning { --amc-msg-tone: var(--amc-msg-warning); --amc-msg-tone-contrast: var(--amc-msg-warning-contrast); }
+.amc-msg-toast--error { --amc-msg-tone: var(--amc-msg-danger); --amc-msg-tone-contrast: var(--amc-msg-danger-contrast); }
+
+.amc-msg-icon {
+  display: grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  background: var(--amc-msg-t-icon-bg);
+  color: var(--amc-msg-t-icon-fg);
+}
+.amc-msg-icon svg { inline-size: 1rem; block-size: 1rem; }
+.amc-msg-body { min-inline-size: 0; padding-block-start: .1875rem; }
+.amc-msg-title { margin: 0; font-weight: 600; }
+/* Each line takes its direction from its own text (English message on an RTL page and vice versa) */
+.amc-msg-title, .amc-msg-text, .amc-msg-list li, .amc-msg-link { unicode-bidi: plaintext; }
+.amc-msg-text { margin: .125rem 0 0; color: var(--amc-msg-t-muted); }
+.amc-msg-title + .amc-msg-text { margin-block-start: .125rem; }
+
+.amc-msg-list { margin: .5rem 0 0; padding: 0; list-style: none; display: grid; gap: .25rem; }
+.amc-msg-list li { position: relative; padding-inline-start: .875rem; }
+.amc-msg-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: .6em;
+  inline-size: .3125rem;
+  block-size: .3125rem;
+  border-radius: 50%;
+  background: var(--amc-msg-tone);
+}
+.amc-msg-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+.amc-msg-link:hover { text-decoration-color: currentColor; }
+
+.amc-msg-close {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  margin-block: -.25rem 0;
+  margin-inline: 0 -.125rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--amc-msg-t-muted);
+  cursor: pointer;
+}
+.amc-msg-close svg { inline-size: .875rem; block-size: .875rem; }
+.amc-msg-close:hover { background: color-mix(in srgb, var(--amc-msg-t-fg) 10%, transparent); color: var(--amc-msg-t-fg); }
+.amc-msg-close:focus-visible,
+.amc-msg-link:focus-visible {
+  outline: 2px solid var(--amc-msg-focus, var(--amc-msg-primary));
+  outline-offset: 2px;
+}
+
+/* Progress bar: shown only with motion allowed (see below) */
+.amc-msg-progress {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: none;
+  block-size: 3px;
+  background: color-mix(in srgb, var(--amc-msg-t-bar) 18%, transparent);
+}
+.amc-msg-progress-bar {
+  display: block;
+  block-size: 100%;
+  background: var(--amc-msg-t-bar);
+  transform-origin: left;
+}
+[dir="rtl"] .amc-msg-progress-bar { transform-origin: right; }
+
+.amc-msg-sr {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Looks --------------------------------------------------------------- */
+/* soft (default): tinted surface, colored icon disc */
+
+.amc-msg--look-glass .amc-msg-toast {
+  --amc-msg-t-bg: color-mix(in srgb, var(--amc-msg-bg) 68%, transparent);
+  --amc-msg-t-border: 1px solid color-mix(in srgb, var(--amc-msg-fg) 12%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .amc-msg--look-glass .amc-msg-toast { --amc-msg-t-bg: var(--amc-msg-bg); }
+}
+
+.amc-msg--look-solid .amc-msg-toast {
+  --amc-msg-t-bg: var(--amc-msg-tone);
+  --amc-msg-t-fg: var(--amc-msg-tone-contrast);
+  --amc-msg-t-muted: color-mix(in srgb, var(--amc-msg-tone-contrast) 82%, var(--amc-msg-tone));
+  --amc-msg-t-border: 1px solid transparent;
+  --amc-msg-t-icon-bg: color-mix(in srgb, var(--amc-msg-tone-contrast) 20%, transparent);
+  --amc-msg-t-icon-fg: var(--amc-msg-tone-contrast);
+  --amc-msg-t-bar: var(--amc-msg-tone-contrast);
+  --amc-msg-focus: var(--amc-msg-tone-contrast);
+}
+.amc-msg--look-solid .amc-msg-list li::before { background: currentColor; }
+
+.amc-msg--look-brutal .amc-msg-stack { --amc-msg-radius: 0; }
+.amc-msg--look-brutal .amc-msg-toast {
+  --amc-msg-t-bg: var(--amc-msg-bg);
+  --amc-msg-t-border: 2px solid var(--amc-msg-fg);
+  box-shadow: .3125rem .3125rem 0 var(--amc-msg-fg);
+}
+[dir="rtl"].amc-msg--look-brutal .amc-msg-toast,
+.amc-msg--look-brutal [dir="rtl"] .amc-msg-toast { box-shadow: -.3125rem .3125rem 0 var(--amc-msg-fg); }
+.amc-msg--look-brutal .amc-msg-icon,
+.amc-msg--look-brutal .amc-msg-close { border-radius: 0; }
+.amc-msg--look-brutal .amc-msg-icon { border: 2px solid var(--amc-msg-fg); }
+.amc-msg--look-brutal .amc-msg-title { font-weight: 800; }
+.amc-msg--look-brutal .amc-msg-progress { block-size: 5px; }
+
+.amc-msg--look-minimal .amc-msg-toast {
+  --amc-msg-t-bg: var(--amc-msg-bg);
+  --amc-msg-t-border: 1px solid var(--amc-msg-line);
+  --amc-msg-t-icon-bg: transparent;
+  --amc-msg-t-icon-fg: var(--amc-msg-tone);
+  box-shadow: 0 .5rem 1.5rem -1rem color-mix(in srgb, var(--amc-msg-fg) 40%, transparent);
+}
+.amc-msg--look-minimal .amc-msg-icon { box-shadow: inset 0 0 0 1.5px currentColor; }
+/* Warning yellow is too light as text on a light surface: darken it toward the text color */
+.amc-msg--look-minimal .amc-msg-toast--warning { --amc-msg-t-icon-fg: color-mix(in srgb, var(--amc-msg-warning) 70%, var(--amc-msg-fg)); }
+
+/* ---- apex.message.alert / confirm dialogs -------------------------------- */
+.ui-dialog.amc-msg-dialog {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--amc-msg-line);
+  border-radius: calc(var(--amc-msg-radius) + .25rem);
+  background: var(--amc-msg-bg);
+  color: var(--amc-msg-fg);
+  box-shadow: 0 1.5rem 4rem -1.25rem color-mix(in srgb, var(--amc-msg-fg) 50%, transparent);
+}
+.amc-msg--look-brutal .ui-dialog.amc-msg-dialog {
+  --amc-msg-radius: 0;
+  border: 2px solid var(--amc-msg-fg);
+  box-shadow: .5rem .5rem 0 var(--amc-msg-fg);
+}
+.amc-msg--look-glass .ui-dialog.amc-msg-dialog {
+  background: color-mix(in srgb, var(--amc-msg-bg) 80%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+}
+.amc-msg-dialog .ui-dialog-titlebar {
+  padding: 1.25rem 1.5rem 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+.amc-msg-dialog .ui-dialog-title { font-size: 1.0625rem; font-weight: 600; }
+.amc-msg-dialog .ui-dialog-content { padding: 1rem 1.5rem 1.25rem; background: transparent; color: inherit; }
+.amc-msg-dialog .a-AlertMessage-icon,
+.amc-msg-dialog .amc-msg-dialog-icon {
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-msg-dialog-tone, var(--amc-msg-primary)) 14%, transparent);
+  color: var(--amc-msg-dialog-tone, var(--amc-msg-primary));
+}
+.amc-msg-dialog .a-AlertMessage-title { margin: 0 0 .25rem; font-size: 1.0625rem; font-weight: 600; }
+.amc-msg-dialog .a-AlertMessage-title ~ .a-AlertMessage-details { color: var(--amc-msg-muted); }
+.amc-msg-dialog .ui-dialog-titlebar-close {
+  inline-size: 2rem;
+  block-size: 2rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--amc-msg-muted);
+}
+.amc-msg-dialog .ui-dialog-titlebar-close:hover { background: color-mix(in srgb, var(--amc-msg-fg) 8%, transparent); color: var(--amc-msg-fg); }
+.amc-msg-dialog--warning { --amc-msg-dialog-tone: color-mix(in srgb, var(--amc-msg-warning) 75%, var(--amc-msg-fg)); }
+.amc-msg-dialog--success { --amc-msg-dialog-tone: var(--amc-msg-success); }
+.amc-msg-dialog--danger { --amc-msg-dialog-tone: var(--amc-msg-danger); }
+
+.amc-msg-dialog .ui-dialog-buttonpane {
+  margin: 0;
+  padding: .875rem 1.5rem 1.25rem;
+  border: 0;
+  background: transparent;
+}
+.amc-msg-dialog .ui-dialog-buttonset { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; float: none; }
+.amc-msg-dialog .ui-dialog-buttonset .ui-button {
+  min-block-size: 2.5rem;
+  margin: 0;
+  padding: .5rem 1.125rem;
+  border: 1px solid var(--amc-msg-line);
+  border-radius: calc(var(--amc-msg-radius) - .125rem);
+  background: var(--amc-msg-bg);
+  color: var(--amc-msg-fg);
+  font-weight: 600;
+  box-shadow: none;
+}
+.amc-msg-dialog .ui-dialog-buttonset .ui-button:hover { background: color-mix(in srgb, var(--amc-msg-fg) 6%, var(--amc-msg-bg)); }
+.amc-msg-dialog .ui-dialog-buttonset .ui-button--hot {
+  border-color: transparent;
+  background: var(--amc-msg-primary);
+  color: var(--amc-msg-primary-contrast);
+}
+.amc-msg-dialog .ui-dialog-buttonset .ui-button--hot:hover { background: color-mix(in srgb, var(--amc-msg-primary) 88%, var(--amc-msg-fg)); }
+.amc-msg-dialog--danger .ui-dialog-buttonset .ui-button--hot {
+  background: var(--amc-msg-danger);
+  color: var(--amc-msg-danger-contrast);
+}
+.amc-msg-dialog--danger .ui-dialog-buttonset .ui-button--hot:hover { background: color-mix(in srgb, var(--amc-msg-danger) 88%, var(--amc-msg-fg)); }
+.amc-msg-dialog .ui-dialog-buttonset .ui-button:focus-visible,
+.amc-msg-dialog .ui-dialog-titlebar-close:focus-visible {
+  outline: 2px solid var(--amc-msg-primary);
+  outline-offset: 2px;
+}
+.amc-msg--look-brutal .amc-msg-dialog .ui-dialog-buttonset .ui-button { border: 2px solid var(--amc-msg-fg); }
+.amc-msg-dialog-open .ui-widget-overlay {
+  background: color-mix(in srgb, var(--ut-body-background-color, #1c1c1c) 15%, var(--amc-msg-overlay, #000) 35%);
+  opacity: 1;
+}
+
+/* =========================================================================
+   Motion (only when the user has not asked for reduced motion)
+   ========================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-msg-stack { --amc-msg-in-x: calc(110% * var(--amc-msg-dir)); --amc-msg-in-y: 0; }
+  .amc-msg--pos-top-center .amc-msg-stack { --amc-msg-in-x: 0; --amc-msg-in-y: -1.25rem; }
+  .amc-msg--pos-bottom-center .amc-msg-stack { --amc-msg-in-x: 0; --amc-msg-in-y: 1.25rem; }
+  @media (max-width: 30rem) {
+    .amc-msg-stack { --amc-msg-in-x: 0; --amc-msg-in-y: -1.25rem; }
+    .amc-msg--pos-bottom-end .amc-msg-stack,
+    .amc-msg--pos-bottom-center .amc-msg-stack { --amc-msg-in-y: 1.25rem; }
+  }
+
+  .amc-msg-toast {
+    animation: amc-msg-in .42s var(--amc-msg-spring) both;
+    transition: translate .25s var(--amc-msg-ease), opacity .25s ease, box-shadow .2s ease;
+  }
+  .amc-msg-toast.is-dragging { transition: none; }
+  .amc-msg-toast--error.is-fresh { animation: amc-msg-in .42s var(--amc-msg-spring) both, amc-msg-shake .45s ease .42s 1; }
+  .amc-msg-toast.is-leaving { animation: amc-msg-out .28s var(--amc-msg-ease) both; }
+  .amc-msg-toast.is-swiped { animation: none; opacity: 0; }
+
+  .amc-msg-progress { display: block; }
+  .amc-msg-progress-bar { animation: amc-msg-progress var(--amc-msg-life, 5s) linear both; }
+  .amc-msg-toast.is-paused .amc-msg-progress-bar { animation-play-state: paused; }
+
+  .amc-msg-close { transition: background-color .15s ease, color .15s ease, transform .2s var(--amc-msg-spring); }
+  .amc-msg-close:active { transform: scale(.9); }
+  .amc-msg-link { transition: text-decoration-color .15s ease; }
+
+  @keyframes amc-msg-in {
+    from { opacity: 0; transform: translate(var(--amc-msg-in-x), var(--amc-msg-in-y)) scale(.96); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes amc-msg-out {
+    from { opacity: 1; transform: none; }
+    to { opacity: 0; transform: translate(calc(var(--amc-msg-in-x) * .4), calc(var(--amc-msg-in-y) * .6)) scale(.94); }
+  }
+  @keyframes amc-msg-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(2px); }
+  }
+  @keyframes amc-msg-progress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+  .ui-dialog.amc-msg-dialog { animation: amc-msg-dialog-in .26s var(--amc-msg-spring) both; }
+  .amc-msg-dialog .ui-dialog-buttonset .ui-button { transition: background-color .15s ease, transform .15s var(--amc-msg-ease), box-shadow .2s ease; }
+  .amc-msg-dialog .ui-dialog-buttonset .ui-button:active { transform: scale(.97); }
+  .amc-msg-dialog-open .ui-widget-overlay {
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    animation: amc-msg-fade .2s ease both;
+  }
+  @keyframes amc-msg-dialog-in { from { opacity: 0; transform: scale(.92) translateY(.5rem); } to { opacity: 1; transform: none; } }
+  @keyframes amc-msg-fade { from { opacity: 0; } to { opacity: 1; } }
+}
+
+/* ---- Windows High Contrast / forced colors ------------------------------- */
+@media (forced-colors: active) {
+  .amc-msg-toast { border: 2px solid CanvasText; }
+  .amc-msg-icon { border: 1px solid CanvasText; }
+  .amc-msg-progress-bar { background: Highlight; }
+  .amc-msg-list li::before { background: CanvasText; }
+  .amc-msg-close { border: 1px solid ButtonText; }
+  .ui-dialog.amc-msg-dialog { border: 2px solid CanvasText; }
+}

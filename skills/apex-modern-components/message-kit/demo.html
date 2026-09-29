@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message Kit Demo</title>
+<style>
+/* Stand-in for Universal Theme so the demo runs without APEX. Class names and message
+   markup follow Universal Theme and apex.message; the look is simplified. Delete this
+   block inside APEX. Values approximate Vita and Vita Dark. */
+:root {
+  --ut-palette-primary: #056ac8; --ut-palette-primary-contrast: #fff;
+  --ut-palette-success: #278701; --ut-palette-success-contrast: #fff;
+  --ut-palette-info: #0076df; --ut-palette-info-contrast: #fff;
+  --ut-palette-warning: #fbce4a; --ut-palette-warning-contrast: #443302;
+  --ut-palette-danger: #cb1100; --ut-palette-danger-contrast: #fff;
+  --ut-component-background-color: #fff; --ut-component-text-default-color: #262626;
+  --ut-component-text-muted-color: #6b6b6b; --ut-component-border-color: #e1e3e6;
+  --ut-component-border-radius: .25rem;
+  --ut-body-background-color: #f4f5f7; --ut-header-background-color: #1c2b3a; --ut-header-text-color: #fff;
+}
+html.vita-dark {
+  --ut-palette-primary: #3c96ea; --ut-palette-primary-contrast: #0b1520;
+  --ut-palette-success: #5bb450; --ut-palette-success-contrast: #0c1a0a;
+  --ut-palette-info: #4aa3ff; --ut-palette-info-contrast: #06121f;
+  --ut-palette-warning: #f5c542; --ut-palette-warning-contrast: #2b2003;
+  --ut-palette-danger: #ff6b5a; --ut-palette-danger-contrast: #1f0603;
+  --ut-component-background-color: #262626; --ut-component-text-default-color: #eceff3;
+  --ut-component-text-muted-color: #a3aab4; --ut-component-border-color: #3a3d42;
+  --ut-body-background-color: #161616; --ut-header-background-color: #0e1116;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ut-body-background-color); color: var(--ut-component-text-default-color); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.t-Header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; background: var(--ut-header-background-color); color: var(--ut-header-text-color); }
+.t-Header-logo { font-weight: 700; }
+.t-Body-content { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.u-hidden { display: none !important; }
+.u-VisuallyHidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+/* Native UT alerts (what the page shows without the kit) */
+.t-Alert { margin-bottom: 16px; border-radius: 6px; border: 1px solid var(--ut-component-border-color); background: var(--ut-component-background-color); }
+.t-Alert-wrap { display: flex; gap: 10px; align-items: flex-start; padding: 12px 16px; }
+.t-Alert--success { border-color: var(--ut-palette-success); }
+.t-Alert--warning, .t-Alert--danger { border-color: var(--ut-palette-danger); }
+.t-Alert-content { flex: 1; }
+.t-Alert-title { margin: 0; font-size: 14px; }
+.t-Button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--ut-component-border-color); border-radius: 6px; background: var(--ut-component-background-color); color: inherit; font: inherit; font-weight: 500; cursor: pointer; }
+.t-Button--hot { border-color: transparent; background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); }
+.t-Button--danger { color: var(--ut-palette-danger); }
+.t-Button--noUI { border: 0; background: none; padding: 4px; }
+.t-Button:focus-visible { outline: 2px solid var(--ut-palette-primary); outline-offset: 2px; }
+h1 { margin: 0 0 16px; font-size: 22px; }
+.t-Body-contentInner { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 16px; }
+.t-Region { border: 1px solid var(--ut-component-border-color); border-radius: 10px; background: var(--ut-component-background-color); }
+.t-Region-header { padding: 10px 14px; border-bottom: 1px solid var(--ut-component-border-color); font-weight: 600; }
+.t-Region-body { padding: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.t-Form-fieldContainer { margin-bottom: 14px; }
+.t-Form-label { display: block; margin-bottom: 4px; color: var(--ut-component-text-muted-color); font-size: 12px; }
+.apex-item-text, .apex-item-select { width: 100%; padding: 9px 10px; border: 1px solid var(--ut-component-border-color); border-radius: 6px; background: var(--ut-component-background-color); color: inherit; font: inherit; }
+.apex-item-text:focus { outline: 2px solid var(--ut-palette-primary); outline-offset: 0; }
+.t-Form-error { color: var(--ut-palette-danger); font-size: 12px; margin-top: 4px; }
+.t-Form-fieldContainer.is-error .apex-item-text { border-color: var(--ut-palette-danger); }
+.settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+code { font-size: 12px; }
+pre { margin: 10px 0 0; padding: 10px; border-radius: 6px; background: color-mix(in srgb, var(--ut-component-text-default-color) 6%, transparent); overflow: auto; font-size: 12px; }
+/* jQuery UI dialog stand-in (APEX renders apex.message.alert/confirm with jQuery UI) */
+.ui-widget-overlay { position: fixed; inset: 0; z-index: 900; background: rgba(0,0,0,.4); }
+.ui-dialog { position: fixed; z-index: 901; width: min(420px, calc(100vw - 32px)); border: 1px solid #999; background: var(--ut-component-background-color); color: inherit; }
+.ui-dialog-titlebar { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #eee; color: #222; }
+.ui-dialog-titlebar-close { border: 0; background: none; color: inherit; font-size: 18px; cursor: pointer; }
+.ui-dialog-content { padding: 12px; }
+.a-AlertMessage { display: flex; gap: 12px; align-items: flex-start; }
+.a-AlertMessage-icon { flex: none; width: 32px; height: 32px; display: grid; place-items: center; font-weight: 700; }
+.a-AlertMessage-title { margin: 0; font-size: 15px; }
+.a-AlertMessage-details { margin: 4px 0 0; }
+.ui-dialog-buttonpane { padding: 8px 12px; border-top: 1px solid #ddd; }
+.ui-dialog-buttonset { display: flex; justify-content: flex-end; gap: 6px; }
+.ui-button { padding: 6px 12px; border: 1px solid #aaa; background: #f6f6f6; color: #222; font: inherit; cursor: pointer; }
+.ui-button--hot { background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); }
+</style>
+<link rel="stylesheet" href="amc-message-kit.css">
+</head>
+<body>
+<header class="t-Header">
+  <div class="t-Header-logo">Sales App</div>
+  <div class="row" style="margin:0">
+    <button class="t-Button t-Button--noUI" style="color:inherit" type="button" id="themeBtn">Vita Dark</button>
+    <button class="t-Button t-Button--noUI" style="color:inherit" type="button" id="dirBtn">RTL</button>
+  </div>
+</header>
+
+<div class="t-Body-content">
+  <!-- Universal Theme page template: #SUCCESS_MESSAGE# and #NOTIFICATION_MESSAGE# land here.
+       The success message below is what APEX renders after "Save" with a branch. -->
+  <div class="t-Body-alert">
+    <div id="APEX_SUCCESS_MESSAGE" data-template-id="demo_S" class="apex-page-success">
+      <div class="t-Alert t-Alert--defaultIcons t-Alert--success t-Alert--horizontal t-Alert--page t-Alert--colorBG" id="t_Alert_Success" role="alert">
+        <div class="t-Alert-wrap">
+          <div class="t-Alert-icon"><span class="t-Icon"></span></div>
+          <div class="t-Alert-content"><div class="t-Alert-header"><h2 class="t-Alert-title">Order 58213 saved.</h2></div></div>
+          <div class="t-Alert-buttons"><button class="t-Button t-Button--noUI t-Button--icon t-Button--closeAlert" type="button" title="Close Notification" onclick="apex.message.hidePageSuccess()">&times;</button></div>
+        </div>
+      </div>
+    </div>
+    <div id="APEX_ERROR_MESSAGE" data-template-id="demo_E" class="apex-page-error u-hidden"></div>
+  </div>
+
+  <h1>Message Kit demo</h1>
+  <div class="t-Body-contentInner">
+    <section class="t-Region" aria-labelledby="h-login">
+      <div class="t-Region-header" id="h-login">Sign in (authentication page)</div>
+      <div class="t-Region-body">
+        <div class="t-Form-fieldContainer" id="P101_USERNAME_CONTAINER">
+          <label class="t-Form-label" for="P101_USERNAME">Username</label>
+          <div class="t-Form-inputContainer"><input class="apex-item-text" id="P101_USERNAME" name="P101_USERNAME" autocomplete="username"></div>
+          <span class="t-Form-error" id="P101_USERNAME_error_placeholder"></span>
+        </div>
+        <div class="t-Form-fieldContainer" id="P101_PASSWORD_CONTAINER">
+          <label class="t-Form-label" for="P101_PASSWORD">Password</label>
+          <div class="t-Form-inputContainer"><input class="apex-item-text" type="password" id="P101_PASSWORD" name="P101_PASSWORD" autocomplete="current-password"></div>
+          <span class="t-Form-error" id="P101_PASSWORD_error_placeholder"></span>
+        </div>
+        <div class="row">
+          <button class="t-Button t-Button--hot" type="button" id="signInBtn">Sign In</button>
+          <button class="t-Button" type="button" id="clearBtn">Clear errors</button>
+        </div>
+        <pre>apex.message.showErrors([...])   // what APEX does on a failed validation
+apex.message.clearErrors()</pre>
+      </div>
+    </section>
+
+    <section class="t-Region" aria-labelledby="h-page">
+      <div class="t-Region-header" id="h-page">Page messages</div>
+      <div class="t-Region-body">
+        <div class="row">
+          <button class="t-Button" type="button" id="successBtn">showPageSuccess</button>
+          <button class="t-Button" type="button" id="hideSuccessBtn">hidePageSuccess</button>
+          <button class="t-Button" type="button" id="pageErrBtn">Page error (no item)</button>
+        </div>
+        <pre>apex.message.showPageSuccess("Changes saved.")</pre>
+      </div>
+    </section>
+
+    <section class="t-Region" aria-labelledby="h-api">
+      <div class="t-Region-header" id="h-api">Toast API (Dynamic Action &gt; Execute JavaScript)</div>
+      <div class="t-Region-body">
+        <div class="row">
+          <button class="t-Button" type="button" data-toast="success">Success</button>
+          <button class="t-Button" type="button" data-toast="info">Info</button>
+          <button class="t-Button" type="button" data-toast="warning">Warning</button>
+          <button class="t-Button" type="button" data-toast="error">Error</button>
+          <button class="t-Button" type="button" id="burstBtn">Stack of 3</button>
+        </div>
+        <pre>amcMessageKit.toast({
+  type: "success", title: "Invoice sent",
+  message: "INV-2041 was emailed to Acme Trading.", timeout: 5
+});</pre>
+      </div>
+    </section>
+
+    <section class="t-Region" aria-labelledby="h-dlg">
+      <div class="t-Region-header" id="h-dlg">Dialogs</div>
+      <div class="t-Region-body">
+        <div class="row">
+          <button class="t-Button" type="button" id="alertBtn">apex.message.alert</button>
+          <button class="t-Button" type="button" id="confirmBtn">confirm</button>
+          <button class="t-Button t-Button--danger" type="button" id="deleteBtn">confirm (style: danger)</button>
+        </div>
+        <p id="dlgResult" aria-live="polite" style="margin:0;color:var(--ut-component-text-muted-color)"></p>
+      </div>
+    </section>
+
+    <section class="t-Region" aria-labelledby="h-set">
+      <div class="t-Region-header" id="h-set">Settings</div>
+      <div class="t-Region-body settings">
+        <div><label class="t-Form-label" for="posSel">Position</label>
+          <select class="apex-item-select" id="posSel"><option>top-end</option><option>top-center</option><option>bottom-end</option><option>bottom-center</option></select></div>
+        <div><label class="t-Form-label" for="lookSel">Look</label>
+          <select class="apex-item-select" id="lookSel"><option>soft</option><option>glass</option><option>solid</option><option>brutal</option><option>minimal</option></select></div>
+        <div><label class="t-Form-label" for="toSel">Timeout (s)</label>
+          <select class="apex-item-select" id="toSel"><option>3</option><option selected>5</option><option>8</option><option value="0">0 (stay)</option></select></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* Demo-only stand-in for the APEX client API. It renders the same markup Universal Theme
+   and apex.message produce, so the kit is exercised exactly as on a real page. */
+(function () {
+  function h(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    (kids || []).forEach(function (c) { n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return n;
+  }
+  var successBox = document.getElementById("APEX_SUCCESS_MESSAGE");
+  var errorBox = document.getElementById("APEX_ERROR_MESSAGE");
+  function alertTpl(id, mod, content, onClose) {
+    var close = h("button", { "class": "t-Button t-Button--noUI t-Button--icon t-Button--closeAlert", type: "button", title: "Close Notification" }, ["×"]);
+    close.addEventListener("click", onClose);
+    return h("div", { "class": "t-Alert t-Alert--defaultIcons " + mod + " t-Alert--horizontal t-Alert--page t-Alert--colorBG", id: id, role: "alert" }, [
+      h("div", { "class": "t-Alert-wrap" }, [
+        h("div", { "class": "t-Alert-icon" }, [h("span", { "class": "t-Icon" })]),
+        h("div", { "class": "t-Alert-content" }, content),
+        h("div", { "class": "t-Alert-buttons" }, [close])
+      ])
+    ]);
+  }
+  var items = {};
+  window.apex = {
+    item: function (id) {
+      return { setFocus: function () { var n = document.getElementById(id); if (n) { n.focus(); } } };
+    },
+    message: {
+      showPageSuccess: function (msg) {
+        successBox.textContent = "";
+        successBox.appendChild(alertTpl("t_Alert_Success", "t-Alert--success", [
+          h("div", { "class": "t-Alert-header" }, [h("h2", { "class": "t-Alert-title" }, [msg])])
+        ], function () { apex.message.hidePageSuccess(); }));
+        successBox.classList.remove("u-hidden");
+      },
+      hidePageSuccess: function () { successBox.classList.add("u-hidden"); successBox.textContent = ""; },
+      showErrors: function (errors) {
+        apex.message.clearErrors();
+        var pageErrors = errors.filter(function (e) { return [].concat(e.location).indexOf("page") >= 0; });
+        var list = h("ul", { "class": "a-Notification-list htmldbUlErr" }, pageErrors.map(function (e) {
+          var inner = e.pageItem
+            ? h("a", { href: "#" + e.pageItem, "class": "a-Notification-link", "data-for": e.pageItem }, [e.message])
+            : e.message;
+          return h("li", { "class": "a-Notification-item htmldbStdErr" }, [inner]);
+        }));
+        var title = pageErrors.length === 1 ? "1 error has occurred" : pageErrors.length + " errors have occurred";
+        errorBox.appendChild(alertTpl("t_Alert_Notification", "t-Alert--warning", [
+          h("div", { "class": "t-Alert-body" }, [
+            h("h2", { "class": "u-VisuallyHidden" }, ["Errors"]),
+            h("div", { "class": "a-Notification a-Notification--error" }, [
+              h("h2", { "class": "a-Notification-title aErrMsgTitle" }, [title]), list
+            ])
+          ])
+        ], function () { var a = document.getElementById("t_Alert_Notification"); a.parentNode.removeChild(a); }));
+        errorBox.classList.remove("u-hidden");
+        errors.forEach(function (e) {
+          if (!e.pageItem || [].concat(e.location).indexOf("inline") < 0) { return; }
+          var input = document.getElementById(e.pageItem);
+          var box = document.getElementById(e.pageItem + "_CONTAINER");
+          box.classList.add("is-error");
+          input.classList.add("apex-page-item-error");
+          input.setAttribute("aria-invalid", "true");
+          input.setAttribute("aria-describedby", e.pageItem + "_error");
+          document.getElementById(e.pageItem + "_error_placeholder").appendChild(h("div", { id: e.pageItem + "_error" }, [e.message]));
+          items[e.pageItem] = true;
+        });
+      },
+      clearErrors: function () {
+        errorBox.textContent = "";
+        errorBox.classList.add("u-hidden");
+        Object.keys(items).forEach(function (id) {
+          document.getElementById(id + "_CONTAINER").classList.remove("is-error");
+          var input = document.getElementById(id);
+          input.classList.remove("apex-page-item-error");
+          input.removeAttribute("aria-invalid");
+          document.getElementById(id + "_error_placeholder").textContent = "";
+        });
+        items = {};
+      },
+      alert: function (msg, cb, opts) { openDialog(msg, cb, opts || {}, false); },
+      confirm: function (msg, cb, opts) { openDialog(msg, cb, opts || {}, true); }
+    }
+  };
+
+  /* jQuery UI style dialog, as apex.message.alert/confirm create it */
+  var dlgCount = 0;
+  function openDialog(msg, cb, opts, isConfirm) {
+    var back = document.activeElement;
+    var id = "apex_dialog_" + (++dlgCount);
+    var overlay = h("div", { "class": "ui-widget-overlay ui-front" });
+    var titleId = "ui-id-" + dlgCount;
+    var closeX = h("button", { type: "button", "class": "ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close", title: "Close" }, ["×"]);
+    var ok = h("button", { type: "button", "class": "ui-button ui-corner-all ui-widget ui-button--hot" }, [opts.confirmLabel || "OK"]);
+    var cancel = isConfirm ? h("button", { type: "button", "class": "ui-button ui-corner-all ui-widget" }, [opts.cancelLabel || "Cancel"]) : null;
+    var styleCls = opts.style ? " a-AlertMessage--" + opts.style : "";
+    var dlg = h("div", { "class": "ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog--notification", role: "dialog", tabindex: "-1", "aria-describedby": id, "aria-labelledby": titleId }, [
+      h("div", { "class": "ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix" }, [h("span", { id: titleId, "class": "ui-dialog-title" }, [opts.title || (isConfirm ? "Confirm" : "Alert")]), closeX]),
+      h("div", { id: id, "class": "ui-dialog-content ui-widget-content" }, [
+        h("div", { "class": "a-AlertMessage" + styleCls }, [
+          h("div", { "class": "a-AlertMessage-icon" }, [h("span", { "class": "a-Icon", "aria-hidden": "true" }, [isConfirm ? "?" : "i"])]),
+          h("div", { "class": "a-AlertMessage-body" }, [h("p", { "class": "a-AlertMessage-details" }, [msg])])
+        ])
+      ]),
+      h("div", { "class": "ui-dialog-buttonpane ui-widget-content ui-helper-clearfix" }, [
+        h("div", { "class": "ui-dialog-buttonset" }, cancel ? [cancel, ok] : [ok])
+      ])
+    ]);
+    document.body.appendChild(overlay);
+    document.body.appendChild(dlg);
+    dlg.style.left = Math.max(16, (innerWidth - dlg.offsetWidth) / 2) + "px";
+    dlg.style.top = Math.max(16, (innerHeight - dlg.offsetHeight) / 3) + "px";
+    function done(result) {
+      dlg.remove(); overlay.remove();
+      if (back && back.focus) { back.focus(); }
+      if (cb) { cb(result); }
+    }
+    ok.addEventListener("click", function () { done(true); });
+    if (cancel) { cancel.addEventListener("click", function () { done(false); }); }
+    closeX.addEventListener("click", function () { done(false); });
+    dlg.addEventListener("keydown", function (e) { if (e.key === "Escape") { done(false); } });
+    ok.focus();
+  }
+})();
+</script>
+<script src="amc-message-kit.js"></script>
+<script>
+/* Demo wiring */
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  $("signInBtn").addEventListener("click", function () {
+    var errs = [];
+    if (!$("P101_USERNAME").value) { errs.push({ type: "error", location: ["page", "inline"], pageItem: "P101_USERNAME", message: "Username must have some value." }); }
+    if (!$("P101_PASSWORD").value) { errs.push({ type: "error", location: ["page", "inline"], pageItem: "P101_PASSWORD", message: "Password must have some value." }); }
+    if (errs.length) { apex.message.showErrors(errs); }
+    else { apex.message.clearErrors(); apex.message.showPageSuccess("Signed in as " + $("P101_USERNAME").value + "."); }
+  });
+  $("clearBtn").addEventListener("click", function () { apex.message.clearErrors(); });
+  $("successBtn").addEventListener("click", function () { apex.message.showPageSuccess("Changes saved."); });
+  $("hideSuccessBtn").addEventListener("click", function () { apex.message.hidePageSuccess(); });
+  $("pageErrBtn").addEventListener("click", function () {
+    apex.message.showErrors([{ type: "error", location: "page", message: "The order could not be posted: the period is closed." }]);
+  });
+  var samples = {
+    success: { title: "Invoice sent", message: "INV-2041 was emailed to Acme Trading." },
+    info: { title: "New version available", message: "Reload the page to get the latest changes." },
+    warning: { title: "Session ends in 5 minutes", message: "Save your work to avoid losing it." },
+    error: { title: "Payment failed", message: "The card was declined. Try another card." }
+  };
+  Array.prototype.forEach.call(document.querySelectorAll("[data-toast]"), function (b) {
+    b.addEventListener("click", function () {
+      var s = samples[b.getAttribute("data-toast")];
+      amcMessageKit.toast({ type: b.getAttribute("data-toast"), title: s.title, message: s.message });
+    });
+  });
+  $("burstBtn").addEventListener("click", function () {
+    amcMessageKit.toast({ type: "success", title: "Row 1 saved" });
+    amcMessageKit.toast({ type: "info", title: "Row 2 queued" });
+    amcMessageKit.toast({ type: "warning", title: "Row 3 has a warning", message: "Price is below cost." });
+  });
+  function result(t) { $("dlgResult").textContent = t; }
+  $("alertBtn").addEventListener("click", function () { apex.message.alert("Your export is ready to download.", function () { result("Alert closed."); }); });
+  $("confirmBtn").addEventListener("click", function () {
+    apex.message.confirm("Submit this order for approval?", function (ok) { result(ok ? "Confirmed." : "Cancelled."); }, { title: "Submit order" });
+  });
+  $("deleteBtn").addEventListener("click", function () {
+    apex.message.confirm("Delete order 58213? This cannot be undone.", function (ok) { result(ok ? "Deleted." : "Kept."); }, { title: "Delete order", style: "danger", confirmLabel: "Delete" });
+  });
+  function cfg() { amcMessageKit.configure({ position: $("posSel").value, look: $("lookSel").value, timeout: +$("toSel").value }); }
+  ["posSel", "lookSel", "toSel"].forEach(function (id) { $(id).addEventListener("change", cfg); });
+  $("themeBtn").addEventListener("click", function () {
+    var dark = document.documentElement.classList.toggle("vita-dark");
+    this.textContent = dark ? "Vita" : "Vita Dark";
+  });
+  $("dirBtn").addEventListener("click", function () {
+    var rtl = document.documentElement.dir !== "rtl";
+    document.documentElement.dir = rtl ? "rtl" : "ltr";
+    this.textContent = rtl ? "LTR" : "RTL";
+  });
+})();
+</script>
+</body>
+</html>

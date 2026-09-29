@@ -1,0 +1,9 @@
+file "amc-message-kit/amc-message-kit.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-message-kit/amc-message-kit.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)
