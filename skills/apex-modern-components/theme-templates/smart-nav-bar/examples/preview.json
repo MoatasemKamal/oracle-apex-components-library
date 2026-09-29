@@ -1,0 +1,46 @@
+{
+  "samples": [
+    { "title": "Search, 3 unread notifications, help and user menu", "direction": "living", "wide": true, "options": [], "entries": [
+      { "text": "Search", "link": "#search", "icon": "fa-search", "a01": "search" },
+      { "text": "Notifications", "link": "#notifications", "icon": "fa-bell-o", "a01": "notifications", "a02": "3", "children": [
+        { "text": "Invoice INV-20431 approved", "link": "#inv-20431", "icon": "fa-check", "a01": "N-1043", "a03": "5 min" },
+        { "text": "Shipment SH-778 delayed", "link": "#sh-778", "icon": "fa-truck", "a01": "N-1042", "a03": "1 h" },
+        { "text": "Month-end close starts tomorrow", "link": "#close", "icon": "fa-calendar", "a01": "N-1041", "a03": "3 h" }
+      ] },
+      { "text": "Help", "link": "#help", "icon": "fa-question-circle-o", "a01": "help" },
+      { "text": "Moatasem Kamal", "link": "#", "icon": "fa-user", "a01": "user", "a03": "moatasem.kamal@example.com", "children": [
+        { "text": "Profile", "link": "#profile", "icon": "fa-user-circle-o" },
+        { "text": "Language", "link": "#language", "icon": "fa-globe" },
+        { "text": "Preferences", "link": "#preferences", "icon": "fa-sliders" },
+        { "text": "Sign out", "link": "#logout", "icon": "fa-sign-out" }
+      ] }
+    ] },
+    { "title": "Overflow: seven entries fold into the user menu, labels and name on", "direction": "living", "options": ["amc-TSmartNavBar--labels", "amc-TSmartNavBar--userName", "amc-TSmartNavBar--pulse"], "entries": [
+      { "text": "Search", "link": "#search", "a01": "search" },
+      { "text": "Notifications", "link": "#notifications", "a01": "notifications", "a02": "0" },
+      { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart" },
+      { "text": "Help", "link": "#help", "a01": "help", "children": [
+        { "text": "Documentation", "link": "#docs", "icon": "fa-book" },
+        { "text": "Keyboard shortcuts", "link": "#keys", "icon": "fa-keyboard-o" },
+        { "text": "What is new", "link": "#new", "icon": "fa-star-o" }
+      ] },
+      { "text": "Administration", "link": "#admin", "icon": "fa-cog" },
+      { "text": "Feedback", "link": "#feedback", "icon": "fa-comment-o" },
+      { "text": "Moatasem Kamal", "link": "#", "a01": "user", "a03": "moatasem.kamal@example.com", "children": [
+        { "text": "Profile", "link": "#profile", "icon": "fa-user-circle-o" },
+        { "text": "---", "link": "separator" },
+        { "text": "Sign out", "link": "#logout", "icon": "fa-sign-out" }
+      ] }
+    ] },
+    { "title": "Flat, compact, search field, no user entry: extras go to More", "direction": "living", "options": ["amc-TSmartNavBar--flat", "amc-TSmartNavBar--compact", "amc-TSmartNavBar--searchField"], "entries": [
+      { "text": "Search", "link": "#search", "a01": "search" },
+      { "text": "Alerts", "link": "#alerts", "a01": "notifications", "children": [
+        { "text": "Stock below minimum for SKU 4410", "link": "#sku-4410", "icon": "fa-cubes", "a01": "A-77", "a03": "12 min" },
+        { "text": "Backup finished", "link": "#backup", "icon": "fa-database", "a01": "A-76", "a02": "read", "a03": "Yesterday" }
+      ] },
+      { "text": "Docs", "link": "#docs", "icon": "fa-book" },
+      { "text": "Status", "link": "#status", "icon": "fa-heartbeat" },
+      { "text": "Settings", "link": "#settings", "icon": "fa-cog" }
+    ] }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "kind": "list",
+  "name": "AMC Smart Nav Bar",
+  "staticId": "AMC_TPL_SMART_NAV_BAR",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A calm, compact pill cluster for the application Navigation Bar that knows what each entry is for: a search button that opens a command palette over the page's navigation menu, a notification bell with a remembered unread state and a feed dropdown, a help menu and an initials avatar with a user menu, and it folds extra entries into that menu by itself when the header runs out of room.",
+  "useFor": "The application Navigation Bar slot, User Interface > Navigation Bar > List Template, with the Navigation Bar list: Search, Notifications with one sub entry per notification from a dynamic list, Help as a link or with sub entries, and the user entry, usually &APP_USER., with Profile, Language, Preferences and Sign out as sub entries. It also works in a List region placed in the header.",
+  "keywords": [
+    "navigation bar",
+    "header",
+    "user menu",
+    "avatar",
+    "notifications",
+    "bell",
+    "badge",
+    "search",
+    "command palette",
+    "ctrl k",
+    "overflow",
+    "living"
+  ],
+  "helpText": "List template for the application Navigation Bar, one level of sub entries. Each top entry declares its role in User Defined Attribute 1: search, notifications, help or user; leave it empty for a normal link. Attribute 2 is a badge count, left empty rather than 0 so no badge shows without JavaScript; Attribute 3 is secondary text such as the user's email or a notification's time. Roles: search renders a button that opens a command palette, a native modal dialog with focus kept inside, Escape and backdrop click to close, arrow keys to move and Enter to open, that searches the links of the page's Navigation Menu, found by feature in #t_TreeNav, #t_MenuNav, .t-TreeNav, an AMC Command Rail or any element marked data-amc-nav-source, or the nav bar's own entries when no menu is on the page; pages opened from it are kept as Recent, with a Clear button. Before opening its own dialog it dispatches the cancelable CustomEvent amc:command-search on document with detail source smart-nav-bar; a Command Rail or any other search that wants to take over calls event.preventDefault in its listener and opens its own search instead. When an AMC Command Rail is on the page but does not listen for the event, the nav bar hands the search to it through its Ctrl+K shortcut instead of opening its own dialog. Ctrl+K or Cmd+K opens the search unless another handler already called preventDefault or another template owns the shortcut: window.amcCommandK holds the name of the one AMC template that handles it, set by the first template that loads with a search entry, here smart-nav-bar. notifications renders a bell with the Attribute 2 count as a badge, announced as a number of unread notifications; its sub entries, usually from a dynamic list query, form a feed with icon, text, the Attribute 3 time and an unread dot. On sub entries Attribute 1 is a stable notification key and Attribute 2 set to read marks one as already read. Mark all read stores the read keys and the count in localStorage, key amc-tpl-smart-nav-bar:APP_ID:LIST_ID:read, and hides the badge until the count grows past the stored count; the badge then shows only the new ones and bumps. An empty bell shows an empty state; the entry's own link, when it has one, becomes View all. amcTplSmartNavBar.setCount with the list element or id and a number updates the badge live and announces it; amcTplSmartNavBar.openSearch opens the search from your own code. help is a plain link or, with sub entries, a menu. user shows an avatar with initials from the entry text, or the entry image when it is an image URL, and opens a menu with the name, the Attribute 3 email and the sub entries; a sub entry with the text --- or the URL separator becomes a divider and a sign out entry gets its own group. Normal entries with sub entries open a menu too. Menus use role menu; notifications are a labelled group of links. Keyboard: Tab moves through the cluster, Arrow Left and Arrow Right move between its buttons, Enter, Space or Arrow Down opens a dropdown on its first item and Arrow Up on its last, arrow keys, Home and End move inside, Escape closes and returns focus to the button, Tab or a click outside closes it, and only one dropdown is open at a time on the page. Overflow: at most four entries are visible; search, notifications and user stay, the rest move into the user menu, or into a More menu when the user entry has no sub entries or is missing, when there are more than four, when the header is too narrow, measured with ResizeObserver, and on phones below 600px wide where only search, bell and avatar remain. Without JavaScript every entry is a plain link and sub entries open as nested links on hover and keyboard focus. Template options: Labels visible, Flat buttons instead of the pill cluster, Show user name, Pulse on new notifications, Compact and Search field. Under prefers-reduced-motion nothing moves; forced colors keep borders. English strings to translate are data attributes in the Before List Entry part: aria-label Account and tools, data-search Search, data-search-placeholder Search pages, data-no-results No matching pages, data-results results, data-recent Recent, data-clear-recent Clear, data-pages Pages, data-unread unread notifications, data-unread-one unread notification, data-mark-read Mark all read, data-marked All notifications marked as read, data-empty You are all caught up, data-view-all View all, data-more More, data-unread-dot Unread, data-hint to move, to open. Stored in the browser only: read notification keys, the read count, the last badge seen and up to five recent searches. A theme style switch is not built in because APEX has no stable client API for it; add a normal user sub entry that links to a page or a Theme Style Selection dialog, such as a Preferences page with the Theme Style item, and it appears in the user menu like any other entry. Universal Theme caveat: the header markup, the navigation menu ids and the UT header colors used here must be confirmed on a live APEX page; if they differ, the search falls back to the nav bar's own entries and the cluster keeps working. Sub entry text uses TEXT_ESC_SC; escape values you pass in attributes from user data with apex_escape.html_attribute in the query.",
+  "attributes": {
+    "a01": "Role - search, notifications, help, user - or the notification key on sub entries",
+    "a02": "Badge count, or read on a notification sub entry",
+    "a03": "Secondary text - email or time"
+  },
+  "templateOptions": [
+    {
+      "staticId": "LABELS",
+      "name": "Labels visible",
+      "cssClass": "amc-TSmartNavBar--labels",
+      "sequence": 10,
+      "help": "Shows the entry text next to each icon on wide screens. Labels hide again when the header gets narrow, before any entry moves into the overflow menu."
+    },
+    {
+      "staticId": "FLAT",
+      "name": "Flat buttons",
+      "cssClass": "amc-TSmartNavBar--flat",
+      "sequence": 20,
+      "help": "Separate round icon buttons without the shared pill background, closest to the Universal Theme navigation bar."
+    },
+    {
+      "staticId": "USER_NAME",
+      "name": "Show user name",
+      "cssClass": "amc-TSmartNavBar--userName",
+      "sequence": 30,
+      "help": "Shows the user entry text next to the avatar on wide screens."
+    },
+    {
+      "staticId": "PULSE",
+      "name": "Pulse on new notifications",
+      "cssClass": "amc-TSmartNavBar--pulse",
+      "sequence": 40,
+      "help": "When the unread count grows, a soft ring pulses around the badge three times. Nothing moves under reduced motion."
+    },
+    {
+      "staticId": "COMPACT",
+      "name": "Compact",
+      "cssClass": "amc-TSmartNavBar--compact",
+      "sequence": 50,
+      "help": "Smaller 28 pixel buttons and avatar for dense headers; touch screens keep 32 pixels."
+    },
+    {
+      "staticId": "SEARCH_FIELD",
+      "name": "Search field",
+      "cssClass": "amc-TSmartNavBar--searchField",
+      "sequence": 60,
+      "help": "On wide screens the search button looks like a search field with its Ctrl K hint; below 1024 pixels it becomes an icon again."
+    }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

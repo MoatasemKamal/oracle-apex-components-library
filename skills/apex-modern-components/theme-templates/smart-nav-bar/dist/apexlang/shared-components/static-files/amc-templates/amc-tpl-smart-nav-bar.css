@@ -1,0 +1,801 @@
+/* AMC Smart Nav Bar: list template for the application Navigation Bar slot.
+   A compact pill cluster in the header: search, notifications, help and the user avatar.
+   Chrome inside the header follows the header text color (currentColor), so it fits dark
+   and light headers; dropdowns and the search dialog use the component surface tokens. */
+
+.amc-TSmartNavBar {
+  --amc-snb-surface: var(--ut-component-background-color, #fff);
+  --amc-snb-text: var(--ut-component-text-default-color, #262626);
+  --amc-snb-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-snb-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-snb-accent: var(--ut-palette-primary, #056ac8);
+  --amc-snb-accent-contrast: var(--ut-palette-primary-contrast, #fff);
+  --amc-snb-badge: var(--ut-palette-danger, #cb1100);
+  --amc-snb-badge-contrast: var(--ut-palette-danger-contrast, #fff);
+  --amc-snb-ring: var(--ut-header-background-color, var(--ut-body-background-color, #fff));
+  --amc-snb-radius: var(--ut-component-border-radius, 8px);
+  --amc-snb-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .06)), 0 12px 32px -8px var(--amc-snb-shadow-color, rgba(0, 0, 0, .22));
+  --amc-snb-tint: color-mix(in srgb, currentColor 7%, transparent);
+  --amc-snb-tint-line: color-mix(in srgb, currentColor 13%, transparent);
+  --amc-snb-hover: color-mix(in srgb, currentColor 12%, transparent);
+  --amc-snb-press: color-mix(in srgb, currentColor 18%, transparent);
+  --amc-snb-size: 2.125rem;
+  --amc-snb-avatar: 1.75rem;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-inline-size: 0;
+  color: inherit;
+  font-size: .875rem;
+  line-height: 1.25;
+}
+
+.amc-TSmartNavBar-list {
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 3px;
+  list-style: none;
+  border-radius: 999px;
+  background: var(--amc-snb-tint);
+  box-shadow: inset 0 0 0 1px var(--amc-snb-tint-line);
+}
+.amc-TSmartNavBar--flat .amc-TSmartNavBar-list {
+  gap: 4px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.amc-TSmartNavBar-item {
+  position: relative;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.amc-TSmartNavBar-item.is-overflow,
+.amc-TSmartNavBar-item--more:not(.is-needed) {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- buttons and links */
+
+.amc-TSmartNavBar-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-block-size: var(--amc-snb-size);
+  min-inline-size: var(--amc-snb-size);
+  margin: 0;
+  padding-block: 0;
+  padding-inline: 8px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s ease, box-shadow .15s ease;
+}
+.amc-TSmartNavBar-link:hover {
+  background: var(--amc-snb-hover);
+  color: inherit;
+  text-decoration: none;
+}
+.amc-TSmartNavBar-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+.amc-TSmartNavBar-link[aria-expanded="true"],
+.amc-TSmartNavBar-link[aria-current="page"],
+.amc-TSmartNavBar-item.is-current > .amc-TSmartNavBar-link {
+  background: var(--amc-snb-press);
+}
+.amc-TSmartNavBar--flat .amc-TSmartNavBar-link {
+  box-shadow: inset 0 0 0 1px var(--amc-snb-tint-line);
+}
+
+.amc-TSmartNavBar-icon {
+  inline-size: 1.15em;
+  font-size: 1rem;
+  line-height: 1;
+  text-align: center;
+}
+.amc-TSmartNavBar-icon:not([class*="fa-"]) {
+  display: none;
+}
+
+/* Icon-only by default: the text stays for screen readers and as a tooltip. */
+.amc-TSmartNavBar-srOnly,
+.amc-TSmartNavBar-icon[class*="fa-"] ~ .amc-TSmartNavBar-label,
+.amc-TSmartNavBar-avatar ~ .amc-TSmartNavBar-label {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.amc-TSmartNavBar-label {
+  unicode-bidi: isolate;
+}
+.amc-TSmartNavBar-meta {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .amc-TSmartNavBar--labels:not(.is-tight) .amc-TSmartNavBar-icon[class*="fa-"] ~ .amc-TSmartNavBar-label,
+  .amc-TSmartNavBar--userName:not(.is-tight) .amc-TSmartNavBar-avatar ~ .amc-TSmartNavBar-label {
+    position: static;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+  }
+  .amc-TSmartNavBar--labels:not(.is-tight) .amc-TSmartNavBar-link {
+    padding-inline: 10px 12px;
+  }
+  .amc-TSmartNavBar--userName:not(.is-tight) .amc-TSmartNavBar-item--user > .amc-TSmartNavBar-link {
+    padding-inline-end: 10px;
+  }
+}
+
+/* Badge: a number on the icon; empty or zero badges disappear. */
+.amc-TSmartNavBar-badge {
+  position: absolute;
+  inset-block-start: 1px;
+  inset-inline-end: 1px;
+  box-sizing: border-box;
+  min-inline-size: 1.05rem;
+  block-size: 1.05rem;
+  padding-inline: 4px;
+  border-radius: 999px;
+  background: var(--amc-snb-badge);
+  color: var(--amc-snb-badge-contrast);
+  box-shadow: 0 0 0 2px var(--amc-snb-ring);
+  font-size: .6875rem;
+  font-weight: 700;
+  line-height: 1.05rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+  pointer-events: none;
+}
+.amc-TSmartNavBar-badge:empty,
+.amc-TSmartNavBar-badge.is-zero {
+  display: none;
+}
+.amc-TSmartNavBar--labels:not(.is-tight) .amc-TSmartNavBar-badge {
+  inset-inline-end: auto;
+  inset-inline-start: 1.1rem;
+}
+.amc-TSmartNavBar-item.is-bumped .amc-TSmartNavBar-badge {
+  animation: amc-TSmartNavBar-bump .45s cubic-bezier(.3, 1.6, .5, 1);
+}
+.amc-TSmartNavBar--pulse .amc-TSmartNavBar-item.is-bumped .amc-TSmartNavBar-badge::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 var(--amc-snb-badge);
+  animation: amc-TSmartNavBar-pulse 1.6s ease-out 3;
+}
+@keyframes amc-TSmartNavBar-bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+@keyframes amc-TSmartNavBar-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--amc-snb-badge) 55%, transparent); }
+  100% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--amc-snb-badge) 0%, transparent); }
+}
+
+/* Chevron after the avatar and after menu buttons with a visible label. */
+.amc-TSmartNavBar-caret {
+  inline-size: 6px;
+  block-size: 6px;
+  margin-inline: 1px 2px;
+  border-style: solid;
+  border-color: currentColor;
+  border-width: 0 1.5px 1.5px 0; /* physical on purpose: a down chevron is the same in RTL */
+  opacity: .7;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .15s ease;
+}
+.amc-TSmartNavBar-link[aria-expanded="true"] .amc-TSmartNavBar-caret {
+  transform: translateY(1px) rotate(225deg);
+}
+
+/* Avatar */
+.amc-TSmartNavBar-item--user > .amc-TSmartNavBar-link {
+  padding-inline: 3px 6px;
+}
+.amc-TSmartNavBar-avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--amc-snb-avatar);
+  block-size: var(--amc-snb-avatar);
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--amc-snb-accent);
+  color: var(--amc-snb-accent-contrast);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1;
+  unicode-bidi: isolate;
+}
+.amc-TSmartNavBar-avatarImg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+.amc-TSmartNavBar-avatar--large {
+  --amc-snb-avatar: 2.5rem;
+  font-size: .9375rem;
+}
+
+/* Search as a field (option) */
+.amc-TSmartNavBar-kbd {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .amc-TSmartNavBar--searchField:not(.is-tight) .amc-TSmartNavBar-item--search > .amc-TSmartNavBar-link {
+    justify-content: flex-start;
+    min-inline-size: 13rem;
+    padding-inline: 10px 6px;
+    background: var(--amc-snb-tint);
+    box-shadow: inset 0 0 0 1px var(--amc-snb-tint-line);
+    cursor: text;
+  }
+  .amc-TSmartNavBar--searchField:not(.is-tight) .amc-TSmartNavBar-item--search .amc-TSmartNavBar-label {
+    position: static;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    flex: 1;
+    opacity: .75;
+    text-align: start;
+  }
+  .amc-TSmartNavBar--searchField:not(.is-tight) .amc-TSmartNavBar-kbd {
+    display: inline-block;
+  }
+}
+.amc-TSmartNavBar-kbd {
+  padding: 1px 6px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px var(--amc-snb-tint-line);
+  font: inherit;
+  font-size: .6875rem;
+  opacity: .8;
+}
+
+/* Compact */
+.amc-TSmartNavBar--compact {
+  --amc-snb-size: 1.75rem;
+  --amc-snb-avatar: 1.5rem;
+}
+.amc-TSmartNavBar--compact .amc-TSmartNavBar-icon {
+  font-size: .875rem;
+}
+.amc-TSmartNavBar--compact .amc-TSmartNavBar-list {
+  padding: 2px;
+}
+@media (pointer: coarse) {
+  .amc-TSmartNavBar--compact {
+    --amc-snb-size: 2rem;
+  }
+}
+
+/* ---------------------------------------------------------------- dropdown panels */
+
+.amc-TSmartNavBar-panel {
+  position: absolute;
+  z-index: 950;
+  inset-block-start: calc(100% + 8px);
+  inset-inline-end: 0;
+  box-sizing: border-box;
+  inline-size: max-content;
+  min-inline-size: 15rem;
+  max-inline-size: min(22.5rem, calc(100vw - 16px));
+  border: 1px solid var(--amc-snb-line);
+  border-radius: max(var(--amc-snb-radius), 10px);
+  background: var(--amc-snb-surface);
+  color: var(--amc-snb-text);
+  box-shadow: var(--amc-snb-shadow);
+  text-align: start;
+  white-space: normal;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .14s ease, transform .14s ease, visibility 0s linear .14s;
+}
+.amc-TSmartNavBar-item.is-open > .amc-TSmartNavBar-panel,
+.amc-TSmartNavBar:not(.is-js) .amc-TSmartNavBar-item:hover > .amc-TSmartNavBar-panel,
+.amc-TSmartNavBar:not(.is-js) .amc-TSmartNavBar-item:focus-within > .amc-TSmartNavBar-panel {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+.amc-TSmartNavBar-item--notifications > .amc-TSmartNavBar-panel {
+  inline-size: 22.5rem;
+}
+
+.amc-TSmartNavBar-panelHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 12px;
+  padding-inline: 14px;
+  border-block-end: 1px solid var(--amc-snb-line);
+}
+.amc-TSmartNavBar-panelTitle {
+  flex: 1;
+  margin: 0;
+  font-size: .9375rem;
+  font-weight: 600;
+}
+.amc-TSmartNavBar-panelWho {
+  display: grid;
+  min-inline-size: 0;
+}
+.amc-TSmartNavBar-panelName {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+.amc-TSmartNavBar-panelSub {
+  overflow: hidden;
+  color: var(--amc-snb-muted);
+  font-size: .8125rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: plaintext;
+}
+.amc-TSmartNavBar-panelSub:empty {
+  display: none;
+}
+
+.amc-TSmartNavBar-markRead,
+.amc-TSmartNavBar-clearRecent {
+  padding-block: 4px;
+  padding-inline: 8px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--amc-snb-accent);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.amc-TSmartNavBar-markRead:hover,
+.amc-TSmartNavBar-clearRecent:hover {
+  background: color-mix(in srgb, var(--amc-snb-accent) 10%, transparent);
+}
+.amc-TSmartNavBar-markRead[aria-disabled="true"] {
+  color: var(--amc-snb-muted);
+  background: transparent;
+  cursor: default;
+}
+.amc-TSmartNavBar-markRead:focus-visible,
+.amc-TSmartNavBar-clearRecent:focus-visible,
+.amc-TSmartNavBar-footLink:focus-visible {
+  outline: 2px solid var(--amc-snb-accent);
+  outline-offset: 1px;
+}
+
+.amc-TSmartNavBar-menu {
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+}
+.amc-TSmartNavBar-item--notifications .amc-TSmartNavBar-menu {
+  max-block-size: min(22rem, 60vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.amc-TSmartNavBar-entry {
+  margin: 0;
+}
+.amc-TSmartNavBar-entryLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 8px;
+  padding-inline: 10px;
+  border-radius: 8px;
+  color: var(--amc-snb-text);
+  text-decoration: none;
+  transition: background-color .12s ease;
+}
+.amc-TSmartNavBar-entryLink:hover,
+.amc-TSmartNavBar-entryLink:focus {
+  background: color-mix(in srgb, var(--amc-snb-text) 7%, transparent);
+  color: var(--amc-snb-text);
+  text-decoration: none;
+}
+.amc-TSmartNavBar-entryLink:focus-visible {
+  outline: 2px solid var(--amc-snb-accent);
+  outline-offset: -2px;
+}
+.amc-TSmartNavBar-entryLink[aria-current="page"] {
+  color: var(--amc-snb-accent);
+  font-weight: 600;
+}
+.amc-TSmartNavBar-entryIcon {
+  inline-size: 1.15em;
+  flex: none;
+  color: var(--amc-snb-muted);
+  text-align: center;
+}
+.amc-TSmartNavBar-entryIcon:not([class*="fa-"]) {
+  display: none;
+}
+.amc-TSmartNavBar-entryBody {
+  display: grid;
+  flex: 1;
+  min-inline-size: 0;
+}
+.amc-TSmartNavBar-entryText {
+  unicode-bidi: isolate;
+}
+.amc-TSmartNavBar-entryMeta {
+  color: var(--amc-snb-muted);
+  font-size: .75rem;
+  unicode-bidi: plaintext;
+}
+.amc-TSmartNavBar-entryMeta:empty {
+  display: none;
+}
+.amc-TSmartNavBar-menu .amc-TSmartNavBar-entryMeta {
+  display: none;
+}
+.amc-TSmartNavBar-item--notifications .amc-TSmartNavBar-entryMeta {
+  display: block;
+  margin-block-start: 2px;
+}
+.amc-TSmartNavBar-entry--separator {
+  block-size: 1px;
+  margin-block: 6px;
+  margin-inline: 4px;
+  background: var(--amc-snb-line);
+}
+.amc-TSmartNavBar-entry--group {
+  padding-block: 8px 4px;
+  padding-inline: 10px;
+  color: var(--amc-snb-muted);
+  font-size: .75rem;
+  font-weight: 600;
+}
+.amc-TSmartNavBar-entry.is-signout {
+  margin-block-start: 6px;
+  padding-block-start: 6px;
+  border-block-start: 1px solid var(--amc-snb-line);
+}
+.amc-TSmartNavBar-entry--separator + .amc-TSmartNavBar-entry.is-signout {
+  margin-block-start: 0;
+  padding-block-start: 0;
+  border: 0;
+}
+
+/* Notification feed */
+.amc-TSmartNavBar-item--notifications .amc-TSmartNavBar-entryLink {
+  align-items: flex-start;
+  padding-block: 10px;
+}
+.amc-TSmartNavBar-item--notifications .amc-TSmartNavBar-entryIcon {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-snb-accent) 12%, transparent);
+  color: var(--amc-snb-accent);
+  font-size: .875rem;
+}
+.amc-TSmartNavBar-item--notifications .amc-TSmartNavBar-entryIcon:not([class*="fa-"])::before {
+  content: "";
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.amc-TSmartNavBar-dot {
+  flex: none;
+  inline-size: 8px;
+  block-size: 8px;
+  margin-block-start: 6px;
+  border-radius: 50%;
+  background: var(--amc-snb-accent);
+}
+.amc-TSmartNavBar-entry.is-read .amc-TSmartNavBar-dot {
+  visibility: hidden;
+}
+.amc-TSmartNavBar-entry.is-read .amc-TSmartNavBar-entryText {
+  color: var(--amc-snb-muted);
+}
+.amc-TSmartNavBar-empty {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 0;
+  padding-block: 28px;
+  padding-inline: 16px;
+  color: var(--amc-snb-muted);
+  text-align: center;
+}
+.amc-TSmartNavBar-empty[hidden],
+.amc-TSmartNavBar-noResults[hidden] {
+  display: none;
+}
+.amc-TSmartNavBar-emptyIcon {
+  font-size: 1.5rem;
+  opacity: .7;
+}
+.amc-TSmartNavBar-footLink {
+  display: block;
+  padding: 10px;
+  border-block-start: 1px solid var(--amc-snb-line);
+  border-end-start-radius: inherit;
+  border-end-end-radius: inherit;
+  color: var(--amc-snb-accent);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+.amc-TSmartNavBar-footLink:hover {
+  background: color-mix(in srgb, var(--amc-snb-accent) 8%, transparent);
+  text-decoration: none;
+}
+
+/* Phones: panels span the screen under the header (JS sets the top edge). */
+@media (max-width: 599.98px) {
+  .amc-TSmartNavBar.is-js .amc-TSmartNavBar-panel {
+    position: fixed;
+    inset-block-start: var(--amc-snb-top, 56px);
+    inset-inline: 8px;
+    inline-size: auto;
+    min-inline-size: 0;
+    max-inline-size: none;
+    max-block-size: calc(100dvh - var(--amc-snb-top, 56px) - 8px);
+    overflow-y: auto;
+  }
+}
+
+/* ---------------------------------------------------------------- search dialog */
+
+.amc-TSmartNavBar-dialog {
+  box-sizing: border-box;
+  inline-size: min(40rem, calc(100vw - 24px));
+  max-inline-size: none;
+  max-block-size: calc(100dvh - 24px);
+  margin-block: 12vh auto;
+  margin-inline: auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  color: var(--amc-snb-text);
+  font-size: .875rem;
+}
+.amc-TSmartNavBar-dialog::backdrop {
+  background: var(--amc-snb-scrim, rgba(10, 12, 16, .42));
+}
+.amc-TSmartNavBar-dialog[open] .amc-TSmartNavBar-dialogBox {
+  animation: amc-TSmartNavBar-rise .16s ease-out;
+}
+@keyframes amc-TSmartNavBar-rise {
+  from { opacity: 0; transform: translateY(6px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+.amc-TSmartNavBar-dialogBox {
+  display: flex;
+  flex-direction: column;
+  max-block-size: calc(76dvh);
+  overflow: hidden;
+  border: 1px solid var(--amc-snb-line);
+  border-radius: 14px;
+  background: var(--amc-snb-surface);
+  box-shadow: var(--amc-snb-shadow);
+}
+.amc-TSmartNavBar-searchRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 12px;
+  padding-inline: 16px;
+  border-block-end: 1px solid var(--amc-snb-line);
+}
+.amc-TSmartNavBar-searchRow:focus-within {
+  box-shadow: inset 0 -2px 0 var(--amc-snb-accent);
+}
+.amc-TSmartNavBar-searchIcon {
+  color: var(--amc-snb-muted);
+  font-size: 1rem;
+}
+.amc-TSmartNavBar-input {
+  flex: 1;
+  min-inline-size: 0;
+  padding: 4px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--amc-snb-text);
+  font: inherit;
+  font-size: 1rem;
+}
+.amc-TSmartNavBar-input::placeholder {
+  color: var(--amc-snb-muted);
+}
+.amc-TSmartNavBar-escKey,
+.amc-TSmartNavBar-footKey {
+  padding: 1px 6px;
+  border: 1px solid var(--amc-snb-line);
+  border-radius: 5px;
+  color: var(--amc-snb-muted);
+  font: inherit;
+  font-size: .6875rem;
+}
+.amc-TSmartNavBar-results {
+  flex: 1;
+  min-block-size: 0;
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.amc-TSmartNavBar-groupLabel {
+  padding-block: 8px 4px;
+  padding-inline: 10px;
+  color: var(--amc-snb-muted);
+  font-size: .75rem;
+  font-weight: 600;
+}
+.amc-TSmartNavBar-groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.amc-TSmartNavBar-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-block: 8px;
+  padding-inline: 10px;
+  border-radius: 8px;
+  color: var(--amc-snb-text);
+  text-decoration: none;
+  scroll-margin-block: 6px;
+}
+.amc-TSmartNavBar-option:hover {
+  background: color-mix(in srgb, var(--amc-snb-text) 6%, transparent);
+  color: var(--amc-snb-text);
+  text-decoration: none;
+}
+.amc-TSmartNavBar-option.is-active {
+  background: color-mix(in srgb, var(--amc-snb-accent) 12%, transparent);
+}
+.amc-TSmartNavBar-optionIcon {
+  inline-size: 1.25em;
+  flex: none;
+  color: var(--amc-snb-muted);
+  text-align: center;
+}
+.amc-TSmartNavBar-option.is-active .amc-TSmartNavBar-optionIcon {
+  color: var(--amc-snb-accent);
+}
+.amc-TSmartNavBar-optionText {
+  display: grid;
+  flex: 1;
+  min-inline-size: 0;
+}
+.amc-TSmartNavBar-optionLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+.amc-TSmartNavBar-optionPath {
+  overflow: hidden;
+  color: var(--amc-snb-muted);
+  font-size: .75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.amc-TSmartNavBar-optionPath:empty {
+  display: none;
+}
+.amc-TSmartNavBar-enter {
+  visibility: hidden;
+  color: var(--amc-snb-muted);
+  font-size: .75rem;
+}
+.amc-TSmartNavBar-option.is-active .amc-TSmartNavBar-enter {
+  visibility: visible;
+}
+.amc-TSmartNavBar-mark {
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--amc-snb-accent) 22%, transparent);
+  color: inherit;
+}
+.amc-TSmartNavBar-noResults {
+  margin: 0;
+  padding-block: 28px;
+  padding-inline: 16px;
+  color: var(--amc-snb-muted);
+  text-align: center;
+}
+.amc-TSmartNavBar-dialogFoot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-block: 8px;
+  padding-inline: 14px;
+  border-block-start: 1px solid var(--amc-snb-line);
+  color: var(--amc-snb-muted);
+  font-size: .75rem;
+}
+.amc-TSmartNavBar-footGap {
+  margin-inline-end: 10px;
+}
+
+/* ---------------------------------------------------------------- motion and contrast */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSmartNavBar-link,
+  .amc-TSmartNavBar-caret,
+  .amc-TSmartNavBar-panel,
+  .amc-TSmartNavBar-entryLink {
+    transition: none;
+  }
+  .amc-TSmartNavBar-panel {
+    transform: none;
+  }
+  .amc-TSmartNavBar-item.is-bumped .amc-TSmartNavBar-badge,
+  .amc-TSmartNavBar-item.is-bumped .amc-TSmartNavBar-badge::after,
+  .amc-TSmartNavBar-dialog[open] .amc-TSmartNavBar-dialogBox {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .amc-TSmartNavBar-list,
+  .amc-TSmartNavBar--flat .amc-TSmartNavBar-link {
+    border: 1px solid CanvasText;
+  }
+  .amc-TSmartNavBar-panel,
+  .amc-TSmartNavBar-dialogBox,
+  .amc-TSmartNavBar-badge {
+    border: 1px solid CanvasText;
+  }
+  .amc-TSmartNavBar-link[aria-expanded="true"],
+  .amc-TSmartNavBar-option.is-active,
+  .amc-TSmartNavBar-entryLink:focus {
+    outline: 2px solid Highlight;
+  }
+  .amc-TSmartNavBar-dot {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+}

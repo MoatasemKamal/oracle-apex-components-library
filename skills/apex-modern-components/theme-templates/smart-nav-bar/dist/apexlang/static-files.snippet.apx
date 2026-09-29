@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-smart-nav-bar.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-smart-nav-bar.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)
