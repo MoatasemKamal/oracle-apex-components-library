@@ -10,7 +10,7 @@
   if (w.amcTplReadableArticle) return;
   var ROOT = "amc-TReadableArticle", P = ROOT + "-";
   var WIDE = 880, TOC_MIN = 2;
-  var AR = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/g, LAT = /[A-Za-zÀ-ɏ]/g;
+  var AR = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/g, LAT = /[A-Za-z\u00C0-\u024F]/g;
 
   function closest(el, cls) {
     while (el && el.nodeType === 1) { if (el.classList && el.classList.contains(cls)) return el; el = el.parentNode; }
@@ -40,8 +40,8 @@
     return s.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
   }
   function slug(s) {
-    var out = s.toLowerCase().replace(/[ً-ٰٟ]/g, "")
-      .replace(/[^a-z0-9À-ɏ؀-ۿ\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
+    var out = s.toLowerCase().replace(/[\u064B-\u065F\u0670]/g, "")
+      .replace(/[^a-z0-9\u00C0-\u024F\u0600-\u06FF\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
     return out.slice(0, 60) || "section";
   }
 
@@ -56,7 +56,7 @@
     root.classList.toggle("is-arabic", arabic);
 
     // Reading time: words over words per minute (Arabic reads a little slower per word).
-    var words = text.replace(/^\s+|\s+$/g, "").split(/\s+/).filter(function (x) { return /[0-9A-Za-zÀ-ɏ؀-ۿ]/.test(x); }).length;
+    var words = text.replace(/^\s+|\s+$/g, "").split(/\s+/).filter(function (x) { return /[0-9A-Za-z\u00C0-\u024F\u0600-\u06FF]/.test(x); }).length;
     var wpm = parseInt(root.getAttribute("data-amc-wpm"), 10) || (arabic ? 180 : 220);
     var minutes = Math.max(1, Math.round(words / wpm));
     var heads = body.querySelectorAll("h2, h3, h4");
@@ -208,7 +208,7 @@
     var url = String(w.location.href).split("#")[0] + "#" + hid;
     copy(url, function () {
       anchor.classList.add("is-copied");
-      anchor.textContent = "✓";
+      anchor.textContent = "\u2713";
       var live = part(root, "live");
       if (live) live.textContent = txt(root, "copied", "Link to %0 copied", h ? headingText(h) : hid);
       clearTimeout(anchor._amcT);

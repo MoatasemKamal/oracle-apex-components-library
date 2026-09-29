@@ -10,7 +10,7 @@
   "use strict";
   if (w.amcTplPeakEndSummary) return;
   var ROOT = "amc-TPeakEndSummary", P = ROOT + "-";
-  var AI = "٠١٢٣٤٥٦٧٨٩";
+  var AI = "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
 
   function closest(el, cls) {
     while (el && el.nodeType === 1) { if (el.classList && el.classList.contains(cls)) return el; el = el.parentNode; }
@@ -18,7 +18,7 @@
   }
   function part(root, name) { return root.querySelector("." + P + name); }
   function reduced() { return !!(w.matchMedia && w.matchMedia("(prefers-reduced-motion: reduce)").matches); }
-  function toLatin(s) { return s.replace(/[٠-٩]/g, function (c) { return String(c.charCodeAt(0) - 0x660); }); }
+  function toLatin(s) { return s.replace(/[\u0660-\u0669]/g, function (c) { return String(c.charCodeAt(0) - 0x660); }); }
   function norm(s) { return String(s || "").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, ""); }
   // Spoken form of the peak: label, figure and note as separate phrases.
   function spoken(peak) {
@@ -33,11 +33,11 @@
     while ((n = walker.nextNode())) {
       if (n.parentNode !== peak && n.parentNode.parentNode !== peak) continue;
       if (n.parentNode !== peak && /^(SPAN|SMALL)$/.test(n.parentNode.tagName)) continue; // labels
-      var m = /^([\s\S]*?)([0-9٠-٩](?:[0-9٠-٩.,٫٬   ]*[0-9٠-٩])?)([\s\S]*)$/.exec(n.nodeValue);
+      var m = /^([\s\S]*?)([0-9\u0660-\u0669](?:[0-9\u0660-\u0669.,\u066B\u066C\u00A0\u202F ]*[0-9\u0660-\u0669])?)([\s\S]*)$/.exec(n.nodeValue);
       if (!m) continue;
-      var raw = m[2], arabic = /[٠-٩]/.test(raw), lat = toLatin(raw).replace(/٫/g, ".").replace(/٬/g, ",");
+      var raw = m[2], arabic = /[\u0660-\u0669]/.test(raw), lat = toLatin(raw).replace(/\u066B/g, ".").replace(/\u066C/g, ",");
       var seps = lat.replace(/[0-9]/g, ""), dec = "", grp = "";
-      var lc = lat.lastIndexOf(","), ld = lat.lastIndexOf("."), ls = Math.max(lat.lastIndexOf(" "), lat.lastIndexOf(" "), lat.lastIndexOf(" "));
+      var lc = lat.lastIndexOf(","), ld = lat.lastIndexOf("."), ls = Math.max(lat.lastIndexOf(" "), lat.lastIndexOf("\u00A0"), lat.lastIndexOf("\u202F"));
       if (lc >= 0 && ld >= 0) { dec = lc > ld ? "," : "."; grp = lc > ld ? "." : ","; }
       else if (lc >= 0 || ld >= 0) {
         var c = lc >= 0 ? "," : ".", parts = lat.split(c);
@@ -51,8 +51,8 @@
       if (!ip || seps.length > 12) continue;
       var value = parseFloat(ip + (fp ? "." + fp : ""));
       if (!isFinite(value)) continue;
-      var decOut = dec && arabic && raw.indexOf("٫") >= 0 ? "٫" : dec;
-      var grpOut = grp && arabic && raw.indexOf("٬") >= 0 ? "٬" : grp;
+      var decOut = dec && arabic && raw.indexOf("\u066B") >= 0 ? "\u066B" : dec;
+      var grpOut = grp && arabic && raw.indexOf("\u066C") >= 0 ? "\u066C" : grp;
       return { node: n, pre: m[1], post: m[3], value: value, decimals: fp.length, dec: decOut, grp: grpOut, arabic: arabic, original: n.nodeValue };
     }
     return null;

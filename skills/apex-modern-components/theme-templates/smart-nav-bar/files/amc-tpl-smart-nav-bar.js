@@ -236,7 +236,7 @@
         btn.removeAttribute("aria-expanded");
         btn.setAttribute("aria-haspopup", "dialog");
         btn.classList.add(P + "searchBtn");
-        var kbd = make("kbd", P + "kbd", btn, isMac() ? "⌘ K" : "Ctrl K");
+        var kbd = make("kbd", P + "kbd", btn, isMac() ? "\u2318 K" : "Ctrl K");
         kbd.setAttribute("aria-hidden", "true");
         if (panel) panel.parentNode.removeChild(panel); // search has no dropdown
       } else if (role === "notifications") {
@@ -268,7 +268,7 @@
       var sb = root.querySelector("." + P + "searchBtn");
       if (sb) {
         sb.setAttribute("aria-keyshortcuts", isMac() ? "Meta+K" : "Control+K");
-        sb.title = (sb.title ? sb.title + " " : "") + "(" + (isMac() ? "⌘K" : "Ctrl+K") + ")";
+        sb.title = (sb.title ? sb.title + " " : "") + "(" + (isMac() ? "\u2318K" : "Ctrl+K") + ")";
       }
     }
     watchSize(root);
@@ -569,7 +569,7 @@
             if (own && own !== a) trail.unshift(trim(own.textContent));
           }
         }
-        push(a, trail.join(" › "), icon);
+        push(a, trail.join(" \u203A "), icon);
       }
     }
     if (out.length) return { items: out, own: false };
@@ -619,7 +619,7 @@
     var foot = make("div", P + "dialogFoot", box);
     foot.setAttribute("aria-hidden", "true");
     var hint = str(root, "hint", "to move,to open").split(",");
-    make("kbd", P + "footKey", foot, "↑↓");
+    make("kbd", P + "footKey", foot, "\u2191\u2193");
     make("span", P + "footGap", foot, hint[0] || "");
     make("kbd", P + "footKey", foot, "Enter");
     make("span", null, foot, hint[1] || "");
@@ -691,7 +691,7 @@
         var tx = make("span", P + "optionText", a);
         highlight(make("span", P + "optionLabel", tx), it.label, tokens);
         make("span", P + "optionPath", tx, it.path || "");
-        make("span", P + "enter", a, "↵").setAttribute("aria-hidden", "true");
+        make("span", P + "enter", a, "\u21B5").setAttribute("aria-hidden", "true");
         s.options.push(a);
         total++;
       }

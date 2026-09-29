@@ -350,7 +350,7 @@
     var meta = text(star, B + "-group");
     var extra = star.classList.contains("is-current") ? root.getAttribute("data-here") :
       star.classList.contains("is-shine3") || star.classList.contains("is-shine2") ? root.getAttribute("data-recent") : "";
-    st.cardMeta.textContent = meta && extra ? meta + " · " + extra : meta || extra || "";
+    st.cardMeta.textContent = meta && extra ? meta + " \u00B7 " + extra : meta || extra || "";
     st.cardDesc.textContent = text(star, B + "-desc");
     st.card.hidden = false;
     var r = dot.getBoundingClientRect(), k = st.sky.getBoundingClientRect();

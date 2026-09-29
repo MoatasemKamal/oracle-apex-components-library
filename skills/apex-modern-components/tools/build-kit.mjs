@@ -88,6 +88,10 @@ const sql = [
 ];
 
 for (const f of FILES) {
+  if (f.name.endsWith(".js") && /[^\x00-\x7F]/.test(fs.readFileSync(path.join(KIT, f.name), "utf8"))) {
+    console.error(`error ${dir}/${f.name} contains non-ASCII characters; write them as \\uXXXX escapes`);
+    process.exit(1);
+  }
   const content = fs.readFileSync(path.join(KIT, f.name));
   const published = `${FOLDER}/${f.name}`;
   outputs.set(path.join(DIST, "apexlang", "shared-components", "static-files", FOLDER, f.name), content);

@@ -308,7 +308,7 @@
     if (f.formatRange) {
       try { return f.formatRange(a, b); } catch (e) { /* fall through */ }
     }
-    return f.format(a) + " – " + f.format(b);
+    return f.format(a) + " \u2013 " + f.format(b);
   };
   Cal.prototype.num = function (n, opts) {
     try { return new Intl.NumberFormat(this.lang, opts || {}).format(n); } catch (e) { return String(n); }
@@ -419,8 +419,8 @@
     var startsHere = sameDay(ev.start, day);
     var endsHere = sameDay(new Date(ev.end.getTime() - 1), day);
     if (startsHere && (endsHere || ev.noEnd)) { return ev.noEnd ? this.f(ev.start, TIME) : this.range(ev.start, ev.end, TIME); }
-    if (startsHere) { return this.f(ev.start, TIME) + " →"; }
-    if (endsHere) { return "→ " + this.f(ev.end, TIME); }
+    if (startsHere) { return this.f(ev.start, TIME) + " \u2192"; }
+    if (endsHere) { return "\u2192 " + this.f(ev.end, TIME); }
     return this.i18n.allDay;
   };
   Cal.prototype.duration = function (ev) {

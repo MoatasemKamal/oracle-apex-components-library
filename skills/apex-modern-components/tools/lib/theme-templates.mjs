@@ -143,6 +143,7 @@ export function validateTemplate(t) {
   checkCss(slug, css, errors, warnings);
   const js = files.filter((f) => f.name.endsWith(".js")).map((f) => f.content.toString("utf8")).join("\n");
   if (js && /\.innerHTML\s*=/.test(js)) errors.push(`${slug}: JS assigns innerHTML; build DOM with textContent`);
+  if (js && /[^\x00-\x7F]/.test(js)) errors.push(`${slug}: JS contains non-ASCII characters; write them as \\uXXXX escapes (files may be served without a UTF-8 charset)`);
 
   const optIds = new Set();
   for (const o of s.templateOptions || []) {

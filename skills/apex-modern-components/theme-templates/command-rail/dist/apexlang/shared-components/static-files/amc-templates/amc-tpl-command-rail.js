@@ -779,7 +779,7 @@
     var saved = s ? readRaw(s, storeKey("collapsed")) : null;
     st.own = saved === "1" ? true : saved === "0" ? false : opt(root, "startCollapsed");
     var kbd = part(root, "kbd");
-    if (kbd && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || "")) { kbd.textContent = root.getAttribute("data-mac-key") || "⌘ K"; }
+    if (kbd && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent || "")) { kbd.textContent = root.getAttribute("data-mac-key") || "\u2318 K"; }
     if (!opt(root, "noRecent")) {
       var cur = currentEntry(st);
       if (cur && cur.key) { record(cur.key); }

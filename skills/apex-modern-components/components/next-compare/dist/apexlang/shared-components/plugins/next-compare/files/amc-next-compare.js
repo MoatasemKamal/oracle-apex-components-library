@@ -25,8 +25,8 @@
 
   var STYLES = ["tenderTable", "specSheet", "scorecard", "sideCards", "diffView"];
   var FLAGS = { success: "success", warning: "warning", danger: "danger", y: "info", info: "info" };
-  var YES = /^(yes|y|included|available|supported|true|✓|✔|نعم|متوفر)$/i;
-  var NO = /^(no|n|not included|not available|none|false|✗|✘|لا|غير متوفر)$/i;
+  var YES = /^(yes|y|included|available|supported|true|\u2713|\u2714|\u0646\u0639\u0645|\u0645\u062A\u0648\u0641\u0631)$/i;
+  var NO = /^(no|n|not included|not available|none|false|\u2717|\u2718|\u0644\u0627|\u063A\u064A\u0631 \u0645\u062A\u0648\u0641\u0631)$/i;
   var mqReduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
   var uidSeq = 0;
 
@@ -61,9 +61,9 @@
 
   function latinDigits(s) {
     return String(s)
-      .replace(/[٠-٩]/g, function (c) { return String(c.charCodeAt(0) - 0x0660); })
-      .replace(/[۰-۹]/g, function (c) { return String(c.charCodeAt(0) - 0x06F0); })
-      .replace(/٫/g, ".").replace(/٬/g, ",").replace(/−/g, "-");
+      .replace(/[\u0660-\u0669]/g, function (c) { return String(c.charCodeAt(0) - 0x0660); })
+      .replace(/[\u06F0-\u06F9]/g, function (c) { return String(c.charCodeAt(0) - 0x06F0); })
+      .replace(/\u066B/g, ".").replace(/\u066C/g, ",").replace(/\u2212/g, "-");
   }
   function plainNum(t) {
     var s = latinDigits(clean(t)).replace(/[\s,]/g, "");
@@ -80,7 +80,7 @@
     var n = parseFloat(m[0].replace(/,/g, ""));
     if (!isFinite(n)) { return null; }
     var rest = s.slice(m.index + m[0].length);
-    // Unit: the word right after the number ("days", "m²", "%"); more numbers make it text.
+    // Unit: the word right after the number ("days", "m\u00B2", "%"); more numbers make it text.
     var unit = /^\s*([^\s\d,;]{1,12})/.exec(rest);
     return { n: n, pre: s.slice(0, m.index).trim(), post: unit ? unit[1] : "", single: !re.exec(s) };
   }
@@ -309,7 +309,7 @@
     var x = this.m.cells[o.i + ":" + c.i];
     var idx = this.m.options.indexOf(o);
     if (!x || !clean(x.value) && !isFinite(x.score)) {
-      box.appendChild(h("span", "amc-NCompare-missing", "–"));
+      box.appendChild(h("span", "amc-NCompare-missing", "\u2013"));
       box.appendChild(sr(L.missing));
       return "";
     }
@@ -388,7 +388,7 @@
       var unit = a.post || b.post;
       var pre = a.pre || b.pre;
       var num = this.nfs.format(Math.abs(dv));
-      return { kind: kind, sign: dv > 0 ? "+" : "−", text: (pre ? pre + " " : "") + num + (unit ? " " + unit : ""), label: kind === "better" ? L.better : kind === "worse" ? L.worse : L.changed };
+      return { kind: kind, sign: dv > 0 ? "+" : "\u2212", text: (pre ? pre + " " : "") + num + (unit ? " " + unit : ""), label: kind === "better" ? L.better : kind === "worse" ? L.worse : L.changed };
     }
     if (clean(x.value).toLowerCase() === clean(bx.value).toLowerCase()) {
       return { kind: "same", sign: "=", text: "", label: L.same };
@@ -396,7 +396,7 @@
     var sa = isFinite(x.score) ? x.score : NaN;
     var sb = isFinite(bx.score) ? bx.score : NaN;
     var k2 = isFinite(sa) && isFinite(sb) && sa !== sb ? (sa > sb ? "better" : "worse") : "changed";
-    return { kind: k2, sign: k2 === "better" ? "+" : k2 === "worse" ? "−" : "~", text: "", label: k2 === "better" ? L.better : k2 === "worse" ? L.worse : L.changed };
+    return { kind: k2, sign: k2 === "better" ? "+" : k2 === "worse" ? "\u2212" : "~", text: "", label: k2 === "better" ? L.better : k2 === "worse" ? L.worse : L.changed };
   };
 
   Cmp.prototype.critLabel = function (c, tag) {

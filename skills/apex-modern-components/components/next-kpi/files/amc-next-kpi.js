@@ -196,7 +196,7 @@
       } else {
         var glyph = document.createElement("span");
         glyph.className = "amc-NKpi-glyph";
-        glyph.textContent = ch === " " ? " " : ch;
+        glyph.textContent = ch === " " ? "\u00A0" : ch;
         reads.appendChild(glyph);
       }
     }

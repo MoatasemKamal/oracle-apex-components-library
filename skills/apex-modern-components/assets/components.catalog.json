@@ -86,7 +86,7 @@
       "apexlangName": "bentoGrid",
       "staticId": "AMC_BENTO_GRID",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -172,7 +172,7 @@
       "apexlangName": "circularProgress",
       "staticId": "AMC_CIRCULAR_PROGRESS",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -247,7 +247,7 @@
       "apexlangName": "designAlert",
       "staticId": "AMC_DESIGN_ALERT",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -445,7 +445,7 @@
       "apexlangName": "designBadge",
       "staticId": "AMC_DESIGN_BADGE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -526,7 +526,7 @@
       "apexlangName": "designButton",
       "staticId": "AMC_DESIGN_BUTTON",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -609,7 +609,7 @@
       "apexlangName": "designCard",
       "staticId": "AMC_DESIGN_CARD",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -748,7 +748,7 @@
       "apexlangName": "designDivider",
       "staticId": "AMC_DESIGN_DIVIDER",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -849,7 +849,7 @@
       "apexlangName": "designHeader",
       "staticId": "AMC_DESIGN_HEADER",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -956,7 +956,7 @@
       "apexlangName": "designKpi",
       "staticId": "AMC_DESIGN_KPI",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -1071,6 +1071,12 @@
           "staticId": "DESCRIPTION",
           "type": "sessionStateValue",
           "required": false
+        },
+        {
+          "apexlangName": "lowerIsBetter",
+          "staticId": "LOWER_IS_BETTER",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {
@@ -1086,7 +1092,7 @@
       "apexlangName": "designList",
       "staticId": "AMC_DESIGN_LIST",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -1215,7 +1221,7 @@
       "apexlangName": "designPricing",
       "staticId": "AMC_DESIGN_PRICING",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -1329,7 +1335,7 @@
       "apexlangName": "designProfile",
       "staticId": "AMC_DESIGN_PROFILE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -1487,7 +1493,7 @@
       "apexlangName": "designTimeline",
       "staticId": "AMC_DESIGN_TIMELINE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -1577,7 +1583,7 @@
       "apexlangName": "emptyState",
       "staticId": "AMC_EMPTY_STATE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -1639,6 +1645,12 @@
           "staticId": "BORDERED",
           "type": "yesNo",
           "required": false
+        },
+        {
+          "apexlangName": "iconValue",
+          "staticId": "ICON_VALUE",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {
@@ -1654,7 +1666,7 @@
       "apexlangName": "keyValueList",
       "staticId": "AMC_KEY_VALUE_LIST",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -1798,7 +1810,7 @@
       "apexlangName": "motionCountUp",
       "staticId": "AMC_MOTION_COUNT_UP",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -1880,6 +1892,12 @@
             "warning",
             "danger"
           ]
+        },
+        {
+          "apexlangName": "accentValue",
+          "staticId": "ACCENT_VALUE",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {
@@ -1895,7 +1913,7 @@
       "apexlangName": "motionEffect",
       "staticId": "AMC_MOTION_EFFECT",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -2019,7 +2037,7 @@
       "apexlangName": "motionInteraction",
       "staticId": "AMC_MOTION_INTERACTION",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -2095,7 +2113,7 @@
       "apexlangName": "motionLoader",
       "staticId": "AMC_MOTION_LOADER",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -2143,6 +2161,12 @@
             "small",
             "large"
           ]
+        },
+        {
+          "apexlangName": "labelValue",
+          "staticId": "LABEL_VALUE",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {
@@ -2158,7 +2182,7 @@
       "apexlangName": "motionSpotlightCards",
       "staticId": "AMC_MOTION_SPOTLIGHT_CARDS",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -2314,7 +2338,7 @@
       "apexlangName": "motionText",
       "staticId": "AMC_MOTION_TEXT",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -2387,7 +2411,7 @@
       "apexlangName": "nextAlert",
       "staticId": "AMC_NEXT_ALERT",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -2487,12 +2511,144 @@
       }
     },
     {
+      "slug": "next-approval",
+      "name": "Next Approval",
+      "apexlangName": "nextApproval",
+      "staticId": "AMC_NEXT_APPROVAL",
+      "pluginType": "templateComponent",
+      "version": "1.1.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report",
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/nextApproval",
+      "apexlangItemType": null,
+      "keywords": [
+        "approval",
+        "approval chain",
+        "approval flow",
+        "workflow",
+        "sign-off",
+        "signatures",
+        "approvers",
+        "purchase order",
+        "leave request",
+        "expense claim",
+        "delegation",
+        "sla",
+        "overdue",
+        "parallel approval",
+        "stepper",
+        "audit trail",
+        "next collection"
+      ],
+      "description": "Next Collection approval chain for purchase orders, leave requests and expense claims: one row per approver, with who acts now, the deadline and parallel approvers who share a step number. Follows the approval-routing pattern of ERP and HR systems, but the person who acts now carries an SLA ring around their photo that fills from the moment the request reached them to the due date, so a late approval is visible at a glance. Five styles, each for a named use: Chain (smart, an expense claim in employee self-service; the dates move into their own column when the region is wide), Stepper (motion, the approval strip on a purchase order page; turns vertical when narrow), Signature sheet (bold, the printed sign-off block of a purchase order with rubber stamps), Chip row (depth, a leave request row in a manager's inbox, with overlapping approver discs that open on hover or focus) and Audit log (smart, the decision trail for internal audit written as sentences in time order).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "chain",
+            "stepper",
+            "signatureSheet",
+            "chipRow",
+            "auditLog"
+          ]
+        },
+        {
+          "apexlangName": "step",
+          "staticId": "STEP",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "approver",
+          "staticId": "APPROVER",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "role",
+          "staticId": "ROLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "actionDate",
+          "staticId": "ACTION_DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "comment",
+          "staticId": "COMMENT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "delegatedFrom",
+          "staticId": "DELEGATED_FROM",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "dueDate",
+          "staticId": "DUE_DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "parallelRule",
+          "staticId": "PARALLEL_RULE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "all",
+            "any"
+          ]
+        },
+        {
+          "apexlangName": "parallelRuleValue",
+          "staticId": "PARALLEL_RULE_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-approval/README.md",
+        "example": "components/next-approval/examples",
+        "apexlang": "components/next-approval/dist/apexlang/shared-components/plugins/next-approval",
+        "legacySql": "components/next-approval/dist/legacy/amc_next_approval.sql"
+      }
+    },
+    {
       "slug": "next-badge",
       "name": "Next Badge",
       "apexlangName": "nextBadge",
       "staticId": "AMC_NEXT_BADGE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -2573,7 +2729,7 @@
       "apexlangName": "nextBento",
       "staticId": "AMC_NEXT_BENTO",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -2711,7 +2867,7 @@
       "apexlangName": "nextButton",
       "staticId": "AMC_NEXT_BUTTON",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -2811,7 +2967,7 @@
       "apexlangName": "nextCalendar",
       "staticId": "AMC_NEXT_CALENDAR",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -2978,6 +3134,12 @@
           "staticId": "UPCOMING_COUNT",
           "type": "integer",
           "required": false
+        },
+        {
+          "apexlangName": "initialDateValue",
+          "staticId": "INITIAL_DATE_VALUE",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {
@@ -2993,7 +3155,7 @@
       "apexlangName": "nextCard",
       "staticId": "AMC_NEXT_CARD",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -3138,12 +3300,370 @@
       }
     },
     {
+      "slug": "next-compare",
+      "name": "Next Compare",
+      "apexlangName": "nextCompare",
+      "staticId": "AMC_NEXT_COMPARE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextCompare",
+      "apexlangItemType": null,
+      "keywords": [
+        "compare",
+        "comparison",
+        "matrix",
+        "vendor comparison",
+        "quotation comparison",
+        "bid evaluation",
+        "tender",
+        "rfq",
+        "procurement",
+        "weighted scoring",
+        "scorecard",
+        "ranking",
+        "spec sheet",
+        "feature comparison",
+        "plans",
+        "candidates",
+        "diff",
+        "baseline",
+        "pin column",
+        "sticky header",
+        "swipe",
+        "rtl",
+        "next collection"
+      ],
+      "description": "Next Collection family of five comparison matrices built from one row per option and criterion, for vendor quotations, tender bid evaluation, plans and candidates. The runtime pivots the rows into options by criteria, derives price-type scores from the lowest or highest value (lowest / value x maximum, the usual tender formula), computes weighted totals and ranks, marks the best value in each criterion and the overall leader, lets users hide identical rows and pin an option, and keeps the header row and criterion column sticky. Narrow regions switch to one option at a time with swipe and previous / next buttons. Smart: Tender Table (grouped criteria with weights, standings strip, weighted total and rank rows) and Diff View (every option against a pinned baseline with signed differences, identical rows hidden). Bold: Spec Sheet (heavy datasheet rules, inverted group bands, yes / no as marks with text). Motion: Scorecard (score bars that grow as they scroll in and columns that glide when an option is pinned). Depth: Side Cards (each option as a stack of quotation pages, the leader lifted forward). Pattern follows procurement evaluation sheets used in Gulf government and corporate tenders.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "tenderTable",
+            "specSheet",
+            "scorecard",
+            "sideCards",
+            "diffView"
+          ]
+        },
+        {
+          "apexlangName": "option",
+          "staticId": "OPTION",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "criterion",
+          "staticId": "CRITERION",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "score",
+          "staticId": "SCORE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "weight",
+          "staticId": "WEIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "note",
+          "staticId": "NOTE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "highlight",
+          "staticId": "HIGHLIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "criterionGroup",
+          "staticId": "CRITERION_GROUP",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "better",
+          "staticId": "BETTER",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "optionDetail",
+          "staticId": "OPTION_DETAIL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "scoreMax",
+          "staticId": "SCORE_MAX",
+          "type": "number",
+          "required": false
+        },
+        {
+          "apexlangName": "hideIdentical",
+          "staticId": "HIDE_IDENTICAL",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "pinnedOption",
+          "staticId": "PINNED_OPTION",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "showTotals",
+          "staticId": "SHOW_TOTALS",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-compare/README.md",
+        "example": "components/next-compare/examples",
+        "apexlang": "components/next-compare/dist/apexlang/shared-components/plugins/next-compare",
+        "legacySql": "components/next-compare/dist/legacy/amc_next_compare.sql"
+      }
+    },
+    {
+      "slug": "next-document",
+      "name": "Next Document",
+      "apexlangName": "nextDocument",
+      "staticId": "AMC_NEXT_DOCUMENT",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextDocument",
+      "apexlangItemType": null,
+      "keywords": [
+        "document",
+        "invoice",
+        "tax invoice",
+        "zatca",
+        "e-invoice",
+        "vat",
+        "quotation",
+        "quote",
+        "purchase order",
+        "po",
+        "payslip",
+        "salary slip",
+        "receipt",
+        "thermal receipt",
+        "bill",
+        "amount in words",
+        "tafqit",
+        "rubber stamp",
+        "paid stamp",
+        "print",
+        "a4",
+        "bilingual",
+        "arabic",
+        "rtl",
+        "next collection"
+      ],
+      "description": "Next Collection family of five business documents built from line rows: tax invoices, quotations, purchase orders, receipts and payslips. The runtime computes subtotal, discount, VAT per rate (EN 16931 / ZATCA rule: VAT on the taxable total of each rate), total and optional amount in words in English and Arabic, formats money with Intl, and marks the status with a rubber-stamp element. Bold: Classic Invoice (an A4 sheet with ledger rules, a double rule under the total and an inked stamp). Smart: Modern Minimal (meta rail beside the lines when wide, total first when narrow, due date counted in days) and Bilingual Tax Invoice (English and Arabic labels side by side in the ZATCA layout, Hijri date, QR image). Depth: Thermal Receipt (a torn paper strip lifted off the page). Motion: Payslip (earnings and deductions side by side and a pay split bar that settles once). Every style has an A4 print stylesheet (the receipt prints on 80 mm paper). The pattern follows real Gulf tax invoices and payslips rather than a SaaS card.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "classicInvoice",
+            "modernMinimal",
+            "bilingualTax",
+            "thermalReceipt",
+            "payslip"
+          ]
+        },
+        {
+          "apexlangName": "docType",
+          "staticId": "DOC_TYPE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "docNumber",
+          "staticId": "DOC_NUMBER",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "docDate",
+          "staticId": "DOC_DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "dueDate",
+          "staticId": "DUE_DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "partyName",
+          "staticId": "PARTY_NAME",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "partyAddress",
+          "staticId": "PARTY_ADDRESS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "vatNumber",
+          "staticId": "VAT_NUMBER",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "currency",
+          "staticId": "CURRENCY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "status",
+          "staticId": "STATUS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "notes",
+          "staticId": "NOTES",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "lineDesc",
+          "staticId": "LINE_DESC",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "qty",
+          "staticId": "QTY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "unitPrice",
+          "staticId": "UNIT_PRICE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "discount",
+          "staticId": "DISCOUNT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "taxRate",
+          "staticId": "TAX_RATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "lineTotal",
+          "staticId": "LINE_TOTAL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "issuerName",
+          "staticId": "ISSUER_NAME",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "issuerDetails",
+          "staticId": "ISSUER_DETAILS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "issuerVat",
+          "staticId": "ISSUER_VAT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "defaultTaxRate",
+          "staticId": "DEFAULT_TAX_RATE",
+          "type": "number",
+          "required": false
+        },
+        {
+          "apexlangName": "amountInWords",
+          "staticId": "AMOUNT_IN_WORDS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "english",
+            "arabic",
+            "both",
+            "none"
+          ]
+        },
+        {
+          "apexlangName": "bilingual",
+          "staticId": "BILINGUAL",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "qrImageUrl",
+          "staticId": "QR_IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "showPrint",
+          "staticId": "SHOW_PRINT",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-document/README.md",
+        "example": "components/next-document/examples",
+        "apexlang": "components/next-document/dist/apexlang/shared-components/plugins/next-document",
+        "legacySql": "components/next-document/dist/legacy/amc_next_document.sql"
+      }
+    },
+    {
       "slug": "next-gallery",
       "name": "Next Gallery",
       "apexlangName": "nextGallery",
       "staticId": "AMC_NEXT_GALLERY",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -3310,7 +3830,7 @@
       "apexlangName": "nextHero",
       "staticId": "AMC_NEXT_HERO",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial"
@@ -3427,12 +3947,175 @@
       }
     },
     {
+      "slug": "next-kanban",
+      "name": "Next Kanban",
+      "apexlangName": "nextKanban",
+      "staticId": "AMC_NEXT_KANBAN",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextKanban",
+      "apexlangItemType": null,
+      "keywords": [
+        "kanban",
+        "board",
+        "task board",
+        "work orders",
+        "pipeline",
+        "columns",
+        "swimlanes",
+        "wip limit",
+        "drag and drop",
+        "move card",
+        "status board",
+        "sticky notes",
+        "due dates",
+        "mobile board",
+        "requisitions",
+        "tickets",
+        "next collection"
+      ],
+      "description": "Next Collection board that groups report rows into columns by Column Key, with counts, work-in-progress limits and moving cards by drag and drop or keyboard. Follows the column-board pattern of task tools, but the column header carries the load: every limit slot is drawn, so a full or overloaded column is visible before any card is read. Five styles, each for a named use: Calm lanes (smart, a procurement requisition pipeline; lanes stack when the region is narrow), Ops board (bold, a facilities work-order wallboard with large counts and priority codes), Sticky wall (depth, a campaign planning workshop of paper notes that lift when moved), Due timeline (motion, contract and licence renewals grouped by due date inside each column) and Compact list (smart, a field supervisor's phone view with one column per tab; drop a card on a tab to move it). The board never writes to the database: a move fires the amc:kanban-move event and can set page items for a Dynamic Action to save it.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "calmLanes",
+            "opsBoard",
+            "stickyWall",
+            "dueTimeline",
+            "compactList"
+          ]
+        },
+        {
+          "apexlangName": "cardId",
+          "staticId": "CARD_ID",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "columnKey",
+          "staticId": "COLUMN_KEY",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "columnLabel",
+          "staticId": "COLUMN_LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "columnLimit",
+          "staticId": "COLUMN_LIMIT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "assignee",
+          "staticId": "ASSIGNEE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "dueDate",
+          "staticId": "DUE_DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "priority",
+          "staticId": "PRIORITY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "tags",
+          "staticId": "TAGS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "allowMove",
+          "staticId": "ALLOW_MOVE",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "cardItem",
+          "staticId": "CARD_ITEM",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "fromItem",
+          "staticId": "FROM_ITEM",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "toItem",
+          "staticId": "TO_ITEM",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "indexItem",
+          "staticId": "INDEX_ITEM",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-kanban/README.md",
+        "example": "components/next-kanban/examples",
+        "apexlang": "components/next-kanban/dist/apexlang/shared-components/plugins/next-kanban",
+        "legacySql": "components/next-kanban/dist/legacy/amc_next_kanban.sql"
+      }
+    },
+    {
       "slug": "next-kpi",
       "name": "Next KPI",
       "apexlangName": "nextKpi",
       "staticId": "AMC_NEXT_KPI",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -3563,6 +4246,12 @@
           "staticId": "DESCRIPTION",
           "type": "sessionStateValue",
           "required": false
+        },
+        {
+          "apexlangName": "lowerIsBetter",
+          "staticId": "LOWER_IS_BETTER",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {
@@ -3578,7 +4267,7 @@
       "apexlangName": "nextList",
       "staticId": "AMC_NEXT_LIST",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -3696,12 +4385,148 @@
       }
     },
     {
+      "slug": "next-org-chart",
+      "name": "Next Org Chart",
+      "apexlangName": "nextOrgChart",
+      "staticId": "AMC_NEXT_ORG_CHART",
+      "pluginType": "templateComponent",
+      "version": "1.0.1",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextOrgChart",
+      "apexlangItemType": null,
+      "keywords": [
+        "org chart",
+        "organization chart",
+        "organisation chart",
+        "hierarchy",
+        "tree",
+        "reporting lines",
+        "reports to",
+        "manager",
+        "team",
+        "department",
+        "headcount",
+        "vacancy",
+        "vacant position",
+        "open role",
+        "staff directory",
+        "who is who",
+        "swimlanes",
+        "radial",
+        "connect by",
+        "next collection"
+      ],
+      "description": "Next Collection org chart that builds a reporting hierarchy from report rows (ID and PARENT_ID, in any order) in five layouts, each made for one job. Top-down (depth) is the classic chart for leadership pages: people sit on name plates, a collapsed team becomes a stack of plates whose thickness shows its size, and teams of individual contributors stack vertically to save width. Left to right (smart) suits deep chains such as a directorate structure and turns into an indented outline in narrow regions. Department swimlanes (bold) give each department a lane with its headcount and open seats, for restructuring and workforce planning. Radial (motion) puts a small project team around its lead, and branches grow out of their manager when opened. Staff directory (smart) is a searchable list grouped under managers that filters as you type and shows each person's chain of command. All layouts share collapsible branches, search that reveals and scrolls to a person, keyboard tree navigation, zoom and drag to pan for large charts, and a hatched empty plate for vacant positions. Without JavaScript the rows show as an outline list indented by Level.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "topDown",
+            "leftToRight",
+            "swimlanes",
+            "radial",
+            "directory"
+          ]
+        },
+        {
+          "apexlangName": "id",
+          "staticId": "ID",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "parentId",
+          "staticId": "PARENT_ID",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "name",
+          "staticId": "NAME",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "department",
+          "staticId": "DEPARTMENT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "vacant",
+          "staticId": "VACANT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "headcount",
+          "staticId": "HEADCOUNT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "level",
+          "staticId": "LEVEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "expandLevels",
+          "staticId": "EXPAND_LEVELS",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "apexlangName": "showSearch",
+          "staticId": "SHOW_SEARCH",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-org-chart/README.md",
+        "example": "components/next-org-chart/examples",
+        "apexlang": "components/next-org-chart/dist/apexlang/shared-components/plugins/next-org-chart",
+        "legacySql": "components/next-org-chart/dist/legacy/amc_next_org_chart.sql"
+      }
+    },
+    {
       "slug": "next-pricing",
       "name": "Next Pricing",
       "apexlangName": "nextPricing",
       "staticId": "AMC_NEXT_PRICING",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -3850,7 +4675,7 @@
       "apexlangName": "nextProfile",
       "staticId": "AMC_NEXT_PROFILE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -4032,12 +4857,171 @@
       }
     },
     {
+      "slug": "next-thread",
+      "name": "Next Thread",
+      "apexlangName": "nextThread",
+      "staticId": "AMC_NEXT_THREAD",
+      "pluginType": "templateComponent",
+      "version": "1.0.1",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextThread",
+      "apexlangItemType": null,
+      "keywords": [
+        "thread",
+        "comments",
+        "conversation",
+        "activity",
+        "activity feed",
+        "history",
+        "audit trail",
+        "timeline",
+        "notes",
+        "internal note",
+        "replies",
+        "mentions",
+        "chat",
+        "messages",
+        "ticket",
+        "case",
+        "approval",
+        "correspondence",
+        "email",
+        "status change",
+        "next collection"
+      ],
+      "description": "Next Collection comment and activity thread for a record such as a ticket, a purchase request or a case, in five layouts. Chat (motion) shows the conversation as bubbles, yours on the other side, and slides new messages in after a refresh. Audit timeline (bold) sets status changes in large type on a rail with the time beside each step, for approvals and audits. Email (smart) folds earlier messages to one line with the sender and the first words, and opens the latest, for formal correspondence. Activity feed (smart) is a compact log of who did what for a record's side panel, and moves the time into its own column when there is room. Case file (depth) layers entries as sheets in a folder, pins internal notes on top as slips and stamps status changes, for legal, HR and compliance cases. All layouts group entries by day with Intl day names and relative times, nest replies one level, fold long threads behind Show earlier updates, highlight mentions, and mark internal notes with a dashed edge and a label. There is no composer: add a native form and refresh the region after posting.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "chat",
+            "auditTimeline",
+            "emailThread",
+            "activityFeed",
+            "caseFile"
+          ]
+        },
+        {
+          "apexlangName": "id",
+          "staticId": "ID",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "parentId",
+          "staticId": "PARENT_ID",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "author",
+          "staticId": "AUTHOR",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "created",
+          "staticId": "CREATED",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "body",
+          "staticId": "BODY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "kind",
+          "staticId": "KIND",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "attachmentName",
+          "staticId": "ATTACHMENT_NAME",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "attachmentUrl",
+          "staticId": "ATTACHMENT_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "mentions",
+          "staticId": "MENTIONS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "isInternal",
+          "staticId": "IS_INTERNAL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "isMine",
+          "staticId": "IS_MINE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "showLatest",
+          "staticId": "SHOW_LATEST",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "apexlangName": "sortOrder",
+          "staticId": "SORT_ORDER",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "oldestFirst",
+            "newestFirst"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/next-thread/README.md",
+        "example": "components/next-thread/examples",
+        "apexlang": "components/next-thread/dist/apexlang/shared-components/plugins/next-thread",
+        "legacySql": "components/next-thread/dist/legacy/amc_next_thread.sql"
+      }
+    },
+    {
       "slug": "next-timeline",
       "name": "Next Timeline",
       "apexlangName": "nextTimeline",
       "staticId": "AMC_NEXT_TIMELINE",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -4136,7 +5120,7 @@
       "apexlangName": "progressMeter",
       "staticId": "AMC_PROGRESS_METER",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -4209,7 +5193,7 @@
       "apexlangName": "progressSteps",
       "staticId": "AMC_PROGRESS_STEPS",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "availableAs": [
         "report"
@@ -4322,7 +5306,7 @@
       "apexlangName": "statCard",
       "staticId": "AMC_STAT_CARD",
       "pluginType": "templateComponent",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "minApexVersion": "23.1",
       "availableAs": [
         "partial",
@@ -4411,6 +5395,18 @@
             "three",
             "four"
           ]
+        },
+        {
+          "apexlangName": "lowerIsBetter",
+          "staticId": "LOWER_IS_BETTER",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "accentValue",
+          "staticId": "ACCENT_VALUE",
+          "type": "sessionStateValue",
+          "required": false
         }
       ],
       "paths": {

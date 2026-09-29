@@ -31,51 +31,51 @@
 
   /* Arabic labels for bilingual layouts. English labels come from the template (translatable). */
   var AR = {
-    from: "المورد", billTo: "العميل", supplier: "المورد", employee: "الموظف", issued: "تاريخ الإصدار",
-    due: "تاريخ الاستحقاق", valid: "صالح حتى", payDate: "تاريخ الصرف", vatNo: "الرقم الضريبي",
-    currency: "العملة", no: "م", desc: "البيان", qty: "الكمية", unit: "سعر الوحدة", disc: "الخصم",
-    rate: "نسبة الضريبة", vatAmount: "مبلغ الضريبة", amount: "المبلغ", taxable: "المبلغ الخاضع للضريبة",
-    incl: "الإجمالي شامل الضريبة", subtotal: "المجموع", discount: "الخصم", vat: "ضريبة القيمة المضافة",
-    total: "الإجمالي", totalDue: "المبلغ المستحق", totalPaid: "المبلغ المدفوع", words: "المبلغ كتابةً",
-    notes: "ملاحظات", earnings: "الاستحقاقات", deductions: "الاستقطاعات", gross: "إجمالي الراتب",
-    totalDeductions: "إجمالي الاستقطاعات", net: "صافي الراتب", items: "البنود",
-    paid: "مدفوعة", stOverdue: "متأخرة", draft: "مسودة", "void": "ملغاة", sent: "مرسلة", approved: "معتمدة",
-    hijri: "التاريخ الهجري"
+    from: "\u0627\u0644\u0645\u0648\u0631\u062F", billTo: "\u0627\u0644\u0639\u0645\u064A\u0644", supplier: "\u0627\u0644\u0645\u0648\u0631\u062F", employee: "\u0627\u0644\u0645\u0648\u0638\u0641", issued: "\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0625\u0635\u062F\u0627\u0631",
+    due: "\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0627\u0633\u062A\u062D\u0642\u0627\u0642", valid: "\u0635\u0627\u0644\u062D \u062D\u062A\u0649", payDate: "\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0635\u0631\u0641", vatNo: "\u0627\u0644\u0631\u0642\u0645 \u0627\u0644\u0636\u0631\u064A\u0628\u064A",
+    currency: "\u0627\u0644\u0639\u0645\u0644\u0629", no: "\u0645", desc: "\u0627\u0644\u0628\u064A\u0627\u0646", qty: "\u0627\u0644\u0643\u0645\u064A\u0629", unit: "\u0633\u0639\u0631 \u0627\u0644\u0648\u062D\u062F\u0629", disc: "\u0627\u0644\u062E\u0635\u0645",
+    rate: "\u0646\u0633\u0628\u0629 \u0627\u0644\u0636\u0631\u064A\u0628\u0629", vatAmount: "\u0645\u0628\u0644\u063A \u0627\u0644\u0636\u0631\u064A\u0628\u0629", amount: "\u0627\u0644\u0645\u0628\u0644\u063A", taxable: "\u0627\u0644\u0645\u0628\u0644\u063A \u0627\u0644\u062E\u0627\u0636\u0639 \u0644\u0644\u0636\u0631\u064A\u0628\u0629",
+    incl: "\u0627\u0644\u0625\u062C\u0645\u0627\u0644\u064A \u0634\u0627\u0645\u0644 \u0627\u0644\u0636\u0631\u064A\u0628\u0629", subtotal: "\u0627\u0644\u0645\u062C\u0645\u0648\u0639", discount: "\u0627\u0644\u062E\u0635\u0645", vat: "\u0636\u0631\u064A\u0628\u0629 \u0627\u0644\u0642\u064A\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629",
+    total: "\u0627\u0644\u0625\u062C\u0645\u0627\u0644\u064A", totalDue: "\u0627\u0644\u0645\u0628\u0644\u063A \u0627\u0644\u0645\u0633\u062A\u062D\u0642", totalPaid: "\u0627\u0644\u0645\u0628\u0644\u063A \u0627\u0644\u0645\u062F\u0641\u0648\u0639", words: "\u0627\u0644\u0645\u0628\u0644\u063A \u0643\u062A\u0627\u0628\u0629\u064B",
+    notes: "\u0645\u0644\u0627\u062D\u0638\u0627\u062A", earnings: "\u0627\u0644\u0627\u0633\u062A\u062D\u0642\u0627\u0642\u0627\u062A", deductions: "\u0627\u0644\u0627\u0633\u062A\u0642\u0637\u0627\u0639\u0627\u062A", gross: "\u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0631\u0627\u062A\u0628",
+    totalDeductions: "\u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0627\u0633\u062A\u0642\u0637\u0627\u0639\u0627\u062A", net: "\u0635\u0627\u0641\u064A \u0627\u0644\u0631\u0627\u062A\u0628", items: "\u0627\u0644\u0628\u0646\u0648\u062F",
+    paid: "\u0645\u062F\u0641\u0648\u0639\u0629", stOverdue: "\u0645\u062A\u0623\u062E\u0631\u0629", draft: "\u0645\u0633\u0648\u062F\u0629", "void": "\u0645\u0644\u063A\u0627\u0629", sent: "\u0645\u0631\u0633\u0644\u0629", approved: "\u0645\u0639\u062A\u0645\u062F\u0629",
+    hijri: "\u0627\u0644\u062A\u0627\u0631\u064A\u062E \u0627\u0644\u0647\u062C\u0631\u064A"
   };
   var AR_TITLES = [
-    ["simplified tax invoice", "فاتورة ضريبية مبسطة"], ["tax invoice", "فاتورة ضريبية"],
-    ["proforma invoice", "فاتورة مبدئية"], ["credit note", "إشعار دائن"], ["debit note", "إشعار مدين"],
-    ["invoice", "فاتورة"], ["quotation", "عرض سعر"], ["quote", "عرض سعر"], ["purchase order", "أمر شراء"],
-    ["delivery note", "إشعار تسليم"], ["payment receipt", "إيصال دفع"], ["receipt", "إيصال"],
-    ["payslip", "قسيمة راتب"], ["salary slip", "قسيمة راتب"]
+    ["simplified tax invoice", "\u0641\u0627\u062A\u0648\u0631\u0629 \u0636\u0631\u064A\u0628\u064A\u0629 \u0645\u0628\u0633\u0637\u0629"], ["tax invoice", "\u0641\u0627\u062A\u0648\u0631\u0629 \u0636\u0631\u064A\u0628\u064A\u0629"],
+    ["proforma invoice", "\u0641\u0627\u062A\u0648\u0631\u0629 \u0645\u0628\u062F\u0626\u064A\u0629"], ["credit note", "\u0625\u0634\u0639\u0627\u0631 \u062F\u0627\u0626\u0646"], ["debit note", "\u0625\u0634\u0639\u0627\u0631 \u0645\u062F\u064A\u0646"],
+    ["invoice", "\u0641\u0627\u062A\u0648\u0631\u0629"], ["quotation", "\u0639\u0631\u0636 \u0633\u0639\u0631"], ["quote", "\u0639\u0631\u0636 \u0633\u0639\u0631"], ["purchase order", "\u0623\u0645\u0631 \u0634\u0631\u0627\u0621"],
+    ["delivery note", "\u0625\u0634\u0639\u0627\u0631 \u062A\u0633\u0644\u064A\u0645"], ["payment receipt", "\u0625\u064A\u0635\u0627\u0644 \u062F\u0641\u0639"], ["receipt", "\u0625\u064A\u0635\u0627\u0644"],
+    ["payslip", "\u0642\u0633\u064A\u0645\u0629 \u0631\u0627\u062A\u0628"], ["salary slip", "\u0642\u0633\u064A\u0645\u0629 \u0631\u0627\u062A\u0628"]
   ];
 
   /* Currency words. ar: [one, two, few (3-10), many (11-99), hundreds], g = gender of the noun. */
   var CUR = {
     SAR: { en: ["Saudi riyal", "Saudi riyals"], enMinor: ["halala", "halalas"],
-      ar: ["ريال سعودي واحد", "ريالان سعوديان", "ريالات سعودية", "ريالاً سعودياً", "ريال سعودي"], g: "m",
-      arMinor: ["هللة واحدة", "هللتان", "هللات", "هللة", "هللة"], gMinor: "f" },
+      ar: ["\u0631\u064A\u0627\u0644 \u0633\u0639\u0648\u062F\u064A \u0648\u0627\u062D\u062F", "\u0631\u064A\u0627\u0644\u0627\u0646 \u0633\u0639\u0648\u062F\u064A\u0627\u0646", "\u0631\u064A\u0627\u0644\u0627\u062A \u0633\u0639\u0648\u062F\u064A\u0629", "\u0631\u064A\u0627\u0644\u0627\u064B \u0633\u0639\u0648\u062F\u064A\u0627\u064B", "\u0631\u064A\u0627\u0644 \u0633\u0639\u0648\u062F\u064A"], g: "m",
+      arMinor: ["\u0647\u0644\u0644\u0629 \u0648\u0627\u062D\u062F\u0629", "\u0647\u0644\u0644\u062A\u0627\u0646", "\u0647\u0644\u0644\u0627\u062A", "\u0647\u0644\u0644\u0629", "\u0647\u0644\u0644\u0629"], gMinor: "f" },
     AED: { en: ["UAE dirham", "UAE dirhams"], enMinor: ["fils", "fils"],
-      ar: ["درهم إماراتي واحد", "درهمان إماراتيان", "دراهم إماراتية", "درهماً إماراتياً", "درهم إماراتي"], g: "m",
-      arMinor: ["فلس واحد", "فلسان", "فلوس", "فلساً", "فلس"], gMinor: "m" },
+      ar: ["\u062F\u0631\u0647\u0645 \u0625\u0645\u0627\u0631\u0627\u062A\u064A \u0648\u0627\u062D\u062F", "\u062F\u0631\u0647\u0645\u0627\u0646 \u0625\u0645\u0627\u0631\u0627\u062A\u064A\u0627\u0646", "\u062F\u0631\u0627\u0647\u0645 \u0625\u0645\u0627\u0631\u0627\u062A\u064A\u0629", "\u062F\u0631\u0647\u0645\u0627\u064B \u0625\u0645\u0627\u0631\u0627\u062A\u064A\u0627\u064B", "\u062F\u0631\u0647\u0645 \u0625\u0645\u0627\u0631\u0627\u062A\u064A"], g: "m",
+      arMinor: ["\u0641\u0644\u0633 \u0648\u0627\u062D\u062F", "\u0641\u0644\u0633\u0627\u0646", "\u0641\u0644\u0648\u0633", "\u0641\u0644\u0633\u0627\u064B", "\u0641\u0644\u0633"], gMinor: "m" },
     QAR: { en: ["Qatari riyal", "Qatari riyals"], enMinor: ["dirham", "dirhams"],
-      ar: ["ريال قطري واحد", "ريالان قطريان", "ريالات قطرية", "ريالاً قطرياً", "ريال قطري"], g: "m",
-      arMinor: ["درهم واحد", "درهمان", "دراهم", "درهماً", "درهم"], gMinor: "m" },
+      ar: ["\u0631\u064A\u0627\u0644 \u0642\u0637\u0631\u064A \u0648\u0627\u062D\u062F", "\u0631\u064A\u0627\u0644\u0627\u0646 \u0642\u0637\u0631\u064A\u0627\u0646", "\u0631\u064A\u0627\u0644\u0627\u062A \u0642\u0637\u0631\u064A\u0629", "\u0631\u064A\u0627\u0644\u0627\u064B \u0642\u0637\u0631\u064A\u0627\u064B", "\u0631\u064A\u0627\u0644 \u0642\u0637\u0631\u064A"], g: "m",
+      arMinor: ["\u062F\u0631\u0647\u0645 \u0648\u0627\u062D\u062F", "\u062F\u0631\u0647\u0645\u0627\u0646", "\u062F\u0631\u0627\u0647\u0645", "\u062F\u0631\u0647\u0645\u0627\u064B", "\u062F\u0631\u0647\u0645"], gMinor: "m" },
     KWD: { en: ["Kuwaiti dinar", "Kuwaiti dinars"], enMinor: ["fils", "fils"],
-      ar: ["دينار كويتي واحد", "ديناران كويتيان", "دنانير كويتية", "ديناراً كويتياً", "دينار كويتي"], g: "m",
-      arMinor: ["فلس واحد", "فلسان", "فلوس", "فلساً", "فلس"], gMinor: "m" },
+      ar: ["\u062F\u064A\u0646\u0627\u0631 \u0643\u0648\u064A\u062A\u064A \u0648\u0627\u062D\u062F", "\u062F\u064A\u0646\u0627\u0631\u0627\u0646 \u0643\u0648\u064A\u062A\u064A\u0627\u0646", "\u062F\u0646\u0627\u0646\u064A\u0631 \u0643\u0648\u064A\u062A\u064A\u0629", "\u062F\u064A\u0646\u0627\u0631\u0627\u064B \u0643\u0648\u064A\u062A\u064A\u0627\u064B", "\u062F\u064A\u0646\u0627\u0631 \u0643\u0648\u064A\u062A\u064A"], g: "m",
+      arMinor: ["\u0641\u0644\u0633 \u0648\u0627\u062D\u062F", "\u0641\u0644\u0633\u0627\u0646", "\u0641\u0644\u0648\u0633", "\u0641\u0644\u0633\u0627\u064B", "\u0641\u0644\u0633"], gMinor: "m" },
     BHD: { en: ["Bahraini dinar", "Bahraini dinars"], enMinor: ["fils", "fils"],
-      ar: ["دينار بحريني واحد", "ديناران بحرينيان", "دنانير بحرينية", "ديناراً بحرينياً", "دينار بحريني"], g: "m",
-      arMinor: ["فلس واحد", "فلسان", "فلوس", "فلساً", "فلس"], gMinor: "m" },
+      ar: ["\u062F\u064A\u0646\u0627\u0631 \u0628\u062D\u0631\u064A\u0646\u064A \u0648\u0627\u062D\u062F", "\u062F\u064A\u0646\u0627\u0631\u0627\u0646 \u0628\u062D\u0631\u064A\u0646\u064A\u0627\u0646", "\u062F\u0646\u0627\u0646\u064A\u0631 \u0628\u062D\u0631\u064A\u0646\u064A\u0629", "\u062F\u064A\u0646\u0627\u0631\u0627\u064B \u0628\u062D\u0631\u064A\u0646\u064A\u0627\u064B", "\u062F\u064A\u0646\u0627\u0631 \u0628\u062D\u0631\u064A\u0646\u064A"], g: "m",
+      arMinor: ["\u0641\u0644\u0633 \u0648\u0627\u062D\u062F", "\u0641\u0644\u0633\u0627\u0646", "\u0641\u0644\u0648\u0633", "\u0641\u0644\u0633\u0627\u064B", "\u0641\u0644\u0633"], gMinor: "m" },
     OMR: { en: ["Omani rial", "Omani rials"], enMinor: ["baisa", "baisa"],
-      ar: ["ريال عماني واحد", "ريالان عمانيان", "ريالات عمانية", "ريالاً عمانياً", "ريال عماني"], g: "m",
-      arMinor: ["بيسة واحدة", "بيستان", "بيسات", "بيسة", "بيسة"], gMinor: "f" },
+      ar: ["\u0631\u064A\u0627\u0644 \u0639\u0645\u0627\u0646\u064A \u0648\u0627\u062D\u062F", "\u0631\u064A\u0627\u0644\u0627\u0646 \u0639\u0645\u0627\u0646\u064A\u0627\u0646", "\u0631\u064A\u0627\u0644\u0627\u062A \u0639\u0645\u0627\u0646\u064A\u0629", "\u0631\u064A\u0627\u0644\u0627\u064B \u0639\u0645\u0627\u0646\u064A\u0627\u064B", "\u0631\u064A\u0627\u0644 \u0639\u0645\u0627\u0646\u064A"], g: "m",
+      arMinor: ["\u0628\u064A\u0633\u0629 \u0648\u0627\u062D\u062F\u0629", "\u0628\u064A\u0633\u062A\u0627\u0646", "\u0628\u064A\u0633\u0627\u062A", "\u0628\u064A\u0633\u0629", "\u0628\u064A\u0633\u0629"], gMinor: "f" },
     USD: { en: ["US dollar", "US dollars"], enMinor: ["cent", "cents"],
-      ar: ["دولار أمريكي واحد", "دولاران أمريكيان", "دولارات أمريكية", "دولاراً أمريكياً", "دولار أمريكي"], g: "m",
-      arMinor: ["سنت واحد", "سنتان", "سنتات", "سنتاً", "سنت"], gMinor: "m" },
+      ar: ["\u062F\u0648\u0644\u0627\u0631 \u0623\u0645\u0631\u064A\u0643\u064A \u0648\u0627\u062D\u062F", "\u062F\u0648\u0644\u0627\u0631\u0627\u0646 \u0623\u0645\u0631\u064A\u0643\u064A\u0627\u0646", "\u062F\u0648\u0644\u0627\u0631\u0627\u062A \u0623\u0645\u0631\u064A\u0643\u064A\u0629", "\u062F\u0648\u0644\u0627\u0631\u0627\u064B \u0623\u0645\u0631\u064A\u0643\u064A\u0627\u064B", "\u062F\u0648\u0644\u0627\u0631 \u0623\u0645\u0631\u064A\u0643\u064A"], g: "m",
+      arMinor: ["\u0633\u0646\u062A \u0648\u0627\u062D\u062F", "\u0633\u0646\u062A\u0627\u0646", "\u0633\u0646\u062A\u0627\u062A", "\u0633\u0646\u062A\u0627\u064B", "\u0633\u0646\u062A"], gMinor: "m" },
     EUR: { en: ["euro", "euros"], enMinor: ["cent", "cents"],
-      ar: ["يورو واحد", "يوروان", "يوروهات", "يورو", "يورو"], g: "m",
-      arMinor: ["سنت واحد", "سنتان", "سنتات", "سنتاً", "سنت"], gMinor: "m" }
+      ar: ["\u064A\u0648\u0631\u0648 \u0648\u0627\u062D\u062F", "\u064A\u0648\u0631\u0648\u0627\u0646", "\u064A\u0648\u0631\u0648\u0647\u0627\u062A", "\u064A\u0648\u0631\u0648", "\u064A\u0648\u0631\u0648"], g: "m",
+      arMinor: ["\u0633\u0646\u062A \u0648\u0627\u062D\u062F", "\u0633\u0646\u062A\u0627\u0646", "\u0633\u0646\u062A\u0627\u062A", "\u0633\u0646\u062A\u0627\u064B", "\u0633\u0646\u062A"], gMinor: "m" }
   };
 
   /* ---------- DOM helpers ---------- */
@@ -110,9 +110,9 @@
   /* ---------- Numbers ---------- */
   function latinDigits(s) {
     return String(s)
-      .replace(/[٠-٩]/g, function (c) { return String(c.charCodeAt(0) - 0x0660); })
-      .replace(/[۰-۹]/g, function (c) { return String(c.charCodeAt(0) - 0x06F0); })
-      .replace(/٫/g, ".").replace(/٬/g, ",").replace(/−/g, "-");
+      .replace(/[\u0660-\u0669]/g, function (c) { return String(c.charCodeAt(0) - 0x0660); })
+      .replace(/[\u06F0-\u06F9]/g, function (c) { return String(c.charCodeAt(0) - 0x06F0); })
+      .replace(/\u066B/g, ".").replace(/\u066C/g, ",").replace(/\u2212/g, "-");
   }
   function num(text) {
     var s = latinDigits(clean(text));
@@ -220,29 +220,29 @@
   }
 
   /* ---------- Amount in words: Arabic tafqit (simplified, nominative) ---------- */
-  var AR_M = ["", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة"];
-  var AR_F = ["", "واحدة", "اثنتان", "ثلاث", "أربع", "خمس", "ست", "سبع", "ثماني", "تسع"];
-  var AR_TENS = ["", "عشرة", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"];
-  var AR_HUNDREDS = ["", "مائة", "مائتان", "ثلاثمائة", "أربعمائة", "خمسمائة", "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة"];
-  // g is the gender of the counted noun: 3-10 take the opposite form (ثلاثة ريالات, ثلاث هللات).
+  var AR_M = ["", "\u0648\u0627\u062D\u062F", "\u0627\u062B\u0646\u0627\u0646", "\u062B\u0644\u0627\u062B\u0629", "\u0623\u0631\u0628\u0639\u0629", "\u062E\u0645\u0633\u0629", "\u0633\u062A\u0629", "\u0633\u0628\u0639\u0629", "\u062B\u0645\u0627\u0646\u064A\u0629", "\u062A\u0633\u0639\u0629"];
+  var AR_F = ["", "\u0648\u0627\u062D\u062F\u0629", "\u0627\u062B\u0646\u062A\u0627\u0646", "\u062B\u0644\u0627\u062B", "\u0623\u0631\u0628\u0639", "\u062E\u0645\u0633", "\u0633\u062A", "\u0633\u0628\u0639", "\u062B\u0645\u0627\u0646\u064A", "\u062A\u0633\u0639"];
+  var AR_TENS = ["", "\u0639\u0634\u0631\u0629", "\u0639\u0634\u0631\u0648\u0646", "\u062B\u0644\u0627\u062B\u0648\u0646", "\u0623\u0631\u0628\u0639\u0648\u0646", "\u062E\u0645\u0633\u0648\u0646", "\u0633\u062A\u0648\u0646", "\u0633\u0628\u0639\u0648\u0646", "\u062B\u0645\u0627\u0646\u0648\u0646", "\u062A\u0633\u0639\u0648\u0646"];
+  var AR_HUNDREDS = ["", "\u0645\u0627\u0626\u0629", "\u0645\u0627\u0626\u062A\u0627\u0646", "\u062B\u0644\u0627\u062B\u0645\u0627\u0626\u0629", "\u0623\u0631\u0628\u0639\u0645\u0627\u0626\u0629", "\u062E\u0645\u0633\u0645\u0627\u0626\u0629", "\u0633\u062A\u0645\u0627\u0626\u0629", "\u0633\u0628\u0639\u0645\u0627\u0626\u0629", "\u062B\u0645\u0627\u0646\u0645\u0627\u0626\u0629", "\u062A\u0633\u0639\u0645\u0627\u0626\u0629"];
+  // g is the gender of the counted noun: 3-10 take the opposite form (\u062B\u0644\u0627\u062B\u0629 \u0631\u064A\u0627\u0644\u0627\u062A, \u062B\u0644\u0627\u062B \u0647\u0644\u0644\u0627\u062A).
   function arBelow100(n, g) {
     var units = g === "f" ? AR_F : AR_M;
     if (n === 0) { return ""; }
     if (n < 10) { return units[n]; }
-    if (n === 10) { return g === "f" ? "عشر" : "عشرة"; }
-    if (n === 11) { return g === "f" ? "إحدى عشرة" : "أحد عشر"; }
-    if (n === 12) { return g === "f" ? "اثنتا عشرة" : "اثنا عشر"; }
-    if (n < 20) { return units[n - 10] + (g === "f" ? " عشرة" : " عشر"); }
+    if (n === 10) { return g === "f" ? "\u0639\u0634\u0631" : "\u0639\u0634\u0631\u0629"; }
+    if (n === 11) { return g === "f" ? "\u0625\u062D\u062F\u0649 \u0639\u0634\u0631\u0629" : "\u0623\u062D\u062F \u0639\u0634\u0631"; }
+    if (n === 12) { return g === "f" ? "\u0627\u062B\u0646\u062A\u0627 \u0639\u0634\u0631\u0629" : "\u0627\u062B\u0646\u0627 \u0639\u0634\u0631"; }
+    if (n < 20) { return units[n - 10] + (g === "f" ? " \u0639\u0634\u0631\u0629" : " \u0639\u0634\u0631"); }
     var u = n % 10;
-    return (u ? units[u] + " و" : "") + AR_TENS[Math.floor(n / 10)];
+    return (u ? units[u] + " \u0648" : "") + AR_TENS[Math.floor(n / 10)];
   }
   function arBelow1000(n, g, construct) {
     var hnd = Math.floor(n / 100);
     var rest = n % 100;
     var parts = [];
-    if (hnd) { parts.push(hnd === 2 && !rest && construct ? "مائتا" : AR_HUNDREDS[hnd]); }
+    if (hnd) { parts.push(hnd === 2 && !rest && construct ? "\u0645\u0627\u0626\u062A\u0627" : AR_HUNDREDS[hnd]); }
     if (rest) { parts.push(arBelow100(rest, g)); }
-    return parts.join(" و");
+    return parts.join(" \u0648");
   }
   function arScale(k, forms) {
     // forms: [one, two, plural (3-10), accusative (11-99), singular]
@@ -253,25 +253,25 @@
     return arBelow1000(k, "m", true) + " " + noun;
   }
   function arNumber(n, g) {
-    if (n === 0) { return "صفر"; }
+    if (n === 0) { return "\u0635\u0641\u0631"; }
     var parts = [];
     var bil = Math.floor(n / 1e9);
     var mil = Math.floor(n / 1e6) % 1000;
     var th = Math.floor(n / 1000) % 1000;
     var rest = n % 1000;
-    if (bil) { parts.push(arScale(bil, ["مليار", "ملياران", "مليارات", "ملياراً", "مليار"])); }
-    if (mil) { parts.push(arScale(mil, ["مليون", "مليونان", "ملايين", "مليوناً", "مليون"])); }
-    if (th) { parts.push(arScale(th, ["ألف", "ألفان", "آلاف", "ألفاً", "ألف"])); }
+    if (bil) { parts.push(arScale(bil, ["\u0645\u0644\u064A\u0627\u0631", "\u0645\u0644\u064A\u0627\u0631\u0627\u0646", "\u0645\u0644\u064A\u0627\u0631\u0627\u062A", "\u0645\u0644\u064A\u0627\u0631\u0627\u064B", "\u0645\u0644\u064A\u0627\u0631"])); }
+    if (mil) { parts.push(arScale(mil, ["\u0645\u0644\u064A\u0648\u0646", "\u0645\u0644\u064A\u0648\u0646\u0627\u0646", "\u0645\u0644\u0627\u064A\u064A\u0646", "\u0645\u0644\u064A\u0648\u0646\u0627\u064B", "\u0645\u0644\u064A\u0648\u0646"])); }
+    if (th) { parts.push(arScale(th, ["\u0623\u0644\u0641", "\u0623\u0644\u0641\u0627\u0646", "\u0622\u0644\u0627\u0641", "\u0623\u0644\u0641\u0627\u064B", "\u0623\u0644\u0641"])); }
     if (rest) { parts.push(arBelow1000(rest, g, false)); }
-    return parts.join(" و");
+    return parts.join(" \u0648");
   }
   function arCounted(n, forms, g) {
     if (n === 1) { return forms[0]; }
     if (n === 2) { return forms[1]; }
     var last2 = n % 100;
     var noun = last2 >= 3 && last2 <= 10 ? forms[2] : last2 >= 11 ? forms[3] : forms[4];
-    // A dual directly before the counted noun takes the construct form: ألفا ريال, مائتا ريال.
-    var words = arNumber(n, g).replace(/(ألف|مليون|مليار|مائت)ان$/, "$1ا");
+    // A dual directly before the counted noun takes the construct form: \u0623\u0644\u0641\u0627 \u0631\u064A\u0627\u0644, \u0645\u0627\u0626\u062A\u0627 \u0631\u064A\u0627\u0644.
+    var words = arNumber(n, g).replace(/(\u0623\u0644\u0641|\u0645\u0644\u064A\u0648\u0646|\u0645\u0644\u064A\u0627\u0631|\u0645\u0627\u0626\u062A)\u0627\u0646$/, "$1\u0627");
     return words + " " + noun;
   }
   function amountAr(major, minor, code) {
@@ -279,12 +279,12 @@
     var s;
     if (c) {
       s = major ? arCounted(major, c.ar, c.g) : "";
-      if (minor > 0) { s += (s ? " و" : "") + arCounted(minor, c.arMinor, c.gMinor); }
+      if (minor > 0) { s += (s ? " \u0648" : "") + arCounted(minor, c.arMinor, c.gMinor); }
       if (!s) { s = arCounted(0, c.ar, c.g); }
     } else {
-      s = arNumber(major, "m") + " " + code + (minor > 0 ? " و" + arNumber(minor, "m") : "");
+      s = arNumber(major, "m") + " " + code + (minor > 0 ? " \u0648" + arNumber(minor, "m") : "");
     }
-    return "فقط " + s + " لا غير";
+    return "\u0641\u0642\u0637 " + s + " \u0644\u0627 \u063A\u064A\u0631";
   }
 
   /* ---------- Reading rows ---------- */
@@ -690,7 +690,7 @@
       box.appendChild(ht("p", "amc-NDocument-wordsText", (neg ? "Minus " : "") + amountEn(major, mnr, this.code, this.digits)));
     }
     if (mode === "arabic" || mode === "both") {
-      var ar = h("p", "amc-NDocument-wordsText amc-NDocument-ar", (neg ? "سالب " : "") + amountAr(major, mnr, this.code));
+      var ar = h("p", "amc-NDocument-wordsText amc-NDocument-ar", (neg ? "\u0633\u0627\u0644\u0628 " : "") + amountAr(major, mnr, this.code));
       ar.setAttribute("lang", "ar");
       ar.setAttribute("dir", "rtl");
       box.appendChild(ar);
@@ -770,7 +770,7 @@
       var parts = splitLines(l.desc);
       add(what, ht("p", "amc-NDocument-desc", parts[0] || ""));
       var bits = [];
-      if (l.qty !== null && l.price !== null) { bits.push(self.qf.format(l.qty) + " × " + self.amount(l.price)); }
+      if (l.qty !== null && l.price !== null) { bits.push(self.qf.format(l.qty) + " \u00D7 " + self.amount(l.price)); }
       if (l.discount) { bits.push(self.L.discount + " " + (l.discountText || self.amount(l.discount))); }
       if (self.calc.mixedRates) { bits.push(self.L.vat + " " + self.pct(l.rate)); }
       if (parts[1]) { what.appendChild(ht("p", "amc-NDocument-detail", parts.slice(1).join(" "))); }
@@ -815,7 +815,7 @@
       var li = h("li", "amc-NDocument-item");
       li.appendChild(ht("p", "amc-NDocument-desc", splitLines(l.desc).join(" ")));
       var row = h("p", "amc-NDocument-lead");
-      var calc = l.qty !== null && l.price !== null ? self.qf.format(l.qty) + " × " + self.amount(l.price) : "";
+      var calc = l.qty !== null && l.price !== null ? self.qf.format(l.qty) + " \u00D7 " + self.amount(l.price) : "";
       if (l.discount) { calc += (calc ? ", " : "") + "-" + (l.discountText || self.amount(l.discount)); }
       add(row, ht("span", "amc-NDocument-calc", calc), h("span", "amc-NDocument-dots"), h("span", "amc-NDocument-num", self.amount(l.net)));
       li.appendChild(row);

@@ -162,5 +162,12 @@ export function validateComponent({ slug, component: c, loaded }) {
       if (/\.innerHTML\s*=/.test(text)) warnings.push(`${slug}: ${f.fileName} assigns innerHTML; escape with apex.util.escapeHTML`);
     }
   }
+  // Scripts must be ASCII: literal non-ASCII (Arabic text, symbols, Unicode ranges in regexes) breaks
+  // when a file is served or uploaded without a UTF-8 charset. Write such characters as \uXXXX escapes.
+  for (const f of loaded.files || []) {
+    if (f.fileName.endsWith(".js") && /[^\x00-\x7F]/.test(f.content.toString("utf8"))) {
+      errors.push(`${slug}: ${f.fileName} contains non-ASCII characters; write them as \\uXXXX escapes`);
+    }
+  }
   return { errors, warnings };
 }

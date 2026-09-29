@@ -148,7 +148,7 @@
       "staticId": "AMC_TPL_AUTH_CARD",
       "apexlangId": "amc-auth-card",
       "direction": "motion",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "minApexVersion": "23.1",
       "description": "A motion-rich authentication card for login, sign-up, forgot-password, OTP and reset pages: seven looks, seven full-screen scenes drawn behind the page, and opt-in field behaviour by item CSS class, while items, validations and processes stay native.",
       "useFor": "The Static Content region that holds the page items and buttons of an authentication page: the app's Login page, Create account, Forgot password, OTP verification and Reset password.",
@@ -660,6 +660,52 @@
       "legacySql": "theme-templates/clay-panel/dist/legacy/amc_tpl_clay_panel.sql"
     },
     {
+      "slug": "coach-tour",
+      "kind": "list",
+      "name": "AMC Coach Tour",
+      "staticId": "AMC_TPL_COACH_TOUR",
+      "apexlangId": "amc-coach-tour",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A guided page tour built from a list: each entry is a step that dims the page, cuts a spotlight around its target element and explains it in a coach card with Step 2 of 5, Back, Next and Skip, remembered per application so it runs once; without JavaScript it is a checklist of tips.",
+      "useFor": "First-run orientation on a busy page: an Interactive Grid page, a dashboard, a complex form or a newly redesigned page. 3 to 6 steps that point at real elements by static ID or class.",
+      "keywords": [
+        "tour",
+        "onboarding",
+        "coach marks",
+        "walkthrough",
+        "spotlight",
+        "tips",
+        "first run",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Target selector",
+        "a02": "Step text"
+      },
+      "templateOptions": [
+        {
+          "name": "Manual start",
+          "cssClass": "amc-TCoachTour--manual"
+        },
+        {
+          "name": "Launcher only",
+          "cssClass": "amc-TCoachTour--launcherOnly"
+        },
+        {
+          "name": "Pulse ring",
+          "cssClass": "amc-TCoachTour--pulse"
+        },
+        {
+          "name": "Docked card",
+          "cssClass": "amc-TCoachTour--docked"
+        }
+      ],
+      "apexlang": "theme-templates/coach-tour/dist/apexlang",
+      "legacySql": "theme-templates/coach-tour/dist/legacy/amc_tpl_coach_tour.sql"
+    },
+    {
       "slug": "collapsible-morph",
       "kind": "region",
       "name": "AMC Collapsible Morph",
@@ -955,6 +1001,101 @@
       "legacySql": "theme-templates/dual-view/dist/legacy/amc_tpl_dual_view.sql"
     },
     {
+      "slug": "empty-aware",
+      "kind": "region",
+      "name": "AMC Empty Aware",
+      "staticId": "AMC_TPL_EMPTY_AWARE",
+      "apexlangId": "amc-empty-aware",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame that notices when the native content inside it has nothing to show, a no-data message, a report table without rows or a card list without cards, and replaces that dead end with a drawn empty state that states what is missing and promotes the region's Create button as the next action, then steps aside when a refresh brings data back.",
+      "useFor": "Classic Report, Interactive Report, Interactive Grid, Cards and List regions that can legitimately be empty: open requests, filtered searches, documents to upload, exceptions and overdue items on dashboards. Around Forms, Charts and text it is a plain frame.",
+      "keywords": [
+        "empty state",
+        "no data found",
+        "zero results",
+        "create",
+        "call to action",
+        "figure-ground",
+        "feedback",
+        "living",
+        "content-aware",
+        "refresh"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Drawing - Search",
+          "cssClass": "amc-TEmptyAware--search"
+        },
+        {
+          "name": "Drawing - Documents",
+          "cssClass": "amc-TEmptyAware--docs"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TEmptyAware--compact"
+        },
+        {
+          "name": "Dashed outline",
+          "cssClass": "amc-TEmptyAware--dashed"
+        },
+        {
+          "name": "Frameless",
+          "cssClass": "amc-TEmptyAware--frameless"
+        }
+      ],
+      "apexlang": "theme-templates/empty-aware/dist/apexlang",
+      "legacySql": "theme-templates/empty-aware/dist/legacy/amc_tpl_empty_aware.sql"
+    },
+    {
+      "slug": "error-summary",
+      "kind": "region",
+      "name": "AMC Error Summary",
+      "staticId": "AMC_TPL_ERROR_SUMMARY",
+      "apexlangId": "amc-error-summary",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A form frame that turns the item errors APEX shows inside it into a summary at the top, with a count, a link to each field and a plain-language fix hint, moves focus there once and clears itself when the errors clear.",
+      "useFor": "Form regions and Static Content regions with page items, on pages that validate on submit or with apex.message.showErrors. Around a report, chart or text it is a plain frame.",
+      "keywords": [
+        "form",
+        "errors",
+        "validation",
+        "summary",
+        "accessibility",
+        "smart",
+        "feedback"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "No focus move",
+          "cssClass": "amc-TErrorSummary--noFocus"
+        },
+        {
+          "name": "Hide fix hints",
+          "cssClass": "amc-TErrorSummary--noHints"
+        },
+        {
+          "name": "Sticky summary",
+          "cssClass": "amc-TErrorSummary--sticky"
+        },
+        {
+          "name": "Include page errors",
+          "cssClass": "amc-TErrorSummary--includePage"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TErrorSummary--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/error-summary/dist/apexlang",
+      "legacySql": "theme-templates/error-summary/dist/legacy/amc_tpl_error_summary.sql"
+    },
+    {
       "slug": "flip-tiles",
       "kind": "list",
       "name": "AMC Flip Tiles",
@@ -1005,7 +1146,7 @@
       "staticId": "AMC_TPL_FOCUS_STAGE",
       "apexlangId": "amc-focus-stage",
       "direction": "living",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "description": "A region that can take the stage: its Focus button (or focusing a field inside it) dims and blurs the rest of the page behind a scrim and lifts the region with a sticky header, so a long form or a dense report gets the user's full attention without leaving the page.",
       "useFor": "Long Forms (data entry, approvals, checklists), dense Interactive Reports or Interactive Grids, a Chart under discussion in a meeting, and any region that users work in for a long time on a busy page.",
@@ -1093,6 +1234,53 @@
       ],
       "apexlang": "theme-templates/folder-tab/dist/apexlang",
       "legacySql": "theme-templates/folder-tab/dist/legacy/amc_tpl_folder_tab.sql"
+    },
+    {
+      "slug": "form-progress",
+      "kind": "region",
+      "name": "AMC Form Progress",
+      "staticId": "AMC_TPL_FORM_PROGRESS",
+      "apexlangId": "amc-form-progress",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A form frame whose top edge is a segmented meter with one segment per required item, and whose header says honestly how many required fields are done and offers a Next button to the next empty one.",
+      "useFor": "Form regions and Static Content regions with page items, especially long data-entry forms such as supplier registration, customer onboarding or claims. Around a report, chart or text it is a plain frame.",
+      "keywords": [
+        "form",
+        "progress",
+        "required",
+        "completion",
+        "zeigarnik",
+        "meter",
+        "living",
+        "content-aware"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Show save-draft hint",
+          "cssClass": "amc-TFormProgress--draftHint"
+        },
+        {
+          "name": "Mark optional fields",
+          "cssClass": "amc-TFormProgress--markOptional"
+        },
+        {
+          "name": "Sticky progress header",
+          "cssClass": "amc-TFormProgress--sticky"
+        },
+        {
+          "name": "Continuous bar",
+          "cssClass": "amc-TFormProgress--bar"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TFormProgress--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/form-progress/dist/apexlang",
+      "legacySql": "theme-templates/form-progress/dist/legacy/amc_tpl_form_progress.sql"
     },
     {
       "slug": "frecency-launcher",
@@ -1237,6 +1425,54 @@
       "legacySql": "theme-templates/glass-depth/dist/legacy/amc_tpl_glass_depth.sql"
     },
     {
+      "slug": "hick-menu",
+      "kind": "list",
+      "name": "AMC Hick Menu",
+      "staticId": "AMC_TPL_HICK_MENU",
+      "apexlangId": "amc-hick-menu",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A long list of 20 to 80 entries cut into named groups of at most seven visible entries each, with Show all 12 in Finance for the rest, a filter box that only appears when the list is long, and the entries this user opened last on top.",
+      "useFor": "Report catalogues, admin and setup menus, and any List region or dynamic list with more entries than a person can scan at once, grouped by module, department or report family.",
+      "keywords": [
+        "report catalogue",
+        "menu",
+        "grouped list",
+        "filter",
+        "recent",
+        "chunking",
+        "hicks law",
+        "millers law",
+        "smart"
+      ],
+      "attributes": {
+        "a01": "Group",
+        "a02": "Description",
+        "a03": "Meta"
+      },
+      "templateOptions": [
+        {
+          "name": "Columns",
+          "cssClass": "amc-THickMenu--columns"
+        },
+        {
+          "name": "Tight chunks",
+          "cssClass": "amc-THickMenu--tight"
+        },
+        {
+          "name": "No recent strip",
+          "cssClass": "amc-THickMenu--noRecent"
+        },
+        {
+          "name": "Folded groups",
+          "cssClass": "amc-THickMenu--folded"
+        }
+      ],
+      "apexlang": "theme-templates/hick-menu/dist/apexlang",
+      "legacySql": "theme-templates/hick-menu/dist/legacy/amc_tpl_hick_menu.sql"
+    },
+    {
       "slug": "holo-edge",
       "kind": "region",
       "name": "AMC Holo Edge",
@@ -1327,6 +1563,56 @@
       ],
       "apexlang": "theme-templates/insight-frame/dist/apexlang",
       "legacySql": "theme-templates/insight-frame/dist/legacy/amc_tpl_insight_frame.sql"
+    },
+    {
+      "slug": "island-groups",
+      "kind": "region",
+      "name": "AMC Island Groups",
+      "staticId": "AMC_TPL_ISLAND_GROUPS",
+      "apexlangId": "amc-island-groups",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame that turns its sub regions and marked body blocks into clearly bounded islands, grouped by a shared tinted ground and generous gutters instead of borders, on a 12-column grid that follows the region's own width and balances the islands so none is left alone on the last row.",
+      "useFor": "A parent Static Content region whose sub regions are the groups of a record page, a dashboard or a long form: Customer 360, supplier or employee profile, KPI overviews, onboarding steps. Give the sub regions this template too, or Blank with Attributes; Static Content can also mark its own blocks with data-amc-island.",
+      "keywords": [
+        "islands",
+        "groups",
+        "sub regions",
+        "common region",
+        "proximity",
+        "dashboard",
+        "record page",
+        "layout",
+        "container queries",
+        "12 column",
+        "smart"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Numbered sequence",
+          "cssClass": "amc-TIslandGroups--sequence"
+        },
+        {
+          "name": "On page",
+          "cssClass": "amc-TIslandGroups--onPage"
+        },
+        {
+          "name": "Dense",
+          "cssClass": "amc-TIslandGroups--dense"
+        },
+        {
+          "name": "Accent ground",
+          "cssClass": "amc-TIslandGroups--accent"
+        },
+        {
+          "name": "Pairs",
+          "cssClass": "amc-TIslandGroups--pairs"
+        }
+      ],
+      "apexlang": "theme-templates/island-groups/dist/apexlang",
+      "legacySql": "theme-templates/island-groups/dist/legacy/amc_tpl_island_groups.sql"
     },
     {
       "slug": "journey-trail",
@@ -1712,6 +1998,57 @@
       "legacySql": "theme-templates/orbit-launcher/dist/legacy/amc_tpl_orbit_launcher.sql"
     },
     {
+      "slug": "peak-end-summary",
+      "kind": "region",
+      "name": "AMC Peak End Summary",
+      "staticId": "AMC_TPL_PEAK_END_SUMMARY",
+      "apexlangId": "amc-peak-end-summary",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "An end-of-flow summary frame whose single orchestrated moment is the flow's key figure counting up into place while a light blooms behind it and an accent bar draws under it, followed by a still recap list, numbered next steps and a calm closing line; the end state is exactly the static markup.",
+      "useFor": "A Static Content region on the page a process branches to after a business flow completes: order submitted, application or request sent, month or period closed, payroll or import run finished. The region text carries the figure, the recap and the next steps. For authentication outcomes use AMC Auth Result instead.",
+      "keywords": [
+        "summary",
+        "confirmation",
+        "order placed",
+        "completed",
+        "recap",
+        "next steps",
+        "peak-end",
+        "count up",
+        "month end close",
+        "receipt",
+        "feedback",
+        "motion"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Tone - Info",
+          "cssClass": "amc-TPeakEndSummary--info"
+        },
+        {
+          "name": "Tone - Warning",
+          "cssClass": "amc-TPeakEndSummary--warning"
+        },
+        {
+          "name": "Receipt recap",
+          "cssClass": "amc-TPeakEndSummary--receipt"
+        },
+        {
+          "name": "Centered",
+          "cssClass": "amc-TPeakEndSummary--center"
+        },
+        {
+          "name": "Still",
+          "cssClass": "amc-TPeakEndSummary--still"
+        }
+      ],
+      "apexlang": "theme-templates/peak-end-summary/dist/apexlang",
+      "legacySql": "theme-templates/peak-end-summary/dist/legacy/amc_tpl_peak_end_summary.sql"
+    },
+    {
       "slug": "peek-nav",
       "kind": "list",
       "name": "AMC Peek Nav",
@@ -1762,6 +2099,48 @@
       "legacySql": "theme-templates/peek-nav/dist/legacy/amc_tpl_peek_nav.sql"
     },
     {
+      "slug": "progressive-disclosure",
+      "kind": "region",
+      "name": "AMC Progressive Disclosure",
+      "staticId": "AMC_TPL_PROGRESSIVE_DISCLOSURE",
+      "apexlangId": "amc-progressive-disclosure",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A form frame that keeps the essential items in view and gathers the items marked amc-pd-more behind one counted toggle, Show 6 more options, remembers the choice per page and never hides a filled or invalid option silently.",
+      "useFor": "Form regions and Static Content regions with page items where a few fields matter to everyone and others only to some, for example order entry, customer records or report filters.",
+      "keywords": [
+        "form",
+        "progressive disclosure",
+        "advanced",
+        "more options",
+        "tesler",
+        "collapse",
+        "smart"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Start open",
+          "cssClass": "amc-TProgressiveDisclosure--openDefault"
+        },
+        {
+          "name": "Tinted more section",
+          "cssClass": "amc-TProgressiveDisclosure--tinted"
+        },
+        {
+          "name": "Do not remember",
+          "cssClass": "amc-TProgressiveDisclosure--noMemory"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TProgressiveDisclosure--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/progressive-disclosure/dist/apexlang",
+      "legacySql": "theme-templates/progressive-disclosure/dist/legacy/amc_tpl_progressive_disclosure.sql"
+    },
+    {
       "slug": "quest-list",
       "kind": "list",
       "name": "AMC Quest List",
@@ -1810,6 +2189,58 @@
       ],
       "apexlang": "theme-templates/quest-list/dist/apexlang",
       "legacySql": "theme-templates/quest-list/dist/legacy/amc_tpl_quest_list.sql"
+    },
+    {
+      "slug": "readable-article",
+      "kind": "region",
+      "name": "AMC Readable Article",
+      "staticId": "AMC_TPL_READABLE_ARTICLE",
+      "apexlangId": "amc-readable-article",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A reading frame for long text that holds the body to a comfortable 60 to 75 character measure under a heavy title and a 1.25 modular heading scale, and builds a table of contents from the text's own headings whose rail fills as you read, sticky beside the text when the region is wide and a collapsible Contents block on top when it is narrow.",
+      "useFor": "Static Content and Dynamic Content regions with running text: policies, help pages, announcements, terms of use, release notes, onboarding guides. Write the text with h2 and h3 headings; h4 is anchored but not listed. Not meant for reports or forms.",
+      "keywords": [
+        "article",
+        "policy",
+        "help",
+        "terms",
+        "announcement",
+        "table of contents",
+        "reading progress",
+        "reading time",
+        "anchor",
+        "typography",
+        "measure",
+        "arabic",
+        "print"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Serif text",
+          "cssClass": "amc-TReadableArticle--serif"
+        },
+        {
+          "name": "Numbered sections",
+          "cssClass": "amc-TReadableArticle--numbered"
+        },
+        {
+          "name": "Compact announcement",
+          "cssClass": "amc-TReadableArticle--compact"
+        },
+        {
+          "name": "No contents",
+          "cssClass": "amc-TReadableArticle--noToc"
+        },
+        {
+          "name": "Plain page",
+          "cssClass": "amc-TReadableArticle--plain"
+        }
+      ],
+      "apexlang": "theme-templates/readable-article/dist/apexlang",
+      "legacySql": "theme-templates/readable-article/dist/legacy/amc_tpl_readable_article.sql"
     },
     {
       "slug": "segmented-glass",
@@ -1898,13 +2329,59 @@
       "legacySql": "theme-templates/side-rail/dist/legacy/amc_tpl_side_rail.sql"
     },
     {
+      "slug": "skeleton-region",
+      "kind": "region",
+      "name": "AMC Skeleton Region",
+      "staticId": "AMC_TPL_SKELETON_REGION",
+      "apexlangId": "amc-skeleton-region",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame that, when a refresh takes longer than 400 ms, lays a skeleton with the exact shape of the current content over the body, measured from the report rows, cards, fields and text lines on screen, and never flashes on fast loads.",
+      "useFor": "Classic Report, Interactive Report, Cards, Chart and Form regions that refresh on filters or Dynamic Actions, and lazy-loading regions with the First load option.",
+      "keywords": [
+        "skeleton",
+        "loading",
+        "refresh",
+        "placeholder",
+        "doherty",
+        "perceived performance",
+        "motion"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Skeleton on first load",
+          "cssClass": "amc-TSkeletonRegion--firstLoad"
+        },
+        {
+          "name": "Pulse instead of sweep",
+          "cssClass": "amc-TSkeletonRegion--pulse"
+        },
+        {
+          "name": "Accent bones",
+          "cssClass": "amc-TSkeletonRegion--accent"
+        },
+        {
+          "name": "Show elapsed time",
+          "cssClass": "amc-TSkeletonRegion--elapsed"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TSkeletonRegion--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/skeleton-region/dist/apexlang",
+      "legacySql": "theme-templates/skeleton-region/dist/legacy/amc_tpl_skeleton_region.sql"
+    },
+    {
       "slug": "smart-nav-bar",
       "kind": "list",
       "name": "AMC Smart Nav Bar",
       "staticId": "AMC_TPL_SMART_NAV_BAR",
       "apexlangId": "amc-smart-nav-bar",
       "direction": "living",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "description": "A calm, compact pill cluster for the application Navigation Bar that knows what each entry is for: a search button that opens a command palette over the page's navigation menu, a notification bell with a remembered unread state and a feed dropdown, a help menu and an initials avatar with a user menu, and it folds extra entries into that menu by itself when the header runs out of room.",
       "useFor": "The application Navigation Bar slot, User Interface > Navigation Bar > List Template, with the Navigation Bar list: Search, Notifications with one sub entry per notification from a dynamic list, Help as a link or with sub entries, and the user entry, usually &APP_USER., with Profile, Language, Preferences and Sign out as sub entries. It also works in a List region placed in the header.",
@@ -1963,7 +2440,7 @@
       "staticId": "AMC_TPL_SPEED_DIAL",
       "apexlangId": "amc-speed-dial",
       "direction": "motion",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "minApexVersion": "23.1",
       "description": "A floating action button that springs the list entries out as mini buttons in a stack or a quarter arc, with labels sliding out beside them, instead of a static button bar.",
       "useFor": "Quick action lists of 2 to 10 entries: create shortcuts on a dashboard, record actions on a detail page, a page-wide create menu on page 0 with Float on page.",
@@ -2002,6 +2479,54 @@
       ],
       "apexlang": "theme-templates/speed-dial/dist/apexlang",
       "legacySql": "theme-templates/speed-dial/dist/legacy/amc_tpl_speed_dial.sql"
+    },
+    {
+      "slug": "spotlight-choice",
+      "kind": "list",
+      "name": "AMC Spotlight Choice",
+      "staticId": "AMC_TPL_SPOTLIGHT_CHOICE",
+      "apexlangId": "amc-spotlight-choice",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A plan or option chooser in which exactly one recommended entry is isolated as a solid, raised card with a Recommended flag and placed first or in the middle by serial position, with radio-like keyboard selection that writes the chosen value to a page item.",
+      "useFor": "Choosing between 2 to 5 options where one is advised: support or subscription plans, delivery services, payment terms, leasing packages, insurance cover. Static or dynamic lists in a List region, on a form page or a wizard step.",
+      "keywords": [
+        "plan chooser",
+        "pricing",
+        "options",
+        "recommended",
+        "radio",
+        "von restorff",
+        "serial position",
+        "bold"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Recommended",
+        "a03": "Price or value",
+        "a04": "Return value"
+      },
+      "templateOptions": [
+        {
+          "name": "Centre stage",
+          "cssClass": "amc-TSpotlightChoice--middle"
+        },
+        {
+          "name": "Stacked rows",
+          "cssClass": "amc-TSpotlightChoice--stack"
+        },
+        {
+          "name": "Quiet highlight",
+          "cssClass": "amc-TSpotlightChoice--quiet"
+        },
+        {
+          "name": "Preselect recommended",
+          "cssClass": "amc-TSpotlightChoice--preselect"
+        }
+      ],
+      "apexlang": "theme-templates/spotlight-choice/dist/apexlang",
+      "legacySql": "theme-templates/spotlight-choice/dist/legacy/amc_tpl_spotlight_choice.sql"
     },
     {
       "slug": "spotlight-frame",
@@ -2237,6 +2762,56 @@
       ],
       "apexlang": "theme-templates/terminal-window/dist/apexlang",
       "legacySql": "theme-templates/terminal-window/dist/legacy/amc_tpl_terminal_window.sql"
+    },
+    {
+      "slug": "thumb-bar",
+      "kind": "list",
+      "name": "AMC Thumb Bar",
+      "staticId": "AMC_TPL_THUMB_BAR",
+      "apexlangId": "amc-thumb-bar",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A mobile-first bottom action bar for the page's main actions: the primary action is the largest target in the thumb zone, secondary actions are compact, the rest wait in a bottom sheet, and on wider screens it is an inline action row.",
+      "useFor": "The 2 to 8 main actions of a detail, approval or form page used on phones: Approve invoice, Add note, Attach file, Call customer, Share, Print, Cancel order. One Thumb Bar per page.",
+      "keywords": [
+        "bottom bar",
+        "action bar",
+        "mobile",
+        "thumb zone",
+        "fitts law",
+        "bottom sheet",
+        "primary action",
+        "depth"
+      ],
+      "attributes": {
+        "a01": "Badge",
+        "a02": "Role, primary or overflow"
+      },
+      "templateOptions": [
+        {
+          "name": "Centre primary",
+          "cssClass": "amc-TThumbBar--center"
+        },
+        {
+          "name": "Icon only secondaries",
+          "cssClass": "amc-TThumbBar--iconOnly"
+        },
+        {
+          "name": "Stay in place",
+          "cssClass": "amc-TThumbBar--static"
+        },
+        {
+          "name": "Floating bar",
+          "cssClass": "amc-TThumbBar--floating"
+        },
+        {
+          "name": "Success primary",
+          "cssClass": "amc-TThumbBar--success"
+        }
+      ],
+      "apexlang": "theme-templates/thumb-bar/dist/apexlang",
+      "legacySql": "theme-templates/thumb-bar/dist/legacy/amc_tpl_thumb_bar.sql"
     },
     {
       "slug": "ticket-stub",

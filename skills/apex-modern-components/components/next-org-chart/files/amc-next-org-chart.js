@@ -57,7 +57,7 @@
   function norm(s) {
     s = String(s || "").toLowerCase();
     if (s.normalize) { s = s.normalize("NFD"); }
-    return s.replace(/[̀-ًͯ-ٰٟ]/g, "").replace(/[‐-―'’`-]/g, " ").replace(/\s+/g, " ").replace(/^ | $/g, "");
+    return s.replace(/[\u0300-\u036F\u064B-\u065F\u0670]/g, "").replace(/[\u2010-\u2015'\u2019`-]/g, " ").replace(/\s+/g, " ").replace(/^ | $/g, "");
   }
   function closest(el, sel) {
     while (el && el.nodeType === 1) {

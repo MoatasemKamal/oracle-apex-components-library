@@ -62,7 +62,7 @@
   function norm(s) {
     s = String(s || "").toLowerCase();
     try { s = s.normalize("NFD"); } catch (e) { /* old engine */ }
-    return s.replace(/[̀-ًͯ-ٰٟ]/g, "").replace(/\s+/g, " ").trim();
+    return s.replace(/[\u0300-\u036F\u064B-\u065F\u0670]/g, "").replace(/\s+/g, " ").trim();
   }
   function textOf(el, part) { var n = el.querySelector(C(part)); return n ? n.textContent.replace(/\s+/g, " ").trim() : ""; }
 
@@ -189,7 +189,7 @@
     var empty = root.querySelector(C("empty"));
     if (empty) {
       empty.hidden = !(words.length && matches === 0);
-      empty.textContent = empty.hidden ? "" : fill(root.getAttribute("data-no-match"), { query: "“" + input.value.trim() + "”" });
+      empty.textContent = empty.hidden ? "" : fill(root.getAttribute("data-no-match"), { query: "\u201C" + input.value.trim() + "\u201D" });
     }
     var recent = root.querySelector(C("recent"));
     if (recent) { recent.classList.toggle("is-filtering", words.length > 0); }
