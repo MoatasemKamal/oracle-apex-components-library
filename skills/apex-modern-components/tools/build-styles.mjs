@@ -61,7 +61,7 @@ if (!only && styles.length) {
     styles: styles.map((t) => ({
       slug: t.slug, name: t.spec.name, staticId: t.spec.staticId, apexlangId: styleId(t), base: t.spec.base,
       scheme: t.spec.scheme, version: t.spec.version, description: t.spec.description, keywords: t.spec.keywords || [],
-      contrast: t.contrast.map((r) => ({ pair: `${r.f} on ${r.b}`, ratio: r.ratio, min: r.min })),
+      contrast: t.contrast.map((r) => ({ scheme: r.scheme, pair: `${r.f} on ${r.b}`, ratio: r.ratio, min: r.min })),
       apexlang: path.posix.join("theme-styles", t.slug, "dist", "apexlang"),
       legacySql: path.posix.join("theme-styles", t.slug, "dist", "legacy", `amc_style_${t.slug.replace(/-/g, "_")}.sql`)
     }))
@@ -103,9 +103,9 @@ function readme(t) {
     "",
     "## Contrast (WCAG, computed by the build)",
     "",
-    "| Pair | Ratio | Minimum |",
-    "|---|---:|---:|",
-    ...t.contrast.map((r) => `| ${r.f} on ${r.b} | ${r.ratio ?? "n/a"} | ${r.min} |`),
+    "| Scheme | Pair | Ratio | Minimum |",
+    "|---|---|---:|---:|",
+    ...t.contrast.map((r) => `| ${r.scheme} | ${r.f} on ${r.b} | ${r.ratio ?? "n/a"} | ${r.min} |`),
     "",
     s.helpText,
     "",

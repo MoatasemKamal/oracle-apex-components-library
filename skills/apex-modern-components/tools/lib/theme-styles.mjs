@@ -82,7 +82,36 @@ export function contrast(fg, bg) {
   return (Math.max(f, b) + 0.05) / (Math.min(f, b) + 0.05);
 }
 
-// Declarations inside the first plain `:root {` block (the style's light or only palette).
+// Split top-level CSS into @media blocks and the rest (brace matching, comments removed).
+export function splitMedia(css) {
+  const src = css.replace(/\/\*[\s\S]*?\*\//g, "");
+  const media = [];
+  let rest = "";
+  let i = 0;
+  while (i < src.length) {
+    const at = src.indexOf("@media", i);
+    if (at < 0) { rest += src.slice(i); break; }
+    rest += src.slice(i, at);
+    const open = src.indexOf("{", at);
+    let depth = 1, j = open + 1;
+    while (j < src.length && depth) { if (src[j] === "{") depth++; else if (src[j] === "}") depth--; j++; }
+    media.push({ query: src.slice(at + 6, open).trim(), body: src.slice(open + 1, j - 1) });
+    i = j;
+  }
+  return { rest, media };
+}
+
+// Palette of a scheme: `:root` declarations outside any @media (light or only palette), or
+// inside the prefers-color-scheme: dark media block (dark palette of an auto style).
+export function schemeVars(css, scheme = "base") {
+  const { rest, media } = splitMedia(css);
+  if (scheme === "dark") {
+    return media.filter((m) => /prefers-color-scheme:\s*dark/.test(m.query)).reduce((acc, m) => ({ ...acc, ...rootVars(m.body) }), {});
+  }
+  return rootVars(rest);
+}
+
+// Declarations inside plain `:root {` blocks of the given CSS text.
 export function rootVars(css, selector = ":root") {
   const vars = {};
   const re = new RegExp(`(^|\\n)\\s*${selector.replace(/[[\]()*.:]/g, "\\$&")}\\s*\\{([^}]*)\\}`, "g");
@@ -133,7 +162,7 @@ export function validateStyle(t) {
   if (!css) return { errors, warnings, contrast: [] };
   const text = css.toString("utf8");
 
-  const vars = rootVars(text);
+  const vars = schemeVars(text);
   for (const v of REQUIRED_VARS) need(v in vars, `:root must set ${v}`);
   if (/@import\b/.test(text)) errors.push(`${slug}: @import is not allowed (app CSP and offline installs); inline fonts are not shipped`);
   if (/url\(\s*["']?https?:/i.test(text)) errors.push(`${slug}: external url() is not allowed; use data: URIs`);
@@ -149,16 +178,15 @@ export function validateStyle(t) {
   if (s.scheme === "auto") {
     need(/prefers-color-scheme:\s*dark/.test(text), "an auto style must redefine the palette under @media (prefers-color-scheme: dark)");
   }
-  const report = contrastReport(vars);
-  for (const r of report) {
-    if (r.ratio === null) warnings.push(`${slug}: contrast of ${r.f} on ${r.b} not computed (non-literal color)`);
-    else if (r.ratio < r.min) errors.push(`${slug}: contrast ${r.ratio}:1 of ${r.f} on ${r.b} is below ${r.min}:1`);
-  }
+  const report = contrastReport(vars).map((r) => ({ ...r, scheme: s.scheme === "auto" ? "light" : s.scheme }));
   if (s.scheme === "auto") {
-    const dark = rootVars(text.split(/prefers-color-scheme:\s*dark/)[1] || "", ":root");
-    for (const r of contrastReport({ ...vars, ...dark })) {
-      if (r.ratio !== null && r.ratio < r.min) errors.push(`${slug} (dark): contrast ${r.ratio}:1 of ${r.f} on ${r.b} is below ${r.min}:1`);
-    }
+    const dark = schemeVars(text, "dark");
+    report.push(...contrastReport({ ...vars, ...dark }).map((r) => ({ ...r, scheme: "dark" })));
+  }
+  for (const r of report) {
+    const tag = s.scheme === "auto" ? ` (${r.scheme})` : "";
+    if (r.ratio === null) warnings.push(`${slug}${tag}: contrast of ${r.f} on ${r.b} not computed (non-literal color)`);
+    else if (r.ratio < r.min) errors.push(`${slug}${tag}: contrast ${r.ratio}:1 of ${r.f} on ${r.b} is below ${r.min}:1`);
   }
   return { errors, warnings, contrast: report };
 }

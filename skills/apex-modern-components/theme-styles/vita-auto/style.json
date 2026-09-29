@@ -1,0 +1,11 @@
+{
+  "name": "AMC Vita Auto",
+  "staticId": "AMC_STYLE_VITA_AUTO",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "auto",
+  "description": "The familiar Vita look that follows the operating system: Vita light by day and a Vita Dark style palette when the user's device is set to dark mode, with no page reload or user preference to manage.",
+  "keywords": ["vita", "auto", "dark mode", "light", "system", "prefers-color-scheme", "accessible"],
+  "helpText": "Style built on Vita that switches automatically between a light and a dark palette with the operating system setting (CSS prefers-color-scheme). The built-in Vita and Vita Dark styles are fixed, so users otherwise have to pick one by hand. Both palettes pass WCAG AA: in light mode the primary is Vita blue with white text; in dark mode it becomes a lighter blue with dark text so it also reads as text on dark regions, and the semantic colors are lightened. Works with every AMC component and template, which read the same --ut-* variables. Because the base CSS is Vita (light), check hard-coded colors from Vita and from plug-ins on a live page in dark mode.",
+  "endUserCanPick": true
+}

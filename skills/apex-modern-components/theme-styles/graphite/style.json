@@ -1,0 +1,11 @@
+{
+  "name": "AMC Graphite",
+  "staticId": "AMC_STYLE_GRAPHITE",
+  "version": "1.0.0",
+  "base": "vita-dark",
+  "scheme": "dark",
+  "description": "A developer and operations console look: neutral charcoal surfaces, warm-grey text, an amber primary, hairline borders and monospaced tabular figures for numbers, report headings and badges.",
+  "keywords": ["graphite", "dark", "charcoal", "amber", "console", "developer", "operations", "monospace"],
+  "helpText": "Dark style built on Vita Dark. Surfaces are neutral charcoal with warm-grey text; regions are separated by 1px hairlines instead of shadows and use a tighter 6px radius. The primary is amber with near-black text (WCAG AA). Numbers in reports and badges use a system monospace stack with tabular figures so columns line up; body text keeps the theme font. Warning is a lighter yellow so it stays distinct from the amber primary. Works with every AMC component and template, which read the same --ut-* variables. Header, navigation, report and badge refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

@@ -1,0 +1,11 @@
+{
+  "name": "AMC Midnight",
+  "staticId": "AMC_STYLE_MIDNIGHT",
+  "version": "1.0.0",
+  "base": "vita-dark",
+  "scheme": "dark",
+  "description": "A calm, premium dark style for operations dashboards: deep navy-ink surfaces that rise in lightness instead of casting shadows, an electric-blue primary and a subtle cyan glow on focus, hot buttons and the current menu entry.",
+  "keywords": ["midnight", "dark", "navy", "electric blue", "cyan", "dashboard", "operations"],
+  "helpText": "Dark style built on Vita Dark. Surfaces are navy ink, never pure black: the page is darkest, the navigation and regions step up in lightness to show elevation, and borders are faint blue hairlines. The primary is an electric blue with dark ink text (WCAG AA); keyboard focus, hot buttons and the current navigation entry carry a soft cyan glow. Semantic colors are tuned light enough to read as text on the dark regions. Works with every AMC component and template, which read the same --ut-* variables. Header, navigation, report and badge refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

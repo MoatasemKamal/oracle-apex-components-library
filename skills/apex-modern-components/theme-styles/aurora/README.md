@@ -19,14 +19,14 @@ A bright, airy style: an aurora gradient header from deep teal to violet, a soft
 
 ## Contrast (WCAG, computed by the build)
 
-| Pair | Ratio | Minimum |
-|---|---:|---:|
-| --ut-body-text-color on --ut-body-background-color | 14.87 | 4.5 |
-| --ut-component-text-default-color on --ut-component-background-color | 16.12 | 4.5 |
-| --ut-component-text-muted-color on --ut-component-background-color | 5.99 | 4.5 |
-| --ut-link-text-color on --ut-component-background-color | 6.46 | 4.5 |
-| --ut-palette-primary-contrast on --ut-palette-primary | 6.46 | 4.5 |
-| --ut-palette-primary on --ut-component-background-color | 6.46 | 3 |
+| Scheme | Pair | Ratio | Minimum |
+|---|---|---:|---:|
+| light | --ut-body-text-color on --ut-body-background-color | 14.87 | 4.5 |
+| light | --ut-component-text-default-color on --ut-component-background-color | 16.12 | 4.5 |
+| light | --ut-component-text-muted-color on --ut-component-background-color | 5.99 | 4.5 |
+| light | --ut-link-text-color on --ut-component-background-color | 6.46 | 4.5 |
+| light | --ut-palette-primary-contrast on --ut-palette-primary | 6.46 | 4.5 |
+| light | --ut-palette-primary on --ut-component-background-color | 6.46 | 3 |
 
 Light style built on Vita. The header and the current menu entry use an aurora gradient from teal to violet; regions are white with a soft cool shadow; the primary color is a deep teal that passes WCAG AA with white text. Works with every AMC component and template, which read the same --ut-* variables. Header and navigation refinements target Universal Theme classes and should be checked on a live page.
 

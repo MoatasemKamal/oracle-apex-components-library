@@ -1,0 +1,23 @@
+style amc-midnight (
+    name: AMC Midnight
+    css {
+        fileUrls: [
+            #THEME_FILES#css/Vita-Dark#MIN#.css?v=#APEX_VERSION#
+            #APP_FILES#amc-styles/amc-style-midnight.css
+        ]
+    }
+    themeRollerAttributes {
+        readOnly: true
+    }
+    advanced {
+        staticId: AMC_STYLE_MIDNIGHT
+        endUserCanPick: true
+        accessibilityTested: false
+    }
+    comments {
+        comments:
+            ```text
+            Dark style built on Vita Dark. Surfaces are navy ink, never pure black: the page is darkest, the navigation and regions step up in lightness to show elevation, and borders are faint blue hairlines. The primary is an electric blue with dark ink text (WCAG AA); keyboard focus, hot buttons and the current navigation entry carry a soft cyan glow. Semantic colors are tuned light enough to read as text on the dark regions. Works with every AMC component and template, which read the same --ut-* variables. Header, navigation, report and badge refinements target Universal Theme classes and should be checked on a live page.
+            ```
+    }
+)

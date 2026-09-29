@@ -1,0 +1,77 @@
+/* AMC Vita Auto: Universal Theme style (auto), layered on Vita.
+   Light palette below; the full palette is redefined for system dark mode further down. */
+:root {
+  --ut-body-background-color: #f5f6f7;
+  --ut-body-text-color: #1f2328;
+  --ut-component-background-color: #ffffff;
+  --ut-component-text-default-color: #1f2328;
+  --ut-component-text-muted-color: #5f6670;
+  --ut-component-border-color: rgba(0, 0, 0, .1);
+  --ut-component-border-radius: 4px;
+  --ut-component-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+  --ut-link-text-color: #0559ad;
+  --ut-focus-outline-color: #0560ba;
+  --ut-palette-primary: #0560ba;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #26712f;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #e0a100;
+  --ut-palette-warning-contrast: #1f1600;
+  --ut-palette-danger: #b9352b;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #2a5db8;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #0560ba;
+  --ut-header-text-color: #ffffff;
+  --ut-nav-background-color: #ffffff;
+  --ut-field-background-color: #ffffff;
+  --ut-field-border-color: rgba(0, 0, 0, .18);
+  --amc-vita-auto-raised: #f7f8f9;
+  color-scheme: light;
+}
+
+/* Shared refinements, driven only by variables so they follow both schemes. */
+.t-Header { background: var(--ut-header-background-color); color: var(--ut-header-text-color); }
+.t-Body-nav { background: var(--ut-nav-background-color); }
+.t-Region { background-color: var(--ut-component-background-color); color: var(--ut-component-text-default-color); }
+.t-Report-colHead { background: var(--amc-vita-auto-raised); color: var(--ut-component-text-muted-color); }
+.apex-item-text, .apex-item-select { background-color: var(--ut-field-background-color); color: var(--ut-component-text-default-color); }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ut-body-background-color: #1b1c1e;
+    --ut-body-text-color: #eceef0;
+    --ut-component-background-color: #25272a;
+    --ut-component-text-default-color: #eceef0;
+    --ut-component-text-muted-color: #a9afb7;
+    --ut-component-border-color: rgba(255, 255, 255, .12);
+    --ut-component-border-radius: 4px;
+    --ut-component-box-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+    --ut-link-text-color: #70b2f5;
+    --ut-focus-outline-color: #70b2f5;
+    --ut-palette-primary: #5ba7f3;
+    --ut-palette-primary-contrast: #06172a;
+    --ut-palette-success: #62c677;
+    --ut-palette-success-contrast: #0a1f0e;
+    --ut-palette-warning: #f2c14e;
+    --ut-palette-warning-contrast: #1f1600;
+    --ut-palette-danger: #ff7b70;
+    --ut-palette-danger-contrast: #2a0805;
+    --ut-palette-info: #7aa9f5;
+    --ut-palette-info-contrast: #0a1730;
+    --ut-header-background-color: #25272a;
+    --ut-header-text-color: #eceef0;
+    --ut-nav-background-color: #212326;
+    --ut-field-background-color: #1e2022;
+    --ut-field-border-color: rgba(255, 255, 255, .2);
+    --amc-vita-auto-raised: #2b2d31;
+    color-scheme: dark;
+  }
+  /* The dark header is no longer blue: keep the Vita accent as a hairline under it. */
+  .t-Header { border-bottom: 1px solid var(--ut-component-border-color); box-shadow: inset 0 -2px 0 var(--ut-palette-primary); }
+  .t-TreeNav .is-current > a { color: var(--ut-link-text-color); }
+}
+
+@media (forced-colors: active) {
+  .t-Header { box-shadow: none; }
+}

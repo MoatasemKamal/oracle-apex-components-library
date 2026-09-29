@@ -1,0 +1,107 @@
+/* AMC Graphite: Universal Theme style (dark), layered on Vita Dark.
+   Neutral charcoal, warm-grey text, amber primary, 1px hairlines, monospaced tabular numbers.
+   The mono stack is system-only (no web font). */
+:root {
+  --ut-body-background-color: #161719;
+  --ut-body-text-color: #e7e3dc;
+  --ut-component-background-color: #1d1e21;
+  --ut-component-text-default-color: #e7e3dc;
+  --ut-component-text-muted-color: #a8a198;
+  --ut-component-border-color: rgba(231, 222, 208, .11);
+  --ut-component-border-radius: 6px;
+  --ut-component-box-shadow: none;
+  --ut-link-text-color: #f4b454;
+  --ut-focus-outline-color: #f4a62a;
+  --ut-palette-primary: #f4a62a;
+  --ut-palette-primary-contrast: #1a1204;
+  --ut-palette-success: #7ccf8f;
+  --ut-palette-success-contrast: #0c1f11;
+  --ut-palette-warning: #f2d066;
+  --ut-palette-warning-contrast: #221a03;
+  --ut-palette-danger: #ff8274;
+  --ut-palette-danger-contrast: #2a0905;
+  --ut-palette-info: #8db4f0;
+  --ut-palette-info-contrast: #0b1628;
+  --ut-header-background-color: #121315;
+  --ut-header-text-color: #e7e3dc;
+  --ut-nav-background-color: #18191b;
+  --ut-field-background-color: #151618;
+  --ut-field-border-color: rgba(231, 222, 208, .18);
+  --amc-graphite-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --amc-graphite-raised: #232427;
+  color-scheme: dark;
+}
+
+/* Header: darkest band with a hairline and a 2px amber rule on the top edge. */
+.t-Header {
+  background: var(--ut-header-background-color);
+  color: var(--ut-header-text-color);
+  border-bottom: 1px solid var(--ut-component-border-color);
+  box-shadow: inset 0 2px 0 var(--ut-palette-primary);
+}
+.t-Body-nav { background: var(--ut-nav-background-color); }
+
+/* Current menu entry: faint amber wash, amber label, square amber marker. */
+.t-TreeNav .is-current > a {
+  background: rgba(244, 166, 42, .1);
+  color: var(--ut-palette-primary);
+  box-shadow: inset 2px 0 0 var(--ut-palette-primary);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -2px 0 0 var(--ut-palette-primary); }
+
+/* Regions: flat, hairline-bordered; the header strip is one step lighter. */
+.t-Region { box-shadow: none; }
+.t-Region-header { background: var(--amc-graphite-raised); border-radius: var(--ut-component-border-radius) var(--ut-component-border-radius) 0 0; }
+.t-Region-title { letter-spacing: -.005em; }
+
+/* Reports: mono column headings, tabular mono numbers, zebra on hover only. */
+.t-Report-colHead {
+  font-family: var(--amc-graphite-mono);
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ut-component-text-muted-color);
+}
+.t-Report-cell.u-tE {
+  font-family: var(--amc-graphite-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+.t-Report-report tbody tr:hover > .t-Report-cell { background: rgba(231, 222, 208, .04); }
+
+/* Badges: mono, tabular, slightly squarer. */
+.t-Badge {
+  font-family: var(--amc-graphite-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: .02em;
+  border-radius: 4px;
+}
+/* Primary (default) badge is outlined so it never reads as a warning status. */
+.t-Badge:not([class*="t-Badge--"]) { background: transparent; box-shadow: inset 0 0 0 1px rgba(244, 166, 42, .55); }
+.t-Badge--warning { color: var(--ut-palette-warning); background: rgba(242, 208, 102, .14); }
+
+/* Hot buttons: solid amber, no glow. */
+.t-Button--hot { background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); font-weight: 600; }
+.t-Button--hot:hover { background: #f7b546; }
+
+/* Focus: crisp amber ring, offset from the element. */
+.t-Button:focus-visible,
+.t-TreeNav a:focus-visible,
+.apex-item-text:focus,
+.apex-item-select:focus {
+  outline: 2px solid var(--ut-focus-outline-color);
+  outline-offset: 2px;
+}
+
+/* Alerts: flat, neutral fill with a semantic hairline and a semantic title. */
+.t-Alert { background: var(--ut-component-background-color); }
+.t-Alert--success .t-Alert-title { color: var(--ut-palette-success); }
+.t-Alert--warning .t-Alert-title { color: var(--ut-palette-warning); }
+.t-Alert--danger .t-Alert-title { color: var(--ut-palette-danger); }
+
+@media (forced-colors: active) {
+  .t-Header { box-shadow: none; border-top: 2px solid CanvasText; }
+  .t-TreeNav .is-current > a { background: Highlight; color: HighlightText; box-shadow: none; }
+  .t-Button--hot { background: ButtonFace; color: ButtonText; }
+  .t-Badge { border: 1px solid CanvasText; box-shadow: none; }
+}
