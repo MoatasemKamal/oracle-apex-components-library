@@ -1,0 +1,541 @@
+plugin nextKanban (
+    name: Next Kanban
+    staticId: AMC_NEXT_KANBAN
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <article class="amc-NKanban-card">
+              <p class="amc-NKanban-where">#COLUMN_LABEL#</p>
+              <p class="amc-NKanban-flags"><span class="amc-NKanban-prio"><span class="amc-NKanban-prioCode" aria-hidden="true">{case PRIORITY/}{when critical/}P1{when high/}P2{when low/}P4{otherwise/}P3{endcase/}</span><span class="amc-NKanban-prioText">{case PRIORITY/}{when critical/}Urgent{when high/}High{when low/}Low{otherwise/}Medium{endcase/}</span></span>{case STATE/}{when success/}<span class="amc-NKanban-state">Done</span>{when warning/}<span class="amc-NKanban-state">At risk</span>{when danger/}<span class="amc-NKanban-state">Blocked</span>{when info/}<span class="amc-NKanban-state">Waiting on others</span>{otherwise/}{endcase/}</p>
+              <h4 class="amc-NKanban-title">{if ?LINK_URL/}<a class="amc-NKanban-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h4>
+              {if ?DESCRIPTION/}<p class="amc-NKanban-desc">#DESCRIPTION#</p>{endif/}
+              {if ?TAGS/}<p class="amc-NKanban-tags">#TAGS#</p>{endif/}
+              <div class="amc-NKanban-foot">{if ?ASSIGNEE/}<span class="amc-NKanban-who"><span class="amc-NKanban-avatar" aria-hidden="true">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user"></span>{endif/}</span><span class="amc-NKanban-person">#ASSIGNEE#</span></span>{endif/}{if ?DUE_DATE/}<time class="amc-NKanban-due" datetime="#DUE_DATE#">#DUE_DATE#</time>{endif/}</div>
+            </article>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NKanban amc-NKanban--#STYLE#" data-view="#STYLE#" data-move="#ALLOW_MOVE#" data-card-item="#CARD_ITEM#" data-from-item="#FROM_ITEM#" data-to-item="#TO_ITEM#" data-index-item="#INDEX_ITEM#">
+              <span class="amc-NKanban-i18n" hidden data-count-limit="%0 of %1" data-count-sr="%0 cards, limit %1" data-count-one="%0 card" data-count-other="%0 cards" data-at-limit="At limit" data-over-limit="Over limit by %0" data-empty="No cards yet. Drag a card here." data-empty-ro="No cards" data-move="Move %0" data-move-help="Press Space to pick up the card, arrow keys to move it, Space to drop it and Escape to cancel." data-picked="Picked up %0 in %1, position %2 of %3. Use the arrow keys to move it." data-moved="%0 is in %1, position %2 of %3." data-dropped="%0 moved to %1, position %2 of %3." data-cancelled="Move cancelled. %0 is back in %1." data-over-note="%0 is now over its limit by %1." data-sorted="Cards in this board are ordered by due date." data-overdue="Overdue" data-today="Due today" data-bucket-overdue="Overdue" data-bucket-today="Today" data-bucket-week="This week" data-bucket-later="Later" data-bucket-none="No due date" data-columns="Board columns" data-due="Due %0"></span>
+              <ol class="amc-NKanban-source">#APEX$ROWS#</ol>
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NKanban-item amc-NKanban-item--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/} amc-NKanban-item--{case PRIORITY/}{when critical/}critical{when high/}high{when low/}low{otherwise/}medium{endcase/}{if ?CARD_ID/}{else/}{if ?TITLE/}{else/} amc-NKanban-item--column{endif/}{endif/}" data-id="#CARD_ID#" data-col="#COLUMN_KEY#" data-col-label="#COLUMN_LABEL#" data-limit="#COLUMN_LIMIT#" data-due="#DUE_DATE#">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-kanban.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-kanban.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            One query row per card, already ordered by column and then by position (order by column_seq, card_seq). Map Card ID, Column Key, Column Label and Title; Column Limit (a number, the same on every row of the column) turns on the work-in-progress warning. To show an empty column, return one row for it with Card ID and Title empty. Due Date is ISO text, TO_CHAR(due_on, 'YYYY-MM-DD'). Priority accepts critical, high, medium or low; State accepts success, warning, danger, info or neutral; Tags is a | separated list. When a card is moved the region fires the custom event amc:kanban-move with detail id, from, to, index (0-based position in the target column) and fromIndex, and first sets the page items named in Card Item, From Item, To Item and Index Item, so a Dynamic Action on that custom event can run a PL/SQL process that saves the move and then refreshes the region. Without JavaScript the rows show as a plain list.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: calmLanes
+        }
+        help {
+            helpText:
+                ```
+                Design of the board; the direction is given in brackets as motion, depth, bold or smart. calmLanes [smart]: flat tinted lanes with quiet borderless cards and limit slots under each column name; the lanes stack when the region is narrow. opsBoard [bold]: a dense wallboard with large column counts, one-line cards and a solid priority code P1 to P4 (tags are not shown), and a column that goes over its limit turns red. stickyWall [depth]: paper notes tinted by priority, slightly turned, that lift off the wall while they are moved. dueTimeline [motion]: cards inside each column are ordered and grouped by Due Date into Overdue, Today, This week, Later and No date, and overdue dates pulse gently; moving up and down is off because the order comes from the date. compactList [smart]: one column at a time behind tabs with counts, for phones and narrow side regions; drop a card on a tab to move it there.
+                ```
+        }
+        entry calmLanes (
+            sequence: 10
+            display: Calm lanes
+            return: calmLanes
+        )
+        entry opsBoard (
+            sequence: 20
+            display: Ops board
+            return: opsBoard
+        )
+        entry stickyWall (
+            sequence: 30
+            display: Sticky wall
+            return: stickyWall
+        )
+        entry dueTimeline (
+            sequence: 40
+            display: Due timeline
+            return: dueTimeline
+        )
+        entry compactList (
+            sequence: 50
+            display: Compact list
+            return: compactList
+        )
+    )
+    customAttribute CARD_ID (
+        apexlangName: cardId
+        attribute: 2
+        name: Card ID
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Primary key of the card, returned as id in the amc:kanban-move event and put in Card Item. Leave it empty (with Title empty) on a row that only makes an empty column visible.
+                ```
+        }
+    )
+    customAttribute COLUMN_KEY (
+        apexlangName: columnKey
+        attribute: 3
+        name: Column Key
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Code of the column the card is in, for example REQUESTED or IN_REVIEW. Rows with the same key form one column; columns appear in the order their first row arrives. Returned as from and to in the amc:kanban-move event.
+                ```
+        }
+    )
+    customAttribute COLUMN_LABEL (
+        apexlangName: columnLabel
+        attribute: 4
+        name: Column Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Column name shown in the header, for example In review. The first row of each column provides it.
+                ```
+        }
+    )
+    customAttribute COLUMN_LIMIT (
+        apexlangName: columnLimit
+        attribute: 5
+        name: Column Limit
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Work-in-progress limit of the column as a whole number, for example 4. The header draws one slot per allowed card, says At limit when full and Over limit by N when exceeded. Empty or 0 means no limit.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 6
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Card heading, for example PR-2291 Laptops for the Dammam branch.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 7
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional one or two lines of detail. Ops board and Compact list show one line.
+                ```
+        }
+    )
+    customAttribute ASSIGNEE (
+        apexlangName: assignee
+        attribute: 8
+        name: Assignee
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Name of the person who owns the card, for example Maha Alharbi.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 9
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown in the assignee disc, for example MA.
+                ```
+        }
+    )
+    customAttribute DUE_DATE (
+        apexlangName: dueDate
+        attribute: 10
+        name: Due Date
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Due date as ISO text, TO_CHAR(due_on, 'YYYY-MM-DD'). It is shown in the page language and marked Overdue or Due today; Due timeline groups cards by it.
+                ```
+        }
+    )
+    customAttribute PRIORITY (
+        apexlangName: priority
+        attribute: 11
+        name: Priority
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                critical, high, medium or low. Critical and high are shown as Urgent and High; medium and low stay quiet except in Ops board (P1 to P4) and Sticky wall (note tint). Other values render as medium.
+                ```
+        }
+    )
+    customAttribute TAGS (
+        apexlangName: tags
+        attribute: 12
+        name: Tags
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short labels separated by |, for example Riyadh|IT hardware. Keep to two or three.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 13
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Health of the card: success (Done), warning (At risk), danger (Blocked), info (Waiting on others) or neutral (no label). Always shown as text, never by color alone. Unknown values render as neutral.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 14
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional page URL that opens the card, built in SQL with apex_page.get_url. The title becomes the link.
+                ```
+        }
+    )
+    customAttribute ALLOW_MOVE (
+        apexlangName: allowMove
+        attribute: 15
+        name: Allow Moving
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 150
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: true
+        }
+        help {
+            helpText:
+                ```
+                Yes lets users move cards by dragging or with the Move button and arrow keys. No shows a read-only board.
+                ```
+        }
+    )
+    customAttribute CARD_ITEM (
+        apexlangName: cardItem
+        attribute: 16
+        name: Card Item
+        scope: component
+        type: text
+        appearance {
+            sequence: 160
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        dependingOn {
+            attribute: @ALLOW_MOVE
+            conditionType: =
+            value: Y
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Name of a page item, for example P10_CARD_ID, that receives the moved card's ID before amc:kanban-move fires. Use a hidden item and submit it from the Dynamic Action.
+                ```
+        }
+    )
+    customAttribute FROM_ITEM (
+        apexlangName: fromItem
+        attribute: 17
+        name: From Item
+        scope: component
+        type: text
+        appearance {
+            sequence: 170
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        dependingOn {
+            attribute: @ALLOW_MOVE
+            conditionType: =
+            value: Y
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Name of a page item that receives the Column Key the card left, for example P10_FROM_COLUMN.
+                ```
+        }
+    )
+    customAttribute TO_ITEM (
+        apexlangName: toItem
+        attribute: 18
+        name: To Item
+        scope: component
+        type: text
+        appearance {
+            sequence: 180
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        dependingOn {
+            attribute: @ALLOW_MOVE
+            conditionType: =
+            value: Y
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Name of a page item that receives the Column Key the card was moved to, for example P10_TO_COLUMN.
+                ```
+        }
+    )
+    customAttribute INDEX_ITEM (
+        apexlangName: indexItem
+        attribute: 19
+        name: Index Item
+        scope: component
+        type: text
+        appearance {
+            sequence: 190
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        dependingOn {
+            attribute: @ALLOW_MOVE
+            conditionType: =
+            value: Y
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Name of a page item that receives the new 0-based position of the card in its column, for example P10_POSITION.
+                ```
+        }
+    )
+    file "amc-next-kanban.css" (
+        fileName: amc-next-kanban.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-kanban.js" (
+        fileName: amc-next-kanban.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

@@ -1,0 +1,249 @@
+{
+  "name": "Next Kanban",
+  "apexlangName": "nextKanban",
+  "staticId": "AMC_NEXT_KANBAN",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["kanban", "board", "task board", "work orders", "pipeline", "columns", "swimlanes", "wip limit", "drag and drop", "move card", "status board", "sticky notes", "due dates", "mobile board", "requisitions", "tickets", "next collection"],
+  "description": "Next Collection board that groups report rows into columns by Column Key, with counts, work-in-progress limits and moving cards by drag and drop or keyboard. Follows the column-board pattern of task tools, but the column header carries the load: every limit slot is drawn, so a full or overloaded column is visible before any card is read. Five styles, each for a named use: Calm lanes (smart, a procurement requisition pipeline; lanes stack when the region is narrow), Ops board (bold, a facilities work-order wallboard with large counts and priority codes), Sticky wall (depth, a campaign planning workshop of paper notes that lift when moved), Due timeline (motion, contract and licence renewals grouped by due date inside each column) and Compact list (smart, a field supervisor's phone view with one column per tab; drop a card on a tab to move it). The board never writes to the database: a move fires the amc:kanban-move event and can set page items for a Dynamic Action to save it.",
+  "helpText": "One query row per card, already ordered by column and then by position (order by column_seq, card_seq). Map Card ID, Column Key, Column Label and Title; Column Limit (a number, the same on every row of the column) turns on the work-in-progress warning. To show an empty column, return one row for it with Card ID and Title empty. Due Date is ISO text, TO_CHAR(due_on, 'YYYY-MM-DD'). Priority accepts critical, high, medium or low; State accepts success, warning, danger, info or neutral; Tags is a | separated list. When a card is moved the region fires the custom event amc:kanban-move with detail id, from, to, index (0-based position in the target column) and fromIndex, and first sets the page items named in Card Item, From Item, To Item and Index Item, so a Dynamic Action on that custom event can run a PL/SQL process that saves the move and then refreshes the region. Without JavaScript the rows show as a plain list.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-kanban.css", "files/amc-next-kanban.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-kanban.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-kanban.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "calmLanes",
+      "sequence": 10,
+      "helpText": "Design of the board; the direction is given in brackets as motion, depth, bold or smart. calmLanes [smart]: flat tinted lanes with quiet borderless cards and limit slots under each column name; the lanes stack when the region is narrow. opsBoard [bold]: a dense wallboard with large column counts, one-line cards and a solid priority code P1 to P4 (tags are not shown), and a column that goes over its limit turns red. stickyWall [depth]: paper notes tinted by priority, slightly turned, that lift off the wall while they are moved. dueTimeline [motion]: cards inside each column are ordered and grouped by Due Date into Overdue, Today, This week, Later and No date, and overdue dates pulse gently; moving up and down is off because the order comes from the date. compactList [smart]: one column at a time behind tabs with counts, for phones and narrow side regions; drop a card on a tab to move it there.",
+      "entries": [
+        { "name": "calmLanes", "display": "Calm lanes", "return": "calmLanes", "sequence": 10 },
+        { "name": "opsBoard", "display": "Ops board", "return": "opsBoard", "sequence": 20 },
+        { "name": "stickyWall", "display": "Sticky wall", "return": "stickyWall", "sequence": 30 },
+        { "name": "dueTimeline", "display": "Due timeline", "return": "dueTimeline", "sequence": 40 },
+        { "name": "compactList", "display": "Compact list", "return": "compactList", "sequence": 50 }
+      ]
+    },
+    {
+      "staticId": "CARD_ID",
+      "apexlangName": "cardId",
+      "attribute": 2,
+      "name": "Card ID",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "Primary key of the card, returned as id in the amc:kanban-move event and put in Card Item. Leave it empty (with Title empty) on a row that only makes an empty column visible."
+    },
+    {
+      "staticId": "COLUMN_KEY",
+      "apexlangName": "columnKey",
+      "attribute": 3,
+      "name": "Column Key",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Code of the column the card is in, for example REQUESTED or IN_REVIEW. Rows with the same key form one column; columns appear in the order their first row arrives. Returned as from and to in the amc:kanban-move event."
+    },
+    {
+      "staticId": "COLUMN_LABEL",
+      "apexlangName": "columnLabel",
+      "attribute": 4,
+      "name": "Column Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Column name shown in the header, for example In review. The first row of each column provides it."
+    },
+    {
+      "staticId": "COLUMN_LIMIT",
+      "apexlangName": "columnLimit",
+      "attribute": 5,
+      "name": "Column Limit",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Work-in-progress limit of the column as a whole number, for example 4. The header draws one slot per allowed card, says At limit when full and Over limit by N when exceeded. Empty or 0 means no limit."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 6,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Card heading, for example PR-2291 Laptops for the Dammam branch."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 7,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Optional one or two lines of detail. Ops board and Compact list show one line."
+    },
+    {
+      "staticId": "ASSIGNEE",
+      "apexlangName": "assignee",
+      "attribute": 8,
+      "name": "Assignee",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "Name of the person who owns the card, for example Maha Alharbi."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 9,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "One or two letters shown in the assignee disc, for example MA."
+    },
+    {
+      "staticId": "DUE_DATE",
+      "apexlangName": "dueDate",
+      "attribute": 10,
+      "name": "Due Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "Due date as ISO text, TO_CHAR(due_on, 'YYYY-MM-DD'). It is shown in the page language and marked Overdue or Due today; Due timeline groups cards by it."
+    },
+    {
+      "staticId": "PRIORITY",
+      "apexlangName": "priority",
+      "attribute": 11,
+      "name": "Priority",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "critical, high, medium or low. Critical and high are shown as Urgent and High; medium and low stay quiet except in Ops board (P1 to P4) and Sticky wall (note tint). Other values render as medium."
+    },
+    {
+      "staticId": "TAGS",
+      "apexlangName": "tags",
+      "attribute": 12,
+      "name": "Tags",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 120,
+      "helpText": "Short labels separated by |, for example Riyadh|IT hardware. Keep to two or three."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 13,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 130,
+      "helpText": "Health of the card: success (Done), warning (At risk), danger (Blocked), info (Waiting on others) or neutral (no label). Always shown as text, never by color alone. Unknown values render as neutral."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 14,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 140,
+      "helpText": "Optional page URL that opens the card, built in SQL with apex_page.get_url. The title becomes the link."
+    },
+    {
+      "staticId": "ALLOW_MOVE",
+      "apexlangName": "allowMove",
+      "attribute": 15,
+      "name": "Allow Moving",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "Y",
+      "sequence": 150,
+      "helpText": "Yes lets users move cards by dragging or with the Move button and arrow keys. No shows a read-only board."
+    },
+    {
+      "staticId": "CARD_ITEM",
+      "apexlangName": "cardItem",
+      "attribute": 16,
+      "name": "Card Item",
+      "type": "text",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 160,
+      "helpText": "Name of a page item, for example P10_CARD_ID, that receives the moved card's ID before amc:kanban-move fires. Use a hidden item and submit it from the Dynamic Action.",
+      "dependsOn": { "attribute": "ALLOW_MOVE", "condition": "equals", "value": "Y" }
+    },
+    {
+      "staticId": "FROM_ITEM",
+      "apexlangName": "fromItem",
+      "attribute": 17,
+      "name": "From Item",
+      "type": "text",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 170,
+      "helpText": "Name of a page item that receives the Column Key the card left, for example P10_FROM_COLUMN.",
+      "dependsOn": { "attribute": "ALLOW_MOVE", "condition": "equals", "value": "Y" }
+    },
+    {
+      "staticId": "TO_ITEM",
+      "apexlangName": "toItem",
+      "attribute": 18,
+      "name": "To Item",
+      "type": "text",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 180,
+      "helpText": "Name of a page item that receives the Column Key the card was moved to, for example P10_TO_COLUMN.",
+      "dependsOn": { "attribute": "ALLOW_MOVE", "condition": "equals", "value": "Y" }
+    },
+    {
+      "staticId": "INDEX_ITEM",
+      "apexlangName": "indexItem",
+      "attribute": 19,
+      "name": "Index Item",
+      "type": "text",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 190,
+      "helpText": "Name of a page item that receives the new 0-based position of the card in its column, for example P10_POSITION.",
+      "dependsOn": { "attribute": "ALLOW_MOVE", "condition": "equals", "value": "Y" }
+    }
+  ]
+}

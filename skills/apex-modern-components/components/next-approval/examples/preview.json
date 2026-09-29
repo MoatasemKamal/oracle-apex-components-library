@@ -1,0 +1,329 @@
+{
+  "samples": [
+    {
+      "title": "Chain: expense claim EC-3317, Riyadh to Dubai client visit, SAR 7,850",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "chain",
+        "PARALLEL_RULE": "all"
+      },
+      "rows": [
+        {
+          "STEP": "1",
+          "APPROVER": "Maha Alharbi",
+          "ROLE": "Line manager",
+          "INITIALS": "MA",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e3dccf'/%3E%3Cpath d='M12 96c3-22 17-32 36-32s33 10 36 32z' fill='%23384a5c'/%3E%3Ccircle cx='48' cy='40' r='18' fill='%23a87b5a'/%3E%3Cpath d='M26 44c0-18 10-28 22-28s22 10 22 28c-2-10-10-16-22-16s-20 6-22 16z' fill='%232b2b2b'/%3E%3C/svg%3E",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-24T09:12",
+          "COMMENT": "Client workshop confirmed, receipts attached.",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Omar Aziz",
+          "ROLE": "Finance controller",
+          "INITIALS": "OA",
+          "IMAGE_URL": "",
+          "STATE": "pending",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": "2026-09-30T17:00"
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Reem Alshehri",
+          "ROLE": "Travel desk",
+          "INITIALS": "RA",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-25T11:40",
+          "COMMENT": "Hotel is within the SAR 900 per night cap.",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "3",
+          "APPROVER": "Khalid Alotaibi",
+          "ROLE": "Department director",
+          "INITIALS": "KA",
+          "IMAGE_URL": "",
+          "STATE": "waiting",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": "2026-10-05T17:00"
+        }
+      ]
+    },
+    {
+      "title": "Stepper: purchase order PO-2026-0418, server upgrade, SAR 184,500",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "stepper",
+        "PARALLEL_RULE": "all"
+      },
+      "rows": [
+        {
+          "STEP": "1",
+          "APPROVER": "Faisal Alharthi",
+          "ROLE": "Requester's manager",
+          "INITIALS": "FA",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-20T10:05",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Noura Alqahtani",
+          "ROLE": "Procurement",
+          "INITIALS": "NA",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-22T13:30",
+          "COMMENT": "Three quotes compared, Gulf Data Systems is lowest.",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "3",
+          "APPROVER": "Omar Aziz",
+          "ROLE": "Finance controller",
+          "INITIALS": "OA",
+          "IMAGE_URL": "",
+          "STATE": "pending",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "Khalid Alotaibi",
+          "DUE_DATE": "2026-09-27T17:00"
+        },
+        {
+          "STEP": "4",
+          "APPROVER": "Sara Alduwaish",
+          "ROLE": "Chief financial officer",
+          "INITIALS": "SD",
+          "IMAGE_URL": "",
+          "STATE": "waiting",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        }
+      ]
+    },
+    {
+      "title": "Signature sheet: PO-2026-0402, office fit-out, SAR 612,000",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "signatureSheet",
+        "PARALLEL_RULE": "all"
+      },
+      "rows": [
+        {
+          "STEP": "1",
+          "APPROVER": "Maha Alharbi",
+          "ROLE": "Head of administration",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-14T09:00",
+          "COMMENT": "Scope matches the landlord's approval.",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Omar Aziz",
+          "ROLE": "Finance controller",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-15T15:20",
+          "COMMENT": "",
+          "DELEGATED_FROM": "Khalid Alotaibi",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "3",
+          "APPROVER": "Lama Alfaraj",
+          "ROLE": "Legal counsel",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "skipped",
+          "ACTION_DATE": "2026-09-15T15:21",
+          "COMMENT": "Standard contract, no legal review needed.",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "4",
+          "APPROVER": "Sara Alduwaish",
+          "ROLE": "Chief financial officer",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "pending",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": "2026-10-02T12:00"
+        },
+        {
+          "STEP": "5",
+          "APPROVER": "Faisal Alqahtani",
+          "ROLE": "Chief executive officer",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "waiting",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        }
+      ]
+    },
+    {
+      "title": "Chip row: annual leave, Yousef Alzahrani, 12 days from 18 Oct",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "chipRow",
+        "PARALLEL_RULE": "all"
+      },
+      "rows": [
+        {
+          "STEP": "1",
+          "APPROVER": "Reem Alshehri",
+          "ROLE": "Team lead",
+          "INITIALS": "RA",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-26T08:30",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Maha Alharbi",
+          "ROLE": "HR business partner",
+          "INITIALS": "MA",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23e3dccf'/%3E%3Cpath d='M12 96c3-22 17-32 36-32s33 10 36 32z' fill='%23384a5c'/%3E%3Ccircle cx='48' cy='40' r='18' fill='%23a87b5a'/%3E%3Cpath d='M26 44c0-18 10-28 22-28s22 10 22 28c-2-10-10-16-22-16s-20 6-22 16z' fill='%232b2b2b'/%3E%3C/svg%3E",
+          "STATE": "pending",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": "2026-10-01T17:00"
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Hassan Almutairi",
+          "ROLE": "Project manager",
+          "INITIALS": "HM",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-27T10:00",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "3",
+          "APPROVER": "Noura Alqahtani",
+          "ROLE": "Department head",
+          "INITIALS": "NA",
+          "IMAGE_URL": "",
+          "STATE": "waiting",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        }
+      ]
+    },
+    {
+      "title": "Audit log: expense claim EC-3290, rejected",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "auditLog",
+        "PARALLEL_RULE": "all"
+      },
+      "rows": [
+        {
+          "STEP": "1",
+          "APPROVER": "Omar Aziz",
+          "ROLE": "line manager",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-10T11:02",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "2",
+          "APPROVER": "Reem Alshehri",
+          "ROLE": "travel desk",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "approved",
+          "ACTION_DATE": "2026-09-10T15:47",
+          "COMMENT": "",
+          "DELEGATED_FROM": "Lama Alfaraj",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "3",
+          "APPROVER": "Noura Alqahtani",
+          "ROLE": "finance reviewer",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "rejected",
+          "ACTION_DATE": "2026-09-11T09:30",
+          "COMMENT": "Taxi receipts for 3 and 4 Sep are missing. Attach them and resubmit.",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        },
+        {
+          "STEP": "4",
+          "APPROVER": "Khalid Alotaibi",
+          "ROLE": "department director",
+          "INITIALS": "",
+          "IMAGE_URL": "",
+          "STATE": "waiting",
+          "ACTION_DATE": "",
+          "COMMENT": "",
+          "DELEGATED_FROM": "",
+          "DUE_DATE": ""
+        }
+      ]
+    },
+    {
+      "title": "Partial: the step waiting for you, chain style",
+      "direction": "smart",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "chain",
+        "STEP": "2",
+        "APPROVER": "Omar Aziz",
+        "ROLE": "Finance controller",
+        "INITIALS": "OA",
+        "IMAGE_URL": "",
+        "STATE": "pending",
+        "ACTION_DATE": "",
+        "COMMENT": "",
+        "DELEGATED_FROM": "",
+        "DUE_DATE": "2026-09-29T15:00"
+      }
+    }
+  ]
+}

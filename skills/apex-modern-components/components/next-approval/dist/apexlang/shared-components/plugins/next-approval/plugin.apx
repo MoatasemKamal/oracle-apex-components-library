@@ -1,0 +1,384 @@
+plugin nextApproval (
+    name: Next Approval
+    staticId: AMC_NEXT_APPROVAL
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+            partial
+        ]
+        partial:
+            ```html
+            <div class="amc-NApproval amc-NApproval--#STYLE# amc-NApproval--single amc-NApproval--{case STATE/}{when approved/}approved{when pending/}pending{when rejected/}rejected{when skipped/}skipped{otherwise/}waiting{endcase/}" data-step="#STEP#" data-state="{case STATE/}{when approved/}approved{when pending/}pending{when rejected/}rejected{when skipped/}skipped{otherwise/}waiting{endcase/}" data-acted="#ACTION_DATE#" data-due="#DUE_DATE#"{case STYLE/}{when chipRow/} tabindex="0"{endcase/}>
+              <span class="amc-NApproval-marker" aria-hidden="true"><span class="amc-NApproval-ring"></span><span class="amc-NApproval-face">{if ?IMAGE_URL/}<img class="amc-NApproval-img" src="#IMAGE_URL#" alt="" width="48" height="48" loading="lazy">{else/}<span class="amc-NApproval-initials">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user"></span>{endif/}</span>{endif/}</span><span class="amc-NApproval-badge"><span class="amc-NApproval-badgeIcon fa {case STATE/}{when approved/}fa-check{when pending/}fa-clock-o{when rejected/}fa-times{when skipped/}fa-minus{otherwise/}fa-ellipsis-h{endcase/}"></span></span></span>
+              <div class="amc-NApproval-body">
+                <p class="amc-NApproval-stepNo">Step #STEP#</p>
+                <h3 class="amc-NApproval-name">#APPROVER#</h3>
+                {if ?ROLE/}<p class="amc-NApproval-role">#ROLE#</p>{endif/}
+                {if ?DELEGATED_FROM/}<p class="amc-NApproval-deleg">On behalf of <span class="amc-NApproval-delegName">#DELEGATED_FROM#</span></p>{endif/}
+                <p class="amc-NApproval-status"><span class="amc-NApproval-state">{case STATE/}{when approved/}Approved{when pending/}Awaiting decision{when rejected/}Rejected{when skipped/}Skipped{otherwise/}Not reached yet{endcase/}</span>{if ?ACTION_DATE/}<time class="amc-NApproval-when" datetime="#ACTION_DATE#">#ACTION_DATE#</time>{endif/}{case STATE/}{when pending/}{if ?DUE_DATE/}<time class="amc-NApproval-due" datetime="#DUE_DATE#" data-overdue="Overdue by %0" data-due-in="Due in %0" data-due-on="Due %0">Due #DUE_DATE#</time>{endif/}{when waiting/}{if ?DUE_DATE/}<time class="amc-NApproval-due" datetime="#DUE_DATE#" data-overdue="Overdue by %0" data-due-in="Due in %0" data-due-on="Due %0">Due #DUE_DATE#</time>{endif/}{otherwise/}{endcase/}</p>
+                {if ?COMMENT/}<blockquote class="amc-NApproval-comment"><p class="amc-NApproval-commentText">#COMMENT#</p></blockquote>{endif/}
+              </div>
+              <span class="amc-NApproval-sign" aria-hidden="true">{case STATE/}{when approved/}<span class="amc-NApproval-stamp">Approved</span>{when rejected/}<span class="amc-NApproval-stamp">Rejected</span>{when skipped/}<span class="amc-NApproval-stamp">Not required</span>{when pending/}<span class="amc-NApproval-line">Awaiting signature</span>{otherwise/}<span class="amc-NApproval-line"></span>{endcase/}</span>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NApproval amc-NApproval--#STYLE# amc-NApproval--flow" data-view="#STYLE#" data-rule="#PARALLEL_RULE#">
+              <span class="amc-NApproval-i18n" hidden data-step="Step %0" data-all="All must approve, %0 of %1 approved" data-any="Any one of %0 can approve" data-waiting-on="Waiting on %0" data-and="%0 and %1" data-overdue="overdue by %0" data-due-in="due in %0" data-approved-all="Approved by everyone, last on %0" data-rejected-by="Rejected by %0 on %1" data-log-approved="%0 approved as %1" data-log-rejected="%0 rejected as %1" data-log-skipped="%0 was skipped as %1" data-log-approved-plain="%0 approved" data-log-rejected-plain="%0 rejected" data-log-skipped-plain="%0 was skipped" data-log-behalf="on behalf of %0" data-log-decisions="Decisions" data-log-open="Still to act" data-not-reached="Not reached, the request was rejected earlier" data-now="Acts now" data-not-needed="No longer needed, the step is approved"></span>
+              <ol class="amc-NApproval-list">#APEX$ROWS#</ol>
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NApproval-item amc-NApproval-item--{case STATE/}{when approved/}approved{when pending/}pending{when rejected/}rejected{when skipped/}skipped{otherwise/}waiting{endcase/}" data-step="#STEP#">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-approval.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-approval.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            One query row per approver, ordered by Step. Rows with the same Step number are parallel approvers; Parallel Rule says whether all of them or any one must approve. State accepts approved, pending (acting now), rejected, skipped or waiting (not reached yet); other values render as waiting. Action Date and Due Date are ISO text, TO_CHAR(d, 'YYYY-MM-DD"T"HH24:MI'). The runtime file formats dates in the page language, marks the step that acts now, shows Overdue by or Due in from Due Date, groups parallel approvers and writes a one-line summary such as Waiting on Omar Aziz. Report mode shows the chain; partial mode shows a single approver, for example the step assigned to the current user.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: chain
+        }
+        help {
+            helpText:
+                ```
+                Design of the approval chain; the direction is given in brackets as motion, depth, bold or smart. chain [smart]: a vertical chain of approvers with comments; parallel approvers sit side by side in one step, and dates move to their own column when the region is wide. stepper [motion]: a horizontal strip of steps whose line fills up to the approver who acts now, whose disc pulses gently; it turns vertical when the region is narrow. signatureSheet [bold]: a ruled sign-off sheet with a rubber stamp for each decision and an empty signature line for the ones still open; prints well. chipRow [depth]: overlapping approver discs for list rows and cards; the approver who acts now is raised and named, the others open on hover or focus. auditLog [smart]: the decisions as sentences in time order, followed by who still has to act, for audit and history pages.
+                ```
+        }
+        entry chain (
+            sequence: 10
+            display: Chain
+            return: chain
+        )
+        entry stepper (
+            sequence: 20
+            display: Stepper
+            return: stepper
+        )
+        entry signatureSheet (
+            sequence: 30
+            display: Signature sheet
+            return: signatureSheet
+        )
+        entry chipRow (
+            sequence: 40
+            display: Chip row
+            return: chipRow
+        )
+        entry auditLog (
+            sequence: 50
+            display: Audit log
+            return: auditLog
+        )
+    )
+    customAttribute STEP (
+        apexlangName: step
+        attribute: 2
+        name: Step
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Step number, 1 for the first approver. Rows with the same number are parallel approvers of one step. Order the query by this column.
+                ```
+        }
+    )
+    customAttribute APPROVER (
+        apexlangName: approver
+        attribute: 3
+        name: Approver
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Name of the person who decides this step, for example Omar Aziz.
+                ```
+        }
+    )
+    customAttribute ROLE (
+        apexlangName: role
+        attribute: 4
+        name: Role
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Why this person approves, for example Line manager or Finance controller. Audit log uses it in the sentence approved as Line manager.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 5
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no Image URL, for example OA.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 6
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional photo URL of the approver, for example from apex_util.get_blob_file_src. Shown as a small square-cropped circle.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 7
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                approved, pending (this approver acts now), rejected, skipped (not needed, for example below a limit) or waiting (not reached yet). Always shown as text and an icon, never by color alone. Unknown values render as waiting.
+                ```
+        }
+    )
+    customAttribute ACTION_DATE (
+        apexlangName: actionDate
+        attribute: 8
+        name: Action Date
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                When the approver decided, as ISO text TO_CHAR(acted_at, 'YYYY-MM-DD"T"HH24:MI'). The latest Action Date of the previous step is also taken as the moment the request reached the current step, which starts its SLA ring.
+                ```
+        }
+    )
+    customAttribute COMMENT (
+        apexlangName: comment
+        attribute: 9
+        name: Comment
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                The approver's note, for example Within the SAR 200,000 delegation limit. Shown as a quote.
+                ```
+        }
+    )
+    customAttribute DELEGATED_FROM (
+        apexlangName: delegatedFrom
+        attribute: 10
+        name: Delegated From
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Name of the person who delegated this step to the approver, for example Khalid Alotaibi while on leave. Shown as On behalf of Khalid Alotaibi.
+                ```
+        }
+    )
+    customAttribute DUE_DATE (
+        apexlangName: dueDate
+        attribute: 11
+        name: Due Date
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                SLA deadline of a pending or waiting step, as ISO text TO_CHAR(due_at, 'YYYY-MM-DD"T"HH24:MI'). A pending step past it shows Overdue by and turns red; within the last quarter of its time, or the last 24 hours, it shows Due in and turns amber. Ignored for decided steps.
+                ```
+        }
+    )
+    customAttribute PARALLEL_RULE (
+        apexlangName: parallelRule
+        attribute: 12
+        name: Parallel Rule
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 120
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: all
+        }
+        help {
+            helpText:
+                ```
+                How a step with several approvers (same Step number) is decided. all: every approver must approve. any: the first approval completes the step.
+                ```
+        }
+        entry all (
+            sequence: 10
+            display: All must approve
+            return: all
+        )
+        entry any (
+            sequence: 20
+            display: Any one approves
+            return: any
+        )
+    )
+    file "amc-next-approval.css" (
+        fileName: amc-next-approval.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-approval.js" (
+        fileName: amc-next-approval.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

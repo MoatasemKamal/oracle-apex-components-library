@@ -1,0 +1,172 @@
+{
+  "name": "Next Approval",
+  "apexlangName": "nextApproval",
+  "staticId": "AMC_NEXT_APPROVAL",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["approval", "approval chain", "approval flow", "workflow", "sign-off", "signatures", "approvers", "purchase order", "leave request", "expense claim", "delegation", "sla", "overdue", "parallel approval", "stepper", "audit trail", "next collection"],
+  "description": "Next Collection approval chain for purchase orders, leave requests and expense claims: one row per approver, with who acts now, the deadline and parallel approvers who share a step number. Follows the approval-routing pattern of ERP and HR systems, but the person who acts now carries an SLA ring around their photo that fills from the moment the request reached them to the due date, so a late approval is visible at a glance. Five styles, each for a named use: Chain (smart, an expense claim in employee self-service; the dates move into their own column when the region is wide), Stepper (motion, the approval strip on a purchase order page; turns vertical when narrow), Signature sheet (bold, the printed sign-off block of a purchase order with rubber stamps), Chip row (depth, a leave request row in a manager's inbox, with overlapping approver discs that open on hover or focus) and Audit log (smart, the decision trail for internal audit written as sentences in time order).",
+  "helpText": "One query row per approver, ordered by Step. Rows with the same Step number are parallel approvers; Parallel Rule says whether all of them or any one must approve. State accepts approved, pending (acting now), rejected, skipped or waiting (not reached yet); other values render as waiting. Action Date and Due Date are ISO text, TO_CHAR(d, 'YYYY-MM-DD\"T\"HH24:MI'). The runtime file formats dates in the page language, marks the step that acts now, shows Overdue by or Due in from Due Date, groups parallel approvers and writes a one-line summary such as Waiting on Omar Aziz. Report mode shows the chain; partial mode shows a single approver, for example the step assigned to the current user.",
+  "templateComponent": {
+    "availableAs": ["report", "partial"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-approval.css", "files/amc-next-approval.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-approval.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-approval.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "chain",
+      "sequence": 10,
+      "helpText": "Design of the approval chain; the direction is given in brackets as motion, depth, bold or smart. chain [smart]: a vertical chain of approvers with comments; parallel approvers sit side by side in one step, and dates move to their own column when the region is wide. stepper [motion]: a horizontal strip of steps whose line fills up to the approver who acts now, whose disc pulses gently; it turns vertical when the region is narrow. signatureSheet [bold]: a ruled sign-off sheet with a rubber stamp for each decision and an empty signature line for the ones still open; prints well. chipRow [depth]: overlapping approver discs for list rows and cards; the approver who acts now is raised and named, the others open on hover or focus. auditLog [smart]: the decisions as sentences in time order, followed by who still has to act, for audit and history pages.",
+      "entries": [
+        { "name": "chain", "display": "Chain", "return": "chain", "sequence": 10 },
+        { "name": "stepper", "display": "Stepper", "return": "stepper", "sequence": 20 },
+        { "name": "signatureSheet", "display": "Signature sheet", "return": "signatureSheet", "sequence": 30 },
+        { "name": "chipRow", "display": "Chip row", "return": "chipRow", "sequence": 40 },
+        { "name": "auditLog", "display": "Audit log", "return": "auditLog", "sequence": 50 }
+      ]
+    },
+    {
+      "staticId": "STEP",
+      "apexlangName": "step",
+      "attribute": 2,
+      "name": "Step",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "Step number, 1 for the first approver. Rows with the same number are parallel approvers of one step. Order the query by this column."
+    },
+    {
+      "staticId": "APPROVER",
+      "apexlangName": "approver",
+      "attribute": 3,
+      "name": "Approver",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Name of the person who decides this step, for example Omar Aziz."
+    },
+    {
+      "staticId": "ROLE",
+      "apexlangName": "role",
+      "attribute": 4,
+      "name": "Role",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Why this person approves, for example Line manager or Finance controller. Audit log uses it in the sentence approved as Line manager."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 5,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "One or two letters shown when there is no Image URL, for example OA."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 6,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Optional photo URL of the approver, for example from apex_util.get_blob_file_src. Shown as a small square-cropped circle."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 7,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "approved, pending (this approver acts now), rejected, skipped (not needed, for example below a limit) or waiting (not reached yet). Always shown as text and an icon, never by color alone. Unknown values render as waiting."
+    },
+    {
+      "staticId": "ACTION_DATE",
+      "apexlangName": "actionDate",
+      "attribute": 8,
+      "name": "Action Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "When the approver decided, as ISO text TO_CHAR(acted_at, 'YYYY-MM-DD\"T\"HH24:MI'). The latest Action Date of the previous step is also taken as the moment the request reached the current step, which starts its SLA ring."
+    },
+    {
+      "staticId": "COMMENT",
+      "apexlangName": "comment",
+      "attribute": 9,
+      "name": "Comment",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "The approver's note, for example Within the SAR 200,000 delegation limit. Shown as a quote."
+    },
+    {
+      "staticId": "DELEGATED_FROM",
+      "apexlangName": "delegatedFrom",
+      "attribute": 10,
+      "name": "Delegated From",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Name of the person who delegated this step to the approver, for example Khalid Alotaibi while on leave. Shown as On behalf of Khalid Alotaibi."
+    },
+    {
+      "staticId": "DUE_DATE",
+      "apexlangName": "dueDate",
+      "attribute": 11,
+      "name": "Due Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "SLA deadline of a pending or waiting step, as ISO text TO_CHAR(due_at, 'YYYY-MM-DD\"T\"HH24:MI'). A pending step past it shows Overdue by and turns red; within the last quarter of its time, or the last 24 hours, it shows Due in and turns amber. Ignored for decided steps."
+    },
+    {
+      "staticId": "PARALLEL_RULE",
+      "apexlangName": "parallelRule",
+      "attribute": 12,
+      "name": "Parallel Rule",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "all",
+      "sequence": 120,
+      "helpText": "How a step with several approvers (same Step number) is decided. all: every approver must approve. any: the first approval completes the step.",
+      "entries": [
+        { "name": "all", "display": "All must approve", "return": "all", "sequence": 10 },
+        { "name": "any", "display": "Any one approves", "return": "any", "sequence": 20 }
+      ]
+    }
+  ]
+}

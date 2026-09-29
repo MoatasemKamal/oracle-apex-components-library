@@ -1,0 +1,8 @@
+<article class="amc-NKanban-card">
+  <p class="amc-NKanban-where">#COLUMN_LABEL#</p>
+  <p class="amc-NKanban-flags"><span class="amc-NKanban-prio"><span class="amc-NKanban-prioCode" aria-hidden="true">{case PRIORITY/}{when critical/}P1{when high/}P2{when low/}P4{otherwise/}P3{endcase/}</span><span class="amc-NKanban-prioText">{case PRIORITY/}{when critical/}Urgent{when high/}High{when low/}Low{otherwise/}Medium{endcase/}</span></span>{case STATE/}{when success/}<span class="amc-NKanban-state">Done</span>{when warning/}<span class="amc-NKanban-state">At risk</span>{when danger/}<span class="amc-NKanban-state">Blocked</span>{when info/}<span class="amc-NKanban-state">Waiting on others</span>{otherwise/}{endcase/}</p>
+  <h4 class="amc-NKanban-title">{if ?LINK_URL/}<a class="amc-NKanban-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h4>
+  {if ?DESCRIPTION/}<p class="amc-NKanban-desc">#DESCRIPTION#</p>{endif/}
+  {if ?TAGS/}<p class="amc-NKanban-tags">#TAGS#</p>{endif/}
+  <div class="amc-NKanban-foot">{if ?ASSIGNEE/}<span class="amc-NKanban-who"><span class="amc-NKanban-avatar" aria-hidden="true">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user"></span>{endif/}</span><span class="amc-NKanban-person">#ASSIGNEE#</span></span>{endif/}{if ?DUE_DATE/}<time class="amc-NKanban-due" datetime="#DUE_DATE#">#DUE_DATE#</time>{endif/}</div>
+</article>
