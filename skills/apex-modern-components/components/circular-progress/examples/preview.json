@@ -5,10 +5,10 @@
       "mode": "report",
       "settings": {},
       "rows": [
-        { "VALUE": "72", "LABEL": "Storage", "STATE": "warning" },
-        { "VALUE": "8", "MAX": "12", "CENTER_TEXT": "8/12", "LABEL": "Sprint tasks", "STATE": "success" },
-        { "VALUE": "96", "LABEL": "Budget used", "STATE": "danger" },
-        { "VALUE": "35", "LABEL": "Onboarding" }
+        { "VALUE": "72", "LABEL": "File storage", "STATE": "warning" },
+        { "VALUE": "8", "MAX": "12", "CENTER_TEXT": "8 of 12", "LABEL": "Sprint tasks", "STATE": "success" },
+        { "VALUE": "96", "LABEL": "Marketing budget", "STATE": "danger" },
+        { "VALUE": "35", "LABEL": "Supplier onboarding" }
       ]
     }
   ]

@@ -93,7 +93,7 @@ plugin motionEffect (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick an effect for hero areas, empty states, success pages or celebrations. Colors follow the theme; override the CSS variables --amc-fx-1 to --amc-fx-4 on a parent to rebrand them. Canvas effects pause while off screen, and users with reduced motion see a still frame.

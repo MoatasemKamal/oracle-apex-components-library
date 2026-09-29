@@ -3,7 +3,7 @@
   "apexlangName": "progressSteps",
   "staticId": "AMC_PROGRESS_STEPS",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["stepper", "steps", "wizard", "workflow", "status", "process", "timeline"],
   "description": "Data-driven stepper that shows where a record is in a process (for example an approval or order workflow). One row per step.",

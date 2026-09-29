@@ -3,7 +3,7 @@
   "apexlangName": "motionEffect",
   "staticId": "AMC_MOTION_EFFECT",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": [
     "animation",

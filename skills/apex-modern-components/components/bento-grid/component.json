@@ -3,7 +3,7 @@
   "apexlangName": "bentoGrid",
   "staticId": "AMC_BENTO_GRID",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["bento", "tiles", "launchpad", "home page", "dashboard", "navigation", "feature grid", "cards", "menu"],
   "description": "Asymmetric grid of feature tiles (normal, wide, tall or large) with icon, title, description, optional background image and a call-to-action that slides in on hover. Good for home pages and app launchpads.",

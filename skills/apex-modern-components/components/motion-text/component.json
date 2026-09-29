@@ -3,7 +3,7 @@
   "apexlangName": "motionText",
   "staticId": "AMC_MOTION_TEXT",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": [
     "text",

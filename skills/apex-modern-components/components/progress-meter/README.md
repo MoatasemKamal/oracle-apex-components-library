@@ -10,7 +10,7 @@ Accessible horizontal progress bar built on the native <progress> element. Use a
 | APEXlang reference | `type: plugin/progressMeter` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Shows a value against a maximum. Map Value to a numeric column; non-numeric values render an empty bar instead of breaking the page. State colors the bar with the theme palette.
 

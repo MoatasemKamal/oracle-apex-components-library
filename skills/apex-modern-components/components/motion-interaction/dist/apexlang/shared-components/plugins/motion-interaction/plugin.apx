@@ -42,7 +42,7 @@ plugin motionInteraction (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Buttons and cards navigate to Link URL when it is set. The like toggle fires the custom event amc-like-change with detail.liked and detail.value; catch it with a Dynamic Action to save the choice.

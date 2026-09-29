@@ -10,7 +10,7 @@ Interactive micro-animations from the Motion Gallery: ripple, magnetic and squis
 | APEXlang reference | `type: plugin/motionInteraction` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Motion Gallery](https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html) (Original) |
 
 Buttons and cards navigate to Link URL when it is set. The like toggle fires the custom event amc-like-change with detail.liked and detail.value; catch it with a Dynamic Action to save the choice.

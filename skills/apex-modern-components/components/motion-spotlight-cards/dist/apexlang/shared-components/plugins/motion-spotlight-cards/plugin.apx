@@ -44,7 +44,7 @@ plugin motionSpotlightCards (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Each query row is one card. The effect needs a mouse or trackpad; on touch screens the cards show as clean static cards. Colors follow the theme primary color.

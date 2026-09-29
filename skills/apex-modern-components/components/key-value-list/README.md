@@ -10,7 +10,7 @@ Semantic description list (<dl>) for record details: label and value pairs in st
 | APEXlang reference | `type: plugin/keyValueList` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Each query row renders one label/value pair. Typical source: an UNPIVOT of the current record or a query returning one row per attribute.
 

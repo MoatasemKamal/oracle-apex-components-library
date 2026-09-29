@@ -10,7 +10,7 @@ Animated ring gauge showing a value against a maximum, with the value in the cen
 | APEXlang reference | `type: plugin/circularProgress` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://magicui.design/docs/components/animated-circular-progress-bar) (MIT) |
 
 Map Value (and optionally Maximum) to numeric columns. The ring animates from zero on load and after region refresh; users with reduced motion see it without animation. Non-numeric values show an empty ring.

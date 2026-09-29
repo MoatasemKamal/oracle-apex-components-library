@@ -45,7 +45,7 @@ plugin progressMeter (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Shows a value against a maximum. Map Value to a numeric column; non-numeric values render an empty bar instead of breaking the page. State colors the bar with the theme palette.

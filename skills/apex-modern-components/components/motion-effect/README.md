@@ -10,7 +10,7 @@
 | APEXlang reference | `type: plugin/motionEffect` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Motion Gallery](https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html) (Original) |
 
 Pick an effect for hero areas, empty states, success pages or celebrations. Colors follow the theme; override the CSS variables --amc-fx-1 to --amc-fx-4 on a parent to rebrand them. Canvas effects pause while off screen, and users with reduced motion see a still frame.

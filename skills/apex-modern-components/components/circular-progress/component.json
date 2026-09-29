@@ -3,7 +3,7 @@
   "apexlangName": "circularProgress",
   "staticId": "AMC_CIRCULAR_PROGRESS",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["gauge", "ring", "donut", "radial", "progress", "percent", "completion", "kpi", "meter"],
   "description": "Animated ring gauge showing a value against a maximum, with the value in the center. One gauge (partial) or a row of labelled gauges (report).",

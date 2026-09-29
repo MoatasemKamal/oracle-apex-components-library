@@ -5,7 +5,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "wave",
-    "TEXT": "MOTION"
+    "TEXT": "Welcome back, Layla"
    }
   },
   {
@@ -13,7 +13,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "glitch",
-    "TEXT": "GLITCH"
+    "TEXT": "Connection lost"
    }
   },
   {
@@ -21,7 +21,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "reveal",
-    "TEXT": "Reveal every word in turn"
+    "TEXT": "Quarter closed four days ahead of schedule"
    }
   },
   {
@@ -29,7 +29,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "flip",
-    "TEXT": "FLIP IT"
+    "TEXT": "Order confirmed"
    }
   },
   {
@@ -37,7 +37,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "typewriter",
-    "TEXT": "Hello, motion.|Type. Pause. Delete."
+    "TEXT": "Searching 4,812 products|Checking stock in Riyadh"
    }
   },
   {
@@ -45,7 +45,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "scramble",
-    "TEXT": "DECODE|SIGNAL"
+    "TEXT": "Verifying payment|Payment verified"
    }
   }
  ]

@@ -15,7 +15,7 @@ plugin bentoGrid (
                 <h3 class="amc-Bento-title">{if ?LINK_URL/}<a class="amc-Bento-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
                 {if ?DESCRIPTION/}<p class="amc-Bento-desc">#DESCRIPTION#</p>{endif/}
               </div>
-              {if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-Bento-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-Bento-arrow fa fa-arrow-right"></span></span>{endif/}{endif/}
+              {if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-Bento-cta" aria-hidden="true">#LINK_LABEL#</span>{endif/}{endif/}
             </div>
             ```
         reportBody:
@@ -42,7 +42,7 @@ plugin bentoGrid (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Each row is one tile. Map Span to a column returning normal, wide, tall or large to build the bento layout. On phones all tiles stack in one column.

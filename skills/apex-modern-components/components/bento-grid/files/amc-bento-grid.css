@@ -130,8 +130,6 @@
   font-weight: 600;
 }
 
-[dir="rtl"] .amc-Bento-arrow { transform: scaleX(-1); }
-
 /* Hover reveal (pointer devices only) */
 @media (hover: hover) {
   .amc-Bento-cta {

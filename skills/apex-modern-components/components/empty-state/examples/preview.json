@@ -3,7 +3,7 @@
     {
       "title": "With button, dashed",
       "mode": "partial",
-      "settings": { "ICON": "fa-inbox", "TITLE": "No orders yet", "MESSAGE": "Orders you create will appear here.", "LINK_URL": "#", "LINK_LABEL": "Create Order", "BORDERED": "Y" }
+      "settings": { "ICON": "fa-inbox", "TITLE": "No orders yet", "MESSAGE": "Orders you create will appear here.", "LINK_URL": "#", "LINK_LABEL": "Create order", "BORDERED": "Y" }
     },
     {
       "title": "Compact",

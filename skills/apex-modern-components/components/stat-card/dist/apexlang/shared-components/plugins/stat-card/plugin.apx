@@ -49,7 +49,7 @@ plugin statCard (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).

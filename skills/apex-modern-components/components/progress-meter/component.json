@@ -3,7 +3,7 @@
   "apexlangName": "progressMeter",
   "staticId": "AMC_PROGRESS_METER",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["progress", "meter", "percent", "completion", "bar", "capacity", "quota"],
   "description": "Accessible horizontal progress bar built on the native <progress> element. Use as a report column (partial) or as a list of labelled bars (report).",

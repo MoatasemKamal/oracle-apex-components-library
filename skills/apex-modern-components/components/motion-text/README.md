@@ -10,7 +10,7 @@ Animated headline text from the Motion Gallery: wave letters, glitch, masked wor
 | APEXlang reference | `type: plugin/motionText` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Motion Gallery](https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html) (Original) |
 
 For Typewriter and Scramble, separate several phrases with |, for example Welcome back|Your orders are ready. Screen readers get the plain text; users with reduced motion see it without animation.

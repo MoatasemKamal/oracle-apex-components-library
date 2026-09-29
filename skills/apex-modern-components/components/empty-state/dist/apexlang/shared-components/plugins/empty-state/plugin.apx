@@ -31,7 +31,7 @@ plugin emptyState (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Place in a region (or use its markup as a report's No Data Found message). The button uses Universal Theme button classes so it matches native buttons in every theme style.

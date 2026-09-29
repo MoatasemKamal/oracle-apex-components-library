@@ -3,11 +3,11 @@
     {
       "title": "Label beside value",
       "mode": "report",
-      "settings": { "LAYOUT": "inline", "DIVIDERS": "Y", "EMPTY_TEXT": "-" },
+      "settings": { "LAYOUT": "inline", "DIVIDERS": "Y", "EMPTY_TEXT": "None" },
       "rows": [
         { "LABEL": "Customer", "VALUE": "Acme Trading Co.", "ICON": "fa-building-o" },
-        { "LABEL": "Account Manager", "VALUE": "Sara Ahmed", "ICON": "fa-user" },
-        { "LABEL": "Contract End", "VALUE": "31-Dec-2026", "ICON": "fa-calendar" },
+        { "LABEL": "Account manager", "VALUE": "Sara Ahmed", "ICON": "fa-user" },
+        { "LABEL": "Contract end", "VALUE": "31-Dec-2026", "ICON": "fa-calendar" },
         { "LABEL": "Notes", "VALUE": "", "ICON": "fa-sticky-note-o" }
       ]
     },

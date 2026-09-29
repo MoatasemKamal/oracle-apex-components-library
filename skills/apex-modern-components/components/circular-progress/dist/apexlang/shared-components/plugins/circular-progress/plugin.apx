@@ -49,7 +49,7 @@ plugin circularProgress (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Map Value (and optionally Maximum) to numeric columns. The ring animates from zero on load and after region refresh; users with reduced motion see it without animation. Non-numeric values show an empty ring.

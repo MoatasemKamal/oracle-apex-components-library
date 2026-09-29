@@ -3,7 +3,7 @@
   "apexlangName": "motionInteraction",
   "staticId": "AMC_MOTION_INTERACTION",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": [
     "button",

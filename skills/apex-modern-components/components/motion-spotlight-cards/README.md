@@ -10,7 +10,7 @@ Card grid where one light follows the pointer across all cards: the nearest bord
 | APEXlang reference | `type: plugin/motionSpotlightCards` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Each query row is one card. The effect needs a mouse or trackpad; on touch screens the cards show as clean static cards. Colors follow the theme primary color.
 

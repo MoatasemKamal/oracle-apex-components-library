@@ -10,7 +10,7 @@ Data-driven stepper that shows where a record is in a process (for example an ap
 | APEXlang reference | `type: plugin/progressSteps` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Each query row is one step. Map Status to a column returning complete, current, upcoming or error. Steps are numbered automatically and the current step is announced to screen readers.
 

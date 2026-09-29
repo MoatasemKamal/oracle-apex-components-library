@@ -10,7 +10,7 @@ KPI tile with label, value, optional unit, trend delta and icon. Renders one car
 | APEXlang reference | `type: plugin/statCard` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Displays a key figure with an optional trend indicator. Map Trend to a column returning up, down or flat. Colors follow the active Universal Theme style (including dark styles and Theme Roller changes).
 

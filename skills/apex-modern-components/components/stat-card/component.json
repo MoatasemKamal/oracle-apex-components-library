@@ -3,7 +3,7 @@
   "apexlangName": "statCard",
   "staticId": "AMC_STAT_CARD",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["kpi", "metric", "stat", "dashboard", "tile", "trend"],
   "description": "KPI tile with label, value, optional unit, trend delta and icon. Renders one card (partial) or a responsive grid of cards (report).",

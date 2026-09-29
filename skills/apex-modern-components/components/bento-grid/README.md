@@ -10,7 +10,7 @@ Asymmetric grid of feature tiles (normal, wide, tall or large) with icon, title,
 | APEXlang reference | `type: plugin/bentoGrid` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://magicui.design/docs/components/bento-grid) (MIT) |
 
 Each row is one tile. Map Span to a column returning normal, wide, tall or large to build the bento layout. On phones all tiles stack in one column.

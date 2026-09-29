@@ -35,7 +35,7 @@ plugin keyValueList (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Each query row renders one label/value pair. Typical source: an UNPIVOT of the current record or a query returning one row per attribute.

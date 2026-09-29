@@ -3,7 +3,7 @@
   "apexlangName": "keyValueList",
   "staticId": "AMC_KEY_VALUE_LIST",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["details", "properties", "attributes", "description list", "record", "summary", "label value"],
   "description": "Semantic description list (<dl>) for record details: label and value pairs in stacked, side-by-side or grid layout.",

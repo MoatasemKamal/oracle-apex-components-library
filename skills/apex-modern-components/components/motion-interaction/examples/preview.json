@@ -5,7 +5,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "ripple",
-    "LABEL": "Click me"
+    "LABEL": "Save draft"
    }
   },
   {
@@ -13,7 +13,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "magnetic",
-    "LABEL": "Magnetic"
+    "LABEL": "Start checkout"
    }
   },
   {
@@ -21,7 +21,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "squish",
-    "LABEL": "Press"
+    "LABEL": "Add to order"
    }
   },
   {
@@ -38,8 +38,8 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "spotlight",
-    "LABEL": "Move your pointer",
-    "TEXT": "The light follows you"
+    "LABEL": "Warehouse capacity",
+    "TEXT": "82% of pallet positions in use"
    }
   },
   {
@@ -47,7 +47,7 @@
    "mode": "partial",
    "settings": {
     "EFFECT": "like",
-    "LABEL": "Like",
+    "LABEL": "Mark as helpful",
     "TEXT": "42"
    }
   }

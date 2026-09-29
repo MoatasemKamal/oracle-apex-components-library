@@ -3,7 +3,7 @@
   "apexlangName": "emptyState",
   "staticId": "AMC_EMPTY_STATE",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["empty", "no data", "placeholder", "onboarding", "zero state", "call to action"],
   "description": "Centered illustration-style message with icon, title, text and an optional Universal Theme button. Use for no-data, first-run and error placeholders.",

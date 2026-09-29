@@ -3,7 +3,7 @@
   "apexlangName": "motionSpotlightCards",
   "staticId": "AMC_MOTION_SPOTLIGHT_CARDS",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["cards", "spotlight", "glow", "hover", "features", "launchpad", "grid", "animation", "creative"],
   "description": "Card grid where one light follows the pointer across all cards: the nearest borders glow and the card under the pointer lights up softly. Each card has icon, title, text, badge and an optional link.",

@@ -10,7 +10,7 @@ Centered illustration-style message with icon, title, text and an optional Unive
 | APEXlang reference | `type: plugin/emptyState` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Place in a region (or use its markup as a report's No Data Found message). The button uses Universal Theme button classes so it matches native buttons in every theme style.
 
