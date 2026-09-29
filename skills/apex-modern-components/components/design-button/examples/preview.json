@@ -8,7 +8,7 @@
       },
       "rows": [
         {
-          "LABEL": "Create Order",
+          "LABEL": "Create order",
           "ICON": "fa-plus",
           "LINK_URL": "#orders/new"
         },
@@ -17,7 +17,7 @@
           "ICON": "fa-download"
         },
         {
-          "LABEL": "View Invoices",
+          "LABEL": "View invoices",
           "LINK_URL": "#invoices"
         }
       ]
@@ -30,11 +30,11 @@
       },
       "rows": [
         {
-          "LABEL": "Start Free Trial",
+          "LABEL": "Start free trial",
           "LINK_URL": "#trial"
         },
         {
-          "LABEL": "Book a Demo",
+          "LABEL": "Book a demo",
           "ICON": "fa-calendar",
           "LINK_URL": "#demo"
         }
@@ -48,12 +48,12 @@
       },
       "rows": [
         {
-          "LABEL": "Open Dashboard",
+          "LABEL": "Open dashboard",
           "ICON": "fa-dashboard",
           "LINK_URL": "#dash"
         },
         {
-          "LABEL": "Share Report",
+          "LABEL": "Share report",
           "ICON": "fa-share-alt"
         }
       ]
@@ -66,11 +66,11 @@
       },
       "rows": [
         {
-          "LABEL": "View Pipeline",
+          "LABEL": "View pipeline",
           "LINK_URL": "#pipeline"
         },
         {
-          "LABEL": "Download Statement",
+          "LABEL": "Download statement",
           "ICON": "fa-download",
           "LINK_URL": "#statement"
         }
@@ -84,11 +84,11 @@
       },
       "rows": [
         {
-          "LABEL": "Get Started",
+          "LABEL": "Set up billing",
           "LINK_URL": "#start"
         },
         {
-          "LABEL": "Explore Plans",
+          "LABEL": "Compare plans",
           "LINK_URL": "#plans"
         }
       ]
@@ -101,12 +101,12 @@
       },
       "rows": [
         {
-          "LABEL": "Add Customer",
+          "LABEL": "Add customer",
           "ICON": "fa-user-plus",
           "LINK_URL": "#customers/new"
         },
         {
-          "LABEL": "Continue to Payment",
+          "LABEL": "Continue to payment",
           "LINK_URL": "#pay"
         }
       ]
@@ -119,11 +119,11 @@
       },
       "rows": [
         {
-          "LABEL": "Approve Request",
+          "LABEL": "Approve request",
           "ICON": "fa-check"
         },
         {
-          "LABEL": "Submit Timesheet",
+          "LABEL": "Submit timesheet",
           "LINK_URL": "#timesheet"
         }
       ]
@@ -141,7 +141,7 @@
           "LINK_URL": "#upgrade"
         },
         {
-          "LABEL": "Claim Offer",
+          "LABEL": "Apply discount code",
           "LINK_URL": "#offer"
         }
       ]
@@ -171,12 +171,12 @@
       },
       "rows": [
         {
-          "LABEL": "Contact Sales",
+          "LABEL": "Contact sales",
           "ICON": "fa-envelope",
           "LINK_URL": "#sales"
         },
         {
-          "LABEL": "Schedule Call",
+          "LABEL": "Schedule call",
           "ICON": "fa-phone"
         }
       ]
@@ -189,12 +189,12 @@
       },
       "rows": [
         {
-          "LABEL": "Download Invoice",
+          "LABEL": "Download invoice",
           "ICON": "fa-download",
           "LINK_URL": "#inv"
         },
         {
-          "LABEL": "Next Step"
+          "LABEL": "Continue to shipping"
         }
       ]
     },
@@ -206,12 +206,12 @@
       },
       "rows": [
         {
-          "LABEL": "Launch Campaign",
+          "LABEL": "Send campaign",
           "ICON": "fa-rocket",
           "LINK_URL": "#campaign"
         },
         {
-          "LABEL": "Preview Email"
+          "LABEL": "Preview email"
         }
       ]
     },
@@ -238,7 +238,7 @@
       "settings": {
         "STYLE": "pillArrow",
         "SIZE": "large",
-        "LABEL": "Create Your Workspace",
+        "LABEL": "Create workspace",
         "LINK_URL": "#workspace"
       }
     }

@@ -10,9 +10,9 @@
         "SUBTITLE": "You have 12 orders waiting for approval and 3 invoices due this week.",
         "ICON": "fa-line-chart",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Review Orders",
+        "PRIMARY_LABEL": "Review orders",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Open Reports"
+        "SECONDARY_LABEL": "Open reports"
       }
     },
     {
@@ -26,9 +26,9 @@
         "ICON": "fa-cubes",
         "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237fa7c9'/%3E%3Cstop offset='1' stop-color='%232c4a63'/%3E%3C/linearGradient%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c9a46a'/%3E%3Cstop offset='1' stop-color='%238a6a3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='400' fill='url%28%23s%29'/%3E%3Crect y='300' width='800' height='100' fill='%233b3f45'/%3E%3Cg transform='translate%2840 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28230 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28420 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28610 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Ccircle cx='690' cy='60' r='26' fill='%23f4e3b5' opacity='.7'/%3E%3C/svg%3E",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Start Stock Count",
+        "PRIMARY_LABEL": "Start stock count",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "View Aisles"
+        "SECONDARY_LABEL": "View aisles"
       }
     },
     {
@@ -37,13 +37,13 @@
       "settings": {
         "STYLE": "minimal",
         "EYEBROW": "Sales / Orders",
-        "TITLE": "Customer Orders",
+        "TITLE": "Customer orders",
         "SUBTITLE": "All open and shipped orders for the current fiscal year.",
         "ICON": "fa-shopping-cart",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Create Order",
+        "PRIMARY_LABEL": "Create order",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Import"
+        "SECONDARY_LABEL": "Import orders"
       }
     },
     {
@@ -56,9 +56,9 @@
         "SUBTITLE": "Orders placed before 13:00 ship from the new western hub and arrive the same evening.",
         "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237fa7c9'/%3E%3Cstop offset='1' stop-color='%232c4a63'/%3E%3C/linearGradient%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c9a46a'/%3E%3Cstop offset='1' stop-color='%238a6a3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='400' fill='url%28%23s%29'/%3E%3Crect y='300' width='800' height='100' fill='%233b3f45'/%3E%3Cg transform='translate%2840 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28230 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28420 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28610 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Ccircle cx='690' cy='60' r='26' fill='%23f4e3b5' opacity='.7'/%3E%3C/svg%3E",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Plan Routes",
+        "PRIMARY_LABEL": "Plan routes",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Coverage Map"
+        "SECONDARY_LABEL": "View coverage map"
       }
     },
     {
@@ -70,9 +70,9 @@
         "TITLE": "Plan every project in one place",
         "SUBTITLE": "Milestones, budgets and timesheets now share one timeline, so project managers see overruns before they happen.",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Create Project",
+        "PRIMARY_LABEL": "Create project",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Watch Tour"
+        "SECONDARY_LABEL": "Watch the tour"
       }
     },
     {
@@ -85,9 +85,9 @@
         "SUBTITLE": "Wholesale account since 2019, 148 orders, credit limit 50,000 SAR.",
         "ICON": "fa-building-o",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "New Order",
+        "PRIMARY_LABEL": "Create order",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Edit"
+        "SECONDARY_LABEL": "Edit customer"
       }
     },
     {
@@ -100,9 +100,9 @@
         "SUBTITLE": "Invoices matched to a purchase order and goods receipt are ready to approve in one step.",
         "ICON": "fa-file-text-o",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Approve Matched",
+        "PRIMARY_LABEL": "Approve matched invoices",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "View Exceptions"
+        "SECONDARY_LABEL": "View exceptions"
       }
     },
     {
@@ -115,7 +115,7 @@
         "SUBTITLE": "Subscriptions drove most of the growth. See the breakdown by region and product line.",
         "ICON": "fa-bar-chart",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Open Dashboard",
+        "PRIMARY_LABEL": "Open dashboard",
         "SECONDARY_URL": "#",
         "SECONDARY_LABEL": "Download PDF"
       }
@@ -130,9 +130,9 @@
         "SUBTITLE": "Find answers about invoices, payment methods, refunds and tax documents.",
         "ICON": "fa-life-ring",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Contact Support",
+        "PRIMARY_LABEL": "Contact support",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Browse Articles"
+        "SECONDARY_LABEL": "Browse articles"
       }
     },
     {
@@ -144,9 +144,9 @@
         "TITLE": "A year of faster, simpler procurement",
         "SUBTITLE": "Purchase orders now take 2.1 days from request to approval, down from 6.4 days a year ago.",
         "PRIMARY_URL": "#",
-        "PRIMARY_LABEL": "Read the Report",
+        "PRIMARY_LABEL": "Read the report",
         "SECONDARY_URL": "#",
-        "SECONDARY_LABEL": "Key Figures"
+        "SECONDARY_LABEL": "View key figures"
       }
     }
   ]

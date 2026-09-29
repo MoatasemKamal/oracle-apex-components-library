@@ -10,7 +10,7 @@ Next Collection family of ten current-generation lists: animated notification fe
 | APEXlang reference | `type: plugin/nextList` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL, Initials or Icon for the lead, State and State Label, Details for the Accordion rows style, and Link URL. Format numbers and dates in SQL. Every style is complete without JavaScript; the plug-in file only adds pointer tracking and the seamless marquee loop, and does nothing when the user prefers reduced motion.

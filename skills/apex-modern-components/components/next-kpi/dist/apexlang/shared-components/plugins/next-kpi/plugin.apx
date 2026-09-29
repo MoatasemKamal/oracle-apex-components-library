@@ -65,7 +65,7 @@ plugin nextKpi (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (0 to 100) drives Liquid Fill, the Bento Tile ring and the Adaptive bar. Series (comma-separated numbers) draws the sparkline of Tilt, Aurora Glow and Bento Tile and the bars of Neo Brutal. Compare Value, Compare Label and Breakdown fill the back of Flip Detail. Every style is complete without JavaScript; the runtime file only adds the ticker, the pointer tilt, sparklines and the Percent level.

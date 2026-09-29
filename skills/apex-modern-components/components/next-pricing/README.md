@@ -10,7 +10,7 @@ Next Collection family of ten current-generation pricing plan designs chosen wit
 | APEXlang reference | `type: plugin/nextPricing` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Pick a Style, then map Plan, Price, Currency, Period, Description and Features (separated by |). CTA Label and CTA URL add a native Universal Theme button. Highlight = Y marks the recommended plan; Beam Featured, Holo Premium and Tilt 3D give it their strongest treatment. Flip Annual also uses Annual Price, Annual Period and Savings. Every style is complete without JavaScript; the runtime file only builds the feature lists and adds the pointer spotlight and tilt.

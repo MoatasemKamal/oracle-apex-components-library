@@ -31,7 +31,7 @@ plugin designDivider (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick a Style. Title is optional: without it the divider is a pure separator (role separator); with it the divider is a section heading (h3). Eyebrow and Description are shown by Eyebrow Title, Accent Underline and Side Label. Meta, for example a count, is shown at the end of the row. Colors follow the active Universal Theme style.

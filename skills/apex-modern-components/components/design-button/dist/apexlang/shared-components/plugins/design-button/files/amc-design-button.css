@@ -423,16 +423,8 @@
   transition: inline-size .25s ease;
 }
 
-.amc-DButton--underline .amc-DButton-arrow { display: inline-flex; }
-
 .amc-DButton--underline:hover .amc-DButton-label::after,
 .amc-DButton--underline:focus-visible .amc-DButton-label::after { inline-size: 100%; }
-
-.amc-DButton--underline:hover .amc-DButton-arrow,
-.amc-DButton--underline:focus-visible .amc-DButton-arrow { transform: translateX(.1875rem); }
-
-.amc-DButton--underline:dir(rtl):hover .amc-DButton-arrow,
-.amc-DButton--underline:dir(rtl):focus-visible .amc-DButton-arrow { transform: translateX(-.1875rem); }
 
 .amc-DButton--underline:active { color: var(--amc-db-fg); }
 

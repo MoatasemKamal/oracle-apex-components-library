@@ -669,7 +669,7 @@
   line-height: 1;
 }
 
-.amc-DTimeline--numbered .amc-DTimeline-marker::before { content: counter(amc-dtl, decimal-leading-zero); }
+.amc-DTimeline--numbered .amc-DTimeline-marker::before { content: counter(amc-dtl); }
 
 .amc-DTimeline--numbered .amc-DTimeline-marker::after {
   content: "";

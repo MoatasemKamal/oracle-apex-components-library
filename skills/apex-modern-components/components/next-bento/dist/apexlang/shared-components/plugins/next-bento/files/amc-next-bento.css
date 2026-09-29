@@ -264,10 +264,14 @@
   white-space: nowrap;
 }
 
+/* The arrow only appears where the label is visually hidden (Grid Pattern, very narrow tiles),
+   so it stands in for the text instead of decorating it. */
 .amc-NBento-arrow {
+  display: none;
   font-size: .75rem;
   transition: transform .3s var(--amc-nb-ease);
 }
+.amc-NBento--gridPattern .amc-NBento-arrow { display: inline-block; }
 
 [dir="rtl"] .amc-NBento-arrow { scale: -1 1; }
 
@@ -286,6 +290,7 @@
 @container amc-nbtile (width < 13rem) {
   .amc-NBento-tile { padding: 1rem; }
   .amc-NBento-ctaText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+  .amc-NBento-arrow { display: inline-block; }
 }
 
 /* =================================================== 1. spotlightGlow · motion
@@ -707,12 +712,11 @@
     .75rem .875rem 1.75rem color-mix(in srgb, var(--amc-nb-tint) 22%, var(--amc-nb-clay-dark)),
     inset -.5rem -.625rem 1rem color-mix(in srgb, var(--amc-nb-tint) 20%, transparent),
     inset .5rem .5rem 1rem var(--amc-nb-clay-light);
-  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .35s ease;
+  transition: box-shadow .35s ease;
 }
 
 .amc-NBento--clay .amc-NBento-tile--link:hover,
 .amc-NBento--clay .amc-NBento-tile--link:focus-within {
-  transform: translateY(-.25rem) scale(1.015);
   box-shadow:
     1rem 1.25rem 2.25rem color-mix(in srgb, var(--amc-nb-tint) 28%, var(--amc-nb-clay-dark)),
     inset -.5rem -.625rem 1rem color-mix(in srgb, var(--amc-nb-tint) 22%, transparent),
@@ -982,13 +986,11 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: auto;
   gap: 1.75rem 1.5rem;
-  counter-reset: amc-nb-story;
 }
 
 .amc-NBento--magazine .amc-NBento-item {
   grid-column: auto;
   grid-row: auto;
-  counter-increment: amc-nb-story;
 }
 
 .amc-NBento--magazine .amc-NBento-tile {
@@ -1005,17 +1007,6 @@
   border-radius: 0;
 }
 
-.amc-NBento--magazine .amc-NBento-tile::before {
-  content: counter(amc-nb-story, decimal-leading-zero);
-  content: counter(amc-nb-story, decimal-leading-zero) / "";
-  grid-area: index;
-  color: var(--amc-nb-accent);
-  font-size: .8125rem;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .06em;
-}
-
 .amc-NBento--magazine .amc-NBento-icon {
   justify-self: end;
   inline-size: auto;
@@ -1029,10 +1020,8 @@
 
 .amc-NBento--magazine .amc-NBento-eyebrow {
   color: var(--amc-nb-accent);
-  font-size: .6875rem;
+  font-size: .8125rem;
   font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
 }
 
 .amc-NBento--magazine .amc-NBento-title {
@@ -1143,7 +1132,7 @@
   }
 }
 
-/* narrow: numbered table of contents */
+/* narrow: a ruled table of contents */
 @container amc-nbento (width < 30rem) {
   .amc-NBento--magazine .amc-NBento-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
 
@@ -1151,9 +1140,9 @@
   .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-tile,
   .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
     min-block-size: 0;
-    grid-template-columns: 2rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
-    grid-template-areas: "index body" "index figure";
+    grid-template-areas: "body" "figure";
     align-items: start;
     padding-block: .875rem;
     border-block-start-width: 1px;
@@ -1161,12 +1150,10 @@
 
   .amc-NBento--magazine .amc-NBento-item--featured .amc-NBento-tile,
   .amc-NBento--magazine .amc-NBento-grid:not(:has(.amc-NBento-item--featured)) .amc-NBento-item:first-child .amc-NBento-tile {
-    grid-template-areas: "index body" "index figure";
+    grid-template-areas: "body" "figure";
     padding-block-end: 1.25rem;
     border-block-start-width: .375rem;
   }
-
-  .amc-NBento--magazine .amc-NBento-tile::before { padding-block-start: .2em; }
 
   .amc-NBento--magazine .amc-NBento-icon,
   .amc-NBento--magazine .amc-NBento-cta { display: none; }

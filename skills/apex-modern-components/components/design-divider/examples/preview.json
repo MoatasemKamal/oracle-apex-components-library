@@ -1,20 +1,20 @@
 {
   "samples": [
-    { "title": "lineTitle", "mode": "partial", "settings": { "STYLE": "lineTitle", "TITLE": "Order Lines", "SPACING": "compact" } },
-    { "title": "lineTitle, start, icon and meta", "mode": "partial", "settings": { "STYLE": "lineTitle", "TITLE": "Shipping Address", "ICON": "fa-truck", "META": "2 addresses", "ALIGN": "start", "SPACING": "compact" } },
-    { "title": "eyebrowTitle", "mode": "partial", "settings": { "STYLE": "eyebrowTitle", "EYEBROW": "Step 2 of 4", "TITLE": "Billing Details", "DESCRIPTION": "Invoices are issued in SAR and sent to the finance contact on file.", "ICON": "fa-credit-card", "META": "Required", "SPACING": "compact" } },
-    { "title": "eyebrowTitle, centered", "mode": "partial", "settings": { "STYLE": "eyebrowTitle", "EYEBROW": "Quarterly Review", "TITLE": "Q3 2026 Results", "DESCRIPTION": "Revenue, margin and cash flow for July to September.", "ALIGN": "center", "SPACING": "compact" } },
+    { "title": "lineTitle", "mode": "partial", "settings": { "STYLE": "lineTitle", "TITLE": "Order lines", "SPACING": "compact" } },
+    { "title": "lineTitle, start, icon and meta", "mode": "partial", "settings": { "STYLE": "lineTitle", "TITLE": "Shipping address", "ICON": "fa-truck", "META": "2 addresses", "ALIGN": "start", "SPACING": "compact" } },
+    { "title": "eyebrowTitle", "mode": "partial", "settings": { "STYLE": "eyebrowTitle", "EYEBROW": "Step 2 of 4", "TITLE": "Billing details", "DESCRIPTION": "Invoices are issued in SAR and sent to the finance contact on file.", "ICON": "fa-credit-card", "META": "Required", "SPACING": "compact" } },
+    { "title": "eyebrowTitle, centered", "mode": "partial", "settings": { "STYLE": "eyebrowTitle", "EYEBROW": "Finance", "TITLE": "Q3 2026 results", "DESCRIPTION": "Revenue, margin and cash flow for July to September.", "ALIGN": "center", "SPACING": "compact" } },
     { "title": "gradientLine", "mode": "partial", "settings": { "STYLE": "gradientLine", "SPACING": "compact" } },
     { "title": "gradientLine, caption", "mode": "partial", "settings": { "STYLE": "gradientLine", "TITLE": "Approved by finance on 28 Sep 2026", "SPACING": "compact" } },
     { "title": "iconCenter", "mode": "partial", "settings": { "STYLE": "iconCenter", "TITLE": "Payment", "ICON": "fa-credit-card", "SPACING": "compact" } },
     { "title": "iconCenter, no icon", "mode": "partial", "settings": { "STYLE": "iconCenter", "SPACING": "compact" } },
     { "title": "pillLabel", "mode": "partial", "settings": { "STYLE": "pillLabel", "TITLE": "Today", "ICON": "fa-calendar", "SPACING": "compact" } },
-    { "title": "pillLabel, meta", "mode": "partial", "settings": { "STYLE": "pillLabel", "TITLE": "Earlier This Week", "META": "14", "SPACING": "compact" } },
-    { "title": "accentUnderline", "mode": "partial", "settings": { "STYLE": "accentUnderline", "EYEBROW": "Customer 10482", "TITLE": "Open Invoices", "DESCRIPTION": "Unpaid invoices older than 30 days are highlighted.", "META": "SAR 42,750 due", "SPACING": "compact" } },
-    { "title": "accentUnderline, centered", "mode": "partial", "settings": { "STYLE": "accentUnderline", "TITLE": "Contract Terms", "ALIGN": "center", "SPACING": "compact" } },
+    { "title": "pillLabel, meta", "mode": "partial", "settings": { "STYLE": "pillLabel", "TITLE": "Earlier this week", "META": "14", "SPACING": "compact" } },
+    { "title": "accentUnderline", "mode": "partial", "settings": { "STYLE": "accentUnderline", "EYEBROW": "Customer 10482", "TITLE": "Open invoices", "DESCRIPTION": "Unpaid invoices older than 30 days are highlighted.", "META": "SAR 42,750 due", "SPACING": "compact" } },
+    { "title": "accentUnderline, centered", "mode": "partial", "settings": { "STYLE": "accentUnderline", "TITLE": "Contract terms", "ALIGN": "center", "SPACING": "compact" } },
     { "title": "dotted", "mode": "partial", "settings": { "STYLE": "dotted", "SPACING": "compact" } },
-    { "title": "dotted, title", "mode": "partial", "settings": { "STYLE": "dotted", "TITLE": "Internal Notes", "SPACING": "compact" } },
-    { "title": "sideLabel", "mode": "partial", "settings": { "STYLE": "sideLabel", "EYEBROW": "Warehouse Riyadh", "TITLE": "Pending Shipments", "ICON": "fa-truck", "META": "12 orders", "SPACING": "compact" } },
-    { "title": "sideLabel, end", "mode": "partial", "settings": { "STYLE": "sideLabel", "TITLE": "Archived Projects", "ICON": "fa-archive", "META": "38", "ALIGN": "end", "SPACING": "compact" } }
+    { "title": "dotted, title", "mode": "partial", "settings": { "STYLE": "dotted", "TITLE": "Internal notes", "SPACING": "compact" } },
+    { "title": "sideLabel", "mode": "partial", "settings": { "STYLE": "sideLabel", "EYEBROW": "Riyadh warehouse", "TITLE": "Pending shipments", "ICON": "fa-truck", "META": "12 orders", "SPACING": "compact" } },
+    { "title": "sideLabel, end", "mode": "partial", "settings": { "STYLE": "sideLabel", "TITLE": "Archived projects", "ICON": "fa-archive", "META": "38", "ALIGN": "end", "SPACING": "compact" } }
   ]
 }

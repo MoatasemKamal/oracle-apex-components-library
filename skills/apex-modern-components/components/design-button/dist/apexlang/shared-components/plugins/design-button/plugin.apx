@@ -39,7 +39,7 @@ plugin designButton (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Use for marketing-style calls to action and hero links; keep native Universal Theme buttons for form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Every design has hover, pressed and keyboard focus states and respects reduced motion.

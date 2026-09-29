@@ -10,7 +10,7 @@ Next Collection family of ten current-generation timelines: beam rail, pulsing c
 | APEXlang reference | `type: plugin/nextTimeline` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Each query row is one event, in the order the query returns them. Pick a Style for the whole region, then map Title (required), Body, Date, Icon, State and Tag to columns. Format dates in SQL with the application's NLS settings. State accepts success, current, warning, danger, info or neutral; any other value renders as neutral. For progress journeys return success for done steps, current for the active step and neutral for steps not reached yet. Pure CSS, no JavaScript.

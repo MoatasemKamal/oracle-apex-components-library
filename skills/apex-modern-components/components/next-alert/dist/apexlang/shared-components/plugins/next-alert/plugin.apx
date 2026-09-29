@@ -18,10 +18,10 @@ plugin nextAlert (
                     <p class="amc-NAlert-run amc-NAlert-run--copy" aria-hidden="true"><strong class="amc-NAlert-title">#TITLE#</strong>{if ?MESSAGE/}<span class="amc-NAlert-sep"></span><span class="amc-NAlert-message">#MESSAGE#</span>{endif/}{if ?META/}<span class="amc-NAlert-sep"></span><span class="amc-NAlert-meta">#META#</span>{endif/}</p>
                   </div>
                 </div>
-                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span><span class="amc-NAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span></a>{endif/}{endif/}
               </div>{when expandDetails/}<details class="amc-NAlert-surface amc-NAlert-details">
                 <summary class="amc-NAlert-summary"><span class="amc-NAlert-icon"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span></span><span class="amc-NAlert-state">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Information{otherwise/}Notice{endcase/}</span><span class="amc-NAlert-title">#TITLE#</span>{if ?META/}<span class="amc-NAlert-meta">#META#</span>{endif/}<span class="amc-NAlert-chevron fa fa-chevron-down" aria-hidden="true"></span></summary>
-                <div class="amc-NAlert-more">{if ?MESSAGE/}<p class="amc-NAlert-message">#MESSAGE#</p>{endif/}{if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span><span class="amc-NAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}</div>
+                <div class="amc-NAlert-more">{if ?MESSAGE/}<p class="amc-NAlert-message">#MESSAGE#</p>{endif/}{if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span></a>{endif/}{endif/}</div>
               </details>{otherwise/}<span class="amc-NAlert-fx" aria-hidden="true"></span>
               <div class="amc-NAlert-surface">
                 <span class="amc-NAlert-icon"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span></span>
@@ -31,7 +31,7 @@ plugin nextAlert (
                   {if ?MESSAGE/}<p class="amc-NAlert-message">#MESSAGE#</p>{endif/}
                   {if ?META/}<p class="amc-NAlert-meta">#META#</p>{endif/}
                 </div>
-                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span><span class="amc-NAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span></a>{endif/}{endif/}
               </div>
               <span class="amc-NAlert-beam" aria-hidden="true"></span>{endcase/}
             </div>
@@ -60,7 +60,7 @@ plugin nextAlert (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set. In report mode Stacked Toasts shows the first three rows as a stack that fans out on hover, keyboard focus or touch devices.

@@ -42,7 +42,7 @@ plugin designList (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL or Initials (avatar), Icon, Value and Maximum (bars in leaderboard and metricRows), State and State Label, Link URL. Format numbers and dates in SQL.

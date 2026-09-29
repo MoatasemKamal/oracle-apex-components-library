@@ -9,12 +9,12 @@
       },
       "rows": [
         {
-          "LABEL": "Open Q3 Forecast",
+          "LABEL": "Open Q3 forecast",
           "ICON": "fa-line-chart",
           "LINK_URL": "#forecast"
         },
         {
-          "LABEL": "Review 12 Orders",
+          "LABEL": "Review 12 orders",
           "HINT": "New",
           "LINK_URL": "#orders"
         }
@@ -29,12 +29,12 @@
       },
       "rows": [
         {
-          "LABEL": "Upgrade to Enterprise",
+          "LABEL": "Renew support contract",
           "ICON": "fa-star",
           "LINK_URL": "#upgrade"
         },
         {
-          "LABEL": "Start Free Trial",
+          "LABEL": "Request a quote",
           "COLOR": "info"
         }
       ]
@@ -48,12 +48,12 @@
       },
       "rows": [
         {
-          "LABEL": "Launch Campaign",
+          "LABEL": "Launch campaign",
           "ICON": "fa-rocket",
           "LINK_URL": "#campaign"
         },
         {
-          "LABEL": "Publish Price List",
+          "LABEL": "Publish price list",
           "HINT": "v2"
         }
       ]
@@ -67,13 +67,13 @@
       },
       "rows": [
         {
-          "LABEL": "Join Live Review",
+          "LABEL": "Join review call",
           "ICON": "fa-video-camera",
           "COLOR": "danger",
           "LINK_URL": "#live"
         },
         {
-          "LABEL": "Approve 3 Invoices",
+          "LABEL": "Approve 3 invoices",
           "ICON": "fa-check",
           "COLOR": "success"
         }
@@ -88,12 +88,12 @@
       },
       "rows": [
         {
-          "LABEL": "Save Order",
+          "LABEL": "Save order",
           "ICON": "fa-save",
           "HINT": "Ctrl S"
         },
         {
-          "LABEL": "New Customer",
+          "LABEL": "New customer",
           "ICON": "fa-user-plus",
           "HINT": "Alt N",
           "COLOR": "success"
@@ -115,12 +115,12 @@
       },
       "rows": [
         {
-          "LABEL": "Create Project",
+          "LABEL": "Create project",
           "ICON": "fa-plus",
           "LINK_URL": "#projects/new"
         },
         {
-          "LABEL": "Duplicate Quote",
+          "LABEL": "Duplicate quote",
           "ICON": "fa-copy",
           "COLOR": "info"
         }
@@ -135,11 +135,11 @@
       },
       "rows": [
         {
-          "LABEL": "Continue to Checkout",
+          "LABEL": "Continue to payment",
           "LINK_URL": "#checkout"
         },
         {
-          "LABEL": "Book Onboarding Call",
+          "LABEL": "Book onboarding call",
           "ICON": "fa-calendar",
           "COLOR": "success",
           "LINK_URL": "#call"
@@ -155,12 +155,12 @@
       },
       "rows": [
         {
-          "LABEL": "Export Invoices",
+          "LABEL": "Export invoices",
           "ICON": "fa-download",
           "LINK_URL": "#export"
         },
         {
-          "LABEL": "Flag Shipment",
+          "LABEL": "Flag shipment",
           "ICON": "fa-flag",
           "COLOR": "warning",
           "HINT": "2"
@@ -176,11 +176,11 @@
       },
       "rows": [
         {
-          "LABEL": "Add Line Item",
+          "LABEL": "Add line item",
           "ICON": "fa-plus"
         },
         {
-          "LABEL": "Mark as Paid",
+          "LABEL": "Mark as paid",
           "ICON": "fa-check",
           "COLOR": "success"
         }
@@ -195,12 +195,12 @@
       },
       "rows": [
         {
-          "LABEL": "Claim Partner Badge",
+          "LABEL": "Download partner certificate",
           "ICON": "fa-certificate",
           "LINK_URL": "#partner"
         },
         {
-          "LABEL": "View Annual Report",
+          "LABEL": "View annual report",
           "HINT": "2026",
           "LINK_URL": "#report"
         }
@@ -215,7 +215,7 @@
       },
       "rows": [
         {
-          "LABEL": "Add Customer",
+          "LABEL": "Add customer",
           "ICON": "fa-user-plus"
         },
         {
@@ -224,12 +224,12 @@
           "COLOR": "success"
         },
         {
-          "LABEL": "Share Dashboard",
+          "LABEL": "Share dashboard",
           "ICON": "fa-share-alt",
           "COLOR": "info"
         },
         {
-          "LABEL": "Open Details"
+          "LABEL": "Open order details"
         }
       ]
     },
@@ -242,15 +242,15 @@
       },
       "rows": [
         {
-          "LABEL": "Delete Invoice INV-2041",
+          "LABEL": "Delete invoice INV-2041",
           "ICON": "fa-trash",
           "HINT": "Hold to confirm",
           "COLOR": "danger"
         },
         {
-          "LABEL": "Release Payment Run",
+          "LABEL": "Release payment run",
           "ICON": "fa-send",
-          "HINT": "Hold 1 second",
+          "HINT": "Hold to release",
           "COLOR": "success"
         }
       ]
@@ -262,7 +262,7 @@
       "settings": {
         "STYLE": "borderBeam",
         "SIZE": "large",
-        "LABEL": "Create Your Workspace",
+        "LABEL": "Create workspace",
         "ICON": "fa-magic",
         "LINK_URL": "#workspace"
       }

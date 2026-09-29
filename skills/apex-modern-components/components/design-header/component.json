@@ -3,7 +3,7 @@
   "apexlangName": "designHeader",
   "staticId": "AMC_DESIGN_HEADER",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["header", "hero", "page header", "banner", "title", "intro", "landing", "jumbotron", "section header", "call to action"],
   "description": "Family of 10 compact page hero and section header designs (gradient hero, split, minimal, image overlay, dotted grid, card header, centered icon, wave bottom, glass panel, eyebrow) with eyebrow, title, subtitle, icon, optional image and up to two native Universal Theme buttons. Follows the page-header pattern of modern design systems (Oracle Redwood page header, Tailwind UI and Stripe heroes) kept compact for application pages: no full-viewport height, theme colors only, readable in light and dark styles.",

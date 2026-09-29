@@ -10,7 +10,7 @@ Next Collection family of 10 current-generation page and region heroes for home 
 | APEXlang reference | `type: plugin/nextHero` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Place at the top of a page or login region, usually in a region with the Blank with Attributes template or the Standard template with hideHeader and noUI options. Title renders as h2, Highlight continues the same heading with an accent treatment. The primary button uses t-Button--hot and the secondary a normal t-Button. The optional JavaScript file only tracks the pointer for the Grid Spotlight and Parallax Layers styles and splits the headline into words for Scroll Reveal; it does nothing under reduced motion or on touch input.

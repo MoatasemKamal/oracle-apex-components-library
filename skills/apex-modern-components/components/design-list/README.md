@@ -10,7 +10,7 @@ Design Collection family of eleven data-driven lists (avatar rows, files, checkl
 | APEXlang reference | `type: plugin/designList` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL or Initials (avatar), Icon, Value and Maximum (bars in leaderboard and metricRows), State and State Label, Link URL. Format numbers and dates in SQL.
 

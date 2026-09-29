@@ -10,7 +10,7 @@ Status badges in 12 designs (soft, solid, outline, dot, live, gradient pill, cou
 | APEXlang reference | `type: plugin/designBadge` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Choose a Style, map Label to the text and State to a column returning success, warning, danger, info or neutral (anything else renders as neutral). The label itself must carry the meaning (for example Paid or Overdue), so state is never shown by color alone. Value adds a second segment: the count in Counter, the value half in Code, trailing text elsewhere.
 

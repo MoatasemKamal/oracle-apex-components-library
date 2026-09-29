@@ -10,7 +10,7 @@ Design Collection family of ten chronological timelines (dots, icon rail, altern
 | APEXlang reference | `type: plugin/designTimeline` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Each query row is one event, in the order the query returns them. Pick a Style for the whole region, then map Title (required), Body, Date, Icon, State and Tag to columns. Format dates in SQL with the application's NLS settings. State accepts success, warning, danger, info or neutral; any other value renders as neutral.
 

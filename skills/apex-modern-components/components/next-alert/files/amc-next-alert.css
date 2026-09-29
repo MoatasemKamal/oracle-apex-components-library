@@ -108,10 +108,18 @@
 }
 .amc-NAlert-state {
   color: var(--amc-na-ink);
-  font-size: .6875rem;
-  font-weight: 700;
-  letter-spacing: .06em;
+  font-size: .75rem;
+  font-weight: 650;
   line-height: 1.4;
+}
+/* Styles that show the state as a compact chip keep short capitals; elsewhere it reads as plain text. */
+.amc-NAlert-badge .amc-NAlert-state,
+.amc-NAlert--neoBrutal .amc-NAlert-state,
+.amc-NAlert--hazardStripe .amc-NAlert-state,
+.amc-NAlert--expandDetails .amc-NAlert-state,
+.amc-NAlert--adaptiveBar .amc-NAlert-state {
+  font-size: .6875rem;
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 .amc-NAlert-title {
@@ -154,17 +162,6 @@
 .amc-NAlert-link:focus-visible {
   outline: 2px solid var(--amc-na-tone);
   outline-offset: 2px;
-}
-.amc-NAlert-linkIcon {
-  font-size: .75em;
-  transition: transform .15s ease-out;
-}
-.amc-NAlert-link:hover .amc-NAlert-linkIcon,
-.amc-NAlert-link:focus-visible .amc-NAlert-linkIcon {
-  transform: translateX(calc(3px * var(--amc-na-dir)));
-}
-.amc-NAlert-link .amc-NAlert-linkIcon:dir(rtl) {
-  rotate: 180deg;
 }
 
 /* Report wrapper */
@@ -963,9 +960,6 @@
 .amc-NAlert--adaptiveBar .amc-NAlert-link:focus-visible {
   outline: none;
 }
-.amc-NAlert--adaptiveBar .amc-NAlert-linkIcon {
-  display: none;
-}
 @container amc-nalert (min-width: 16rem) {
   .amc-NAlert--adaptiveBar .amc-NAlert-surface {
     align-items: start;
@@ -1020,9 +1014,6 @@
   }
   .amc-NAlert--adaptiveBar .amc-NAlert-link:focus-visible {
     outline: 2px solid var(--amc-na-tone);
-  }
-  .amc-NAlert--adaptiveBar .amc-NAlert-linkIcon {
-    display: inline;
   }
 }
 @container amc-nalert (min-width: 36rem) {
@@ -1132,7 +1123,6 @@
     border-radius: 1.25rem;
   }
   .amc-NAlert .amc-NAlert-link,
-  .amc-NAlert .amc-NAlert-linkIcon,
   .amc-NAlert .amc-NAlert-surface,
   .amc-NAlert .amc-NAlert-chevron,
   .amc-NAlert .amc-NAlert-surface > *,

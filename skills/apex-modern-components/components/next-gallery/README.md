@@ -10,7 +10,7 @@ Next Collection gallery family: a report-driven image gallery (image, thumbnail,
 | APEXlang reference | `type: plugin/nextGallery` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://magicui.design/docs/components/lens) (MIT) |
 
 Each query row is one image. Map Image URL (required), ideally Width and Height in pixels so the layout is stable before images load, and Alt Text for screen readers; Thumbnail URL, Title, Caption, Link URL and Group are optional. For BLOB columns select apex_util.get_blob_file_src with the name of a page item of type File Browse or Display Image, or build a REST or Object Storage URL. Pick a Style and, where it applies, Columns, Row Height and Autoplay. The Compare style pairs rows by Group: the first row of a group is the before image and the second row the after image. With Lightbox on, clicking an image opens the full-size viewer; with it off, the image link opens Link URL, or the image itself. Without JavaScript every image stays a normal link inside a figure. Colors follow the active Universal Theme style, including dark styles, Theme Roller changes and right-to-left pages.

@@ -64,7 +64,7 @@ plugin designKpi (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (a number from 0 to 100) drives the Target Bar and Ring styles, Series (comma-separated numbers) drives Spark Bars, and Compare Value / Compare Label drive the Compare and Target Bar styles. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.

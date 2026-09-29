@@ -53,14 +53,14 @@
   max-inline-size: 46rem;
 }
 
+/* The eyebrow carries context (record id, section, date), so it reads as normal
+   sentence-case text. Only the Eyebrow style sets it in tracked capitals. */
 .amc-DHeader-eyebrow {
   margin: 0;
   color: var(--amc-dh-ink);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .08em;
+  font-size: .8125rem;
+  font-weight: 600;
   line-height: 1.4;
-  text-transform: uppercase;
   unicode-bidi: isolate;
 }
 
@@ -228,10 +228,7 @@
 .amc-DHeader--minimal .amc-DHeader-content { flex: 1 1 14rem; gap: .125rem; }
 .amc-DHeader--minimal .amc-DHeader-eyebrow {
   color: var(--amc-dh-muted);
-  font-size: .8125rem;
   font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
 }
 .amc-DHeader--minimal .amc-DHeader-title { font-size: clamp(1.25rem, 1rem + 1.4cqi, 1.625rem); font-weight: 600; }
 .amc-DHeader--minimal .amc-DHeader-subtitle { font-size: .875rem; }
@@ -464,7 +461,10 @@
   display: flex;
   align-items: center;
   gap: .75rem;
+  font-size: .75rem;
+  font-weight: 700;
   letter-spacing: .14em;
+  text-transform: uppercase;
 }
 .amc-DHeader--eyebrow .amc-DHeader-eyebrow::before {
   content: "";

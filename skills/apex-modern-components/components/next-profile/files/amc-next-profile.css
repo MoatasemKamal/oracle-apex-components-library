@@ -325,17 +325,6 @@
   text-decoration: none;
 }
 .amc-NProfile-action:focus-visible { outline: 2px solid var(--amc-nprof-accent); outline-offset: 2px; }
-.amc-NProfile-ctaIcon,
-.amc-NProfile-actionIcon {
-  font-size: .75em;
-  transition: transform .25s var(--amc-nprof-ease);
-}
-.amc-NProfile-ctaIcon:dir(rtl),
-.amc-NProfile-actionIcon:dir(rtl) { transform: scaleX(-1); }
-.amc-NProfile-card:hover .amc-NProfile-ctaIcon,
-.amc-NProfile-card:focus-within .amc-NProfile-ctaIcon { transform: translateX(.25rem); }
-.amc-NProfile-card:hover .amc-NProfile-ctaIcon:dir(rtl),
-.amc-NProfile-card:focus-within .amc-NProfile-ctaIcon:dir(rtl) { transform: scaleX(-1) translateX(.25rem); }
 .amc-NProfile-sr {
   position: absolute;
   inline-size: 1px;
@@ -475,7 +464,7 @@
 .amc-NProfile--beamFrame .amc-NProfile-dot { inset-block-end: -.25rem; inset-inline-end: -.25rem; }
 .amc-NProfile--beamFrame .amc-NProfile-main { align-items: flex-start; }
 .amc-NProfile--beamFrame .amc-NProfile-name { font-size: 1.1875rem; }
-.amc-NProfile--beamFrame .amc-NProfile-org { order: -1; color: var(--amc-nprof-accent); letter-spacing: .06em; text-transform: uppercase; font-size: .6875rem; }
+.amc-NProfile--beamFrame .amc-NProfile-org { order: -1; color: var(--amc-nprof-accent); font-size: .8125rem; font-weight: 600; }
 .amc-NProfile--beamFrame .amc-NProfile-more,
 .amc-NProfile--beamFrame .amc-NProfile-cta { grid-column: 1 / -1; }
 .amc-NProfile--beamFrame .amc-NProfile-stats { grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); }
@@ -687,8 +676,6 @@
   margin: 0;
   font-size: .75rem;
   font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
   opacity: .85;
 }
 .amc-NProfile-face--back .amc-NProfile-contact { gap: .625rem; font-size: .875rem; }
@@ -886,10 +873,7 @@
     0 1.25rem 2.25rem -1rem color-mix(in srgb, var(--amc-nprof-accent) 45%, var(--amc-nprof-page)),
     inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-nprof-accent) 16%, transparent),
     inset 0 .5rem 1rem color-mix(in srgb, var(--amc-nprof-light) 55%, transparent);
-  transition: transform .35s var(--amc-nprof-ease);
 }
-.amc-NProfile--clay .amc-NProfile-card:hover,
-.amc-NProfile--clay .amc-NProfile-card:focus-within { transform: translateY(-.25rem) scale(1.01); }
 .amc-NProfile--clay .amc-NProfile-avatar {
   inline-size: 6rem;
   block-size: 6rem;

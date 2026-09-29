@@ -23,7 +23,7 @@
       { "LABEL": "Degraded", "STATE": "warning" },
       { "LABEL": "Outage", "STATE": "danger" }
     ] },
-    { "title": "Live, partial", "mode": "partial", "settings": { "STYLE": "live", "LABEL": "Live", "STATE": "danger", "VALUE": "128 viewers" } },
+    { "title": "Live, partial", "mode": "partial", "settings": { "STYLE": "live", "LABEL": "Live", "STATE": "danger", "VALUE": "Order feed, 42 new" } },
     { "title": "Gradient Pill, customer tier", "mode": "report", "settings": { "STYLE": "gradientPill" }, "rows": [
       { "LABEL": "Enterprise", "STATE": "info", "ICON": "fa-star" },
       { "LABEL": "Renewed", "STATE": "success" },

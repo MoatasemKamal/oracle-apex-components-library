@@ -10,7 +10,7 @@ Next Collection card family: one record (order, project, invoice, customer) as a
 | APEXlang reference | `type: plugin/nextCard` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Pick a Style, then map Title (required) and any of Eyebrow, Description, Details, Icon, Image URL, Badge, State, Value, Value Label, Meta, Link URL and Link Label. Empty settings are left out. With Link URL the whole card is clickable. Pointer effects (Spotlight, Tilt 3D, Holo Foil) need the plug-in JavaScript file and run only with a mouse or pen; every effect also runs on keyboard focus, and all motion stops when the user asks the system for reduced motion.

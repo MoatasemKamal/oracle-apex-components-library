@@ -18,7 +18,7 @@ plugin designCard (
                   <h3 class="amc-DCard-title">{if ?LINK_URL/}<a class="amc-DCard-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
                   {if ?DESCRIPTION/}<p class="amc-DCard-desc">#DESCRIPTION#</p>{endif/}
                 </div>
-                <div class="amc-DCard-foot">{if ?VALUE/}<p class="amc-DCard-figure">{if ?VALUE_LABEL/}<span class="amc-DCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-DCard-value">#VALUE#</span></p>{endif/}{if ?META/}<span class="amc-DCard-meta">#META#</span>{endif/}{if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-DCard-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-DCard-ctaIcon fa fa-arrow-right"></span></span>{endif/}{endif/}</div>
+                <div class="amc-DCard-foot">{if ?VALUE/}<p class="amc-DCard-figure">{if ?VALUE_LABEL/}<span class="amc-DCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-DCard-value">#VALUE#</span></p>{endif/}{if ?META/}<span class="amc-DCard-meta">#META#</span>{endif/}{if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-DCard-cta" aria-hidden="true">#LINK_LABEL#</span>{endif/}{endif/}</div>
               </article>
             </div>
             ```
@@ -46,7 +46,7 @@ plugin designCard (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick a Style, then map Title (required) and any of Eyebrow, Description, Icon, Image URL, Badge, State, Value, Value Label, Meta, Link URL and Link Label to columns or static text. Empty settings are simply left out. The whole card becomes clickable when Link URL is set. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.

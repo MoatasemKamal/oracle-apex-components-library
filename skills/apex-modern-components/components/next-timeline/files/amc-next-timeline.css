@@ -221,9 +221,8 @@
   justify-self: end;
   z-index: 1;
   margin: .875rem 1rem 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: .6875rem;
-  letter-spacing: .04em;
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .amc-NTimeline--beamRail .amc-NTimeline-card {
@@ -562,8 +561,7 @@
   inset-inline-start: 2.25rem;
   color: var(--amc-ntl-tone-text);
   font-size: .75rem;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
 }
 
 .amc-NTimeline--stackedCards3d .amc-NTimeline-title { font-size: 1rem; }
@@ -622,10 +620,8 @@
   border: 2px solid var(--amc-ntl-ink);
   background-color: var(--amc-ntl-warning);
   color: var(--ut-palette-warning-contrast, #262626);
-  font-size: .6875rem;
+  font-size: .75rem;
   font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
   transform: rotate(-2deg);
 }
 
@@ -719,7 +715,6 @@
   box-shadow:
     0 10px 20px -6px color-mix(in srgb, var(--amc-ntl-accent) 32%, var(--amc-ntl-page)),
     inset 0 -6px 12px color-mix(in srgb, var(--amc-ntl-accent) 16%, transparent);
-  transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
 }
 
 .amc-NTimeline--clay .amc-NTimeline-card::before {
@@ -733,9 +728,6 @@
   opacity: .7;
   pointer-events: none;
 }
-
-.amc-NTimeline--clay .amc-NTimeline-item:hover .amc-NTimeline-card,
-.amc-NTimeline--clay .amc-NTimeline-item:focus-within .amc-NTimeline-card { transform: translateY(-3px) scale(1.01); }
 
 .amc-NTimeline--clay .amc-NTimeline-date {
   grid-area: card;
@@ -893,7 +885,7 @@
 .amc-NTimeline--metroLine .amc-NTimeline-title { font-size: .9375rem; font-weight: 700; }
 .amc-NTimeline--metroLine .amc-NTimeline-item--neutral .amc-NTimeline-title { color: var(--amc-ntl-muted); }
 .amc-NTimeline--metroLine .amc-NTimeline-body { margin-block-start: .125rem; font-size: .8125rem; }
-.amc-NTimeline--metroLine .amc-NTimeline-date { margin-block-start: .125rem; letter-spacing: .04em; text-transform: uppercase; font-size: .6875rem; }
+.amc-NTimeline--metroLine .amc-NTimeline-date { margin-block-start: .125rem; font-size: .75rem; }
 .amc-NTimeline--metroLine .amc-NTimeline-foot { margin-block-start: .375rem; }
 
 .amc-NTimeline--metroLine .amc-NTimeline-tag {
@@ -988,7 +980,7 @@
 }
 
 .amc-NTimeline--scrollProgress .amc-NTimeline-marker::before { content: counter(amc-ntl); }
-.amc-NTimeline--scrollProgress .amc-NTimeline-date { padding-block-start: .375rem; color: var(--amc-ntl-accent); letter-spacing: .04em; text-transform: uppercase; }
+.amc-NTimeline--scrollProgress .amc-NTimeline-date { padding-block-start: .375rem; color: var(--amc-ntl-accent); font-weight: 600; }
 .amc-NTimeline--scrollProgress .amc-NTimeline-title { font-size: 1.125rem; font-weight: 700; letter-spacing: -.01em; }
 .amc-NTimeline--scrollProgress .amc-NTimeline-body { font-size: .9375rem; }
 

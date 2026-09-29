@@ -47,7 +47,7 @@ plugin nextList (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Each query row is one list row. Pick a Style for the whole region, then map Title (required) and the columns the style uses: Subtitle, Meta, Image URL, Initials or Icon for the lead, State and State Label, Details for the Accordion rows style, and Link URL. Format numbers and dates in SQL. Every style is complete without JavaScript; the plug-in file only adds pointer tracking and the seamless marquee loop, and does nothing when the user prefers reduced motion.

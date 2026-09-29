@@ -201,9 +201,7 @@
   padding-inline: .5rem .625rem;
   background-color: color-mix(in srgb, var(--amc-nbd-c) 10%, var(--amc-nbd-surface));
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nbd-c) 35%, transparent);
-  font-size: .6875rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: .75rem;
 }
 
 .amc-NBadge--pulseLive .amc-NBadge-dot {
@@ -253,7 +251,7 @@
   border-radius: 999px;
   background-color: var(--amc-nbd-c);
   color: var(--amc-nbd-on);
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
 

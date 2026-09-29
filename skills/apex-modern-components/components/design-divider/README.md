@@ -10,7 +10,7 @@ Design Collection divider family: a section break or section heading in 8 distin
 | APEXlang reference | `type: plugin/designDivider` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Pick a Style. Title is optional: without it the divider is a pure separator (role separator); with it the divider is a section heading (h3). Eyebrow and Description are shown by Eyebrow Title, Accent Underline and Side Label. Meta, for example a count, is shown at the end of the row. Colors follow the active Universal Theme style.
 

@@ -579,16 +579,9 @@
   border-start-start-radius: 2px;
   border-start-end-radius: 2px;
   background-color: color-mix(in srgb, var(--amc-dkpi-accent) 28%, transparent);
-  transform-origin: bottom;
-  animation: amc-dkpi-grow .6s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .amc-DKpi-sparkBar.is-current { background-color: var(--amc-dkpi-accent); }
-
-@keyframes amc-dkpi-grow {
-  from { transform: scaleY(0); }
-  to { transform: scaleY(1); }
-}
 
 /* ---------- 9. Icon Left: solid icon tile beside the figure ---------- */
 
@@ -637,10 +630,8 @@
 }
 
 .amc-DKpi--minimal .amc-DKpi-label {
-  font-size: .6875rem;
+  font-size: .8125rem;
   font-weight: 600;
-  letter-spacing: .07em;
-  text-transform: uppercase;
 }
 
 .amc-DKpi--minimal .amc-DKpi-value {
@@ -686,7 +677,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .amc-DKpi-ringBar { transition: none; }
-  .amc-DKpi-sparkBar { animation: none; }
 }
 
 @media (forced-colors: active) {

@@ -67,8 +67,8 @@
         },
         {
           "STATE": "success",
-          "TITLE": "Recurring invoices are live",
-          "MESSAGE": "Set up monthly billing for 1,240 subscription customers in one step."
+          "TITLE": "Recurring invoices are available",
+          "MESSAGE": "Set up monthly billing for your 1,240 subscription customers under Billing, Schedules."
         }
       ]
     },
@@ -121,7 +121,7 @@
         "MESSAGE": "The Gulf region closed 4.2M SAR against a 4.0M target. Bonus accruals were posted automatically.",
         "META": "Updated 07:30",
         "LINK_URL": "#",
-        "LINK_LABEL": "See the breakdown"
+        "LINK_LABEL": "View regional breakdown"
       }
     },
     {

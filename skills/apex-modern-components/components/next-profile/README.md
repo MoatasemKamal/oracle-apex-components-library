@@ -10,7 +10,7 @@ Next Collection profile family: one person (employee, customer contact, speaker)
 | APEXlang reference | `type: plugin/nextProfile` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Pick a Style, then map Name (required) and any of Role, Image URL or Initials, Bio, Status, up to three stats, Link URL and Link Label, Email, Phone, Location, Organisation and Reference. Empty settings are left out. Tilt Holo ID needs the plug-in JavaScript file for its pointer tilt and works without it as a static card. Every hover effect also runs on keyboard focus, and all motion stops when the user asks the system for reduced motion.

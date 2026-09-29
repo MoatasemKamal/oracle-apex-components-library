@@ -3,7 +3,7 @@
   "apexlangName": "designCard",
   "staticId": "AMC_DESIGN_CARD",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["card", "tile", "design", "record", "image card", "ticket", "glass", "gradient", "content card", "design collection"],
   "description": "Design Collection card family: one record (order, project, invoice, customer) as a card in 12 distinct styles, from a quiet elevated or outlined card to image, horizontal media, ticket, stacked-paper and corner-icon layouts. Follows the Universal Theme Cards pattern (eyebrow, title, body, footer with figure and action) and takes every color from the active theme style.",

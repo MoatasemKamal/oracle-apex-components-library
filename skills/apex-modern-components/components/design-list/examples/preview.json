@@ -89,20 +89,20 @@
         {
           "TITLE": "Verify supplier bank details",
           "SUBTITLE": "Call-back to the number on file",
-          "META": "Done 12 Sep",
+          "META": "Sara Haddad, 12 Sep",
           "STATE": "done"
         },
         {
           "TITLE": "Match invoice to purchase order PO-5520",
-          "META": "Done 13 Sep",
+          "META": "Omar Aziz, 13 Sep",
           "STATE": "done"
         },
         {
           "TITLE": "Approve payment run above USD 50,000",
-          "SUBTITLE": "Needs CFO sign-off",
+          "SUBTITLE": "Payment run PR-2026-37, 14 suppliers",
           "META": "Due today",
           "STATE": "warning",
-          "STATE_LABEL": "Due today"
+          "STATE_LABEL": "Waiting for CFO"
         },
         {
           "TITLE": "Archive remittance advice",

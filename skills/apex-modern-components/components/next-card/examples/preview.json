@@ -291,7 +291,7 @@
       "rows": [
         {
           "TITLE": "Onboarding: Tamimi Markets",
-          "EYEBROW": "Customer success",
+          "EYEBROW": "Account ACC-4410",
           "DESCRIPTION": "Kick-off done, data import scheduled, training next week.",
           "ICON": "fa-smile-o",
           "BADGE": "Healthy",
@@ -304,7 +304,7 @@
         },
         {
           "TITLE": "Onboarding: Najd Pharmacies",
-          "EYEBROW": "Customer success",
+          "EYEBROW": "Account ACC-4417",
           "DESCRIPTION": "Waiting on SSO configuration from the customer IT team.",
           "ICON": "fa-plug",
           "BADGE": "Blocked",
@@ -453,7 +453,7 @@
       "rows": [
         {
           "TITLE": "Jeddah Waterfront Towers",
-          "EYEBROW": "Featured project",
+          "EYEBROW": "Project PRJ-3104",
           "DESCRIPTION": "Two mixed-use towers with 420 residential units and a retail podium. Structural works reached level 28 this week.",
           "ICON": "fa-building-o",
           "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxZDM1NTciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNzZmNTEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjQ4MCIgY3k9IjE0MCIgcj0iNDYiIGZpbGw9IiNmZmQxNjYiIG9wYWNpdHk9Ii45Ii8+PHJlY3QgeD0iMzAiIHk9IjIwMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjE2MCIgZmlsbD0iIzE0MjEzZCIvPjxyZWN0IHg9IjExMCIgeT0iMjUwIiB3aWR0aD0iNjAiIGhlaWdodD0iMTEwIiBmaWxsPSIjMTQyMTNkIi8+PHJlY3QgeD0iMTgwIiB5PSIxNzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxOTAiIGZpbGw9IiMxNDIxM2QiLz48cmVjdCB4PSIyNzAiIHk9IjIyMCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzE0MjEzZCIvPjxyZWN0IHg9IjMzMCIgeT0iMjcwIiB3aWR0aD0iNzAiIGhlaWdodD0iOTAiIGZpbGw9IiMxNDIxM2QiLz48cmVjdCB4PSI0MTAiIHk9IjE5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE3MCIgZmlsbD0iIzE0MjEzZCIvPjxyZWN0IHg9IjQ4MCIgeT0iMjQwIiB3aWR0aD0iNzAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMTQyMTNkIi8+PHJlY3QgeD0iNTYwIiB5PSIyMTAiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiMxNDIxM2QiLz48L3N2Zz4=",

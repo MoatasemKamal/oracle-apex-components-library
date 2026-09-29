@@ -149,7 +149,7 @@
           "PERIOD": "/ year",
           "DESCRIPTION": "Named engineers and a 4 hour response target.",
           "FEATURES": "24/7 ticket desk|4 hour response|Quarterly health check|Upgrade assistance",
-          "CTA_LABEL": "Upgrade",
+          "CTA_LABEL": "Upgrade to Priority Care",
           "CTA_URL": "#priority",
           "BADGE": "Recommended",
           "HIGHLIGHT": "Y"
@@ -161,7 +161,7 @@
           "PERIOD": "/ year",
           "DESCRIPTION": "A dedicated team for business-critical apps.",
           "FEATURES": "1 hour response|Dedicated success manager|On-site workshops|Custom SLA",
-          "CTA_LABEL": "Talk to us",
+          "CTA_LABEL": "Request a quote",
           "CTA_URL": "#premier",
           "HIGHLIGHT": "N"
         }
@@ -234,7 +234,7 @@
           "PERIOD": "/ year",
           "DESCRIPTION": "Named engineers and a 4 hour response target.",
           "FEATURES": "24/7 ticket desk|4 hour response|Quarterly health check|Upgrade assistance",
-          "CTA_LABEL": "Upgrade",
+          "CTA_LABEL": "Upgrade to Priority Care",
           "CTA_URL": "#priority",
           "BADGE": "Recommended",
           "HIGHLIGHT": "Y"
@@ -246,7 +246,7 @@
           "PERIOD": "/ year",
           "DESCRIPTION": "A dedicated team for business-critical apps.",
           "FEATURES": "1 hour response|Dedicated success manager|On-site workshops|Custom SLA",
-          "CTA_LABEL": "Talk to us",
+          "CTA_LABEL": "Request a quote",
           "CTA_URL": "#premier",
           "HIGHLIGHT": "N"
         }
@@ -401,7 +401,7 @@
           "PERIOD": "/ year",
           "DESCRIPTION": "Named engineers and a 4 hour response target.",
           "FEATURES": "24/7 ticket desk|4 hour response|Quarterly health check|Upgrade assistance",
-          "CTA_LABEL": "Upgrade",
+          "CTA_LABEL": "Upgrade to Priority Care",
           "CTA_URL": "#priority",
           "BADGE": "Recommended",
           "HIGHLIGHT": "Y"
@@ -413,7 +413,7 @@
           "PERIOD": "/ year",
           "DESCRIPTION": "A dedicated team for business-critical apps.",
           "FEATURES": "1 hour response|Dedicated success manager|On-site workshops|Custom SLA",
-          "CTA_LABEL": "Talk to us",
+          "CTA_LABEL": "Request a quote",
           "CTA_URL": "#premier",
           "HIGHLIGHT": "N"
         }

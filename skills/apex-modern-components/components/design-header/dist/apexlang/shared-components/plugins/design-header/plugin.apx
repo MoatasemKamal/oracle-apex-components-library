@@ -39,7 +39,7 @@ plugin designHeader (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Place at the top of a page or section, usually in a region with the Blank with Attributes template. Title renders as h2. The primary button uses t-Button--hot and the secondary a normal t-Button, so both follow the theme. The Image URL is used by the Image Overlay and Split styles only.

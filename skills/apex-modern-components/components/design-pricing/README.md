@@ -10,7 +10,7 @@ Pricing plan cards in 10 designs (classic, highlighted, glass, gradient header, 
 | APEXlang reference | `type: plugin/designPricing` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Use report mode with one row per plan (2 to 4 plans read best). Map Features to a column that joins the features with |, for example Unlimited orders|Priority support. Map Highlight to a column returning Y for the recommended plan. The call to action renders as a native Universal Theme button (hot for the highlighted plan).
 

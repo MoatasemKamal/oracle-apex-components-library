@@ -10,7 +10,7 @@ Family of 10 compact page hero and section header designs (gradient hero, split,
 | APEXlang reference | `type: plugin/designHeader` |
 | Modes | partial (single / report column) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Place at the top of a page or section, usually in a region with the Blank with Attributes template. Title renders as h2. The primary button uses t-Button--hot and the secondary a normal t-Button, so both follow the theme. The Image URL is used by the Image Overlay and Split styles only.
 

@@ -3,7 +3,7 @@
   "apexlangName": "designList",
   "staticId": "AMC_DESIGN_LIST",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "filesVersion": 1,
   "minApexVersion": "23.1",
   "keywords": ["list", "content row", "media list", "avatar list", "files", "checklist", "tasks", "leaderboard", "ranking", "contacts", "people", "settings", "notifications", "inbox", "messages", "metrics", "bars", "chips", "design collection"],

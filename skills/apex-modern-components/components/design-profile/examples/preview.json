@@ -55,7 +55,7 @@
           "LINK_URL": "#",
           "COVER_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%23435a6e'/%3E%3Cpath d='M0 120 L160 70 L300 110 L460 40 L640 90 L640 160 L0 160z' fill='%23627c92'/%3E%3C/svg%3E",
           "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23c9d3de'/%3E%3Ccircle cx='48' cy='38' r='17' fill='%23788a9e'/%3E%3Cpath d='M14 96c4-22 17-31 34-31s30 9 34 31z' fill='%23788a9e'/%3E%3C/svg%3E",
-          "LINK_LABEL": "Follow"
+          "LINK_LABEL": "View accounts"
         },
         {
           "NAME": "Omar Khaled",
@@ -70,7 +70,7 @@
           "STAT3_VALUE": "12",
           "STAT3_LABEL": "Carriers",
           "LINK_URL": "#",
-          "LINK_LABEL": "Message"
+          "LINK_LABEL": "Send message"
         }
       ]
     },

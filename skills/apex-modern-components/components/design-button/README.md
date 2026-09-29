@@ -10,7 +10,7 @@ Link and action buttons in 12 designs (soft, gradient, glass, outline draw, pill
 | APEXlang reference | `type: plugin/designButton` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Use for marketing-style calls to action and hero links; keep native Universal Theme buttons for form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Every design has hover, pressed and keyboard focus states and respects reduced motion.
 

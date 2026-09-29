@@ -10,7 +10,7 @@ Design Collection family of ten person/profile designs chosen with Style: center
 | APEXlang reference | `type: plugin/designProfile` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Pick a Style, then map Name and either Image URL or Initials. Role, Bio, Status (online, away, busy, offline), up to three stats, a link and, for the Cover and Business Card styles, Cover Image URL, Email and Phone are optional. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.
 

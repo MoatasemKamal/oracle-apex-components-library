@@ -161,11 +161,9 @@
 .amc-DDivider--eyebrowTitle .amc-DDivider-eyebrow {
   display: block;
   color: var(--amc-ddiv-accent);
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .08em;
+  font-size: .8125rem;
+  font-weight: 600;
   line-height: 1.3;
-  text-transform: uppercase;
 }
 
 .amc-DDivider--eyebrowTitle .amc-DDivider-title {
@@ -467,10 +465,8 @@
 
 .amc-DDivider--dotted .amc-DDivider-title {
   color: var(--amc-ddiv-muted);
-  font-size: .6875rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 600;
 }
 
 .amc-DDivider--dotted .amc-DDivider-icon {
@@ -522,11 +518,9 @@
 .amc-DDivider--sideLabel .amc-DDivider-eyebrow {
   display: block;
   color: var(--amc-ddiv-muted);
-  font-size: .6875rem;
-  font-weight: 600;
-  letter-spacing: .06em;
+  font-size: .75rem;
+  font-weight: 500;
   line-height: 1.2;
-  text-transform: uppercase;
 }
 
 .amc-DDivider--sideLabel .amc-DDivider-desc {

@@ -49,7 +49,7 @@ plugin nextBento (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Each query row is one tile. Pick a Style, map Title (required) and any of Eyebrow, Description, Icon, Value, Value Label, State, Link URL, Link Label, Span and Featured. Span returns normal, wide, tall or large and builds the bento layout; the grid switches to two columns and then one column based on the width of the region itself, not the window. Featured returns Y for the tile the style should emphasise, such as the beam tile, the magazine cover story or the tile that is open first. Colors follow the active Universal Theme style, including dark styles, Theme Roller changes and right-to-left pages.
@@ -79,7 +79,7 @@ plugin nextBento (
         help {
             helpText:
                 ```
-                Bento design, tagged with its Next direction. Spotlight Glow, motion: one light follows the pointer across the whole grid and lights the nearest borders. Beam Feature, motion: a light beam travels around the Featured tile, the others stay quiet. Tilt Tiles, depth: each tile tilts toward the pointer with its icon and figure floating above the surface. Layered Glass, depth: frosted tiles float at different heights over a soft blurred color field that shifts with the pointer. Neo Brutal, bold: ink borders, hard offset shadows and flat fills. Clay, bold: soft pillowy tiles with inner and outer shadows. Aurora Mosaic, bold: tiles cut as windows from one continuous aurora gradient with film grain. Grid Pattern, bold: grid and dot patterns with oversized outline icons. Magazine, smart: editorial cover story and numbered columns when wide, two columns when medium, a numbered contents list when narrow. Expanding Tiles, smart: the hovered or focused tile grows while its siblings shrink; a vertical accordion when narrow. The pointer effects need a mouse or trackpad and stop when the user prefers reduced motion; the static design stays complete.
+                Bento design, tagged with its Next direction. Spotlight Glow, motion: one light follows the pointer across the whole grid and lights the nearest borders. Beam Feature, motion: a light beam travels around the Featured tile, the others stay quiet. Tilt Tiles, depth: each tile tilts toward the pointer with its icon and figure floating above the surface. Layered Glass, depth: frosted tiles float at different heights over a soft blurred color field that shifts with the pointer. Neo Brutal, bold: ink borders, hard offset shadows and flat fills. Clay, bold: soft pillowy tiles with inner and outer shadows. Aurora Mosaic, bold: tiles cut as windows from one continuous aurora gradient with film grain. Grid Pattern, bold: grid and dot patterns with oversized outline icons. Magazine, smart: editorial cover story and ruled columns when wide, two columns when medium, a ruled contents list when narrow. Expanding Tiles, smart: the hovered or focused tile grows while its siblings shrink; a vertical accordion when narrow. The pointer effects need a mouse or trackpad and stop when the user prefers reduced motion; the static design stays complete.
                 ```
         }
         entry spotlightGlow (

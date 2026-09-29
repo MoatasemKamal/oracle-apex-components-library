@@ -10,7 +10,7 @@ Call-to-action buttons in 12 current-generation designs from the Next Collection
 | APEXlang reference | `type: plugin/nextButton` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Use for one or two prominent calls to action per page and keep native Universal Theme buttons for ordinary form actions. Set Link to render an anchor; without a link a button is rendered for a Dynamic Action. Map Color to a column returning primary, success, warning, danger or info (anything else renders as primary). Hint is short secondary text: the shortcut legend on Keycap, the instruction under the label on Confirm hold, a small trailing tag elsewhere. Every design has hover, pressed and keyboard focus states, and all motion stops under reduced motion.

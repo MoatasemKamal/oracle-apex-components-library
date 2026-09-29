@@ -3,7 +3,7 @@
   "apexlangName": "nextGallery",
   "staticId": "AMC_NEXT_GALLERY",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "filesVersion": 1,
   "minApexVersion": "23.1",
   "keywords": ["gallery", "image gallery", "photo gallery", "photos", "images", "pictures", "lightbox", "masonry", "justified", "filmstrip", "carousel", "slideshow", "coverflow", "polaroid", "mosaic", "bento", "hover zoom", "before after", "image compare", "comparison slider", "swipe", "card stack", "contact sheet", "light table", "loupe", "blob", "next collection"],

@@ -270,7 +270,6 @@
     inset 0 0 0 1px color-mix(in srgb, var(--amc-nbtn-c) 30%, var(--amc-nbtn-line)),
     0 1px 2px color-mix(in srgb, var(--amc-nbtn-shade) 8%, transparent),
     0 1rem 2.25rem -1rem color-mix(in srgb, var(--amc-nbtn-c) 80%, transparent);
-  transform: translateY(-1px);
 }
 
 .amc-NButton--borderBeam:hover .amc-NButton-icon,
@@ -385,9 +384,6 @@
   background: var(--amc-nbtn-spectrum);
   color: var(--amc-nbtn-shade);
 }
-
-.amc-NButton--rainbowGlow:hover,
-.amc-NButton--rainbowGlow:focus-visible { transform: translateY(-2px); }
 
 .amc-NButton--rainbowGlow:hover .amc-NButton-fx,
 .amc-NButton--rainbowGlow:focus-visible .amc-NButton-fx {
@@ -745,9 +741,6 @@
 
 .amc-NButton--clay .amc-NButton-hint { background-color: color-mix(in srgb, var(--amc-nbtn-light) 25%, transparent); }
 
-.amc-NButton--clay:hover,
-.amc-NButton--clay:focus-visible { transform: translateY(-2px) scale(1.02); }
-
 .amc-NButton--clay:active {
   box-shadow:
     .125rem .25rem .5rem -.125rem color-mix(in srgb, var(--amc-nbtn-c) 45%, color-mix(in srgb, var(--amc-nbtn-page) 60%, var(--amc-nbtn-shade))),
@@ -805,7 +798,6 @@
 .amc-NButton--holo:hover,
 .amc-NButton--holo:focus-visible {
   --amc-nbtn-foil: 75%;
-  transform: translateY(-1px);
 }
 
 .amc-NButton--holo:active { transform: scale(.97); }

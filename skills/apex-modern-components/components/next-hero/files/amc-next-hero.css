@@ -227,17 +227,10 @@
   font-size: clamp(1.5rem, 6.2cqi, 4rem);
   letter-spacing: -.035em;
 }
-.amc-NHero--aurora .amc-NHero-highlight {
-  animation: amc-nh-textflow 9s ease-in-out infinite alternate;
-}
 
 @keyframes amc-nh-aurora {
   from { background-position: 0% 50%; }
   to { background-position: 200% 50%; }
-}
-@keyframes amc-nh-textflow {
-  from { background-position: 0% 50%; }
-  to { background-position: 100% 50%; }
 }
 
 /* ======================================================================
@@ -532,7 +525,6 @@
   position: absolute;
   inset: 4%;
   border-radius: 50%;
-  animation: amc-nh-spin 18s linear infinite;
 }
 .amc-NHero-orbit::before {
   content: "";
@@ -588,7 +580,6 @@
   border-radius: .75rem;
   background: var(--amc-nh-bg);
   box-shadow: 0 .75rem 1.5rem -.75rem color-mix(in srgb, var(--amc-nh-fg) 40%, transparent);
-  animation: amc-nh-float 6s ease-in-out infinite alternate;
 }
 .amc-NHero-chip--a {
   inset-block-start: 14%;
@@ -645,13 +636,6 @@
   from { rotate: y -5deg; }
   to { rotate: y 5deg; }
 }
-@keyframes amc-nh-spin {
-  to { transform: rotate(1turn); }
-}
-@keyframes amc-nh-float {
-  from { translate: 0 -.35rem; }
-  to { translate: 0 .35rem; }
-}
 
 /* ======================================================================
  * BOLD - Kinetic Type: oversized headline, outlined highlight swept by
@@ -675,9 +659,8 @@
   border: 0;
   border-radius: 0;
   background: none;
-  font-size: .8125rem;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  font-size: .9375rem;
+  font-weight: 700;
 }
 .amc-NHero--kineticType .amc-NHero-eyebrowDot {
   inline-size: 1.5rem;
@@ -780,8 +763,6 @@
   background: var(--amc-nh-bg);
   box-shadow: calc(3px * var(--amc-nh-dir)) 3px 0 var(--amc-nh-ink);
   font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
   rotate: -2deg;
 }
 .amc-NHero--neoBrutal .amc-NHero-eyebrowDot {
@@ -835,7 +816,6 @@
   aspect-ratio: 1;
   background: var(--amc-nh-ink);
   clip-path: var(--amc-nh-star);
-  animation: amc-nh-spin 30s linear infinite;
 }
 .amc-NHero-burst::before {
   content: "";
@@ -848,7 +828,6 @@
   position: relative;
   color: var(--amc-nh-accent-on);
   font-size: clamp(1.5rem, 5cqi, 2.5rem);
-  animation: amc-nh-spin 30s linear infinite reverse;
 }
 @container amc-nhero (max-width: 30rem) {
   .amc-NHero-burst {
@@ -1095,9 +1074,8 @@
   border: 0;
   background: none;
   color: var(--amc-nh-accent);
-  font-size: .8125rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: .9375rem;
+  font-weight: 700;
 }
 .amc-NHero--scrollReveal .amc-NHero-eyebrowDot {
   display: none;

@@ -3,8 +3,8 @@
   "apexlangName": "designProfile",
   "staticId": "AMC_DESIGN_PROFILE",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
-  "filesVersion": 1,
+  "version": "1.0.1",
+  "filesVersion": 2,
   "minApexVersion": "23.1",
   "keywords": [
     "profile",

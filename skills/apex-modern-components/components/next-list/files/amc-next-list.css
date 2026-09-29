@@ -298,14 +298,13 @@
   background: linear-gradient(180deg, var(--amc-nl-bg), color-mix(in srgb, var(--amc-nl-fg) 3%, var(--amc-nl-bg)));
   box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-nl-fg) 6%, transparent);
   white-space: nowrap;
-  transition: border-color .25s, box-shadow .25s, transform .25s var(--amc-nl-ease);
+  transition: border-color .25s, box-shadow .25s;
 }
 
 .amc-NList--marqueeLogos .amc-NList-item:hover,
 .amc-NList--marqueeLogos .amc-NList-item:focus-within {
   border-color: color-mix(in srgb, var(--amc-nl-accent) 45%, var(--amc-nl-line));
   box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--amc-nl-accent) 40%, transparent);
-  transform: translateY(-2px);
 }
 
 .amc-NList--marqueeLogos .amc-NList-lead {
@@ -698,7 +697,7 @@
     0 2px 4px color-mix(in srgb, var(--amc-nl-accent) 14%, transparent),
     inset 0 -6px 12px color-mix(in srgb, var(--amc-nl-accent) 16%, transparent),
     inset 0 -1px 2px color-mix(in srgb, var(--amc-nl-page) 60%, transparent);
-  transition: transform .4s var(--amc-nl-spring), box-shadow .4s;
+  transition: box-shadow .4s;
 }
 
 /* Soft top-left highlight; screen blending lightens in both light and dark styles. */
@@ -716,7 +715,6 @@
 
 .amc-NList--clay .amc-NList-item:hover,
 .amc-NList--clay .amc-NList-item:focus-within {
-  transform: translateY(-3px) scale(1.01);
   box-shadow:
     0 16px 28px -8px color-mix(in srgb, var(--amc-nl-accent) 40%, var(--amc-nl-page)),
     0 2px 4px color-mix(in srgb, var(--amc-nl-accent) 14%, transparent),

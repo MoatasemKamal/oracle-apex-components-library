@@ -292,7 +292,11 @@
   border-radius: var(--amc-dprof-radius);
 }
 
-.amc-DProfile-linkIcon { font-size: .6875rem; }
+/* Text links carry no appended chevron. It is shown only where the link is an icon-only
+   target (Horizontal) or a row disclosure in a list (Compact Row). */
+.amc-DProfile-linkIcon { display: none; font-size: .6875rem; }
+.amc-DProfile--horizontal .amc-DProfile-linkIcon,
+.amc-DProfile--compactRow .amc-DProfile-linkIcon { display: inline-block; }
 .amc-DProfile-linkIcon:dir(rtl) { transform: scaleX(-1); }
 
 /* Contact lines (Business Card) */
@@ -438,7 +442,6 @@
   white-space: nowrap;
 }
 
-.amc-DProfile--cover .amc-DProfile-linkIcon { display: none; }
 
 /* ---------- 3. Horizontal: avatar beside the text ---------- */
 

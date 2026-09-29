@@ -58,7 +58,7 @@
           "PERIOD": "/ month",
           "DESCRIPTION": "Track up to 50 shipments a month.",
           "FEATURES": "50 shipments|Live tracking page|Email alerts",
-          "CTA_LABEL": "Get started",
+          "CTA_LABEL": "Choose Basic",
           "CTA_URL": "#"
         },
         {
@@ -80,7 +80,7 @@
           "PERIOD": "/ month",
           "DESCRIPTION": "Warehouses, APIs and SLAs.",
           "FEATURES": "Unlimited shipments|Warehouse routing|REST API|99.9% uptime SLA",
-          "CTA_LABEL": "Talk to us",
+          "CTA_LABEL": "Contact sales",
           "CTA_URL": "#"
         }
       ]
@@ -196,7 +196,7 @@
           "PERIOD": "/ month",
           "DESCRIPTION": "One app, community support.",
           "FEATURES": "1 workspace|3 environments|Community forum",
-          "CTA_LABEL": "Start building",
+          "CTA_LABEL": "Choose Hobby",
           "CTA_URL": "#"
         },
         {
@@ -204,11 +204,11 @@
           "PRICE": "29",
           "CURRENCY": "$",
           "PERIOD": "/ dev / month",
-          "DESCRIPTION": "Ship faster with previews and CI.",
+          "DESCRIPTION": "Preview deployments and CI for small teams.",
           "FEATURES": "Unlimited workspaces|Preview deployments|CI pipelines|Email support",
-          "CTA_LABEL": "Go Pro",
+          "CTA_LABEL": "Choose Pro",
           "CTA_URL": "#",
-          "BADGE": "Hot pick",
+          "BADGE": "Most teams",
           "HIGHLIGHT": "Y"
         },
         {
@@ -403,9 +403,9 @@
           "PRICE": "0",
           "CURRENCY": "SAR",
           "PERIOD": "/ month",
-          "DESCRIPTION": "Try the form builder.",
+          "DESCRIPTION": "Three forms for one team.",
           "FEATURES": "3 forms|100 responses|Basic fields",
-          "CTA_LABEL": "Sign up",
+          "CTA_LABEL": "Create free account",
           "CTA_URL": "#"
         },
         {

@@ -20,7 +20,7 @@
           "LINK_LABEL": "Open project"
         },
         {
-          "TITLE": "ERP Cloud Migration",
+          "TITLE": "ERP cloud migration",
           "EYEBROW": "Project PRJ-2057",
           "DESCRIPTION": "Finance and procurement modules move to the new tenant.",
           "ICON": "fa-cloud",
@@ -70,7 +70,7 @@
       },
       "rows": [
         {
-          "TITLE": "Q3 Revenue Review",
+          "TITLE": "Q3 revenue review",
           "EYEBROW": "Finance",
           "DESCRIPTION": "Board pack with regional breakdown and forecast update.",
           "ICON": "fa-line-chart",
@@ -81,7 +81,7 @@
           "LINK_LABEL": "Open report"
         },
         {
-          "TITLE": "Vendor Scorecards",
+          "TITLE": "Vendor scorecards",
           "EYEBROW": "Procurement",
           "DESCRIPTION": "Delivery, quality and price scores for 48 suppliers.",
           "ICON": "fa-star",
@@ -97,18 +97,18 @@
       },
       "rows": [
         {
-          "TITLE": "Enterprise Support Plan",
+          "TITLE": "Enterprise support plan",
           "EYEBROW": "Renewal due 30 Nov",
           "DESCRIPTION": "24x7 support, 1-hour response and a named engineer.",
           "ICON": "fa-shield",
           "VALUE": "SAR 96,000",
           "VALUE_LABEL": "Annual",
           "LINK_URL": "f?p=100:12",
-          "LINK_LABEL": "Renew"
+          "LINK_LABEL": "Renew plan"
         },
         {
-          "TITLE": "Data Platform Add-on",
-          "EYEBROW": "Recommended",
+          "TITLE": "Data platform add-on",
+          "EYEBROW": "Not in current contract",
           "DESCRIPTION": "Adds 5 TB storage and daily replicated backups.",
           "ICON": "fa-database",
           "VALUE": "SAR 18,500",
@@ -124,7 +124,7 @@
       },
       "rows": [
         {
-          "TITLE": "Jeddah Warehouse Expansion",
+          "TITLE": "Jeddah warehouse expansion",
           "EYEBROW": "Facilities",
           "DESCRIPTION": "Adds 12,000 pallet positions and two loading docks.",
           "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNkZmU4ZjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5ZmI2Y2MiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxyZWN0IHg9IjYwIiB5PSI5MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIyMzAiIGZpbGw9IiM1ZDc4OTIiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjcwIiB5PSIxMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHg9IjcwIiB5PSIxNzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2U5YTU1YSIvPjxyZWN0IHg9IjcwIiB5PSIyMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHg9IjIwMCIgeT0iOTAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMjMwIiBmaWxsPSIjNWQ3ODkyIiBvcGFjaXR5PSIuODUiLz48cmVjdCB4PSIyMTAiIHk9IjExMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjJjMjdiIi8+PHJlY3QgeD0iMjEwIiB5PSIxNzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2U5YTU1YSIvPjxyZWN0IHg9IjIxMCIgeT0iMjMwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNmMmMyN2IiLz48cmVjdCB4PSIzNDAiIHk9IjkwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjIzMCIgZmlsbD0iIzVkNzg5MiIgb3BhY2l0eT0iLjg1Ii8+PHJlY3QgeD0iMzUwIiB5PSIxMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHg9IjM1MCIgeT0iMTcwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNlOWE1NWEiLz48cmVjdCB4PSIzNTAiIHk9IjIzMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjJjMjdiIi8+PHJlY3QgeD0iNDgwIiB5PSI5MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIyMzAiIGZpbGw9IiM1ZDc4OTIiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjQ5MCIgeT0iMTEwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNmMmMyN2IiLz48cmVjdCB4PSI0OTAiIHk9IjE3MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZTlhNTVhIi8+PHJlY3QgeD0iNDkwIiB5PSIyMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHk9IjMyMCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzQ0NWE3MCIvPjwvc3ZnPg==",
@@ -133,10 +133,10 @@
           "STATE": "info",
           "META": "Due 14 Dec 2026",
           "LINK_URL": "f?p=100:12",
-          "LINK_LABEL": "Details"
+          "LINK_LABEL": "View schedule"
         },
         {
-          "TITLE": "Head Office Refurbishment",
+          "TITLE": "Head office refurbishment",
           "EYEBROW": "Facilities",
           "DESCRIPTION": "Open-plan floor 4 with 60 hot desks.",
           "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmMWU5ZGMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkOWM3YWIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxyZWN0IHg9IjAiIHk9IjI1MCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIxMTAiIGZpbGw9IiM2YjRmM2EiLz48cmVjdCB4PSIyMDAiIHk9IjExMCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxNDAiIHJ4PSIxMCIgZmlsbD0iIzIyMzEzZiIvPjxyZWN0IHg9IjIxNCIgeT0iMTI0IiB3aWR0aD0iMjEyIiBoZWlnaHQ9IjExMiIgZmlsbD0iIzRmODZjNiIvPjxyZWN0IHg9IjMwMCIgeT0iMjUwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTIiIGZpbGw9IiMyMjMxM2YiLz48Y2lyY2xlIGN4PSI1MjAiIGN5PSIyMjAiIHI9IjI2IiBmaWxsPSIjZmZmZmZmIi8+PHJlY3QgeD0iODAiIHk9IjE3MCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjgwIiByeD0iOCIgZmlsbD0iIzJhOWQ4ZiIvPjwvc3ZnPg==",
@@ -154,7 +154,7 @@
       },
       "rows": [
         {
-          "TITLE": "Dammam Port Logistics Hub",
+          "TITLE": "Dammam port logistics hub",
           "EYEBROW": "Region East",
           "DESCRIPTION": "Container throughput up 18% since the new cranes went live.",
           "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNhOGRhZGMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmMWZhZWUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxyZWN0IHg9IjQwIiB5PSIyMjAiIHdpZHRoPSIxMDUiIGhlaWdodD0iNTYiIGZpbGw9IiNlNjM5NDYiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMTUwIiB5PSIyMjAiIHdpZHRoPSIxMDUiIGhlaWdodD0iNTYiIGZpbGw9IiM0NTdiOWQiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjYwIiB5PSIyMjAiIHdpZHRoPSIxMDUiIGhlaWdodD0iNTYiIGZpbGw9IiNmNGEyNjEiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iOTUiIHk9IjE2MCIgd2lkdGg9IjEwNSIgaGVpZ2h0PSI1NiIgZmlsbD0iIzJhOWQ4ZiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyMDUiIHk9IjE2MCIgd2lkdGg9IjEwNSIgaGVpZ2h0PSI1NiIgZmlsbD0iI2U5YzQ2YSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIzNzAiIHk9IjIyMCIgd2lkdGg9IjEwNSIgaGVpZ2h0PSI1NiIgZmlsbD0iIzFkMzU1NyIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSI1MDAiIHk9IjYwIiB3aWR0aD0iMTQiIGhlaWdodD0iMjE2IiBmaWxsPSIjMWQzNTU3Ii8+PHJlY3QgeD0iNDIwIiB5PSI2MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzFkMzU1NyIvPjxyZWN0IHk9IjI3NiIgd2lkdGg9IjY0MCIgaGVpZ2h0PSI4NCIgZmlsbD0iIzM1NTA3MCIvPjwvc3ZnPg==",
@@ -162,7 +162,7 @@
           "STATE": "success",
           "META": "212 shipments this week",
           "LINK_URL": "f?p=100:12",
-          "LINK_LABEL": "Explore"
+          "LINK_LABEL": "View shipments"
         },
         {
           "TITLE": "NEOM Solar Farm",
@@ -173,12 +173,12 @@
           "STATE": "neutral"
         },
         {
-          "TITLE": "Customer Success Program",
-          "EYEBROW": "No image",
-          "DESCRIPTION": "Without an image the card falls back to a primary gradient.",
+          "TITLE": "Customer onboarding program",
+          "EYEBROW": "Customer success",
+          "DESCRIPTION": "Nine new accounts need an onboarding owner this month.",
           "ICON": "fa-users",
           "LINK_URL": "f?p=100:12",
-          "LINK_LABEL": "Join"
+          "LINK_LABEL": "Assign accounts"
         }
       ]
     },
@@ -220,7 +220,7 @@
       },
       "rows": [
         {
-          "TITLE": "Server Room Cooling",
+          "TITLE": "Server room cooling",
           "EYEBROW": "Incident INC-5521",
           "DESCRIPTION": "Rack temperature above threshold in hall B.",
           "ICON": "fa-thermometer-three-quarters",
@@ -229,7 +229,7 @@
           "META": "Opened 09:42"
         },
         {
-          "TITLE": "Payroll Run September",
+          "TITLE": "September payroll run",
           "EYEBROW": "HR Operations",
           "DESCRIPTION": "All 1,204 payslips generated and approved.",
           "ICON": "fa-check",
@@ -238,7 +238,7 @@
           "META": "Closed 28 Sep"
         },
         {
-          "TITLE": "Annual Audit Prep",
+          "TITLE": "Annual audit preparation",
           "EYEBROW": "Compliance",
           "DESCRIPTION": "Evidence folders for 3 of 5 controls uploaded.",
           "ICON": "fa-folder-open-o",
@@ -287,8 +287,7 @@
       },
       "rows": [
         {
-          "TITLE": "Supplier Contracts 2026",
-          "EYEBROW": "Folder",
+          "TITLE": "Supplier contracts 2026",
           "DESCRIPTION": "Signed master agreements and annexes for active suppliers.",
           "ICON": "fa-files-o",
           "BADGE": "38 documents",
@@ -298,8 +297,7 @@
           "LINK_LABEL": "Open folder"
         },
         {
-          "TITLE": "Purchase Requests to Approve",
-          "EYEBROW": "Queue",
+          "TITLE": "Purchase requests to approve",
           "DESCRIPTION": "Requests waiting for your approval, oldest first.",
           "ICON": "fa-inbox",
           "BADGE": "7 waiting",
@@ -316,7 +314,7 @@
       },
       "rows": [
         {
-          "TITLE": "Monthly Operating Costs",
+          "TITLE": "Monthly operating costs",
           "EYEBROW": "Cost center CC-400",
           "DESCRIPTION": "Utilities, maintenance and security for all sites.",
           "ICON": "fa-money",
@@ -325,7 +323,7 @@
           "META": "-4.1% vs. August"
         },
         {
-          "TITLE": "Fleet Utilization",
+          "TITLE": "Fleet utilization",
           "EYEBROW": "Logistics",
           "DESCRIPTION": "Share of trucks on the road during working hours.",
           "ICON": "fa-truck",
@@ -343,7 +341,7 @@
       },
       "rows": [
         {
-          "TITLE": "Open Support Tickets",
+          "TITLE": "Open support tickets",
           "EYEBROW": "Service desk",
           "DESCRIPTION": "Across all priority levels.",
           "ICON": "fa-ticket",
@@ -353,7 +351,7 @@
           "LINK_LABEL": "Go to queue"
         },
         {
-          "TITLE": "New Customers",
+          "TITLE": "New customers",
           "EYEBROW": "Sales",
           "DESCRIPTION": "Accounts created this quarter.",
           "ICON": "fa-user-plus",

@@ -601,10 +601,8 @@
 .amc-NPricing--neoBrutal.is-featured .amc-NPricing-period { color: color-mix(in srgb, var(--amc-npr-accent-fg) 85%, transparent); }
 
 .amc-NPricing--neoBrutal .amc-NPricing-plan {
-  font-size: .8125rem;
+  font-size: .9375rem;
   font-weight: 800;
-  letter-spacing: .08em;
-  text-transform: uppercase;
 }
 
 .amc-NPricing--neoBrutal .amc-NPricing-amount {
@@ -684,7 +682,6 @@
     0 .375rem .75rem -.25rem color-mix(in srgb, var(--amc-npr-fg) 12%, transparent),
     inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-npr-accent) 12%, transparent),
     inset 0 .625rem 1rem color-mix(in srgb, var(--amc-npr-page) 75%, transparent);
-  transition: transform .35s var(--amc-npr-ease);
 }
 
 .amc-NPricing--clay.is-featured .amc-NPricing-card {
@@ -694,10 +691,6 @@
     0 .375rem .75rem -.25rem color-mix(in srgb, var(--amc-npr-fg) 12%, transparent),
     inset 0 -.75rem 1.5rem color-mix(in srgb, var(--amc-npr-accent) 24%, transparent),
     inset 0 .625rem 1rem color-mix(in srgb, var(--amc-npr-page) 60%, transparent);
-}
-
-@media (hover: hover) {
-  .amc-NPricing--clay .amc-NPricing-card:hover { transform: translateY(-.25rem) scale(1.01); }
 }
 
 .amc-NPricing--clay .amc-NPricing-icon {
@@ -918,7 +911,7 @@
   border-radius: calc(var(--amc-npr-radius) + .5rem);
   background-color: var(--amc-npr-bg);
   box-shadow: var(--amc-npr-shadow);
-  transition: transform .4s var(--amc-npr-ease), box-shadow .4s var(--amc-npr-ease);
+  transition: box-shadow .4s var(--amc-npr-ease);
 }
 
 .amc-NPricing--expandFeatures.is-featured .amc-NPricing-card {
@@ -931,13 +924,11 @@
 .amc-NPricing--expandFeatures .amc-NPricing-card:focus-within,
 .amc-NPricing--expandFeatures .amc-NPricing-card.is-open {
   box-shadow: 0 1.5rem 2.5rem -1.5rem color-mix(in srgb, var(--amc-npr-fg) 45%, transparent), var(--amc-npr-shadow);
-  transform: translateY(-.25rem);
 }
 
 @media (hover: hover) {
   .amc-NPricing--expandFeatures .amc-NPricing-card:hover {
     box-shadow: 0 1.5rem 2.5rem -1.5rem color-mix(in srgb, var(--amc-npr-fg) 45%, transparent), var(--amc-npr-shadow);
-    transform: translateY(-.25rem);
   }
 }
 

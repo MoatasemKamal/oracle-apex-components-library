@@ -10,7 +10,7 @@ Next Collection family of ten current-generation KPI tiles chosen with Style, co
 | APEXlang reference | `type: plugin/nextKpi` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (0 to 100) drives Liquid Fill, the Bento Tile ring and the Adaptive bar. Series (comma-separated numbers) draws the sparkline of Tilt, Aurora Glow and Bento Tile and the bars of Neo Brutal. Compare Value, Compare Label and Breakdown fill the back of Flip Detail. Every style is complete without JavaScript; the runtime file only adds the ticker, the pointer tilt, sparklines and the Percent level.

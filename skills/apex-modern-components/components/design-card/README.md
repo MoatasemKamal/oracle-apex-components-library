@@ -10,7 +10,7 @@ Design Collection card family: one record (order, project, invoice, customer) as
 | APEXlang reference | `type: plugin/designCard` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Pick a Style, then map Title (required) and any of Eyebrow, Description, Icon, Image URL, Badge, State, Value, Value Label, Meta, Link URL and Link Label to columns or static text. Empty settings are simply left out. The whole card becomes clickable when Link URL is set. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.
 

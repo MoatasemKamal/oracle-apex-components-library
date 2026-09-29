@@ -10,7 +10,7 @@ Family of 10 alert and callout designs (soft, side icon, solid, gradient banner,
 | APEXlang reference | `type: plugin/designAlert` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set.
 

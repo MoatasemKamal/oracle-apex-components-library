@@ -3,7 +3,7 @@
   "apexlangName": "designBadge",
   "staticId": "AMC_DESIGN_BADGE",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["badge", "status", "tag", "label", "pill", "chip", "lozenge", "counter", "live", "ribbon", "design collection"],
   "description": "Status badges in 12 designs (soft, solid, outline, dot, live, gradient pill, counter, icon tag, chip, ribbon, code, status bar), following the lozenge and chip patterns of Universal Theme Badge, GitHub labels and shields-style split tags. One badge (partial) or an inline wrapping group (report).",

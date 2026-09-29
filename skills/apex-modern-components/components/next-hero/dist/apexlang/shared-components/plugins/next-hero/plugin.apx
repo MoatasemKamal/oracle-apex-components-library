@@ -43,7 +43,7 @@ plugin nextHero (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Place at the top of a page or login region, usually in a region with the Blank with Attributes template or the Standard template with hideHeader and noUI options. Title renders as h2, Highlight continues the same heading with an accent treatment. The primary button uses t-Button--hot and the secondary a normal t-Button. The optional JavaScript file only tracks the pointer for the Grid Spotlight and Parallax Layers styles and splits the headline into words for Scroll Reveal; it does nothing under reduced motion or on touch input.

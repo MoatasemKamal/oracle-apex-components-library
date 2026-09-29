@@ -55,7 +55,7 @@ plugin designPricing (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Use report mode with one row per plan (2 to 4 plans read best). Map Features to a column that joins the features with |, for example Unlimited orders|Priority support. Map Highlight to a column returning Y for the recommended plan. The call to action renders as a native Universal Theme button (hot for the highlighted plan).

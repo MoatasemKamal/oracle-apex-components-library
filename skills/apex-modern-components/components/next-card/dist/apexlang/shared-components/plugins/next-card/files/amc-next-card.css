@@ -290,15 +290,6 @@
   font-weight: 600;
   text-decoration: none;
 }
-.amc-NCard-ctaIcon {
-  font-size: .75em;
-  transition: transform .25s var(--amc-ncard-ease);
-}
-.amc-NCard-ctaIcon:dir(rtl) { transform: scaleX(-1); }
-.amc-NCard-card:hover .amc-NCard-ctaIcon,
-.amc-NCard-card:focus-within .amc-NCard-ctaIcon { transform: translateX(.25rem); }
-.amc-NCard-card:hover .amc-NCard-ctaIcon:dir(rtl),
-.amc-NCard-card:focus-within .amc-NCard-ctaIcon:dir(rtl) { transform: scaleX(-1) translateX(.25rem); }
 
 /* Narrow cards (220px columns): the heading takes its own line under icon and badge. */
 @container (max-width: 17rem) {
@@ -693,8 +684,6 @@
   margin: 0;
   font-size: .8125rem;
   font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
   opacity: .85;
 }
 .amc-NCard-face--back .amc-NCard-desc { color: var(--amc-ncard-fg); font-size: .9375rem; }
@@ -800,8 +789,6 @@
   background: color-mix(in srgb, var(--amc-ncard-accent) 22%, var(--amc-ncard-bg));
   color: var(--amc-ncard-ink);
   font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
 }
 .amc-NCard--neoBrutal .amc-NCard-title {
   margin-block-start: .375rem;
@@ -855,11 +842,10 @@
     0 1.25rem 2.25rem -1rem color-mix(in srgb, var(--amc-ncard-accent) 45%, var(--amc-ncard-page)),
     inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-ncard-accent) 16%, transparent),
     inset 0 .5rem 1rem color-mix(in srgb, var(--amc-ncard-light) 55%, transparent);
-  transition: transform .35s var(--amc-ncard-ease), box-shadow .35s var(--amc-ncard-ease);
+  transition: box-shadow .35s var(--amc-ncard-ease);
 }
 .amc-NCard--clay .amc-NCard-card:hover,
 .amc-NCard--clay .amc-NCard-card:focus-within {
-  transform: translateY(-.25rem) scale(1.01);
   box-shadow:
     0 1.75rem 2.75rem -1rem color-mix(in srgb, var(--amc-ncard-accent) 55%, var(--amc-ncard-page)),
     inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-ncard-accent) 20%, transparent),
@@ -1019,9 +1005,8 @@
 }
 .amc-NCard--holoFoil .amc-NCard-eyebrow {
   color: var(--amc-ncard-fg);
-  font-size: .6875rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 600;
 }
 .amc-NCard--holoFoil .amc-NCard-title { font-size: 1.25rem; font-weight: 800; letter-spacing: -.01em; }
 .amc-NCard--holoFoil .amc-NCard-badge { background: color-mix(in srgb, var(--amc-ncard-bg) 75%, transparent); }
@@ -1224,7 +1209,7 @@
     letter-spacing: -.035em;
     line-height: 1.02;
   }
-  .amc-NCard--adaptive .amc-NCard-eyebrow { margin-block-start: .5rem; letter-spacing: .08em; text-transform: uppercase; }
+  .amc-NCard--adaptive .amc-NCard-eyebrow { margin-block-start: .5rem; }
   .amc-NCard--adaptive .amc-NCard-head { align-items: flex-start; }
   .amc-NCard--adaptive .amc-NCard-icon {
     background: color-mix(in srgb, var(--amc-ncard-on-media) 16%, transparent);

@@ -3,7 +3,7 @@
   "apexlangName": "designAlert",
   "staticId": "AMC_DESIGN_ALERT",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["alert", "notice", "banner", "callout", "message", "notification", "toast", "announcement", "tip", "status", "warning", "error", "success"],
   "description": "Family of 10 alert and callout designs (soft, side icon, solid, gradient banner, toast card, announcement, tip, quote, inline, panel) with success, warning, danger, info and neutral states. Follows the inline alert pattern of Universal Theme and modern design systems: the state is shown by semantic color plus an icon and a text label, never by color alone. Renders one alert (partial) or a stack of alerts from a query (report).",

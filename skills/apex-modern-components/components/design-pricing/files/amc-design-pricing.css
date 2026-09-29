@@ -388,10 +388,8 @@
 
 .amc-DPricing--minimal .amc-DPricing-plan {
   color: var(--amc-dp-muted);
-  font-size: .75rem;
+  font-size: .875rem;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
 }
 
 .amc-DPricing--minimal .amc-DPricing-amount {
@@ -586,18 +584,26 @@
   font-size: .75rem;
 }
 
-.amc-DPricing--compact .amc-DPricing-list { display: block; }
+/* Features wrap as short "included" items: a bare check mark, no bullet separators. */
+.amc-DPricing--compact .amc-DPricing-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem .875rem;
+}
 .amc-DPricing--compact .amc-DPricing-feature {
-  display: inline-block;
+  align-items: center;
+  gap: .3125rem;
   max-inline-size: 100%;
 }
-.amc-DPricing--compact .amc-DPricing-check { display: none; }
-
-.amc-DPricing--compact .amc-DPricing-feature + .amc-DPricing-feature::before {
-  content: "\00B7";
-  margin-inline: .375rem;
-  color: var(--amc-dp-accent-text);
-  font-weight: 700;
+.amc-DPricing--compact .amc-DPricing-check {
+  inline-size: .625rem;
+  block-size: .75rem;
+  background: none;
+}
+.amc-DPricing--compact .amc-DPricing-check::after {
+  inline-size: .1875rem;
+  block-size: .4375rem;
+  border-width: 0 .1rem .1rem 0;
 }
 
 .amc-DPricing--compact.is-highlighted .amc-DPricing-card {
@@ -629,9 +635,7 @@
 
 .amc-DPricing--darkEnterprise .amc-DPricing-plan {
   color: var(--amc-dp-glow);
-  font-size: .8125rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: 1rem;
 }
 
 .amc-DPricing--darkEnterprise .amc-DPricing-badge {

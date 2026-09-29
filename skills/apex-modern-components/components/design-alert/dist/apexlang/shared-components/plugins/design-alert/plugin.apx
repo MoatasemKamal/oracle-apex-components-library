@@ -19,7 +19,7 @@ plugin designAlert (
                   {if ?MESSAGE/}<p class="amc-DAlert-message">#MESSAGE#</p>{endif/}
                   {if ?META/}<p class="amc-DAlert-meta">#META#</p>{endif/}
                 </div>
-                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-DAlert-link" href="#LINK_URL#"><span class="amc-DAlert-linkLabel">#LINK_LABEL#</span><span class="amc-DAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-DAlert-link" href="#LINK_URL#"><span class="amc-DAlert-linkLabel">#LINK_LABEL#</span></a>{endif/}{endif/}
               </div>
             </div>
             ```
@@ -47,7 +47,7 @@ plugin designAlert (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set.

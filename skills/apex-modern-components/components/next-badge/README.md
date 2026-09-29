@@ -10,7 +10,7 @@ Status badges in 10 current-generation designs from the Next Collection: motion 
 | APEXlang reference | `type: plugin/nextBadge` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Choose a Style, map Label to the text and State to a column returning success, warning, danger, info or neutral (anything else renders as neutral). The label must carry the meaning, for example Paid or Overdue, so state is never shown by color alone. Value adds a second segment: the viewer or item count in Live pulse and Stack count, trailing text elsewhere. Expand label and Stack count are keyboard focusable, show their labels on hover or focus, and always show them on touch screens.

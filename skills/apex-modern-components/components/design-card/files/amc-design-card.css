@@ -293,21 +293,11 @@
   white-space: nowrap;
 }
 
-.amc-DCard-ctaIcon {
-  font-size: .75rem;
-  transition: transform .2s ease;
-}
-
-.amc-DCard-ctaIcon:dir(rtl) {
-  transform: scaleX(-1);
-}
-
-.amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-ctaIcon {
-  transform: translateX(.1875rem);
-}
-
-.amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-ctaIcon:dir(rtl) {
-  transform: scaleX(-1) translateX(.1875rem);
+/* The card title is the link; the label underlines when the card is hovered so the
+   whole card reads as one target without an appended arrow. */
+.amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-cta {
+  text-decoration: underline;
+  text-underline-offset: .2em;
 }
 
 /* ---------- 1. Elevated: borderless, layered soft shadow, lifts on hover ---------- */
@@ -487,14 +477,6 @@
   padding-block-end: var(--amc-dcard-pad);
 }
 
-.amc-DCard--imageTop .amc-DCard-img {
-  transition: transform .4s ease;
-}
-
-.amc-DCard--imageTop .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-img {
-  transform: scale(1.04);
-}
-
 /* ---------- 6. Image Overlay: text on a scrim over the picture ---------- */
 
 .amc-DCard--imageOverlay .amc-DCard-card {
@@ -519,14 +501,6 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, color-mix(in srgb, var(--amc-dcard-scrim) 88%, transparent) 0%, color-mix(in srgb, var(--amc-dcard-scrim) 62%, transparent) 50%, color-mix(in srgb, var(--amc-dcard-scrim) 18%, transparent) 100%);
-}
-
-.amc-DCard--imageOverlay .amc-DCard-img {
-  transition: transform .5s ease;
-}
-
-.amc-DCard--imageOverlay .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-img {
-  transform: scale(1.05);
 }
 
 .amc-DCard--imageOverlay .amc-DCard-icon {
@@ -776,10 +750,8 @@
 }
 
 .amc-DCard--ticket .amc-DCard-valueLabel {
-  font-size: .6875rem;
+  font-size: .75rem;
   font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
 }
 
 .amc-DCard--ticket .amc-DCard-value {
@@ -965,7 +937,6 @@
 }
 
 .amc-DCard--cornerIcon .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-icon {
-  transform: scale(1.08);
   background-color: color-mix(in srgb, var(--amc-dcard-accent) 20%, transparent);
 }
 
@@ -1022,15 +993,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .amc-DCard-card,
-  .amc-DCard-img,
-  .amc-DCard-icon,
-  .amc-DCard-ctaIcon {
+  .amc-DCard-icon {
     transition: none;
   }
 
   .amc-DCard-card:has(.amc-DCard-link):hover,
-  .amc-DCard--stackedPaper:has(.amc-DCard-link):hover .amc-DCard-card,
-  .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-img {
+  .amc-DCard--stackedPaper:has(.amc-DCard-link):hover .amc-DCard-card {
     transform: none;
   }
 }

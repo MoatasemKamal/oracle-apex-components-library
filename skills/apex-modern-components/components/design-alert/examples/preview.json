@@ -29,7 +29,7 @@
     {
       "title": "gradientBanner, info",
       "mode": "partial",
-      "settings": { "STYLE": "gradientBanner", "STATE": "info", "ICON": "fa-calendar", "TITLE": "Fiscal year 2026 budgets are open", "MESSAGE": "Department heads can submit budget requests until 15 November.", "LINK_URL": "#", "LINK_LABEL": "Start budget" }
+      "settings": { "STYLE": "gradientBanner", "STATE": "info", "ICON": "fa-calendar", "TITLE": "Fiscal year 2026 budgets are open", "MESSAGE": "Department heads can submit budget requests until 15 November.", "LINK_URL": "#", "LINK_LABEL": "Create budget request" }
     },
     {
       "title": "toastCard, report",
@@ -44,12 +44,12 @@
     {
       "title": "announcement, success",
       "mode": "partial",
-      "settings": { "STYLE": "announcement", "STATE": "success", "ICON": "fa-rocket", "META": "Release 24.2", "TITLE": "Recurring invoices are here", "MESSAGE": "Set up monthly or yearly billing once and the system creates, sends and tracks every invoice for you.", "LINK_URL": "#", "LINK_LABEL": "See what is new" }
+      "settings": { "STYLE": "announcement", "STATE": "success", "ICON": "fa-rocket", "META": "Release 24.2", "TITLE": "Recurring invoices are available", "MESSAGE": "Set a monthly or yearly schedule on a customer and each invoice is created and emailed on its due date.", "LINK_URL": "#", "LINK_LABEL": "Set up a schedule" }
     },
     {
       "title": "tip, info",
       "mode": "partial",
-      "settings": { "STYLE": "tip", "STATE": "info", "ICON": "fa-lightbulb-o", "TITLE": "Tip: bulk approve orders", "MESSAGE": "Select several orders in the grid and press Approve to process them in one step.", "LINK_URL": "#", "LINK_LABEL": "Learn more" }
+      "settings": { "STYLE": "tip", "STATE": "info", "ICON": "fa-lightbulb-o", "TITLE": "Approve several orders at once", "MESSAGE": "Select several orders in the grid and press Approve to process them in one step.", "LINK_URL": "#", "LINK_LABEL": "Read the approval guide" }
     },
     {
       "title": "quote, neutral",
@@ -61,7 +61,7 @@
       "mode": "report",
       "settings": { "STYLE": "inline" },
       "rows": [
-        { "STATE": "warning", "TITLE": "VAT number missing", "MESSAGE": "Required for B2B invoices.", "LINK_URL": "#", "LINK_LABEL": "Add now" },
+        { "STATE": "warning", "TITLE": "VAT number missing", "MESSAGE": "Required for B2B invoices.", "LINK_URL": "#", "LINK_LABEL": "Add VAT number" },
         { "STATE": "success", "TITLE": "Address verified", "MESSAGE": "Matches the national registry." },
         { "STATE": "danger", "TITLE": "Duplicate customer", "MESSAGE": "Same email as CUST-0192." }
       ]

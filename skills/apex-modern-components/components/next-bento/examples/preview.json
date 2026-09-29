@@ -1,7 +1,7 @@
 {
   "samples": [
     {
-      "title": "Spotlight Glow · sales launchpad",
+      "title": "Spotlight Glow, sales launchpad",
       "direction": "motion",
       "mode": "report",
       "settings": {
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "title": "Beam Feature · month-end close",
+      "title": "Beam Feature, month-end close",
       "direction": "motion",
       "mode": "report",
       "settings": {
@@ -106,7 +106,7 @@
       ]
     },
     {
-      "title": "Tilt Tiles · warehouse",
+      "title": "Tilt Tiles, warehouse",
       "direction": "depth",
       "mode": "report",
       "settings": {
@@ -174,7 +174,7 @@
       ]
     },
     {
-      "title": "Layered Glass · customer service",
+      "title": "Layered Glass, customer service",
       "direction": "depth",
       "mode": "report",
       "settings": {
@@ -224,7 +224,7 @@
       ]
     },
     {
-      "title": "Neo Brutal · HR self-service",
+      "title": "Neo Brutal, HR self-service",
       "direction": "bold",
       "mode": "report",
       "settings": {
@@ -274,7 +274,7 @@
       ]
     },
     {
-      "title": "Clay · project workspace",
+      "title": "Clay, project workspace",
       "direction": "bold",
       "mode": "report",
       "settings": {
@@ -342,7 +342,7 @@
       ]
     },
     {
-      "title": "Aurora Mosaic · executive home",
+      "title": "Aurora Mosaic, executive home",
       "direction": "bold",
       "mode": "report",
       "settings": {
@@ -412,7 +412,7 @@
       ]
     },
     {
-      "title": "Grid Pattern · admin console",
+      "title": "Grid Pattern, admin console",
       "direction": "bold",
       "mode": "report",
       "settings": {
@@ -463,7 +463,7 @@
       ]
     },
     {
-      "title": "Magazine · weekly business review",
+      "title": "Magazine, weekly business review",
       "direction": "smart",
       "mode": "report",
       "settings": {
@@ -527,7 +527,7 @@
       ]
     },
     {
-      "title": "Expanding Tiles · order-to-cash",
+      "title": "Expanding Tiles, order-to-cash",
       "direction": "smart",
       "mode": "report",
       "settings": {

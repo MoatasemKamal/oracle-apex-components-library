@@ -3,7 +3,7 @@
   "apexlangName": "designDivider",
   "staticId": "AMC_DESIGN_DIVIDER",
   "pluginType": "templateComponent",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "keywords": ["divider", "separator", "section title", "section header", "rule", "hr", "heading", "design collection"],
   "description": "Design Collection divider family: a section break or section heading in 8 distinct styles, from a hairline with a centered title to an eyebrow heading, a glowing gradient rule, an icon medallion, a pill label, an accent underline, a dotted scene break and a side label with a count. Follows the Universal Theme heading and separator pattern and takes every color from the active theme style.",

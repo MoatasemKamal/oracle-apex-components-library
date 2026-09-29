@@ -104,10 +104,10 @@
       "mode": "report",
       "settings": { "STYLE": "scrollProgress" },
       "rows": [
-        { "TITLE": "Discovery workshop", "BODY": "Map the current approval process with Finance and Procurement.", "DATE": "Phase 1", "STATE": "success" },
-        { "TITLE": "Prototype in APEX", "BODY": "Clickable approval flow tested with 8 key users.", "DATE": "Phase 2", "STATE": "success", "TAG": "2 weeks" },
-        { "TITLE": "Build and integrate", "BODY": "Connect the ERP purchase order API and single sign-on.", "DATE": "Phase 3", "STATE": "current", "TAG": "6 weeks" },
-        { "TITLE": "Go live and hypercare", "BODY": "Daily check-ins for the first two weeks after launch.", "DATE": "Phase 4", "STATE": "neutral" }
+        { "TITLE": "Discovery workshop", "BODY": "Map the current approval process with Finance and Procurement.", "DATE": "Done 4 Sep", "STATE": "success" },
+        { "TITLE": "Prototype in APEX", "BODY": "Clickable approval flow tested with 8 key users.", "DATE": "Done 18 Sep", "STATE": "success", "TAG": "2 weeks" },
+        { "TITLE": "Build and integrate", "BODY": "Connect the ERP purchase order API and single sign-on.", "DATE": "Until 30 Oct", "STATE": "current", "TAG": "6 weeks" },
+        { "TITLE": "Go live and hypercare", "BODY": "Daily check-ins for the first two weeks after launch.", "DATE": "From 2 Nov", "STATE": "neutral" }
       ]
     },
     {

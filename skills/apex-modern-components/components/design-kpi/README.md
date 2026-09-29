@@ -10,7 +10,7 @@ Design Collection family of ten KPI tile designs chosen with Style: big number, 
 | APEXlang reference | `type: plugin/designKpi` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (a number from 0 to 100) drives the Target Bar and Ring styles, Series (comma-separated numbers) drives Spark Bars, and Compare Value / Compare Label drive the Compare and Target Bar styles. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.
 
