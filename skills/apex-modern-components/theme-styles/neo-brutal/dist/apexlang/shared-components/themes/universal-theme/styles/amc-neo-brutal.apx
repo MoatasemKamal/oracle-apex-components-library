@@ -1,0 +1,23 @@
+style amc-neo-brutal (
+    name: AMC Neo Brutal
+    css {
+        fileUrls: [
+            #THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#
+            #APP_FILES#amc-styles/amc-style-neo-brutal.css
+        ]
+    }
+    themeRollerAttributes {
+        readOnly: true
+    }
+    advanced {
+        staticId: AMC_STYLE_NEO_BRUTAL
+        endUserCanPick: true
+        accessibilityTested: false
+    }
+    comments {
+        comments:
+            ```text
+            Light style built on Vita. Regions, buttons and fields get 2px ink borders and hard offset shadows (mirrored in right-to-left pages); buttons press down on click, without animation when the user prefers reduced motion. The header is sun yellow with ink text, the current menu entry is pink, and the primary color is a cobalt blue that passes WCAG AA with white text. Report rows keep light dividers so dense data stays readable. Works with every AMC component and template, which read the same --ut-* variables. Refinements target Universal Theme classes and should be checked on a live page.
+            ```
+    }
+)

@@ -1,0 +1,11 @@
+{
+  "name": "AMC Glass",
+  "staticId": "AMC_STYLE_GLASS",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "A frosted glass style: translucent regions with light edges over a soft multi-color gradient page, a translucent header, strong dark text and a deep ocean-blue primary.",
+  "keywords": ["glass", "glassmorphism", "frosted", "translucent", "gradient", "blue", "light", "modern"],
+  "helpText": "Light style built on Vita. The page background is a soft pink, sky and lilac CSS gradient (no image). Regions, alerts, the header and the navigation are frosted glass: translucent white with a light edge and a background blur where the browser supports backdrop-filter; where it does not, they fall back to near-opaque white so text stays readable. Menus, popups and library components keep a near-opaque surface. Text is a strong dark navy and the primary color a deep ocean blue that passes WCAG AA with white text. Works with every AMC component and template, which read the same --ut-* variables. Refinements target Universal Theme classes and should be checked on a live page, including popups and dialogs.",
+  "endUserCanPick": true
+}

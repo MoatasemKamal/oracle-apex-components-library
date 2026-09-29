@@ -1,0 +1,106 @@
+/* AMC Neo Brutal: Universal Theme style (light), layered on Vita.
+   Ink borders, hard offset shadows (mirrored for RTL), flat saturated fills. */
+:root {
+  --ut-body-background-color: #fff6e0;
+  --ut-body-text-color: #121212;
+  --ut-component-background-color: #ffffff;
+  --ut-component-text-default-color: #121212;
+  --ut-component-text-muted-color: #474747;
+  --ut-component-border-color: #121212;
+  --ut-component-border-radius: 6px;
+  --ut-component-box-shadow: 4px 4px 0 #121212;
+  --ut-link-text-color: #1d3bd1;
+  --ut-focus-outline-color: #1d3bd1;
+  --ut-palette-primary: #1d3bd1;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #177a3a;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #ffc21a;
+  --ut-palette-warning-contrast: #121212;
+  --ut-palette-danger: #d0202e;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #1d3bd1;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #ffd23f;
+  --ut-header-text-color: #121212;
+  --ut-nav-background-color: #fff6e0;
+  --ut-field-background-color: #ffffff;
+  --ut-field-border-color: #121212;
+  --amc-brutal-ink: #121212;
+  --amc-brutal-pink: #ff8fc7;
+  --amc-brutal-lime: #c6f432;
+  --amc-brutal-rule: rgba(18, 18, 18, .14);
+  --amc-brutal-x: 1;
+}
+html[dir="rtl"] {
+  --ut-component-box-shadow: -4px 4px 0 #121212;
+  --amc-brutal-x: -1;
+}
+
+/* Header and navigation */
+.t-Header { border-block-end: 2px solid var(--amc-brutal-ink); box-shadow: none; }
+.t-Header-logo { font-weight: 900; letter-spacing: -.02em; }
+.t-Body-nav { border-inline-end: 2px solid var(--amc-brutal-ink); }
+.t-TreeNav .is-current > a {
+  background: var(--amc-brutal-pink);
+  color: var(--amc-brutal-ink);
+  font-weight: 800;
+  box-shadow: inset 4px 0 0 var(--amc-brutal-ink);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -4px 0 0 var(--amc-brutal-ink); }
+
+/* Regions */
+.t-Region { border-width: 2px; border-color: var(--amc-brutal-ink); }
+.t-Region-header { border-block-end: 2px solid var(--amc-brutal-ink); }
+.t-Region-title, .t-BreadcrumbRegion-title, .t-BreadcrumbRegion-titleText { font-weight: 850; letter-spacing: -.015em; }
+
+/* Reports stay calm: ink header rule, light row dividers */
+.t-Report-colHead { color: var(--amc-brutal-ink); font-weight: 800; border-block-end: 2px solid var(--amc-brutal-ink); }
+.t-Report-cell { border-block-end-color: var(--amc-brutal-rule); }
+
+/* Buttons: ink border, hard shadow, press down on click */
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree) {
+  border: 2px solid var(--amc-brutal-ink);
+  font-weight: 800;
+  box-shadow: calc(3px * var(--amc-brutal-x)) 3px 0 var(--amc-brutal-ink);
+  transition: transform .08s ease-out, box-shadow .08s ease-out;
+}
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):hover { background-color: var(--amc-brutal-lime); color: var(--amc-brutal-ink); }
+.t-Button--hot:not(.t-Button--noUI, .t-Button--link):hover { background-color: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); box-shadow: calc(3px * var(--amc-brutal-x)) 3px 0 var(--amc-brutal-ink), inset 0 -3px 0 rgba(0, 0, 0, .25); }
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):active {
+  transform: translate(calc(3px * var(--amc-brutal-x)), 3px);
+  box-shadow: 0 0 0 var(--amc-brutal-ink);
+}
+.t-Button:focus-visible { outline: 3px solid var(--ut-focus-outline-color); outline-offset: 3px; }
+
+/* Fields */
+.apex-item-text, .apex-item-textarea, .apex-item-select, .apex-item-number {
+  border: 2px solid var(--amc-brutal-ink);
+  box-shadow: calc(2px * var(--amc-brutal-x)) 2px 0 var(--amc-brutal-ink);
+}
+.apex-item-text:focus, .apex-item-textarea:focus, .apex-item-select:focus, .apex-item-number:focus {
+  outline: 3px solid var(--ut-focus-outline-color);
+  outline-offset: 2px;
+  background-color: #fffbe8;
+}
+.t-Form-label { color: var(--amc-brutal-ink); font-weight: 700; }
+
+/* Alerts and badges */
+.t-Alert { border: 2px solid var(--amc-brutal-ink); box-shadow: var(--ut-component-box-shadow); color: var(--amc-brutal-ink); }
+.t-Alert-title { font-weight: 850; }
+.t-Alert--success { background: color-mix(in srgb, var(--amc-brutal-lime) 55%, #ffffff); }
+.t-Alert--warning { background: color-mix(in srgb, var(--ut-header-background-color) 70%, #ffffff); }
+.t-Alert--danger { background: color-mix(in srgb, var(--amc-brutal-pink) 45%, #ffffff); }
+.t-Alert--info { background: color-mix(in srgb, var(--ut-palette-info) 14%, #ffffff); }
+.t-Badge { border: 1.5px solid var(--amc-brutal-ink); border-radius: 4px; font-weight: 800; }
+.t-Badge--warning { background: var(--ut-palette-warning); color: var(--amc-brutal-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree) { transition: none; }
+  .t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):active { transform: none; }
+}
+@media (forced-colors: active) {
+  .t-Region, .t-Alert, .t-Button, .apex-item-text, .apex-item-textarea, .apex-item-select, .apex-item-number { box-shadow: none; border-color: CanvasText; }
+  .t-Alert { background: Canvas; }
+  .t-TreeNav .is-current > a { background: Highlight; color: HighlightText; box-shadow: none; }
+}

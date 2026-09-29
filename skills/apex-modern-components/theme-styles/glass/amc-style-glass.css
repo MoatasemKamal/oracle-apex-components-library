@@ -1,0 +1,124 @@
+/* AMC Glass: Universal Theme style (light), layered on Vita.
+   Frosted regions over a CSS gradient page. The shared surface variable stays near-opaque so menus,
+   popups and dialogs remain readable; translucency and blur are applied only to regions, alerts,
+   header and navigation, and only where backdrop-filter is supported. */
+:root {
+  --ut-body-background-color: #eef0fb;
+  --ut-body-text-color: #121a33;
+  --ut-component-background-color: rgba(255, 255, 255, .92);
+  --ut-component-text-default-color: #121a33;
+  --ut-component-text-muted-color: #4a5372;
+  --ut-component-border-color: rgba(18, 26, 51, .12);
+  --ut-component-border-radius: 16px;
+  --ut-component-box-shadow: 0 12px 32px -14px rgba(40, 52, 120, .28), inset 0 1px 0 rgba(255, 255, 255, .85);
+  --ut-link-text-color: #1a52c2;
+  --ut-focus-outline-color: #1a52c2;
+  --ut-palette-primary: #1a52c2;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #1f7a4d;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #d9901a;
+  --ut-palette-warning-contrast: #1e1405;
+  --ut-palette-danger: #c42f4a;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #4659d6;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: rgba(255, 255, 255, .88);
+  --ut-header-text-color: #121a33;
+  --ut-nav-background-color: rgba(255, 255, 255, .88);
+  --ut-field-background-color: rgba(255, 255, 255, .9);
+  --ut-field-border-color: rgba(18, 26, 51, .16);
+  --amc-glass-surface: rgba(255, 255, 255, .88);
+  --amc-glass-bar: rgba(255, 255, 255, .88);
+  --amc-glass-edge: rgba(255, 255, 255, .75);
+  --amc-glass-blur: none;
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :root {
+    --amc-glass-surface: rgba(255, 255, 255, .5);
+    --amc-glass-bar: rgba(255, 255, 255, .5);
+    --amc-glass-blur: blur(18px) saturate(1.4);
+  }
+}
+
+/* Page: soft multi-color gradient (CSS only) */
+body.t-PageBody {
+  background-color: var(--ut-body-background-color);
+  background-image:
+    radial-gradient(55vw 55vh at 8% 12%, rgba(255, 190, 222, .75), transparent 70%),
+    radial-gradient(50vw 55vh at 92% 18%, rgba(170, 225, 255, .8), transparent 70%),
+    radial-gradient(60vw 60vh at 70% 95%, rgba(205, 190, 255, .75), transparent 70%),
+    radial-gradient(45vw 45vh at 15% 90%, rgba(255, 226, 190, .7), transparent 70%);
+  background-attachment: fixed;
+}
+[dir="rtl"] body.t-PageBody {
+  background-image:
+    radial-gradient(55vw 55vh at 92% 12%, rgba(255, 190, 222, .75), transparent 70%),
+    radial-gradient(50vw 55vh at 8% 18%, rgba(170, 225, 255, .8), transparent 70%),
+    radial-gradient(60vw 60vh at 30% 95%, rgba(205, 190, 255, .75), transparent 70%),
+    radial-gradient(45vw 45vh at 85% 90%, rgba(255, 226, 190, .7), transparent 70%);
+}
+
+/* Header and navigation: translucent bars */
+.t-Header {
+  background: var(--amc-glass-bar);
+  color: var(--ut-header-text-color);
+  border-block-end: 1px solid var(--amc-glass-edge);
+  box-shadow: 0 8px 24px -18px rgba(40, 52, 120, .45);
+  -webkit-backdrop-filter: var(--amc-glass-blur);
+  backdrop-filter: var(--amc-glass-blur);
+}
+.t-Header-logo { font-weight: 750; }
+.t-Body-nav {
+  background: var(--amc-glass-bar);
+  border-inline-end: 1px solid var(--amc-glass-edge);
+  -webkit-backdrop-filter: var(--amc-glass-blur);
+  backdrop-filter: var(--amc-glass-blur);
+}
+.t-TreeNav .is-current > a { background: rgba(255, 255, 255, .8); }
+
+/* Regions and alerts: frosted glass with a light edge */
+.t-Region, .t-Alert {
+  background-color: var(--amc-glass-surface);
+  border-color: var(--amc-glass-edge);
+  -webkit-backdrop-filter: var(--amc-glass-blur);
+  backdrop-filter: var(--amc-glass-blur);
+}
+.t-Region-header { border-block-end-color: rgba(255, 255, 255, .7); }
+.t-Region-title, .t-BreadcrumbRegion-title, .t-BreadcrumbRegion-titleText { font-weight: 700; letter-spacing: -.01em; }
+.t-Report-colHead { color: #2e3756; border-block-end-color: rgba(18, 26, 51, .16); }
+.t-Report-cell { border-block-end-color: rgba(18, 26, 51, .08); }
+.t-Alert { background-color: color-mix(in srgb, var(--amc-glass-surface), #ffffff 45%); box-shadow: var(--ut-component-box-shadow); color: var(--ut-component-text-default-color); }
+.t-Alert--success { background-image: linear-gradient(rgba(31, 122, 77, .14), rgba(31, 122, 77, .14)); }
+.t-Alert--warning { background-image: linear-gradient(rgba(217, 144, 26, .15), rgba(217, 144, 26, .15)); }
+.t-Alert--danger { background-image: linear-gradient(rgba(196, 47, 74, .13), rgba(196, 47, 74, .13)); }
+.t-Alert--info { background-image: linear-gradient(rgba(70, 89, 214, .13), rgba(70, 89, 214, .13)); }
+
+/* Buttons and fields */
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree) {
+  background-color: rgba(255, 255, 255, .75);
+  border-color: rgba(255, 255, 255, .9);
+  box-shadow: 0 4px 12px -6px rgba(40, 52, 120, .35), inset 0 1px 0 rgba(255, 255, 255, .9);
+}
+.t-Button--hot:not(.t-Button--noUI, .t-Button--link) {
+  background-color: var(--ut-palette-primary);
+  border-color: rgba(255, 255, 255, .35);
+  color: var(--ut-palette-primary-contrast);
+  box-shadow: 0 8px 18px -8px rgba(26, 82, 194, .7), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+.t-Button:focus-visible { outline: 3px solid var(--ut-focus-outline-color); outline-offset: 2px; }
+.apex-item-text, .apex-item-textarea, .apex-item-select, .apex-item-number { box-shadow: inset 0 1px 2px rgba(18, 26, 51, .06); }
+.apex-item-text:focus, .apex-item-textarea:focus, .apex-item-select:focus, .apex-item-number:focus { background-color: #ffffff; }
+
+@media (forced-colors: active) {
+  body.t-PageBody, .t-Header, .t-Body-nav, .t-Region, .t-Alert {
+    background: Canvas;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    border-color: CanvasText;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root { --amc-glass-surface: rgba(255, 255, 255, .92); --amc-glass-bar: rgba(255, 255, 255, .95); --amc-glass-blur: none; }
+}

@@ -1,0 +1,134 @@
+/* AMC Clay: Universal Theme style (light), layered on Vita.
+   Pillowy surfaces: inner highlight + tinted inner shade + soft outer shadow. Vertical shadows only (RTL-neutral). */
+:root {
+  --ut-body-background-color: #f3eefb;
+  --ut-body-text-color: #2a2342;
+  --ut-component-background-color: #fdfbff;
+  --ut-component-text-default-color: #2a2342;
+  --ut-component-text-muted-color: #625a7a;
+  --ut-component-border-color: rgba(106, 76, 190, .12);
+  --ut-component-border-radius: 22px;
+  --ut-component-box-shadow:
+    0 18px 36px -18px rgba(106, 76, 190, .38),
+    0 4px 10px -4px rgba(232, 150, 120, .18),
+    inset 0 2px 1px rgba(255, 255, 255, .95),
+    inset 0 -8px 16px rgba(160, 130, 220, .10);
+  --ut-link-text-color: #6a3fcf;
+  --ut-focus-outline-color: #6a3fcf;
+  --ut-palette-primary: #6a3fcf;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #2b7a4b;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #e39a3b;
+  --ut-palette-warning-contrast: #2a1a05;
+  --ut-palette-danger: #c23a5a;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #4a64d0;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #e7dcfb;
+  --ut-header-text-color: #2a2342;
+  --ut-nav-background-color: #f8f4fe;
+  --ut-field-background-color: #f1ebfa;
+  --ut-field-border-color: rgba(106, 76, 190, .10);
+  --amc-clay-lavender: #b9a3f0;
+  --amc-clay-peach: #ffc9ae;
+  --amc-clay-light: #ffffff;
+  --amc-clay-shade: #4a2f95;
+}
+
+/* Page: a faint peach glow in the far corner */
+body.t-PageBody {
+  background-image:
+    radial-gradient(60vw 50vh at 100% 100%, rgba(255, 201, 174, .35), transparent 70%),
+    radial-gradient(50vw 40vh at 0% 0%, rgba(185, 163, 240, .25), transparent 70%);
+  background-attachment: fixed;
+}
+[dir="rtl"] body.t-PageBody {
+  background-image:
+    radial-gradient(60vw 50vh at 0% 100%, rgba(255, 201, 174, .35), transparent 70%),
+    radial-gradient(50vw 40vh at 100% 0%, rgba(185, 163, 240, .25), transparent 70%);
+}
+
+/* Header and navigation */
+.t-Header {
+  background: linear-gradient(100deg, #e4d7fb, #f3dff4 55%, #ffe3d4);
+  color: var(--ut-header-text-color);
+  box-shadow: 0 10px 24px -16px rgba(106, 76, 190, .5), inset 0 -1px 0 rgba(255, 255, 255, .7);
+}
+.t-Header-logo { font-weight: 750; }
+.t-Body-nav { border-inline-end-color: transparent; }
+.t-TreeNav .is-current > a {
+  border-start-end-radius: 16px;
+  border-end-end-radius: 16px;
+  background: #ece3fd;
+  color: var(--ut-palette-primary);
+  box-shadow: 0 6px 14px -8px rgba(106, 76, 190, .55), inset 0 2px 1px rgba(255, 255, 255, .9), inset 0 -4px 8px rgba(106, 76, 190, .12);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: 0 6px 14px -8px rgba(106, 76, 190, .55), inset 0 2px 1px rgba(255, 255, 255, .9), inset 0 -4px 8px rgba(106, 76, 190, .12); }
+
+/* Regions */
+.t-Region { border-color: rgba(255, 255, 255, .8); }
+.t-Region-header { border-block-end-color: rgba(106, 76, 190, .08); }
+.t-Region-title, .t-BreadcrumbRegion-title, .t-BreadcrumbRegion-titleText { font-weight: 700; letter-spacing: -.01em; }
+
+/* Reports: soft header wash, faint dividers */
+.t-Report-colHead { background: #f5f0fd; border-block-end-color: transparent; }
+.t-Report-colHead:first-child { border-start-start-radius: 12px; border-end-start-radius: 12px; }
+.t-Report-colHead:last-child { border-start-end-radius: 12px; border-end-end-radius: 12px; }
+.t-Report-cell { border-block-end-color: rgba(106, 76, 190, .08); }
+
+/* Buttons: pillowy */
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree) {
+  border-color: transparent;
+  border-radius: 14px;
+  background-color: #efe7fd;
+  box-shadow: 0 8px 16px -8px rgba(106, 76, 190, .6), inset 0 2px 1px rgba(255, 255, 255, .95), inset 0 -4px 7px rgba(106, 76, 190, .18);
+  font-weight: 600;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.t-Button--hot:not(.t-Button--noUI, .t-Button--link) {
+  background-color: var(--ut-palette-primary);
+  color: var(--ut-palette-primary-contrast);
+  box-shadow: 0 10px 18px -10px rgba(106, 63, 207, .85), inset 0 2px 1px rgba(255, 255, 255, .35), inset 0 -4px 8px rgba(40, 16, 110, .35);
+}
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):hover { transform: translateY(-1px); }
+.t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px -4px rgba(106, 76, 190, .5), inset 0 3px 6px rgba(74, 47, 149, .22);
+}
+.t-Button:focus-visible { outline: 3px solid var(--ut-focus-outline-color); outline-offset: 3px; }
+
+/* Fields: pressed in */
+.apex-item-text, .apex-item-textarea, .apex-item-select, .apex-item-number {
+  border-color: transparent;
+  border-radius: 14px;
+  box-shadow: inset 0 3px 6px rgba(106, 76, 190, .16), inset 0 -2px 2px rgba(255, 255, 255, .9);
+}
+.apex-item-text:focus, .apex-item-textarea:focus, .apex-item-select:focus, .apex-item-number:focus {
+  background-color: #ffffff;
+  outline: 3px solid color-mix(in srgb, var(--ut-focus-outline-color) 55%, transparent);
+  outline-offset: 1px;
+}
+
+/* Alerts and badges */
+.t-Alert {
+  border-color: rgba(255, 255, 255, .8);
+  border-radius: 20px;
+  box-shadow: 0 12px 24px -16px rgba(106, 76, 190, .45), inset 0 2px 1px rgba(255, 255, 255, .9), inset 0 -6px 12px rgba(106, 76, 190, .08);
+}
+.t-Alert--success { background: #e3f4e8; }
+.t-Alert--warning { background: #ffeedd; }
+.t-Alert--danger { background: #fde6ec; }
+.t-Alert--info { background: #e6ebfd; }
+.t-Badge { box-shadow: inset 0 1px 1px rgba(255, 255, 255, .8), inset 0 -2px 3px rgba(74, 47, 149, .12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree) { transition: none; }
+  .t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):hover,
+  .t-Button:not(.t-Button--noUI, .t-Button--link, .t-Button--header, .t-Button--headerTree):active { transform: none; }
+}
+@media (forced-colors: active) {
+  .t-Header, body.t-PageBody { background: Canvas; }
+  .t-Region, .t-Alert, .t-Button, .t-Badge, .t-TreeNav .is-current > a { box-shadow: none; border-color: CanvasText; }
+  .apex-item-text, .apex-item-textarea, .apex-item-select, .apex-item-number { box-shadow: none; border-color: CanvasText; }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "AMC Clay",
+  "staticId": "AMC_STYLE_CLAY",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "A soft claymorphism style: pillowy rounded regions and buttons with an inner highlight and a soft outer shadow, pressed-in fields, a gentle lavender and peach palette and a readable violet primary.",
+  "keywords": ["clay", "claymorphism", "soft", "pastel", "lavender", "peach", "violet", "light", "modern"],
+  "helpText": "Light style built on Vita. Regions, buttons and alerts are pillowy: a large radius, a top inner highlight, a tinted inner shade and a soft outer shadow mixed from the palette. Fields look pressed into the surface. The page is pale lavender, the header a lavender to peach wash with dark text, and the primary color a violet that passes WCAG AA with white text. Shadows are vertical only, so right-to-left pages need no mirroring. Works with every AMC component and template, which read the same --ut-* variables. Refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

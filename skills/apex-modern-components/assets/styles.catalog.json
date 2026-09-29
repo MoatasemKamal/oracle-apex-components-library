@@ -2,6 +2,67 @@
   "generatedBy": "tools/build-styles.mjs",
   "styles": [
     {
+      "slug": "arabesque",
+      "name": "AMC Arabesque",
+      "staticId": "AMC_STYLE_ARABESQUE",
+      "apexlangId": "amc-arabesque",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "Contemporary Arabic heritage: a deep emerald header with a faint eight-point star lattice, restrained gold accents, a warm ivory page, generously rounded regions and an Arabic-first font stack.",
+      "keywords": [
+        "arabesque",
+        "arabic",
+        "heritage",
+        "girih",
+        "emerald",
+        "gold",
+        "ivory",
+        "rtl",
+        "light"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 13.57,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 14.66,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 5.97,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.99,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 7.1,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 6.99,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/arabesque/dist/apexlang",
+      "legacySql": "theme-styles/arabesque/dist/legacy/amc_style_arabesque.sql"
+    },
+    {
       "slug": "aurora",
       "name": "AMC Aurora",
       "staticId": "AMC_STYLE_AURORA",
@@ -20,31 +81,37 @@
       ],
       "contrast": [
         {
+          "scheme": "light",
           "pair": "--ut-body-text-color on --ut-body-background-color",
           "ratio": 14.87,
           "min": 4.5
         },
         {
+          "scheme": "light",
           "pair": "--ut-component-text-default-color on --ut-component-background-color",
           "ratio": 16.12,
           "min": 4.5
         },
         {
+          "scheme": "light",
           "pair": "--ut-component-text-muted-color on --ut-component-background-color",
           "ratio": 5.99,
           "min": 4.5
         },
         {
+          "scheme": "light",
           "pair": "--ut-link-text-color on --ut-component-background-color",
           "ratio": 6.46,
           "min": 4.5
         },
         {
+          "scheme": "light",
           "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
           "ratio": 6.46,
           "min": 4.5
         },
         {
+          "scheme": "light",
           "pair": "--ut-palette-primary on --ut-component-background-color",
           "ratio": 6.46,
           "min": 3
@@ -52,6 +119,703 @@
       ],
       "apexlang": "theme-styles/aurora/dist/apexlang",
       "legacySql": "theme-styles/aurora/dist/legacy/amc_style_aurora.sql"
+    },
+    {
+      "slug": "clay",
+      "name": "AMC Clay",
+      "staticId": "AMC_STYLE_CLAY",
+      "apexlangId": "amc-clay",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A soft claymorphism style: pillowy rounded regions and buttons with an inner highlight and a soft outer shadow, pressed-in fields, a gentle lavender and peach palette and a readable violet primary.",
+      "keywords": [
+        "clay",
+        "claymorphism",
+        "soft",
+        "pastel",
+        "lavender",
+        "peach",
+        "violet",
+        "light",
+        "modern"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 13,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 14.4,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.26,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.33,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 6.51,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 6.33,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/clay/dist/apexlang",
+      "legacySql": "theme-styles/clay/dist/legacy/amc_style_clay.sql"
+    },
+    {
+      "slug": "dune",
+      "name": "AMC Dune",
+      "staticId": "AMC_STYLE_DUNE",
+      "apexlangId": "amc-dune",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A calm, warm style: sand neutrals, a deep indigo primary that leads every action, a sparing terracotta accent and soft long shadows, made for HR and hospitality apps.",
+      "keywords": [
+        "dune",
+        "sand",
+        "desert",
+        "indigo",
+        "terracotta",
+        "warm",
+        "calm",
+        "hr",
+        "hospitality",
+        "light"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 13.04,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 14.69,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.14,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 9.6,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 9.83,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 9.6,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/dune/dist/apexlang",
+      "legacySql": "theme-styles/dune/dist/legacy/amc_style_dune.sql"
+    },
+    {
+      "slug": "glass",
+      "name": "AMC Glass",
+      "staticId": "AMC_STYLE_GLASS",
+      "apexlangId": "amc-glass",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A frosted glass style: translucent regions with light edges over a soft multi-color gradient page, a translucent header, strong dark text and a deep ocean-blue primary.",
+      "keywords": [
+        "glass",
+        "glassmorphism",
+        "frosted",
+        "translucent",
+        "gradient",
+        "blue",
+        "light",
+        "modern"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 15.14,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 17.2,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 7.58,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.93,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 6.93,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 6.93,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/glass/dist/apexlang",
+      "legacySql": "theme-styles/glass/dist/legacy/amc_style_glass.sql"
+    },
+    {
+      "slug": "graphite",
+      "name": "AMC Graphite",
+      "staticId": "AMC_STYLE_GRAPHITE",
+      "apexlangId": "amc-graphite",
+      "base": "vita-dark",
+      "scheme": "dark",
+      "version": "1.0.0",
+      "description": "A developer and operations console look: neutral charcoal surfaces, warm-grey text, an amber primary, hairline borders and monospaced tabular figures for numbers, report headings and badges.",
+      "keywords": [
+        "graphite",
+        "dark",
+        "charcoal",
+        "amber",
+        "console",
+        "developer",
+        "operations",
+        "monospace"
+      ],
+      "contrast": [
+        {
+          "scheme": "dark",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 14.02,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 13.03,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.52,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 9.13,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 9.13,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 8.2,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/graphite/dist/apexlang",
+      "legacySql": "theme-styles/graphite/dist/legacy/amc_style_graphite.sql"
+    },
+    {
+      "slug": "high-contrast",
+      "name": "AMC High Contrast",
+      "staticId": "AMC_STYLE_HIGH_CONTRAST",
+      "apexlangId": "amc-high-contrast",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "An accessibility-first style: every text pair meets WCAG AAA (7:1), thick offset focus rings, underlined links, a visible border on every control, alerts marked by a thick start border and a symbol, and no shadows or gradients.",
+      "keywords": [
+        "high contrast",
+        "accessibility",
+        "wcag aaa",
+        "a11y",
+        "low vision",
+        "light",
+        "clean"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 17.31,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 18.88,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 9.29,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 10.11,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 10.11,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 10.11,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/high-contrast/dist/apexlang",
+      "legacySql": "theme-styles/high-contrast/dist/legacy/amc_style_high_contrast.sql"
+    },
+    {
+      "slug": "midnight",
+      "name": "AMC Midnight",
+      "staticId": "AMC_STYLE_MIDNIGHT",
+      "apexlangId": "amc-midnight",
+      "base": "vita-dark",
+      "scheme": "dark",
+      "version": "1.0.0",
+      "description": "A calm, premium dark style for operations dashboards: deep navy-ink surfaces that rise in lightness instead of casting shadows, an electric-blue primary and a subtle cyan glow on focus, hot buttons and the current menu entry.",
+      "keywords": [
+        "midnight",
+        "dark",
+        "navy",
+        "electric blue",
+        "cyan",
+        "dashboard",
+        "operations"
+      ],
+      "contrast": [
+        {
+          "scheme": "dark",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 15.47,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 14.12,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.99,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 8.23,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 6.48,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 5.67,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/midnight/dist/apexlang",
+      "legacySql": "theme-styles/midnight/dist/legacy/amc_style_midnight.sql"
+    },
+    {
+      "slug": "neo-brutal",
+      "name": "AMC Neo Brutal",
+      "staticId": "AMC_STYLE_NEO_BRUTAL",
+      "apexlangId": "amc-neo-brutal",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A bold neo-brutalist style: ink borders, hard offset shadows, flat saturated fills, a sun-yellow header, pink and lime accents and a strong cobalt primary, with calm report rows for daily data entry.",
+      "keywords": [
+        "neo brutal",
+        "brutalist",
+        "bold",
+        "ink",
+        "yellow",
+        "cobalt",
+        "light",
+        "modern"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 17.41,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 18.73,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 9.29,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 8.08,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 8.08,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 8.08,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/neo-brutal/dist/apexlang",
+      "legacySql": "theme-styles/neo-brutal/dist/legacy/amc_style_neo_brutal.sql"
+    },
+    {
+      "slug": "nordic",
+      "name": "AMC Nordic",
+      "staticId": "AMC_STYLE_NORDIC",
+      "apexlangId": "amc-nordic",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A cool, minimal Scandinavian style: pale grey-blue page, white regions with almost no shadow, slate text, a muted fjord-blue primary, soft 12px corners and a thin white header with a slate rule.",
+      "keywords": [
+        "nordic",
+        "scandinavian",
+        "minimal",
+        "calm",
+        "slate",
+        "fjord",
+        "light"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 12.91,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 14.54,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 5.76,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.71,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 6.2,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 6.2,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/nordic/dist/apexlang",
+      "legacySql": "theme-styles/nordic/dist/legacy/amc_style_nordic.sql"
+    },
+    {
+      "slug": "paper",
+      "name": "AMC Paper",
+      "staticId": "AMC_STYLE_PAPER",
+      "apexlangId": "amc-paper",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "An editorial style for reports and document-heavy apps: near-white paper, ink-black text, one strong ink-blue accent, serif headings and hairline rules instead of boxes.",
+      "keywords": [
+        "paper",
+        "editorial",
+        "print",
+        "serif",
+        "report",
+        "document",
+        "ink",
+        "blue",
+        "minimal",
+        "light"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 17.5,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 17.5,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.54,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 8.68,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 9.14,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 8.68,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/paper/dist/apexlang",
+      "legacySql": "theme-styles/paper/dist/legacy/amc_style_paper.sql"
+    },
+    {
+      "slug": "royal",
+      "name": "AMC Royal",
+      "staticId": "AMC_STYLE_ROYAL",
+      "apexlangId": "amc-royal",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A formal government and enterprise style: a deep indigo header with a thin gold rule, a warm ivory page, ivory-white regions, an indigo primary, and gold kept for accents only (current menu marker, focus ring, badges).",
+      "keywords": [
+        "royal",
+        "government",
+        "enterprise",
+        "formal",
+        "indigo",
+        "gold",
+        "ivory",
+        "light"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 14.98,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 16.47,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.86,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 10.48,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 10.66,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 10.48,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/royal/dist/apexlang",
+      "legacySql": "theme-styles/royal/dist/legacy/amc_style_royal.sql"
+    },
+    {
+      "slug": "vita-auto",
+      "name": "AMC Vita Auto",
+      "staticId": "AMC_STYLE_VITA_AUTO",
+      "apexlangId": "amc-vita-auto",
+      "base": "vita",
+      "scheme": "auto",
+      "version": "1.0.0",
+      "description": "The familiar Vita look that follows the operating system: Vita light by day and a Vita Dark style palette when the user's device is set to dark mode, with no page reload or user preference to manage.",
+      "keywords": [
+        "vita",
+        "auto",
+        "dark mode",
+        "light",
+        "system",
+        "prefers-color-scheme",
+        "accessible"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 14.6,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 15.8,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 5.8,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.91,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 6.2,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 6.2,
+          "min": 3
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 14.66,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 12.87,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.78,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 6.69,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 7.1,
+          "min": 4.5
+        },
+        {
+          "scheme": "dark",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 5.89,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/vita-auto/dist/apexlang",
+      "legacySql": "theme-styles/vita-auto/dist/legacy/amc_style_vita_auto.sql"
     }
   ]
 }
