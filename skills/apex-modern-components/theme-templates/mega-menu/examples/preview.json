@@ -1,0 +1,28 @@
+{
+  "samples": [
+    { "title": "Top menu, Sales panel open", "wide": true, "options": [], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-dashboard" },
+      { "text": "Sales", "link": "#", "icon": "fa-line-chart", "current": true, "a01": "Orders, billing and the customers behind them.", "children": [
+        { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "current": true, "a01": "Open, shipped and on-hold sales orders" },
+        { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "Billing, credit notes and overdue items" },
+        { "text": "Customers", "link": "#", "icon": "fa-users", "a01": "Accounts, contacts and credit limits" },
+        { "text": "Quotes", "link": "#", "icon": "fa-pencil-square-o", "a01": "Draft offers waiting for approval" }
+      ] },
+      { "text": "Inventory", "link": "#", "icon": "fa-cubes", "a01": "Stock levels across all warehouses.", "children": [
+        { "text": "Stock", "link": "#", "icon": "fa-archive", "a01": "On hand, reserved and available" },
+        { "text": "Warehouses", "link": "#", "icon": "fa-building-o", "a01": "Sites, bins and capacity" },
+        { "text": "Transfers", "link": "#", "icon": "fa-exchange", "a01": "Moves between warehouses" }
+      ] },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" },
+      { "text": "Admin", "link": "#", "icon": "fa-cog" }
+    ] },
+    { "title": "Compact, solid, no feature card", "options": ["amc-TMegaMenu--compact", "amc-TMegaMenu--solid", "amc-TMegaMenu--noFeature"], "entries": [
+      { "text": "Home", "link": "#", "icon": "fa-home", "current": true },
+      { "text": "Inventory", "link": "#", "icon": "fa-cubes", "children": [
+        { "text": "Stock", "link": "#", "icon": "fa-archive", "a01": "On hand and reserved" },
+        { "text": "Transfers", "link": "#", "icon": "fa-exchange", "a01": "Moves between sites" }
+      ] },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" }
+    ] }
+  ]
+}

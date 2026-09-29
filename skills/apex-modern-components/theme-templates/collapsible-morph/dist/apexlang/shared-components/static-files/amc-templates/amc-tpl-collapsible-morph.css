@@ -1,0 +1,171 @@
+/* Collapsible Morph: region template for Universal Theme. A collapsible region whose card morphs
+   into a compact pill when collapsed: width, corner radius and header shape change together while
+   the body folds away (grid-template-rows 1fr -> 0fr). The body is clipped only while it is
+   collapsed or animating, never when open, so menus and popups inside keep working. Without
+   JavaScript the region stays expanded. */
+.amc-TCollapsibleMorph {
+  --amc-tcm-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tcm-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tcm-surface: var(--ut-component-background-color, #fff);
+  --amc-tcm-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tcm-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tcm-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tcm-glint: var(--amc-tcm-glint-base, #fff);
+  --amc-tcm-radius: calc(var(--ut-component-border-radius, 4px) + 10px);
+  --amc-tcm-pill: 100%;
+  --amc-tcm-ease: cubic-bezier(.5, 0, .1, 1);
+  --amc-tcm-spring: cubic-bezier(.3, 1.25, .45, 1);
+  --amc-tcm-dur: .48s;
+  --amc-tcm-pill-bg: linear-gradient(120deg, color-mix(in srgb, var(--amc-tcm-accent) 12%, var(--amc-tcm-surface)), var(--amc-tcm-surface) 70%);
+  --amc-tcm-pill-ink: var(--amc-tcm-ink);
+  display: flex;
+  flex-direction: column;
+  margin-block-end: 16px;
+  color: var(--amc-tcm-ink);
+}
+
+.amc-TCollapsibleMorph-shell {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  border-radius: var(--amc-tcm-radius);
+  background: var(--amc-tcm-surface);
+  box-shadow:
+    0 0 0 1px var(--amc-tcm-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tcm-ink) 8%, transparent),
+    0 14px 32px -22px color-mix(in srgb, var(--amc-tcm-ink) 45%, transparent);
+  transition:
+    inline-size var(--amc-tcm-dur) var(--amc-tcm-ease),
+    border-radius var(--amc-tcm-dur) var(--amc-tcm-ease),
+    box-shadow .3s ease,
+    background-color .3s ease;
+}
+
+/* Header */
+.amc-TCollapsibleMorph-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-inline-size: 0;
+  padding-block: 10px;
+  padding-inline: 10px 14px;
+  border-block-end: 1px solid var(--amc-tcm-line);
+  transition: padding var(--amc-tcm-dur) var(--amc-tcm-ease), border-color .3s ease;
+}
+.amc-TCollapsibleMorph-title { flex: 0 1 auto; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; }
+.amc-TCollapsibleMorph-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-inline-size: 100%;
+  margin: 0;
+  padding-block: 3px;
+  padding-inline: 3px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: default;
+  transition: background-color .2s ease;
+}
+.amc-TCollapsibleMorph-toggle:focus-visible { outline: 2px solid var(--amc-tcm-accent); outline-offset: 2px; }
+.amc-TCollapsibleMorph.is-ready .amc-TCollapsibleMorph-toggle { cursor: pointer; }
+.amc-TCollapsibleMorph.is-ready .amc-TCollapsibleMorph-toggle:hover { background: color-mix(in srgb, var(--amc-tcm-ink) 5%, transparent); }
+.amc-TCollapsibleMorph-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--amc-tcm-accent) 12%, transparent);
+  color: var(--amc-tcm-accent);
+  font-size: 14px;
+  transition: border-radius var(--amc-tcm-dur) var(--amc-tcm-ease), background-color .3s ease, color .3s ease;
+}
+.amc-TCollapsibleMorph-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TCollapsibleMorph-label { min-inline-size: 0; overflow-wrap: anywhere; }
+.amc-TCollapsibleMorph-chevron {
+  display: none;
+  flex: none;
+  place-items: center;
+  inline-size: 22px;
+  block-size: 22px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-tcm-ink) 7%, transparent);
+  transition: rotate var(--amc-tcm-dur) var(--amc-tcm-spring), background-color .3s ease;
+}
+.amc-TCollapsibleMorph-chevron::before {
+  content: "";
+  inline-size: 6px;
+  block-size: 6px;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  rotate: 225deg;
+  translate: 0 1px;
+}
+.amc-TCollapsibleMorph.is-ready .amc-TCollapsibleMorph-chevron { display: grid; }
+.amc-TCollapsibleMorph-actions, .amc-TCollapsibleMorph-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TCollapsibleMorph-actions { margin-inline-start: auto; transition: opacity .2s ease; }
+.amc-TCollapsibleMorph-actions:empty, .amc-TCollapsibleMorph-footer:empty { display: none; }
+
+/* Body: folds with grid rows; clipped only while collapsed or animating. */
+.amc-TCollapsibleMorph-body {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--amc-tcm-dur) var(--amc-tcm-ease), visibility 0s;
+}
+.amc-TCollapsibleMorph-clip { min-block-size: 0; min-inline-size: 0; }
+.amc-TCollapsibleMorph-content { padding: 14px 18px 16px; min-inline-size: 0; overflow-x: auto; }
+.amc-TCollapsibleMorph-footer { justify-content: flex-end; padding: 0 18px 14px; }
+.amc-TCollapsibleMorph.is-animating .amc-TCollapsibleMorph-clip,
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-clip { overflow: clip; }
+
+/* Collapsed: the card becomes a pill. */
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-shell {
+  inline-size: var(--amc-tcm-pill);
+  border-radius: 28px;
+  background: var(--amc-tcm-pill-bg);
+  color: var(--amc-tcm-pill-ink);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tcm-glint) 45%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--amc-tcm-accent) 22%, var(--amc-tcm-line)),
+    0 8px 20px -12px color-mix(in srgb, var(--amc-tcm-accent) 55%, transparent);
+}
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-header { padding: 5px; border-color: transparent; }
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-icon { border-radius: 50%; background: var(--amc-tcm-accent); color: var(--amc-tcm-accent-ink); }
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-chevron { rotate: 180deg; }
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-actions { display: none; }
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-toggle:hover { background: none; }
+.amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-body {
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows var(--amc-tcm-dur) var(--amc-tcm-ease), visibility 0s linear var(--amc-tcm-dur);
+}
+.amc-TCollapsibleMorph.is-instant .amc-TCollapsibleMorph-shell,
+.amc-TCollapsibleMorph.is-instant .amc-TCollapsibleMorph-header,
+.amc-TCollapsibleMorph.is-instant .amc-TCollapsibleMorph-icon,
+.amc-TCollapsibleMorph.is-instant .amc-TCollapsibleMorph-chevron,
+.amc-TCollapsibleMorph.is-instant .amc-TCollapsibleMorph-body { transition: none; }
+
+/* Template options (Collapsed by default and Remember state are read by the script). */
+.amc-TCollapsibleMorph--collapsed, .amc-TCollapsibleMorph--remember { --amc-tcm-flag: 1; }
+.amc-TCollapsibleMorph--pillEnd.is-collapsed .amc-TCollapsibleMorph-shell { margin-inline-start: auto; }
+.amc-TCollapsibleMorph--primary {
+  --amc-tcm-pill-bg: linear-gradient(120deg, color-mix(in srgb, var(--amc-tcm-accent) 85%, var(--amc-tcm-glint)), var(--amc-tcm-accent));
+  --amc-tcm-pill-ink: var(--amc-tcm-accent-ink);
+}
+.amc-TCollapsibleMorph--primary.is-collapsed .amc-TCollapsibleMorph-icon { background: var(--amc-tcm-accent-ink); color: var(--amc-tcm-accent); }
+.amc-TCollapsibleMorph--primary.is-collapsed .amc-TCollapsibleMorph-chevron { background: color-mix(in srgb, var(--amc-tcm-accent-ink) 20%, transparent); }
+.amc-TCollapsibleMorph--noPadding .amc-TCollapsibleMorph-content { padding-inline: 0; padding-block: 0 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TCollapsibleMorph-shell, .amc-TCollapsibleMorph-header, .amc-TCollapsibleMorph-icon,
+  .amc-TCollapsibleMorph-chevron, .amc-TCollapsibleMorph-toggle, .amc-TCollapsibleMorph-actions,
+  .amc-TCollapsibleMorph-body, .amc-TCollapsibleMorph.is-collapsed .amc-TCollapsibleMorph-body { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TCollapsibleMorph-shell { border: 1px solid CanvasText; }
+  .amc-TCollapsibleMorph-toggle { border: 1px solid ButtonText; }
+}

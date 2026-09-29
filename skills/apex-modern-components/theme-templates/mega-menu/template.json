@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Mega Menu",
+  "staticId": "AMC_TPL_MEGA_MENU",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "A floating top menu bar whose parent entries swing open a glass mega panel on a perspective hinge, with a feature card for the parent page and a grid of sub pages with 3D icon tiles and descriptions.",
+  "useFor": "Top navigation lists with one level of sub entries: Sales with Orders, Invoices and Customers, Inventory with Stock, Warehouses and Transfers, Reports and Admin as plain links. Place the List region in the Before Navigation Bar, Breadcrumb Bar or top of Body.",
+  "keywords": ["mega menu", "top navigation", "dropdown", "glass", "menu bar", "depth"],
+  "helpText": "List template for top navigation with one level of sub lists. Entries without children are links; entries with children render a menu button that opens a glass panel spanning the bar. The panel shows a feature card linking to the parent entry's own target, with its icon and Attribute 1 as description, plus a grid of the child entries with their icons and Attribute 1 descriptions. The current entry gets aria-current=page and parents on the current path are highlighted. With JavaScript the button carries aria-expanded and opens on click, Enter or Space, or mouse hover; ArrowDown moves into the panel, ArrowUp and ArrowDown move between its links, ArrowLeft and ArrowRight move along the bar, Escape closes the panel and returns focus, and a click outside closes it. Without JavaScript the panel opens on hover and keyboard focus. The bar scrolls horizontally in narrow containers and the panel stacks in one column below 560px. Template options: Solid panel drops the backdrop blur; Compact bar; Hide feature card; Three columns; Full width bar. Under prefers-reduced-motion the panel appears without the hinge animation.",
+  "attributes": { "a01": "Description" },
+  "templateOptions": [
+    { "staticId": "SOLID", "name": "Solid panel", "cssClass": "amc-TMegaMenu--solid", "sequence": 10, "help": "Uses an opaque surface instead of frosted glass, for busy page backgrounds or low-end devices." },
+    { "staticId": "COMPACT", "name": "Compact bar", "cssClass": "amc-TMegaMenu--compact", "sequence": 20, "help": "Lower bar with smaller entries, for headers with little room." },
+    { "staticId": "NO_FEATURE", "name": "Hide feature card", "cssClass": "amc-TMegaMenu--noFeature", "sequence": 30, "help": "Shows only the grid of sub pages; use it when parent entries have no page of their own." },
+    { "staticId": "THREE_COLUMNS", "name": "Three columns", "cssClass": "amc-TMegaMenu--cols3", "sequence": 40, "help": "Lays the sub pages out in three columns on wide panels, for large menus." },
+    { "staticId": "FULL_WIDTH", "name": "Full width bar", "cssClass": "amc-TMegaMenu--fullBar", "sequence": 50, "help": "The bar spans the full width of its region instead of fitting its entries." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

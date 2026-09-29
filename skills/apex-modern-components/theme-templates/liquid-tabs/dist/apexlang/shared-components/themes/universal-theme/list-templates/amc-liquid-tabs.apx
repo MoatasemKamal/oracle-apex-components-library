@@ -1,0 +1,143 @@
+listTemplate amc-liquid-tabs (
+    name: AMC Liquid Tabs
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TLiquidTabs #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <div class="amc-TLiquidTabs-scroller">
+            <div class="amc-TLiquidTabs-rail">
+            <span class="amc-TLiquidTabs-goo" aria-hidden="true"><span class="amc-TLiquidTabs-blob amc-TLiquidTabs-blob--tail"></span><span class="amc-TLiquidTabs-blob"></span></span>
+            <ul class="amc-TLiquidTabs-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            </div>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TLiquidTabs-item is-current"><a class="amc-TLiquidTabs-link is-lit" href="#LINK#" aria-current="page"><span class="amc-TLiquidTabs-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TLiquidTabs-label">#TEXT#</span><span class="amc-TLiquidTabs-badge">#A01#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TLiquidTabs-item"><a class="amc-TLiquidTabs-link" href="#LINK#"><span class="amc-TLiquidTabs-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TLiquidTabs-label">#TEXT#</span><span class="amc-TLiquidTabs-badge">#A01#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-liquid-tabs.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-liquid-tabs.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Count badge
+    }
+    advanced {
+        staticId: AMC_TPL_LIQUID_TABS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for tab navigation. Each entry is a real link; the current entry gets aria-current=page. Attribute 1 is a count badge that is hidden when empty. With JavaScript the indicator is a liquid pill that stretches toward the hovered or keyboard-focused tab and returns to the current tab; without JavaScript, and under prefers-reduced-motion, the current tab shows a static pill and nothing moves. The strip scrolls horizontally in narrow containers, fades its edges while scrolling and scrolls the current tab into view. Template options: Solid pill fills the indicator with the primary color; Liquid underline turns it into a stretching drop under the label; Fill width spreads the tabs across the region; Large raises the tab height; No track removes the tray behind the tabs. Forced-colors mode shows the current tab with a system outline.
+            ```
+    }
+
+    templateOption amc-liquid-tabs-solid (
+        name: Solid pill
+        sequence: 10
+        appearance {
+            cssClasses: amc-TLiquidTabs--solid
+        }
+        help {
+            helpText:
+                ```text
+                The liquid pill uses the primary color and the tab on it switches to the primary contrast color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SOLID
+        }
+    )
+
+    templateOption amc-liquid-tabs-drop (
+        name: Liquid underline
+        sequence: 20
+        appearance {
+            cssClasses: amc-TLiquidTabs--drop
+        }
+        help {
+            helpText:
+                ```text
+                Replaces the pill with a primary drop under the label that stretches between tabs; the tray becomes a hairline.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DROP
+        }
+    )
+
+    templateOption amc-liquid-tabs-fill (
+        name: Fill width
+        sequence: 30
+        appearance {
+            cssClasses: amc-TLiquidTabs--fill
+        }
+        help {
+            helpText:
+                ```text
+                Tabs share the full width of the region, for two to five tabs.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FILL
+        }
+    )
+
+    templateOption amc-liquid-tabs-large (
+        name: Large
+        sequence: 40
+        appearance {
+            cssClasses: amc-TLiquidTabs--large
+        }
+        help {
+            helpText:
+                ```text
+                Taller tabs with larger text, for page headers and touch screens.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LARGE
+        }
+    )
+
+    templateOption amc-liquid-tabs-no-track (
+        name: No track
+        sequence: 50
+        appearance {
+            cssClasses: amc-TLiquidTabs--bare
+        }
+        help {
+            helpText:
+                ```text
+                Removes the tray behind the tabs so only the liquid pill remains, for colored hero regions.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_TRACK
+        }
+    )
+)

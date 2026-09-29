@@ -1,0 +1,43 @@
+{
+  "samples": [
+    { "title": "Side navigation with current path", "options": ["amc-TAccordionRail--panel"], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-dashboard" },
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "current": true, "a01": "128", "children": [
+        { "text": "Open orders", "link": "#", "a01": "96" },
+        { "text": "Backorders", "link": "#", "current": true, "a01": "12" },
+        { "text": "Returns", "link": "#" }
+      ] },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "14", "children": [
+        { "text": "Drafts", "link": "#" },
+        { "text": "Overdue", "link": "#", "a01": "14" }
+      ] },
+      { "text": "Customers", "link": "#", "icon": "fa-users" },
+      { "text": "Inventory", "link": "#", "icon": "fa-cubes" },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" },
+      { "text": "Admin", "link": "#", "icon": "fa-cog", "children": [
+        { "text": "Users and roles", "link": "#" },
+        { "text": "Settings", "link": "#" }
+      ] }
+    ] },
+    { "title": "Compact with flowing light", "options": ["amc-TAccordionRail--compact", "amc-TAccordionRail--pulse"], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-dashboard" },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "current": true, "children": [
+        { "text": "Drafts", "link": "#" },
+        { "text": "Sent", "link": "#" },
+        { "text": "Overdue", "link": "#", "current": true, "a01": "14" }
+      ] },
+      { "text": "Customers", "link": "#", "icon": "fa-users" },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart", "current": false }
+    ] },
+    { "title": "Icon rail", "options": ["amc-TAccordionRail--iconRail"], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-dashboard", "current": true },
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "a01": "128", "children": [
+        { "text": "Open orders", "link": "#" },
+        { "text": "Returns", "link": "#" }
+      ] },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o" },
+      { "text": "Inventory", "link": "#", "icon": "fa-cubes", "a01": "3" },
+      { "text": "Admin", "link": "#", "icon": "fa-cog" }
+    ] }
+  ]
+}

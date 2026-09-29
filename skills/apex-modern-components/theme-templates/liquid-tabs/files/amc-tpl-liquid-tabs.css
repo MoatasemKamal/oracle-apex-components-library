@@ -1,0 +1,201 @@
+/* Liquid Tabs: list template for Universal Theme. Tab navigation whose indicator is a drop of
+   liquid: two blobs travel at different speeds through an SVG "goo" filter (blur + alpha
+   threshold), so the pill stretches toward the hovered or focused tab and snaps back to the
+   current one. Without JavaScript, or under reduced motion, the current tab carries a static pill. */
+@property --amc-tlt-x { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --amc-tlt-w { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --amc-tlt-fs { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --amc-tlt-fe { syntax: "<length>"; inherits: false; initial-value: 0px; }
+
+.amc-TLiquidTabs {
+  --amc-tlt-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tlt-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tlt-surface: var(--ut-component-background-color, #fff);
+  --amc-tlt-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tlt-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tlt-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tlt-track: color-mix(in srgb, var(--amc-tlt-ink) 5%, var(--amc-tlt-surface));
+  --amc-tlt-blob: color-mix(in srgb, var(--amc-tlt-accent) 17%, var(--amc-tlt-surface));
+  --amc-tlt-blob-top: color-mix(in srgb, var(--amc-tlt-accent) 9%, var(--amc-tlt-surface));
+  --amc-tlt-lit: color-mix(in srgb, var(--amc-tlt-accent) 88%, var(--amc-tlt-ink));
+  --amc-tlt-badge-lit-bg: var(--amc-tlt-accent);
+  --amc-tlt-badge-lit-ink: var(--amc-tlt-accent-ink);
+  --amc-tlt-shine: color-mix(in srgb, var(--amc-tlt-shine-base, #fff) 40%, transparent);
+  --amc-tlt-h: 2.5rem;
+  --amc-tlt-pad: 1rem;
+  --amc-tlt-gap: 4px;
+  --amc-tlt-filter: url(#amc-tliquidtabs-goo);
+  display: flex;
+  max-inline-size: 100%;
+  margin-block-end: 12px;
+}
+
+.amc-TLiquidTabs-scroller {
+  position: relative;
+  inline-size: max-content;
+  max-inline-size: 100%;
+  padding: var(--amc-tlt-gap);
+  border-radius: 999px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  background: var(--amc-tlt-track);
+  box-shadow:
+    inset 0 0 0 1px var(--amc-tlt-line),
+    inset 0 1px 3px color-mix(in srgb, var(--amc-tlt-ink) 7%, transparent);
+}
+.amc-TLiquidTabs-scroller::-webkit-scrollbar { display: none; }
+
+.amc-TLiquidTabs-rail { position: relative; inline-size: max-content; min-inline-size: 100%; }
+
+.amc-TLiquidTabs-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TLiquidTabs-item { display: flex; margin: 0; }
+
+.amc-TLiquidTabs-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  block-size: var(--amc-tlt-h);
+  padding-inline: var(--amc-tlt-pad);
+  border-radius: 999px;
+  color: var(--amc-tlt-muted);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .3s ease, background-color .3s ease;
+}
+.amc-TLiquidTabs-link:hover { color: var(--amc-tlt-ink); text-decoration: none; }
+.amc-TLiquidTabs-link:focus-visible { outline: 2px solid var(--amc-tlt-accent); outline-offset: 1px; }
+.amc-TLiquidTabs-link[aria-current="page"] { color: var(--amc-tlt-lit); font-weight: 650; }
+.amc-TLiquidTabs-link.is-lit { color: var(--amc-tlt-lit); }
+
+.amc-TLiquidTabs-icon { flex: none; font-size: 14px; inline-size: 1em; text-align: center; }
+.amc-TLiquidTabs-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TLiquidTabs-label { unicode-bidi: isolate; }
+
+.amc-TLiquidTabs-badge {
+  display: inline-grid;
+  place-items: center;
+  min-inline-size: 1.375rem;
+  block-size: 1.375rem;
+  padding-inline: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tlt-ink) 9%, transparent);
+  color: var(--amc-tlt-ink);
+  font-size: .6875rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  transition: color .3s ease, background-color .3s ease;
+}
+.amc-TLiquidTabs-badge:empty { display: none; }
+.amc-TLiquidTabs-link[aria-current="page"] .amc-TLiquidTabs-badge,
+.amc-TLiquidTabs-link.is-lit .amc-TLiquidTabs-badge { background: var(--amc-tlt-badge-lit-bg); color: var(--amc-tlt-badge-lit-ink); }
+
+/* Static pill: no JavaScript, reduced motion, or before the liquid layer is ready. */
+.amc-TLiquidTabs:not(.is-liquid) .amc-TLiquidTabs-link[aria-current="page"] {
+  background:
+    radial-gradient(90% 70% at 28% 0%, var(--amc-tlt-shine), transparent 60%),
+    linear-gradient(to bottom, var(--amc-tlt-blob-top), var(--amc-tlt-blob));
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tlt-ink) 10%, transparent);
+}
+
+/* Liquid layer (JavaScript adds .is-liquid and the SVG goo filter). */
+.amc-TLiquidTabs-goo { display: none; position: absolute; inset: 0; pointer-events: none; }
+.amc-TLiquidTabs.is-liquid .amc-TLiquidTabs-goo { display: block; filter: var(--amc-tlt-filter); }
+.amc-TLiquidTabs-blob {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--amc-tlt-w);
+  border-radius: 999px;
+  background:
+    radial-gradient(90% 70% at 28% 0%, var(--amc-tlt-shine), transparent 60%),
+    linear-gradient(to bottom, var(--amc-tlt-blob-top), var(--amc-tlt-blob));
+  transform: translateX(var(--amc-tlt-x));
+  transition: --amc-tlt-x .34s cubic-bezier(.3, 1.35, .5, 1), --amc-tlt-w .34s cubic-bezier(.3, 1.35, .5, 1);
+}
+.amc-TLiquidTabs-blob--tail {
+  inset-block: 5px;
+  transition: --amc-tlt-x .62s cubic-bezier(.6, 0, .2, 1) .04s, --amc-tlt-w .62s cubic-bezier(.6, 0, .2, 1) .04s;
+}
+.amc-TLiquidTabs.is-instant .amc-TLiquidTabs-blob { transition: none; }
+
+/* Edge fades while the tab strip scrolls (narrow containers). */
+@supports (animation-timeline: scroll()) {
+  .amc-TLiquidTabs-scroller {
+    -webkit-mask-image: linear-gradient(to right, transparent, black var(--amc-tlt-fs), black calc(100% - var(--amc-tlt-fe)), transparent);
+    mask-image: linear-gradient(to right, transparent, black var(--amc-tlt-fs), black calc(100% - var(--amc-tlt-fe)), transparent);
+    animation: amc-tlt-fade linear both;
+    animation-timeline: scroll(self inline);
+  }
+  .amc-TLiquidTabs-scroller:dir(rtl) {
+    -webkit-mask-image: linear-gradient(to left, transparent, black var(--amc-tlt-fs), black calc(100% - var(--amc-tlt-fe)), transparent);
+    mask-image: linear-gradient(to left, transparent, black var(--amc-tlt-fs), black calc(100% - var(--amc-tlt-fe)), transparent);
+  }
+}
+@keyframes amc-tlt-fade {
+  0% { --amc-tlt-fs: 0px; --amc-tlt-fe: 28px; }
+  8% { --amc-tlt-fs: 28px; --amc-tlt-fe: 28px; }
+  92% { --amc-tlt-fs: 28px; --amc-tlt-fe: 28px; }
+  100% { --amc-tlt-fs: 28px; --amc-tlt-fe: 0px; }
+}
+
+/* Template options */
+.amc-TLiquidTabs--solid {
+  --amc-tlt-shine: color-mix(in srgb, var(--amc-tlt-shine-base, #fff) 38%, transparent);
+  --amc-tlt-blob: var(--amc-tlt-accent);
+  --amc-tlt-blob-top: color-mix(in srgb, var(--amc-tlt-accent) 82%, var(--amc-tlt-accent-ink));
+  --amc-tlt-lit: var(--amc-tlt-accent-ink);
+  --amc-tlt-badge-lit-bg: var(--amc-tlt-accent-ink);
+  --amc-tlt-badge-lit-ink: var(--amc-tlt-accent);
+}
+.amc-TLiquidTabs--solid .amc-TLiquidTabs-link[aria-current="page"]:not(.is-lit) { color: var(--amc-tlt-accent); }
+.amc-TLiquidTabs--solid .amc-TLiquidTabs-link[aria-current="page"]:not(.is-lit) .amc-TLiquidTabs-badge { background: var(--amc-tlt-accent); color: var(--amc-tlt-accent-ink); }
+.amc-TLiquidTabs--solid:not(.is-liquid) .amc-TLiquidTabs-link[aria-current="page"] { color: var(--amc-tlt-accent-ink); }
+.amc-TLiquidTabs--solid:not(.is-liquid) .amc-TLiquidTabs-link[aria-current="page"] .amc-TLiquidTabs-badge { background: var(--amc-tlt-accent-ink); color: var(--amc-tlt-accent); }
+
+.amc-TLiquidTabs--drop {
+  --amc-tlt-shine: transparent;
+  --amc-tlt-filter: url(#amc-tliquidtabs-goo-s);
+  --amc-tlt-blob: var(--amc-tlt-accent);
+  --amc-tlt-blob-top: var(--amc-tlt-accent);
+}
+.amc-TLiquidTabs--drop .amc-TLiquidTabs-scroller { border-radius: 0; background: none; box-shadow: inset 0 -1px 0 var(--amc-tlt-line); }
+.amc-TLiquidTabs--drop .amc-TLiquidTabs-link { border-radius: 8px; }
+.amc-TLiquidTabs--drop .amc-TLiquidTabs-blob { inset-block: auto 0; block-size: 4px; }
+.amc-TLiquidTabs--drop .amc-TLiquidTabs-blob--tail { inset-block: auto .5px; block-size: 3px; }
+.amc-TLiquidTabs--drop:not(.is-liquid) .amc-TLiquidTabs-link[aria-current="page"] { background: none; box-shadow: inset 0 -4px 0 var(--amc-tlt-accent); }
+.amc-TLiquidTabs--drop .amc-TLiquidTabs-link:hover { background: color-mix(in srgb, var(--amc-tlt-ink) 5%, transparent); }
+
+.amc-TLiquidTabs--fill .amc-TLiquidTabs-scroller { inline-size: 100%; }
+.amc-TLiquidTabs--fill .amc-TLiquidTabs-list { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(max-content, 1fr); }
+.amc-TLiquidTabs--fill .amc-TLiquidTabs-link { flex: 1; justify-content: center; }
+
+.amc-TLiquidTabs--large { --amc-tlt-h: 3rem; --amc-tlt-pad: 1.375rem; --amc-tlt-gap: 5px; }
+.amc-TLiquidTabs--large .amc-TLiquidTabs-link { font-size: .9375rem; gap: 10px; }
+.amc-TLiquidTabs--large .amc-TLiquidTabs-icon { font-size: 16px; }
+
+.amc-TLiquidTabs--bare .amc-TLiquidTabs-scroller { background: none; box-shadow: none; padding-inline: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TLiquidTabs-link, .amc-TLiquidTabs-badge, .amc-TLiquidTabs-blob { transition: none !important; }
+  .amc-TLiquidTabs-scroller { scroll-behavior: auto; }
+}
+@media (forced-colors: active) {
+  .amc-TLiquidTabs-goo { display: none !important; }
+  .amc-TLiquidTabs-scroller { border: 1px solid CanvasText; }
+  .amc-TLiquidTabs-link[aria-current="page"] { outline: 2px solid Highlight; outline-offset: -2px; }
+}

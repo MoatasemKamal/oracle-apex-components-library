@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Manila folder around a Form, stacked papers", "regionTitle": "Customer file: Al Noor Trading", "icon": "fa-folder-open-o", "bodyKind": "form", "options": ["amc-TFolderTab--stacked"], "buttons": { "EDIT": "Edit", "PREVIOUS": "Back", "NEXT": "Save" } },
+    { "title": "Primary tab around a Classic Report", "regionTitle": "Order lines", "icon": "fa-list-alt", "bodyKind": "report", "options": ["amc-TFolderTab--primary", "amc-TFolderTab--noPadding"], "buttons": { "CREATE": "Add line" } },
+    { "title": "Ink outline, danger tab, text", "regionTitle": "Escalation notes", "icon": "fa-exclamation-triangle", "bodyKind": "text", "options": ["amc-TFolderTab--ink", "amc-TFolderTab--danger"] }
+  ]
+}

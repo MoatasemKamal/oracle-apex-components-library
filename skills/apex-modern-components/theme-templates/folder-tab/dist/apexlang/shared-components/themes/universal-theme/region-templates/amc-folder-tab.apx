@@ -1,0 +1,149 @@
+regionTemplate amc-folder-tab (
+    name: AMC Folder Tab
+    region {
+        template:
+            ```html
+            <section class="amc-TFolderTab #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <header class="amc-TFolderTab-head">
+                <div class="amc-TFolderTab-tab">
+                  <span class="amc-TFolderTab-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TFolderTab-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                </div>
+                <div class="amc-TFolderTab-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+              </header>
+              <div class="amc-TFolderTab-folder">
+                <div class="amc-TFolderTab-paper">
+                  <div class="amc-TFolderTab-body">#BODY##SUB_REGIONS#</div>
+                  <footer class="amc-TFolderTab-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+                </div>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-folder-tab.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_FOLDER_TAB
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template shaped like a file folder. The region title and icon sit on the folder tab; buttons in Help, Edit, Change, Copy, Delete and Create sit beside the tab, and Previous, Close and Next in the paper's footer. The body is a sheet of paper with a light grain and is never clipped or transformed, so report menus, date pickers and popups work normally. Template options: Primary, Success or Danger tab color the whole folder with that palette color and switch the tab text to its contrast color; Stacked papers shows two more sheets peeking out behind the paper; Ink outline gives folder, tab and paper a bold ink border with a hard offset shadow; No body padding lets reports run edge to edge. The tab lifts slightly on hover and focus except under prefers-reduced-motion; forced-colors mode draws plain system borders.
+            ```
+    }
+
+    templateOption amc-folder-tab-tab-primary (
+        name: Tab color: primary
+        sequence: 10
+        appearance {
+            cssClasses: amc-TFolderTab--primary
+        }
+        help {
+            helpText:
+                ```text
+                Folder and tab use the primary palette color; the title switches to the primary contrast color. Without a tab color the folder is manila, mixed from the warning color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TAB_PRIMARY
+        }
+    )
+
+    templateOption amc-folder-tab-tab-success (
+        name: Tab color: success
+        sequence: 20
+        appearance {
+            cssClasses: amc-TFolderTab--success
+        }
+        help {
+            helpText:
+                ```text
+                Folder and tab use the success palette color, for approved or closed files.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TAB_SUCCESS
+        }
+    )
+
+    templateOption amc-folder-tab-tab-danger (
+        name: Tab color: danger
+        sequence: 30
+        appearance {
+            cssClasses: amc-TFolderTab--danger
+        }
+        help {
+            helpText:
+                ```text
+                Folder and tab use the danger palette color, for escalations and blocked files.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TAB_DANGER
+        }
+    )
+
+    templateOption amc-folder-tab-stacked (
+        name: Stacked papers
+        sequence: 40
+        appearance {
+            cssClasses: amc-TFolderTab--stacked
+        }
+        help {
+            helpText:
+                ```text
+                Two more sheets peek out at slight angles behind the paper, for files that hold several documents.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STACKED
+        }
+    )
+
+    templateOption amc-folder-tab-ink (
+        name: Ink outline
+        sequence: 50
+        appearance {
+            cssClasses: amc-TFolderTab--ink
+        }
+        help {
+            helpText:
+                ```text
+                Bold neo-brutal look: 2px ink borders on folder, tab and paper and a hard offset shadow. The ink follows the theme text color, so it inverts in dark styles.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: INK
+        }
+    )
+
+    templateOption amc-folder-tab-no-body-padding (
+        name: No body padding
+        sequence: 60
+        appearance {
+            cssClasses: amc-TFolderTab--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding so reports and grids run edge to edge on the paper.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

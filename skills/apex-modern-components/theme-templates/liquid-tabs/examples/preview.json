@@ -1,0 +1,24 @@
+{
+  "samples": [
+    { "title": "Page tabs with count badges", "options": [], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-dashboard" },
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "current": true, "a01": "128" },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "14" },
+      { "text": "Customers", "link": "#", "icon": "fa-users" },
+      { "text": "Inventory", "link": "#", "icon": "fa-cubes", "a01": "3" },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" }
+    ] },
+    { "title": "Solid pill, large", "options": ["amc-TLiquidTabs--solid", "amc-TLiquidTabs--large"], "entries": [
+      { "text": "Overview", "link": "#", "icon": "fa-home" },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "14" },
+      { "text": "Payments", "link": "#", "icon": "fa-credit-card", "current": true },
+      { "text": "Admin", "link": "#", "icon": "fa-cog" }
+    ] },
+    { "title": "Liquid underline, fill width", "options": ["amc-TLiquidTabs--drop", "amc-TLiquidTabs--fill"], "entries": [
+      { "text": "Details", "link": "#", "current": true },
+      { "text": "Order lines", "link": "#", "a01": "6" },
+      { "text": "Shipments", "link": "#" },
+      { "text": "History", "link": "#" }
+    ] }
+  ]
+}

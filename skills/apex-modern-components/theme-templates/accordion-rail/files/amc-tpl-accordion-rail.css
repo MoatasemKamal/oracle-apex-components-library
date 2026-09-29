@@ -1,0 +1,278 @@
+/* Accordion Rail: list template for Universal Theme. Vertical navigation on a rail: every entry
+   is a node on one line, and the path from the current parent down to the current page lights up
+   as a glowing segment (:has()). Sub lists are native <details>, so they open without JavaScript;
+   where ::details-content and interpolate-size exist, they grow and shrink smoothly. The icon rail
+   option clips the list to its icons and reveals it on hover or keyboard focus. */
+.amc-TAccordionRail {
+  --amc-tar-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tar-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tar-surface: var(--ut-component-background-color, #fff);
+  --amc-tar-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tar-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tar-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tar-rail: color-mix(in srgb, var(--amc-tar-ink) 14%, transparent);
+  --amc-tar-glow: color-mix(in srgb, var(--amc-tar-accent) 55%, transparent);
+  --amc-tar-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tar-gutter: 26px;
+  --amc-tar-railx: 11px;
+  --amc-tar-h: 2.5rem;
+  --amc-tar-sub-h: 2.125rem;
+  --amc-tar-indent: 28px;
+  --amc-tar-fs: .875rem;
+  --amc-tar-lit-dir: to right;
+  interpolate-size: allow-keywords;
+  margin-block-end: 12px;
+  color: var(--amc-tar-ink);
+}
+.amc-TAccordionRail:dir(rtl) { --amc-tar-lit-dir: to left; }
+
+.amc-TAccordionRail-list {
+  position: relative;
+  margin: 0;
+  padding-block: 6px;
+  padding-inline: var(--amc-tar-gutter) 0;
+  list-style: none;
+}
+.amc-TAccordionRail-list::before {
+  content: "";
+  position: absolute;
+  inset-block: 10px;
+  inset-inline-start: calc(var(--amc-tar-railx) - 1px);
+  inline-size: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, transparent, var(--amc-tar-rail) 18px, var(--amc-tar-rail) calc(100% - 18px), transparent);
+}
+.amc-TAccordionRail-item, .amc-TAccordionRail-subitem { position: relative; margin: 0; }
+.amc-TAccordionRail-sub { margin: 0 0 4px; padding: 0; padding-inline-start: var(--amc-tar-indent); list-style: none; }
+
+/* Rows */
+.amc-TAccordionRail-link, .amc-TAccordionRail-sublink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-block-size: var(--amc-tar-h);
+  padding: 6px 10px;
+  border-radius: var(--amc-tar-radius);
+  color: var(--amc-tar-ink);
+  font-size: var(--amc-tar-fs);
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background-color .2s ease, color .2s ease;
+}
+.amc-TAccordionRail-sublink { min-block-size: var(--amc-tar-sub-h); font-size: calc(var(--amc-tar-fs) - .0625rem); color: var(--amc-tar-muted); }
+.amc-TAccordionRail-item--group > .amc-TAccordionRail-link { padding-inline-end: 42px; }
+.amc-TAccordionRail-link:hover, .amc-TAccordionRail-sublink:hover { background: color-mix(in srgb, var(--amc-tar-ink) 5%, transparent); color: var(--amc-tar-ink); text-decoration: none; }
+.amc-TAccordionRail-link:focus-visible, .amc-TAccordionRail-sublink:focus-visible { outline: 2px solid var(--amc-tar-accent); outline-offset: -2px; }
+
+.amc-TAccordionRail-icon { flex: none; inline-size: 16px; font-size: 15px; text-align: center; color: var(--amc-tar-muted); transition: color .2s ease; }
+.amc-TAccordionRail-icon.fa:not([class*="fa-"]) { visibility: hidden; }
+.amc-TAccordionRail-label { flex: 1; min-inline-size: 0; overflow-wrap: anywhere; unicode-bidi: isolate; }
+.amc-TAccordionRail-badge {
+  flex: none;
+  min-inline-size: 1.375rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tar-ink) 8%, transparent);
+  color: var(--amc-tar-ink);
+  font-size: .6875rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+.amc-TAccordionRail-badge:empty { display: none; }
+
+/* Nodes on the rail */
+.amc-TAccordionRail-link::before, .amc-TAccordionRail-sublink::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 50%;
+  inset-inline-start: calc(-1 * var(--amc-tar-gutter) + var(--amc-tar-railx) - 5px);
+  inline-size: 10px;
+  block-size: 10px;
+  border-radius: 50%;
+  background: var(--amc-tar-surface);
+  box-shadow: inset 0 0 0 2px var(--amc-tar-rail);
+  translate: 0 -50%;
+  transition: box-shadow .2s ease, background-color .2s ease, scale .2s ease;
+}
+.amc-TAccordionRail-sublink::before {
+  inset-inline-start: calc(-1 * (var(--amc-tar-gutter) + var(--amc-tar-indent)) + var(--amc-tar-railx) - 3.5px);
+  inline-size: 7px;
+  block-size: 7px;
+  background: var(--amc-tar-rail);
+  box-shadow: 0 0 0 3px var(--amc-tar-surface);
+}
+.amc-TAccordionRail-link:hover::before { box-shadow: inset 0 0 0 2px var(--amc-tar-accent); }
+.amc-TAccordionRail-sublink:hover::before { background: var(--amc-tar-accent); }
+
+/* Current page and current path */
+.amc-TAccordionRail-link[aria-current="page"], .amc-TAccordionRail-sublink[aria-current="page"] {
+  background: linear-gradient(var(--amc-tar-lit-dir), color-mix(in srgb, var(--amc-tar-accent) 17%, transparent), color-mix(in srgb, var(--amc-tar-accent) 5%, transparent) 75%, transparent);
+  color: var(--amc-tar-accent);
+  font-weight: 650;
+}
+.amc-TAccordionRail-link[aria-current="page"] .amc-TAccordionRail-icon,
+.amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link .amc-TAccordionRail-icon { color: var(--amc-tar-accent); }
+.amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link { font-weight: 650; }
+.amc-TAccordionRail-link[aria-current="page"] .amc-TAccordionRail-badge,
+.amc-TAccordionRail-sublink[aria-current="page"] .amc-TAccordionRail-badge { background: var(--amc-tar-accent); color: var(--amc-tar-accent-ink); }
+.amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link::before,
+.amc-TAccordionRail-sublink[aria-current="page"]::before {
+  background: var(--amc-tar-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-tar-accent) 22%, var(--amc-tar-surface)), 0 0 12px 2px var(--amc-tar-glow);
+}
+.amc-TAccordionRail-sublink[aria-current="page"]::before { scale: 1.3; }
+@supports selector(:has(*)) {
+  .amc-TAccordionRail-subitem:has(~ .amc-TAccordionRail-subitem > .amc-TAccordionRail-sublink[aria-current]) > .amc-TAccordionRail-sublink::before { z-index: 2; background: var(--amc-tar-accent); box-shadow: 0 0 6px 1px var(--amc-tar-glow); }
+}
+
+/* Lit rail segments from the current parent down to the current child. */
+.amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link::after, .amc-TAccordionRail-subitem::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: calc(-1 * var(--amc-tar-gutter) + var(--amc-tar-railx) - 1.5px);
+  inline-size: 3px;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, var(--amc-tar-accent), color-mix(in srgb, var(--amc-tar-accent) 70%, var(--ut-palette-info, #0076df)), var(--amc-tar-accent));
+  background-size: 100% 200%;
+  box-shadow: 0 0 10px 1px var(--amc-tar-glow);
+  pointer-events: none;
+}
+.amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link::after { display: none; inset-block: 50% -2px; }
+.amc-TAccordionRail-subitem::after { display: none; inset-inline-start: calc(-1 * (var(--amc-tar-gutter) + var(--amc-tar-indent)) + var(--amc-tar-railx) - 1.5px); inset-block: 0; }
+.amc-TAccordionRail-subitem.is-current::after { display: block; inset-block: 0 50%; }
+@supports selector(:has(*)) {
+  .amc-TAccordionRail-item.is-current:has(> .amc-TAccordionRail-group[open] .amc-TAccordionRail-sublink[aria-current]) > .amc-TAccordionRail-link::after { display: block; }
+  .amc-TAccordionRail-subitem:has(~ .amc-TAccordionRail-subitem > .amc-TAccordionRail-sublink[aria-current])::after { display: block; }
+}
+
+/* Disclosure toggle (native summary) */
+.amc-TAccordionRail-toggle {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: calc((var(--amc-tar-h) - 28px) / 2);
+  inset-inline-end: 6px;
+  display: grid;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 8px;
+  list-style: none;
+  cursor: pointer;
+  color: var(--amc-tar-muted);
+  transition: background-color .2s ease;
+}
+.amc-TAccordionRail-toggle::-webkit-details-marker { display: none; }
+.amc-TAccordionRail-toggle::marker { content: ""; }
+.amc-TAccordionRail-toggle::before {
+  content: "";
+  inline-size: 7px;
+  block-size: 7px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  rotate: 45deg;
+  translate: 0 -2px;
+  transition: rotate .3s cubic-bezier(.3, 1.4, .5, 1), translate .3s ease;
+}
+.amc-TAccordionRail-group[open] > .amc-TAccordionRail-toggle::before { rotate: 225deg; translate: 0 2px; }
+.amc-TAccordionRail-toggle:hover { background: color-mix(in srgb, var(--amc-tar-ink) 8%, transparent); color: var(--amc-tar-ink); }
+.amc-TAccordionRail-toggle:focus-visible { outline: 2px solid var(--amc-tar-accent); outline-offset: 0; }
+.amc-TAccordionRail-srOnly { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Smooth open and close where ::details-content is supported. */
+@supports selector(::details-content) {
+  .amc-TAccordionRail-group::details-content {
+    block-size: 0;
+    overflow-x: visible;
+    overflow-y: clip;
+    opacity: 0;
+    transition: block-size .38s cubic-bezier(.3, .9, .3, 1), opacity .3s ease, content-visibility .38s allow-discrete;
+  }
+  .amc-TAccordionRail-group[open]::details-content { block-size: auto; opacity: 1; }
+}
+
+/* Template options */
+.amc-TAccordionRail--panel {
+  padding: 8px;
+  border-radius: calc(var(--amc-tar-radius) + 6px);
+  background: var(--amc-tar-surface);
+  box-shadow: 0 0 0 1px var(--amc-tar-line), 0 12px 30px -20px color-mix(in srgb, var(--amc-tar-ink) 45%, transparent);
+}
+
+.amc-TAccordionRail--compact { --amc-tar-h: 2.125rem; --amc-tar-sub-h: 1.875rem; --amc-tar-fs: .8125rem; }
+.amc-TAccordionRail--compact .amc-TAccordionRail-link, .amc-TAccordionRail--compact .amc-TAccordionRail-sublink { padding-block: 4px; }
+
+.amc-TAccordionRail--pulse .amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link::after,
+.amc-TAccordionRail--pulse .amc-TAccordionRail-subitem::after { background-image: linear-gradient(to bottom, var(--amc-tar-accent) 0 35%, color-mix(in srgb, var(--amc-tar-accent) 35%, var(--amc-tar-surface)) 50%, var(--amc-tar-accent) 65% 100%); }
+
+.amc-TAccordionRail--iconRail {
+  --amc-tar-railw: 3.75rem;
+  position: relative;
+  z-index: 20;
+  inline-size: var(--amc-tar-railw);
+  border-radius: calc(var(--amc-tar-radius) + 6px);
+  background: var(--amc-tar-surface);
+  box-shadow: 0 0 0 1px var(--amc-tar-line), 0 10px 24px -18px color-mix(in srgb, var(--amc-tar-ink) 45%, transparent);
+}
+.amc-TAccordionRail--iconRail .amc-TAccordionRail-list {
+  inline-size: 16rem;
+  border-radius: calc(var(--amc-tar-radius) + 6px);
+  background: var(--amc-tar-surface);
+  clip-path: inset(-24px calc(100% - var(--amc-tar-railw)) -24px -24px round 0 calc(var(--amc-tar-radius) + 6px) calc(var(--amc-tar-radius) + 6px) 0);
+  transition: clip-path .35s cubic-bezier(.3, .9, .3, 1);
+}
+.amc-TAccordionRail--iconRail:dir(rtl) .amc-TAccordionRail-list { clip-path: inset(-24px -24px -24px calc(100% - var(--amc-tar-railw)) round calc(var(--amc-tar-radius) + 6px) 0 0 calc(var(--amc-tar-radius) + 6px)); }
+.amc-TAccordionRail--iconRail:is(:hover, :focus-within) .amc-TAccordionRail-list,
+.amc-TAccordionRail--iconRail:dir(rtl):is(:hover, :focus-within) .amc-TAccordionRail-list {
+  clip-path: inset(-40px -40px -40px -40px round 0);
+  box-shadow: 0 0 0 1px var(--amc-tar-line), 0 18px 40px -16px color-mix(in srgb, var(--amc-tar-ink) 50%, transparent);
+}
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-sub,
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-toggle { display: none; }
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-link { background: none; }
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-list { background: none; }
+.amc-TAccordionRail--iconRail .amc-TAccordionRail-icon { position: relative; }
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-link:has(.amc-TAccordionRail-badge:not(:empty)) .amc-TAccordionRail-icon::after {
+  content: "";
+  position: absolute;
+  inset-block-start: -3px;
+  inset-inline-end: -5px;
+  inline-size: 7px;
+  block-size: 7px;
+  border-radius: 50%;
+  background: var(--amc-tar-accent);
+  box-shadow: 0 0 0 2px var(--amc-tar-surface);
+}
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-link[aria-current="page"] .amc-TAccordionRail-icon,
+.amc-TAccordionRail--iconRail:not(:hover, :focus-within) .amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link .amc-TAccordionRail-icon { color: var(--amc-tar-accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TAccordionRail--pulse .amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link::after,
+  .amc-TAccordionRail--pulse .amc-TAccordionRail-subitem::after { animation: amc-tar-flow 2.4s linear infinite; }
+  .amc-TAccordionRail--pulse .amc-TAccordionRail-sublink[aria-current="page"]::before,
+  .amc-TAccordionRail--pulse .amc-TAccordionRail-link[aria-current="page"]::before { animation: amc-tar-ping 2.4s ease-out infinite; }
+}
+@keyframes amc-tar-flow { from { background-position: 0 100%; } to { background-position: 0 -100%; } }
+@keyframes amc-tar-ping {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--amc-tar-accent) 45%, transparent), 0 0 12px 2px var(--amc-tar-glow); }
+  70%, 100% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--amc-tar-accent) 0%, transparent), 0 0 12px 2px var(--amc-tar-glow); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TAccordionRail-link, .amc-TAccordionRail-sublink, .amc-TAccordionRail-link::before, .amc-TAccordionRail-sublink::before,
+  .amc-TAccordionRail-icon, .amc-TAccordionRail-toggle, .amc-TAccordionRail-toggle::before,
+  .amc-TAccordionRail--iconRail .amc-TAccordionRail-list { transition: none !important; }
+  .amc-TAccordionRail-group::details-content { transition: none !important; }
+  .amc-TAccordionRail-link::after, .amc-TAccordionRail-subitem::after,
+  .amc-TAccordionRail-link::before, .amc-TAccordionRail-sublink::before { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TAccordionRail-list::before, .amc-TAccordionRail-link::after, .amc-TAccordionRail-subitem::after { background: CanvasText; box-shadow: none; }
+  .amc-TAccordionRail-link[aria-current="page"], .amc-TAccordionRail-sublink[aria-current="page"] { outline: 2px solid Highlight; outline-offset: -2px; }
+  .amc-TAccordionRail-link::before, .amc-TAccordionRail-sublink::before { forced-color-adjust: none; background: Canvas; box-shadow: inset 0 0 0 2px CanvasText; }
+  .amc-TAccordionRail-item.is-current > .amc-TAccordionRail-link::before, .amc-TAccordionRail-sublink[aria-current="page"]::before { background: Highlight; }
+}

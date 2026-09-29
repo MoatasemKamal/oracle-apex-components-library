@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Expanded around a Classic Report", "regionTitle": "Open orders", "icon": "fa-shopping-cart", "bodyKind": "report", "options": ["amc-TCollapsibleMorph--noPadding"], "buttons": { "CREATE": "New order" } },
+    { "title": "Collapsed by default, primary pill", "regionTitle": "Advanced filters", "icon": "fa-filter", "bodyKind": "form", "options": ["amc-TCollapsibleMorph--collapsed", "amc-TCollapsibleMorph--primary"] },
+    { "title": "Collapsed by default, pill at end", "regionTitle": "Revenue this quarter", "icon": "fa-bar-chart", "bodyKind": "chart", "options": ["amc-TCollapsibleMorph--collapsed", "amc-TCollapsibleMorph--pillEnd"] }
+  ]
+}

@@ -1,0 +1,169 @@
+listTemplate amc-mega-menu (
+    name: AMC Mega Menu
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TMegaMenu #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <ul class="amc-TMegaMenu-bar">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TMegaMenu-item is-current"><a class="amc-TMegaMenu-link" href="#LINK#" aria-current="page"><span class="amc-TMegaMenu-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-label">#TEXT#</span></a></li>
+            ```
+        currentWithSublist:
+            ```html
+            <li class="amc-TMegaMenu-item amc-TMegaMenu-item--mega is-current"><button type="button" class="amc-TMegaMenu-link amc-TMegaMenu-trigger" aria-controls="amc-megamenu-#LIST_ITEM_ID#"><span class="amc-TMegaMenu-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-label">#TEXT#</span><span class="amc-TMegaMenu-chevron" aria-hidden="true"></span></button><div class="amc-TMegaMenu-panel" id="amc-megamenu-#LIST_ITEM_ID#"><div class="amc-TMegaMenu-panelInner"><a class="amc-TMegaMenu-feature" href="#LINK#"><span class="amc-TMegaMenu-featureIcon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-featureTitle">#TEXT#</span><span class="amc-TMegaMenu-featureDesc">#A01#</span><span class="amc-TMegaMenu-featureGo" aria-hidden="true"></span></a>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TMegaMenu-item"><a class="amc-TMegaMenu-link" href="#LINK#"><span class="amc-TMegaMenu-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-label">#TEXT#</span></a></li>
+            ```
+        noncurrentWithSublist:
+            ```html
+            <li class="amc-TMegaMenu-item amc-TMegaMenu-item--mega"><button type="button" class="amc-TMegaMenu-link amc-TMegaMenu-trigger" aria-controls="amc-megamenu-#LIST_ITEM_ID#"><span class="amc-TMegaMenu-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-label">#TEXT#</span><span class="amc-TMegaMenu-chevron" aria-hidden="true"></span></button><div class="amc-TMegaMenu-panel" id="amc-megamenu-#LIST_ITEM_ID#"><div class="amc-TMegaMenu-panelInner"><a class="amc-TMegaMenu-feature" href="#LINK#"><span class="amc-TMegaMenu-featureIcon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-featureTitle">#TEXT#</span><span class="amc-TMegaMenu-featureDesc">#A01#</span><span class="amc-TMegaMenu-featureGo" aria-hidden="true"></span></a>
+            ```
+    }
+    sublist {
+        beforeEntries:
+            ```html
+            <ul class="amc-TMegaMenu-grid">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            </div>
+            </li>
+            ```
+    }
+    sublistEntry {
+        current:
+            ```html
+            <li class="amc-TMegaMenu-cell"><a class="amc-TMegaMenu-card" href="#LINK#" aria-current="page"><span class="amc-TMegaMenu-cardIcon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-cardText"><span class="amc-TMegaMenu-cardTitle">#TEXT#</span><span class="amc-TMegaMenu-cardDesc">#A01#</span></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TMegaMenu-cell"><a class="amc-TMegaMenu-card" href="#LINK#"><span class="amc-TMegaMenu-cardIcon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TMegaMenu-cardText"><span class="amc-TMegaMenu-cardTitle">#TEXT#</span><span class="amc-TMegaMenu-cardDesc">#A01#</span></span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-mega-menu.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-mega-menu.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+    }
+    advanced {
+        staticId: AMC_TPL_MEGA_MENU
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for top navigation with one level of sub lists. Entries without children are links; entries with children render a menu button that opens a glass panel spanning the bar. The panel shows a feature card linking to the parent entry's own target, with its icon and Attribute 1 as description, plus a grid of the child entries with their icons and Attribute 1 descriptions. The current entry gets aria-current=page and parents on the current path are highlighted. With JavaScript the button carries aria-expanded and opens on click, Enter or Space, or mouse hover; ArrowDown moves into the panel, ArrowUp and ArrowDown move between its links, ArrowLeft and ArrowRight move along the bar, Escape closes the panel and returns focus, and a click outside closes it. Without JavaScript the panel opens on hover and keyboard focus. The bar scrolls horizontally in narrow containers and the panel stacks in one column below 560px. Template options: Solid panel drops the backdrop blur; Compact bar; Hide feature card; Three columns; Full width bar. Under prefers-reduced-motion the panel appears without the hinge animation.
+            ```
+    }
+
+    templateOption amc-mega-menu-solid (
+        name: Solid panel
+        sequence: 10
+        appearance {
+            cssClasses: amc-TMegaMenu--solid
+        }
+        help {
+            helpText:
+                ```text
+                Uses an opaque surface instead of frosted glass, for busy page backgrounds or low-end devices.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SOLID
+        }
+    )
+
+    templateOption amc-mega-menu-compact (
+        name: Compact bar
+        sequence: 20
+        appearance {
+            cssClasses: amc-TMegaMenu--compact
+        }
+        help {
+            helpText:
+                ```text
+                Lower bar with smaller entries, for headers with little room.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-mega-menu-no-feature (
+        name: Hide feature card
+        sequence: 30
+        appearance {
+            cssClasses: amc-TMegaMenu--noFeature
+        }
+        help {
+            helpText:
+                ```text
+                Shows only the grid of sub pages; use it when parent entries have no page of their own.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_FEATURE
+        }
+    )
+
+    templateOption amc-mega-menu-three-columns (
+        name: Three columns
+        sequence: 40
+        appearance {
+            cssClasses: amc-TMegaMenu--cols3
+        }
+        help {
+            helpText:
+                ```text
+                Lays the sub pages out in three columns on wide panels, for large menus.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: THREE_COLUMNS
+        }
+    )
+
+    templateOption amc-mega-menu-full-width (
+        name: Full width bar
+        sequence: 50
+        appearance {
+            cssClasses: amc-TMegaMenu--fullBar
+        }
+        help {
+            helpText:
+                ```text
+                The bar spans the full width of its region instead of fitting its entries.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FULL_WIDTH
+        }
+    )
+)

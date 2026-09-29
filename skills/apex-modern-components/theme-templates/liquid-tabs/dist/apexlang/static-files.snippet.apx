@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-liquid-tabs.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-liquid-tabs.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

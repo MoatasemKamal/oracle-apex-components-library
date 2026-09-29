@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Collapsible Morph",
+  "staticId": "AMC_TPL_COLLAPSIBLE_MORPH",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "smart",
+  "description": "A collapsible region whose card morphs into a compact pill when collapsed: width, corners and header shape change together while the body folds away, instead of a classic chevron header with a sliding body.",
+  "useFor": "Secondary or optional content that users open on demand: search filters above an Interactive Report, an advanced section of a Form, a Chart or a notes region on a dashboard.",
+  "keywords": ["collapsible", "accordion", "morph", "pill", "toggle", "expand"],
+  "helpText": "Collapsible region template. The region title is a button with aria-expanded and aria-controls inside the heading; clicking it or pressing Enter or Space collapses the card into a pill that holds only the icon, title and chevron, and expands it again. The body is clipped only while it is collapsed or animating and is hidden from keyboard and screen readers when collapsed; when open it is never clipped, so report menus, date pickers and popups inside work normally. After expanding, a resize event lets charts redraw. Without JavaScript the region renders expanded and cannot collapse. Buttons in Help, Edit, Change, Copy, Delete and Create sit in the header and hide while collapsed; Previous, Close and Next sit in the footer. Template options: Collapsed by default applies on page load; Remember state keeps the collapsed or expanded state per page and region for the browser session; Pill at end places the collapsed pill at the inline end; Primary pill colors the collapsed pill with the primary color; No body padding. Under prefers-reduced-motion the change is instant; JavaScript API: amcTplCollapsibleMorph.collapse(element) and expand(element).",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "COLLAPSED", "name": "Collapsed by default", "cssClass": "amc-TCollapsibleMorph--collapsed", "sequence": 10, "help": "The region starts as a pill. Applied by the template script on page load; without JavaScript the region stays expanded so its content is never lost." },
+    { "staticId": "REMEMBER", "name": "Remember state", "cssClass": "amc-TCollapsibleMorph--remember", "sequence": 20, "help": "Keeps the collapsed or expanded state per page and region for the browser session. Needs a region Static ID." },
+    { "staticId": "PILL_END", "name": "Pill at end", "cssClass": "amc-TCollapsibleMorph--pillEnd", "sequence": 30, "help": "When collapsed, the pill sits at the inline end of the row, for toolbars and side filters." },
+    { "staticId": "PRIMARY", "name": "Primary pill", "cssClass": "amc-TCollapsibleMorph--primary", "sequence": 40, "help": "The collapsed pill takes the primary color, so a collapsed section stands out as a call to open it." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TCollapsibleMorph--noPadding", "sequence": 50, "help": "Removes side padding so reports and grids run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

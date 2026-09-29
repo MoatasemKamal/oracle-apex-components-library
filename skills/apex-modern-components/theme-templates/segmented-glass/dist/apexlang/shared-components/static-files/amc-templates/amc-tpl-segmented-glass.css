@@ -1,0 +1,239 @@
+/* Segmented Glass: list template for Universal Theme. A frosted-glass segmented control for
+   page-level navigation or view switching. The raised glass thumb sits on the current page and
+   glides to the hovered or keyboard-focused segment; it is positioned by :has() index rules and
+   equal grid columns, so no JavaScript is involved. Browsers without :has(), or lists longer
+   than eight entries, show a static glass thumb on the current segment instead. */
+@property --amc-tsg-fs { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --amc-tsg-fe { syntax: "<length>"; inherits: false; initial-value: 0px; }
+
+.amc-TSegmentedGlass {
+  --amc-tsg-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tsg-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tsg-surface: var(--ut-component-background-color, #fff);
+  --amc-tsg-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-tsg-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tsg-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tsg-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tsg-glint: var(--amc-tsg-glint-base, #fff);
+  --amc-tsg-radius: calc(var(--ut-component-border-radius, 4px) + 12px);
+  --amc-tsg-pad: 5px;
+  --amc-tsg-h: 2.5rem;
+  --amc-tsg-n: 1;
+  --amc-tsg-i: 0;
+  --amc-tsg-dir: 1;
+  --amc-tsg-thumb-bg: linear-gradient(to bottom, color-mix(in srgb, var(--amc-tsg-surface) 96%, var(--amc-tsg-glint)), var(--amc-tsg-surface));
+  --amc-tsg-thumb-ink: var(--amc-tsg-ink);
+  --amc-tsg-current-ink: var(--amc-tsg-accent);
+  display: flex;
+  max-inline-size: 100%;
+  margin-block-end: 12px;
+}
+.amc-TSegmentedGlass:dir(rtl) { --amc-tsg-dir: -1; }
+
+.amc-TSegmentedGlass-scroller {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  padding: 2px 2px 14px;
+  margin-block-end: -12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.amc-TSegmentedGlass-scroller::-webkit-scrollbar { display: none; }
+@supports (animation-timeline: scroll()) {
+  .amc-TSegmentedGlass-scroller {
+    -webkit-mask-image: linear-gradient(to right, transparent, black var(--amc-tsg-fs), black calc(100% - var(--amc-tsg-fe)), transparent);
+    mask-image: linear-gradient(to right, transparent, black var(--amc-tsg-fs), black calc(100% - var(--amc-tsg-fe)), transparent);
+    animation: amc-tsg-fade linear both;
+    animation-timeline: scroll(self inline);
+  }
+  .amc-TSegmentedGlass-scroller:dir(rtl) {
+    -webkit-mask-image: linear-gradient(to left, transparent, black var(--amc-tsg-fs), black calc(100% - var(--amc-tsg-fe)), transparent);
+    mask-image: linear-gradient(to left, transparent, black var(--amc-tsg-fs), black calc(100% - var(--amc-tsg-fe)), transparent);
+  }
+}
+@keyframes amc-tsg-fade {
+  0% { --amc-tsg-fs: 0px; --amc-tsg-fe: 32px; }
+  8% { --amc-tsg-fs: 32px; --amc-tsg-fe: 32px; }
+  92% { --amc-tsg-fs: 32px; --amc-tsg-fe: 32px; }
+  100% { --amc-tsg-fs: 32px; --amc-tsg-fe: 0px; }
+}
+
+.amc-TSegmentedGlass-track {
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  padding: var(--amc-tsg-pad);
+  border-radius: var(--amc-tsg-radius);
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--amc-tsg-accent) 9%, transparent), transparent 45%, color-mix(in srgb, var(--ut-palette-info, #0076df) 7%, transparent)),
+    color-mix(in srgb, var(--amc-tsg-page) 72%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  backdrop-filter: blur(14px) saturate(1.6);
+  box-shadow:
+    inset 0 0 0 1px var(--amc-tsg-line),
+    inset 0 1px 3px color-mix(in srgb, var(--amc-tsg-ink) 12%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--amc-tsg-glint) 35%, transparent),
+    0 1px 0 color-mix(in srgb, var(--amc-tsg-glint) 45%, transparent),
+    0 12px 28px -18px color-mix(in srgb, var(--amc-tsg-ink) 35%, transparent);
+}
+
+.amc-TSegmentedGlass-list {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TSegmentedGlass-item { display: flex; margin: 0; }
+
+.amc-TSegmentedGlass-link {
+  position: relative;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  block-size: var(--amc-tsg-h);
+  padding-inline: 1.125rem;
+  border-radius: calc(var(--amc-tsg-radius) - var(--amc-tsg-pad));
+  color: var(--amc-tsg-muted);
+  font-size: .875rem;
+  font-weight: 550;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .25s ease, transform .2s ease;
+}
+.amc-TSegmentedGlass-link:hover { color: var(--amc-tsg-ink); text-decoration: none; }
+.amc-TSegmentedGlass-link:active { transform: scale(.97); }
+.amc-TSegmentedGlass-link:focus-visible { outline: 2px solid var(--amc-tsg-accent); outline-offset: -3px; }
+.amc-TSegmentedGlass-link[aria-current="page"] { color: var(--amc-tsg-current-ink); font-weight: 650; }
+.amc-TSegmentedGlass-icon { flex: none; font-size: 14px; inline-size: 1em; text-align: center; }
+.amc-TSegmentedGlass-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TSegmentedGlass-label { unicode-bidi: isolate; }
+
+/* Static glass on the current segment (fallback). */
+.amc-TSegmentedGlass-link[aria-current="page"],
+.amc-TSegmentedGlass-thumb {
+  background: var(--amc-tsg-thumb-bg);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-tsg-glint) 60%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-tsg-glint) 14%, transparent),
+    0 0 0 .5px color-mix(in srgb, var(--amc-tsg-ink) 12%, transparent),
+    0 2px 4px -1px color-mix(in srgb, var(--amc-tsg-ink) 16%, transparent),
+    0 10px 20px -8px color-mix(in srgb, var(--amc-tsg-accent) 38%, transparent);
+}
+
+/* Sliding thumb, driven by :has() index rules (up to eight segments). */
+.amc-TSegmentedGlass-thumb {
+  display: none;
+  position: absolute;
+  z-index: 0;
+  inset-block: var(--amc-tsg-pad);
+  inset-inline-start: var(--amc-tsg-pad);
+  inline-size: calc((100% - 2 * var(--amc-tsg-pad)) / var(--amc-tsg-n));
+  border-radius: calc(var(--amc-tsg-radius) - var(--amc-tsg-pad));
+  opacity: 0;
+  transform: translateX(calc(var(--amc-tsg-i) * 100% * var(--amc-tsg-dir)));
+  transition: transform .5s cubic-bezier(.3, 1.3, .45, 1), opacity .2s ease;
+}
+.amc-TSegmentedGlass--primary .amc-TSegmentedGlass-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 1px 12% auto;
+  block-size: 45%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--amc-tsg-glint) 26%, transparent), transparent);
+  pointer-events: none;
+}
+
+@supports selector(:has(*)) {
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:first-child:nth-last-child(-n+8)) > .amc-TSegmentedGlass-thumb { display: block; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:first-child:nth-last-child(-n+8)) .amc-TSegmentedGlass-link[aria-current="page"] { background: none; box-shadow: none; }
+  .amc-TSegmentedGlass-track:has(.amc-TSegmentedGlass-link:is([aria-current], :hover, :focus-visible)) > .amc-TSegmentedGlass-thumb { opacity: 1; }
+  .amc-TSegmentedGlass-track:has(.amc-TSegmentedGlass-link:active) > .amc-TSegmentedGlass-thumb { transform: translateX(calc(var(--amc-tsg-i) * 100% * var(--amc-tsg-dir))) scale(.96); }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(1):last-child) { --amc-tsg-n: 1; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(2):last-child) { --amc-tsg-n: 2; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(3):last-child) { --amc-tsg-n: 3; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(4):last-child) { --amc-tsg-n: 4; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(5):last-child) { --amc-tsg-n: 5; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(6):last-child) { --amc-tsg-n: 6; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(7):last-child) { --amc-tsg-n: 7; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(8):last-child) { --amc-tsg-n: 8; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(1) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 0; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(2) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 1; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(3) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 2; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(4) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 3; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(5) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 4; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(6) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 5; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(7) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 6; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(8) > .amc-TSegmentedGlass-link[aria-current]) { --amc-tsg-i: 7; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(1) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 0; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(2) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 1; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(3) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 2; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(4) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 3; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(5) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 4; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(6) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 5; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(7) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 6; }
+  .amc-TSegmentedGlass-track:has(> .amc-TSegmentedGlass-list > .amc-TSegmentedGlass-item:nth-child(8) > .amc-TSegmentedGlass-link:is(:hover, :focus-visible)) { --amc-tsg-i: 7; }
+}
+
+/* Template options */
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-scroller { overflow: visible; }
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-item > .amc-TSegmentedGlass-link { padding-inline: 0; inline-size: calc(var(--amc-tsg-h) + 6px); }
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-icon { font-size: 16px; }
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-link::after {
+  content: attr(data-label);
+  position: absolute;
+  z-index: 2;
+  inset-block-start: calc(100% + 8px);
+  inset-inline-start: 50%;
+  translate: -50% 4px;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: var(--amc-tsg-ink);
+  color: var(--amc-tsg-surface);
+  font-size: .75rem;
+  font-weight: 550;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease, translate .15s ease;
+}
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-link:dir(rtl)::after { translate: 50% 4px; }
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-link:is(:hover, :focus-visible)::after { opacity: 1; translate: -50% 0; }
+.amc-TSegmentedGlass--iconOnly .amc-TSegmentedGlass-link:dir(rtl):is(:hover, :focus-visible)::after { translate: 50% 0; }
+
+.amc-TSegmentedGlass--stacked { --amc-tsg-h: 3.75rem; }
+.amc-TSegmentedGlass--stacked .amc-TSegmentedGlass-link { flex-direction: column; gap: 6px; font-size: .75rem; padding-inline: .875rem; }
+.amc-TSegmentedGlass--stacked .amc-TSegmentedGlass-icon { font-size: 18px; }
+
+.amc-TSegmentedGlass--primary {
+  --amc-tsg-thumb-bg: linear-gradient(to bottom, color-mix(in srgb, var(--amc-tsg-accent) 80%, var(--amc-tsg-glint)), var(--amc-tsg-accent));
+  --amc-tsg-current-ink: var(--amc-tsg-accent-ink);
+}
+.amc-TSegmentedGlass--primary .amc-TSegmentedGlass-link:is(:hover, :focus-visible) { color: var(--amc-tsg-accent-ink); }
+@supports selector(:has(*)) {
+  .amc-TSegmentedGlass--primary .amc-TSegmentedGlass-track:has(.amc-TSegmentedGlass-link:is(:hover, :focus-visible)) .amc-TSegmentedGlass-link[aria-current="page"]:not(:hover, :focus-visible) { color: var(--amc-tsg-accent); }
+}
+
+.amc-TSegmentedGlass--stretch .amc-TSegmentedGlass-scroller { flex: 1; }
+.amc-TSegmentedGlass--stretch .amc-TSegmentedGlass-track { display: grid; }
+
+.amc-TSegmentedGlass--large { --amc-tsg-h: 3.25rem; --amc-tsg-pad: 6px; }
+.amc-TSegmentedGlass--large .amc-TSegmentedGlass-link { font-size: 1rem; gap: 10px; padding-inline: 1.5rem; }
+.amc-TSegmentedGlass--large .amc-TSegmentedGlass-icon { font-size: 17px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSegmentedGlass-thumb, .amc-TSegmentedGlass-link, .amc-TSegmentedGlass-link::after { transition: none !important; }
+  .amc-TSegmentedGlass-link:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .amc-TSegmentedGlass-track { border: 1px solid CanvasText; }
+  .amc-TSegmentedGlass-thumb { display: none !important; }
+  .amc-TSegmentedGlass-link[aria-current="page"] { outline: 2px solid Highlight; outline-offset: -3px; }
+}

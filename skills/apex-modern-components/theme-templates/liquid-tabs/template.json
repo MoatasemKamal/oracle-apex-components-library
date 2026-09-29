@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Liquid Tabs",
+  "staticId": "AMC_TPL_LIQUID_TABS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "Tab navigation whose indicator behaves like a drop of liquid: it stretches toward the hovered or focused tab through an SVG goo filter and snaps back to the current page, instead of the flat underline of classic tabs.",
+  "useFor": "Page-level or section tabs on a List region: switching between sibling pages such as Dashboard, Orders, Invoices and Reports, or the tabs of a record page. One level; sub entries are ignored.",
+  "keywords": ["tabs", "liquid", "gooey", "indicator", "navigation", "pill"],
+  "helpText": "List template for tab navigation. Each entry is a real link; the current entry gets aria-current=page. Attribute 1 is a count badge that is hidden when empty. With JavaScript the indicator is a liquid pill that stretches toward the hovered or keyboard-focused tab and returns to the current tab; without JavaScript, and under prefers-reduced-motion, the current tab shows a static pill and nothing moves. The strip scrolls horizontally in narrow containers, fades its edges while scrolling and scrolls the current tab into view. Template options: Solid pill fills the indicator with the primary color; Liquid underline turns it into a stretching drop under the label; Fill width spreads the tabs across the region; Large raises the tab height; No track removes the tray behind the tabs. Forced-colors mode shows the current tab with a system outline.",
+  "attributes": { "a01": "Count badge" },
+  "templateOptions": [
+    { "staticId": "SOLID", "name": "Solid pill", "cssClass": "amc-TLiquidTabs--solid", "sequence": 10, "help": "The liquid pill uses the primary color and the tab on it switches to the primary contrast color." },
+    { "staticId": "DROP", "name": "Liquid underline", "cssClass": "amc-TLiquidTabs--drop", "sequence": 20, "help": "Replaces the pill with a primary drop under the label that stretches between tabs; the tray becomes a hairline." },
+    { "staticId": "FILL", "name": "Fill width", "cssClass": "amc-TLiquidTabs--fill", "sequence": 30, "help": "Tabs share the full width of the region, for two to five tabs." },
+    { "staticId": "LARGE", "name": "Large", "cssClass": "amc-TLiquidTabs--large", "sequence": 40, "help": "Taller tabs with larger text, for page headers and touch screens." },
+    { "staticId": "NO_TRACK", "name": "No track", "cssClass": "amc-TLiquidTabs--bare", "sequence": 50, "help": "Removes the tray behind the tabs so only the liquid pill remains, for colored hero regions." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

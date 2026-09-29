@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Segmented Glass",
+  "staticId": "AMC_TPL_SEGMENTED_GLASS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "A frosted-glass segmented control for page navigation: a recessed glass tray with a raised glass thumb that sits on the current page and glides to the segment under the pointer or keyboard focus, driven by CSS :has() alone.",
+  "useFor": "Two to eight sibling pages or views on a List region: switching a page between Board, List and Calendar views, or between Orders, Invoices and Customers. One level; sub entries are ignored.",
+  "keywords": ["segmented control", "glass", "view switcher", "tabs", "toggle", "depth"],
+  "helpText": "List template for view switching and page-level navigation. Each entry is a real link with icon and label; the current entry gets aria-current=page. Segments share one width, and a raised glass thumb marks the current page and slides to the hovered or keyboard-focused segment without JavaScript. Lists longer than eight entries, and browsers without :has(), keep a static glass thumb on the current segment. The control scrolls horizontally when it is wider than its container. Template options: Icon only hides the labels visually, keeps them for screen readers and shows them as a tooltip on hover and focus; Stacked puts the icon above the label; Primary thumb fills the thumb with the primary color; Stretch spans the full width; Large raises the height. Under prefers-reduced-motion the thumb jumps without sliding; in forced-colors mode the current segment gets a system outline.",
+  "attributes": {},
+  "templateOptions": [
+    { "staticId": "ICON_ONLY", "name": "Icon only", "cssClass": "amc-TSegmentedGlass--iconOnly", "sequence": 10, "help": "Shows only icons; the label stays available to screen readers and appears as a tooltip on hover and keyboard focus. Every entry needs an icon." },
+    { "staticId": "STACKED", "name": "Stacked icon and label", "cssClass": "amc-TSegmentedGlass--stacked", "sequence": 20, "help": "Places the icon above a smaller label, like an app tab bar." },
+    { "staticId": "PRIMARY", "name": "Primary thumb", "cssClass": "amc-TSegmentedGlass--primary", "sequence": 30, "help": "The glass thumb takes the primary color and the segment on it switches to the primary contrast color." },
+    { "staticId": "STRETCH", "name": "Stretch", "cssClass": "amc-TSegmentedGlass--stretch", "sequence": 40, "help": "The control spans the full width of the region with equal segments." },
+    { "staticId": "LARGE", "name": "Large", "cssClass": "amc-TSegmentedGlass--large", "sequence": 50, "help": "Taller segments with larger text and icons, for page headers and touch screens." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

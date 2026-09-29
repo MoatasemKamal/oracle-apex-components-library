@@ -1,0 +1,22 @@
+{
+  "samples": [
+    { "title": "Page navigation", "options": [], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-dashboard" },
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "current": true },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o" },
+      { "text": "Customers", "link": "#", "icon": "fa-users" }
+    ] },
+    { "title": "View switcher, primary thumb, stacked", "options": ["amc-TSegmentedGlass--primary", "amc-TSegmentedGlass--stacked"], "entries": [
+      { "text": "Board", "link": "#", "icon": "fa-columns" },
+      { "text": "List", "link": "#", "icon": "fa-list", "current": true },
+      { "text": "Calendar", "link": "#", "icon": "fa-calendar" },
+      { "text": "Map", "link": "#", "icon": "fa-map-marker" }
+    ] },
+    { "title": "Icon only", "options": ["amc-TSegmentedGlass--iconOnly", "amc-TSegmentedGlass--large"], "entries": [
+      { "text": "Inventory", "link": "#", "icon": "fa-cubes", "current": true },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" },
+      { "text": "Customers", "link": "#", "icon": "fa-users" },
+      { "text": "Admin", "link": "#", "icon": "fa-cog" }
+    ] }
+  ]
+}
