@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Classic Report", "regionTitle": "Open orders", "icon": "fa-shopping-cart", "bodyKind": "report", "options": ["amc-TBeamFrame--noPadding"], "buttons": { "CREATE": "New order" } },
+    { "title": "Dual beam around a Chart", "regionTitle": "Revenue this quarter", "icon": "fa-bar-chart", "bodyKind": "chart", "options": ["amc-TBeamFrame--dual"] },
+    { "title": "Danger around a Form", "regionTitle": "Credit hold review", "icon": "fa-exclamation-triangle", "bodyKind": "form", "options": ["amc-TBeamFrame--danger"], "buttons": { "PREVIOUS": "Back", "NEXT": "Release hold" } }
+  ]
+}

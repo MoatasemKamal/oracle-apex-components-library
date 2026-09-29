@@ -14,6 +14,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { listComponentDirs } from "./lib/load.mjs";
+import { apexlangPath, listTemplateDirs, loadTemplate } from "./lib/theme-templates.mjs";
 
 const SKILL_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -40,6 +41,21 @@ for (const dir of listComponentDirs(path.join(SKILL_ROOT, "components"))) {
   plugins.push(slug);
 }
 
+// Creative theme templates (theme-templates/<slug>/dist/apexlang) go into the scaffold's theme folder.
+const themeTemplates = [];
+for (const dir of listTemplateDirs(path.join(SKILL_ROOT, "theme-templates"))) {
+  const t = loadTemplate(dir);
+  const src = path.join(dir, "dist", "apexlang", apexlangPath(t));
+  if (!fs.existsSync(src)) {
+    console.error(`missing build output for theme template ${t.slug}: run node tools/build-templates.mjs`);
+    process.exit(1);
+  }
+  const dest = path.join(app, apexlangPath(t));
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+  themeTemplates.push({ t, dest });
+}
+
 const run = (cmdArgs) => {
   try {
     return execFileSync(process.execPath, [path.join(apexlang, "tools", "apexctl.mjs"), ...cmdArgs], {
@@ -54,10 +70,9 @@ const run = (cmdArgs) => {
 
 let failed = 0;
 const format = JSON.parse(run(["apexlang", "format", "--app-path", app, "--strict-structure"]) || "{}");
-const structural = (format.findings || []).filter(
-  (f) => f.path.includes(`${path.sep}plugins${path.sep}`) && f.finding !== "compact structural line expanded"
-);
-const rewritten = (format.files || []).filter((f) => f.includes(`${path.sep}plugins${path.sep}`));
+const ours = (p) => p.includes(`${path.sep}plugins${path.sep}`) || /-templates[\\/]amc-[^\\/]+\.apx$/.test(p);
+const structural = (format.findings || []).filter((f) => ours(f.path) && f.finding !== "compact structural line expanded");
+const rewritten = (format.files || []).filter(ours);
 for (const f of [...structural.map((s) => `${s.path}: ${s.finding}`), ...rewritten.map((f) => `${f}: formatter would rewrite`)]) {
   console.error(`format ${path.relative(app, f.split(":")[0])}${f.slice(f.indexOf(":"))}`);
   failed += 1;
@@ -75,10 +90,18 @@ for (const slug of plugins) {
   if (status !== "passed") failed += 1;
 }
 
+for (const { t, dest } of themeTemplates) {
+  const production = t.spec.kind === "list" ? "list-template" : "region-template";
+  const out = run(["apexlang", "grammar", "audit", "--artifact-path", dest, "--components", production]);
+  const status = /"status":\s*"(\w+)"/.exec(out)?.[1] || "error";
+  console.log(`${status === "passed" ? "ok   " : "FAIL "} theme template ${t.slug} (formatter structure; grammar audit: ${status})`);
+  if (status !== "passed") failed += 1;
+}
+
 fs.rmSync(app, { recursive: true, force: true });
 if (failed) {
   console.error(`${failed} apexlang check(s) failed`);
   process.exit(1);
 }
-console.log(`ok    ${plugins.length} plug-in(s) pass apexlang offline structure checks`);
+console.log(`ok    ${plugins.length} plug-in(s) and ${themeTemplates.length} theme template(s) pass apexlang offline structure checks`);
 console.log("note  compiler-truth audit and runtime validate still need an APEX/SQLcl runtime");

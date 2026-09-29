@@ -1,0 +1,53 @@
+{
+  "generatedBy": "tools/build-templates.mjs",
+  "templates": [
+    {
+      "slug": "beam-frame",
+      "kind": "region",
+      "name": "AMC Beam Frame",
+      "staticId": "AMC_TPL_BEAM_FRAME",
+      "apexlangId": "amc-beam-frame",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame with a beam of light that travels around its border and speeds up while the region has hover or focus.",
+      "useFor": "Any region that deserves attention: a key Classic Report, an approval Form, a Chart, a KPI row or a Static Content summary.",
+      "keywords": [
+        "border beam",
+        "glow",
+        "highlight",
+        "featured region",
+        "animated border"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Dual beam",
+          "cssClass": "amc-TBeamFrame--dual"
+        },
+        {
+          "name": "Success color",
+          "cssClass": "amc-TBeamFrame--success"
+        },
+        {
+          "name": "Danger color",
+          "cssClass": "amc-TBeamFrame--danger"
+        },
+        {
+          "name": "Slow beam",
+          "cssClass": "amc-TBeamFrame--slow"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TBeamFrame--noPadding"
+        },
+        {
+          "name": "Hide header",
+          "cssClass": "amc-TBeamFrame--hideHeader"
+        }
+      ],
+      "apexlang": "theme-templates/beam-frame/dist/apexlang",
+      "legacySql": "theme-templates/beam-frame/dist/legacy/amc_tpl_beam_frame.sql"
+    }
+  ]
+}

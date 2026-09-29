@@ -1,0 +1,110 @@
+/* Beam Frame: region template for Universal Theme. A beam of light travels around the region
+   border (conic gradient on a registered angle, masked to a 1.5px ring). Technique adapted from
+   Magic UI border-beam (MIT, https://github.com/magicuidesign/magicui). */
+@property --amc-tbeam-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+.amc-TBeamFrame {
+  --amc-tbeam-color: var(--ut-palette-primary, #056ac8);
+  --amc-tbeam-color-2: var(--ut-palette-info, #0076df);
+  --amc-tbeam-surface: var(--ut-component-background-color, #fff);
+  --amc-tbeam-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tbeam-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tbeam-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tbeam-radius: calc(var(--ut-component-border-radius, 4px) + 8px);
+  --amc-tbeam-speed: 7s;
+  position: relative;
+  isolation: isolate;
+  margin-block-end: 16px;
+  border-radius: var(--amc-tbeam-radius);
+  padding: 1.5px;
+  background: var(--amc-tbeam-line);
+  box-shadow: 0 12px 32px -18px color-mix(in srgb, var(--amc-tbeam-color) 55%, transparent);
+}
+.amc-TBeamFrame-beam {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--amc-tbeam-angle), transparent 0 64%, color-mix(in srgb, var(--amc-tbeam-color) 30%, transparent) 76%, var(--amc-tbeam-color) 88%, var(--amc-tbeam-color-2) 94%, transparent 100%);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+  pointer-events: none;
+}
+.amc-TBeamFrame-beam::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(6px);
+  opacity: .6;
+}
+.amc-TBeamFrame-surface {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  border-radius: calc(var(--amc-tbeam-radius) - 1.5px);
+  background:
+    radial-gradient(120% 60% at 0% 0%, color-mix(in srgb, var(--amc-tbeam-color) 7%, transparent), transparent 60%),
+    var(--amc-tbeam-surface);
+  color: var(--amc-tbeam-ink);
+  overflow: hidden;
+}
+.amc-TBeamFrame-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px 0;
+  min-width: 0;
+}
+.amc-TBeamFrame-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 9px;
+  font-size: 14px;
+  color: var(--amc-tbeam-color);
+  background: color-mix(in srgb, var(--amc-tbeam-color) 12%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tbeam-color) 25%, transparent);
+}
+.amc-TBeamFrame-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TBeamFrame-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.amc-TBeamFrame-actions, .amc-TBeamFrame-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TBeamFrame-actions:empty, .amc-TBeamFrame-footer:empty { display: none; }
+.amc-TBeamFrame-footer { justify-content: flex-end; padding: 0 18px 14px; }
+.amc-TBeamFrame-body { padding: 12px 18px 16px; min-width: 0; overflow-x: auto; }
+
+/* Template options */
+.amc-TBeamFrame--dual .amc-TBeamFrame-beam {
+  background: conic-gradient(from var(--amc-tbeam-angle), transparent 0 30%, var(--amc-tbeam-color) 44%, transparent 50% 80%, var(--amc-tbeam-color-2) 94%, transparent 100%);
+}
+.amc-TBeamFrame--success { --amc-tbeam-color: var(--ut-palette-success, #278701); --amc-tbeam-color-2: color-mix(in srgb, var(--ut-palette-success, #278701) 60%, var(--ut-palette-info, #0076df)); }
+.amc-TBeamFrame--danger { --amc-tbeam-color: var(--ut-palette-danger, #cb1100); --amc-tbeam-color-2: var(--ut-palette-warning, #fbce4a); }
+.amc-TBeamFrame--slow { --amc-tbeam-speed: 14s; }
+.amc-TBeamFrame--noPadding .amc-TBeamFrame-body { padding: 12px 0 0; }
+.amc-TBeamFrame--hideHeader .amc-TBeamFrame-header { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TBeamFrame-beam { animation: amc-tbeam-spin var(--amc-tbeam-speed) linear infinite; }
+  .amc-TBeamFrame:hover .amc-TBeamFrame-beam, .amc-TBeamFrame:focus-within .amc-TBeamFrame-beam { animation-duration: calc(var(--amc-tbeam-speed) / 2.5); }
+}
+@keyframes amc-tbeam-spin { to { --amc-tbeam-angle: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .amc-TBeamFrame-beam { animation: none; --amc-tbeam-angle: 200deg; }
+}
+@media (forced-colors: active) {
+  .amc-TBeamFrame { border: 1px solid CanvasText; padding: 0; }
+  .amc-TBeamFrame-beam { display: none; }
+}

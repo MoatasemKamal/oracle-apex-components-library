@@ -22,6 +22,7 @@ Never bypass apexlang's gates for app artifacts.
    - **Install on APEX 23.1-25.x**: section C.
    - **Make the app look like a design system (DESIGN.md, "make it look like X")**: section D.
    - **Add motion to native buttons, forms, reports, icons, breadcrumbs, nav bar, menu bar or menus**: section E (Motion Kit, not a component).
+   - **Give native regions or lists a creative look through Appearance > Template (no plug-in)**: section F (theme templates, `assets/templates.catalog.json`).
 3. Load only the reference you need:
    - `references/apexlang-integration.md`: installing plug-ins into an APEXlang app, page usage rules, gates
    - `references/native-look-contract.md`: theme variables, UT classes, RTL, a11y, security
@@ -32,6 +33,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
    - `references/design-quality.md`: research-first quality gate and craft checklist (adapted from Refero, MIT)
    - `references/design-collection.md`: the `design*` families (100+ styles chosen with a Style setting) and their shared conventions
+   - `references/theme-templates.md`: creative List Templates and Region Templates (native templates, not plug-ins)
    - `references/next-collection.md`: the `next*` families (new-generation motion, 3D, bold and adaptive designs) that sit beside the Design Collection
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
@@ -113,6 +115,20 @@ Follow `motion-kit/README.md` to install (APEXlang snippets in `motion-kit/dist/
 `motion-kit/amc-motion-kit.{css,js}`, then run `node tools/build-kit.mjs`. The kit may target
 Universal Theme classes (unlike components) but must keep every animation inside
 `@media (prefers-reduced-motion: no-preference)` and must not change layout or colors.
+
+## F. Creative theme templates (native Region and List templates)
+
+1. Read `assets/templates.catalog.json` and `references/theme-templates.md`. Region templates
+   frame any native region; list templates render native Lists (navigation, launchpads,
+   steps, menus).
+2. APEX 23.1-25.x: import `theme-templates/<slug>/dist/legacy/amc_tpl_<slug>.sql` (or the pack
+   `theme-templates/dist/legacy/install_amc_templates.sql`) into an app on Universal Theme. It
+   creates the template, its template options and its Static Application Files.
+3. APEXlang (26.1+): copy `dist/apexlang/**` into the app, merge `static-files.snippet.apx`,
+   reference the template as shown in the template's `examples/*.apx.md`, then run apexlang's
+   gates (the template folder and reference syntax still need compiler confirmation).
+4. New template: `node tools/new-template.mjs`, then `build-templates.mjs`,
+   `preview-templates.mjs` and `apexlang-check.mjs`.
 
 ## Rules
 

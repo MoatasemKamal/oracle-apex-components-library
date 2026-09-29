@@ -1,0 +1,24 @@
+{
+  "kind": "region",
+  "name": "AMC Beam Frame",
+  "staticId": "AMC_TPL_BEAM_FRAME",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "A region frame with a beam of light that travels around its border and speeds up while the region has hover or focus.",
+  "useFor": "Any region that deserves attention: a key Classic Report, an approval Form, a Chart, a KPI row or a Static Content summary.",
+  "keywords": ["border beam", "glow", "highlight", "featured region", "animated border"],
+  "helpText": "Region template with a travelling border beam. Title and icon come from the region; buttons in Help, Edit, Change, Copy, Delete and Create sit in the header, and Previous, Close and Next in the footer. Template options add a second beam, success or danger colors, a slower beam, no body padding or a visually hidden header. Under reduced motion the beam stops as a static gradient border; in forced-colors mode the frame becomes a plain system border.",
+  "landmarkType": "region",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "DUAL_BEAM", "name": "Dual beam", "cssClass": "amc-TBeamFrame--dual", "sequence": 10, "help": "Two beams chase each other around the border." },
+    { "staticId": "SUCCESS", "name": "Success color", "cssClass": "amc-TBeamFrame--success", "sequence": 20, "help": "Beam and icon use the success palette color." },
+    { "staticId": "DANGER", "name": "Danger color", "cssClass": "amc-TBeamFrame--danger", "sequence": 30, "help": "Beam and icon use the danger and warning palette colors, for escalations." },
+    { "staticId": "SLOW", "name": "Slow beam", "cssClass": "amc-TBeamFrame--slow", "sequence": 40, "help": "Halves the beam speed for calmer pages." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TBeamFrame--noPadding", "sequence": 50, "help": "Removes side padding so reports and grids run edge to edge." },
+    { "staticId": "HIDE_HEADER", "name": "Hide header", "cssClass": "amc-TBeamFrame--hideHeader", "sequence": 60, "help": "Keeps the title for screen readers but hides the header visually." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

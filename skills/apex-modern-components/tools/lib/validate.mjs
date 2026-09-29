@@ -32,7 +32,7 @@ function templateRefs(text) {
   return { subs, directives };
 }
 
-function checkCss(slug, css, errors, warnings) {
+export function checkCss(slug, css, errors, warnings) {
   const lines = css.split("\n");
   lines.forEach((line, i) => {
     const code = line.replace(/\/\*.*?\*\//g, "");
