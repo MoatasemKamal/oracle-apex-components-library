@@ -1,0 +1,242 @@
+{
+  "samples": [
+    {
+      "title": "beamToast, report",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "beamToast"
+      },
+      "rows": [
+        {
+          "STATE": "success",
+          "TITLE": "Invoice INV-2058 paid",
+          "MESSAGE": "12,480.00 SAR received from Contoso Ltd.",
+          "META": "2 min ago",
+          "LINK_URL": "#",
+          "LINK_LABEL": "View receipt"
+        },
+        {
+          "STATE": "info",
+          "ICON": "fa-user",
+          "TITLE": "Sara Ahmed assigned you a task",
+          "MESSAGE": "Approve the 8% discount on order SO-10490.",
+          "META": "14 min ago",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open task"
+        },
+        {
+          "STATE": "warning",
+          "TITLE": "Credit limit almost reached",
+          "MESSAGE": "Northwind Traders has used 92% of its 50,000 SAR credit line.",
+          "META": "1 h ago"
+        }
+      ]
+    },
+    {
+      "title": "pulseCritical, danger",
+      "direction": "motion",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "pulseCritical",
+        "STATE": "danger",
+        "ICON": "fa-plug",
+        "TITLE": "Warehouse sync stopped",
+        "MESSAGE": "Stock levels have not updated since 09:12. New orders may be accepted for items that are out of stock.",
+        "META": "Integration WMS-02, retrying every 5 minutes",
+        "LINK_URL": "#",
+        "LINK_LABEL": "Open integration log"
+      }
+    },
+    {
+      "title": "tickerBar, report",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "tickerBar"
+      },
+      "rows": [
+        {
+          "STATE": "info",
+          "ICON": "fa-bullhorn",
+          "TITLE": "Quarter close starts Friday 18:00",
+          "MESSAGE": "Posting to Q3 periods will be locked. Submit open journals before Thursday.",
+          "META": "Finance team",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Close calendar"
+        },
+        {
+          "STATE": "success",
+          "TITLE": "Recurring invoices are live",
+          "MESSAGE": "Set up monthly billing for 1,240 subscription customers in one step."
+        }
+      ]
+    },
+    {
+      "title": "stackedToasts, report (hover or focus to fan out)",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "stackedToasts"
+      },
+      "rows": [
+        {
+          "STATE": "success",
+          "TITLE": "Order SO-10482 shipped",
+          "MESSAGE": "The carrier picked up 3 parcels at 14:20.",
+          "META": "Just now",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Track shipment"
+        },
+        {
+          "STATE": "danger",
+          "TITLE": "Payment for INV-2041 failed",
+          "MESSAGE": "The card was declined. Ask the customer to update the payment method.",
+          "META": "6 min ago"
+        },
+        {
+          "STATE": "info",
+          "ICON": "fa-comment",
+          "TITLE": "Omar replied on PO-7713",
+          "MESSAGE": "Supplier confirmed delivery for 12 March.",
+          "META": "20 min ago"
+        },
+        {
+          "STATE": "neutral",
+          "TITLE": "Price list sync scheduled",
+          "MESSAGE": "Runs tonight at 02:00 and takes about 10 minutes.",
+          "META": "1 h ago"
+        }
+      ]
+    },
+    {
+      "title": "liftGlass, success",
+      "direction": "depth",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "liftGlass",
+        "STATE": "success",
+        "ICON": "fa-trophy",
+        "TITLE": "Q3 sales target reached 11 days early",
+        "MESSAGE": "The Gulf region closed 4.2M SAR against a 4.0M target. Bonus accruals were posted automatically.",
+        "META": "Updated 07:30",
+        "LINK_URL": "#",
+        "LINK_LABEL": "See the breakdown"
+      }
+    },
+    {
+      "title": "neoBrutal, report",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neoBrutal"
+      },
+      "rows": [
+        {
+          "STATE": "warning",
+          "TITLE": "3 invoices are overdue",
+          "MESSAGE": "INV-2031, INV-2036 and INV-2041 passed their due date. Send reminders before month end.",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Send reminders"
+        },
+        {
+          "STATE": "success",
+          "TITLE": "Bank reconciliation complete",
+          "MESSAGE": "All 418 statement lines for February were matched."
+        }
+      ]
+    },
+    {
+      "title": "clay, report",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "clay"
+      },
+      "rows": [
+        {
+          "STATE": "info",
+          "ICON": "fa-calendar",
+          "TITLE": "Budgets for 2027 are open",
+          "MESSAGE": "Department heads can submit budget requests until 15 November.",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Start budget"
+        },
+        {
+          "STATE": "danger",
+          "TITLE": "Contract CT-88 expires in 3 days",
+          "MESSAGE": "Renew or extend the Al Noor logistics contract to avoid a service gap."
+        }
+      ]
+    },
+    {
+      "title": "hazardStripe, warning",
+      "direction": "bold",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "hazardStripe",
+        "STATE": "warning",
+        "ICON": "fa-wrench",
+        "TITLE": "Planned maintenance tonight 23:00 to 01:00",
+        "MESSAGE": "Order entry and invoicing are read-only during the upgrade. Save your drafts before 22:45.",
+        "LINK_URL": "#",
+        "LINK_LABEL": "Maintenance details"
+      }
+    },
+    {
+      "title": "expandDetails, report (click a row)",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "expandDetails"
+      },
+      "rows": [
+        {
+          "STATE": "danger",
+          "TITLE": "2 purchase orders are blocked by budget checks",
+          "MESSAGE": "PO-7719 and PO-7722 exceed the remaining IT hardware budget by 18,300 SAR. Ask Finance for a transfer or split the orders.",
+          "META": "09:40",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Review blocked orders"
+        },
+        {
+          "STATE": "warning",
+          "TITLE": "Exchange rates are 2 days old",
+          "MESSAGE": "The central bank feed failed on Monday. Invoices in USD and EUR use the rate from 12 March.",
+          "META": "Yesterday"
+        },
+        {
+          "STATE": "success",
+          "TITLE": "Payroll for March approved",
+          "MESSAGE": "Transfers for 312 employees will be released on 27 March.",
+          "META": "Mon"
+        }
+      ]
+    },
+    {
+      "title": "adaptiveBar, report (resize the column)",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "adaptiveBar"
+      },
+      "rows": [
+        {
+          "STATE": "warning",
+          "TITLE": "Stock is low for 14 items",
+          "MESSAGE": "Reorder points were reached in Riyadh Central.",
+          "META": "08:15",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Create reorder"
+        },
+        {
+          "STATE": "success",
+          "TITLE": "Customer import finished",
+          "MESSAGE": "2,318 records added, 12 duplicates skipped.",
+          "LINK_URL": "#",
+          "LINK_LABEL": "View log"
+        }
+      ]
+    }
+  ]
+}

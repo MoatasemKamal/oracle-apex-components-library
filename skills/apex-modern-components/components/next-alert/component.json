@@ -1,0 +1,128 @@
+{
+  "name": "Next Alert",
+  "apexlangName": "nextAlert",
+  "staticId": "AMC_NEXT_ALERT",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "filesVersion": 1,
+  "keywords": ["alert", "notice", "banner", "toast", "notification", "announcement", "ticker", "marquee", "border beam", "critical", "warning", "hazard", "glass", "neo brutalism", "claymorphism", "details", "expandable", "container query", "next collection"],
+  "description": "Next Collection family of 10 current-generation alert, toast and announcement designs with success, warning, danger, info and neutral states, in four directions: motion (toast with a travelling border beam, critical banner with a breathing glow ring, announcement ticker that stops on hover, focus and reduced motion), depth (report rows as a 3D toast stack that fans out, floating glass alert with light edge and depth shadow), bold (neo-brutalism, claymorphism, animated hazard stripes) and smart layout (one-line alert that expands with details and summary, adaptive alert that container queries turn into an inline bar, a card or an icon chip). Follows the inline alert and toast patterns of Universal Theme, Sonner and Magic UI: state is always shown by semantic color plus an icon and a text label. CSS only, no JavaScript. The border beam adapts the Magic UI border-beam design.",
+  "helpText": "Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set. In report mode Stacked Toasts shows the first three rows as a stack that fans out on hover, keyboard focus or touch devices.",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-alert.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-alert.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "beamToast",
+      "sequence": 10,
+      "helpText": "Visual design of the alert, each followed by its Next Collection direction. Beam Toast, motion: floating toast with a light beam travelling around its border. Pulse Critical, motion: banner whose icon and outline breathe with a glow ring, meant for danger. Ticker Bar, motion: one-line announcement bar whose text scrolls as a marquee, stopping on hover and focus. Stacked Toasts, depth: report rows become a 3D stack of toasts that fans out on hover or focus; a single alert shows two cards behind it. Lift Glass, depth: floating frosted glass alert with a light edge and depth shadow. Neo Brutal, bold: ink border, hard offset shadow and a state sticker. Clay, bold: soft pillowy claymorphism surface. Hazard Stripe, bold: warning tape with moving diagonal stripes. Expand Details, smart: compact one-line alert that expands to show message and link. Adaptive Bar, smart: an inline bar when wide, a card when medium and an icon chip when narrow.",
+      "entries": [
+        { "name": "beamToast", "display": "Beam Toast - motion", "return": "beamToast", "sequence": 10 },
+        { "name": "pulseCritical", "display": "Pulse Critical - motion", "return": "pulseCritical", "sequence": 20 },
+        { "name": "tickerBar", "display": "Ticker Bar - motion", "return": "tickerBar", "sequence": 30 },
+        { "name": "stackedToasts", "display": "Stacked Toasts - depth", "return": "stackedToasts", "sequence": 40 },
+        { "name": "liftGlass", "display": "Lift Glass - depth", "return": "liftGlass", "sequence": 50 },
+        { "name": "neoBrutal", "display": "Neo Brutal - bold", "return": "neoBrutal", "sequence": 60 },
+        { "name": "clay", "display": "Clay - bold", "return": "clay", "sequence": 70 },
+        { "name": "hazardStripe", "display": "Hazard Stripe - bold", "return": "hazardStripe", "sequence": 80 },
+        { "name": "expandDetails", "display": "Expand Details - smart", "return": "expandDetails", "sequence": 90 },
+        { "name": "adaptiveBar", "display": "Adaptive Bar - smart", "return": "adaptiveBar", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 2,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "success, warning, danger, info or neutral. Any other or empty value renders as neutral. Danger alerts are announced immediately with role=alert."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 3,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Short headline, for example Invoice INV-2041 is overdue. In Expand Details it is the always-visible summary line."
+    },
+    {
+      "staticId": "MESSAGE",
+      "apexlangName": "message",
+      "attribute": 4,
+      "name": "Message",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Supporting sentence that says what happened and what to do next. In Ticker Bar it scrolls after the title; in Expand Details it shows when expanded."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Font APEX icon class, for example fa-truck. Leave empty to use the state icon: check for success, triangle for warning, cross for danger, info for info, bell for neutral."
+    },
+    {
+      "staticId": "META",
+      "apexlangName": "meta",
+      "attribute": 6,
+      "name": "Meta Text",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional small text such as a time stamp, for example 2 min ago. Format dates in SQL with the application's NLS settings."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 7,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional target, for example f?p=&APP_ID.:20:&SESSION.::NO::P20_ID:&P10_ID. or a column holding apex_page.get_url. Must be developer-controlled, never end-user input."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 8,
+      "name": "Link Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "Visible link text, for example Review invoice. The link renders only when both Link URL and Link Label are set."
+    }
+  ]
+}

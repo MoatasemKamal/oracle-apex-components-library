@@ -1,0 +1,1161 @@
+/* APEX Modern Components - Next Alert (nextAlert), Next Collection
+ * Ten current-generation alert / toast / announcement designs chosen with the
+ * Style setting, in four directions: motion (beamToast, pulseCritical, tickerBar),
+ * depth (stackedToasts, liftGlass), bold (neoBrutal, clay, hazardStripe) and
+ * smart layout (expandDetails, adaptiveBar). Every color comes from Universal Theme
+ * variables. State = semantic color + icon + text label, never color alone.
+ * The border beam adapts Magic UI border-beam and the ticker adapts Magic UI
+ * marquee (https://github.com/magicuidesign/magicui), MIT License, (c) Magic UI.
+ * CSS only. Complete at rest; every animation stops under reduced motion. */
+
+@property --amc-na-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ---------- Tokens ---------- */
+.amc-NAlert,
+.amc-NAlerts {
+  --amc-na-bg: var(--ut-component-background-color, #fff);
+  --amc-na-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-na-fg: var(--ut-component-text-default-color, #262626);
+  --amc-na-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-na-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-na-radius: clamp(.5rem, calc(var(--ut-component-border-radius, .375rem) * 2), 1rem);
+  --amc-na-dir: 1;
+}
+.amc-NAlert:dir(rtl),
+.amc-NAlerts:dir(rtl) {
+  --amc-na-dir: -1;
+}
+
+.amc-NAlert {
+  --amc-na-tone: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-na-tone-on: var(--amc-na-auto-on);
+  /* Black or white, whichever reads better on the state color (only used when
+     the theme does not define a --ut-palette-*-contrast variable). */
+  --amc-na-auto-on: oklch(from var(--amc-na-tone) clamp(0, (.62 - l) * 1000, 1) 0 0);
+  --amc-na-ink: color-mix(in srgb, var(--amc-na-tone) 72%, var(--amc-na-fg));
+  --amc-na-tint: color-mix(in srgb, var(--amc-na-tone) 10%, var(--amc-na-bg));
+  --amc-na-tint-line: color-mix(in srgb, var(--amc-na-tone) 32%, var(--amc-na-bg));
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  container: amc-nalert / inline-size;
+  min-inline-size: 0;
+  color: var(--amc-na-fg);
+  font-size: .875rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+.amc-NAlert--success {
+  --amc-na-tone: var(--ut-palette-success, #278701);
+  --amc-na-tone-on: var(--ut-palette-success-contrast, var(--amc-na-auto-on));
+}
+.amc-NAlert--warning {
+  --amc-na-tone: var(--ut-palette-warning, #fbce4a);
+  --amc-na-tone-on: var(--ut-palette-warning-contrast, var(--amc-na-auto-on));
+  /* Warning palettes are light yellows or ambers: mix in more body text color. */
+  --amc-na-ink: color-mix(in srgb, var(--amc-na-tone) 42%, var(--amc-na-fg));
+}
+.amc-NAlert--danger {
+  --amc-na-tone: var(--ut-palette-danger, #cb1100);
+  --amc-na-tone-on: var(--ut-palette-danger-contrast, var(--amc-na-auto-on));
+}
+.amc-NAlert--info {
+  --amc-na-tone: var(--ut-palette-info, #0076df);
+  --amc-na-tone-on: var(--ut-palette-info-contrast, var(--amc-na-auto-on));
+}
+
+/* ---------- Shared structure ---------- */
+.amc-NAlert-surface {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: .5rem .875rem;
+  padding: 1rem 1.125rem;
+  border: 1px solid var(--amc-na-line);
+  border-radius: var(--amc-na-radius);
+  background: var(--amc-na-bg);
+}
+.amc-NAlert-fx,
+.amc-NAlert-beam {
+  display: none;
+}
+
+.amc-NAlert-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: .75rem;
+  background: color-mix(in srgb, var(--amc-na-tone) 14%, transparent);
+  color: var(--amc-na-ink);
+  font-size: 1.0625rem;
+  line-height: 1;
+}
+
+.amc-NAlert-body {
+  display: flex;
+  flex-direction: column;
+  gap: .125rem;
+  min-inline-size: 0;
+}
+.amc-NAlert-state {
+  color: var(--amc-na-ink);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+.amc-NAlert-title {
+  margin: 0;
+  color: var(--amc-na-fg);
+  font-size: .9375rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+.amc-NAlert-message {
+  margin: 0;
+  color: color-mix(in srgb, var(--amc-na-fg) 78%, var(--amc-na-muted));
+}
+.amc-NAlert-meta {
+  margin: .125rem 0 0;
+  color: var(--amc-na-muted);
+  font-size: .75rem;
+  unicode-bidi: isolate;
+}
+
+.amc-NAlert-link {
+  grid-column: 2;
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .375rem .75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-na-tone) 14%, transparent);
+  color: var(--amc-na-ink);
+  font-size: .8125rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background-color .15s ease-out, color .15s ease-out;
+}
+.amc-NAlert-link:hover {
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+}
+.amc-NAlert-link:focus-visible {
+  outline: 2px solid var(--amc-na-tone);
+  outline-offset: 2px;
+}
+.amc-NAlert-linkIcon {
+  font-size: .75em;
+  transition: transform .15s ease-out;
+}
+.amc-NAlert-link:hover .amc-NAlert-linkIcon,
+.amc-NAlert-link:focus-visible .amc-NAlert-linkIcon {
+  transform: translateX(calc(3px * var(--amc-na-dir)));
+}
+.amc-NAlert-link .amc-NAlert-linkIcon:dir(rtl) {
+  rotate: 180deg;
+}
+
+/* Report wrapper */
+.amc-NAlerts {
+  display: grid;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-NAlerts-item {
+  min-inline-size: 0;
+}
+
+/* ======================================================================
+ * MOTION - Beam Toast: floating toast, light beam travels around the
+ * border (conic gradient on a registered angle, masked to the border).
+ * ==================================================================== */
+.amc-NAlert--beamToast .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  border-color: color-mix(in srgb, var(--amc-na-fg) 10%, transparent);
+  border-radius: 1rem;
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--amc-na-fg) 8%, transparent),
+    0 .75rem 2rem -.75rem color-mix(in srgb, var(--amc-na-fg) 30%, transparent),
+    0 1.5rem 3rem -1.5rem color-mix(in srgb, var(--amc-na-tone) 45%, transparent);
+}
+.amc-NAlert--beamToast .amc-NAlert-icon {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--amc-na-tone) 30%, var(--amc-na-bg)), color-mix(in srgb, var(--amc-na-tone) 12%, var(--amc-na-bg)));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-na-tone) 35%, transparent);
+}
+.amc-NAlert--beamToast .amc-NAlert-link {
+  grid-column: auto;
+  align-self: center;
+}
+.amc-NAlert--beamToast .amc-NAlert-beam {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 1.5px;
+  border-radius: 1rem;
+  background: conic-gradient(from var(--amc-na-angle),
+    transparent 0deg 250deg,
+    color-mix(in srgb, var(--amc-na-tone) 30%, transparent) 290deg,
+    var(--amc-na-tone) 340deg,
+    color-mix(in srgb, var(--amc-na-tone) 40%, var(--amc-na-bg)) 352deg,
+    transparent 360deg);
+  -webkit-mask: linear-gradient(var(--amc-na-fg) 0 0) content-box, linear-gradient(var(--amc-na-fg) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-na-fg) 0 0) content-box exclude, linear-gradient(var(--amc-na-fg) 0 0);
+  pointer-events: none;
+  animation: amc-na-beam 4.5s linear infinite;
+}
+@container amc-nalert (max-width: 26rem) {
+  .amc-NAlert--beamToast .amc-NAlert-surface {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .amc-NAlert--beamToast .amc-NAlert-link {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+@keyframes amc-na-beam {
+  to { --amc-na-angle: 360deg; }
+}
+
+/* ======================================================================
+ * MOTION - Pulse Critical: banner with a breathing glow ring and sonar
+ * rings around the icon.
+ * ==================================================================== */
+.amc-NAlert--pulseCritical .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .75rem 1.25rem;
+  padding: 1.125rem 1.25rem;
+  border: 1.5px solid color-mix(in srgb, var(--amc-na-tone) 55%, transparent);
+  border-radius: 1rem;
+  background:
+    radial-gradient(ellipse 45% 120% at 0% 50%, color-mix(in srgb, var(--amc-na-tone) 22%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-na-tone) 7%, var(--amc-na-bg));
+}
+.amc-NAlert--pulseCritical:dir(rtl) .amc-NAlert-surface {
+  background:
+    radial-gradient(ellipse 45% 120% at 100% 50%, color-mix(in srgb, var(--amc-na-tone) 22%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-na-tone) 7%, var(--amc-na-bg));
+}
+.amc-NAlert--pulseCritical .amc-NAlert-fx {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--amc-na-tone) 22%, transparent),
+    0 0 1.75rem .25rem color-mix(in srgb, var(--amc-na-tone) 38%, transparent);
+  animation: amc-na-breathe 2.4s ease-in-out infinite;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-icon {
+  position: relative;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 50%;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+  font-size: 1.25rem;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-icon::before,
+.amc-NAlert--pulseCritical .amc-NAlert-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--amc-na-tone);
+  border-radius: 50%;
+  opacity: .35;
+  transform: scale(1.35);
+  animation: amc-na-sonar 2.4s cubic-bezier(.2, .6, .3, 1) infinite;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-icon::after {
+  opacity: .18;
+  transform: scale(1.7);
+  animation-delay: -1.2s;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-state {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-state::before {
+  content: "";
+  inline-size: .4375rem;
+  block-size: .4375rem;
+  border-radius: 50%;
+  background: var(--amc-na-tone);
+  animation: amc-na-blink 1.2s steps(2, jump-none) infinite;
+}
+.amc-NAlert--pulseCritical .amc-NAlert-link {
+  grid-column: auto;
+  align-self: center;
+  padding: .5rem 1rem;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+}
+.amc-NAlert--pulseCritical .amc-NAlert-link:hover {
+  background: color-mix(in srgb, var(--amc-na-tone) 85%, var(--amc-na-fg));
+}
+@container amc-nalert (max-width: 30rem) {
+  .amc-NAlert--pulseCritical .amc-NAlert-surface {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .amc-NAlert--pulseCritical .amc-NAlert-link {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    justify-content: center;
+  }
+}
+
+@keyframes amc-na-breathe {
+  0%, 100% { opacity: .35; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.012); }
+}
+@keyframes amc-na-sonar {
+  from { opacity: .6; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.9); }
+}
+@keyframes amc-na-blink {
+  from { opacity: 1; }
+  to { opacity: .25; }
+}
+
+/* ======================================================================
+ * MOTION - Ticker Bar: announcement bar, marquee stops on hover / focus,
+ * wraps and stands still under reduced motion.
+ * ==================================================================== */
+.amc-NAlert--tickerBar .amc-NAlert-surface {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .375rem .375rem .375rem .375rem;
+  border-color: color-mix(in srgb, var(--amc-na-tone) 30%, var(--amc-na-line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-na-tone) 8%, var(--amc-na-bg));
+}
+.amc-NAlert-badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: .375rem;
+  padding: .25rem .75rem .25rem .25rem;
+  border-radius: 999px;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+}
+.amc-NAlert-badge .amc-NAlert-icon {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-na-tone-on) 18%, transparent);
+  color: inherit;
+  font-size: .8125rem;
+}
+.amc-NAlert-badge .amc-NAlert-state {
+  color: inherit;
+}
+.amc-NAlert-viewport {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  container-type: inline-size;
+  mask-image: linear-gradient(90deg, transparent, var(--amc-na-fg) 1.5rem, var(--amc-na-fg) calc(100% - 1.5rem), transparent);
+}
+.amc-NAlert-track {
+  display: flex;
+  inline-size: max-content;
+  animation: amc-na-marquee 26s linear infinite;
+}
+.amc-NAlert--tickerBar:hover .amc-NAlert-track,
+.amc-NAlert--tickerBar:focus-within .amc-NAlert-track {
+  animation-play-state: paused;
+}
+.amc-NAlert-run {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: .75rem;
+  box-sizing: border-box;
+  min-inline-size: 100cqi;
+  margin: 0;
+  padding-inline: 1.5rem 3rem;
+  white-space: nowrap;
+}
+.amc-NAlert--tickerBar .amc-NAlert-title {
+  font-size: .875rem;
+}
+.amc-NAlert--tickerBar .amc-NAlert-meta {
+  margin: 0;
+}
+.amc-NAlert-sep {
+  flex: none;
+  inline-size: .3125rem;
+  block-size: .3125rem;
+  border-radius: 50%;
+  background: var(--amc-na-tone);
+  opacity: .7;
+}
+.amc-NAlert--tickerBar .amc-NAlert-link {
+  flex: none;
+  background: var(--amc-na-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-na-tint-line);
+}
+@container amc-nalert (max-width: 26rem) {
+  .amc-NAlert--tickerBar .amc-NAlert-state {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .amc-NAlert-badge {
+    padding: .25rem;
+  }
+  .amc-NAlert--tickerBar .amc-NAlert-link {
+    padding: .375rem .5rem;
+  }
+  .amc-NAlert--tickerBar .amc-NAlert-linkLabel {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@keyframes amc-na-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% * var(--amc-na-dir))); }
+}
+
+/* ======================================================================
+ * DEPTH - Stacked Toasts: report rows stack in 3D and fan out on hover,
+ * keyboard focus, and always on touch devices. A single alert shows two
+ * cards behind it.
+ * ==================================================================== */
+.amc-NAlert--stackedToasts .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr);
+  border-radius: 1rem;
+  box-shadow:
+    0 .75rem 1.5rem -1rem color-mix(in srgb, var(--amc-na-fg) 40%, transparent),
+    0 .5rem 0 -.25rem color-mix(in srgb, var(--amc-na-fg) 4%, var(--amc-na-bg)),
+    0 .5rem 0 -.1875rem var(--amc-na-line),
+    0 1rem 0 -.5rem color-mix(in srgb, var(--amc-na-fg) 8%, var(--amc-na-bg)),
+    0 1rem 0 -.4375rem var(--amc-na-line);
+  margin-block-end: 1rem;
+}
+.amc-NAlert--stackedToasts .amc-NAlert-icon {
+  border-radius: 50%;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+}
+.amc-NAlerts--stackedToasts {
+  --amc-na-peek: .75rem;
+  display: grid;
+  gap: 0;
+  padding-block-end: calc(var(--amc-na-peek) * 2 + .25rem);
+  perspective: 50rem;
+  outline: none;
+  border-radius: 1rem;
+}
+.amc-NAlerts--stackedToasts:focus-visible {
+  outline: 2px solid var(--ut-palette-primary, #056ac8);
+  outline-offset: 4px;
+}
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item {
+  --amc-na-n: 3;
+  grid-area: 1 / 1;
+  align-self: end;
+  transform: translateY(calc(var(--amc-na-n) * var(--amc-na-peek))) translateZ(calc(var(--amc-na-n) * -2.5rem));
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1), opacity .3s ease-out;
+}
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(1) { --amc-na-n: 0; z-index: 3; }
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(2) { --amc-na-n: 1; z-index: 2; }
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(3) { --amc-na-n: 2; z-index: 1; }
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(n+4) {
+  opacity: 0;
+  visibility: hidden;
+}
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(n+2) .amc-NAlert-surface {
+  max-block-size: 4.5rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--amc-na-fg) calc(var(--amc-na-n) * 4%), var(--amc-na-bg));
+}
+.amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(n+2) .amc-NAlert-surface > * {
+  opacity: 0;
+  transition: opacity .2s ease-out;
+}
+.amc-NAlerts--stackedToasts .amc-NAlert-surface,
+.amc-NAlerts--stackedToasts .amc-NAlert--stackedToasts .amc-NAlert-surface {
+  margin: 0;
+  box-shadow: 0 .75rem 1.5rem -1rem color-mix(in srgb, var(--amc-na-fg) 45%, transparent);
+}
+/* Fanned out */
+.amc-NAlerts--stackedToasts:hover,
+.amc-NAlerts--stackedToasts:focus-within {
+  gap: .625rem;
+  padding-block-end: 0;
+}
+.amc-NAlerts--stackedToasts:hover > .amc-NAlerts-item,
+.amc-NAlerts--stackedToasts:focus-within > .amc-NAlerts-item {
+  grid-area: auto;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  animation: amc-na-fan .5s cubic-bezier(.2, .8, .2, 1) both;
+}
+.amc-NAlerts--stackedToasts:hover > .amc-NAlerts-item .amc-NAlert-surface,
+.amc-NAlerts--stackedToasts:focus-within > .amc-NAlerts-item .amc-NAlert-surface {
+  max-block-size: none;
+  background: var(--amc-na-bg);
+}
+.amc-NAlerts--stackedToasts:hover > .amc-NAlerts-item .amc-NAlert-surface > *,
+.amc-NAlerts--stackedToasts:focus-within > .amc-NAlerts-item .amc-NAlert-surface > * {
+  opacity: 1;
+}
+@media (hover: none) {
+  .amc-NAlerts--stackedToasts {
+    gap: .625rem;
+    padding-block-end: 0;
+  }
+  .amc-NAlerts--stackedToasts > .amc-NAlerts-item {
+    grid-area: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(n+2) .amc-NAlert-surface {
+    max-block-size: none;
+    background: var(--amc-na-bg);
+  }
+  .amc-NAlerts--stackedToasts > .amc-NAlerts-item:nth-child(n+2) .amc-NAlert-surface > * {
+    opacity: 1;
+  }
+}
+
+@keyframes amc-na-fan {
+  from {
+    opacity: .5;
+    transform: translateY(calc(var(--amc-na-n) * -55%)) scale(calc(1 - var(--amc-na-n) * .04));
+  }
+}
+
+/* ======================================================================
+ * DEPTH - Lift Glass: frosted glass floating over two state-colored glows,
+ * light edge on top, layered depth shadow, lifts further on hover/focus.
+ * ==================================================================== */
+.amc-NAlert--liftGlass {
+  padding: 1rem .75rem 1.25rem;
+}
+.amc-NAlert--liftGlass .amc-NAlert-fx {
+  display: block;
+  position: absolute;
+  inset: -2rem;
+  z-index: -1;
+  background:
+    radial-gradient(circle 4.5rem at 4.5rem 4.25rem, color-mix(in srgb, var(--amc-na-tone) 70%, transparent), transparent 70%),
+    radial-gradient(ellipse 8rem 4rem at 35% calc(100% - 3rem), color-mix(in srgb, var(--ut-palette-primary, #056ac8) 28%, transparent), transparent 70%),
+    radial-gradient(circle 5.5rem at calc(100% - 5rem) calc(100% - 4.5rem), color-mix(in srgb, var(--amc-na-tone) 55%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.amc-NAlert--liftGlass .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr);
+  border: 1px solid color-mix(in srgb, var(--amc-na-fg) 12%, transparent);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-na-bg) 40%, transparent), transparent 60%),
+    color-mix(in srgb, var(--amc-na-bg) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-na-bg) 85%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-na-bg) 25%, transparent),
+    0 1px 1px color-mix(in srgb, var(--amc-na-fg) 6%, transparent),
+    0 .5rem 1rem -.5rem color-mix(in srgb, var(--amc-na-fg) 22%, transparent),
+    0 1.5rem 2.5rem -1rem color-mix(in srgb, var(--amc-na-fg) 26%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  transform: translateY(-2px);
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1), box-shadow .3s ease-out;
+}
+.amc-NAlert--liftGlass .amc-NAlert-surface::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 12%;
+  block-size: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--amc-na-bg) 95%, var(--amc-na-tone)), transparent);
+}
+.amc-NAlert--liftGlass:hover .amc-NAlert-surface,
+.amc-NAlert--liftGlass:focus-within .amc-NAlert-surface {
+  transform: translateY(-5px) rotateX(3deg);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-na-bg) 85%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-na-bg) 25%, transparent),
+    0 1px 1px color-mix(in srgb, var(--amc-na-fg) 6%, transparent),
+    0 .75rem 1.5rem -.5rem color-mix(in srgb, var(--amc-na-fg) 22%, transparent),
+    0 2.25rem 3.5rem -1.25rem color-mix(in srgb, var(--amc-na-fg) 32%, transparent);
+}
+.amc-NAlert--liftGlass .amc-NAlert-icon {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--amc-na-tone) 26%, var(--amc-na-bg)), color-mix(in srgb, var(--amc-na-tone) 10%, var(--amc-na-bg)));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-na-bg) 80%, transparent), 0 .25rem .75rem -.25rem color-mix(in srgb, var(--amc-na-tone) 60%, transparent);
+}
+
+/* ======================================================================
+ * BOLD - Neo Brutal: ink border, hard offset shadow, flat state fill,
+ * rotated sticker label, pressable link. Ink = body text color.
+ * ==================================================================== */
+.amc-NAlert--neoBrutal {
+  --amc-na-inkline: var(--amc-na-fg);
+  padding-block-end: 6px;
+  padding-inline-end: 6px;
+}
+.amc-NAlert--neoBrutal .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr);
+  border: 2.5px solid var(--amc-na-inkline);
+  border-radius: .625rem;
+  background: color-mix(in srgb, var(--amc-na-tone) 16%, var(--amc-na-bg));
+  box-shadow: calc(6px * var(--amc-na-dir)) 6px 0 var(--amc-na-inkline);
+}
+.amc-NAlert--neoBrutal .amc-NAlert-icon {
+  border: 2.5px solid var(--amc-na-inkline);
+  border-radius: .5rem;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+  box-shadow: calc(3px * var(--amc-na-dir)) 3px 0 var(--amc-na-inkline);
+}
+.amc-NAlert--neoBrutal .amc-NAlert-state {
+  justify-self: start;
+  align-self: flex-start;
+  margin-block-end: .25rem;
+  padding: .0625rem .5rem;
+  border: 2px solid var(--amc-na-inkline);
+  border-radius: .25rem;
+  background: var(--amc-na-bg);
+  color: var(--amc-na-fg);
+  rotate: -2deg;
+}
+.amc-NAlert--neoBrutal .amc-NAlert-title {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.amc-NAlert--neoBrutal .amc-NAlert-message {
+  color: var(--amc-na-fg);
+}
+.amc-NAlert--neoBrutal .amc-NAlert-link {
+  border: 2px solid var(--amc-na-inkline);
+  border-radius: .5rem;
+  background: var(--amc-na-bg);
+  box-shadow: calc(3px * var(--amc-na-dir)) 3px 0 var(--amc-na-inkline);
+  color: var(--amc-na-fg);
+  font-weight: 800;
+  transition: transform .12s ease-out, box-shadow .12s ease-out, background-color .12s ease-out;
+}
+.amc-NAlert--neoBrutal .amc-NAlert-link:hover,
+.amc-NAlert--neoBrutal .amc-NAlert-link:focus-visible {
+  background: var(--amc-na-tone);
+  box-shadow: 0 0 0 var(--amc-na-inkline);
+  color: var(--amc-na-tone-on);
+  transform: translate(calc(3px * var(--amc-na-dir)), 3px);
+}
+
+/* ======================================================================
+ * BOLD - Clay: pillowy claymorphism, soft outer + inner shadows mixed
+ * from the state color and the page background.
+ * ==================================================================== */
+.amc-NAlert--clay {
+  --amc-na-clay: color-mix(in srgb, var(--amc-na-tone) 14%, var(--amc-na-page));
+  padding: .25rem .25rem 1rem;
+}
+.amc-NAlert--clay .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .5rem 1rem;
+  padding: 1.25rem 1.375rem;
+  border: 0;
+  border-radius: 1.75rem;
+  background: var(--amc-na-clay);
+  box-shadow:
+    0 1rem 1.75rem -.5rem color-mix(in srgb, var(--amc-na-tone) 30%, transparent),
+    0 .25rem .5rem color-mix(in srgb, var(--amc-na-tone) 12%, transparent),
+    inset 0 -.5rem 1rem color-mix(in srgb, var(--amc-na-tone) 16%, transparent),
+    inset 0 .375rem .75rem color-mix(in srgb, var(--amc-na-bg) 70%, transparent);
+}
+.amc-NAlert--clay .amc-NAlert-icon {
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: 1.125rem;
+  background: color-mix(in srgb, var(--amc-na-tone) 70%, var(--amc-na-bg));
+  color: var(--amc-na-tone-on);
+  font-size: 1.25rem;
+  box-shadow:
+    0 .5rem 1rem -.25rem color-mix(in srgb, var(--amc-na-tone) 45%, transparent),
+    inset 0 -.25rem .5rem color-mix(in srgb, var(--amc-na-tone) 60%, var(--amc-na-fg) 10%),
+    inset 0 .25rem .375rem color-mix(in srgb, var(--amc-na-bg) 55%, transparent);
+}
+.amc-NAlert--clay .amc-NAlert-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.amc-NAlert--clay .amc-NAlert-link {
+  padding: .5rem 1rem;
+  background: var(--amc-na-bg);
+  box-shadow:
+    0 .375rem .75rem -.25rem color-mix(in srgb, var(--amc-na-tone) 35%, transparent),
+    inset 0 -.1875rem .375rem color-mix(in srgb, var(--amc-na-tone) 14%, transparent);
+  transition: transform .2s cubic-bezier(.3, 1.6, .5, 1), background-color .15s ease-out, color .15s ease-out;
+}
+.amc-NAlert--clay .amc-NAlert-link:hover,
+.amc-NAlert--clay .amc-NAlert-link:focus-visible {
+  transform: scale(1.04);
+}
+.amc-NAlert--clay .amc-NAlert-link:active {
+  transform: scale(.97);
+}
+
+/* ======================================================================
+ * BOLD - Hazard Stripe: caution tape bands above and below, stripes
+ * crawl sideways; label block in ink.
+ * ==================================================================== */
+.amc-NAlert--hazardStripe .amc-NAlert-surface {
+  --amc-na-stripe: repeating-linear-gradient(-45deg, var(--amc-na-tone) 0 .625rem, var(--amc-na-fg) .625rem 1.25rem);
+  grid-template-columns: auto minmax(0, 1fr);
+  overflow: hidden;
+  padding-block: 1.5rem;
+  border: 2px solid var(--amc-na-fg);
+  border-radius: .5rem;
+  background: color-mix(in srgb, var(--amc-na-tone) 10%, var(--amc-na-bg));
+}
+.amc-NAlert--hazardStripe .amc-NAlert-surface::before,
+.amc-NAlert--hazardStripe .amc-NAlert-surface::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  block-size: .625rem;
+  background: var(--amc-na-stripe);
+  background-size: 1.768rem 1.768rem;
+  animation: amc-na-stripes 1.2s linear infinite;
+}
+.amc-NAlert--hazardStripe .amc-NAlert-surface::before {
+  inset-block-start: 0;
+}
+.amc-NAlert--hazardStripe .amc-NAlert-surface::after {
+  inset-block-end: 0;
+  animation-direction: reverse;
+}
+.amc-NAlert--hazardStripe .amc-NAlert-icon {
+  border: 2px solid var(--amc-na-fg);
+  border-radius: 50%;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+}
+.amc-NAlert--hazardStripe .amc-NAlert-state {
+  align-self: flex-start;
+  padding: .125rem .5rem;
+  background: var(--amc-na-fg);
+  color: var(--amc-na-bg);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+.amc-NAlert--hazardStripe .amc-NAlert-title {
+  margin-block-start: .25rem;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  text-transform: none;
+}
+.amc-NAlert--hazardStripe .amc-NAlert-message {
+  color: var(--amc-na-fg);
+}
+.amc-NAlert--hazardStripe .amc-NAlert-link {
+  border-radius: .25rem;
+  background: var(--amc-na-fg);
+  color: var(--amc-na-bg);
+}
+.amc-NAlert--hazardStripe .amc-NAlert-link:hover {
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+}
+
+@keyframes amc-na-stripes {
+  from { background-position: 0 0; }
+  to { background-position: 1.768rem 0; }
+}
+
+/* ======================================================================
+ * SMART - Expand Details: one-line alert, details/summary expands to
+ * message and link; animated height where interpolate-size exists.
+ * ==================================================================== */
+.amc-NAlert--expandDetails .amc-NAlert-surface {
+  display: block;
+  padding: 0;
+  border-color: color-mix(in srgb, var(--amc-na-tone) 28%, var(--amc-na-line));
+  border-radius: .875rem;
+  background: var(--amc-na-bg);
+  transition: box-shadow .2s ease-out, background-color .2s ease-out;
+}
+.amc-NAlert--expandDetails .amc-NAlert-surface[open] {
+  background: color-mix(in srgb, var(--amc-na-tone) 5%, var(--amc-na-bg));
+  box-shadow: 0 .75rem 1.5rem -1rem color-mix(in srgb, var(--amc-na-tone) 60%, transparent);
+}
+.amc-NAlert-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem .625rem;
+  padding: .5rem .75rem .5rem .5rem;
+  border-radius: inherit;
+  cursor: pointer;
+  list-style: none;
+}
+.amc-NAlert-summary::-webkit-details-marker {
+  display: none;
+}
+.amc-NAlert-summary:focus-visible {
+  outline: 2px solid var(--amc-na-tone);
+  outline-offset: 2px;
+}
+.amc-NAlert--expandDetails .amc-NAlert-icon {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: .5rem;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+  font-size: .875rem;
+}
+.amc-NAlert--expandDetails .amc-NAlert-state {
+  padding: .0625rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-na-tone) 14%, transparent);
+}
+.amc-NAlert--expandDetails .amc-NAlert-title {
+  flex: 1 1 10rem;
+  min-inline-size: 0;
+  font-size: .875rem;
+  font-weight: 600;
+}
+.amc-NAlert--expandDetails .amc-NAlert-meta {
+  margin: 0;
+}
+.amc-NAlert-chevron {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  margin-inline-start: auto;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-na-fg) 6%, transparent);
+  color: var(--amc-na-muted);
+  font-size: .6875rem;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1), background-color .2s ease-out;
+}
+.amc-NAlert-summary:hover .amc-NAlert-chevron {
+  background: color-mix(in srgb, var(--amc-na-tone) 18%, transparent);
+  color: var(--amc-na-ink);
+}
+.amc-NAlert--expandDetails [open] .amc-NAlert-chevron {
+  transform: rotate(180deg);
+}
+.amc-NAlert-more {
+  display: grid;
+  justify-items: start;
+  gap: .75rem;
+  padding: .25rem 1rem 1rem calc(.5rem + 1.75rem + .625rem);
+}
+.amc-NAlert-more .amc-NAlert-link {
+  grid-column: auto;
+}
+@supports (interpolate-size: allow-keywords) {
+  .amc-NAlert--expandDetails .amc-NAlert-surface {
+    interpolate-size: allow-keywords;
+  }
+  .amc-NAlert--expandDetails .amc-NAlert-surface::details-content {
+    block-size: 0;
+    overflow: clip;
+    opacity: 0;
+    transition: block-size .35s cubic-bezier(.2, .8, .2, 1), opacity .25s ease-out, content-visibility .35s allow-discrete;
+  }
+  .amc-NAlert--expandDetails .amc-NAlert-surface[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+}
+
+/* ======================================================================
+ * SMART - Adaptive Bar: container queries change the composition.
+ *   < 16rem   icon chip: icon + title, whole chip is the link
+ *   16-36rem  card: icon tile, text, full-width action
+ *   >= 36rem  inline bar: one row, action at the end
+ * ==================================================================== */
+.amc-NAlert--adaptiveBar .amc-NAlert-surface {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: .5rem;
+  padding: .375rem .75rem .375rem .375rem;
+  border-color: var(--amc-na-tint-line);
+  border-radius: 999px;
+  background: var(--amc-na-tint);
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-surface:focus-within {
+  outline: 2px solid var(--amc-na-tone);
+  outline-offset: 2px;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-icon {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  background: var(--amc-na-tone);
+  color: var(--amc-na-tone-on);
+  font-size: .875rem;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-state,
+.amc-NAlert--adaptiveBar .amc-NAlert-message,
+.amc-NAlert--adaptiveBar .amc-NAlert-meta,
+.amc-NAlert--adaptiveBar .amc-NAlert-linkLabel {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-title {
+  overflow: hidden;
+  font-size: .8125rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-link {
+  position: static;
+  padding: 0;
+  background: none;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-link:focus-visible {
+  outline: none;
+}
+.amc-NAlert--adaptiveBar .amc-NAlert-linkIcon {
+  display: none;
+}
+@container amc-nalert (min-width: 16rem) {
+  .amc-NAlert--adaptiveBar .amc-NAlert-surface {
+    align-items: start;
+    gap: .75rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--amc-na-tone) 16%, transparent), transparent 55%),
+      var(--amc-na-bg);
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-surface:focus-within {
+    outline: 0;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-icon {
+    grid-column: 1 / -1;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: .875rem;
+    font-size: 1.125rem;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-body {
+    grid-column: 1 / -1;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-state,
+  .amc-NAlert--adaptiveBar .amc-NAlert-message,
+  .amc-NAlert--adaptiveBar .amc-NAlert-meta,
+  .amc-NAlert--adaptiveBar .amc-NAlert-linkLabel {
+    position: static;
+    inline-size: auto;
+    block-size: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-title {
+    overflow: visible;
+    font-size: .9375rem;
+    white-space: normal;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-link {
+    position: relative;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    justify-content: center;
+    padding: .5rem .875rem;
+    border-radius: .625rem;
+    background: var(--amc-na-tone);
+    color: var(--amc-na-tone-on);
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-link::after {
+    content: none;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-link:focus-visible {
+    outline: 2px solid var(--amc-na-tone);
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-linkIcon {
+    display: inline;
+  }
+}
+@container amc-nalert (min-width: 36rem) {
+  .amc-NAlert--adaptiveBar .amc-NAlert-surface {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: .625rem .625rem .625rem .75rem;
+    border-radius: 999px;
+    background: var(--amc-na-tint);
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-icon {
+    grid-column: auto;
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-body {
+    grid-column: auto;
+    display: block;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-state {
+    margin-inline-end: .5rem;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-title,
+  .amc-NAlert--adaptiveBar .amc-NAlert-message {
+    display: inline;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-title::after {
+    content: " ";
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-meta {
+    display: inline;
+    margin-inline-start: .5rem;
+  }
+  .amc-NAlert--adaptiveBar .amc-NAlert-link {
+    grid-column: auto;
+    justify-self: end;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Very narrow columns: card styles stack the icon above the text ---------- */
+@container amc-nalert (max-width: 18rem) {
+  .amc-NAlert:not(.amc-NAlert--adaptiveBar, .amc-NAlert--tickerBar, .amc-NAlert--expandDetails) .amc-NAlert-surface {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: .875rem;
+  }
+  .amc-NAlert:not(.amc-NAlert--adaptiveBar, .amc-NAlert--tickerBar, .amc-NAlert--expandDetails) .amc-NAlert-link {
+    grid-column: 1;
+    justify-self: start;
+  }
+  .amc-NAlert--pulseCritical .amc-NAlert-icon {
+    margin: .25rem;
+  }
+}
+
+/* ---------- Reduced motion: everything stands still, design remains ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .amc-NAlert .amc-NAlert-beam {
+    animation: none;
+    background: linear-gradient(135deg, var(--amc-na-tone), transparent 35%, transparent 65%, color-mix(in srgb, var(--amc-na-tone) 60%, transparent));
+  }
+  .amc-NAlert .amc-NAlert-fx,
+  .amc-NAlert .amc-NAlert-icon::before,
+  .amc-NAlert .amc-NAlert-icon::after,
+  .amc-NAlert .amc-NAlert-state::before,
+  .amc-NAlert .amc-NAlert-surface::before,
+  .amc-NAlert .amc-NAlert-surface::after,
+  .amc-NAlerts .amc-NAlerts-item {
+    animation: none;
+  }
+  .amc-NAlert--pulseCritical .amc-NAlert-fx {
+    opacity: .7;
+  }
+  .amc-NAlert .amc-NAlert-track {
+    display: block;
+    inline-size: auto;
+    animation: none;
+  }
+  .amc-NAlert .amc-NAlert-viewport {
+    mask-image: none;
+  }
+  .amc-NAlert .amc-NAlert-run {
+    display: block;
+    min-inline-size: 0;
+    padding-inline: .25rem;
+    white-space: normal;
+  }
+  .amc-NAlert .amc-NAlert-sep {
+    display: inline-block;
+    margin-inline: .5rem;
+    vertical-align: middle;
+  }
+  .amc-NAlert--tickerBar .amc-NAlert-surface {
+    flex-wrap: wrap;
+  }
+  .amc-NAlert .amc-NAlert-viewport {
+    flex: 1 1 14rem;
+  }
+  .amc-NAlert .amc-NAlert-run--copy {
+    display: none;
+  }
+  .amc-NAlert--tickerBar .amc-NAlert-surface {
+    border-radius: 1.25rem;
+  }
+  .amc-NAlert .amc-NAlert-link,
+  .amc-NAlert .amc-NAlert-linkIcon,
+  .amc-NAlert .amc-NAlert-surface,
+  .amc-NAlert .amc-NAlert-chevron,
+  .amc-NAlert .amc-NAlert-surface > *,
+  .amc-NAlerts .amc-NAlerts-item {
+    transition: none;
+  }
+  .amc-NAlert--expandDetails .amc-NAlert-surface::details-content {
+    transition: none;
+  }
+}
+
+/* ---------- Forced colors: state stays readable via icon + label ---------- */
+@media (forced-colors: active) {
+  .amc-NAlert-surface,
+  .amc-NAlert-badge,
+  .amc-NAlert-icon {
+    border: 1px solid CanvasText;
+  }
+  .amc-NAlert-fx,
+  .amc-NAlert-beam {
+    display: none;
+  }
+  .amc-NAlert-viewport {
+    mask-image: none;
+  }
+}

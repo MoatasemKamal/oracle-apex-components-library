@@ -1,0 +1,160 @@
+{
+  "name": "Next Hero",
+  "apexlangName": "nextHero",
+  "staticId": "AMC_NEXT_HERO",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "filesVersion": 1,
+  "keywords": ["hero", "banner", "page header", "landing", "login page", "home page", "welcome", "aurora", "meteors", "retro grid", "spotlight", "parallax", "kinetic type", "neo brutalism", "mesh gradient", "grain", "container query", "scroll reveal", "next collection"],
+  "description": "Next Collection family of 10 current-generation page and region heroes for home pages, dashboards and login pages, in four directions: motion (aurora ribbons, meteor shower, grid revealed by a pointer spotlight), depth (retro perspective floor grid, pointer parallax layers), bold (kinetic outline type, neo-brutalism, mesh gradient with film grain) and smart layout (container queries that morph between split, centered and compact bar compositions; words revealed by scroll-driven animation). Follows the landing-page hero patterns of Magic UI and 21st.dev (announcement pill, oversized balanced headline with a highlighted phrase, two actions) rebuilt on Universal Theme variables: every color derives from the theme palette, so Vita, Vita Dark, Redwood and Theme Roller styles are followed. Complete at rest, and every animation stops under reduced motion. Aurora, meteors and retro grid adapt Magic UI designs.",
+  "helpText": "Place at the top of a page or login region, usually in a region with the Blank with Attributes template or the Standard template with hideHeader and noUI options. Title renders as h2, Highlight continues the same heading with an accent treatment. The primary button uses t-Button--hot and the secondary a normal t-Button. The optional JavaScript file only tracks the pointer for the Grid Spotlight and Parallax Layers styles and splits the headline into words for Scroll Reveal; it does nothing under reduced motion or on touch input.",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["partial"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": ["files/amc-next-hero.css", "files/amc-next-hero.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-hero.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-hero.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "aurora",
+      "sequence": 10,
+      "helpText": "Visual design of the hero, each followed by its Next Collection direction. Aurora, motion: slow aurora ribbons behind a centered headline with aurora text. Meteors, motion: night panel from the primary color with a meteor shower and a glowing horizon. Grid Spotlight, motion: a grid revealed by a spotlight that follows the pointer and drifts when idle. Retro Grid, depth: perspective floor grid scrolling toward a striped horizon sun. Parallax Layers, depth: headline beside floating layered shapes and an icon tile that shift with the pointer. Kinetic Type, bold: oversized headline with an outlined highlight swept by light. Neo Brutal, bold: flat tint, ink border, hard offset shadow and sticker label. Mesh Grain, bold: mesh gradient with film grain. Split Morph, smart: container queries switch between split, centered and compact bar compositions. Scroll Reveal, smart: headline words reveal as the hero scrolls into view, fully visible where scroll-driven animation is not supported.",
+      "entries": [
+        { "name": "aurora", "display": "Aurora - motion", "return": "aurora", "sequence": 10 },
+        { "name": "meteors", "display": "Meteors - motion", "return": "meteors", "sequence": 20 },
+        { "name": "gridSpotlight", "display": "Grid Spotlight - motion", "return": "gridSpotlight", "sequence": 30 },
+        { "name": "retroGrid", "display": "Retro Grid - depth", "return": "retroGrid", "sequence": 40 },
+        { "name": "parallaxLayers", "display": "Parallax Layers - depth", "return": "parallaxLayers", "sequence": 50 },
+        { "name": "kineticType", "display": "Kinetic Type - bold", "return": "kineticType", "sequence": 60 },
+        { "name": "neoBrutal", "display": "Neo Brutal - bold", "return": "neoBrutal", "sequence": 70 },
+        { "name": "meshGrain", "display": "Mesh Grain - bold", "return": "meshGrain", "sequence": 80 },
+        { "name": "splitMorph", "display": "Split Morph - smart", "return": "splitMorph", "sequence": 90 },
+        { "name": "scrollReveal", "display": "Scroll Reveal - smart", "return": "scrollReveal", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "EYEBROW",
+      "apexlangName": "eyebrow",
+      "attribute": 2,
+      "name": "Eyebrow",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Short announcement pill above the title, for example New: recurring invoices or Q3 2026 review. Neo Brutal shows it as a sticker."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 3,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Main heading, rendered as h2. Keep it short, for example Close the quarter."
+    },
+    {
+      "staticId": "HIGHLIGHT",
+      "apexlangName": "highlight",
+      "attribute": 4,
+      "name": "Highlight",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Optional phrase that continues the heading with the style's accent treatment: aurora text, outlined type, a marker block or a gradient. For example without the spreadsheet chase."
+    },
+    {
+      "staticId": "SUBTITLE",
+      "apexlangName": "subtitle",
+      "attribute": 5,
+      "name": "Subtitle",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "One or two sentences that explain the page or what to do next."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 6,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Optional Font APEX icon class, for example fa-line-chart. Shown in the Parallax Layers tile, the Neo Brutal badge and the Split Morph media and compact bar."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 7,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional image for the Split Morph media panel, for example #APP_FILES#hero-warehouse.jpg. Decorative, rendered with an empty alt text. Must be developer-controlled. Without an image the panel shows the icon on a mesh gradient. Ignored by the other styles."
+    },
+    {
+      "staticId": "PRIMARY_URL",
+      "apexlangName": "primaryUrl",
+      "attribute": 8,
+      "name": "Primary Button URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Target of the hot button, for example f?p=&APP_ID.:15:&SESSION. Must be developer-controlled, never end-user input."
+    },
+    {
+      "staticId": "PRIMARY_LABEL",
+      "apexlangName": "primaryLabel",
+      "attribute": 9,
+      "name": "Primary Button Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "Hot button text, for example Review Orders. Renders only when URL and label are both set."
+    },
+    {
+      "staticId": "SECONDARY_URL",
+      "apexlangName": "secondaryUrl",
+      "attribute": 10,
+      "name": "Secondary Button URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "Target of the normal button. Must be developer-controlled, never end-user input."
+    },
+    {
+      "staticId": "SECONDARY_LABEL",
+      "apexlangName": "secondaryLabel",
+      "attribute": 11,
+      "name": "Secondary Button Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Normal button text, for example Open Reports. Renders only when URL and label are both set."
+    }
+  ]
+}

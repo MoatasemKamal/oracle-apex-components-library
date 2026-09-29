@@ -1,0 +1,168 @@
+{
+  "samples": [
+    {
+      "title": "aurora, home page",
+      "direction": "motion",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "aurora",
+        "EYEBROW": "New: recurring invoices are live",
+        "TITLE": "Close the quarter",
+        "HIGHLIGHT": "without the spreadsheet chase",
+        "SUBTITLE": "Invoices, approvals and payments for all 14 entities in one place. 38 approvals are waiting for you today.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Review Approvals",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Open Ledger"
+      }
+    },
+    {
+      "title": "meteors, login page",
+      "direction": "motion",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "meteors",
+        "EYEBROW": "Customer Portal",
+        "TITLE": "Welcome back to",
+        "HIGHLIGHT": "Northwind Supply",
+        "SUBTITLE": "Track orders, download invoices and raise service requests. Sign in with your company account.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Sign In",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Request Access"
+      }
+    },
+    {
+      "title": "gridSpotlight, analytics home",
+      "direction": "motion",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "gridSpotlight",
+        "EYEBROW": "Sales analytics",
+        "TITLE": "Revenue is up 12.4%",
+        "HIGHLIGHT": "this quarter",
+        "SUBTITLE": "Riyadh and Jeddah drove most of the growth. Move the pointer over the grid, then open the regional breakdown.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Open Breakdown",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Export PDF"
+      }
+    },
+    {
+      "title": "retroGrid, launch page",
+      "direction": "depth",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "retroGrid",
+        "EYEBROW": "Release 26.1",
+        "TITLE": "Your warehouse,",
+        "HIGHLIGHT": "now in real time",
+        "SUBTITLE": "Stock levels, pick lists and dock schedules update every 30 seconds across all 6 sites.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Open Dashboard",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "What is New"
+      }
+    },
+    {
+      "title": "parallaxLayers, workspace home",
+      "direction": "depth",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "parallaxLayers",
+        "EYEBROW": "Procurement workspace",
+        "TITLE": "Good morning, Layla.",
+        "HIGHLIGHT": "9 orders need you.",
+        "SUBTITLE": "Three suppliers confirmed delivery dates overnight and two quotes expire on Thursday.",
+        "ICON": "fa-shopping-cart",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Review Orders",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Compare Quotes"
+      }
+    },
+    {
+      "title": "kineticType, campaign page",
+      "direction": "bold",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "kineticType",
+        "EYEBROW": "FY 2026 Kick-off",
+        "TITLE": "Sell more.",
+        "HIGHLIGHT": "Chase less.",
+        "SUBTITLE": "The new pipeline board scores every deal overnight, so the team starts the day with the 20 opportunities most likely to close.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Open Pipeline",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Watch Demo"
+      }
+    },
+    {
+      "title": "neoBrutal, internal tool",
+      "direction": "bold",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "neoBrutal",
+        "EYEBROW": "Expense week",
+        "TITLE": "Submit expenses",
+        "HIGHLIGHT": "before Friday 18:00",
+        "SUBTITLE": "Receipts from the Dubai trade show can be scanned straight from your phone. Finance pays approved claims with the March payroll.",
+        "ICON": "fa-credit-card",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "New Expense Claim",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Policy"
+      }
+    },
+    {
+      "title": "meshGrain, customer success",
+      "direction": "bold",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "meshGrain",
+        "EYEBROW": "Customer success",
+        "TITLE": "Every renewal,",
+        "HIGHLIGHT": "one calm view.",
+        "SUBTITLE": "47 contracts renew in the next 90 days. Health scores, open tickets and usage trends sit side by side.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Open Renewals",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Health Report"
+      }
+    },
+    {
+      "title": "splitMorph, with image",
+      "direction": "smart",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "splitMorph",
+        "EYEBROW": "Inventory",
+        "TITLE": "Riyadh Central Warehouse",
+        "HIGHLIGHT": "is 94% full",
+        "SUBTITLE": "4,812 SKUs across 36 aisles. Stock counts were reconciled today at 07:30 and 3 aisles need a recount.",
+        "ICON": "fa-cubes",
+        "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237fa7c9'/%3E%3Cstop offset='1' stop-color='%232c4a63'/%3E%3C/linearGradient%3E%3ClinearGradient id='f' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c9a46a'/%3E%3Cstop offset='1' stop-color='%238a6a3c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='400' fill='url%28%23s%29'/%3E%3Crect y='300' width='800' height='100' fill='%233b3f45'/%3E%3Cg transform='translate%2840 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28230 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28420 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Cg transform='translate%28610 90%29'%3E%3Crect width='150' height='210' fill='%2327313b'/%3E%3Crect x='8' y='70' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='32' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='40' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='135' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='97' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='105' width='58' height='28' fill='url%28%23f%29'/%3E%3Crect x='8' y='200' width='134' height='6' fill='%23e0663a'/%3E%3Crect x='14' y='162' width='56' height='36' fill='url%28%23f%29'/%3E%3Crect x='76' y='170' width='58' height='28' fill='url%28%23f%29'/%3E%3C/g%3E%3Ccircle cx='690' cy='60' r='26' fill='%23f4e3b5' opacity='.7'/%3E%3C/svg%3E",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Start Recount",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "View Aisles"
+      }
+    },
+    {
+      "title": "scrollReveal, annual report",
+      "direction": "smart",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "scrollReveal",
+        "EYEBROW": "Annual report 2025",
+        "TITLE": "A year of faster deliveries and",
+        "HIGHLIGHT": "happier customers.",
+        "SUBTITLE": "Average delivery time fell from 3.2 to 1.9 days while order volume grew 27%. Scroll to see how each region contributed.",
+        "PRIMARY_URL": "#",
+        "PRIMARY_LABEL": "Read the Report",
+        "SECONDARY_URL": "#",
+        "SECONDARY_LABEL": "Download PDF"
+      }
+    }
+  ]
+}

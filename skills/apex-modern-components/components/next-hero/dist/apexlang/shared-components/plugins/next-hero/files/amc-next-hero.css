@@ -1,0 +1,1245 @@
+/* APEX Modern Components - Next Hero (nextHero), Next Collection
+ * Ten current-generation hero designs chosen with the Style setting, in four
+ * directions: motion (aurora, meteors, gridSpotlight), depth (retroGrid,
+ * parallaxLayers), bold (kineticType, neoBrutal, meshGrain) and smart layout
+ * (splitMorph, scrollReveal). Every color derives from Universal Theme variables;
+ * accent hues are rotated from --ut-palette-primary with relative color syntax.
+ * Aurora text, meteors, retro grid, dot/grid patterns and the animated grid cells
+ * adapt Magic UI designs (https://github.com/magicuidesign/magicui), MIT License,
+ * (c) Magic UI. Complete at rest; every animation stops under reduced motion. */
+
+@property --amc-nh-dx {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 72%;
+}
+@property --amc-nh-dy {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 36%;
+}
+
+/* ---------- Tokens ---------- */
+.amc-NHero {
+  --amc-nh-bg: var(--ut-component-background-color, #fff);
+  --amc-nh-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-nh-fg: var(--ut-component-text-default-color, #262626);
+  --amc-nh-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-nh-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nh-accent: var(--ut-palette-primary, #056ac8);
+  --amc-nh-accent-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-nh-radius: clamp(.75rem, calc(var(--ut-component-border-radius, .375rem) * 3), 1.5rem);
+  /* Companion hues. Fallback: mixes of the palette; modern browsers rotate the primary hue. */
+  --amc-nh-a2: color-mix(in srgb, var(--amc-nh-accent) 55%, var(--ut-palette-info, #0076df));
+  --amc-nh-a3: color-mix(in srgb, var(--amc-nh-accent) 70%, var(--amc-nh-fg));
+  /* Night surface for Meteors: falls back to the normal surface. */
+  --amc-nh-night: var(--amc-nh-bg);
+  --amc-nh-night-fg: var(--amc-nh-fg);
+  --amc-nh-night-muted: var(--amc-nh-muted);
+  --amc-nh-dir: 1;
+  --amc-nh-pad-i: clamp(1rem, 6cqi, 4rem);
+  --amc-nh-pad-b: clamp(1.5rem, 6cqi, 4.5rem);
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  container: amc-nhero / inline-size;
+  min-inline-size: 0;
+  overflow: hidden;
+  border-radius: var(--amc-nh-radius);
+  background: var(--amc-nh-bg);
+  color: var(--amc-nh-fg);
+  font-size: .9375rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+@supports (color: oklch(from currentColor l c h)) {
+  .amc-NHero {
+    --amc-nh-a2: oklch(from var(--amc-nh-accent) calc(l + .04) c calc(h - 48));
+    --amc-nh-a3: oklch(from var(--amc-nh-accent) calc(l + .02) calc(c * 1.1) calc(h + 38));
+    --amc-nh-night: oklch(from var(--amc-nh-accent) .19 calc(c * .42) h);
+    --amc-nh-night-fg: oklch(from var(--amc-nh-accent) .97 .012 h);
+    --amc-nh-night-muted: oklch(from var(--amc-nh-accent) .8 .035 h);
+  }
+}
+.amc-NHero:dir(rtl) {
+  --amc-nh-dir: -1;
+}
+
+/* ---------- Shared structure ---------- */
+.amc-NHero-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.amc-NHero-inner {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  align-content: center;
+  gap: 1.5rem 2.5rem;
+  min-block-size: clamp(15rem, 34cqi, 25rem);
+  padding: var(--amc-nh-pad-b) var(--amc-nh-pad-i);
+}
+
+.amc-NHero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .875rem;
+  min-inline-size: 0;
+  max-inline-size: 46rem;
+}
+
+.amc-NHero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  max-inline-size: 100%;
+  margin: 0;
+  padding: .3125rem .875rem .3125rem .625rem;
+  border: 1px solid var(--amc-nh-line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-nh-bg) 72%, transparent);
+  color: var(--amc-nh-fg);
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  unicode-bidi: isolate;
+}
+.amc-NHero-eyebrowDot {
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background: var(--amc-nh-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-nh-accent) 22%, transparent);
+}
+
+.amc-NHero-title {
+  margin: 0;
+  color: inherit;
+  font-size: clamp(1.5rem, 5.4cqi, 3.5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.028em;
+  text-wrap: balance;
+  hyphens: auto;
+}
+.amc-NHero-highlight {
+  color: var(--amc-nh-accent);
+}
+
+.amc-NHero-subtitle {
+  margin: 0;
+  max-inline-size: 38rem;
+  color: var(--amc-nh-muted);
+  font-size: clamp(.9375rem, 1.9cqi, 1.125rem);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.amc-NHero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem;
+  margin-block-start: .5rem;
+}
+.amc-NHero-actions:empty {
+  display: none;
+}
+
+/* Centered compositions */
+.amc-NHero--aurora .amc-NHero-content,
+.amc-NHero--meteors .amc-NHero-content,
+.amc-NHero--retroGrid .amc-NHero-content {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+.amc-NHero--aurora .amc-NHero-subtitle,
+.amc-NHero--meteors .amc-NHero-subtitle,
+.amc-NHero--retroGrid .amc-NHero-subtitle {
+  margin-inline: auto;
+}
+.amc-NHero--aurora .amc-NHero-actions,
+.amc-NHero--meteors .amc-NHero-actions,
+.amc-NHero--retroGrid .amc-NHero-actions {
+  justify-content: center;
+}
+
+/* Gradient headline text shared by several styles */
+.amc-NHero--aurora .amc-NHero-highlight,
+.amc-NHero--meteors .amc-NHero-highlight,
+.amc-NHero--retroGrid .amc-NHero-highlight,
+.amc-NHero--gridSpotlight .amc-NHero-highlight,
+.amc-NHero--parallaxLayers .amc-NHero-highlight,
+.amc-NHero--splitMorph .amc-NHero-highlight {
+  padding-inline-end: .06em;
+  background-image: linear-gradient(120deg, var(--amc-nh-accent), var(--amc-nh-a2) 45%, var(--amc-nh-a3) 80%, var(--amc-nh-accent));
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ======================================================================
+ * MOTION - Aurora: drifting aurora ribbons, aurora text (Magic UI)
+ * ==================================================================== */
+.amc-NHero--aurora {
+  background: color-mix(in srgb, var(--amc-nh-accent) 4%, var(--amc-nh-bg));
+}
+.amc-NHero-aurora {
+  position: absolute;
+  inset: -35% -15% 5%;
+  background-image: repeating-linear-gradient(100deg,
+    var(--amc-nh-accent) 0%,
+    var(--amc-nh-a2) 7%,
+    color-mix(in srgb, var(--amc-nh-a2) 30%, var(--amc-nh-bg)) 11%,
+    var(--amc-nh-a3) 16%,
+    var(--amc-nh-accent) 24%);
+  background-size: 200% 100%;
+  opacity: .62;
+  filter: blur(22px) saturate(1.3);
+  mask-image: radial-gradient(ellipse 85% 95% at 50% 8%, var(--amc-nh-fg) 30%, transparent 78%);
+  animation: amc-nh-aurora 28s linear infinite;
+}
+.amc-NHero-aurora--b {
+  inset: -20% -30% 25%;
+  background-size: 260% 100%;
+  opacity: .4;
+  mix-blend-mode: normal;
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+.amc-NHero-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--amc-nh-fg) 16%, transparent) 1px, transparent 1.5px);
+  background-size: 1.25rem 1.25rem;
+  mask-image: radial-gradient(ellipse 60% 55% at 50% 100%, var(--amc-nh-fg), transparent 80%);
+}
+.amc-NHero--aurora .amc-NHero-title {
+  font-size: clamp(1.5rem, 6.2cqi, 4rem);
+  letter-spacing: -.035em;
+}
+.amc-NHero--aurora .amc-NHero-highlight {
+  animation: amc-nh-textflow 9s ease-in-out infinite alternate;
+}
+
+@keyframes amc-nh-aurora {
+  from { background-position: 0% 50%; }
+  to { background-position: 200% 50%; }
+}
+@keyframes amc-nh-textflow {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* ======================================================================
+ * MOTION - Meteors: night panel, meteor shower, glowing horizon (Magic UI)
+ * ==================================================================== */
+.amc-NHero--meteors {
+  --amc-nh-line: color-mix(in srgb, var(--amc-nh-night-fg) 16%, transparent);
+  background: var(--amc-nh-night);
+  color: var(--amc-nh-night-fg);
+}
+.amc-NHero--meteors .amc-NHero-fx,
+.amc-NHero--gridSpotlight .amc-NHero-fx {
+  direction: ltr;
+}
+.amc-NHero--meteors .amc-NHero-subtitle {
+  color: var(--amc-nh-night-muted);
+}
+.amc-NHero--meteors .amc-NHero-eyebrow {
+  background: color-mix(in srgb, var(--amc-nh-night-fg) 8%, transparent);
+  color: var(--amc-nh-night-fg);
+}
+.amc-NHero--meteors .amc-NHero-highlight {
+  background-image: linear-gradient(180deg, var(--amc-nh-night-fg) 20%, color-mix(in srgb, var(--amc-nh-accent) 55%, var(--amc-nh-night-fg)));
+  background-size: 100% 100%;
+}
+.amc-NHero--meteors .amc-NHero-inner {
+  padding-block-end: calc(var(--amc-nh-pad-b) + 2.5rem);
+}
+.amc-NHero-stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(color-mix(in srgb, var(--amc-nh-night-fg) 55%, transparent) 1px, transparent 1.4px),
+    radial-gradient(color-mix(in srgb, var(--amc-nh-night-fg) 30%, transparent) 1px, transparent 1.4px);
+  background-size: 7.3rem 6.1rem, 4.7rem 5.3rem;
+  background-position: 1.1rem 2.3rem, 3.2rem .6rem;
+  opacity: .7;
+  mask-image: linear-gradient(to bottom, var(--amc-nh-fg), transparent 85%);
+}
+.amc-NHero-meteor {
+  --amc-nh-x: 50%;
+  --amc-nh-t: 7s;
+  --amc-nh-d: -1s;
+  --amc-nh-p: 10;
+  position: absolute;
+  inset-block-start: -4%;
+  inset-inline-start: var(--amc-nh-x);
+  inline-size: 2px;
+  block-size: 2px;
+  border-radius: 50%;
+  background: var(--amc-nh-night-fg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-nh-night-fg) 12%, transparent), 0 0 .5rem 1px color-mix(in srgb, var(--amc-nh-accent) 70%, transparent);
+  transform: rotate(-35deg) translateX(0);
+  animation: amc-nh-meteor var(--amc-nh-t) linear var(--amc-nh-d) infinite;
+}
+.amc-NHero-meteor::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 1px;
+  inline-size: 5rem;
+  block-size: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, var(--amc-nh-night-fg), color-mix(in srgb, var(--amc-nh-accent) 40%, transparent) 30%, transparent);
+}
+.amc-NHero-meteor:nth-child(2) { --amc-nh-x: 18%; --amc-nh-t: 6s; --amc-nh-d: -2.2s; --amc-nh-p: 14; }
+.amc-NHero-meteor:nth-child(3) { --amc-nh-x: 31%; --amc-nh-t: 9s; --amc-nh-d: -6.5s; --amc-nh-p: 22; }
+.amc-NHero-meteor:nth-child(4) { --amc-nh-x: 44%; --amc-nh-t: 7s; --amc-nh-d: -.8s; --amc-nh-p: 6; }
+.amc-NHero-meteor:nth-child(5) { --amc-nh-x: 57%; --amc-nh-t: 11s; --amc-nh-d: -4.1s; --amc-nh-p: 18; }
+.amc-NHero-meteor:nth-child(6) { --amc-nh-x: 66%; --amc-nh-t: 6.5s; --amc-nh-d: -5.3s; --amc-nh-p: 30; }
+.amc-NHero-meteor:nth-child(7) { --amc-nh-x: 74%; --amc-nh-t: 8s; --amc-nh-d: -1.7s; --amc-nh-p: 11; }
+.amc-NHero-meteor:nth-child(8) { --amc-nh-x: 83%; --amc-nh-t: 10s; --amc-nh-d: -7.4s; --amc-nh-p: 26; }
+.amc-NHero-meteor:nth-child(9) { --amc-nh-x: 91%; --amc-nh-t: 7.5s; --amc-nh-d: -3.3s; --amc-nh-p: 16; }
+.amc-NHero-meteor:nth-child(10) { --amc-nh-x: 99%; --amc-nh-t: 9.5s; --amc-nh-d: -.3s; --amc-nh-p: 8; }
+.amc-NHero-meteor:nth-child(11) { --amc-nh-x: 106%; --amc-nh-t: 8.5s; --amc-nh-d: -5.9s; --amc-nh-p: 20; }
+.amc-NHero-meteor:nth-child(12) { --amc-nh-x: 112%; --amc-nh-t: 12s; --amc-nh-d: -9.1s; --amc-nh-p: 28; }
+.amc-NHero-meteor:nth-child(13) { --amc-nh-x: 52%; --amc-nh-t: 13s; --amc-nh-d: -10.2s; --amc-nh-p: 34; }
+.amc-NHero-horizon {
+  position: absolute;
+  inset-inline: -25%;
+  inset-block-start: calc(100% - 3.25rem);
+  block-size: 160%;
+  border-radius: 50%;
+  background: var(--amc-nh-night);
+  box-shadow:
+    0 -1px 0 color-mix(in srgb, var(--amc-nh-accent) 55%, var(--amc-nh-night-fg)),
+    0 -.75rem 2.5rem color-mix(in srgb, var(--amc-nh-accent) 55%, transparent),
+    0 -2rem 7rem color-mix(in srgb, var(--amc-nh-a2) 35%, transparent),
+    inset 0 1.5rem 3rem color-mix(in srgb, var(--amc-nh-accent) 22%, transparent);
+}
+
+@keyframes amc-nh-meteor {
+  0% { transform: rotate(-35deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(-35deg) translateX(-42rem); opacity: 0; }
+}
+
+/* ======================================================================
+ * MOTION - Grid Spotlight: grid revealed by a pointer spotlight (Magic UI
+ * grid pattern + animated grid cells). Drifts on its own when idle.
+ * ==================================================================== */
+.amc-NHero--gridSpotlight {
+  --amc-nh-cell: 2.5rem;
+  --amc-nh-sx: var(--amc-mx, calc(50% + (var(--amc-nh-dx) - 50%) * var(--amc-nh-dir)));
+  --amc-nh-sy: var(--amc-my, var(--amc-nh-dy));
+  animation: amc-nh-drift 16s ease-in-out infinite alternate;
+}
+.amc-NHero--gridSpotlight.amc-is-tracking {
+  animation-play-state: paused;
+}
+.amc-NHero-grid,
+.amc-NHero-gridLit {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--amc-nh-gl) 1px, transparent 1px),
+    linear-gradient(90deg, var(--amc-nh-gl) 1px, transparent 1px);
+  background-size: var(--amc-nh-cell) var(--amc-nh-cell);
+  background-position: -1px -1px;
+}
+.amc-NHero-grid {
+  --amc-nh-gl: color-mix(in srgb, var(--amc-nh-fg) 7%, transparent);
+  mask-image: linear-gradient(to bottom, var(--amc-nh-fg) 25%, transparent);
+}
+.amc-NHero-gridLit {
+  --amc-nh-gl: color-mix(in srgb, var(--amc-nh-accent) 70%, transparent);
+  mask-image: radial-gradient(circle 11rem at var(--amc-nh-sx) var(--amc-nh-sy), var(--amc-nh-fg), transparent);
+}
+.amc-NHero-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 20rem at var(--amc-nh-sx) var(--amc-nh-sy), color-mix(in srgb, var(--amc-nh-accent) 16%, transparent), transparent 70%);
+}
+.amc-NHero-cell {
+  --amc-nh-cx: 12;
+  --amc-nh-cy: 1;
+  position: absolute;
+  inset-block-start: calc(var(--amc-nh-cell) * var(--amc-nh-cy));
+  inset-inline-start: calc(var(--amc-nh-cell) * var(--amc-nh-cx));
+  inline-size: calc(var(--amc-nh-cell) - 1px);
+  block-size: calc(var(--amc-nh-cell) - 1px);
+  background: color-mix(in srgb, var(--amc-nh-accent) 20%, transparent);
+  opacity: .7;
+  animation: amc-nh-flicker 5s ease-in-out var(--amc-nh-cd, 0s) infinite;
+}
+.amc-NHero-cell:nth-child(2) { --amc-nh-cx: 14; --amc-nh-cy: 1; --amc-nh-cd: -1s; }
+.amc-NHero-cell:nth-child(3) { --amc-nh-cx: 17; --amc-nh-cy: 3; --amc-nh-cd: -2.5s; }
+.amc-NHero-cell:nth-child(4) { --amc-nh-cx: 20; --amc-nh-cy: 2; --amc-nh-cd: -.4s; }
+.amc-NHero-cell:nth-child(5) { --amc-nh-cx: 11; --amc-nh-cy: 5; --amc-nh-cd: -3.6s; }
+.amc-NHero-cell:nth-child(6) { --amc-nh-cx: 23; --amc-nh-cy: 4; --amc-nh-cd: -1.8s; }
+.amc-NHero-cell:nth-child(7) { --amc-nh-cx: 3; --amc-nh-cy: 7; --amc-nh-cd: -4.2s; }
+.amc-NHero-cell:nth-child(8) { --amc-nh-cx: 26; --amc-nh-cy: 6; --amc-nh-cd: -2.9s; }
+.amc-NHero--gridSpotlight .amc-NHero-title {
+  font-size: clamp(1.5rem, 5.8cqi, 3.75rem);
+  letter-spacing: -.035em;
+}
+
+@keyframes amc-nh-drift {
+  0% { --amc-nh-dx: 62%; --amc-nh-dy: 28%; }
+  50% { --amc-nh-dx: 84%; --amc-nh-dy: 58%; }
+  100% { --amc-nh-dx: 72%; --amc-nh-dy: 18%; }
+}
+@keyframes amc-nh-flicker {
+  0%, 100% { opacity: .75; }
+  50% { opacity: .08; }
+}
+
+/* ======================================================================
+ * DEPTH - Retro Grid: perspective floor scrolling toward a striped sun
+ * (after Magic UI retro-grid, CSS only).
+ * ==================================================================== */
+.amc-NHero--retroGrid {
+  --amc-nh-floor: clamp(7rem, 22cqi, 11rem);
+  background: linear-gradient(to bottom, var(--amc-nh-bg) 30%, color-mix(in srgb, var(--amc-nh-accent) 9%, var(--amc-nh-bg)));
+}
+.amc-NHero--retroGrid .amc-NHero-inner {
+  padding-block-end: calc(var(--amc-nh-floor) + clamp(2.5rem, 9cqi, 4.5rem));
+}
+.amc-NHero--retroGrid .amc-NHero-title {
+  font-size: clamp(1.5rem, 6cqi, 3.875rem);
+  letter-spacing: -.035em;
+}
+.amc-NHero-floor {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: var(--amc-nh-floor);
+  overflow: hidden;
+  perspective: 12rem;
+  perspective-origin: 50% 0;
+  mask-image: linear-gradient(to top, var(--amc-nh-fg) 35%, transparent);
+}
+.amc-NHero-floorPlane {
+  --amc-nh-gs: 3.5rem;
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: -150%;
+  inline-size: 400%;
+  block-size: 600%;
+  transform-origin: 50% 0;
+  transform: rotateX(62deg);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--amc-nh-accent) 70%, transparent) 2px, transparent 2px),
+    linear-gradient(90deg, color-mix(in srgb, var(--amc-nh-accent) 55%, transparent) 2px, transparent 2px);
+  background-size: var(--amc-nh-gs) var(--amc-nh-gs);
+  background-position: 50% 0;
+  animation: amc-nh-floor 1.6s linear infinite;
+}
+.amc-NHero-sun {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-end: var(--amc-nh-floor);
+  inline-size: clamp(6rem, 18cqi, 10rem);
+  aspect-ratio: 2;
+  border-start-start-radius: 999rem;
+  border-start-end-radius: 999rem;
+  translate: calc(-50% * var(--amc-nh-dir)) 0;
+  background: linear-gradient(to bottom, var(--amc-nh-a3), var(--amc-nh-accent) 55%, var(--amc-nh-a2));
+  opacity: .8;
+  mask-image: repeating-linear-gradient(to top, transparent 0 4%, var(--amc-nh-fg) 4% 9%, transparent 9% 11%, var(--amc-nh-fg) 11% 20%);
+  filter: drop-shadow(0 0 1.5rem color-mix(in srgb, var(--amc-nh-accent) 50%, transparent));
+}
+.amc-NHero--retroGrid .amc-NHero-fx::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: var(--amc-nh-floor);
+  block-size: 2px;
+  background: linear-gradient(90deg, transparent, var(--amc-nh-accent) 30%, var(--amc-nh-a3) 70%, transparent);
+  box-shadow: 0 0 1rem color-mix(in srgb, var(--amc-nh-accent) 60%, transparent);
+}
+
+@keyframes amc-nh-floor {
+  from { background-position: 50% 0; }
+  to { background-position: 50% var(--amc-nh-gs); }
+}
+
+/* ======================================================================
+ * DEPTH - Parallax Layers: real 3D scene, layers at different depths that
+ * shift with the pointer (JS sets --amc-rx / --amc-ry) and sway when idle.
+ * ==================================================================== */
+.amc-NHero--parallaxLayers {
+  background:
+    radial-gradient(ellipse 60% 80% at 85% 50%, color-mix(in srgb, var(--amc-nh-accent) 10%, transparent), transparent 70%),
+    var(--amc-nh-bg);
+}
+.amc-NHero--parallaxLayers:dir(rtl) {
+  background:
+    radial-gradient(ellipse 60% 80% at 15% 50%, color-mix(in srgb, var(--amc-nh-accent) 10%, transparent), transparent 70%),
+    var(--amc-nh-bg);
+}
+.amc-NHero--parallaxLayers .amc-NHero-inner {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+}
+.amc-NHero-scene {
+  --amc-nh-tx: calc(var(--amc-rx, 0) * 14deg * var(--amc-nh-dir) - 16deg * var(--amc-nh-dir));
+  --amc-nh-ty: calc(var(--amc-ry, 0) * -10deg + 8deg);
+  position: relative;
+  justify-self: center;
+  inline-size: min(100%, 22rem);
+  aspect-ratio: 1.1;
+  perspective: 55rem;
+}
+.amc-NHero-scene > .amc-NHero-layer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--amc-nh-tx)) rotateX(var(--amc-nh-ty)) translateZ(var(--amc-nh-z, 0));
+  transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+  animation: amc-nh-sway 9s ease-in-out infinite alternate;
+}
+.amc-NHero.amc-is-tracking .amc-NHero-layer {
+  transition-duration: .12s;
+  animation-play-state: paused;
+}
+.amc-NHero-layer--back { --amc-nh-z: -4rem; }
+.amc-NHero-layer--mid { --amc-nh-z: 0rem; }
+.amc-NHero-layer--front { --amc-nh-z: 4.5rem; }
+.amc-NHero-ring {
+  position: absolute;
+  inset: 4%;
+  border: 1px dashed color-mix(in srgb, var(--amc-nh-accent) 40%, var(--amc-nh-line));
+  border-radius: 50%;
+}
+.amc-NHero-ring--inner {
+  inset: 20%;
+  border-style: solid;
+  border-color: var(--amc-nh-line);
+}
+.amc-NHero-orbit {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  animation: amc-nh-spin 18s linear infinite;
+}
+.amc-NHero-orbit::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -.4rem;
+  inset-inline-start: calc(50% - .4rem);
+  inline-size: .8rem;
+  block-size: .8rem;
+  border-radius: 50%;
+  background: var(--amc-nh-accent);
+  box-shadow: 0 0 0 .3rem color-mix(in srgb, var(--amc-nh-accent) 22%, transparent), 0 0 1.25rem var(--amc-nh-accent);
+}
+.amc-NHero-plate {
+  position: absolute;
+  inset: 22% 18%;
+  border: 1px solid color-mix(in srgb, var(--amc-nh-accent) 30%, var(--amc-nh-line));
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(color-mix(in srgb, var(--amc-nh-accent) 45%, transparent) 1px, transparent 1.5px) 0 0 / .875rem .875rem,
+    linear-gradient(135deg, color-mix(in srgb, var(--amc-nh-accent) 18%, var(--amc-nh-bg)), color-mix(in srgb, var(--amc-nh-a2) 14%, var(--amc-nh-bg)));
+  box-shadow: 0 2rem 3rem -1.5rem color-mix(in srgb, var(--amc-nh-accent) 45%, transparent);
+  transform: rotate(-8deg);
+}
+.amc-NHero-tile {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  display: grid;
+  place-items: center;
+  inline-size: 5.5rem;
+  block-size: 5.5rem;
+  margin-block-start: -2.75rem;
+  margin-inline-start: -2.75rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nh-fg) 14%, transparent);
+  border-radius: 1.375rem;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--amc-nh-bg) 82%, transparent), color-mix(in srgb, var(--amc-nh-bg) 55%, transparent));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-nh-bg) 90%, transparent),
+    0 1.5rem 2.5rem -1rem color-mix(in srgb, var(--amc-nh-fg) 35%, transparent),
+    0 0 0 6px color-mix(in srgb, var(--amc-nh-accent) 10%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--amc-nh-accent);
+  font-size: 2.25rem;
+}
+.amc-NHero-chip {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  padding: .55rem .65rem;
+  border: 1px solid var(--amc-nh-line);
+  border-radius: .75rem;
+  background: var(--amc-nh-bg);
+  box-shadow: 0 .75rem 1.5rem -.75rem color-mix(in srgb, var(--amc-nh-fg) 40%, transparent);
+  animation: amc-nh-float 6s ease-in-out infinite alternate;
+}
+.amc-NHero-chip--a {
+  inset-block-start: 14%;
+  inset-inline-end: 4%;
+  inline-size: 5.5rem;
+}
+.amc-NHero-chip--b {
+  inset-block-end: 16%;
+  inset-inline-start: 6%;
+  animation-delay: -3s;
+}
+.amc-NHero-chipBar {
+  display: block;
+  block-size: .35rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--amc-nh-accent), var(--amc-nh-a2));
+}
+.amc-NHero-chipBar--short {
+  inline-size: 60%;
+  background: var(--amc-nh-line);
+}
+.amc-NHero-chipDot {
+  display: block;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: 50%;
+  background: conic-gradient(var(--amc-nh-accent) 0 72%, color-mix(in srgb, var(--amc-nh-accent) 18%, transparent) 72%);
+  mask-image: radial-gradient(circle, transparent 42%, var(--amc-nh-fg) 44%);
+}
+@container amc-nhero (max-width: 40rem) {
+  .amc-NHero--parallaxLayers .amc-NHero-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .amc-NHero-scene {
+    order: -1;
+    justify-self: start;
+    inline-size: min(100%, 12rem);
+    margin-block-end: -1rem;
+  }
+  .amc-NHero-tile {
+    inline-size: 3.75rem;
+    block-size: 3.75rem;
+    margin-block-start: -1.875rem;
+    margin-inline-start: -1.875rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+  }
+  .amc-NHero-chip--a {
+    inline-size: 3.5rem;
+  }
+}
+
+@keyframes amc-nh-sway {
+  from { rotate: y -5deg; }
+  to { rotate: y 5deg; }
+}
+@keyframes amc-nh-spin {
+  to { transform: rotate(1turn); }
+}
+@keyframes amc-nh-float {
+  from { translate: 0 -.35rem; }
+  to { translate: 0 .35rem; }
+}
+
+/* ======================================================================
+ * BOLD - Kinetic Type: oversized headline, outlined highlight swept by
+ * light, editorial footer rule, giant ghost word.
+ * ==================================================================== */
+.amc-NHero--kineticType .amc-NHero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "eyebrow eyebrow"
+    "title title"
+    "sub actions";
+  align-items: end;
+  gap: 1rem 2rem;
+  max-inline-size: none;
+}
+.amc-NHero--kineticType .amc-NHero-eyebrow {
+  grid-area: eyebrow;
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: .8125rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.amc-NHero--kineticType .amc-NHero-eyebrowDot {
+  inline-size: 1.5rem;
+  block-size: 2px;
+  border-radius: 0;
+  box-shadow: none;
+}
+.amc-NHero--kineticType .amc-NHero-title {
+  grid-area: title;
+  font-size: clamp(1.875rem, 10cqi, 7rem);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.055em;
+}
+.amc-NHero--kineticType .amc-NHero-highlight {
+  display: inline;
+  padding-inline-end: .04em;
+  background-image: linear-gradient(100deg, transparent 38%, var(--amc-nh-accent) 46%, var(--amc-nh-a2) 54%, transparent 62%);
+  background-size: 300% 100%;
+  background-position: 70% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: max(1.5px, .018em) var(--amc-nh-accent);
+  animation: amc-nh-sweep 5.5s cubic-bezier(.6, 0, .4, 1) infinite;
+}
+.amc-NHero--kineticType .amc-NHero-subtitle,
+.amc-NHero--kineticType .amc-NHero-actions {
+  align-self: stretch;
+  margin: 0;
+  padding-block-start: 1rem;
+  border-block-start: 2px solid var(--amc-nh-fg);
+}
+.amc-NHero--kineticType .amc-NHero-subtitle {
+  grid-area: sub;
+  max-inline-size: none;
+  color: var(--amc-nh-fg);
+}
+.amc-NHero--kineticType .amc-NHero-actions {
+  grid-area: actions;
+  justify-content: flex-end;
+  align-content: flex-start;
+}
+.amc-NHero-ghost {
+  position: absolute;
+  inset-block-end: -.18em;
+  inset-inline-end: -.04em;
+  color: transparent;
+  font-size: clamp(5rem, 26cqi, 18rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.06em;
+  white-space: nowrap;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--amc-nh-accent) 22%, transparent);
+  animation: amc-nh-ghost 22s ease-in-out infinite alternate;
+}
+@container amc-nhero (max-width: 36rem) {
+  .amc-NHero-ghost {
+    display: none;
+  }
+  .amc-NHero--kineticType .amc-NHero-content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "eyebrow" "title" "sub" "actions";
+  }
+  .amc-NHero--kineticType .amc-NHero-actions {
+    justify-content: flex-start;
+    padding-block-start: 0;
+    border: 0;
+  }
+}
+
+@keyframes amc-nh-sweep {
+  0% { background-position: 100% 0; }
+  60%, 100% { background-position: 0% 0; }
+}
+@keyframes amc-nh-ghost {
+  from { translate: 0 0; }
+  to { translate: calc(6% * var(--amc-nh-dir)) 0; }
+}
+
+/* ======================================================================
+ * BOLD - Neo Brutal: flat tint, ink border, hard offset shadow, sticker,
+ * marker highlight, rotating burst badge. Ink = body text color.
+ * ==================================================================== */
+.amc-NHero--neoBrutal {
+  --amc-nh-ink: var(--amc-nh-fg);
+  margin-block-end: 8px;
+  margin-inline-end: 8px;
+  border: 3px solid var(--amc-nh-ink);
+  border-radius: .75rem;
+  background: color-mix(in srgb, var(--amc-nh-accent) 18%, var(--amc-nh-bg));
+  box-shadow: calc(8px * var(--amc-nh-dir)) 8px 0 var(--amc-nh-ink);
+}
+.amc-NHero--neoBrutal .amc-NHero-content {
+  max-inline-size: min(42rem, 76%);
+}
+.amc-NHero--neoBrutal .amc-NHero-eyebrow {
+  padding: .3125rem .875rem .3125rem .5rem;
+  border: 2px solid var(--amc-nh-ink);
+  background: var(--amc-nh-bg);
+  box-shadow: calc(3px * var(--amc-nh-dir)) 3px 0 var(--amc-nh-ink);
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  rotate: -2deg;
+}
+.amc-NHero--neoBrutal .amc-NHero-eyebrowDot {
+  border: 2px solid var(--amc-nh-ink);
+  border-radius: 2px;
+  box-shadow: none;
+}
+.amc-NHero--neoBrutal .amc-NHero-title {
+  font-size: clamp(1.5rem, 6cqi, 3.75rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.04em;
+}
+.amc-NHero--neoBrutal .amc-NHero-highlight {
+  display: inline-block;
+  margin-block-start: .12em;
+  padding: 0 .22em .04em;
+  border-radius: .35rem;
+  background: var(--amc-nh-ink);
+  color: var(--amc-nh-bg);
+  rotate: -1.5deg;
+}
+.amc-NHero--neoBrutal .amc-NHero-subtitle {
+  color: var(--amc-nh-fg);
+  font-weight: 500;
+}
+.amc-NHero--neoBrutal .amc-NHero-action {
+  border: 2px solid var(--amc-nh-ink);
+  border-radius: .5rem;
+  box-shadow: calc(4px * var(--amc-nh-dir)) 4px 0 var(--amc-nh-ink);
+  font-weight: 700;
+  transition: transform .12s ease-out, box-shadow .12s ease-out;
+}
+.amc-NHero--neoBrutal .amc-NHero-action:hover,
+.amc-NHero--neoBrutal .amc-NHero-action:focus-visible {
+  transform: translate(calc(2px * var(--amc-nh-dir)), 2px);
+  box-shadow: calc(2px * var(--amc-nh-dir)) 2px 0 var(--amc-nh-ink);
+}
+.amc-NHero--neoBrutal .amc-NHero-action:active {
+  transform: translate(calc(4px * var(--amc-nh-dir)), 4px);
+  box-shadow: 0 0 0 var(--amc-nh-ink);
+}
+.amc-NHero-burst {
+  --amc-nh-star: polygon(50% 0, 61% 17%, 79% 9%, 79% 29%, 98% 34%, 86% 50%, 98% 66%, 79% 71%, 79% 91%, 61% 83%, 50% 100%, 39% 83%, 21% 91%, 21% 71%, 2% 66%, 14% 50%, 2% 34%, 21% 29%, 21% 9%, 39% 17%);
+  position: absolute;
+  inset-block-start: clamp(1rem, 4cqi, 2rem);
+  inset-inline-end: clamp(1rem, 5cqi, 3rem);
+  display: grid;
+  place-items: center;
+  inline-size: clamp(5rem, 16cqi, 8rem);
+  aspect-ratio: 1;
+  background: var(--amc-nh-ink);
+  clip-path: var(--amc-nh-star);
+  animation: amc-nh-spin 30s linear infinite;
+}
+.amc-NHero-burst::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: var(--amc-nh-accent);
+  clip-path: var(--amc-nh-star);
+}
+.amc-NHero-burstIcon {
+  position: relative;
+  color: var(--amc-nh-accent-on);
+  font-size: clamp(1.5rem, 5cqi, 2.5rem);
+  animation: amc-nh-spin 30s linear infinite reverse;
+}
+@container amc-nhero (max-width: 30rem) {
+  .amc-NHero-burst {
+    display: none;
+  }
+  .amc-NHero--neoBrutal .amc-NHero-content {
+    max-inline-size: none;
+  }
+}
+
+/* ======================================================================
+ * BOLD - Mesh Grain: mesh gradient from rotated primary hues, film grain
+ * (SVG feTurbulence), slow drift.
+ * ==================================================================== */
+.amc-NHero--meshGrain {
+  background: color-mix(in srgb, var(--amc-nh-accent) 16%, var(--amc-nh-bg));
+}
+.amc-NHero-mesh {
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(38% 42% at 18% 22%, color-mix(in srgb, var(--amc-nh-accent) 48%, transparent), transparent 72%),
+    radial-gradient(34% 40% at 82% 18%, color-mix(in srgb, var(--amc-nh-a3) 52%, transparent), transparent 72%),
+    radial-gradient(42% 46% at 76% 82%, color-mix(in srgb, var(--amc-nh-a2) 55%, transparent), transparent 72%),
+    radial-gradient(36% 40% at 24% 86%, color-mix(in srgb, var(--amc-nh-a3) 34%, transparent), transparent 72%),
+    radial-gradient(30% 30% at 55% 50%, color-mix(in srgb, var(--amc-nh-bg) 55%, transparent), transparent 80%);
+  animation: amc-nh-mesh 24s ease-in-out infinite alternate;
+}
+.amc-NHero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.1 -.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 11.25rem 11.25rem;
+  opacity: .55;
+  mix-blend-mode: overlay;
+}
+.amc-NHero--meshGrain .amc-NHero-title {
+  font-size: clamp(1.5rem, 6.4cqi, 4.25rem);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+.amc-NHero--meshGrain .amc-NHero-highlight {
+  display: inline;
+  color: inherit;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -.03em;
+}
+.amc-NHero--meshGrain .amc-NHero-subtitle {
+  color: color-mix(in srgb, var(--amc-nh-fg) 82%, transparent);
+}
+.amc-NHero--meshGrain .amc-NHero-eyebrow {
+  border-color: color-mix(in srgb, var(--amc-nh-fg) 18%, transparent);
+  background: color-mix(in srgb, var(--amc-nh-bg) 45%, transparent);
+}
+
+@keyframes amc-nh-mesh {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(4%, -3%) rotate(8deg) scale(1.06); }
+  100% { transform: translate(-3%, 3%) rotate(-6deg) scale(1); }
+}
+
+/* ======================================================================
+ * SMART - Split Morph: container queries switch composition.
+ *   < 30rem  compact bar (icon tile, title, clamped subtitle, actions)
+ *   30-52rem centered stack with a media banner on top
+ *   >= 52rem split, media panel beside the text with an overlapping tile
+ * ==================================================================== */
+.amc-NHero--splitMorph {
+  border: 1px solid var(--amc-nh-line);
+  background:
+    radial-gradient(ellipse 70% 90% at 100% 0%, color-mix(in srgb, var(--amc-nh-accent) 9%, transparent), transparent 70%),
+    var(--amc-nh-bg);
+}
+.amc-NHero--splitMorph .amc-NHero-inner {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: .875rem;
+  min-block-size: 0;
+  padding: 1rem;
+}
+.amc-NHero-barIcon {
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: .875rem;
+  background: linear-gradient(135deg, var(--amc-nh-accent), var(--amc-nh-a2));
+  box-shadow: 0 .5rem 1rem -.5rem var(--amc-nh-accent);
+  color: var(--amc-nh-accent-on);
+  font-size: 1.25rem;
+}
+.amc-NHero--splitMorph .amc-NHero-content {
+  gap: .5rem;
+}
+@container amc-nhero (min-width: 20rem) {
+  .amc-NHero--splitMorph .amc-NHero-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .amc-NHero--splitMorph .amc-NHero-content {
+    grid-column: 2;
+  }
+  .amc-NHero--splitMorph .amc-NHero-inner > .amc-NHero-content:first-child {
+    grid-column: 1 / -1;
+  }
+}
+.amc-NHero--splitMorph .amc-NHero-eyebrow {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--amc-nh-muted);
+}
+.amc-NHero--splitMorph .amc-NHero-title {
+  font-size: 1.25rem;
+  letter-spacing: -.015em;
+}
+.amc-NHero--splitMorph .amc-NHero-subtitle {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: .875rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+.amc-NHero--splitMorph .amc-NHero-actions {
+  margin-block-start: .25rem;
+}
+.amc-NHero-media {
+  position: relative;
+  display: none;
+  margin: 0;
+  padding: .375rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nh-accent) 28%, var(--amc-nh-line));
+  border-radius: calc(var(--amc-nh-radius) + .25rem);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--amc-nh-accent) 14%, var(--amc-nh-bg)), var(--amc-nh-bg));
+  box-shadow: 0 1.75rem 3rem -1.5rem color-mix(in srgb, var(--amc-nh-accent) 45%, transparent);
+}
+.amc-NHero-img,
+.amc-NHero-mediaMesh {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: var(--amc-nh-radius);
+  object-fit: cover;
+}
+.amc-NHero-mediaMesh {
+  background:
+    radial-gradient(color-mix(in srgb, var(--amc-nh-bg) 35%, transparent) 1px, transparent 1.5px) 0 0 / 1rem 1rem,
+    radial-gradient(60% 70% at 20% 20%, var(--amc-nh-a3), transparent 70%),
+    radial-gradient(60% 70% at 85% 80%, var(--amc-nh-a2), transparent 70%),
+    var(--amc-nh-accent);
+}
+.amc-NHero-mediaTile {
+  position: absolute;
+  inset-block-end: -1rem;
+  inset-inline-start: -1rem;
+  display: grid;
+  place-items: center;
+  inline-size: 3.75rem;
+  block-size: 3.75rem;
+  border: 1px solid var(--amc-nh-line);
+  border-radius: 1rem;
+  background: var(--amc-nh-bg);
+  box-shadow: 0 1rem 2rem -.75rem color-mix(in srgb, var(--amc-nh-fg) 45%, transparent);
+  color: var(--amc-nh-accent);
+  font-size: 1.5rem;
+}
+@container amc-nhero (min-width: 30rem) {
+  .amc-NHero--splitMorph .amc-NHero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 1.75rem;
+    padding: clamp(1.5rem, 5cqi, 2.5rem) var(--amc-nh-pad-i);
+    text-align: center;
+  }
+  .amc-NHero--splitMorph .amc-NHero-barIcon {
+    display: none;
+  }
+  .amc-NHero--splitMorph .amc-NHero-content {
+    grid-column: 1;
+    align-items: center;
+  }
+  .amc-NHero--splitMorph .amc-NHero-eyebrow {
+    padding: .3125rem .875rem .3125rem .625rem;
+    border: 1px solid var(--amc-nh-line);
+    background: color-mix(in srgb, var(--amc-nh-bg) 72%, transparent);
+    color: var(--amc-nh-fg);
+  }
+  .amc-NHero--splitMorph .amc-NHero-title {
+    font-size: clamp(1.625rem, 5.4cqi, 3rem);
+    letter-spacing: -.03em;
+  }
+  .amc-NHero--splitMorph .amc-NHero-subtitle {
+    display: block;
+    font-size: 1rem;
+  }
+  .amc-NHero--splitMorph .amc-NHero-actions {
+    justify-content: center;
+  }
+  .amc-NHero-media {
+    display: block;
+    order: -1;
+    inline-size: min(100%, 28rem);
+    aspect-ratio: 16 / 7;
+  }
+}
+@container amc-nhero (min-width: 52rem) {
+  .amc-NHero--splitMorph .amc-NHero-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    justify-items: stretch;
+    align-items: center;
+    gap: 3rem;
+    min-block-size: clamp(18rem, 32cqi, 26rem);
+    padding: var(--amc-nh-pad-b) var(--amc-nh-pad-i);
+    text-align: start;
+  }
+  .amc-NHero--splitMorph .amc-NHero-content {
+    align-items: flex-start;
+  }
+  .amc-NHero--splitMorph .amc-NHero-actions {
+    justify-content: flex-start;
+  }
+  .amc-NHero-media {
+    order: 0;
+    inline-size: auto;
+    aspect-ratio: 4 / 3;
+    transform: perspective(60rem) rotateY(calc(-8deg * var(--amc-nh-dir)));
+  }
+  .amc-NHero--splitMorph .amc-NHero-title {
+    font-size: clamp(2rem, 4.6cqi, 3.5rem);
+  }
+}
+
+/* ======================================================================
+ * SMART - Scroll Reveal: headline words, subtitle and a progress rail
+ * reveal with a view() timeline. Fully visible without support.
+ * ==================================================================== */
+.amc-NHero--scrollReveal .amc-NHero-inner {
+  padding-inline-start: calc(var(--amc-nh-pad-i) + 1.25rem);
+}
+.amc-NHero--scrollReveal .amc-NHero-eyebrow {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--amc-nh-accent);
+  font-size: .8125rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.amc-NHero--scrollReveal .amc-NHero-eyebrowDot {
+  display: none;
+}
+.amc-NHero--scrollReveal .amc-NHero-title {
+  max-inline-size: 18ch;
+  font-size: clamp(1.625rem, 7cqi, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+.amc-NHero--scrollReveal .amc-NHero-highlight {
+  color: var(--amc-nh-accent);
+}
+.amc-NHero-rail {
+  position: absolute;
+  inset-block: var(--amc-nh-pad-b);
+  inset-inline-start: var(--amc-nh-pad-i);
+  inline-size: 3px;
+  border-radius: 3px;
+  background: var(--amc-nh-line);
+}
+.amc-NHero-railFill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, var(--amc-nh-accent), var(--amc-nh-a2));
+  transform-origin: 50% 0;
+}
+.amc-NHero-railFill::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -.3rem;
+  inset-inline-start: -.3rem;
+  inline-size: calc(100% + .6rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--amc-nh-a2);
+  box-shadow: 0 0 0 .3rem color-mix(in srgb, var(--amc-nh-a2) 25%, transparent);
+}
+.amc-NHero-word {
+  display: inline-block;
+}
+/* Only when motion is welcome: without it everything is shown at rest. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .amc-NHero--scrollReveal {
+      view-timeline: --amc-nh-view block;
+    }
+    .amc-NHero--scrollReveal .amc-NHero-railFill {
+      animation: amc-nh-rail linear both;
+      animation-timeline: --amc-nh-view;
+      animation-range: cover 5% cover 45%;
+    }
+    .amc-NHero--scrollReveal .amc-NHero-word {
+      animation: amc-nh-word linear both;
+      animation-timeline: --amc-nh-view;
+      animation-range: cover calc(4% + var(--amc-i, 0) * 1.6%) cover calc(20% + var(--amc-i, 0) * 1.6%);
+    }
+    .amc-NHero--scrollReveal .amc-NHero-highlight .amc-NHero-word {
+      animation-name: amc-nh-word-accent;
+    }
+    .amc-NHero--scrollReveal .amc-NHero-subtitle,
+    .amc-NHero--scrollReveal .amc-NHero-actions {
+      animation: amc-nh-rise linear both;
+      animation-timeline: --amc-nh-view;
+      animation-range: cover 10% cover 32%;
+    }
+  }
+}
+
+@keyframes amc-nh-rail {
+  from { transform: scaleY(.04); }
+  to { transform: scaleY(1); }
+}
+@keyframes amc-nh-word {
+  from { opacity: .12; transform: translateY(.3em); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes amc-nh-word-accent {
+  from { opacity: .12; transform: translateY(.3em); color: var(--amc-nh-muted); }
+  to { opacity: 1; transform: none; color: var(--amc-nh-accent); }
+}
+@keyframes amc-nh-rise {
+  from { opacity: .2; transform: translateY(1rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Reduced motion: every moving part stops, design stays ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .amc-NHero--gridSpotlight,
+  .amc-NHero .amc-NHero-aurora,
+  .amc-NHero .amc-NHero-highlight,
+  .amc-NHero .amc-NHero-cell,
+  .amc-NHero .amc-NHero-floorPlane,
+  .amc-NHero .amc-NHero-layer,
+  .amc-NHero .amc-NHero-orbit,
+  .amc-NHero .amc-NHero-chip,
+  .amc-NHero .amc-NHero-ghost,
+  .amc-NHero .amc-NHero-burst,
+  .amc-NHero .amc-NHero-burstIcon,
+  .amc-NHero .amc-NHero-mesh {
+    animation: none;
+  }
+  .amc-NHero .amc-NHero-meteor {
+    animation: none;
+    opacity: .75;
+    transform: rotate(-35deg) translateX(calc(var(--amc-nh-p) * -1rem));
+  }
+  .amc-NHero .amc-NHero-layer,
+  .amc-NHero .amc-NHero-action {
+    transition: none;
+  }
+  .amc-NHero--kineticType .amc-NHero-highlight {
+    background-position: 100% 0;
+  }
+}
+
+/* Printing and screenshots of the whole page show the finished headline */
+@media print {
+  .amc-NHero-word,
+  .amc-NHero-railFill,
+  .amc-NHero-subtitle,
+  .amc-NHero-actions {
+    animation: none;
+  }
+}
+
+/* ---------- Forced colors ---------- */
+@media (forced-colors: active) {
+  .amc-NHero {
+    border: 1px solid CanvasText;
+  }
+  .amc-NHero-fx {
+    display: none;
+  }
+  .amc-NHero .amc-NHero-highlight {
+    background: none;
+    color: CanvasText;
+    -webkit-text-stroke: 0;
+  }
+  .amc-NHero-eyebrow {
+    border-color: CanvasText;
+  }
+}

@@ -1,0 +1,306 @@
+plugin nextAlert (
+    name: Next Alert
+    staticId: AMC_NEXT_ALERT
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-NAlert amc-NAlert--#STYLE# {case STATE/}{when success/}amc-NAlert--success{when warning/}amc-NAlert--warning{when danger/}amc-NAlert--danger{when info/}amc-NAlert--info{otherwise/}amc-NAlert--neutral{endcase/}" {case STATE/}{when danger/}role="alert"{otherwise/}role="status"{endcase/}>
+              {case STYLE/}{when tickerBar/}<div class="amc-NAlert-surface">
+                <span class="amc-NAlert-badge"><span class="amc-NAlert-icon"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span></span><span class="amc-NAlert-state">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Information{otherwise/}Notice{endcase/}</span></span>
+                <div class="amc-NAlert-viewport">
+                  <div class="amc-NAlert-track">
+                    <p class="amc-NAlert-run"><strong class="amc-NAlert-title">#TITLE#</strong>{if ?MESSAGE/}<span class="amc-NAlert-sep" aria-hidden="true"></span><span class="amc-NAlert-message">#MESSAGE#</span>{endif/}{if ?META/}<span class="amc-NAlert-sep" aria-hidden="true"></span><span class="amc-NAlert-meta">#META#</span>{endif/}</p>
+                    <p class="amc-NAlert-run amc-NAlert-run--copy" aria-hidden="true"><strong class="amc-NAlert-title">#TITLE#</strong>{if ?MESSAGE/}<span class="amc-NAlert-sep"></span><span class="amc-NAlert-message">#MESSAGE#</span>{endif/}{if ?META/}<span class="amc-NAlert-sep"></span><span class="amc-NAlert-meta">#META#</span>{endif/}</p>
+                  </div>
+                </div>
+                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span><span class="amc-NAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+              </div>{when expandDetails/}<details class="amc-NAlert-surface amc-NAlert-details">
+                <summary class="amc-NAlert-summary"><span class="amc-NAlert-icon"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span></span><span class="amc-NAlert-state">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Information{otherwise/}Notice{endcase/}</span><span class="amc-NAlert-title">#TITLE#</span>{if ?META/}<span class="amc-NAlert-meta">#META#</span>{endif/}<span class="amc-NAlert-chevron fa fa-chevron-down" aria-hidden="true"></span></summary>
+                <div class="amc-NAlert-more">{if ?MESSAGE/}<p class="amc-NAlert-message">#MESSAGE#</p>{endif/}{if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span><span class="amc-NAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}</div>
+              </details>{otherwise/}<span class="amc-NAlert-fx" aria-hidden="true"></span>
+              <div class="amc-NAlert-surface">
+                <span class="amc-NAlert-icon"><span class="fa {if ?ICON/}#ICON#{else/}{case STATE/}{when success/}fa-check-circle{when warning/}fa-exclamation-triangle{when danger/}fa-times-circle{when info/}fa-info-circle{otherwise/}fa-bell-o{endcase/}{endif/}" aria-hidden="true"></span></span>
+                <div class="amc-NAlert-body">
+                  <span class="amc-NAlert-state">{case STATE/}{when success/}Success{when warning/}Warning{when danger/}Error{when info/}Information{otherwise/}Notice{endcase/}</span>
+                  <h3 class="amc-NAlert-title">#TITLE#</h3>
+                  {if ?MESSAGE/}<p class="amc-NAlert-message">#MESSAGE#</p>{endif/}
+                  {if ?META/}<p class="amc-NAlert-meta">#META#</p>{endif/}
+                </div>
+                {if ?LINK_URL/}{if ?LINK_LABEL/}<a class="amc-NAlert-link" href="#LINK_URL#"><span class="amc-NAlert-linkLabel">#LINK_LABEL#</span><span class="amc-NAlert-linkIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{endif/}
+              </div>
+              <span class="amc-NAlert-beam" aria-hidden="true"></span>{endcase/}
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-NAlerts amc-NAlerts--#STYLE#"{case STYLE/}{when stackedToasts/} tabindex="0" aria-label="Notifications"{otherwise/}{endcase/}>#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NAlerts-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-alert.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set. In report mode Stacked Toasts shows the first three rows as a stack that fans out on hover, keyboard focus or touch devices.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: beamToast
+        }
+        help {
+            helpText:
+                ```
+                Visual design of the alert, each followed by its Next Collection direction. Beam Toast, motion: floating toast with a light beam travelling around its border. Pulse Critical, motion: banner whose icon and outline breathe with a glow ring, meant for danger. Ticker Bar, motion: one-line announcement bar whose text scrolls as a marquee, stopping on hover and focus. Stacked Toasts, depth: report rows become a 3D stack of toasts that fans out on hover or focus; a single alert shows two cards behind it. Lift Glass, depth: floating frosted glass alert with a light edge and depth shadow. Neo Brutal, bold: ink border, hard offset shadow and a state sticker. Clay, bold: soft pillowy claymorphism surface. Hazard Stripe, bold: warning tape with moving diagonal stripes. Expand Details, smart: compact one-line alert that expands to show message and link. Adaptive Bar, smart: an inline bar when wide, a card when medium and an icon chip when narrow.
+                ```
+        }
+        entry beamToast (
+            sequence: 10
+            display: Beam Toast - motion
+            return: beamToast
+        )
+        entry pulseCritical (
+            sequence: 20
+            display: Pulse Critical - motion
+            return: pulseCritical
+        )
+        entry tickerBar (
+            sequence: 30
+            display: Ticker Bar - motion
+            return: tickerBar
+        )
+        entry stackedToasts (
+            sequence: 40
+            display: Stacked Toasts - depth
+            return: stackedToasts
+        )
+        entry liftGlass (
+            sequence: 50
+            display: Lift Glass - depth
+            return: liftGlass
+        )
+        entry neoBrutal (
+            sequence: 60
+            display: Neo Brutal - bold
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 70
+            display: Clay - bold
+            return: clay
+        )
+        entry hazardStripe (
+            sequence: 80
+            display: Hazard Stripe - bold
+            return: hazardStripe
+        )
+        entry expandDetails (
+            sequence: 90
+            display: Expand Details - smart
+            return: expandDetails
+        )
+        entry adaptiveBar (
+            sequence: 100
+            display: Adaptive Bar - smart
+            return: adaptiveBar
+        )
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 2
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                success, warning, danger, info or neutral. Any other or empty value renders as neutral. Danger alerts are announced immediately with role=alert.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 3
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short headline, for example Invoice INV-2041 is overdue. In Expand Details it is the always-visible summary line.
+                ```
+        }
+    )
+    customAttribute MESSAGE (
+        apexlangName: message
+        attribute: 4
+        name: Message
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Supporting sentence that says what happened and what to do next. In Ticker Bar it scrolls after the title; in Expand Details it shows when expanded.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class, for example fa-truck. Leave empty to use the state icon: check for success, triangle for warning, cross for danger, info for info, bell for neutral.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 6
+        name: Meta Text
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional small text such as a time stamp, for example 2 min ago. Format dates in SQL with the application's NLS settings.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 7
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target, for example f?p=&APP_ID.:20:&SESSION.::NO::P20_ID:&P10_ID. or a column holding apex_page.get_url. Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 8
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible link text, for example Review invoice. The link renders only when both Link URL and Link Label are set.
+                ```
+        }
+    )
+    file "amc-next-alert.css" (
+        fileName: amc-next-alert.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

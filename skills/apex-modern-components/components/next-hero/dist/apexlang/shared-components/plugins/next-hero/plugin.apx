@@ -1,0 +1,360 @@
+plugin nextHero (
+    name: Next Hero
+    staticId: AMC_NEXT_HERO
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+        ]
+        partial:
+            ```html
+            <div class="amc-NHero amc-NHero--#STYLE#{if ?IMAGE_URL/} amc-NHero--hasImage{endif/}{if ?ICON/} amc-NHero--hasIcon{endif/}">
+              <div class="amc-NHero-fx" aria-hidden="true">{case STYLE/}{when aurora/}<span class="amc-NHero-aurora"></span><span class="amc-NHero-aurora amc-NHero-aurora--b"></span><span class="amc-NHero-dots"></span>{when meteors/}<span class="amc-NHero-stars"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-meteor"></span><span class="amc-NHero-horizon"></span>{when gridSpotlight/}<span class="amc-NHero-grid"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-cell"></span><span class="amc-NHero-gridLit"></span><span class="amc-NHero-glow"></span>{when retroGrid/}<span class="amc-NHero-sun"></span><span class="amc-NHero-floor"><span class="amc-NHero-floorPlane"></span></span>{when kineticType/}<span class="amc-NHero-ghost">{if ?EYEBROW/}#EYEBROW#{else/}#TITLE#{endif/}</span>{when neoBrutal/}<span class="amc-NHero-burst"><span class="amc-NHero-burstIcon fa {if ?ICON/}#ICON#{else/}fa-bolt{endif/}"></span></span>{when meshGrain/}<span class="amc-NHero-mesh"></span><span class="amc-NHero-grain"></span>{when scrollReveal/}<span class="amc-NHero-rail"><span class="amc-NHero-railFill"></span></span>{otherwise/}{endcase/}</div>
+              <div class="amc-NHero-inner">
+                {case STYLE/}{when splitMorph/}{if ?ICON/}<span class="amc-NHero-barIcon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{otherwise/}{endcase/}
+                <div class="amc-NHero-content">
+                  {if ?EYEBROW/}<p class="amc-NHero-eyebrow"><span class="amc-NHero-eyebrowDot" aria-hidden="true"></span><span class="amc-NHero-eyebrowText">#EYEBROW#</span></p>{endif/}
+                  <h2 class="amc-NHero-title"><span class="amc-NHero-titleText">#TITLE#</span>{if ?HIGHLIGHT/} <span class="amc-NHero-highlight">#HIGHLIGHT#</span>{endif/}</h2>
+                  {if ?SUBTITLE/}<p class="amc-NHero-subtitle">#SUBTITLE#</p>{endif/}
+                  <div class="amc-NHero-actions">{if ?PRIMARY_URL/}{if ?PRIMARY_LABEL/}<a class="t-Button t-Button--hot amc-NHero-action amc-NHero-action--primary" href="#PRIMARY_URL#"><span class="t-Button-label">#PRIMARY_LABEL#</span></a>{endif/}{endif/}{if ?SECONDARY_URL/}{if ?SECONDARY_LABEL/}<a class="t-Button amc-NHero-action" href="#SECONDARY_URL#"><span class="t-Button-label">#SECONDARY_LABEL#</span></a>{endif/}{endif/}</div>
+                </div>
+                {case STYLE/}{when splitMorph/}<figure class="amc-NHero-media" aria-hidden="true">{if ?IMAGE_URL/}<img class="amc-NHero-img" src="#IMAGE_URL#" width="720" height="540" alt="" decoding="async">{else/}<span class="amc-NHero-mediaMesh"></span>{endif/}<span class="amc-NHero-mediaTile"><span class="fa {if ?ICON/}#ICON#{else/}fa-cube{endif/}"></span></span></figure>{when parallaxLayers/}<div class="amc-NHero-scene" aria-hidden="true"><span class="amc-NHero-layer amc-NHero-layer--back"><span class="amc-NHero-ring"></span><span class="amc-NHero-ring amc-NHero-ring--inner"></span><span class="amc-NHero-orbit"></span></span><span class="amc-NHero-layer amc-NHero-layer--mid"><span class="amc-NHero-plate"></span></span><span class="amc-NHero-layer amc-NHero-layer--front"><span class="amc-NHero-tile"><span class="fa {if ?ICON/}#ICON#{else/}fa-cube{endif/}"></span></span><span class="amc-NHero-chip amc-NHero-chip--a"><span class="amc-NHero-chipBar"></span><span class="amc-NHero-chipBar amc-NHero-chipBar--short"></span></span><span class="amc-NHero-chip amc-NHero-chip--b"><span class="amc-NHero-chipDot"></span></span></span></div>{otherwise/}{endcase/}
+              </div>
+            </div>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-hero.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-hero.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Place at the top of a page or login region, usually in a region with the Blank with Attributes template or the Standard template with hideHeader and noUI options. Title renders as h2, Highlight continues the same heading with an accent treatment. The primary button uses t-Button--hot and the secondary a normal t-Button. The optional JavaScript file only tracks the pointer for the Grid Spotlight and Parallax Layers styles and splits the headline into words for Scroll Reveal; it does nothing under reduced motion or on touch input.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: aurora
+        }
+        help {
+            helpText:
+                ```
+                Visual design of the hero, each followed by its Next Collection direction. Aurora, motion: slow aurora ribbons behind a centered headline with aurora text. Meteors, motion: night panel from the primary color with a meteor shower and a glowing horizon. Grid Spotlight, motion: a grid revealed by a spotlight that follows the pointer and drifts when idle. Retro Grid, depth: perspective floor grid scrolling toward a striped horizon sun. Parallax Layers, depth: headline beside floating layered shapes and an icon tile that shift with the pointer. Kinetic Type, bold: oversized headline with an outlined highlight swept by light. Neo Brutal, bold: flat tint, ink border, hard offset shadow and sticker label. Mesh Grain, bold: mesh gradient with film grain. Split Morph, smart: container queries switch between split, centered and compact bar compositions. Scroll Reveal, smart: headline words reveal as the hero scrolls into view, fully visible where scroll-driven animation is not supported.
+                ```
+        }
+        entry aurora (
+            sequence: 10
+            display: Aurora - motion
+            return: aurora
+        )
+        entry meteors (
+            sequence: 20
+            display: Meteors - motion
+            return: meteors
+        )
+        entry gridSpotlight (
+            sequence: 30
+            display: Grid Spotlight - motion
+            return: gridSpotlight
+        )
+        entry retroGrid (
+            sequence: 40
+            display: Retro Grid - depth
+            return: retroGrid
+        )
+        entry parallaxLayers (
+            sequence: 50
+            display: Parallax Layers - depth
+            return: parallaxLayers
+        )
+        entry kineticType (
+            sequence: 60
+            display: Kinetic Type - bold
+            return: kineticType
+        )
+        entry neoBrutal (
+            sequence: 70
+            display: Neo Brutal - bold
+            return: neoBrutal
+        )
+        entry meshGrain (
+            sequence: 80
+            display: Mesh Grain - bold
+            return: meshGrain
+        )
+        entry splitMorph (
+            sequence: 90
+            display: Split Morph - smart
+            return: splitMorph
+        )
+        entry scrollReveal (
+            sequence: 100
+            display: Scroll Reveal - smart
+            return: scrollReveal
+        )
+    )
+    customAttribute EYEBROW (
+        apexlangName: eyebrow
+        attribute: 2
+        name: Eyebrow
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short announcement pill above the title, for example New: recurring invoices or Q3 2026 review. Neo Brutal shows it as a sticker.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 3
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Main heading, rendered as h2. Keep it short, for example Close the quarter.
+                ```
+        }
+    )
+    customAttribute HIGHLIGHT (
+        apexlangName: highlight
+        attribute: 4
+        name: Highlight
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional phrase that continues the heading with the style's accent treatment: aurora text, outlined type, a marker block or a gradient. For example without the spreadsheet chase.
+                ```
+        }
+    )
+    customAttribute SUBTITLE (
+        apexlangName: subtitle
+        attribute: 5
+        name: Subtitle
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two sentences that explain the page or what to do next.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 6
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-line-chart. Shown in the Parallax Layers tile, the Neo Brutal badge and the Split Morph media and compact bar.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 7
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional image for the Split Morph media panel, for example #APP_FILES#hero-warehouse.jpg. Decorative, rendered with an empty alt text. Must be developer-controlled. Without an image the panel shows the icon on a mesh gradient. Ignored by the other styles.
+                ```
+        }
+    )
+    customAttribute PRIMARY_URL (
+        apexlangName: primaryUrl
+        attribute: 8
+        name: Primary Button URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target of the hot button, for example f?p=&APP_ID.:15:&SESSION. Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute PRIMARY_LABEL (
+        apexlangName: primaryLabel
+        attribute: 9
+        name: Primary Button Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Hot button text, for example Review Orders. Renders only when URL and label are both set.
+                ```
+        }
+    )
+    customAttribute SECONDARY_URL (
+        apexlangName: secondaryUrl
+        attribute: 10
+        name: Secondary Button URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Target of the normal button. Must be developer-controlled, never end-user input.
+                ```
+        }
+    )
+    customAttribute SECONDARY_LABEL (
+        apexlangName: secondaryLabel
+        attribute: 11
+        name: Secondary Button Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Normal button text, for example Open Reports. Renders only when URL and label are both set.
+                ```
+        }
+    )
+    file "amc-next-hero.css" (
+        fileName: amc-next-hero.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-hero.js" (
+        fileName: amc-next-hero.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)
