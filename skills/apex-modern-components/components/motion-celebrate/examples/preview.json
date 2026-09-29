@@ -1,0 +1,5 @@
+{
+  "samples": [
+    { "title": "Invisible marker (fires on the page)", "mode": "partial", "settings": { "EFFECT": "cannons", "TRIGGER": "event" } }
+  ]
+}

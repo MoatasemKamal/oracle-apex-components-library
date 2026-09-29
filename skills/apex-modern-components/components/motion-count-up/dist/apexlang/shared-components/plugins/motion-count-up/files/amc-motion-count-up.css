@@ -1,0 +1,82 @@
+/* APEX Modern Components - Motion Count Up */
+
+.amc-CountUp,
+.amc-CountUps {
+  --amc-cu-fg: var(--ut-component-text-default-color, #262626);
+  --amc-cu-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-cu-accent: var(--amc-cu-fg);
+  --amc-cu-icon: var(--ut-palette-primary, #056ac8);
+}
+
+.amc-CountUps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-CountUps-item { display: flex; justify-content: center; min-inline-size: 0; container-type: inline-size; }
+
+.amc-CountUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .25rem;
+  padding: .75rem .5rem;
+  color: var(--amc-cu-fg);
+  text-align: center;
+}
+
+.amc-CountUp--primary { --amc-cu-accent: var(--ut-palette-primary, #056ac8); --amc-cu-icon: var(--amc-cu-accent); }
+.amc-CountUp--success { --amc-cu-accent: var(--ut-palette-success, #278701); --amc-cu-icon: var(--amc-cu-accent); }
+.amc-CountUp--warning { --amc-cu-accent: var(--ut-palette-warning, #b86b00); --amc-cu-icon: var(--amc-cu-accent); }
+.amc-CountUp--danger { --amc-cu-accent: var(--ut-palette-danger, #cb1100); --amc-cu-icon: var(--amc-cu-accent); }
+
+.amc-CountUp-icon { margin-block-end: .25rem; color: var(--amc-cu-icon); font-size: 1.5rem; }
+
+.amc-CountUp-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .15em;
+  color: var(--amc-cu-accent);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  font-size: clamp(1.25rem, 13cqi, 2.75rem); /* scales with its column in report mode */
+  flex-wrap: wrap;
+  justify-content: center;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  unicode-bidi: plaintext;
+}
+
+.amc-CountUp-affix { font-size: .55em; font-weight: 600; opacity: .8; }
+
+.amc-CountUp-label {
+  color: var(--amc-cu-muted);
+  font-size: .8125rem;
+  font-weight: 500;
+}
+
+.amc-u-srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Arrival pulse when the count lands */
+.amc-CountUp-num.amc-is-done { animation: amc-cu-land .45s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes amc-cu-land { 0% { transform: scale(1); } 40% { transform: scale(1.08); } 100% { transform: scale(1); } }
+.amc-CountUp-num { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-CountUp-num.amc-is-done { animation: none; }
+}

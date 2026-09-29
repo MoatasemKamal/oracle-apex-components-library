@@ -1,0 +1,15 @@
+{
+  "samples": [
+    {
+      "title": "Rise",
+      "mode": "report",
+      "settings": { "DIVIDERS": "Y" },
+      "rows": [
+        { "TITLE": "Invoice INV-2041 paid", "DESCRIPTION": "Acme Trading Co.", "META": "2 min ago", "ICON": "fa-check-circle", "LINK_URL": "#" },
+        { "TITLE": "New order #58213", "DESCRIPTION": "3 items, express shipping", "META": "12 min ago", "ICON": "fa-shopping-cart", "LINK_URL": "#" },
+        { "TITLE": "Sara Ahmed joined the team", "DESCRIPTION": "Sales, Riyadh office", "META": "1 h ago", "ICON": "fa-user-plus" },
+        { "TITLE": "Stock low: USB-C cables", "DESCRIPTION": "12 left in warehouse B", "META": "3 h ago", "ICON": "fa-exclamation-triangle" }
+      ]
+    }
+  ]
+}

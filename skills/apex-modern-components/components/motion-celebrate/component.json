@@ -1,0 +1,48 @@
+{
+  "name": "Motion Celebrate",
+  "apexlangName": "motionCelebrate",
+  "staticId": "AMC_MOTION_CELEBRATE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["confetti", "celebrate", "success", "fireworks", "milestone", "reward", "dynamic action", "animation", "creative"],
+  "description": "Full-screen celebration fired on page load or from a Dynamic Action: confetti cannons, a confetti rain or fireworks, optionally with the native APEX success message.",
+  "helpText": "Place the region anywhere (use a blank region template; it renders nothing visible). Trigger On Page Load for success pages, or On Event and fire it from a Dynamic Action with apex.event.trigger(document, 'amc-celebrate') or amcCelebrate.fire(). Users with reduced motion get only the message.",
+  "templateComponent": {
+    "availableAs": ["partial"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": { "partial": "templates/partial.html" }
+  },
+  "files": ["files/amc-motion-celebrate.css", "files/amc-motion-celebrate.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-motion-celebrate.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-motion-celebrate.js"],
+  "attributes": [
+    {
+      "staticId": "EFFECT", "apexlangName": "effect", "attribute": 1, "name": "Effect", "type": "selectList", "required": true, "escapeMode": "htmlAttribute", "default": "cannons", "sequence": 10,
+      "helpText": "The celebration.",
+      "entries": [
+        { "name": "cannons", "display": "Confetti cannons", "return": "cannons", "sequence": 10 },
+        { "name": "rain", "display": "Confetti rain", "return": "rain", "sequence": 20 },
+        { "name": "fireworks", "display": "Fireworks", "return": "fireworks", "sequence": 30 }
+      ]
+    },
+    {
+      "staticId": "TRIGGER", "apexlangName": "trigger", "attribute": 2, "name": "Trigger", "type": "selectList", "required": true, "escapeMode": "htmlAttribute", "default": "load", "sequence": 20,
+      "helpText": "On Page Load fires once when the page opens. On Event waits for the amc-celebrate event.",
+      "entries": [
+        { "name": "load", "display": "On Page Load", "return": "load", "sequence": 10 },
+        { "name": "event", "display": "On Event", "return": "event", "sequence": 20 }
+      ]
+    },
+    { "staticId": "MESSAGE", "apexlangName": "message", "attribute": 3, "name": "Success Message", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 30, "helpText": "Optional text shown with the native APEX success message, for example Order placed." },
+    {
+      "staticId": "INTENSITY", "apexlangName": "intensity", "attribute": 4, "name": "Intensity", "type": "selectList", "required": false, "escapeMode": "htmlAttribute", "sequence": 40,
+      "helpText": "How much confetti or how many rockets. Leave empty for normal.",
+      "entries": [
+        { "name": "subtle", "display": "Subtle", "return": "subtle", "sequence": 10 },
+        { "name": "big", "display": "Big", "return": "big", "sequence": 20 }
+      ]
+    }
+  ]
+}

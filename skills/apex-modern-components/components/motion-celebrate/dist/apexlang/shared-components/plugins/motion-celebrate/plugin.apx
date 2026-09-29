@@ -1,0 +1,188 @@
+plugin motionCelebrate (
+    name: Motion Celebrate
+    staticId: AMC_MOTION_CELEBRATE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+        ]
+        partial:
+            ```html
+            <span class="amc-Celebrate" data-amc-effect="#EFFECT#" data-amc-trigger="#TRIGGER#"{if ?INTENSITY/} data-amc-intensity="#INTENSITY#"{endif/}{if ?MESSAGE/} data-amc-message="#MESSAGE#"{endif/} aria-hidden="true"></span>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-celebrate.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-celebrate.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Place the region anywhere (use a blank region template; it renders nothing visible). Trigger On Page Load for success pages, or On Event and fire it from a Dynamic Action with apex.event.trigger(document, 'amc-celebrate') or amcCelebrate.fire(). Users with reduced motion get only the message.
+            ```
+    }
+    customAttribute EFFECT (
+        apexlangName: effect
+        attribute: 1
+        name: Effect
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: cannons
+        }
+        help {
+            helpText:
+                ```
+                The celebration.
+                ```
+        }
+        entry cannons (
+            sequence: 10
+            display: Confetti cannons
+            return: cannons
+        )
+        entry rain (
+            sequence: 20
+            display: Confetti rain
+            return: rain
+        )
+        entry fireworks (
+            sequence: 30
+            display: Fireworks
+            return: fireworks
+        )
+    )
+    customAttribute TRIGGER (
+        apexlangName: trigger
+        attribute: 2
+        name: Trigger
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 20
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: load
+        }
+        help {
+            helpText:
+                ```
+                On Page Load fires once when the page opens. On Event waits for the amc-celebrate event.
+                ```
+        }
+        entry load (
+            sequence: 10
+            display: On Page Load
+            return: load
+        )
+        entry event (
+            sequence: 20
+            display: On Event
+            return: event
+        )
+    )
+    customAttribute MESSAGE (
+        apexlangName: message
+        attribute: 3
+        name: Success Message
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional text shown with the native APEX success message, for example Order placed.
+                ```
+        }
+    )
+    customAttribute INTENSITY (
+        apexlangName: intensity
+        attribute: 4
+        name: Intensity
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 40
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                How much confetti or how many rockets. Leave empty for normal.
+                ```
+        }
+        entry subtle (
+            sequence: 10
+            display: Subtle
+            return: subtle
+        )
+        entry big (
+            sequence: 20
+            display: Big
+            return: big
+        )
+    )
+    file "amc-motion-celebrate.css" (
+        fileName: amc-motion-celebrate.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-motion-celebrate.js" (
+        fileName: amc-motion-celebrate.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

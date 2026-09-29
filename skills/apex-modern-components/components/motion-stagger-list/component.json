@@ -1,0 +1,41 @@
+{
+  "name": "Motion Stagger List",
+  "apexlangName": "motionStaggerList",
+  "staticId": "AMC_MOTION_STAGGER_LIST",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["list", "feed", "activity", "notifications", "stagger", "entrance", "report", "animation", "creative"],
+  "description": "Report rows that animate in one after another the first time the list scrolls into view: rise, slide, scale or blur. Each row has icon, title, description, meta text and an optional link.",
+  "helpText": "Each query row is one list item. The entrance replays after every region refresh. Without JavaScript, or with reduced motion, the rows are simply visible.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-motion-stagger-list.css", "files/amc-motion-stagger-list.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-motion-stagger-list.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-motion-stagger-list.js"],
+  "attributes": [
+    { "staticId": "TITLE", "apexlangName": "title", "attribute": 1, "name": "Title", "type": "sessionStateValue", "required": true, "escapeMode": "html", "sequence": 10, "helpText": "Main line of the row." },
+    { "staticId": "DESCRIPTION", "apexlangName": "description", "attribute": 2, "name": "Description", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 20, "helpText": "Secondary line." },
+    { "staticId": "META", "apexlangName": "meta", "attribute": 3, "name": "Meta", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 30, "helpText": "Short text at the end of the row, for example a time or amount." },
+    { "staticId": "ICON", "apexlangName": "icon", "attribute": 4, "name": "Icon", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 40, "helpText": "Font APEX icon class shown in a tinted circle, for example fa-envelope." },
+    { "staticId": "LINK_URL", "apexlangName": "linkUrl", "attribute": 5, "name": "Link URL", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 50, "helpText": "Optional target for the whole row, for example apex_page.get_url(p_page => 10, p_items => 'P10_ID', p_values => id). Must be developer-controlled." },
+    {
+      "staticId": "ENTRANCE", "apexlangName": "entrance", "attribute": 6, "name": "Entrance", "type": "selectList", "required": false, "escapeMode": "htmlAttribute", "sequence": 60,
+      "helpText": "How rows arrive. Leave empty for Rise.",
+      "entries": [
+        { "name": "slide", "display": "Slide from the side", "return": "slide", "sequence": 10 },
+        { "name": "scale", "display": "Scale up", "return": "scale", "sequence": 20 },
+        { "name": "blur", "display": "Blur in", "return": "blur", "sequence": 30 }
+      ]
+    },
+    { "staticId": "DIVIDERS", "apexlangName": "dividers", "attribute": 7, "name": "Show Dividers", "type": "yesNo", "required": false, "escapeMode": "htmlAttribute", "default": "Y", "sequence": 70, "helpText": "Draw a line between rows." }
+  ]
+}

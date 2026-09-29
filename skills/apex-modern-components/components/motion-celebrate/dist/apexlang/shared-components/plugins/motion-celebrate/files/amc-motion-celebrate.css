@@ -1,0 +1,22 @@
+/* APEX Modern Components - Motion Celebrate
+ * The marker element is invisible; the runtime draws on a temporary full-screen
+ * canvas above the page that never blocks clicks. */
+
+.amc-Celebrate {
+  --amc-cb-1: var(--ut-palette-primary, #056ac8);
+  --amc-cb-2: var(--ut-palette-danger, #cb1100);
+  --amc-cb-3: var(--ut-palette-warning, #f2b134);
+  --amc-cb-4: var(--ut-palette-success, #278701);
+  --amc-cb-5: var(--ut-palette-info, #0e8a9a);
+
+  display: none;
+}
+
+.amc-Celebrate-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+}

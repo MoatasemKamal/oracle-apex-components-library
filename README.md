@@ -31,6 +31,10 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 | [Motion Effect](skills/apex-modern-components/components/motion-effect) | template component | partial | 31 decorative animations: physics, morphing, SVG, 3D and canvas particles (confetti, fireworks, galaxy) |
 | [Motion Text](skills/apex-modern-components/components/motion-text) | template component | partial | Animated headlines: wave, glitch, reveal, flip, typewriter, scramble |
 | [Motion Interaction](skills/apex-modern-components/components/motion-interaction) | template component | partial | Ripple, magnetic and squish buttons, tilt card, spotlight, like toggle |
+| [Motion Count Up](skills/apex-modern-components/components/motion-count-up) | template component | partial, report | KPI numbers that count up when scrolled into view, locale-formatted |
+| [Motion Stagger List](skills/apex-modern-components/components/motion-stagger-list) | template component | report | Activity feeds whose rows rise, slide, scale or blur in one after another |
+| [Motion Spotlight Cards](skills/apex-modern-components/components/motion-spotlight-cards) | template component | report | Card grid with a light and border glow that follow the pointer |
+| [Motion Celebrate](skills/apex-modern-components/components/motion-celebrate) | template component | partial | Confetti cannons, confetti rain or fireworks on page load or from a Dynamic Action |
 
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.

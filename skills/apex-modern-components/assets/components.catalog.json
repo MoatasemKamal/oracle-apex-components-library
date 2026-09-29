@@ -392,6 +392,174 @@
       }
     },
     {
+      "slug": "motion-celebrate",
+      "name": "Motion Celebrate",
+      "apexlangName": "motionCelebrate",
+      "staticId": "AMC_MOTION_CELEBRATE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/motionCelebrate",
+      "apexlangItemType": null,
+      "keywords": [
+        "confetti",
+        "celebrate",
+        "success",
+        "fireworks",
+        "milestone",
+        "reward",
+        "dynamic action",
+        "animation",
+        "creative"
+      ],
+      "description": "Full-screen celebration fired on page load or from a Dynamic Action: confetti cannons, a confetti rain or fireworks, optionally with the native APEX success message.",
+      "settings": [
+        {
+          "apexlangName": "effect",
+          "staticId": "EFFECT",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "cannons",
+            "rain",
+            "fireworks"
+          ]
+        },
+        {
+          "apexlangName": "trigger",
+          "staticId": "TRIGGER",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "load",
+            "event"
+          ]
+        },
+        {
+          "apexlangName": "message",
+          "staticId": "MESSAGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "intensity",
+          "staticId": "INTENSITY",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "subtle",
+            "big"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-celebrate/README.md",
+        "example": "components/motion-celebrate/examples",
+        "apexlang": "components/motion-celebrate/dist/apexlang/shared-components/plugins/motion-celebrate",
+        "legacySql": "components/motion-celebrate/dist/legacy/amc_motion_celebrate.sql"
+      }
+    },
+    {
+      "slug": "motion-count-up",
+      "name": "Motion Count Up",
+      "apexlangName": "motionCountUp",
+      "staticId": "AMC_MOTION_COUNT_UP",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/motionCountUp",
+      "apexlangItemType": null,
+      "keywords": [
+        "kpi",
+        "counter",
+        "count up",
+        "number",
+        "odometer",
+        "metric",
+        "dashboard",
+        "animation",
+        "creative"
+      ],
+      "description": "KPI numbers that count up from zero when they scroll into view, formatted in the user's locale. One figure (partial) or a responsive row of figures (report).",
+      "settings": [
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "prefix",
+          "staticId": "PREFIX",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "suffix",
+          "staticId": "SUFFIX",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "decimals",
+          "staticId": "DECIMALS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "one",
+            "two"
+          ]
+        },
+        {
+          "apexlangName": "duration",
+          "staticId": "DURATION",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "short",
+            "long"
+          ]
+        },
+        {
+          "apexlangName": "accent",
+          "staticId": "ACCENT",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "primary",
+            "success",
+            "warning",
+            "danger"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-count-up/README.md",
+        "example": "components/motion-count-up/examples",
+        "apexlang": "components/motion-count-up/dist/apexlang/shared-components/plugins/motion-count-up",
+        "legacySql": "components/motion-count-up/dist/legacy/amc_motion_count_up.sql"
+      }
+    },
+    {
       "slug": "motion-effect",
       "name": "Motion Effect",
       "apexlangName": "motionEffect",
@@ -652,6 +820,162 @@
         "example": "components/motion-loader/examples",
         "apexlang": "components/motion-loader/dist/apexlang/shared-components/plugins/motion-loader",
         "legacySql": "components/motion-loader/dist/legacy/amc_motion_loader.sql"
+      }
+    },
+    {
+      "slug": "motion-spotlight-cards",
+      "name": "Motion Spotlight Cards",
+      "apexlangName": "motionSpotlightCards",
+      "staticId": "AMC_MOTION_SPOTLIGHT_CARDS",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/motionSpotlightCards",
+      "apexlangItemType": null,
+      "keywords": [
+        "cards",
+        "spotlight",
+        "glow",
+        "hover",
+        "features",
+        "launchpad",
+        "grid",
+        "animation",
+        "creative"
+      ],
+      "description": "Card grid where one light follows the pointer across all cards: the nearest borders glow and the card under the pointer lights up softly. Each card has icon, title, text, badge and an optional link.",
+      "settings": [
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "text",
+          "staticId": "TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "badge",
+          "staticId": "BADGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "columns",
+          "staticId": "COLUMNS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "two",
+            "three",
+            "four"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-spotlight-cards/README.md",
+        "example": "components/motion-spotlight-cards/examples",
+        "apexlang": "components/motion-spotlight-cards/dist/apexlang/shared-components/plugins/motion-spotlight-cards",
+        "legacySql": "components/motion-spotlight-cards/dist/legacy/amc_motion_spotlight_cards.sql"
+      }
+    },
+    {
+      "slug": "motion-stagger-list",
+      "name": "Motion Stagger List",
+      "apexlangName": "motionStaggerList",
+      "staticId": "AMC_MOTION_STAGGER_LIST",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/motionStaggerList",
+      "apexlangItemType": null,
+      "keywords": [
+        "list",
+        "feed",
+        "activity",
+        "notifications",
+        "stagger",
+        "entrance",
+        "report",
+        "animation",
+        "creative"
+      ],
+      "description": "Report rows that animate in one after another the first time the list scrolls into view: rise, slide, scale or blur. Each row has icon, title, description, meta text and an optional link.",
+      "settings": [
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "entrance",
+          "staticId": "ENTRANCE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "slide",
+            "scale",
+            "blur"
+          ]
+        },
+        {
+          "apexlangName": "dividers",
+          "staticId": "DIVIDERS",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-stagger-list/README.md",
+        "example": "components/motion-stagger-list/examples",
+        "apexlang": "components/motion-stagger-list/dist/apexlang/shared-components/plugins/motion-stagger-list",
+        "legacySql": "components/motion-stagger-list/dist/legacy/amc_motion_stagger_list.sql"
       }
     },
     {

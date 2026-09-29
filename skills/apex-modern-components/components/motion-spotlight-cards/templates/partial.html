@@ -1,0 +1,6 @@
+<div class="amc-SpotCard{if ?LINK_URL/} amc-SpotCard--link{endif/}">
+  {if ?BADGE/}<span class="amc-SpotCard-badge">#BADGE#</span>{endif/}
+  {if ?ICON/}<span class="amc-SpotCard-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+  <h3 class="amc-SpotCard-title">{if ?LINK_URL/}<a class="amc-SpotCard-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+  {if ?TEXT/}<p class="amc-SpotCard-text">#TEXT#</p>{endif/}
+</div>

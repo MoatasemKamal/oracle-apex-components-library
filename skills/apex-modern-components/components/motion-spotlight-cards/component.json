@@ -1,0 +1,40 @@
+{
+  "name": "Motion Spotlight Cards",
+  "apexlangName": "motionSpotlightCards",
+  "staticId": "AMC_MOTION_SPOTLIGHT_CARDS",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["cards", "spotlight", "glow", "hover", "features", "launchpad", "grid", "animation", "creative"],
+  "description": "Card grid where one light follows the pointer across all cards: the nearest borders glow and the card under the pointer lights up softly. Each card has icon, title, text, badge and an optional link.",
+  "helpText": "Each query row is one card. The effect needs a mouse or trackpad; on touch screens the cards show as clean static cards. Colors follow the theme primary color.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-motion-spotlight-cards.css", "files/amc-motion-spotlight-cards.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-motion-spotlight-cards.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-motion-spotlight-cards.js"],
+  "attributes": [
+    { "staticId": "TITLE", "apexlangName": "title", "attribute": 1, "name": "Title", "type": "sessionStateValue", "required": true, "escapeMode": "html", "sequence": 10, "helpText": "Card heading." },
+    { "staticId": "TEXT", "apexlangName": "text", "attribute": 2, "name": "Text", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 20, "helpText": "Supporting text under the title." },
+    { "staticId": "ICON", "apexlangName": "icon", "attribute": 3, "name": "Icon", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 30, "helpText": "Font APEX icon class, for example fa-bar-chart." },
+    { "staticId": "BADGE", "apexlangName": "badge", "attribute": 4, "name": "Badge", "type": "sessionStateValue", "required": false, "escapeMode": "html", "sequence": 40, "helpText": "Small label in the corner, for example New or a count." },
+    { "staticId": "LINK_URL", "apexlangName": "linkUrl", "attribute": 5, "name": "Link URL", "type": "sessionStateValue", "required": false, "escapeMode": "htmlAttribute", "sequence": 50, "helpText": "Optional target for the whole card. Must be developer-controlled." },
+    {
+      "staticId": "COLUMNS", "apexlangName": "columns", "attribute": 6, "name": "Columns", "type": "selectList", "required": false, "escapeMode": "htmlAttribute", "sequence": 60,
+      "helpText": "Leave empty to fit as many cards as the width allows. Fixed column counts collapse to one column on phones.",
+      "entries": [
+        { "name": "two", "display": "2 Columns", "return": "2", "sequence": 10 },
+        { "name": "three", "display": "3 Columns", "return": "3", "sequence": 20 },
+        { "name": "four", "display": "4 Columns", "return": "4", "sequence": 30 }
+      ]
+    }
+  ]
+}

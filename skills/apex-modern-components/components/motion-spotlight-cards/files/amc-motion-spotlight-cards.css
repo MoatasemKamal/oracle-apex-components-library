@@ -1,0 +1,126 @@
+/* APEX Modern Components - Motion Spotlight Cards
+ * The runtime writes the pointer position into --mx / --my on every card, relative to
+ * that card, so one light appears to move across the whole grid. The border glow is a
+ * masked gradient ring; the inner glow is a soft radial fill. */
+
+.amc-SpotCards {
+  --amc-sc-bg: var(--ut-component-background-color, #fff);
+  --amc-sc-fg: var(--ut-component-text-default-color, #262626);
+  --amc-sc-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-sc-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-sc-accent: var(--ut-palette-primary, #056ac8);
+  --amc-sc-radius: calc(var(--ut-component-border-radius, .5rem) * 1.5);
+  --amc-sc-min: 15rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-sc-min), 100%), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-SpotCards--cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.amc-SpotCards--cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.amc-SpotCards--cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 640px) {
+  .amc-SpotCards--cols2,
+  .amc-SpotCards--cols3,
+  .amc-SpotCards--cols4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.amc-SpotCards-item { display: flex; min-inline-size: 0; }
+
+.amc-SpotCard {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--amc-sc-line);
+  border-radius: var(--amc-sc-radius);
+  background: var(--amc-sc-bg);
+  color: var(--amc-sc-fg);
+}
+
+/* Border glow: gradient ring cut out with a mask so only the 1px edge shows. */
+.amc-SpotCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx, -999px) var(--my, -999px), var(--amc-sc-accent), transparent 65%);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+
+/* Inner glow under the pointer */
+.amc-SpotCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(340px circle at var(--mx, -999px) var(--my, -999px), color-mix(in srgb, var(--amc-sc-accent) 11%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+
+.amc-SpotCards.amc-is-lit .amc-SpotCard::before { opacity: 1; }
+.amc-SpotCards.amc-is-lit .amc-SpotCard:hover::after { opacity: 1; }
+
+.amc-SpotCard-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border: 1px solid var(--amc-sc-line);
+  border-radius: calc(var(--amc-sc-radius) * .7);
+  color: var(--amc-sc-accent);
+  font-size: 1.125rem;
+}
+
+.amc-SpotCard-title { position: relative; margin: .25rem 0 0; font-size: 1rem; font-weight: 600; line-height: 1.3; }
+.amc-SpotCard-text { position: relative; margin: 0; color: var(--amc-sc-muted); font-size: .875rem; line-height: 1.5; }
+
+.amc-SpotCard-badge {
+  position: absolute;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-sc-accent) 14%, transparent);
+  color: var(--amc-sc-accent);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+}
+
+.amc-SpotCard-link { color: inherit; text-decoration: none; }
+.amc-SpotCard-link::after { content: ""; position: absolute; inset: -100vmax; z-index: 2; }
+.amc-SpotCard-link:focus-visible { outline: 2px solid var(--amc-sc-accent); outline-offset: 3px; border-radius: 2px; }
+.amc-SpotCard--link { transition: transform .25s ease; }
+.amc-SpotCard--link:hover { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-SpotCard::before,
+  .amc-SpotCard::after,
+  .amc-SpotCard--link { transition: none; }
+  .amc-SpotCard--link:hover { transform: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-SpotCard::before,
+  .amc-SpotCard::after { display: none; }
+}

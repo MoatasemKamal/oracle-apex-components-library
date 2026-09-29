@@ -1,0 +1,8 @@
+<div class="amc-Stagger-row{if ?LINK_URL/} amc-Stagger-row--link{endif/}">
+  {if ?ICON/}<span class="amc-Stagger-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+  <span class="amc-Stagger-body">
+    <span class="amc-Stagger-title">{if ?LINK_URL/}<a class="amc-Stagger-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</span>
+    {if ?DESCRIPTION/}<span class="amc-Stagger-desc">#DESCRIPTION#</span>{endif/}
+  </span>
+  {if ?META/}<span class="amc-Stagger-meta">#META#</span>{endif/}
+</div>

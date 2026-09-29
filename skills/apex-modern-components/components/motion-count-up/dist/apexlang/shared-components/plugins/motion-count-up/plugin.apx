@@ -1,0 +1,288 @@
+plugin motionCountUp (
+    name: Motion Count Up
+    staticId: AMC_MOTION_COUNT_UP
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-CountUp{if ?ACCENT/} amc-CountUp--#ACCENT#{endif/}">
+              {if ?ICON/}<span class="amc-CountUp-icon fa #ICON#" aria-hidden="true"></span>{endif/}
+              <span class="amc-CountUp-value">{if ?PREFIX/}<span class="amc-CountUp-affix">#PREFIX#</span>{endif/}<span class="amc-CountUp-num" data-amc-count="#VALUE#" data-amc-decimals="{if ?DECIMALS/}#DECIMALS#{else/}0{endif/}" data-amc-duration="{case DURATION/}{when short/}0.8{when long/}2.8{otherwise/}1.6{endcase/}">#VALUE#</span>{if ?SUFFIX/}<span class="amc-CountUp-affix">#SUFFIX#</span>{endif/}</span>
+              {if ?LABEL/}<span class="amc-CountUp-label">#LABEL#</span>{endif/}
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-CountUps">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-CountUps-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-count-up.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-count-up.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Map Value to a numeric column, using a period as decimal separator. The final value is in the page markup, so screen readers, printing and users with reduced motion get it directly; the count-up only animates what is shown.
+            ```
+    }
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 1
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Numeric value to count up to, for example 1284500 or 98.6. Use a period as decimal separator.
+                ```
+        }
+    )
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 2
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption under the number, for example Orders this year.
+                ```
+        }
+    )
+    customAttribute PREFIX (
+        apexlangName: prefix
+        attribute: 3
+        name: Prefix
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Text before the number, for example a currency symbol.
+                ```
+        }
+    )
+    customAttribute SUFFIX (
+        apexlangName: suffix
+        attribute: 4
+        name: Suffix
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Text after the number, for example %, k or SAR.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-shopping-cart.
+                ```
+        }
+    )
+    customAttribute DECIMALS (
+        apexlangName: decimals
+        attribute: 6
+        name: Decimal Places
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 60
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Digits after the decimal separator. Leave empty for whole numbers.
+                ```
+        }
+        entry one (
+            sequence: 10
+            display: 1
+            return: 1
+        )
+        entry two (
+            sequence: 20
+            display: 2
+            return: 2
+        )
+    )
+    customAttribute DURATION (
+        apexlangName: duration
+        attribute: 7
+        name: Duration
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 70
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                How long the count takes. Leave empty for 1.6 seconds.
+                ```
+        }
+        entry short (
+            sequence: 10
+            display: Short, 0.8 s
+            return: short
+        )
+        entry long (
+            sequence: 20
+            display: Long, 2.8 s
+            return: long
+        )
+    )
+    customAttribute ACCENT (
+        apexlangName: accent
+        attribute: 8
+        name: Accent
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 80
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Colors the number and icon with the theme palette. Leave empty for the default text color.
+                ```
+        }
+        entry primary (
+            sequence: 10
+            display: Primary
+            return: primary
+        )
+        entry success (
+            sequence: 20
+            display: Success
+            return: success
+        )
+        entry warning (
+            sequence: 30
+            display: Warning
+            return: warning
+        )
+        entry danger (
+            sequence: 40
+            display: Danger
+            return: danger
+        )
+    )
+    file "amc-motion-count-up.css" (
+        fileName: amc-motion-count-up.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-motion-count-up.js" (
+        fileName: amc-motion-count-up.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

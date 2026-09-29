@@ -1,0 +1,14 @@
+{
+  "samples": [
+    {
+      "title": "Three columns",
+      "mode": "report",
+      "settings": { "COLUMNS": "3" },
+      "rows": [
+        { "TITLE": "Sales Dashboard", "TEXT": "Revenue, pipeline and forecast.", "ICON": "fa-bar-chart", "LINK_URL": "#", "BADGE": "New" },
+        { "TITLE": "Orders", "TEXT": "Create and track orders.", "ICON": "fa-shopping-cart", "LINK_URL": "#" },
+        { "TITLE": "Customers", "TEXT": "Accounts and contacts.", "ICON": "fa-users", "LINK_URL": "#", "BADGE": "12" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "samples": [
+    {
+      "title": "Report",
+      "mode": "report",
+      "settings": {},
+      "rows": [
+        { "VALUE": "1284500", "PREFIX": "SAR", "LABEL": "Revenue this year", "ICON": "fa-money", "ACCENT": "primary" },
+        { "VALUE": "3481", "LABEL": "Orders shipped", "ICON": "fa-truck" },
+        { "VALUE": "98.6", "SUFFIX": "%", "DECIMALS": "1", "LABEL": "On-time delivery", "ICON": "fa-clock-o", "ACCENT": "success" }
+      ]
+    }
+  ]
+}

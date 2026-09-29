@@ -1,0 +1,237 @@
+plugin motionStaggerList (
+    name: Motion Stagger List
+    staticId: AMC_MOTION_STAGGER_LIST
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-Stagger-row{if ?LINK_URL/} amc-Stagger-row--link{endif/}">
+              {if ?ICON/}<span class="amc-Stagger-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+              <span class="amc-Stagger-body">
+                <span class="amc-Stagger-title">{if ?LINK_URL/}<a class="amc-Stagger-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</span>
+                {if ?DESCRIPTION/}<span class="amc-Stagger-desc">#DESCRIPTION#</span>{endif/}
+              </span>
+              {if ?META/}<span class="amc-Stagger-meta">#META#</span>{endif/}
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-Stagger amc-Stagger--{if ?ENTRANCE/}#ENTRANCE#{else/}rise{endif/}{if DIVIDERS/} amc-Stagger--dividers{endif/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-Stagger-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-stagger-list.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-stagger-list.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row is one list item. The entrance replays after every region refresh. Without JavaScript, or with reduced motion, the rows are simply visible.
+            ```
+    }
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 1
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 10
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Main line of the row.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 2
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Secondary line.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 3
+        name: Meta
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short text at the end of the row, for example a time or amount.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 4
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Font APEX icon class shown in a tinted circle, for example fa-envelope.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 5
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target for the whole row, for example apex_page.get_url(p_page => 10, p_items => 'P10_ID', p_values => id). Must be developer-controlled.
+                ```
+        }
+    )
+    customAttribute ENTRANCE (
+        apexlangName: entrance
+        attribute: 6
+        name: Entrance
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 60
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                How rows arrive. Leave empty for Rise.
+                ```
+        }
+        entry slide (
+            sequence: 10
+            display: Slide from the side
+            return: slide
+        )
+        entry scale (
+            sequence: 20
+            display: Scale up
+            return: scale
+        )
+        entry blur (
+            sequence: 30
+            display: Blur in
+            return: blur
+        )
+    )
+    customAttribute DIVIDERS (
+        apexlangName: dividers
+        attribute: 7
+        name: Show Dividers
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 70
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: true
+        }
+        help {
+            helpText:
+                ```
+                Draw a line between rows.
+                ```
+        }
+    )
+    file "amc-motion-stagger-list.css" (
+        fileName: amc-motion-stagger-list.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-motion-stagger-list.js" (
+        fileName: amc-motion-stagger-list.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)
