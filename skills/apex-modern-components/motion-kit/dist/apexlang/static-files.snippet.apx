@@ -1,0 +1,9 @@
+file "amc-motion-kit/amc-motion-kit.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-motion-kit/amc-motion-kit.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

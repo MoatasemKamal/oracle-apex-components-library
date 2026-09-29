@@ -39,6 +39,14 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Motion Kit (native buttons, forms, reports, icons, breadcrumbs, nav bar, menu bar)
+
+[`motion-kit/`](skills/apex-modern-components/motion-kit) adds motion to the native
+Universal Theme elements every page already has, app-wide, from two static files: ripple and
+busy states on buttons, focus glow and error shake on forms, row entrances on report refresh,
+icon animation classes, sliding breadcrumbs, badge bumps in the navigation bar, a gliding
+highlight in the menu bar and animated menus. See its README for install and configuration.
+
 ## Motion Gallery
 
 [`motion-gallery/index.html`](motion-gallery/index.html) is a standalone showcase of 50
@@ -88,6 +96,7 @@ node tools/build.mjs          # validate + generate APEXlang, legacy SQL, README
 node tools/preview.mjs        # preview/index.html: light, dark, RTL
 node tools/apexlang-check.mjs --apexlang <path>/oracle-skills/apex/apexlang
 node tools/design-md-to-ut.mjs <path>/DESIGN.md             # design system -> UT style
+node tools/build-kit.mjs                                    # package the Motion Kit
 ```
 
 See [`SKILL.md`](skills/apex-modern-components/SKILL.md) and the

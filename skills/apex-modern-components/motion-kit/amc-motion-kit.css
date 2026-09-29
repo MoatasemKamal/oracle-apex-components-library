@@ -1,0 +1,249 @@
+/* =========================================================================
+   APEX Modern Components - Motion Kit
+   App-wide motion for native Universal Theme elements: buttons, forms,
+   reports, icons, breadcrumbs, navigation bar, menu bar and menus.
+
+   How it is scoped
+   - Nothing here applies until amc-motion-kit.js adds "amc-mk" and one
+     "amc-mk--<area>" class per enabled area to <html>. Without the script
+     the page is unchanged.
+   - Every animation and transition lives inside
+     @media (prefers-reduced-motion: no-preference), so users who ask for
+     reduced motion get no movement at all.
+   - Add the class "amc-mk-off" (CSS Classes field of a region, button or
+     item) to exclude one element and its content.
+   - Colors come from Universal Theme variables, so the kit follows every
+     theme style, Theme Roller change and dark mode.
+   ========================================================================= */
+
+.amc-mk {
+  --amc-mk-accent: var(--ut-palette-primary, #056ac8);
+  --amc-mk-danger: var(--ut-palette-danger, #cb1100);
+  --amc-mk-fg: var(--ut-component-text-default-color, #262626);
+  --amc-mk-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-mk-shadow: 0 10px 24px -12px color-mix(in srgb, var(--amc-mk-fg) 35%, transparent);
+  --amc-mk-ease: cubic-bezier(.2, .8, .2, 1);
+  --amc-mk-spring: cubic-bezier(.2, 1.6, .4, 1);
+  --amc-mk-fast: .15s;
+  --amc-mk-base: .28s;
+}
+
+/* ---- Static (non-motion) parts: visible for everyone ---------------------- */
+
+/* Busy button: spinner replaces the label while the page submits */
+.amc-mk--buttons .t-Button.amc-mk-is-busy { pointer-events: none; }
+.amc-mk--buttons .t-Button.amc-mk-is-busy > * { opacity: 0; }
+.amc-mk--buttons .t-Button.amc-mk-is-busy::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: 1em;
+  block-size: 1em;
+  margin: -.5em 0 0 -.5em;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  opacity: .9;
+}
+
+/* Ripple host: clipped layer inside each button */
+.amc-mk--buttons .t-Button { position: relative; }
+.amc-mk-ripple-host {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.amc-mk-ripple {
+  position: absolute;
+  inline-size: 16px;
+  block-size: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+}
+
+/* Menu bar sliding highlight */
+.amc-mk--menubar .a-MenuBar { position: relative; }
+.amc-mk-ink {
+  position: absolute;
+  inset-block-end: 2px;
+  left: 0; /* physical on purpose: the runtime measures from the left edge in LTR and RTL */
+  block-size: 2px;
+  inline-size: 0;
+  border-radius: 2px;
+  background: var(--amc-mk-accent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================================================================
+   Motion (only when the user has not asked for reduced motion)
+   ========================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---- Buttons ---------------------------------------------------------- */
+  .amc-mk--buttons .t-Button:not(.amc-mk-off) {
+    transition: transform var(--amc-mk-fast) var(--amc-mk-ease), box-shadow var(--amc-mk-base) var(--amc-mk-ease), background-color var(--amc-mk-base) ease;
+  }
+  .amc-mk--buttons .t-Button:not(.amc-mk-off):active { transform: scale(.96); }
+
+  .amc-mk--buttons .t-Button--hot:not(.amc-mk-off):hover { box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--amc-mk-accent) 70%, transparent); }
+
+  /* Shine that sweeps across hot buttons on hover */
+  .amc-mk--buttons .t-Button--hot:not(.amc-mk-off) .amc-mk-ripple-host::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -60%;
+    inline-size: 50%;
+    background: linear-gradient(100deg, transparent, var(--amc-mk-shine, rgba(255, 255, 255, .35)), transparent);
+    transform: skewX(-20deg);
+    opacity: 0;
+  }
+  .amc-mk--buttons .t-Button--hot:not(.amc-mk-off):hover .amc-mk-ripple-host::after { animation: amc-mk-shine .8s var(--amc-mk-ease); }
+  @keyframes amc-mk-shine { from { opacity: 1; inset-inline-start: -60%; } to { opacity: 1; inset-inline-start: 120%; } }
+
+  /* Icon nudge toward the label's reading direction */
+  .amc-mk--buttons .t-Button:not(.amc-mk-off) .t-Button-icon { transition: transform var(--amc-mk-base) var(--amc-mk-spring); }
+  .amc-mk--buttons .t-Button:not(.amc-mk-off):hover .t-Button-icon--right { transform: translateX(3px); }
+  .amc-mk--buttons .t-Button:not(.amc-mk-off):hover .t-Button-icon--left { transform: translateX(-2px); }
+  [dir="rtl"].amc-mk--buttons .t-Button:not(.amc-mk-off):hover .t-Button-icon--right { transform: translateX(-3px); }
+  [dir="rtl"].amc-mk--buttons .t-Button:not(.amc-mk-off):hover .t-Button-icon--left { transform: translateX(2px); }
+  .amc-mk--buttons .t-Button--noLabel:not(.amc-mk-off):hover .t-Button-icon { transform: scale(1.12); }
+
+  .amc-mk-ripple { animation: amc-mk-ripple .6s ease-out forwards; }
+  @keyframes amc-mk-ripple { from { opacity: .28; transform: scale(1); } to { opacity: 0; transform: scale(var(--amc-mk-ripple-scale, 18)); } }
+
+  .amc-mk--buttons .t-Button.amc-mk-is-busy::before { animation: amc-mk-spin .7s linear infinite; }
+  .amc-mk--buttons .t-Button.amc-mk-is-busy > * { transition: opacity var(--amc-mk-fast) ease; }
+  @keyframes amc-mk-spin { to { transform: rotate(360deg); } }
+
+  /* ---- Forms ------------------------------------------------------------ */
+  .amc-mk--forms .t-Form-fieldContainer:not(.amc-mk-off) .t-Form-inputContainer .apex-item-text,
+  .amc-mk--forms .t-Form-fieldContainer:not(.amc-mk-off) .t-Form-inputContainer .apex-item-textarea,
+  .amc-mk--forms .t-Form-fieldContainer:not(.amc-mk-off) .t-Form-inputContainer .apex-item-select,
+  .amc-mk--forms .t-Form-fieldContainer:not(.amc-mk-off) .t-Form-inputContainer .apex-item-datepicker {
+    transition: box-shadow var(--amc-mk-base) var(--amc-mk-ease), border-color var(--amc-mk-base) ease;
+  }
+  .amc-mk--forms .t-Form-fieldContainer:not(.amc-mk-off):focus-within .t-Form-inputContainer :is(.apex-item-text, .apex-item-textarea, .apex-item-select, .apex-item-datepicker) {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--amc-mk-accent) 18%, transparent);
+  }
+
+  /* Floating labels glide instead of jumping */
+  .amc-mk--forms .t-Form-fieldContainer--floatingLabel:not(.amc-mk-off) .t-Form-label {
+    transition: transform var(--amc-mk-base) var(--amc-mk-ease), font-size var(--amc-mk-base) var(--amc-mk-ease), color var(--amc-mk-base) ease;
+  }
+
+  /* One shake when APEX marks a field invalid, then the message slides in */
+  .amc-mk--forms .t-Form-fieldContainer.is-error:not(.amc-mk-off) .t-Form-inputContainer { animation: amc-mk-shake .42s var(--amc-mk-ease) 1; }
+  .amc-mk--forms .t-Form-fieldContainer:not(.amc-mk-off) .t-Form-error:not(:empty) { animation: amc-mk-drop .3s var(--amc-mk-ease) both; }
+  @keyframes amc-mk-shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(2px); }
+  }
+  @keyframes amc-mk-drop { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+  /* Checkbox, radio and switch marks pop when selected */
+  .amc-mk--forms .apex-item-option:not(.amc-mk-off) input:checked + label::before { animation: amc-mk-pop .32s var(--amc-mk-spring); }
+  .amc-mk--forms .a-Switch:not(.amc-mk-off) input:checked + .a-Switch-toggle { animation: amc-mk-pop .32s var(--amc-mk-spring); }
+  @keyframes amc-mk-pop { 0% { transform: scale(.7); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+  /* ---- Reports ---------------------------------------------------------- */
+  /* Rows get amc-mk-enter and --amc-mk-i from the runtime on load and refresh */
+  .amc-mk--reports .amc-mk-enter { animation: amc-mk-row-in .45s var(--amc-mk-ease) both; animation-delay: calc(var(--amc-mk-i, 0) * 32ms); }
+  @keyframes amc-mk-row-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .amc-mk--reports .amc-mk-refreshing { opacity: .55; transition: opacity var(--amc-mk-base) ease; }
+
+  .amc-mk--reports .t-Report-report tbody tr td,
+  .amc-mk--reports .a-IRR-table tr td { transition: background-color var(--amc-mk-fast) ease; }
+
+  .amc-mk--reports :is(.a-CardView-item, .t-Cards-item .t-Card):not(.amc-mk-off) { transition: transform var(--amc-mk-base) var(--amc-mk-ease), box-shadow var(--amc-mk-base) var(--amc-mk-ease); }
+  .amc-mk--reports .a-CardView-item:not(.amc-mk-off):hover,
+  .amc-mk--reports .t-Cards-item .t-Card:not(.amc-mk-off):hover { transform: translateY(-3px); box-shadow: var(--amc-mk-shadow); }
+
+  /* ---- Breadcrumbs ------------------------------------------------------ */
+  .amc-mk--breadcrumbs .t-Breadcrumb:not(.amc-mk-off) .t-Breadcrumb-item { animation: amc-mk-crumb .4s var(--amc-mk-ease) both; }
+  .amc-mk--breadcrumbs .t-Breadcrumb-item:nth-child(2) { animation-delay: .06s; }
+  .amc-mk--breadcrumbs .t-Breadcrumb-item:nth-child(3) { animation-delay: .12s; }
+  .amc-mk--breadcrumbs .t-Breadcrumb-item:nth-child(4) { animation-delay: .18s; }
+  .amc-mk--breadcrumbs .t-Breadcrumb-item:nth-child(5) { animation-delay: .24s; }
+  .amc-mk--breadcrumbs .t-Breadcrumb-item:nth-child(n+6) { animation-delay: .3s; }
+  @keyframes amc-mk-crumb { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+  [dir="rtl"].amc-mk--breadcrumbs .t-Breadcrumb-item { animation-name: amc-mk-crumb-rtl; }
+  @keyframes amc-mk-crumb-rtl { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+
+  .amc-mk--breadcrumbs .t-Breadcrumb-item a.t-Breadcrumb-label {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size var(--amc-mk-base) var(--amc-mk-ease);
+  }
+  .amc-mk--breadcrumbs .t-Breadcrumb-item a.t-Breadcrumb-label:hover { background-size: 100% 1px; }
+
+  /* ---- Navigation bar --------------------------------------------------- */
+  .amc-mk--navbar .t-NavigationBar-item:not(.amc-mk-off) .t-Icon,
+  .amc-mk--navbar .t-NavigationBar-item:not(.amc-mk-off) .fa { transition: transform var(--amc-mk-base) var(--amc-mk-spring); }
+  .amc-mk--navbar .t-NavigationBar-item:not(.amc-mk-off):hover .t-Icon,
+  .amc-mk--navbar .t-NavigationBar-item:not(.amc-mk-off):hover .fa { transform: translateY(-2px) scale(1.08); }
+  .amc-mk--navbar .amc-mk-bump { animation: amc-mk-bump .5s var(--amc-mk-spring); }
+  @keyframes amc-mk-bump { 0% { transform: scale(1); } 35% { transform: scale(1.45); } 100% { transform: scale(1); } }
+
+  /* ---- Menu bar and all APEX menus -------------------------------------- */
+  .amc-mk-ink { transition: transform .3s var(--amc-mk-ease), inline-size .3s var(--amc-mk-ease), opacity .2s ease; }
+  .amc-mk--menubar .a-MenuBar-item:not(.amc-mk-off) .a-MenuBar-label { transition: color var(--amc-mk-fast) ease; }
+
+  /* APEX shows menus by switching display, which restarts this animation */
+  .amc-mk--menus .a-Menu:not(.amc-mk-off) { animation: amc-mk-menu .18s var(--amc-mk-ease); transform-origin: top; }
+  @keyframes amc-mk-menu { from { opacity: 0; transform: translateY(-4px) scale(.98); } to { opacity: 1; transform: none; } }
+  .amc-mk--menus .a-Menu:not(.amc-mk-off) .a-Menu-item { transition: background-color var(--amc-mk-fast) ease; }
+
+  /* Side navigation tree: icon nudge on hover */
+  .amc-mk--menubar .t-TreeNav .a-TreeView-content .fa { transition: transform var(--amc-mk-base) var(--amc-mk-spring); }
+  .amc-mk--menubar .t-TreeNav .a-TreeView-content:hover .fa { transform: translateX(3px); }
+  [dir="rtl"].amc-mk--menubar .t-TreeNav .a-TreeView-content:hover .fa { transform: translateX(-3px); }
+
+  /* ---- Page messages ---------------------------------------------------- */
+  .amc-mk--alerts .t-Body-alert .t-Alert { animation: amc-mk-alert .45s var(--amc-mk-spring) both; }
+  @keyframes amc-mk-alert { from { opacity: 0; transform: translateY(-14px) scale(.98); } to { opacity: 1; transform: none; } }
+
+  /* ---- Regions (opt-in: add "regions" to the enabled areas) ------------- */
+  .amc-mk--regions .amc-mk-region-in { animation: amc-mk-row-in .5s var(--amc-mk-ease) both; animation-delay: calc(var(--amc-mk-i, 0) * 70ms); }
+
+  /* ---- Icon utilities: add to any icon, e.g. "fa-bell amc-icon-wiggle" --- */
+  .amc-mk--icons .amc-icon-wiggle { animation: amc-icon-wiggle 2.4s ease-in-out infinite; transform-origin: 50% 10%; }
+  .amc-mk--icons .amc-icon-bounce { animation: amc-icon-bounce 1.6s var(--amc-mk-ease) infinite; }
+  .amc-mk--icons .amc-icon-beat { animation: amc-icon-beat 1.3s ease-in-out infinite; }
+  .amc-mk--icons .amc-icon-spin { animation: amc-mk-spin 1.4s linear infinite; }
+  .amc-mk--icons .amc-icon-tada { animation: amc-icon-tada 2.4s ease-in-out infinite; }
+  .amc-mk--icons .amc-icon-float { animation: amc-icon-float 3s ease-in-out infinite; }
+
+  /* Hover variants: animate once when the icon or its button, link or card is hovered */
+  .amc-mk--icons :is(a, button, .t-Button, .t-Card, .a-CardView-item, li):hover > .amc-icon-hover-wiggle,
+  .amc-mk--icons :is(a, button, .t-Button, .t-Card, .a-CardView-item, li):hover .amc-icon-hover-wiggle,
+  .amc-mk--icons .amc-icon-hover-wiggle:hover { animation: amc-icon-wiggle .8s ease-in-out; transform-origin: 50% 10%; }
+  .amc-mk--icons :is(a, button, .t-Button, .t-Card, .a-CardView-item, li):hover .amc-icon-hover-bounce,
+  .amc-mk--icons .amc-icon-hover-bounce:hover { animation: amc-icon-bounce .7s var(--amc-mk-ease); }
+  .amc-mk--icons :is(a, button, .t-Button, .t-Card, .a-CardView-item, li):hover .amc-icon-hover-spin,
+  .amc-mk--icons .amc-icon-hover-spin:hover { animation: amc-mk-spin .6s var(--amc-mk-ease); }
+  .amc-mk--icons :is(a, button, .t-Button, .t-Card, .a-CardView-item, li):hover .amc-icon-hover-tada,
+  .amc-mk--icons .amc-icon-hover-tada:hover { animation: amc-icon-tada .9s ease-in-out; }
+
+  @keyframes amc-icon-wiggle { 0%, 60%, 100% { transform: rotate(0); } 10% { transform: rotate(14deg); } 20% { transform: rotate(-12deg); } 30% { transform: rotate(9deg); } 40% { transform: rotate(-6deg); } 50% { transform: rotate(3deg); } }
+  @keyframes amc-icon-bounce { 0%, 100% { transform: translateY(0); } 30% { transform: translateY(-5px); } 50% { transform: translateY(0); } 65% { transform: translateY(-2px); } }
+  @keyframes amc-icon-beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.18); } 30% { transform: scale(1); } 45% { transform: scale(1.12); } }
+  @keyframes amc-icon-tada { 0%, 100% { transform: scale(1) rotate(0); } 10%, 20% { transform: scale(.9) rotate(-4deg); } 30%, 50%, 70% { transform: scale(1.1) rotate(4deg); } 40%, 60% { transform: scale(1.1) rotate(-4deg); } 80% { transform: scale(1) rotate(0); } }
+  @keyframes amc-icon-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+}
+
+/* Exclusions: anything inside .amc-mk-off keeps native behavior */
+.amc-mk .amc-mk-off .amc-mk-enter,
+.amc-mk .amc-mk-off.amc-mk-enter { animation: none; }

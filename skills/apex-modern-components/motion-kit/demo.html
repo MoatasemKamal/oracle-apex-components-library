@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion Kit Demo</title>
+<style>
+/* Stand-in for Universal Theme so the demo runs without APEX. Class names match
+   Universal Theme; the look is simplified. Delete this block inside APEX. */
+:root {
+  --ut-palette-primary: #056ac8; --ut-palette-primary-contrast: #fff; --ut-palette-danger: #cb1100;
+  --ut-component-background-color: #fff; --ut-component-text-default-color: #262626;
+  --ut-component-text-muted-color: #6b6b6b; --ut-component-border-color: #e1e3e6;
+  --ut-body-background-color: #f4f5f7; --ut-header-background-color: #1c2b3a; --ut-header-text-color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ut-palette-primary: #4aa3ff; --ut-palette-primary-contrast: #06121f; --ut-palette-danger: #ff6b5a;
+    --ut-component-background-color: #1e2126; --ut-component-text-default-color: #eceff3;
+    --ut-component-text-muted-color: #a3aab4; --ut-component-border-color: #30353d;
+    --ut-body-background-color: #15171b; --ut-header-background-color: #0e1116; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--ut-body-background-color); color: var(--ut-component-text-default-color); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.t-Header { display: flex; align-items: center; gap: 24px; padding: 0 16px; background: var(--ut-header-background-color); color: var(--ut-header-text-color); }
+.t-Header-logo { font-weight: 700; padding: 14px 0; }
+.t-Header-nav { flex: 1; }
+.a-MenuBar ul { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.a-MenuBar-item { position: relative; }
+.a-MenuBar-label { display: block; padding: 16px 12px; color: inherit; text-decoration: none; opacity: .85; }
+.a-MenuBar-item.is-current .a-MenuBar-label, .a-MenuBar-item:hover .a-MenuBar-label { opacity: 1; }
+.t-NavigationBar { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.t-NavigationBar-item { position: relative; }
+.t-Button { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--ut-component-border-color); border-radius: 6px; background: var(--ut-component-background-color); color: inherit; font: inherit; font-weight: 500; cursor: pointer; }
+.t-Button--hot { border-color: transparent; background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); }
+.t-Button--header { border: 0; background: transparent; color: var(--ut-header-text-color); }
+.t-Button-badge { position: absolute; top: 2px; right: 0; min-width: 18px; padding: 1px 5px; border-radius: 9px; background: var(--ut-palette-danger); color: #fff; font-size: 11px; font-weight: 700; text-align: center; }
+.t-Button-icon { font-style: normal; }
+.a-Menu { position: absolute; top: 100%; right: 0; z-index: 20; min-width: 180px; padding: 4px 0; border: 1px solid var(--ut-component-border-color); border-radius: 8px; background: var(--ut-component-background-color); color: var(--ut-component-text-default-color); box-shadow: 0 12px 30px -10px rgba(0,0,0,.35); }
+.a-Menu ul { margin: 0; padding: 0; list-style: none; }
+.a-Menu-item { padding: 8px 14px; cursor: pointer; }
+.a-Menu-item:hover { background: color-mix(in srgb, var(--ut-palette-primary) 10%, transparent); }
+.t-Body-content { max-width: 1100px; margin: 0 auto; padding: 16px; }
+.t-Body-alert { min-height: 0; }
+.t-Alert { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; background: #e6f4ea; color: #1b5e20; }
+@media (prefers-color-scheme: dark) { .t-Alert { background: #16311f; color: #b9e6c3; } }
+.t-Breadcrumb { display: flex; gap: 8px; margin: 0 0 4px; padding: 0; list-style: none; color: var(--ut-component-text-muted-color); }
+.t-Breadcrumb-item + .t-Breadcrumb-item::before { content: "/"; margin-right: 8px; opacity: .5; }
+.t-Breadcrumb-label { color: inherit; text-decoration: none; }
+.t-Breadcrumb-item.is-active .t-Breadcrumb-label { color: var(--ut-component-text-default-color); font-weight: 600; }
+h1 { margin: 0 0 16px; font-size: 22px; }
+.t-Body-contentInner { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); gap: 16px; }
+.t-Region { border: 1px solid var(--ut-component-border-color); border-radius: 10px; background: var(--ut-component-background-color); }
+.t-Region-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--ut-component-border-color); font-weight: 600; }
+.t-Region-body { padding: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.t-Form-fieldContainer { margin-bottom: 14px; }
+.t-Form-label { display: block; margin-bottom: 4px; color: var(--ut-component-text-muted-color); font-size: 12px; }
+.apex-item-text { width: 100%; padding: 9px 10px; border: 1px solid var(--ut-component-border-color); border-radius: 6px; background: transparent; color: inherit; font: inherit; }
+.t-Form-error { color: var(--ut-palette-danger); font-size: 12px; margin-top: 4px; }
+.t-Form-fieldContainer.is-error .apex-item-text { border-color: var(--ut-palette-danger); }
+.apex-item-option input { position: absolute; opacity: 0; }
+.apex-item-option label { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; }
+.apex-item-option label::before { content: ""; width: 16px; height: 16px; border: 1.5px solid var(--ut-component-text-muted-color); border-radius: 4px; }
+.apex-item-option input:checked + label::before { border-color: var(--ut-palette-primary); background: var(--ut-palette-primary); box-shadow: inset 0 0 0 3px var(--ut-component-background-color); }
+.t-Report-report { width: 100%; border-collapse: collapse; }
+.t-Report-report th, .t-Report-report td { padding: 8px 6px; border-bottom: 1px solid var(--ut-component-border-color); text-align: left; }
+.t-Report-report tbody tr:hover td { background: color-mix(in srgb, var(--ut-palette-primary) 6%, transparent); }
+.a-CardView-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.a-CardView-item { padding: 14px; border: 1px solid var(--ut-component-border-color); border-radius: 10px; background: var(--ut-component-background-color); }
+.a-CardView-item b { display: block; }
+.a-CardView-item span { color: var(--ut-component-text-muted-color); font-size: 12px; }
+.fa { display: inline-block; font-style: normal; }
+</style>
+<link rel="stylesheet" href="amc-motion-kit.css">
+</head>
+<body>
+<header class="t-Header">
+  <div class="t-Header-logo">Sales App</div>
+  <nav class="t-Header-nav">
+    <div class="a-MenuBar"><ul>
+      <li class="a-MenuBar-item is-current"><a class="a-MenuBar-label" href="#">Home</a></li>
+      <li class="a-MenuBar-item"><a class="a-MenuBar-label" href="#">Orders</a></li>
+      <li class="a-MenuBar-item"><a class="a-MenuBar-label" href="#">Customers</a></li>
+      <li class="a-MenuBar-item"><a class="a-MenuBar-label" href="#">Reports</a></li>
+    </ul></div>
+  </nav>
+  <ul class="t-NavigationBar">
+    <li class="t-NavigationBar-item"><button class="t-Button t-Button--header" id="bell" type="button" aria-label="Notifications"><span class="fa amc-icon-wiggle" aria-hidden="true">🔔</span><span class="t-Button-badge" id="badge">3</span></button></li>
+    <li class="t-NavigationBar-item"><button class="t-Button t-Button--header" id="userBtn" type="button">Sara ▾</button>
+      <div class="a-Menu" id="userMenu" style="display:none"><ul><li class="a-Menu-item">Profile</li><li class="a-Menu-item">Settings</li><li class="a-Menu-item">Sign out</li></ul></div>
+    </li>
+  </ul>
+</header>
+
+<div class="t-Body-content">
+  <div class="t-Body-alert" id="alertHost"></div>
+  <ul class="t-Breadcrumb">
+    <li class="t-Breadcrumb-item"><a class="t-Breadcrumb-label" href="#">Home</a></li>
+    <li class="t-Breadcrumb-item"><a class="t-Breadcrumb-label" href="#">Sales</a></li>
+    <li class="t-Breadcrumb-item"><a class="t-Breadcrumb-label" href="#">Orders</a></li>
+    <li class="t-Breadcrumb-item is-active"><span class="t-Breadcrumb-label">Order 58213</span></li>
+  </ul>
+  <h1>Motion Kit demo</h1>
+
+  <div class="t-Body-contentInner">
+    <section class="t-Region">
+      <div class="t-Region-header">Buttons</div>
+      <div class="t-Region-body">
+        <div class="row">
+          <button class="t-Button t-Button--hot" type="button" id="saveBtn"><span class="t-Button-label">Save</span></button>
+          <button class="t-Button" type="button"><span class="t-Button-label">Next</span><span class="t-Button-icon t-Button-icon--right fa" aria-hidden="true">→</span></button>
+          <button class="t-Button t-Button--noLabel" type="button" aria-label="Refresh"><span class="t-Button-icon fa amc-icon-hover-spin" aria-hidden="true">⟳</span></button>
+          <button class="t-Button" type="button" id="notifyBtn"><span class="t-Button-label">New notification</span></button>
+          <button class="t-Button" type="button" id="successBtn"><span class="t-Button-label">Show success</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="t-Region">
+      <div class="t-Region-header">Form</div>
+      <div class="t-Region-body">
+        <div class="t-Form-fieldContainer" id="emailField">
+          <label class="t-Form-label" for="email">Email</label>
+          <div class="t-Form-inputContainer"><input class="apex-item-text" id="email" value="sara@example"></div>
+          <div class="t-Form-error" id="emailError"></div>
+        </div>
+        <div class="t-Form-fieldContainer">
+          <div class="apex-item-option"><input type="checkbox" id="terms"><label for="terms">Send me updates</label></div>
+        </div>
+        <button class="t-Button t-Button--hot" type="button" id="validateBtn"><span class="t-Button-label">Validate</span></button>
+      </div>
+    </section>
+
+    <section class="t-Region" id="ordersRegion">
+      <div class="t-Region-header">Classic report <button class="t-Button" type="button" id="refreshBtn"><span class="t-Button-label">Refresh</span></button></div>
+      <div class="t-Region-body">
+        <table class="t-Report-report">
+          <thead><tr><th>Order</th><th>Customer</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td>58213</td><td>Acme Trading</td><td>1,240</td></tr>
+            <tr><td>58212</td><td>Nile Foods</td><td>860</td></tr>
+            <tr><td>58209</td><td>Gulf Textiles</td><td>2,115</td></tr>
+            <tr><td>58207</td><td>Delta Motors</td><td>9,480</td></tr>
+            <tr><td>58201</td><td>Riyadh Tech</td><td>430</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="t-Region">
+      <div class="t-Region-header">Cards and icons</div>
+      <div class="t-Region-body">
+        <ul class="a-CardView-items">
+          <li class="a-CardView-item"><b><span class="fa amc-icon-hover-bounce">📦</span> Shipments</b><span>12 in transit</span></li>
+          <li class="a-CardView-item"><b><span class="fa amc-icon-beat">❤</span> Favorites</b><span>Beat</span></li>
+          <li class="a-CardView-item"><b><span class="fa amc-icon-float">☁</span> Sync</b><span>Float</span></li>
+          <li class="a-CardView-item"><b><span class="fa amc-icon-hover-tada">🏆</span> Targets</b><span>Hover for tada</span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="amc-motion-kit.js"></script>
+<script>
+/* Demo-only wiring that simulates what APEX does on a real page. */
+(function () {
+  var badge = document.getElementById("badge");
+  document.getElementById("notifyBtn").addEventListener("click", function () { badge.textContent = String(+badge.textContent + 1); });
+  var menu = document.getElementById("userMenu");
+  document.getElementById("userBtn").addEventListener("click", function () { menu.style.display = menu.style.display === "none" ? "block" : "none"; });
+  document.getElementById("validateBtn").addEventListener("click", function () {
+    var f = document.getElementById("emailField");
+    f.classList.remove("is-error"); document.getElementById("emailError").textContent = "";
+    void f.offsetWidth;
+    f.classList.add("is-error"); document.getElementById("emailError").textContent = "Enter a valid email address.";
+  });
+  document.getElementById("refreshBtn").addEventListener("click", function () {
+    var r = document.getElementById("ordersRegion");
+    r.classList.add("amc-mk-refreshing");
+    setTimeout(function () { r.classList.remove("amc-mk-refreshing"); amcMotionKit.enterRows(r); }, 500);
+  });
+  document.getElementById("saveBtn").addEventListener("click", function () {
+    var b = this; b.classList.add("amc-mk-is-busy"); setTimeout(function () { b.classList.remove("amc-mk-is-busy"); }, 1800);
+  });
+  document.getElementById("successBtn").addEventListener("click", function () {
+    document.getElementById("alertHost").innerHTML = '<div class="t-Alert" role="alert">Order 58213 saved.</div>';
+  });
+})();
+</script>
+</body>
+</html>

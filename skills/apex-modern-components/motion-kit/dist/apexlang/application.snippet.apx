@@ -1,0 +1,10 @@
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-motion-kit/amc-motion-kit.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-motion-kit/amc-motion-kit.css
+        ]
+    }

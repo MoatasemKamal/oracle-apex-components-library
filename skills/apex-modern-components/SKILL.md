@@ -21,6 +21,7 @@ Never bypass apexlang's gates for app artifacts.
    - **Create a new component, or port one from 21st.dev and similar galleries**: section B.
    - **Install on APEX 23.1-25.x**: section C.
    - **Make the app look like a design system (DESIGN.md, "make it look like X")**: section D.
+   - **Add motion to native buttons, forms, reports, icons, breadcrumbs, nav bar, menu bar or menus**: section E (Motion Kit, not a component).
 3. Load only the reference you need:
    - `references/apexlang-integration.md`: installing plug-ins into an APEXlang app, page usage rules, gates
    - `references/native-look-contract.md`: theme variables, UT classes, RTL, a11y, security
@@ -95,6 +96,18 @@ Then describe the page setup in Builder terms using the component README's
 4. Give the user the CSS and the Theme Roller steps from `references/design-systems.md`.
    Components need no changes, because they already read the `--ut-*` variables.
    Never put the source brand's name or logo in the app.
+
+## E. Motion Kit for native elements
+
+Native Universal Theme elements (buttons, form fields, reports, breadcrumbs, navigation bar,
+menu bar, menus, icons, alerts) are not components, so they get motion from the app-wide
+**Motion Kit** in `motion-kit/`: `amc-motion-kit.css` + `amc-motion-kit.js`, loaded once as
+Static Application Files and referenced from the application's CSS and JavaScript File URLs.
+Follow `motion-kit/README.md` to install (APEXlang snippets in `motion-kit/dist/apexlang/`,
+23.1+ SQL in `motion-kit/dist/legacy/`) and configure areas. Edit only
+`motion-kit/amc-motion-kit.{css,js}`, then run `node tools/build-kit.mjs`. The kit may target
+Universal Theme classes (unlike components) but must keep every animation inside
+`@media (prefers-reduced-motion: no-preference)` and must not change layout or colors.
 
 ## Rules
 

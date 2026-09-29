@@ -15,6 +15,9 @@ jobs:
       - name: Validate components and verify generated files are up to date
         working-directory: skills/apex-modern-components
         run: node tools/build.mjs --check
+      - name: Verify the Motion Kit package is up to date
+        working-directory: skills/apex-modern-components
+        run: node tools/build-kit.mjs --check
       - name: Oracle apexlang offline structure checks
         run: |
           git clone --depth 1 https://github.com/oracle/skills.git /tmp/oracle-skills
