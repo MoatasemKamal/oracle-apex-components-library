@@ -188,3 +188,30 @@ button and the body classes that open or close the side column. A navigation tem
   touch.
 - The exact UT class names and the slot markup must be confirmed on a live APEX page; the
   template's helpText says so, and its JS must degrade to a working plain menu if they differ.
+
+## Authentication templates (login, sign up, forgot password, OTP, reset, confirmation)
+
+Plugin-free: two Region Templates plus the app-wide Message Kit (`message-kit/`, static files).
+
+- **`auth-card`** (region template) wraps the native page items and buttons of an authentication
+  page: Login (the app's login page, which uses Universal Theme's Login page template),
+  Create account, Forgot password, OTP verification and Reset password. Looks and full-screen
+  **scenes** are Template Options. Scenes are decorative layers the template draws behind the
+  page (`position: fixed; inset: 0; z-index: -1; pointer-events: none`), so no custom page
+  template is needed.
+- **Field behaviour is opt-in by item CSS class** (Page Item > Advanced > CSS Classes), so native
+  items stay native and validations, session state and processes are unchanged:
+  `amc-auth-password` (show/hide toggle, Caps Lock warning), `amc-auth-strength` (strength meter),
+  `amc-auth-match` (must equal the previous `amc-auth-password` item), `amc-auth-otp` (the one
+  real text item is shown as N boxes: `inputmode="numeric"`, `autocomplete="one-time-code"`,
+  paste of the whole code, optional auto-submit), `amc-auth-resend` (on a button: countdown
+  before it can be pressed again). The template's JS finds them inside its region.
+- **`auth-result`** (region template): confirmation and outcome screens: success, email sent,
+  verified, expired or failed, with an animated symbol, text from the region body, and an
+  optional countdown redirect to the first link in the body.
+- **Security stays server-side.** The templates are UI only: OTP expiry and attempt limits,
+  rate limiting, neutral wording on "forgot password" (never reveal whether an account exists),
+  password rules and token checks belong to page processes and validations. Examples say so.
+- **Messages:** APEX renders success and error messages through the page template; the
+  **Message Kit** restyles them (and `apex.message` alerts, confirms and page errors) app-wide,
+  so authentication pages and every other page share the same modern toasts and dialogs.
