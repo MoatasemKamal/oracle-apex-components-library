@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Stacked windows around Cards", "regionTitle": "Customer portal home", "icon": "fa-globe", "bodyKind": "cards", "options": ["amc-TBrowserWindow--stacked"], "buttons": { "EDIT": "Edit page" } },
+    { "title": "Dark chrome around a Classic Report, no padding", "regionTitle": "Public price list", "icon": "fa-tags", "bodyKind": "report", "options": ["amc-TBrowserWindow--darkChrome", "amc-TBrowserWindow--noPadding"], "buttons": { "HELP": "Help", "CREATE": "Publish" } },
+    { "title": "Phone frame around a Form", "regionTitle": "Mobile checkout", "icon": "fa-mobile", "bodyKind": "form", "options": ["amc-TBrowserWindow--phone"], "buttons": { "NEXT": "Pay now" } },
+    { "title": "Minimal chrome around a Chart", "regionTitle": "Status page: uptime", "icon": "fa-signal", "bodyKind": "chart", "options": ["amc-TBrowserWindow--minimal"] }
+  ]
+}

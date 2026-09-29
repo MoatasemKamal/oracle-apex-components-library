@@ -1,0 +1,7 @@
+{
+  "samples": [
+    { "title": "Around a Form", "regionTitle": "Expense claim EC-2291", "icon": "fa-file-text-o", "bodyKind": "form", "options": [], "buttons": { "PREVIOUS": "Save draft", "NEXT": "Submit claim" } },
+    { "title": "Four sheets, strong tilt around text", "regionTitle": "Brief: Q4 supplier review", "icon": "fa-thumb-tack", "bodyKind": "text", "options": ["amc-TStackedSheets--four", "amc-TStackedSheets--strongTilt"], "buttons": { "EDIT": "Edit brief" } },
+    { "title": "Straight stack, plain paper around a Classic Report", "regionTitle": "Recent contracts", "icon": "fa-folder-open-o", "bodyKind": "report", "options": ["amc-TStackedSheets--straight", "amc-TStackedSheets--plain", "amc-TStackedSheets--noPadding"], "buttons": { "CREATE": "Upload" } }
+  ]
+}

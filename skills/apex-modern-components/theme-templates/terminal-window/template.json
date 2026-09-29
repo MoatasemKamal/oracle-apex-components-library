@@ -1,0 +1,24 @@
+{
+  "kind": "region",
+  "name": "AMC Terminal Window",
+  "staticId": "AMC_TPL_TERMINAL_WINDOW",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "A desktop terminal window: an inverse-colored bezel and title bar with three window dots and the title centered in monospace after a prompt, around a readable content pane.",
+  "useFor": "Technical and operational regions: job logs and scheduler runs in a Classic Report, integration status Cards, an API settings Form, a code or SQL snippet in Static Content, or a Chart of error rates.",
+  "keywords": ["terminal", "console", "macos window", "window chrome", "developer", "monospace", "scanlines"],
+  "helpText": "Region template that draws a terminal window around any region. The title bar shows three window dots from the danger, warning and success palette colors and the region title centered in monospace after a prompt glyph, or after the region icon when one is set. Buttons in Help, Edit, Change, Copy, Delete and Create sit at the end of the title bar; Previous, Close and Next sit in a status line under the content. By default the bezel uses inverse theme colors, so it is dark in light styles and light in dark styles, while the content pane keeps the normal surface so reports and forms stay native. Template options: Theme chrome keeps the bezel in the normal theme colors, Console pane turns the content pane inverse too and is meant for text, logs, charts and cards, Scanlines adds CRT lines to the chrome and console, Blinking caret adds a caret after the title, Monospace body sets the content font to monospace, and No body padding. Under reduced motion the caret stays solid; in forced-colors mode the window becomes a plain bordered box.",
+  "landmarkType": "region",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "THEME_CHROME", "name": "Theme chrome", "cssClass": "amc-TTerminalWindow--themeChrome", "sequence": 10, "help": "Bezel and title bar follow the theme colors instead of the inverse colors, for a light window in light styles." },
+    { "staticId": "CONSOLE", "name": "Console pane", "cssClass": "amc-TTerminalWindow--console", "sequence": 20, "help": "The content pane also uses inverse colors, like a real console. Best for Static Content, logs, Charts and Cards; keep it off for Interactive Reports and Forms." },
+    { "staticId": "SCANLINES", "name": "Scanlines", "cssClass": "amc-TTerminalWindow--scanlines", "sequence": 30, "help": "Adds faint CRT scanlines to the chrome, and behind the content when Console pane is on. Lines never cover the content." },
+    { "staticId": "CARET", "name": "Blinking caret", "cssClass": "amc-TTerminalWindow--caret", "sequence": 40, "help": "Shows a block caret after the title that blinks; solid under reduced motion." },
+    { "staticId": "MONO_BODY", "name": "Monospace body", "cssClass": "amc-TTerminalWindow--monoBody", "sequence": 50, "help": "Sets the content font to monospace, for logs, code and ID-heavy reports." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TTerminalWindow--noPadding", "sequence": 60, "help": "Removes side padding so reports run edge to edge inside the window." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

@@ -1,0 +1,136 @@
+/* Side Rail: region template for Universal Theme. Editorial layout under a heavy top rule: in
+   containers of 34rem and wider the title runs vertically (writing-mode) in a rail at the start
+   edge with the icon and header buttons stacked in it; narrower containers get a normal top
+   header. Container queries switch the composition; logical properties mirror it in RTL.
+   Original design. No motion. */
+
+.amc-TSideRail {
+  --amc-tsr-surface: var(--ut-component-background-color, #fff);
+  --amc-tsr-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tsr-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tsr-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tsr-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tsr-rail-bg: color-mix(in srgb, var(--amc-tsr-accent) 5%, var(--amc-tsr-surface));
+  --amc-tsr-rail-ink: var(--amc-tsr-ink);
+  --amc-tsr-rail-muted: var(--amc-tsr-muted);
+  --amc-tsr-rule: var(--amc-tsr-ink);
+  --amc-tsr-radius: var(--ut-component-border-radius, 4px);
+  container-type: inline-size;
+  margin-block-end: 16px;
+  color: var(--amc-tsr-ink);
+}
+.amc-TSideRail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-block-start: 3px solid var(--amc-tsr-rule);
+  border-end-start-radius: var(--amc-tsr-radius);
+  border-end-end-radius: var(--amc-tsr-radius);
+  background: var(--amc-tsr-surface);
+  box-shadow: 0 0 0 1px var(--amc-tsr-line);
+}
+
+/* ---------- Rail: horizontal header by default (narrow containers) ---------- */
+.amc-TSideRail-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-width: 0;
+  padding: 12px 16px;
+  background: var(--amc-tsr-rail-bg);
+  color: var(--amc-tsr-rail-ink);
+  border-block-end: 1px solid var(--amc-tsr-line);
+}
+.amc-TSideRail-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  font-size: .9rem;
+  color: var(--amc-tsr-rail-bg);
+  background: var(--amc-tsr-rail-ink);
+}
+.amc-TSideRail-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TSideRail-title {
+  flex: 1 1 10rem;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  overflow-wrap: break-word;
+}
+.amc-TSideRail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.amc-TSideRail-actions:empty { display: none; }
+
+.amc-TSideRail-main { display: grid; align-content: start; min-width: 0; }
+.amc-TSideRail-body { padding: 16px 18px; min-width: 0; overflow-x: auto; }
+.amc-TSideRail-footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; padding: 0 18px 16px; }
+.amc-TSideRail-footer:empty { display: none; }
+
+/* ---------- Rail: vertical side rail (wide containers) ---------- */
+/* Reading direction: upward at the start edge in LTR; mirrored in RTL so the rail at the right
+   reads downward with glyph tops facing outward. Read downward swaps both. */
+.amc-TSideRail { --amc-tsr-wm: sideways-lr; --amc-tsr-rot: none; }
+.amc-TSideRail:dir(rtl) { --amc-tsr-wm: sideways-rl; }
+.amc-TSideRail--readDown { --amc-tsr-wm: sideways-rl; }
+.amc-TSideRail--readDown:dir(rtl) { --amc-tsr-wm: sideways-lr; }
+/* Browsers without sideways-*: vertical-rl, turned half a circle where it must read upward. */
+@supports not (writing-mode: sideways-lr) {
+  .amc-TSideRail { --amc-tsr-wm: vertical-rl; --amc-tsr-rot: 180deg; }
+  .amc-TSideRail:dir(rtl) { --amc-tsr-rot: none; }
+  .amc-TSideRail--readDown { --amc-tsr-rot: none; }
+  .amc-TSideRail--readDown:dir(rtl) { --amc-tsr-rot: 180deg; }
+}
+@container (min-width: 34rem) {
+  .amc-TSideRail:not(.amc-TSideRail--lateSwitch) .amc-TSideRail-layout { grid-template-columns: auto minmax(0, 1fr); }
+  .amc-TSideRail:not(.amc-TSideRail--lateSwitch) .amc-TSideRail-rail {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 16px 12px;
+    border-block-end: 0;
+    border-inline-end: 1px solid var(--amc-tsr-line);
+    border-end-start-radius: var(--amc-tsr-radius);
+  }
+  .amc-TSideRail:not(.amc-TSideRail--lateSwitch) .amc-TSideRail-title,
+  .amc-TSideRail:not(.amc-TSideRail--lateSwitch) .amc-TSideRail-actions { writing-mode: var(--amc-tsr-wm); rotate: var(--amc-tsr-rot); }
+  .amc-TSideRail:not(.amc-TSideRail--lateSwitch) .amc-TSideRail-title { flex: none; max-inline-size: 15rem; font-size: 1.5rem; line-height: 1; text-wrap: balance; }
+  .amc-TSideRail:not(.amc-TSideRail--lateSwitch) .amc-TSideRail-actions { margin-block-start: auto; flex-wrap: nowrap; }
+}
+@container (min-width: 52rem) {
+  .amc-TSideRail--lateSwitch .amc-TSideRail-layout { grid-template-columns: auto minmax(0, 1fr); }
+  .amc-TSideRail--lateSwitch .amc-TSideRail-rail {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 16px 12px;
+    border-block-end: 0;
+    border-inline-end: 1px solid var(--amc-tsr-line);
+    border-end-start-radius: var(--amc-tsr-radius);
+  }
+  .amc-TSideRail--lateSwitch .amc-TSideRail-title,
+  .amc-TSideRail--lateSwitch .amc-TSideRail-actions { writing-mode: var(--amc-tsr-wm); rotate: var(--amc-tsr-rot); }
+  .amc-TSideRail--lateSwitch .amc-TSideRail-title { flex: none; max-inline-size: 15rem; font-size: 1.5rem; line-height: 1; text-wrap: balance; }
+  .amc-TSideRail--lateSwitch .amc-TSideRail-actions { margin-block-start: auto; flex-wrap: nowrap; }
+}
+
+/* ---------- Template options ---------- */
+.amc-TSideRail--filled {
+  --amc-tsr-rail-bg: var(--amc-tsr-accent);
+  --amc-tsr-rail-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tsr-rule: var(--amc-tsr-accent);
+}
+.amc-TSideRail--noPadding .amc-TSideRail-body { padding: 0; }
+.amc-TSideRail--noPadding .amc-TSideRail-footer { padding-block-start: 12px; }
+
+@media (forced-colors: active) {
+  .amc-TSideRail-layout { border: 1px solid CanvasText; border-block-start-width: 3px; }
+  .amc-TSideRail-rail { border-color: CanvasText; }
+  .amc-TSideRail-icon { border: 1px solid CanvasText; }
+}

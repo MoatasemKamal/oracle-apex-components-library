@@ -1,0 +1,24 @@
+{
+  "kind": "region",
+  "name": "AMC Browser Window",
+  "staticId": "AMC_TPL_BROWSER_WINDOW",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "A browser-window mockup with real depth: a tab strip whose active tab carries the title and icon as favicon, a toolbar with an address pill, and a layered window shadow, with phone and tablet device frames for previewing pages.",
+  "useFor": "Previews and showcases: a Static Content or Cards region that previews a customer portal page, a release-notes region, a Form that edits what a public page shows, or a Chart embedded as a page mockup. Phone and tablet frames suit responsive previews.",
+  "keywords": ["browser mockup", "safari", "chrome window", "device frame", "phone frame", "tablet frame", "preview"],
+  "helpText": "Region template that draws a browser window around any region. The region title is the active tab and the region icon its favicon; the address pill repeats the title for sighted users and is hidden from screen readers. Buttons in Help, Edit, Change, Copy, Delete and Create sit at the end of the toolbar; Previous, Close and Next sit in a footer inside the page. Template options: Phone frame and Tablet frame constrain the width and draw a device bezel, Minimal chrome keeps only the address bar, Stacked windows adds two windows behind that fan out on hover or focus, Dark chrome uses inverse theme colors for the chrome, and No body padding. The content area is never transformed or clipped, so popups, menus and date pickers work. Under reduced motion the stacked windows stay still; in forced-colors mode the window becomes a plain bordered box.",
+  "landmarkType": "region",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "PHONE", "name": "Phone frame", "cssClass": "amc-TBrowserWindow--phone", "sequence": 10, "help": "Limits the width to a phone, about 24rem, centers it and draws a phone bezel with a camera island. The tab strip is hidden; the address bar shows the title." },
+    { "staticId": "TABLET", "name": "Tablet frame", "cssClass": "amc-TBrowserWindow--tablet", "sequence": 20, "help": "Limits the width to a tablet, about 52rem, centers it and draws a tablet bezel." },
+    { "staticId": "MINIMAL", "name": "Minimal chrome", "cssClass": "amc-TBrowserWindow--minimal", "sequence": 30, "help": "Hides the tab strip and keeps the window dots, address pill and buttons on one bar." },
+    { "staticId": "STACKED", "name": "Stacked windows", "cssClass": "amc-TBrowserWindow--stacked", "sequence": 40, "help": "Two more windows peek out behind the region and fan out on hover or keyboard focus." },
+    { "staticId": "DARK_CHROME", "name": "Dark chrome", "cssClass": "amc-TBrowserWindow--darkChrome", "sequence": 50, "help": "Tab strip and toolbar use inverse theme colors: dark in light styles, light in dark styles. The page area keeps the theme surface." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TBrowserWindow--noPadding", "sequence": 60, "help": "Removes the page padding so reports, images and grids run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

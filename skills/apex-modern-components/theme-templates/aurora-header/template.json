@@ -1,0 +1,24 @@
+{
+  "kind": "region",
+  "name": "AMC Aurora Header",
+  "staticId": "AMC_TPL_AURORA_HEADER",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "A region with a tall header band of slowly drifting aurora light and film grain, carrying a large title and icon, and a calm content sheet that overlaps the band.",
+  "useFor": "Landing regions of a page or dashboard: a Cards region of KPIs, a Chart, a Classic Report of today's work or a Static Content welcome. Use one per page; it is a headline, not a panel for every region.",
+  "keywords": ["aurora", "gradient header", "hero region", "grain", "banner", "overlap card"],
+  "helpText": "Region template with an aurora header band. The band shows the region icon and title large; buttons in Help, Edit, Change, Copy, Delete and Create sit on the band, and Previous, Close and Next in the footer of the content sheet. The native region content sits on a plain surface sheet that overlaps the band, so reports, forms and charts keep their normal colors. Aurora colors are derived from the theme primary color. Template options: Tall band, Compact band, Sunset colors from the warning and danger palette, Lagoon colors from the success and info palette, Still aurora without motion, and No body padding for edge-to-edge reports. Under reduced motion the aurora stops and stays as a static gradient; in forced-colors mode the band becomes a plain bordered header.",
+  "landmarkType": "region",
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "TALL", "name": "Tall band", "cssClass": "amc-TAuroraHeader--tall", "sequence": 10, "help": "Makes the aurora band about twice as tall, for the first region of a landing page." },
+    { "staticId": "COMPACT", "name": "Compact band", "cssClass": "amc-TAuroraHeader--compact", "sequence": 20, "help": "A short band with a smaller title, for dashboards with several aurora regions." },
+    { "staticId": "SUNSET", "name": "Sunset colors", "cssClass": "amc-TAuroraHeader--sunset", "sequence": 30, "help": "Aurora drawn from the warning and danger palette colors, for alerts and escalations." },
+    { "staticId": "LAGOON", "name": "Lagoon colors", "cssClass": "amc-TAuroraHeader--lagoon", "sequence": 40, "help": "Aurora drawn from the success and info palette colors, for health and completion summaries." },
+    { "staticId": "STILL", "name": "Still aurora", "cssClass": "amc-TAuroraHeader--still", "sequence": 50, "help": "Freezes the aurora as a static gradient, for pages that already have motion." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TAuroraHeader--noPadding", "sequence": 60, "help": "Removes side padding of the content sheet so reports and grids run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

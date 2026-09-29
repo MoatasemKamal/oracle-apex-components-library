@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Kinetic Title",
+  "staticId": "AMC_TPL_KINETIC_TITLE",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "bold",
+  "description": "A magazine-style region: an oversized outlined title that fills with color in a wipe on hover or keyboard focus, a small eyebrow from the icon, a thin rule that grows an accent, and the native content on a plain sheet below.",
+  "useFor": "Section openers on dashboards and report pages: a Chart, a Cards region of KPIs, a Classic Report or a Static Content summary that starts a new topic. Use it for a few regions per page; the title is meant to be short.",
+  "keywords": ["kinetic type", "outline text", "magazine", "editorial", "wipe", "ghost title", "oversized title"],
+  "helpText": "Region template with oversized kinetic type. The region title is set very large as outlined letters; when the pointer is over the region or anything inside it has keyboard focus, color wipes into the letters from the reading start edge and the accent on the rule grows. The region icon is a small eyebrow above the title; buttons in Help, Edit, Change, Copy, Delete and Create sit at the end of the eyebrow line and Previous, Close and Next in the footer. The native content sits on a plain surface sheet below the rule. Template options: Giant ghost title repeats the title huge and faint behind the header, Solid title starts filled in the text color and wipes to the accent color, Huge title makes it larger still, Ink fill wipes in the text color instead of the palette gradient, and No body padding. Short titles work best; long titles wrap. Under reduced motion the fill changes without the wipe; in forced-colors mode the title is plain solid text.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "GHOST", "name": "Giant ghost title", "cssClass": "amc-TKineticTitle--ghost", "sequence": 10, "help": "Repeats the title very large and faint behind the header, cropped by the header, which drifts a little on hover." },
+    { "staticId": "SOLID", "name": "Solid title", "cssClass": "amc-TKineticTitle--solid", "sequence": 20, "help": "The title starts filled in the text color instead of outlined, for maximum legibility; the hover wipe paints the accent color." },
+    { "staticId": "HUGE", "name": "Huge title", "cssClass": "amc-TKineticTitle--huge", "sequence": 30, "help": "Makes the title larger still, for the first region of a page. Keep the title to a few words." },
+    { "staticId": "INK_FILL", "name": "Ink fill", "cssClass": "amc-TKineticTitle--inkFill", "sequence": 40, "help": "The wipe fills the letters with the text color instead of the primary palette gradient." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TKineticTitle--noPadding", "sequence": 50, "help": "Removes side padding of the content sheet so reports run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

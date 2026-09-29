@@ -1,0 +1,150 @@
+regionTemplate amc-stacked-sheets (
+    name: AMC Stacked Sheets
+    region {
+        template:
+            ```html
+            <section class="amc-TStackedSheets #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <span class="amc-TStackedSheets-sheet amc-TStackedSheets-sheet--4" aria-hidden="true"></span>
+              <span class="amc-TStackedSheets-sheet amc-TStackedSheets-sheet--3" aria-hidden="true"></span>
+              <span class="amc-TStackedSheets-sheet amc-TStackedSheets-sheet--2" aria-hidden="true"></span>
+              <span class="amc-TStackedSheets-sheet amc-TStackedSheets-sheet--1" aria-hidden="true"></span>
+              <div class="amc-TStackedSheets-paper">
+                <span class="amc-TStackedSheets-tape" aria-hidden="true"></span>
+                <header class="amc-TStackedSheets-header">
+                  <span class="amc-TStackedSheets-sticker fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TStackedSheets-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TStackedSheets-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </header>
+                <div class="amc-TStackedSheets-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TStackedSheets-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-stacked-sheets.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_STACKED_SHEETS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template that sets the region on a pile of paper sheets. The top sheet holds the native region content on the normal surface; the sheets behind are tinted from the palette and fan out on hover and when anything inside has keyboard focus. The region icon is shown as a small tilted sticker next to the title. Buttons in Help, Edit, Change, Copy, Delete and Create sit in the header, and Previous, Close and Next in the footer. Template options: Single sheet or Four sheets change the pile, Straight stack drops the tilt so sheets offset straight down, Strong tilt doubles it, Plain paper uses neutral sheets instead of palette tints, and No body padding. On wide regions the tilt is reduced automatically so the corners stay close to the region. Under reduced motion the pile does not move; in forced-colors mode the sheets become plain outlines.
+            ```
+    }
+
+    templateOption amc-stacked-sheets-single (
+        name: Single sheet
+        sequence: 10
+        appearance {
+            cssClasses: amc-TStackedSheets--single
+        }
+        help {
+            helpText:
+                ```text
+                Only one sheet behind the region, for dense pages.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SINGLE
+        }
+    )
+
+    templateOption amc-stacked-sheets-four (
+        name: Four sheets
+        sequence: 20
+        appearance {
+            cssClasses: amc-TStackedSheets--four
+        }
+        help {
+            helpText:
+                ```text
+                Four sheets behind the region for a thicker pile.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FOUR
+        }
+    )
+
+    templateOption amc-stacked-sheets-straight (
+        name: Straight stack
+        sequence: 30
+        appearance {
+            cssClasses: amc-TStackedSheets--straight
+        }
+        help {
+            helpText:
+                ```text
+                No tilt: the sheets offset straight down and fan downward on hover.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STRAIGHT
+        }
+    )
+
+    templateOption amc-stacked-sheets-strong-tilt (
+        name: Strong tilt
+        sequence: 40
+        appearance {
+            cssClasses: amc-TStackedSheets--strongTilt
+        }
+        help {
+            helpText:
+                ```text
+                Doubles the tilt for a playful, hand-placed pile.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STRONG_TILT
+        }
+    )
+
+    templateOption amc-stacked-sheets-plain (
+        name: Plain paper
+        sequence: 50
+        appearance {
+            cssClasses: amc-TStackedSheets--plain
+        }
+        help {
+            helpText:
+                ```text
+                Sheets and tape use neutral paper tones instead of palette tints.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PLAIN
+        }
+    )
+
+    templateOption amc-stacked-sheets-no-body-padding (
+        name: No body padding
+        sequence: 60
+        appearance {
+            cssClasses: amc-TStackedSheets--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding so reports run edge to edge on the top sheet.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

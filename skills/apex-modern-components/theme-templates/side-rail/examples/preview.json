@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Wide: around a Classic Report", "regionTitle": "Orders at risk", "icon": "fa-exclamation-circle", "bodyKind": "report", "options": ["amc-TSideRail--noPadding"], "buttons": { "CREATE": "Escalate" }, "wide": true },
+    { "title": "Filled rail around a Chart", "regionTitle": "Revenue", "icon": "fa-line-chart", "bodyKind": "chart", "options": ["amc-TSideRail--filled"], "buttons": { "PREVIOUS": "Q2", "NEXT": "Q4" } },
+    { "title": "Read downward around text", "regionTitle": "Editor's note", "icon": "fa-pencil", "bodyKind": "text", "options": ["amc-TSideRail--readDown"] },
+    { "title": "Late switch around Cards", "regionTitle": "This week at a glance", "icon": "fa-calendar", "bodyKind": "cards", "options": ["amc-TSideRail--lateSwitch"], "buttons": { "EDIT": "Edit" } }
+  ]
+}

@@ -1,0 +1,145 @@
+regionTemplate amc-terminal-window (
+    name: AMC Terminal Window
+    region {
+        template:
+            ```html
+            <section class="amc-TTerminalWindow #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <header class="amc-TTerminalWindow-bar">
+                <span class="amc-TTerminalWindow-lights" aria-hidden="true"><span class="amc-TTerminalWindow-light amc-TTerminalWindow-light--close"></span><span class="amc-TTerminalWindow-light amc-TTerminalWindow-light--min"></span><span class="amc-TTerminalWindow-light amc-TTerminalWindow-light--max"></span></span>
+                <h2 class="amc-TTerminalWindow-title" id="#REGION_STATIC_ID#_heading"><span class="amc-TTerminalWindow-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TTerminalWindow-text">#TITLE#</span><span class="amc-TTerminalWindow-caret" aria-hidden="true"></span></h2>
+                <div class="amc-TTerminalWindow-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+              </header>
+              <div class="amc-TTerminalWindow-pane">
+                <div class="amc-TTerminalWindow-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TTerminalWindow-status">#PREVIOUS##CLOSE##NEXT#</footer>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-terminal-window.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_TERMINAL_WINDOW
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template that draws a terminal window around any region. The title bar shows three window dots from the danger, warning and success palette colors and the region title centered in monospace after a prompt glyph, or after the region icon when one is set. Buttons in Help, Edit, Change, Copy, Delete and Create sit at the end of the title bar; Previous, Close and Next sit in a status line under the content. By default the bezel uses inverse theme colors, so it is dark in light styles and light in dark styles, while the content pane keeps the normal surface so reports and forms stay native. Template options: Theme chrome keeps the bezel in the normal theme colors, Console pane turns the content pane inverse too and is meant for text, logs, charts and cards, Scanlines adds CRT lines to the chrome and console, Blinking caret adds a caret after the title, Monospace body sets the content font to monospace, and No body padding. Under reduced motion the caret stays solid; in forced-colors mode the window becomes a plain bordered box.
+            ```
+    }
+
+    templateOption amc-terminal-window-theme-chrome (
+        name: Theme chrome
+        sequence: 10
+        appearance {
+            cssClasses: amc-TTerminalWindow--themeChrome
+        }
+        help {
+            helpText:
+                ```text
+                Bezel and title bar follow the theme colors instead of the inverse colors, for a light window in light styles.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: THEME_CHROME
+        }
+    )
+
+    templateOption amc-terminal-window-console (
+        name: Console pane
+        sequence: 20
+        appearance {
+            cssClasses: amc-TTerminalWindow--console
+        }
+        help {
+            helpText:
+                ```text
+                The content pane also uses inverse colors, like a real console. Best for Static Content, logs, Charts and Cards; keep it off for Interactive Reports and Forms.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CONSOLE
+        }
+    )
+
+    templateOption amc-terminal-window-scanlines (
+        name: Scanlines
+        sequence: 30
+        appearance {
+            cssClasses: amc-TTerminalWindow--scanlines
+        }
+        help {
+            helpText:
+                ```text
+                Adds faint CRT scanlines to the chrome, and behind the content when Console pane is on. Lines never cover the content.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SCANLINES
+        }
+    )
+
+    templateOption amc-terminal-window-caret (
+        name: Blinking caret
+        sequence: 40
+        appearance {
+            cssClasses: amc-TTerminalWindow--caret
+        }
+        help {
+            helpText:
+                ```text
+                Shows a block caret after the title that blinks; solid under reduced motion.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CARET
+        }
+    )
+
+    templateOption amc-terminal-window-mono-body (
+        name: Monospace body
+        sequence: 50
+        appearance {
+            cssClasses: amc-TTerminalWindow--monoBody
+        }
+        help {
+            helpText:
+                ```text
+                Sets the content font to monospace, for logs, code and ID-heavy reports.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MONO_BODY
+        }
+    )
+
+    templateOption amc-terminal-window-no-body-padding (
+        name: No body padding
+        sequence: 60
+        appearance {
+            cssClasses: amc-TTerminalWindow--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding so reports run edge to edge inside the window.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

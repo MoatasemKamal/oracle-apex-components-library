@@ -1,0 +1,148 @@
+regionTemplate amc-aurora-header (
+    name: AMC Aurora Header
+    region {
+        template:
+            ```html
+            <section class="amc-TAuroraHeader #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <header class="amc-TAuroraHeader-band">
+                <span class="amc-TAuroraHeader-sky" aria-hidden="true"><span class="amc-TAuroraHeader-glow"></span><span class="amc-TAuroraHeader-ribbon"></span><span class="amc-TAuroraHeader-ribbon amc-TAuroraHeader-ribbon--b"></span><span class="amc-TAuroraHeader-grain"></span></span>
+                <div class="amc-TAuroraHeader-head">
+                  <span class="amc-TAuroraHeader-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TAuroraHeader-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TAuroraHeader-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </div>
+              </header>
+              <div class="amc-TAuroraHeader-sheet">
+                <div class="amc-TAuroraHeader-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TAuroraHeader-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-aurora-header.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_AURORA_HEADER
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template with an aurora header band. The band shows the region icon and title large; buttons in Help, Edit, Change, Copy, Delete and Create sit on the band, and Previous, Close and Next in the footer of the content sheet. The native region content sits on a plain surface sheet that overlaps the band, so reports, forms and charts keep their normal colors. Aurora colors are derived from the theme primary color. Template options: Tall band, Compact band, Sunset colors from the warning and danger palette, Lagoon colors from the success and info palette, Still aurora without motion, and No body padding for edge-to-edge reports. Under reduced motion the aurora stops and stays as a static gradient; in forced-colors mode the band becomes a plain bordered header.
+            ```
+    }
+
+    templateOption amc-aurora-header-tall (
+        name: Tall band
+        sequence: 10
+        appearance {
+            cssClasses: amc-TAuroraHeader--tall
+        }
+        help {
+            helpText:
+                ```text
+                Makes the aurora band about twice as tall, for the first region of a landing page.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TALL
+        }
+    )
+
+    templateOption amc-aurora-header-compact (
+        name: Compact band
+        sequence: 20
+        appearance {
+            cssClasses: amc-TAuroraHeader--compact
+        }
+        help {
+            helpText:
+                ```text
+                A short band with a smaller title, for dashboards with several aurora regions.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-aurora-header-sunset (
+        name: Sunset colors
+        sequence: 30
+        appearance {
+            cssClasses: amc-TAuroraHeader--sunset
+        }
+        help {
+            helpText:
+                ```text
+                Aurora drawn from the warning and danger palette colors, for alerts and escalations.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SUNSET
+        }
+    )
+
+    templateOption amc-aurora-header-lagoon (
+        name: Lagoon colors
+        sequence: 40
+        appearance {
+            cssClasses: amc-TAuroraHeader--lagoon
+        }
+        help {
+            helpText:
+                ```text
+                Aurora drawn from the success and info palette colors, for health and completion summaries.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LAGOON
+        }
+    )
+
+    templateOption amc-aurora-header-still (
+        name: Still aurora
+        sequence: 50
+        appearance {
+            cssClasses: amc-TAuroraHeader--still
+        }
+        help {
+            helpText:
+                ```text
+                Freezes the aurora as a static gradient, for pages that already have motion.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STILL
+        }
+    )
+
+    templateOption amc-aurora-header-no-body-padding (
+        name: No body padding
+        sequence: 60
+        appearance {
+            cssClasses: amc-TAuroraHeader--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding of the content sheet so reports and grids run edge to edge.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

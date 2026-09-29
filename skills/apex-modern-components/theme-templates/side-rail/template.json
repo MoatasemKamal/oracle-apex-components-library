@@ -1,0 +1,21 @@
+{
+  "kind": "region",
+  "name": "AMC Side Rail",
+  "staticId": "AMC_TPL_SIDE_RAIL",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "smart",
+  "description": "An editorial region: under a heavy top rule the title runs vertically in a side rail with the icon and header buttons stacked in it, and the native content takes the rest; in narrow containers it switches to a normal top header by itself.",
+  "useFor": "Sections of a report-style page or a magazine-like dashboard: a Classic Report or Interactive Report of a topic, a Chart with commentary, a Static Content article, Cards of highlights. Works well in wide body columns and still fits a narrow side column.",
+  "keywords": ["editorial", "vertical title", "side rail", "writing-mode", "container query", "magazine"],
+  "helpText": "Region template with an editorial side rail. When the region is at least about 34rem wide, the title is set vertically in a rail at the start edge, reading upward, with the region icon above it and the Help, Edit, Change, Copy, Delete and Create buttons stacked below it; the region content takes the remaining width. Narrower regions switch automatically, through a container query, to a normal horizontal header. The rail mirrors in right-to-left languages. Previous, Close and Next sit in a footer under the content. Template options: Filled rail paints the rail with the primary color, Read downward sets the title top to bottom, Late switch keeps the top header until about 52rem, and No body padding. There is no motion; in forced-colors mode the rules use system colors.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "FILLED", "name": "Filled rail", "cssClass": "amc-TSideRail--filled", "sequence": 10, "help": "Paints the rail with the primary color and its contrast text color." },
+    { "staticId": "READ_DOWN", "name": "Read downward", "cssClass": "amc-TSideRail--readDown", "sequence": 20, "help": "The vertical title reads from top to bottom instead of upward." },
+    { "staticId": "LATE_SWITCH", "name": "Late switch", "cssClass": "amc-TSideRail--lateSwitch", "sequence": 30, "help": "Keeps the horizontal header until the region is about 52rem wide, for regions with long titles." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TSideRail--noPadding", "sequence": 40, "help": "Removes padding around the content so reports run edge to edge next to the rail." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

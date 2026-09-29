@@ -1,0 +1,169 @@
+/* Stacked Sheets: region template for Universal Theme. The region is the top sheet of a pile of
+   offset paper sheets tinted from the palette, held by a strip of tape. The sheets behind fan out
+   on hover and focus-within. Only the decorative sheets are transformed; the top sheet holding
+   the native content is never transformed or clipped. Original design. */
+
+.amc-TStackedSheets {
+  --amc-tss-surface: var(--ut-component-background-color, #fff);
+  --amc-tss-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tss-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tss-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tss-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tss-a2: color-mix(in srgb, var(--amc-tss-accent) 50%, var(--ut-palette-info, #0076df));
+  --amc-tss-a3: color-mix(in srgb, var(--amc-tss-accent) 55%, var(--ut-palette-warning, #fbce4a));
+  --amc-tss-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tss-tint-1: color-mix(in srgb, var(--amc-tss-accent) 14%, var(--amc-tss-surface));
+  --amc-tss-tint-2: color-mix(in srgb, var(--amc-tss-a2) 22%, var(--amc-tss-surface));
+  --amc-tss-tint-3: color-mix(in srgb, var(--amc-tss-a3) 26%, var(--amc-tss-surface));
+  --amc-tss-tint-4: color-mix(in srgb, var(--amc-tss-accent) 34%, var(--amc-tss-surface));
+  --amc-tss-tape: color-mix(in srgb, var(--amc-tss-a3) 38%, transparent);
+  --amc-tss-tilt: 1;
+  --amc-tss-drop: 1;
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  margin-block: 14px 30px;
+  margin-inline: 8px;
+  color: var(--amc-tss-ink);
+}
+@supports (color: oklch(from red l c h)) {
+  .amc-TStackedSheets {
+    --amc-tss-a2: oklch(from var(--amc-tss-accent) l c calc(h - 50));
+    --amc-tss-a3: oklch(from var(--amc-tss-accent) calc(l + .08) c calc(h + 70));
+  }
+}
+
+/* ---------- Sheets behind ---------- */
+.amc-TStackedSheets-sheet {
+  --amc-tss-k: 1;
+  --amc-tss-spread: 1;
+  --amc-tss-fit: 1;
+  position: absolute;
+  inset: 0 10px;
+  z-index: -1;
+  border-radius: var(--amc-tss-radius);
+  background: var(--amc-tss-tint-1);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-tss-ink) 10%, transparent),
+    0 6px 14px -8px color-mix(in srgb, var(--amc-tss-ink) 30%, transparent);
+  transform-origin: 50% 50%;
+  transform:
+    translate(calc(var(--amc-tss-dx, 3px) * var(--amc-tss-spread)), calc(var(--amc-tss-dy, 5px) * var(--amc-tss-spread) * var(--amc-tss-drop)))
+    rotate(calc(var(--amc-tss-k) * .8deg * var(--amc-tss-tilt) * var(--amc-tss-fit) * var(--amc-tss-spread)));
+  pointer-events: none;
+}
+.amc-TStackedSheets-sheet--1 { --amc-tss-k: 1; --amc-tss-dx: 4px; --amc-tss-dy: 6px; }
+.amc-TStackedSheets-sheet--2 { --amc-tss-k: -1.5; --amc-tss-dx: -5px; --amc-tss-dy: 11px; z-index: -2; background: var(--amc-tss-tint-2); }
+.amc-TStackedSheets-sheet--3 { --amc-tss-k: 2.1; --amc-tss-dx: 6px; --amc-tss-dy: 16px; z-index: -3; background: var(--amc-tss-tint-3); }
+.amc-TStackedSheets-sheet--4 { --amc-tss-k: -2.7; --amc-tss-dx: -7px; --amc-tss-dy: 21px; z-index: -4; background: var(--amc-tss-tint-4); display: none; }
+.amc-TStackedSheets:hover .amc-TStackedSheets-sheet,
+.amc-TStackedSheets:focus-within .amc-TStackedSheets-sheet { --amc-tss-spread: 1.7; }
+/* Wide regions: a small angle already moves the corners a lot, so tilt less. */
+@container (min-width: 40rem) { .amc-TStackedSheets-sheet { --amc-tss-fit: .55; } }
+@container (min-width: 64rem) { .amc-TStackedSheets-sheet { --amc-tss-fit: .35; } }
+
+/* ---------- Top sheet ---------- */
+.amc-TStackedSheets-paper {
+  position: relative;
+  border-radius: var(--amc-tss-radius);
+  background: var(--amc-tss-surface);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-tss-ink) 11%, transparent),
+    0 1px 2px color-mix(in srgb, var(--amc-tss-ink) 8%, transparent),
+    0 12px 26px -16px color-mix(in srgb, var(--amc-tss-ink) 34%, transparent);
+}
+.amc-TStackedSheets-tape {
+  position: absolute;
+  inset-block-start: -11px;
+  inset-inline-start: 50%;
+  z-index: 1;
+  inline-size: 5.5rem;
+  block-size: 1.4rem;
+  margin-inline-start: -2.75rem;
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--amc-tss-surface) 22%, transparent) 0 2px, transparent 2px 7px),
+    var(--amc-tss-tape);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tss-ink) 12%, transparent);
+  clip-path: polygon(3% 0, 97% 4%, 100% 30%, 98% 62%, 100% 100%, 2% 96%, 0 66%, 2% 34%);
+  rotate: -2.5deg;
+  pointer-events: none;
+}
+.amc-TStackedSheets-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 20px 20px 12px;
+  border-block-end: 1px dashed color-mix(in srgb, var(--amc-tss-ink) 18%, transparent);
+  margin-inline: 8px;
+  padding-inline: 12px;
+}
+.amc-TStackedSheets-sticker {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2.1rem;
+  block-size: 2.1rem;
+  border-radius: 8px;
+  font-size: .95rem;
+  color: var(--amc-tss-accent);
+  background: var(--amc-tss-tint-1);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tss-accent) 22%, transparent), 0 2px 0 color-mix(in srgb, var(--amc-tss-accent) 20%, transparent);
+  rotate: -6deg;
+}
+.amc-TStackedSheets-sticker.fa:not([class*="fa-"]) { display: none; }
+.amc-TStackedSheets:hover .amc-TStackedSheets-sticker,
+.amc-TStackedSheets:focus-within .amc-TStackedSheets-sticker { rotate: 0deg; }
+.amc-TStackedSheets-title {
+  flex: 1 1 9rem;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -.01em;
+  overflow-wrap: break-word;
+}
+.amc-TStackedSheets-actions,
+.amc-TStackedSheets-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.amc-TStackedSheets-actions:empty,
+.amc-TStackedSheets-footer:empty { display: none; }
+.amc-TStackedSheets-body { padding: 16px 20px 18px; min-width: 0; overflow-x: auto; }
+.amc-TStackedSheets-footer { justify-content: flex-end; padding: 0 20px 18px; }
+
+/* ---------- Template options ---------- */
+.amc-TStackedSheets--single .amc-TStackedSheets-sheet--2,
+.amc-TStackedSheets--single .amc-TStackedSheets-sheet--3 { display: none; }
+.amc-TStackedSheets--four { margin-block-end: 36px; }
+.amc-TStackedSheets--four .amc-TStackedSheets-sheet--4 { display: block; }
+.amc-TStackedSheets--straight { --amc-tss-tilt: 0; --amc-tss-drop: 1.25; }
+.amc-TStackedSheets--straight .amc-TStackedSheets-sheet { --amc-tss-dx: 0px; inset-inline: calc(7px * var(--amc-tss-n, 1)); }
+.amc-TStackedSheets--straight .amc-TStackedSheets-sheet--2 { --amc-tss-n: 2; }
+.amc-TStackedSheets--straight .amc-TStackedSheets-sheet--3 { --amc-tss-n: 3; }
+.amc-TStackedSheets--straight .amc-TStackedSheets-sheet--4 { --amc-tss-n: 4; }
+.amc-TStackedSheets--strongTilt { --amc-tss-tilt: 2; margin-block: 22px 40px; margin-inline: 16px; }
+.amc-TStackedSheets--plain {
+  --amc-tss-tint-1: color-mix(in srgb, var(--amc-tss-ink) 4%, var(--amc-tss-surface));
+  --amc-tss-tint-2: color-mix(in srgb, var(--amc-tss-ink) 7%, var(--amc-tss-surface));
+  --amc-tss-tint-3: color-mix(in srgb, var(--amc-tss-ink) 10%, var(--amc-tss-surface));
+  --amc-tss-tint-4: color-mix(in srgb, var(--amc-tss-ink) 13%, var(--amc-tss-surface));
+  --amc-tss-tape: color-mix(in srgb, var(--amc-tss-ink) 14%, transparent);
+}
+.amc-TStackedSheets--plain .amc-TStackedSheets-sticker { color: var(--amc-tss-ink); box-shadow: inset 0 0 0 1px var(--amc-tss-line); }
+.amc-TStackedSheets--noPadding .amc-TStackedSheets-body { padding: 4px 0 6px; }
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TStackedSheets-sheet { transition: transform .5s cubic-bezier(.2, .9, .25, 1.15); }
+  .amc-TStackedSheets-sticker { transition: rotate .35s cubic-bezier(.2, .9, .25, 1.3); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TStackedSheets-sheet, .amc-TStackedSheets-sticker { transition: none; }
+  .amc-TStackedSheets:hover .amc-TStackedSheets-sheet,
+  .amc-TStackedSheets:focus-within .amc-TStackedSheets-sheet { --amc-tss-spread: 1; }
+}
+@media (forced-colors: active) {
+  .amc-TStackedSheets-paper { border: 1px solid CanvasText; }
+  .amc-TStackedSheets-sheet { border: 1px solid GrayText; background: Canvas; }
+  .amc-TStackedSheets-tape { display: none; }
+}

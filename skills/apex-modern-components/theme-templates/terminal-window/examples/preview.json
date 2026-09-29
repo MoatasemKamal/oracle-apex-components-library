@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Around a Classic Report, caret", "regionTitle": "scheduler runs", "icon": "fa-terminal", "bodyKind": "report", "options": ["amc-TTerminalWindow--caret", "amc-TTerminalWindow--noPadding"], "buttons": { "CREATE": "Run now" } },
+    { "title": "Console pane with scanlines around a Chart", "regionTitle": "api-gateway: 5xx per hour", "bodyKind": "chart", "options": ["amc-TTerminalWindow--console", "amc-TTerminalWindow--scanlines", "amc-TTerminalWindow--caret"], "buttons": { "PREVIOUS": "Earlier", "NEXT": "Later" } },
+    { "title": "Theme chrome, monospace body around a Form", "regionTitle": "integration settings", "icon": "fa-plug", "bodyKind": "form", "options": ["amc-TTerminalWindow--themeChrome", "amc-TTerminalWindow--monoBody"], "buttons": { "HELP": "Docs", "NEXT": "Save" } },
+    { "title": "Console pane around text", "regionTitle": "deploy notes", "bodyKind": "text", "options": ["amc-TTerminalWindow--console", "amc-TTerminalWindow--monoBody"] }
+  ]
+}

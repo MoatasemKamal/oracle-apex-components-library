@@ -1,0 +1,4 @@
+file "amc-templates/amc-tpl-terminal-window.css" (
+    mimeType: text/css
+    charSet: utf-8
+)

@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Around a Chart", "regionTitle": "Revenue", "icon": "fa-line-chart", "bodyKind": "chart", "options": [], "buttons": { "PREVIOUS": "Q2", "NEXT": "Q4" } },
+    { "title": "Giant ghost title around Cards", "regionTitle": "This week", "icon": "fa-bolt", "bodyKind": "cards", "options": ["amc-TKineticTitle--ghost"], "buttons": { "EDIT": "Customize" } },
+    { "title": "Solid title around a Classic Report, no padding", "regionTitle": "Late shipments", "icon": "fa-truck", "bodyKind": "report", "options": ["amc-TKineticTitle--solid", "amc-TKineticTitle--noPadding"], "buttons": { "CREATE": "Notify customers" } },
+    { "title": "Huge, ghost, ink fill around text", "regionTitle": "Close", "icon": "fa-calendar-check-o", "bodyKind": "text", "options": ["amc-TKineticTitle--huge", "amc-TKineticTitle--ghost", "amc-TKineticTitle--inkFill"] }
+  ]
+}

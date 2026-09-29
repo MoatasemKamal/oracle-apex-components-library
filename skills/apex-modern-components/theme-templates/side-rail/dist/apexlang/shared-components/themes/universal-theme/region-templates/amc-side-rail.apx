@@ -1,0 +1,111 @@
+regionTemplate amc-side-rail (
+    name: AMC Side Rail
+    region {
+        template:
+            ```html
+            <section class="amc-TSideRail #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <div class="amc-TSideRail-layout">
+                <header class="amc-TSideRail-rail">
+                  <span class="amc-TSideRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TSideRail-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TSideRail-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </header>
+                <div class="amc-TSideRail-main">
+                  <div class="amc-TSideRail-body">#BODY##SUB_REGIONS#</div>
+                  <footer class="amc-TSideRail-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+                </div>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-side-rail.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_SIDE_RAIL
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template with an editorial side rail. When the region is at least about 34rem wide, the title is set vertically in a rail at the start edge, reading upward, with the region icon above it and the Help, Edit, Change, Copy, Delete and Create buttons stacked below it; the region content takes the remaining width. Narrower regions switch automatically, through a container query, to a normal horizontal header. The rail mirrors in right-to-left languages. Previous, Close and Next sit in a footer under the content. Template options: Filled rail paints the rail with the primary color, Read downward sets the title top to bottom, Late switch keeps the top header until about 52rem, and No body padding. There is no motion; in forced-colors mode the rules use system colors.
+            ```
+    }
+
+    templateOption amc-side-rail-filled (
+        name: Filled rail
+        sequence: 10
+        appearance {
+            cssClasses: amc-TSideRail--filled
+        }
+        help {
+            helpText:
+                ```text
+                Paints the rail with the primary color and its contrast text color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FILLED
+        }
+    )
+
+    templateOption amc-side-rail-read-down (
+        name: Read downward
+        sequence: 20
+        appearance {
+            cssClasses: amc-TSideRail--readDown
+        }
+        help {
+            helpText:
+                ```text
+                The vertical title reads from top to bottom instead of upward.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: READ_DOWN
+        }
+    )
+
+    templateOption amc-side-rail-late-switch (
+        name: Late switch
+        sequence: 30
+        appearance {
+            cssClasses: amc-TSideRail--lateSwitch
+        }
+        help {
+            helpText:
+                ```text
+                Keeps the horizontal header until the region is about 52rem wide, for regions with long titles.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LATE_SWITCH
+        }
+    )
+
+    templateOption amc-side-rail-no-body-padding (
+        name: No body padding
+        sequence: 40
+        appearance {
+            cssClasses: amc-TSideRail--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes padding around the content so reports run edge to edge next to the rail.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

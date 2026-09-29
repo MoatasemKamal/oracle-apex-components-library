@@ -1,0 +1,158 @@
+regionTemplate amc-browser-window (
+    name: AMC Browser Window
+    region {
+        template:
+            ```html
+            <section class="amc-TBrowserWindow #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading">
+              <span class="amc-TBrowserWindow-behind amc-TBrowserWindow-behind--far" aria-hidden="true"></span><span class="amc-TBrowserWindow-behind" aria-hidden="true"></span>
+              <header class="amc-TBrowserWindow-chrome">
+                <div class="amc-TBrowserWindow-strip">
+                  <span class="amc-TBrowserWindow-lights" aria-hidden="true"><span class="amc-TBrowserWindow-light"></span><span class="amc-TBrowserWindow-light"></span><span class="amc-TBrowserWindow-light"></span></span>
+                  <div class="amc-TBrowserWindow-tab">
+                    <span class="amc-TBrowserWindow-favicon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                    <h2 class="amc-TBrowserWindow-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                    <span class="amc-TBrowserWindow-tabClose fa fa-times" aria-hidden="true"></span>
+                  </div>
+                  <span class="amc-TBrowserWindow-newTab fa fa-plus" aria-hidden="true"></span>
+                </div>
+                <div class="amc-TBrowserWindow-toolbar">
+                  <span class="amc-TBrowserWindow-lights amc-TBrowserWindow-lights--bar" aria-hidden="true"><span class="amc-TBrowserWindow-light"></span><span class="amc-TBrowserWindow-light"></span><span class="amc-TBrowserWindow-light"></span></span>
+                  <span class="amc-TBrowserWindow-nav" aria-hidden="true"><span class="fa fa-arrow-left"></span><span class="fa fa-arrow-right"></span><span class="fa fa-repeat"></span></span>
+                  <span class="amc-TBrowserWindow-address" aria-hidden="true"><span class="amc-TBrowserWindow-lock fa fa-lock"></span><span class="amc-TBrowserWindow-url">#TITLE#</span></span>
+                  <div class="amc-TBrowserWindow-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </div>
+              </header>
+              <div class="amc-TBrowserWindow-page">
+                <div class="amc-TBrowserWindow-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TBrowserWindow-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-browser-window.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_BROWSER_WINDOW
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Region template that draws a browser window around any region. The region title is the active tab and the region icon its favicon; the address pill repeats the title for sighted users and is hidden from screen readers. Buttons in Help, Edit, Change, Copy, Delete and Create sit at the end of the toolbar; Previous, Close and Next sit in a footer inside the page. Template options: Phone frame and Tablet frame constrain the width and draw a device bezel, Minimal chrome keeps only the address bar, Stacked windows adds two windows behind that fan out on hover or focus, Dark chrome uses inverse theme colors for the chrome, and No body padding. The content area is never transformed or clipped, so popups, menus and date pickers work. Under reduced motion the stacked windows stay still; in forced-colors mode the window becomes a plain bordered box.
+            ```
+    }
+
+    templateOption amc-browser-window-phone (
+        name: Phone frame
+        sequence: 10
+        appearance {
+            cssClasses: amc-TBrowserWindow--phone
+        }
+        help {
+            helpText:
+                ```text
+                Limits the width to a phone, about 24rem, centers it and draws a phone bezel with a camera island. The tab strip is hidden; the address bar shows the title.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PHONE
+        }
+    )
+
+    templateOption amc-browser-window-tablet (
+        name: Tablet frame
+        sequence: 20
+        appearance {
+            cssClasses: amc-TBrowserWindow--tablet
+        }
+        help {
+            helpText:
+                ```text
+                Limits the width to a tablet, about 52rem, centers it and draws a tablet bezel.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TABLET
+        }
+    )
+
+    templateOption amc-browser-window-minimal (
+        name: Minimal chrome
+        sequence: 30
+        appearance {
+            cssClasses: amc-TBrowserWindow--minimal
+        }
+        help {
+            helpText:
+                ```text
+                Hides the tab strip and keeps the window dots, address pill and buttons on one bar.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MINIMAL
+        }
+    )
+
+    templateOption amc-browser-window-stacked (
+        name: Stacked windows
+        sequence: 40
+        appearance {
+            cssClasses: amc-TBrowserWindow--stacked
+        }
+        help {
+            helpText:
+                ```text
+                Two more windows peek out behind the region and fan out on hover or keyboard focus.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STACKED
+        }
+    )
+
+    templateOption amc-browser-window-dark-chrome (
+        name: Dark chrome
+        sequence: 50
+        appearance {
+            cssClasses: amc-TBrowserWindow--darkChrome
+        }
+        help {
+            helpText:
+                ```text
+                Tab strip and toolbar use inverse theme colors: dark in light styles, light in dark styles. The page area keeps the theme surface.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DARK_CHROME
+        }
+    )
+
+    templateOption amc-browser-window-no-body-padding (
+        name: No body padding
+        sequence: 60
+        appearance {
+            cssClasses: amc-TBrowserWindow--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes the page padding so reports, images and grids run edge to edge.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

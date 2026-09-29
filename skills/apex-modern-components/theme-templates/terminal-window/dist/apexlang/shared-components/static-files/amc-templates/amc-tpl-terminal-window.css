@@ -1,0 +1,185 @@
+/* Terminal Window: region template for Universal Theme. Desktop terminal chrome (window dots,
+   centered monospace title after a prompt, optional blinking caret and CRT scanlines) around a
+   content pane that keeps the theme surface. Chrome colors are the inverse of the theme
+   (text color as background), so the window is dark in light styles and light in dark styles.
+   Window idea after Magic UI terminal (MIT, https://github.com/magicuidesign/magicui).
+   The body is never transformed or clipped. */
+
+.amc-TTerminalWindow {
+  --amc-ttw-surface: var(--ut-component-background-color, #fff);
+  --amc-ttw-ink: var(--ut-component-text-default-color, #262626);
+  --amc-ttw-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-ttw-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-ttw-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ttw-red: var(--ut-palette-danger, #cb1100);
+  --amc-ttw-amber: var(--ut-palette-warning, #fbce4a);
+  --amc-ttw-green: var(--ut-palette-success, #278701);
+  --amc-ttw-radius: calc(var(--ut-component-border-radius, 4px) + 8px);
+  --amc-ttw-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  /* Chrome: inverse of the theme, faintly tinted with the primary color. */
+  --amc-ttw-chrome: color-mix(in srgb, var(--amc-ttw-ink) 93%, var(--amc-ttw-accent));
+  --amc-ttw-chrome-ink: var(--amc-ttw-surface);
+  --amc-ttw-chrome-muted: color-mix(in srgb, var(--amc-ttw-surface) 62%, var(--amc-ttw-ink));
+  --amc-ttw-scan: transparent;
+  position: relative;
+  container-type: inline-size;
+  margin-block-end: 16px;
+  padding: 0 5px 5px;
+  border-radius: var(--amc-ttw-radius);
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--amc-ttw-chrome-ink) 9%, transparent), transparent 44px),
+    var(--amc-ttw-chrome);
+  color: var(--amc-ttw-ink);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-ttw-ink) 22%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-ttw-chrome-ink) 14%, transparent),
+    0 2px 4px color-mix(in srgb, var(--amc-ttw-ink) 10%, transparent),
+    0 26px 50px -26px color-mix(in srgb, var(--amc-ttw-ink) 60%, transparent);
+}
+
+/* ---------- Title bar ---------- */
+.amc-TTerminalWindow-bar {
+  display: grid;
+  grid-template-columns: minmax(3.5rem, 1fr) minmax(0, auto) minmax(3.5rem, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-block-size: 42px;
+  padding: 6px 9px;
+  color: var(--amc-ttw-chrome-ink);
+  background-image: repeating-linear-gradient(to bottom, var(--amc-ttw-scan) 0 1px, transparent 1px 3px);
+  border-start-start-radius: var(--amc-ttw-radius);
+  border-start-end-radius: var(--amc-ttw-radius);
+}
+.amc-TTerminalWindow-lights { display: flex; gap: 8px; justify-self: start; }
+.amc-TTerminalWindow-light {
+  display: grid;
+  place-items: center;
+  inline-size: 12px;
+  block-size: 12px;
+  border-radius: 50%;
+  background: var(--amc-ttw-red);
+  box-shadow: inset 0 0 0 .5px color-mix(in srgb, var(--amc-ttw-ink) 30%, transparent);
+  font: 700 9px/1 var(--amc-ttw-mono);
+  color: transparent;
+}
+.amc-TTerminalWindow-light--min { background: var(--amc-ttw-amber); }
+.amc-TTerminalWindow-light--max { background: var(--amc-ttw-green); }
+.amc-TTerminalWindow-light--close::after { content: "\00d7"; }
+.amc-TTerminalWindow-light--min::after { content: "\2013"; }
+.amc-TTerminalWindow-light--max::after { content: "+"; }
+.amc-TTerminalWindow:hover .amc-TTerminalWindow-light,
+.amc-TTerminalWindow:focus-within .amc-TTerminalWindow-light { color: color-mix(in srgb, var(--ut-component-text-default-color, #262626) 45%, transparent); }
+
+.amc-TTerminalWindow-title {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--amc-ttw-mono);
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: .01em;
+  color: var(--amc-ttw-chrome-ink);
+  text-align: center;
+}
+.amc-TTerminalWindow-icon { margin-inline-end: .6em; font-size: .8125rem; color: var(--amc-ttw-chrome-muted); }
+.amc-TTerminalWindow-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TTerminalWindow-icon.fa:not([class*="fa-"]) + .amc-TTerminalWindow-text::before {
+  content: "\276F";
+  margin-inline-end: .6em;
+  color: var(--amc-ttw-chrome-muted);
+}
+.amc-TTerminalWindow-text { overflow-wrap: anywhere; unicode-bidi: isolate; }
+.amc-TTerminalWindow-caret { display: none; }
+.amc-TTerminalWindow--caret .amc-TTerminalWindow-caret {
+  display: inline-block;
+  inline-size: .6em;
+  block-size: 1.15em;
+  margin-inline-start: 3px;
+  vertical-align: -.2em;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--amc-ttw-accent) 70%, var(--amc-ttw-chrome-ink));
+}
+.amc-TTerminalWindow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  justify-self: end;
+  min-width: 0;
+}
+.amc-TTerminalWindow-actions:empty { display: none; }
+
+/* ---------- Content pane ---------- */
+.amc-TTerminalWindow-pane {
+  border-radius: calc(var(--amc-ttw-radius) - 4px);
+  background: var(--amc-ttw-surface);
+  color: var(--amc-ttw-ink);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-ttw-ink) 18%, transparent);
+}
+.amc-TTerminalWindow-body { padding: 16px 18px; min-width: 0; overflow-x: auto; }
+.amc-TTerminalWindow-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 8px 12px;
+  border-block-start: 1px dashed var(--amc-ttw-line);
+  font-family: var(--amc-ttw-mono);
+}
+.amc-TTerminalWindow-status:empty { display: none; }
+
+/* ---------- Template options ---------- */
+.amc-TTerminalWindow--themeChrome {
+  --amc-ttw-chrome: color-mix(in srgb, var(--amc-ttw-ink) 7%, var(--amc-ttw-surface));
+  --amc-ttw-chrome-ink: var(--amc-ttw-ink);
+  --amc-ttw-chrome-muted: var(--amc-ttw-muted);
+  box-shadow:
+    0 0 0 1px var(--amc-ttw-line),
+    0 2px 4px color-mix(in srgb, var(--amc-ttw-ink) 6%, transparent),
+    0 26px 50px -30px color-mix(in srgb, var(--amc-ttw-ink) 45%, transparent);
+}
+.amc-TTerminalWindow--themeChrome .amc-TTerminalWindow-pane { box-shadow: 0 0 0 1px var(--amc-ttw-line); }
+
+/* Console pane: the pane takes the inverse colors and re-maps the component variables so
+   content that reads them (text, charts, cards) follows. */
+.amc-TTerminalWindow--console .amc-TTerminalWindow-pane {
+  --ut-component-background-color: color-mix(in srgb, var(--amc-ttw-chrome) 88%, var(--amc-ttw-chrome-ink));
+  --ut-component-text-default-color: var(--amc-ttw-chrome-ink);
+  --ut-component-text-muted-color: var(--amc-ttw-chrome-muted);
+  --ut-component-border-color: color-mix(in srgb, var(--amc-ttw-chrome-ink) 16%, transparent);
+  background:
+    radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--amc-ttw-accent) 12%, transparent), transparent 70%),
+    repeating-linear-gradient(to bottom, var(--amc-ttw-scan) 0 1px, transparent 1px 3px),
+    color-mix(in srgb, var(--amc-ttw-chrome) 94%, var(--amc-ttw-surface));
+  color: var(--amc-ttw-chrome-ink);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ttw-chrome-ink) 10%, transparent), inset 0 0 40px color-mix(in srgb, var(--amc-ttw-ink) 30%, transparent);
+}
+.amc-TTerminalWindow--console .amc-TTerminalWindow-status { border-color: color-mix(in srgb, var(--amc-ttw-chrome-ink) 16%, transparent); }
+.amc-TTerminalWindow--scanlines { --amc-ttw-scan: color-mix(in srgb, var(--amc-ttw-chrome-ink) 6%, transparent); }
+.amc-TTerminalWindow--monoBody .amc-TTerminalWindow-body { font-family: var(--amc-ttw-mono); }
+.amc-TTerminalWindow--noPadding .amc-TTerminalWindow-body { padding: 4px 0 0; }
+
+@container (max-width: 23rem) {
+  .amc-TTerminalWindow-bar { grid-template-columns: auto minmax(0, 1fr); }
+  .amc-TTerminalWindow-title { text-align: start; }
+  .amc-TTerminalWindow-actions { grid-column: 1 / -1; justify-content: flex-start; }
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TTerminalWindow--caret .amc-TTerminalWindow-caret { animation: amc-ttw-blink 1.1s steps(1, end) infinite; }
+  .amc-TTerminalWindow-light { transition: color .15s ease; }
+}
+@keyframes amc-ttw-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .amc-TTerminalWindow--caret .amc-TTerminalWindow-caret { animation: none; }
+  .amc-TTerminalWindow-light { transition: none; }
+}
+@media (forced-colors: active) {
+  .amc-TTerminalWindow { border: 1px solid CanvasText; background: Canvas; }
+  .amc-TTerminalWindow-bar, .amc-TTerminalWindow-title { color: CanvasText; }
+  .amc-TTerminalWindow-light { border: 1px solid CanvasText; }
+  .amc-TTerminalWindow-pane { border: 1px solid CanvasText; }
+}

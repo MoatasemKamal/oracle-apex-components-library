@@ -1,0 +1,23 @@
+{
+  "kind": "region",
+  "name": "AMC Stacked Sheets",
+  "staticId": "AMC_TPL_STACKED_SHEETS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "The region is the top sheet of a small pile of offset, palette-tinted paper sheets held by a strip of tape; the sheets fan out further on hover or keyboard focus.",
+  "useFor": "Regions that feel like documents or drafts: a Form for a proposal or claim, a Classic Report of recent documents, a Static Content brief or note, Cards of attachments. Works best as one or two accents per page.",
+  "keywords": ["paper stack", "sheets", "pile", "document", "fan out", "tape", "depth"],
+  "helpText": "Region template that sets the region on a pile of paper sheets. The top sheet holds the native region content on the normal surface; the sheets behind are tinted from the palette and fan out on hover and when anything inside has keyboard focus. The region icon is shown as a small tilted sticker next to the title. Buttons in Help, Edit, Change, Copy, Delete and Create sit in the header, and Previous, Close and Next in the footer. Template options: Single sheet or Four sheets change the pile, Straight stack drops the tilt so sheets offset straight down, Strong tilt doubles it, Plain paper uses neutral sheets instead of palette tints, and No body padding. On wide regions the tilt is reduced automatically so the corners stay close to the region. Under reduced motion the pile does not move; in forced-colors mode the sheets become plain outlines.",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "SINGLE", "name": "Single sheet", "cssClass": "amc-TStackedSheets--single", "sequence": 10, "help": "Only one sheet behind the region, for dense pages." },
+    { "staticId": "FOUR", "name": "Four sheets", "cssClass": "amc-TStackedSheets--four", "sequence": 20, "help": "Four sheets behind the region for a thicker pile." },
+    { "staticId": "STRAIGHT", "name": "Straight stack", "cssClass": "amc-TStackedSheets--straight", "sequence": 30, "help": "No tilt: the sheets offset straight down and fan downward on hover." },
+    { "staticId": "STRONG_TILT", "name": "Strong tilt", "cssClass": "amc-TStackedSheets--strongTilt", "sequence": 40, "help": "Doubles the tilt for a playful, hand-placed pile." },
+    { "staticId": "PLAIN", "name": "Plain paper", "cssClass": "amc-TStackedSheets--plain", "sequence": 50, "help": "Sheets and tape use neutral paper tones instead of palette tints." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TStackedSheets--noPadding", "sequence": 60, "help": "Removes side padding so reports run edge to edge on the top sheet." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

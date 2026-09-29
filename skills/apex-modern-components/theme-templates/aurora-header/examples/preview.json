@@ -1,0 +1,8 @@
+{
+  "samples": [
+    { "title": "Tall band around Cards", "regionTitle": "Good morning, operations", "icon": "fa-sun-o", "bodyKind": "cards", "options": ["amc-TAuroraHeader--tall"], "buttons": { "EDIT": "Customize" } },
+    { "title": "Around a Classic Report, no body padding", "regionTitle": "Orders waiting for you", "icon": "fa-inbox", "bodyKind": "report", "options": ["amc-TAuroraHeader--noPadding"], "buttons": { "CREATE": "New order" } },
+    { "title": "Compact, Lagoon colors, around a Chart", "regionTitle": "Fulfilment health", "icon": "fa-heartbeat", "bodyKind": "chart", "options": ["amc-TAuroraHeader--compact", "amc-TAuroraHeader--lagoon"], "buttons": { "PREVIOUS": "Last week", "NEXT": "Next week" } },
+    { "title": "Sunset colors around a Form", "regionTitle": "Credit hold review", "icon": "fa-exclamation-triangle", "bodyKind": "form", "options": ["amc-TAuroraHeader--sunset"], "buttons": { "NEXT": "Release hold" } }
+  ]
+}
