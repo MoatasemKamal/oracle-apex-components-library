@@ -1026,13 +1026,12 @@ a.amc-NCalendar-rowTitle:focus-visible,
   font-size: .75rem;
   line-height: 1.25;
   text-decoration: none;
-  transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .2s ease;
+  transition: box-shadow .2s ease;
 }
 
 .amc-NCalendar-wEv:hover,
 .amc-NCalendar-wEv:focus-visible {
   z-index: 4;
-  transform: translateY(-2px) scale(1.02);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--amc-ncal-bg) 55%, transparent),
     0 2px 4px color-mix(in srgb, var(--amc-ncal-fg) 12%, transparent),
@@ -1144,14 +1143,18 @@ a.amc-NCalendar-rowTitle:focus-visible,
 
 .amc-NCalendar-heatBusyLabel {
   color: var(--amc-ncal-muted);
-  font-size: .6875rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 600;
 }
 
 .amc-NCalendar-heatBusyValue {
   font-weight: 700;
+  unicode-bidi: isolate;
+}
+
+.amc-NCalendar-heatBusyCount {
+  color: var(--amc-ncal-muted);
+  font-variant-numeric: tabular-nums;
   unicode-bidi: isolate;
 }
 
@@ -1450,13 +1453,12 @@ a.amc-NCalendar-rowTitle:focus-visible,
   font-size: .75rem;
   line-height: 1.2;
   text-decoration: none;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: box-shadow .18s ease;
 }
 
 .amc-NCalendar-span:hover,
 .amc-NCalendar-span:focus-visible {
   box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--amc-ncal-ev) 90%, transparent);
-  transform: translateY(-1px);
 }
 
 .amc-NCalendar-span.is-danger { border-color: var(--amc-ncal-danger); }
@@ -1568,10 +1570,8 @@ a.amc-NCalendar-rowTitle:focus-visible,
   gap: .5rem;
   margin: 0;
   color: var(--amc-ncal-muted);
-  font-size: .875rem;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .amc-NCalendar-pEyebrow .amc-NCalendar-rel { letter-spacing: .04em; }
@@ -1615,10 +1615,8 @@ a.amc-NCalendar-rowTitle:focus-visible,
   margin: 0;
   padding-inline: .5rem;
   color: var(--amc-ncal-muted);
-  font-size: .75rem;
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 700;
 }
 
 .amc-NCalendar-pList { gap: .375rem; }
@@ -1659,13 +1657,12 @@ a.amc-NCalendar-rowTitle:focus-visible,
 
 .amc-NCalendar-pNextLabel {
   color: var(--amc-ncal-muted);
-  font-size: .6875rem;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 600;
 }
 
 .amc-NCalendar-pNextTitle { font-weight: 700; }
+.amc-NCalendar-pNextWhen { color: var(--amc-ncal-muted); font-size: .8125rem; unicode-bidi: isolate; }
 
 @container (max-width: 36rem) {
   .amc-NCalendar-poster { grid-template-columns: minmax(0, 1fr); }
@@ -2107,10 +2104,8 @@ a.amc-NCalendar-tileLink:hover { color: var(--amc-ncal-accent); }
 .amc-NCalendar-hubCount {
   margin: 0;
   color: var(--amc-ncal-muted);
-  font-size: .6875rem;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 700;
 }
 
 .amc-NCalendar-hubList {

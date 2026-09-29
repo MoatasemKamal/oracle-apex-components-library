@@ -925,7 +925,8 @@
     if (busiest) {
       var b = h("p", "amc-NCalendar-heatBusy");
       b.appendChild(h("span", "amc-NCalendar-heatBusyLabel", c.i18n.busiest));
-      b.appendChild(h("span", "amc-NCalendar-heatBusyValue", c.f(busiest, { weekday: "short", day: "numeric", month: "short" }) + " · " + fmtVal(max)));
+      b.appendChild(h("span", "amc-NCalendar-heatBusyValue", c.f(busiest, { weekday: "short", day: "numeric", month: "short" })));
+      b.appendChild(h("span", "amc-NCalendar-heatBusyCount", fmtVal(max)));
       sum.appendChild(b);
     }
     c.app.appendChild(sum);
@@ -958,7 +959,7 @@
       var cell = h("button", "amc-NCalendar-hcell is-l" + lvl);
       cell.type = "button";
       var isSel = sameDay(d, selInYear);
-      var tip = c.f(d, { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + " · " + (val ? fmtVal(val) : c.i18n.noEvents);
+      var tip = c.f(d, { weekday: "short", day: "numeric", month: "short", year: "numeric" }) + ", " + (val ? fmtVal(val) : c.i18n.noEvents);
       set(cell, {
         "data-day": keyOf(d),
         "data-amc-nav": "day",
@@ -1171,7 +1172,8 @@
       if (up) {
         var nx = h("p", "amc-NCalendar-pNext");
         nx.appendChild(h("span", "amc-NCalendar-pNextLabel", c.i18n.nextEvent));
-        nx.appendChild(h("span", "amc-NCalendar-pNextTitle", up.title + " · " + c.f(up.start, { weekday: "short", day: "numeric", month: "short" })));
+        nx.appendChild(h("span", "amc-NCalendar-pNextTitle", up.title));
+        nx.appendChild(h("span", "amc-NCalendar-pNextWhen", c.f(up.start, { weekday: "short", day: "numeric", month: "short" })));
         side.appendChild(nx);
       }
     }

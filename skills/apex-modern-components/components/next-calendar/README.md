@@ -10,7 +10,7 @@ Next Collection family of ten calendars that read events from a report, covering
 | APEXlang reference | `type: plugin/nextCalendar` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 One query row per event. Map Start Date (required) and Title (required); return dates as text in ISO form with TO_CHAR(date_col, 'YYYY-MM-DD"T"HH24:MI'), or 'YYYY-MM-DD' for all-day events. End Date is exclusive for timed events and the last day for all-day events. Category groups events by color and makes the lanes of Timeline Lanes. State accepts success, warning, danger, info or neutral. Value is a number that drives the Heatmap intensity instead of the event count. Without JavaScript the rows show as a readable agenda list; the runtime file builds the chosen view, keyboard navigation and live updates, and rebuilds after a region refresh.
 
