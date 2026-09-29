@@ -31,6 +31,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/design-systems.md`: turn a DESIGN.md (awesome-design-md) into a Universal Theme style
    - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
    - `references/design-quality.md`: research-first quality gate and craft checklist (adapted from Refero, MIT)
+   - `references/design-collection.md`: the `design*` families (100+ styles chosen with a Style setting) and their shared conventions
 
 All `node tools/...` commands run from this skill's root (the folder holding this file).
 
@@ -57,7 +58,10 @@ All `node tools/...` commands run from this skill's root (the folder holding thi
 
 ## B. Create or port a component
 
-1. Check the catalog; extend an existing component rather than duplicating it. Research
+1. Check the catalog; extend an existing component rather than duplicating it. For a new
+   look of an existing kind (card, badge, alert, timeline, list, KPI, profile, pricing,
+   button, header, avatar, divider), add a **style** to its `design*` family
+   (`references/design-collection.md`) instead of a new component. Research
    the pattern first (`references/design-quality.md` section 1; use the Refero MCP if
    it is connected).
 2. For external designs (21st.dev, Magic UI, etc.), first run the **licence check** and
