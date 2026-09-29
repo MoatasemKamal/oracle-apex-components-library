@@ -1,0 +1,444 @@
+{
+  "samples": [
+    {
+      "title": "beamFeatured",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "beamFeatured"
+      },
+      "rows": [
+        {
+          "PLAN": "Starter",
+          "PRICE": "149",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ user / month",
+          "DESCRIPTION": "For small sales teams getting organised.",
+          "FEATURES": "Up to 5 users|Contacts and deals|Email integration|Mobile app",
+          "CTA_LABEL": "Start free trial",
+          "CTA_URL": "#",
+          "ICON": "fa-paper-plane"
+        },
+        {
+          "PLAN": "Business",
+          "PRICE": "289",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ user / month",
+          "DESCRIPTION": "Pipelines, quotes and forecasts for growing teams.",
+          "FEATURES": "Unlimited users|Quotes and e-invoices|Sales forecasting|Workflow automation|Priority support",
+          "CTA_LABEL": "Choose Business",
+          "CTA_URL": "#",
+          "BADGE": "Most popular",
+          "HIGHLIGHT": "Y",
+          "ICON": "fa-rocket"
+        },
+        {
+          "PLAN": "Enterprise",
+          "PRICE": "Custom",
+          "DESCRIPTION": "Security, SSO and a dedicated success manager.",
+          "FEATURES": "Everything in Business|Single sign-on|Audit trail|Dedicated success manager",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#",
+          "ICON": "fa-building-o"
+        }
+      ]
+    },
+    {
+      "title": "spotlight",
+      "direction": "motion",
+      "mode": "report",
+      "settings": {
+        "STYLE": "spotlight"
+      },
+      "rows": [
+        {
+          "PLAN": "Basic",
+          "PRICE": "0",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Track up to 50 shipments a month.",
+          "FEATURES": "50 shipments|Live tracking page|Email alerts",
+          "CTA_LABEL": "Get started",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Growth",
+          "PRICE": "690",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Multi-carrier shipping for busy stores.",
+          "FEATURES": "2,000 shipments|All local carriers|Returns portal|SMS notifications",
+          "CTA_LABEL": "Start 14-day trial",
+          "CTA_URL": "#",
+          "BADGE": "Recommended",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Scale",
+          "PRICE": "1,990",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Warehouses, APIs and SLAs.",
+          "FEATURES": "Unlimited shipments|Warehouse routing|REST API|99.9% uptime SLA",
+          "CTA_LABEL": "Talk to us",
+          "CTA_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "tilt3d",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "tilt3d"
+      },
+      "rows": [
+        {
+          "PLAN": "Team",
+          "PRICE": "39",
+          "CURRENCY": "USD",
+          "PERIOD": "/ agent / month",
+          "DESCRIPTION": "Shared inbox for your support team.",
+          "FEATURES": "Email and chat|Canned replies|Basic reports",
+          "CTA_LABEL": "Try Team",
+          "CTA_URL": "#",
+          "ICON": "fa-comments-o"
+        },
+        {
+          "PLAN": "Professional",
+          "PRICE": "79",
+          "CURRENCY": "USD",
+          "PERIOD": "/ agent / month",
+          "DESCRIPTION": "SLAs, automations and a help center.",
+          "FEATURES": "Everything in Team|SLA policies|Help center|Automations",
+          "CTA_LABEL": "Try Professional",
+          "CTA_URL": "#",
+          "BADGE": "Best value",
+          "HIGHLIGHT": "Y",
+          "ICON": "fa-life-ring"
+        },
+        {
+          "PLAN": "Enterprise",
+          "PRICE": "129",
+          "CURRENCY": "USD",
+          "PERIOD": "/ agent / month",
+          "DESCRIPTION": "Multi-brand support with sandbox.",
+          "FEATURES": "Multiple brands|Sandbox|Custom roles",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#",
+          "ICON": "fa-shield"
+        }
+      ]
+    },
+    {
+      "title": "flipAnnual",
+      "direction": "depth",
+      "mode": "report",
+      "settings": {
+        "STYLE": "flipAnnual"
+      },
+      "rows": [
+        {
+          "PLAN": "Essentials",
+          "PRICE": "99",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "ANNUAL_PRICE": "950",
+          "ANNUAL_PERIOD": "/ year",
+          "SAVINGS": "Save 20%",
+          "DESCRIPTION": "Invoicing and expenses for freelancers.",
+          "FEATURES": "Unlimited invoices|ZATCA e-invoicing|Expense tracking",
+          "CTA_LABEL": "Start with Essentials",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Plus",
+          "PRICE": "249",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "ANNUAL_PRICE": "2,390",
+          "ANNUAL_PERIOD": "/ year",
+          "SAVINGS": "2 months free",
+          "DESCRIPTION": "Accounting, payroll and inventory.",
+          "FEATURES": "Everything in Essentials|Payroll for 25 staff|Inventory|Bank feeds",
+          "CTA_LABEL": "Choose Plus",
+          "CTA_URL": "#",
+          "BADGE": "Popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Premium",
+          "PRICE": "499",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "ANNUAL_PRICE": "4,790",
+          "ANNUAL_PERIOD": "/ year",
+          "SAVINGS": "Save 20%",
+          "DESCRIPTION": "Multi-entity books with approvals.",
+          "FEATURES": "Multi-company|Approval workflows|Consolidated reports",
+          "CTA_LABEL": "Choose Premium",
+          "CTA_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "neoBrutal",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "neoBrutal"
+      },
+      "rows": [
+        {
+          "PLAN": "Hobby",
+          "PRICE": "0",
+          "CURRENCY": "$",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "One app, community support.",
+          "FEATURES": "1 workspace|3 environments|Community forum",
+          "CTA_LABEL": "Start building",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Pro",
+          "PRICE": "29",
+          "CURRENCY": "$",
+          "PERIOD": "/ dev / month",
+          "DESCRIPTION": "Ship faster with previews and CI.",
+          "FEATURES": "Unlimited workspaces|Preview deployments|CI pipelines|Email support",
+          "CTA_LABEL": "Go Pro",
+          "CTA_URL": "#",
+          "BADGE": "Hot pick",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Org",
+          "PRICE": "99",
+          "CURRENCY": "$",
+          "PERIOD": "/ dev / month",
+          "DESCRIPTION": "Governance for many teams.",
+          "FEATURES": "SSO and SCIM|Audit logs|Private networking",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "clay",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "clay"
+      },
+      "rows": [
+        {
+          "PLAN": "Clinic",
+          "PRICE": "450",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Appointments for one location.",
+          "FEATURES": "Online booking|Patient reminders|2 practitioners",
+          "CTA_LABEL": "Book a demo",
+          "CTA_URL": "#",
+          "ICON": "fa-heartbeat"
+        },
+        {
+          "PLAN": "Medical Center",
+          "PRICE": "1,200",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Records, billing and insurance claims.",
+          "FEATURES": "Unlimited practitioners|E-prescriptions|Insurance claims|Lab integrations",
+          "CTA_LABEL": "Book a demo",
+          "CTA_URL": "#",
+          "BADGE": "Most chosen",
+          "HIGHLIGHT": "Y",
+          "ICON": "fa-hospital-o"
+        },
+        {
+          "PLAN": "Hospital",
+          "PRICE": "Custom",
+          "DESCRIPTION": "Multi-site deployment with HL7.",
+          "FEATURES": "Multi-site|HL7 and FHIR|On-site training",
+          "CTA_LABEL": "Contact us",
+          "CTA_URL": "#",
+          "ICON": "fa-building"
+        }
+      ]
+    },
+    {
+      "title": "holoPremium",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "holoPremium"
+      },
+      "rows": [
+        {
+          "PLAN": "Silver",
+          "PRICE": "59",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Lounge access twice a year.",
+          "FEATURES": "2 lounge visits|Priority check-in|5% on bookings",
+          "CTA_LABEL": "Join Silver",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Platinum",
+          "PRICE": "349",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Unlimited lounges and a travel concierge.",
+          "FEATURES": "Unlimited lounge visits|24/7 travel concierge|Free seat selection|15% on bookings|Companion pass",
+          "CTA_LABEL": "Upgrade to Platinum",
+          "CTA_URL": "#",
+          "BADGE": "Premium",
+          "HIGHLIGHT": "Y",
+          "ICON": "fa-diamond"
+        },
+        {
+          "PLAN": "Gold",
+          "PRICE": "149",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Six lounge visits and fast track.",
+          "FEATURES": "6 lounge visits|Fast track security|10% on bookings",
+          "CTA_LABEL": "Join Gold",
+          "CTA_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "auroraDark",
+      "direction": "bold",
+      "mode": "report",
+      "settings": {
+        "STYLE": "auroraDark"
+      },
+      "rows": [
+        {
+          "PLAN": "Analyst",
+          "PRICE": "320",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Dashboards on one data source.",
+          "FEATURES": "1 data source|20 dashboards|Daily refresh",
+          "CTA_LABEL": "Start trial",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Insights",
+          "PRICE": "980",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Blend sources and ask questions in Arabic or English.",
+          "FEATURES": "10 data sources|Natural language questions|Hourly refresh|Scheduled reports",
+          "CTA_LABEL": "Start trial",
+          "CTA_URL": "#",
+          "BADGE": "New",
+          "HIGHLIGHT": "Y",
+          "ICON": "fa-magic"
+        },
+        {
+          "PLAN": "Data Platform",
+          "PRICE": "Custom",
+          "DESCRIPTION": "Governed semantic layer for the enterprise.",
+          "FEATURES": "Unlimited sources|Row-level security|Private cloud",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "expandFeatures",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "expandFeatures"
+      },
+      "rows": [
+        {
+          "PLAN": "Retail",
+          "PRICE": "199",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ branch / month",
+          "DESCRIPTION": "Point of sale for one store.",
+          "FEATURES": "POS app|Card and Mada payments|Daily sales report|Stock alerts|Barcode labels|Offline mode",
+          "CTA_LABEL": "Choose Retail",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Chain",
+          "PRICE": "349",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ branch / month",
+          "DESCRIPTION": "Central stock across branches.",
+          "FEATURES": "Everything in Retail|Central inventory|Branch transfers|Loyalty program|Promotions engine|Supplier orders|Role permissions",
+          "CTA_LABEL": "Choose Chain",
+          "CTA_URL": "#",
+          "BADGE": "Popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Franchise",
+          "PRICE": "Custom",
+          "DESCRIPTION": "Royalties and franchisee portals.",
+          "FEATURES": "Everything in Chain|Franchisee portal|Royalty billing|Brand compliance audits|Open API",
+          "CTA_LABEL": "Contact sales",
+          "CTA_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "comparisonAdaptive",
+      "direction": "smart",
+      "mode": "report",
+      "settings": {
+        "STYLE": "comparisonAdaptive"
+      },
+      "rows": [
+        {
+          "PLAN": "Free",
+          "PRICE": "0",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Try the form builder.",
+          "FEATURES": "3 forms|100 responses|Basic fields",
+          "CTA_LABEL": "Sign up",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Team",
+          "PRICE": "120",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Collect and route requests with approvals.",
+          "FEATURES": "Unlimited forms|10,000 responses|Approvals|File uploads",
+          "CTA_LABEL": "Choose Team",
+          "CTA_URL": "#",
+          "BADGE": "Popular",
+          "HIGHLIGHT": "Y"
+        },
+        {
+          "PLAN": "Business",
+          "PRICE": "390",
+          "CURRENCY": "SAR",
+          "PERIOD": "/ month",
+          "DESCRIPTION": "Workflows across departments with an audit trail.",
+          "FEATURES": "Unlimited responses|Multi-step workflows|Audit trail|SSO",
+          "CTA_LABEL": "Choose Business",
+          "CTA_URL": "#"
+        },
+        {
+          "PLAN": "Government",
+          "PRICE": "Custom",
+          "DESCRIPTION": "Sovereign cloud hosting.",
+          "FEATURES": "Local data residency|NCA controls|On-premise option",
+          "CTA_LABEL": "Contact us",
+          "CTA_URL": "#"
+        }
+      ]
+    }
+  ]
+}

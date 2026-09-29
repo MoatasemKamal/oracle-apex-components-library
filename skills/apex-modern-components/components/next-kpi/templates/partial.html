@@ -1,0 +1,26 @@
+<div class="amc-NKpi amc-NKpi--#STYLE# {case TREND/}{when up/}amc-NKpi--up{when down/}amc-NKpi--down{otherwise/}amc-NKpi--flat{endcase/}{if INVERT_TREND/} amc-NKpi--invert{endif/}">
+  <div class="amc-NKpi-card" data-percent="#PERCENT#"{case STYLE/}{when flipDetail/} tabindex="0" role="group" aria-label="#LABEL!ATTR#"{when tilt/} data-amc-pointer="tilt"{otherwise/}{endcase/}>
+    {case STYLE/}{when beam/}<span class="amc-NKpi-beam" aria-hidden="true"></span>{when liquidFill/}<span class="amc-NKpi-liquid" aria-hidden="true"><span class="amc-NKpi-wave amc-NKpi-wave--back"></span><span class="amc-NKpi-wave"></span></span>{when auroraGlow/}<span class="amc-NKpi-aurora" aria-hidden="true"></span>{when tilt/}<span class="amc-NKpi-stack" aria-hidden="true"></span><span class="amc-NKpi-glare" aria-hidden="true"></span>{otherwise/}{endcase/}
+    <div class="amc-NKpi-face amc-NKpi-face--front">
+      <div class="amc-NKpi-head">
+        {if ?ICON/}<span class="amc-NKpi-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+        <h3 class="amc-NKpi-label">#LABEL#</h3>
+        {case STYLE/}{when ticker/}<span class="amc-NKpi-live" aria-hidden="true"></span>{when flipDetail/}<span class="amc-NKpi-flipHint" aria-hidden="true"><span class="fa fa-refresh"></span></span>{otherwise/}{endcase/}
+      </div>
+      <p class="amc-NKpi-value"><span class="amc-NKpi-num"{case STYLE/}{when ticker/} data-amc-ticker="Y"{otherwise/}{endcase/}>#VALUE#</span>{if ?UNIT/}<span class="amc-NKpi-unit">#UNIT#</span>{endif/}</p>
+      {if ?CHANGE/}<p class="amc-NKpi-delta"><span class="amc-NKpi-deltaIcon fa {case TREND/}{when up/}fa-arrow-up{when down/}fa-arrow-down{otherwise/}fa-minus{endcase/}" aria-hidden="true"></span><span class="amc-NKpi-sr">{case TREND/}{when up/}Increase{when down/}Decrease{otherwise/}No change{endcase/}</span><span class="amc-NKpi-deltaText">#CHANGE#</span></p>{endif/}
+      {case STYLE/}{when liquidFill/}{if ?PERCENT/}<p class="amc-NKpi-level"><span class="amc-NKpi-levelNum">#PERCENT#</span><span class="amc-NKpi-levelUnit">%</span></p>{endif/}{when bentoTile/}{if ?PERCENT/}<div class="amc-NKpi-ring"><span class="amc-NKpi-ringDial" aria-hidden="true"></span><span class="amc-NKpi-ringText"><span class="amc-NKpi-levelNum">#PERCENT#</span>%</span></div>{endif/}{when adaptive/}{if ?PERCENT/}<div class="amc-NKpi-meter"><span class="amc-NKpi-meterTrack" aria-hidden="true"><span class="amc-NKpi-meterBar"></span></span><span class="amc-NKpi-meterText"><span class="amc-NKpi-levelNum">#PERCENT#</span>%</span></div>{endif/}{otherwise/}{endcase/}
+      {case STYLE/}{when tilt/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="line" aria-hidden="true"></div>{endif/}{when auroraGlow/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="line" aria-hidden="true"></div>{endif/}{when bentoTile/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="line" aria-hidden="true"></div>{endif/}{when neoBrutal/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="bars" aria-hidden="true"></div>{endif/}{otherwise/}{endcase/}
+      {if ?DESCRIPTION/}<p class="amc-NKpi-desc">#DESCRIPTION#</p>{endif/}
+      {case STYLE/}{when flipDetail/}{if ?COMPARE_VALUE/}<p class="amc-NKpi-teaser" aria-hidden="true"><span class="amc-NKpi-teaserLabel">{if ?COMPARE_LABEL/}#COMPARE_LABEL#{else/}Previous{endif/}</span><span class="amc-NKpi-teaserValue">#COMPARE_VALUE#</span></p>{endif/}{otherwise/}{endcase/}
+    </div>
+    {case STYLE/}{when flipDetail/}<div class="amc-NKpi-face amc-NKpi-face--back">
+      <p class="amc-NKpi-backTitle">#LABEL#</p>
+      <dl class="amc-NKpi-compare">
+        <div class="amc-NKpi-side amc-NKpi-side--now"><dt class="amc-NKpi-sideLabel">{if ?DESCRIPTION/}#DESCRIPTION#{else/}Current{endif/}</dt><dd class="amc-NKpi-sideValue">#VALUE#{if ?UNIT/} <span class="amc-NKpi-unit">#UNIT#</span>{endif/}</dd></div>
+        {if ?COMPARE_VALUE/}<div class="amc-NKpi-side amc-NKpi-side--was"><dt class="amc-NKpi-sideLabel">{if ?COMPARE_LABEL/}#COMPARE_LABEL#{else/}Previous{endif/}</dt><dd class="amc-NKpi-sideValue">#COMPARE_VALUE#{if ?UNIT/} <span class="amc-NKpi-unit">#UNIT#</span>{endif/}</dd></div>{endif/}
+      </dl>
+      {if ?BREAKDOWN/}<div class="amc-NKpi-breakdown">#BREAKDOWN#</div>{endif/}
+    </div>{otherwise/}{endcase/}
+  </div>
+</div>

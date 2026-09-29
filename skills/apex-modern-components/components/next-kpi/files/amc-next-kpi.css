@@ -1,0 +1,1449 @@
+/* APEX Modern Components - Next KPI (Next Collection)
+ * Ten current-generation KPI tiles in four directions (motion, depth, bold, smart).
+ * Border beam, number ticker and pointer spotlight/tilt ideas adapted from Magic UI
+ * (https://github.com/magicuidesign/magicui, MIT License, (c) Magic UI).
+ * Every color resolves from Universal Theme variables (--ut-*) with literal
+ * fallbacks; tints, glows and aurora hues are color-mix() / relative colors of the
+ * palette, so the tiles follow Vita, Vita Dark, Redwood and Theme Roller. */
+
+@property --amc-nkpi-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@property --amc-nkpi-pct {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.amc-NKpi,
+.amc-NKpis {
+  --amc-nkpi-bg: var(--ut-component-background-color, #fff);
+  --amc-nkpi-page: var(--ut-body-background-color, #f8f8f8);
+  --amc-nkpi-fg: var(--ut-component-text-default-color, #262626);
+  --amc-nkpi-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-nkpi-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nkpi-radius: var(--ut-component-border-radius, .5rem);
+  --amc-nkpi-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .06));
+  --amc-nkpi-accent: var(--ut-palette-primary, #056ac8);
+  --amc-nkpi-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-nkpi-info: var(--ut-palette-info, #0076df);
+  --amc-nkpi-up: var(--ut-palette-success, #278701);
+  --amc-nkpi-up-fg: var(--ut-palette-success-contrast, #fff);
+  --amc-nkpi-down: var(--ut-palette-danger, #cb1100);
+  --amc-nkpi-down-fg: var(--ut-palette-danger-contrast, #fff);
+  --amc-nkpi-flat: var(--ut-component-text-muted-color, #6b6b6b);
+  /* Dark "night" surface for Aurora Glow; override --amc-next-night per app. */
+  --amc-nkpi-night: var(--amc-next-night, #0b1020);
+  --amc-nkpi-night-fg: var(--amc-next-night-text, #f3f5fb);
+  --amc-nkpi-night-muted: var(--amc-next-night-muted, #aab3cc);
+  /* Opaque paint for masks only (never visible). */
+  --amc-nkpi-opaque: var(--amc-next-opaque, #000);
+  /* Two companion hues derived from the primary color (relative colors below). */
+  --amc-nkpi-hue2: color-mix(in srgb, var(--amc-nkpi-accent) 55%, var(--amc-nkpi-info));
+  --amc-nkpi-hue3: color-mix(in srgb, var(--amc-nkpi-info) 70%, var(--amc-nkpi-bg));
+  --amc-nkpi-ease: cubic-bezier(.2, .7, .1, 1);
+  --amc-nkpi-min: 14rem;
+}
+
+@supports (color: oklch(from currentColor l c h)) {
+  .amc-NKpi,
+  .amc-NKpis {
+    --amc-nkpi-hue2: oklch(from var(--amc-nkpi-accent) l c calc(h + 65));
+    --amc-nkpi-hue3: oklch(from var(--amc-nkpi-accent) calc(l + .08) c calc(h - 70));
+  }
+}
+
+/* ---------- Report grid ---------- */
+
+.amc-NKpis-frame { container-type: inline-size; }
+
+.amc-NKpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-nkpi-min), 100%), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NKpis-item {
+  display: flex;
+  min-inline-size: 0;
+}
+
+.amc-NKpis--neoBrutal {
+  gap: 1.375rem;
+  padding-block-end: .5rem;
+  padding-inline-end: .5rem;
+}
+
+.amc-NKpis--tilt,
+.amc-NKpis--clay { gap: 1.25rem; padding-block-end: .75rem; }
+
+/* ---------- Shared anatomy ---------- */
+
+.amc-NKpi {
+  --amc-nkpi-trend: var(--amc-nkpi-flat);
+  --amc-nkpi-trend-fg: var(--amc-nkpi-bg);
+  flex: 1;
+  min-inline-size: 0;
+  container-type: inline-size;
+  color: var(--amc-nkpi-fg);
+}
+
+.amc-NKpi--up { --amc-nkpi-trend: var(--amc-nkpi-up); --amc-nkpi-trend-fg: var(--amc-nkpi-up-fg); }
+.amc-NKpi--down { --amc-nkpi-trend: var(--amc-nkpi-down); --amc-nkpi-trend-fg: var(--amc-nkpi-down-fg); }
+.amc-NKpi--invert.amc-NKpi--up { --amc-nkpi-trend: var(--amc-nkpi-down); --amc-nkpi-trend-fg: var(--amc-nkpi-down-fg); }
+.amc-NKpi--invert.amc-NKpi--down { --amc-nkpi-trend: var(--amc-nkpi-up); --amc-nkpi-trend-fg: var(--amc-nkpi-up-fg); }
+
+.amc-NKpi-card {
+  --amc-nkpi-trend-text: color-mix(in srgb, var(--amc-nkpi-trend) 82%, var(--amc-nkpi-fg));
+  position: relative;
+  box-sizing: border-box;
+  block-size: 100%;
+  isolation: isolate;
+}
+
+/* isolation would flatten the 3D context of the depth styles. */
+.amc-NKpi--tilt .amc-NKpi-card,
+.amc-NKpi--flipDetail .amc-NKpi-card { isolation: auto; }
+
+.amc-NKpi-face {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: .5rem;
+  box-sizing: border-box;
+  block-size: 100%;
+  padding: 1.125rem 1.25rem;
+}
+
+.amc-NKpi-head {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-inline-size: 0;
+}
+
+.amc-NKpi-icon {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 14%, transparent);
+  color: var(--amc-nkpi-accent);
+  font-size: .8125rem;
+}
+
+.amc-NKpi-label {
+  flex: 1;
+  min-inline-size: 0;
+  margin: 0;
+  color: var(--amc-nkpi-muted);
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: .3rem;
+  min-inline-size: 0;
+  margin: 0;
+  font-size: 2rem;
+  font-size: clamp(1.5rem, 14cqi, 2.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+
+.amc-NKpi-num {
+  min-inline-size: 0;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-unit {
+  color: var(--amc-nkpi-muted);
+  font-size: .875rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+.amc-NKpi-delta {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: .3rem;
+  margin: 0;
+  color: var(--amc-nkpi-trend-text);
+  font-size: .8125rem;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.amc-NKpi-deltaIcon { font-size: .75em; }
+
+.amc-NKpi-deltaText,
+.amc-NKpi-levelNum {
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-desc {
+  margin: 0;
+  color: var(--amc-nkpi-muted);
+  font-size: .75rem;
+  line-height: 1.4;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sparkline (built by the runtime file from Series) */
+.amc-NKpi-spark {
+  position: relative;
+  block-size: 2.5rem;
+  min-inline-size: 0;
+  color: var(--amc-nkpi-accent);
+}
+
+.amc-NKpi-spark:not([data-amc-init]),
+.amc-NKpi-spark[data-empty] { display: none; }
+
+.amc-NKpi-sparkPlot {
+  position: relative;
+  display: block;
+  block-size: 100%;
+}
+
+.amc-NKpi-sparkSvg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.amc-NKpi-sparkLine {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.amc-NKpi-sparkArea {
+  fill: color-mix(in srgb, currentColor 16%, transparent);
+  stroke: none;
+}
+
+.amc-NKpi-sparkDot {
+  position: absolute;
+  inset-block-start: calc(var(--amc-nkpi-ey, 50) * 1%);
+  inset-inline-start: calc(var(--amc-nkpi-ex, 100) * 1%);
+  inline-size: .5rem;
+  block-size: .5rem;
+  margin-block-start: -.25rem;
+  margin-inline-start: -.25rem;
+  border-radius: 50%;
+  background-color: currentColor;
+  box-shadow: 0 0 0 .2rem color-mix(in srgb, currentColor 25%, transparent);
+}
+
+/* The SVG x axis is physical: keep the series oldest-first left to right. */
+.amc-NKpi-spark { direction: ltr; }
+
+/* =====================================================================
+   MOTION - Ticker: odometer wheels
+   ===================================================================== */
+
+.amc-NKpi--ticker .amc-NKpi-card {
+  overflow: hidden;
+  border: 1px solid var(--amc-nkpi-line);
+  border-radius: calc(var(--amc-nkpi-radius) + .25rem);
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--amc-nkpi-accent) 12%, transparent), transparent 60%),
+    var(--amc-nkpi-bg);
+  box-shadow: var(--amc-nkpi-shadow);
+}
+
+.amc-NKpi--ticker .amc-NKpi-value {
+  font-size: 2.25rem;
+  font-size: clamp(1.125rem, 11cqi, 2.75rem);
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.amc-NKpi-live {
+  position: relative;
+  flex: none;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-nkpi-accent);
+}
+
+.amc-NKpi-live::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: var(--amc-nkpi-accent);
+  animation: amc-nkpi-ping 2.4s var(--amc-nkpi-ease) infinite;
+}
+
+@keyframes amc-nkpi-ping {
+  0% { transform: scale(1); opacity: .6; }
+  70%, 100% { transform: scale(3); opacity: 0; }
+}
+
+.amc-NKpi-num.is-wheels { unicode-bidi: normal; }
+
+.amc-NKpi-reads {
+  display: inline-flex;
+  flex-wrap: wrap;
+  max-inline-size: 100%;
+  gap: .05em;
+  direction: ltr;
+  vertical-align: bottom;
+}
+
+.amc-NKpi-wheel,
+.amc-NKpi-glyph {
+  display: inline-block;
+  block-size: 1.2em;
+  line-height: 1.2em;
+}
+
+.amc-NKpi-wheel {
+  position: relative;
+  overflow: hidden;
+  padding-inline: .07em;
+  border-radius: .16em;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--amc-nkpi-fg) 9%, transparent),
+    color-mix(in srgb, var(--amc-nkpi-fg) 3%, transparent) 50%,
+    color-mix(in srgb, var(--amc-nkpi-fg) 9%, transparent));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nkpi-fg) 7%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, var(--amc-nkpi-opaque) 16%, var(--amc-nkpi-opaque) 84%, transparent);
+  mask-image: linear-gradient(180deg, transparent, var(--amc-nkpi-opaque) 16%, var(--amc-nkpi-opaque) 84%, transparent);
+}
+
+/* Split-flap seam across the middle of every wheel. */
+.amc-NKpi-wheel::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: 1px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-bg) 70%, transparent);
+}
+
+.amc-NKpi-reel {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(calc(var(--amc-nkpi-d, 0) * -1.2em));
+  transition: transform 1.7s var(--amc-nkpi-ease) calc(var(--amc-nkpi-i, 0) * 80ms);
+}
+
+.amc-NKpi-num.is-reset .amc-NKpi-reel { transition: none; }
+
+.amc-NKpi-cell {
+  display: block;
+  block-size: 1.2em;
+  text-align: center;
+}
+
+.amc-NKpi-glyph { padding-inline: .02em; }
+
+.amc-NKpi--ticker .amc-NKpi-delta {
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-trend) 12%, transparent);
+}
+
+/* =====================================================================
+   MOTION - Beam: travelling border beam over a dot grid
+   ===================================================================== */
+
+.amc-NKpi--beam .amc-NKpi-card {
+  border: 1px solid var(--amc-nkpi-line);
+  border-radius: calc(var(--amc-nkpi-radius) + .375rem);
+  background-color: var(--amc-nkpi-bg);
+  box-shadow: 0 .75rem 1.75rem -1.25rem color-mix(in srgb, var(--amc-nkpi-accent) 55%, transparent), var(--amc-nkpi-shadow);
+}
+
+/* Dot grid, faded toward the start corner. */
+.amc-NKpi--beam .amc-NKpi-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(color-mix(in srgb, var(--amc-nkpi-fg) 16%, transparent) 1px, transparent 1.5px);
+  background-size: .875rem .875rem;
+  -webkit-mask-image: radial-gradient(110% 90% at 100% 100%, var(--amc-nkpi-opaque), transparent 70%);
+  mask-image: radial-gradient(110% 90% at 100% 100%, var(--amc-nkpi-opaque), transparent 70%);
+  pointer-events: none;
+}
+
+.amc-NKpi-beam {
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  padding: 2px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--amc-nkpi-angle),
+    transparent 0 12%,
+    color-mix(in srgb, var(--amc-nkpi-hue3) 60%, transparent) 20%,
+    transparent 26%,
+    transparent 58%,
+    color-mix(in srgb, var(--amc-nkpi-hue2) 70%, transparent) 72%,
+    var(--amc-nkpi-accent) 86%,
+    transparent 92%);
+  -webkit-mask: linear-gradient(var(--amc-nkpi-opaque) 0 0) content-box, linear-gradient(var(--amc-nkpi-opaque) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-nkpi-opaque) 0 0) content-box exclude, linear-gradient(var(--amc-nkpi-opaque) 0 0);
+  pointer-events: none;
+  animation: amc-nkpi-orbit 6s linear infinite;
+}
+
+@keyframes amc-nkpi-orbit {
+  to { --amc-nkpi-angle: 360deg; }
+}
+
+.amc-NKpi--beam .amc-NKpi-label { color: var(--amc-nkpi-fg); }
+
+.amc-NKpi--beam .amc-NKpi-value {
+  font-size: clamp(1.625rem, 15cqi, 2.5rem);
+  font-weight: 750;
+}
+
+.amc-NKpi--beam .amc-NKpi-num {
+  background-image: linear-gradient(100deg, var(--amc-nkpi-fg) 35%, var(--amc-nkpi-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.amc-NKpi--beam .amc-NKpi-delta {
+  padding: .2rem .55rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nkpi-trend) 35%, transparent);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-trend) 10%, var(--amc-nkpi-bg));
+}
+
+/* =====================================================================
+   MOTION - Liquid Fill: the tile fills with a moving wave to Percent
+   ===================================================================== */
+
+.amc-NKpi--liquidFill .amc-NKpi-card {
+  --amc-nkpi-liquid-top: color-mix(in srgb, var(--amc-nkpi-accent) 24%, var(--amc-nkpi-bg));
+  --amc-nkpi-liquid-deep: color-mix(in srgb, var(--amc-nkpi-accent) 40%, var(--amc-nkpi-bg));
+  overflow: hidden;
+  min-block-size: 10.5rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nkpi-accent) 30%, var(--amc-nkpi-line));
+  border-radius: calc(var(--amc-nkpi-radius) + .75rem);
+  background-color: var(--amc-nkpi-bg);
+  box-shadow: inset 0 0 0 .25rem color-mix(in srgb, var(--amc-nkpi-accent) 6%, transparent), var(--amc-nkpi-shadow);
+}
+
+.amc-NKpi-liquid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  direction: ltr;
+  background: linear-gradient(180deg, var(--amc-nkpi-liquid-top), var(--amc-nkpi-liquid-deep));
+  transform: translateY(calc((100 - var(--amc-nkpi-pct, 0)) * 1%));
+  transition: transform 2s var(--amc-nkpi-ease);
+}
+
+.amc-NKpi-wave {
+  position: absolute;
+  inset-block-end: calc(100% - 1px);
+  inset-inline-start: 0;
+  inline-size: 200%;
+  block-size: .875rem;
+  background-color: var(--amc-nkpi-liquid-top);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 Q15 0 30 6 T60 6 T90 6 T120 6 V12 H0Z'/%3E%3C/svg%3E") 0 0 / 50% 100% repeat-x;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 Q15 0 30 6 T60 6 T90 6 T120 6 V12 H0Z'/%3E%3C/svg%3E") 0 0 / 50% 100% repeat-x;
+  animation: amc-nkpi-wave 5s linear infinite;
+}
+
+.amc-NKpi-wave--back {
+  block-size: 1.25rem;
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 14%, var(--amc-nkpi-bg));
+  animation-duration: 8s;
+  animation-direction: reverse;
+}
+
+@keyframes amc-nkpi-wave {
+  to { transform: translateX(-50%); }
+}
+
+/* Rising bubbles inside the liquid. */
+.amc-NKpi-liquid::before,
+.amc-NKpi-liquid::after {
+  content: "";
+  position: absolute;
+  inset-block-end: .75rem;
+  inset-inline-start: 22%;
+  inline-size: .375rem;
+  block-size: .375rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--amc-nkpi-bg) 70%, transparent);
+  animation: amc-nkpi-bubble 4.5s ease-in infinite;
+}
+
+.amc-NKpi-liquid::after {
+  inset-inline-start: 64%;
+  inline-size: .25rem;
+  block-size: .25rem;
+  animation-delay: 1.8s;
+  animation-duration: 3.6s;
+}
+
+@keyframes amc-nkpi-bubble {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-4.5rem); opacity: 0; }
+}
+
+.amc-NKpi--liquidFill .amc-NKpi-face { grid-template-rows: auto auto auto 1fr; }
+
+.amc-NKpi--liquidFill .amc-NKpi-label { color: var(--amc-nkpi-fg); }
+
+.amc-NKpi--liquidFill .amc-NKpi-value { font-weight: 750; }
+
+.amc-NKpi-level {
+  display: flex;
+  align-items: baseline;
+  align-self: end;
+  justify-self: end;
+  margin: 0;
+  color: color-mix(in srgb, var(--amc-nkpi-accent) 55%, var(--amc-nkpi-fg));
+  font-size: 2.75rem;
+  font-size: clamp(2rem, 20cqi, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.amc-NKpi-levelUnit {
+  font-size: .45em;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* =====================================================================
+   DEPTH - Tilt: pointer tilt with a floating number plate
+   ===================================================================== */
+
+.amc-NKpi--tilt {
+  padding-block: .375rem .875rem;
+  perspective: 44rem;
+}
+
+.amc-NKpi--tilt .amc-NKpi-card {
+  --amc-nkpi-rest-y: -5deg;
+  border: 1px solid var(--amc-nkpi-line);
+  border-radius: calc(var(--amc-nkpi-radius) + .5rem);
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--amc-nkpi-accent) 12%, var(--amc-nkpi-bg)), var(--amc-nkpi-bg) 58%);
+  box-shadow:
+    0 1.75rem 2.5rem -1.75rem color-mix(in srgb, var(--amc-nkpi-fg) 45%, transparent),
+    var(--amc-nkpi-shadow);
+  transform-style: preserve-3d;
+  transform: rotateX(var(--amc-rx, 4deg)) rotateY(var(--amc-ry, var(--amc-nkpi-rest-y)));
+  transition: transform .6s var(--amc-nkpi-ease);
+}
+
+.amc-NKpi--tilt .amc-NKpi-card:dir(rtl) { --amc-nkpi-rest-y: 5deg; }
+
+.amc-NKpi--tilt .amc-NKpi-card.is-pointer { transition-duration: .15s; }
+
+.amc-NKpi--tilt .amc-NKpi-face { transform-style: preserve-3d; }
+
+/* A second sheet sits behind the tile. */
+.amc-NKpi-stack {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 1px solid color-mix(in srgb, var(--amc-nkpi-accent) 30%, var(--amc-nkpi-line));
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 16%, var(--amc-nkpi-bg));
+  transform: translate3d(0, 1.5rem, -3rem) scale(.96);
+  pointer-events: none;
+}
+
+.amc-NKpi-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: radial-gradient(60% 60% at var(--amc-mx, 50%) var(--amc-my, 0%), color-mix(in srgb, var(--amc-nkpi-accent) 20%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+
+.amc-NKpi--tilt .amc-NKpi-card.is-pointer .amc-NKpi-glare { opacity: 1; }
+
+.amc-NKpi--tilt .amc-NKpi-head { transform: translateZ(1.25rem); }
+
+.amc-NKpi--tilt .amc-NKpi-value {
+  justify-self: start;
+  max-inline-size: 100%;
+  box-sizing: border-box;
+  padding: .3rem .75rem .4rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nkpi-accent) 22%, var(--amc-nkpi-line));
+  border-radius: .875rem;
+  background-color: var(--amc-nkpi-bg);
+  box-shadow:
+    0 1.25rem 1.5rem -1rem color-mix(in srgb, var(--amc-nkpi-accent) 60%, transparent),
+    0 .125rem .25rem color-mix(in srgb, var(--amc-nkpi-fg) 8%, transparent);
+  font-weight: 750;
+  transform: translateZ(2.75rem);
+}
+
+.amc-NKpi--tilt .amc-NKpi-delta { transform: translateZ(1.75rem); }
+.amc-NKpi--tilt .amc-NKpi-spark { transform: translateZ(1.5rem); }
+.amc-NKpi--tilt .amc-NKpi-desc { transform: translateZ(.75rem); }
+
+/* =====================================================================
+   DEPTH - Flip Detail: front figure, back comparison and breakdown
+   ===================================================================== */
+
+.amc-NKpi--flipDetail { perspective: 60rem; }
+
+.amc-NKpi--flipDetail .amc-NKpi-card {
+  --amc-nkpi-flip: 180deg;
+  display: grid;
+  border-radius: calc(var(--amc-nkpi-radius) + .375rem);
+  transform-style: preserve-3d;
+  transition: transform .75s var(--amc-nkpi-ease);
+  outline-offset: .25rem;
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-card:dir(rtl) { --amc-nkpi-flip: -180deg; }
+
+.amc-NKpi--flipDetail .amc-NKpi-card:focus { outline: none; }
+
+.amc-NKpi--flipDetail .amc-NKpi-card:focus-visible {
+  outline: 2px solid var(--amc-nkpi-accent);
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-card:focus-within {
+  transform: rotateY(var(--amc-nkpi-flip));
+}
+
+@media (hover: hover) {
+  .amc-NKpi--flipDetail .amc-NKpi-card:hover {
+    transform: rotateY(var(--amc-nkpi-flip));
+  }
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-face {
+  grid-area: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--amc-nkpi-line);
+  border-radius: inherit;
+  background:
+    linear-gradient(115deg, transparent 38%, color-mix(in srgb, var(--amc-nkpi-accent) 7%, transparent) 50%, transparent 62%),
+    var(--amc-nkpi-bg);
+  /* A solid lower edge gives the tile the thickness of a real card. */
+  box-shadow:
+    0 .3125rem 0 -.0625rem color-mix(in srgb, var(--amc-nkpi-accent) 30%, var(--amc-nkpi-bg)),
+    0 1.5rem 1.75rem -1.125rem color-mix(in srgb, var(--amc-nkpi-fg) 40%, transparent);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-face--front {
+  grid-template-rows: auto 1fr;
+  align-content: stretch;
+}
+
+/* Teaser strip: a glimpse of the back face (the back face carries the real text). */
+.amc-NKpi-teaser {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .375rem;
+  margin: .25rem -1.25rem -1.125rem;
+  padding: .5rem 3rem .625rem 1.25rem;
+  padding-inline: 1.25rem 3rem;
+  border-block-start: 1px dashed color-mix(in srgb, var(--amc-nkpi-accent) 35%, var(--amc-nkpi-line));
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 7%, var(--amc-nkpi-bg));
+  font-size: .75rem;
+}
+
+.amc-NKpi-teaserLabel {
+  color: var(--amc-nkpi-muted);
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-teaserValue {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-value {
+  align-self: center;
+  font-size: clamp(1.75rem, 16cqi, 2.75rem);
+  font-weight: 750;
+}
+
+/* Dog-ear: a folded corner that shows the tile has a back. */
+.amc-NKpi--flipDetail .amc-NKpi-face--front::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  z-index: 2;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-start-start-radius: .5rem;
+  background: linear-gradient(to bottom right, color-mix(in srgb, var(--amc-nkpi-accent) 35%, var(--amc-nkpi-bg)) 50%, color-mix(in srgb, var(--amc-nkpi-fg) 8%, var(--amc-nkpi-bg)) 50%);
+  box-shadow: -.125rem -.125rem .375rem color-mix(in srgb, var(--amc-nkpi-fg) 14%, transparent);
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-face--front:dir(rtl)::after {
+  background: linear-gradient(to bottom left, color-mix(in srgb, var(--amc-nkpi-accent) 35%, var(--amc-nkpi-bg)) 50%, color-mix(in srgb, var(--amc-nkpi-fg) 8%, var(--amc-nkpi-bg)) 50%);
+  box-shadow: .125rem -.125rem .375rem color-mix(in srgb, var(--amc-nkpi-fg) 14%, transparent);
+}
+
+.amc-NKpi-flipHint {
+  flex: none;
+  color: color-mix(in srgb, var(--amc-nkpi-accent) 70%, var(--amc-nkpi-muted));
+  font-size: .75rem;
+}
+
+.amc-NKpi--flipDetail .amc-NKpi-face--back {
+  gap: .625rem;
+  background:
+    radial-gradient(90% 70% at 0% 0%, color-mix(in srgb, var(--amc-nkpi-accent) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--amc-nkpi-accent) 5%, var(--amc-nkpi-bg));
+  transform: rotateY(180deg);
+}
+
+.amc-NKpi-backTitle {
+  margin: 0;
+  color: var(--amc-nkpi-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(6.5rem, 100%), 1fr));
+  gap: .5rem;
+  margin: 0;
+}
+
+.amc-NKpi-side {
+  display: grid;
+  gap: .125rem;
+  padding: .5rem .625rem;
+  border-radius: .625rem;
+  background-color: var(--amc-nkpi-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nkpi-line);
+}
+
+.amc-NKpi-side--now { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--amc-nkpi-accent) 55%, transparent); }
+
+.amc-NKpi-sideLabel {
+  color: var(--amc-nkpi-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-sideValue {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-sideValue .amc-NKpi-unit { font-size: .6875rem; }
+
+.amc-NKpi-breakdown {
+  color: var(--amc-nkpi-muted);
+  font-size: .75rem;
+  overflow-wrap: anywhere;
+}
+
+.amc-NKpi-parts {
+  display: grid;
+  gap: .25rem;
+  margin: 0;
+}
+
+.amc-NKpi-part {
+  display: flex;
+  align-items: baseline;
+  gap: .375rem;
+  min-inline-size: 0;
+}
+
+/* Dotted leader between name and value. */
+.amc-NKpi-part::after {
+  content: "";
+  order: 1;
+  flex: 1;
+  min-inline-size: .5rem;
+  border-block-end: 1px dotted color-mix(in srgb, var(--amc-nkpi-fg) 30%, transparent);
+}
+
+.amc-NKpi-partName {
+  min-inline-size: 0;
+  color: var(--amc-nkpi-muted);
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+
+.amc-NKpi-partValue {
+  order: 2;
+  margin: 0;
+  color: var(--amc-nkpi-fg);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  unicode-bidi: plaintext;
+}
+
+/* =====================================================================
+   BOLD - Neo Brutal: ink border, hard offset shadow, flat fills
+   ===================================================================== */
+
+.amc-NKpi--neoBrutal .amc-NKpi-card {
+  --amc-nkpi-ink: var(--amc-nkpi-fg);
+  --amc-nkpi-off: .375rem;
+  border: 3px solid var(--amc-nkpi-ink);
+  border-radius: .375rem;
+  background-color: var(--amc-nkpi-bg);
+  box-shadow: var(--amc-nkpi-off) var(--amc-nkpi-off) 0 var(--amc-nkpi-ink);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-card:dir(rtl) { box-shadow: calc(var(--amc-nkpi-off) * -1) var(--amc-nkpi-off) 0 var(--amc-nkpi-ink); }
+
+@media (hover: hover) {
+  .amc-NKpi--neoBrutal .amc-NKpi-card:hover {
+    --amc-nkpi-off: .5625rem;
+    transform: translate(-.1875rem, -.1875rem);
+  }
+  .amc-NKpi--neoBrutal .amc-NKpi-card:dir(rtl):hover { transform: translate(.1875rem, -.1875rem); }
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-face {
+  gap: .75rem;
+  padding: 1rem 1.125rem 1.125rem;
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-head { justify-content: space-between; }
+
+.amc-NKpi--neoBrutal .amc-NKpi-label {
+  flex: 0 1 auto;
+  padding: .2rem .5rem;
+  border: 2px solid var(--amc-nkpi-ink);
+  border-radius: .25rem;
+  background-color: var(--amc-nkpi-accent);
+  color: var(--amc-nkpi-accent-fg);
+  font-size: .6875rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-icon {
+  order: 2;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border: 2px solid var(--amc-nkpi-ink);
+  border-radius: .25rem;
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 16%, var(--amc-nkpi-bg));
+  color: var(--amc-nkpi-ink);
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-value {
+  font-size: 2.5rem;
+  font-size: clamp(1.875rem, 18cqi, 3.25rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-unit {
+  color: var(--amc-nkpi-ink);
+  font-weight: 800;
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-delta {
+  padding: .2rem .55rem;
+  border: 2px solid var(--amc-nkpi-ink);
+  border-radius: .25rem;
+  background-color: var(--amc-nkpi-trend);
+  box-shadow: .1875rem .1875rem 0 var(--amc-nkpi-ink);
+  color: var(--amc-nkpi-trend-fg);
+  font-weight: 800;
+  transform: rotate(-2.5deg);
+}
+
+.amc-NKpi--neoBrutal.amc-NKpi--flat .amc-NKpi-delta {
+  background-color: var(--amc-nkpi-bg);
+  color: var(--amc-nkpi-ink);
+}
+
+.amc-NKpi--neoBrutal .amc-NKpi-spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  block-size: 3rem;
+}
+
+.amc-NKpi-sparkBar {
+  flex: 1;
+  min-inline-size: 0;
+  box-sizing: border-box;
+  block-size: calc(var(--amc-nkpi-h, 6) * 1%);
+  border: 2px solid var(--amc-nkpi-ink, currentColor);
+  border-radius: 2px 2px 0 0;
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 22%, var(--amc-nkpi-bg));
+}
+
+.amc-NKpi-sparkBar.is-current { background-color: var(--amc-nkpi-accent); }
+
+.amc-NKpi--neoBrutal .amc-NKpi-desc {
+  padding-block-start: .5rem;
+  border-block-start: 2px dashed var(--amc-nkpi-ink);
+  color: var(--amc-nkpi-ink);
+  font-weight: 600;
+}
+
+/* =====================================================================
+   BOLD - Clay: pillowy radius, soft inner and outer shadows
+   ===================================================================== */
+
+.amc-NKpi--clay .amc-NKpi-card {
+  border-radius: 1.75rem;
+  background-color: color-mix(in srgb, var(--amc-nkpi-accent) 7%, var(--amc-nkpi-bg));
+  box-shadow:
+    0 1.25rem 2rem -1.125rem color-mix(in srgb, var(--amc-nkpi-accent) 45%, transparent),
+    0 .375rem .75rem -.25rem color-mix(in srgb, var(--amc-nkpi-fg) 12%, transparent),
+    inset 0 -.5rem 1rem color-mix(in srgb, var(--amc-nkpi-accent) 14%, transparent),
+    inset 0 .5rem .75rem color-mix(in srgb, var(--amc-nkpi-page) 75%, transparent);
+  transition: transform .35s var(--amc-nkpi-ease);
+}
+
+@media (hover: hover) {
+  .amc-NKpi--clay .amc-NKpi-card:hover { transform: translateY(-.1875rem) scale(1.01); }
+}
+
+.amc-NKpi--clay .amc-NKpi-face {
+  gap: .625rem;
+  padding: 1.375rem 1.5rem 1.5rem;
+}
+
+.amc-NKpi--clay .amc-NKpi-head {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .75rem;
+}
+
+.amc-NKpi--clay .amc-NKpi-icon {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 1rem;
+  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--amc-nkpi-accent) 55%, var(--amc-nkpi-bg)), var(--amc-nkpi-accent) 70%);
+  box-shadow:
+    0 .5rem .875rem -.375rem color-mix(in srgb, var(--amc-nkpi-accent) 70%, transparent),
+    inset -.1875rem -.25rem .5rem color-mix(in srgb, var(--amc-nkpi-fg) 22%, transparent),
+    inset .1875rem .25rem .5rem color-mix(in srgb, var(--amc-nkpi-bg) 45%, transparent);
+  color: var(--amc-nkpi-accent-fg);
+  font-size: 1.0625rem;
+}
+
+.amc-NKpi--clay .amc-NKpi-label {
+  color: var(--amc-nkpi-fg);
+  font-size: .875rem;
+}
+
+.amc-NKpi--clay .amc-NKpi-value {
+  color: color-mix(in srgb, var(--amc-nkpi-accent) 45%, var(--amc-nkpi-fg));
+  font-size: clamp(1.75rem, 15cqi, 2.5rem);
+  font-weight: 800;
+}
+
+.amc-NKpi--clay .amc-NKpi-delta {
+  padding: .3rem .75rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-trend) 14%, var(--amc-nkpi-bg));
+  box-shadow:
+    inset 0 -.1875rem .375rem color-mix(in srgb, var(--amc-nkpi-trend) 22%, transparent),
+    inset 0 .1875rem .375rem color-mix(in srgb, var(--amc-nkpi-page) 80%, transparent),
+    0 .25rem .5rem -.25rem color-mix(in srgb, var(--amc-nkpi-trend) 40%, transparent);
+}
+
+/* =====================================================================
+   BOLD - Aurora Glow: night tile, aurora mesh, glowing number, grain
+   ===================================================================== */
+
+.amc-NKpi--auroraGlow .amc-NKpi-card {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--amc-nkpi-night-fg) 14%, transparent);
+  border-radius: calc(var(--amc-nkpi-radius) + .5rem);
+  background-color: var(--amc-nkpi-night);
+  box-shadow: 0 1.25rem 2rem -1.25rem color-mix(in srgb, var(--amc-nkpi-accent) 60%, transparent);
+  color: var(--amc-nkpi-night-fg);
+}
+
+.amc-NKpi-aurora {
+  position: absolute;
+  inset: -45%;
+  z-index: 0;
+  background:
+    radial-gradient(22% 26% at 72% 36%, color-mix(in srgb, var(--amc-nkpi-accent) 90%, transparent), transparent 70%),
+    radial-gradient(22% 22% at 60% 30%, color-mix(in srgb, var(--amc-nkpi-hue2) 80%, transparent), transparent 70%),
+    radial-gradient(30% 22% at 40% 70%, color-mix(in srgb, var(--amc-nkpi-hue3) 70%, transparent), transparent 70%);
+  filter: blur(1.25rem);
+  opacity: .85;
+  animation: amc-nkpi-aurora 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes amc-nkpi-aurora {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(18deg) scale(1.12) translate(3%, -2%); }
+  100% { transform: rotate(-12deg) scale(1.05) translate(-3%, 3%); }
+}
+
+/* Film grain plus a veil that keeps text contrast on top of the aurora. */
+.amc-NKpi--auroraGlow .amc-NKpi-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .16;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.amc-NKpi--auroraGlow .amc-NKpi-label,
+.amc-NKpi--auroraGlow .amc-NKpi-unit,
+.amc-NKpi--auroraGlow .amc-NKpi-desc { color: var(--amc-nkpi-night-muted); }
+
+.amc-NKpi--auroraGlow .amc-NKpi-icon {
+  background-color: color-mix(in srgb, var(--amc-nkpi-night-fg) 12%, transparent);
+  color: var(--amc-nkpi-night-fg);
+}
+
+.amc-NKpi--auroraGlow .amc-NKpi-value {
+  font-size: clamp(1.75rem, 16cqi, 2.75rem);
+  font-weight: 750;
+  text-shadow:
+    0 0 1.5rem color-mix(in srgb, var(--amc-nkpi-accent) 90%, transparent),
+    0 0 .375rem color-mix(in srgb, var(--amc-nkpi-hue2) 50%, transparent);
+}
+
+.amc-NKpi--auroraGlow .amc-NKpi-delta {
+  padding: .2rem .6rem;
+  border: 1px solid color-mix(in srgb, var(--amc-nkpi-night-fg) 20%, transparent);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-night-fg) 10%, transparent);
+  color: color-mix(in srgb, var(--amc-nkpi-trend) 45%, var(--amc-nkpi-night-fg));
+}
+
+.amc-NKpi--auroraGlow .amc-NKpi-spark {
+  color: color-mix(in srgb, var(--amc-nkpi-accent) 45%, var(--amc-nkpi-night-fg));
+  filter: drop-shadow(0 0 .375rem color-mix(in srgb, var(--amc-nkpi-accent) 80%, transparent));
+}
+
+/* =====================================================================
+   SMART - Bento Tile: container queries recompose the parts into sub-tiles
+   ===================================================================== */
+
+.amc-NKpis--bentoTile { grid-auto-flow: dense; }
+
+@container (min-width: 30rem) {
+  .amc-NKpis--bentoTile > .amc-NKpis-item:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-card {
+  border: 1px solid var(--amc-nkpi-line);
+  border-radius: calc(var(--amc-nkpi-radius) + .625rem);
+  background-color: color-mix(in srgb, var(--amc-nkpi-fg) 4%, var(--amc-nkpi-bg));
+  transition: --amc-nkpi-pct 1.4s var(--amc-nkpi-ease);
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-face {
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  gap: .375rem;
+  padding: .375rem;
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-head { padding: .375rem .5rem .125rem; }
+
+.amc-NKpi--bentoTile .amc-NKpi-label { color: var(--amc-nkpi-fg); }
+
+.amc-NKpi--bentoTile .amc-NKpi-value,
+.amc-NKpi--bentoTile .amc-NKpi-delta,
+.amc-NKpi--bentoTile .amc-NKpi-ring,
+.amc-NKpi--bentoTile .amc-NKpi-spark {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: .75rem .875rem;
+  border-radius: calc(var(--amc-nkpi-radius) + .25rem);
+  background-color: var(--amc-nkpi-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nkpi-line);
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-value {
+  align-content: end;
+  min-block-size: 5rem;
+  background:
+    radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--amc-nkpi-accent) 16%, transparent), transparent 60%),
+    var(--amc-nkpi-bg);
+  font-size: clamp(1.625rem, 13cqi, 3.25rem);
+  font-weight: 750;
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-delta {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: .125rem;
+  justify-self: stretch;
+  background-color: color-mix(in srgb, var(--amc-nkpi-trend) 10%, var(--amc-nkpi-bg));
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-deltaIcon {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--amc-nkpi-trend);
+  color: var(--amc-nkpi-trend-fg);
+  font-size: .6875rem;
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-spark {
+  block-size: 4.25rem;
+  padding-block: .875rem .625rem;
+}
+
+.amc-NKpi--bentoTile .amc-NKpi-desc { padding: .125rem .5rem .25rem; }
+
+.amc-NKpi-ring {
+  display: grid;
+  place-items: center;
+}
+
+.amc-NKpi-ringDial,
+.amc-NKpi-ringText { grid-area: 1 / 1; }
+
+.amc-NKpi-ringDial {
+  inline-size: 4.25rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(var(--amc-nkpi-accent) calc(var(--amc-nkpi-pct, 0) * 1%), color-mix(in srgb, var(--amc-nkpi-fg) 10%, transparent) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - .4375rem), var(--amc-nkpi-opaque) calc(100% - .4375rem + 1px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - .4375rem), var(--amc-nkpi-opaque) calc(100% - .4375rem + 1px));
+}
+
+.amc-NKpi-ringText {
+  font-size: .8125rem;
+  font-weight: 700;
+}
+
+/* Two columns: number across, change + ring side by side, spark across. */
+@container (min-width: 15rem) {
+  .amc-NKpi--bentoTile .amc-NKpi-face { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .amc-NKpi--bentoTile .amc-NKpi-head,
+  .amc-NKpi--bentoTile .amc-NKpi-value,
+  .amc-NKpi--bentoTile .amc-NKpi-spark,
+  .amc-NKpi--bentoTile .amc-NKpi-desc { grid-column: 1 / -1; }
+  .amc-NKpi--bentoTile .amc-NKpi-face:not(:has(.amc-NKpi-ring)) .amc-NKpi-delta,
+  .amc-NKpi--bentoTile .amc-NKpi-face:not(:has(.amc-NKpi-delta)) .amc-NKpi-ring { grid-column: 1 / -1; }
+}
+
+/* Four columns: a tall number tile, the spark across the top, change and ring below. */
+@container (min-width: 28rem) {
+  .amc-NKpi--bentoTile .amc-NKpi-face {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-content: stretch;
+  }
+  .amc-NKpi--bentoTile .amc-NKpi-value {
+    grid-column: 1 / span 2;
+    grid-row: span 2;
+    min-block-size: 9rem;
+    font-size: clamp(1.625rem, 8cqi, 3.5rem);
+  }
+  .amc-NKpi--bentoTile .amc-NKpi-spark { grid-column: 3 / span 2; }
+  .amc-NKpi--bentoTile .amc-NKpi-face:not(:has(.amc-NKpi-spark)) .amc-NKpi-value { grid-row: auto; }
+  .amc-NKpi--bentoTile .amc-NKpi-delta { grid-column: 3; }
+  .amc-NKpi--bentoTile .amc-NKpi-ring { grid-column: 4; }
+  .amc-NKpi--bentoTile .amc-NKpi-face:not(:has(.amc-NKpi-ring)) .amc-NKpi-delta,
+  .amc-NKpi--bentoTile .amc-NKpi-face:not(:has(.amc-NKpi-delta)) .amc-NKpi-ring { grid-column: 3 / span 2; }
+}
+
+/* =====================================================================
+   SMART - Adaptive: chip, big number or row, by its own width
+   ===================================================================== */
+
+.amc-NKpis--adaptive { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: .75rem; }
+.amc-NKpis--adaptive > .amc-NKpis-item { grid-column: span 6; }
+.amc-NKpis--adaptive > .amc-NKpis-item:first-child { grid-column: 1 / -1; }
+
+@container (min-width: 40rem) {
+  .amc-NKpis--adaptive > .amc-NKpis-item { grid-column: span 3; }
+  .amc-NKpis--adaptive > .amc-NKpis-item:nth-child(2),
+  .amc-NKpis--adaptive > .amc-NKpis-item:nth-child(3) { grid-column: span 6; }
+}
+
+@container (max-width: 22rem) {
+  .amc-NKpis--adaptive > .amc-NKpis-item { grid-column: 1 / -1; }
+}
+
+.amc-NKpi--adaptive .amc-NKpi-card {
+  border: 1px solid var(--amc-nkpi-line);
+  border-radius: calc(var(--amc-nkpi-radius) + .375rem);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nkpi-accent) 7%, transparent), transparent 3.5rem),
+    var(--amc-nkpi-bg);
+  box-shadow: var(--amc-nkpi-shadow);
+}
+
+.amc-NKpi--adaptive .amc-NKpi-icon {
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: .75rem;
+  background-color: var(--amc-nkpi-accent);
+  color: var(--amc-nkpi-accent-fg);
+  font-size: .9375rem;
+}
+
+.amc-NKpi--adaptive .amc-NKpi-label { color: var(--amc-nkpi-fg); }
+
+.amc-NKpi--adaptive .amc-NKpi-value {
+  font-size: clamp(1.75rem, 15cqi, 3rem);
+  font-weight: 750;
+}
+
+.amc-NKpi--adaptive .amc-NKpi-delta {
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-trend) 12%, transparent);
+}
+
+.amc-NKpi-meter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .625rem;
+}
+
+.amc-NKpi-meterTrack {
+  display: block;
+  overflow: hidden;
+  block-size: .5rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-nkpi-fg) 9%, transparent);
+}
+
+.amc-NKpi-meterBar {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--amc-nkpi-hue2), var(--amc-nkpi-accent));
+  transform: scaleX(calc(var(--amc-nkpi-pct, 0) / 100));
+  transform-origin: left;
+  transition: transform 1.2s var(--amc-nkpi-ease);
+}
+
+.amc-NKpi-meterBar:dir(rtl) {
+  background: linear-gradient(270deg, var(--amc-nkpi-hue2), var(--amc-nkpi-accent));
+  transform-origin: right;
+}
+
+.amc-NKpi-meterText {
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* Scroll-driven entry: the bar grows while the tile scrolls into view. */
+@supports (animation-timeline: view()) {
+  .amc-NKpi--adaptive .amc-NKpi-meterTrack {
+    animation: amc-nkpi-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+  .amc-NKpi--adaptive .amc-NKpi-meterTrack:dir(rtl) { animation-name: amc-nkpi-grow-rtl; }
+}
+
+@keyframes amc-nkpi-grow {
+  from { clip-path: inset(0 100% 0 0 round 999px); }
+}
+
+@keyframes amc-nkpi-grow-rtl {
+  from { clip-path: inset(0 0 0 100% round 999px); }
+}
+
+/* Row: icon | label + description | meter | value + change */
+@container (min-width: 30rem) {
+  .amc-NKpi--adaptive .amc-NKpi-face {
+    grid-template-columns: auto minmax(0, 1fr) minmax(5rem, 11rem) auto;
+    grid-template-areas:
+      "icon label meter value"
+      "icon desc  meter delta";
+    align-items: center;
+    column-gap: 1rem;
+    row-gap: .125rem;
+    padding: .875rem 1.125rem;
+  }
+  .amc-NKpi--adaptive .amc-NKpi-head { display: contents; }
+  .amc-NKpi--adaptive .amc-NKpi-icon { grid-area: icon; }
+  .amc-NKpi--adaptive .amc-NKpi-label { grid-area: label; align-self: end; font-size: .875rem; }
+  .amc-NKpi--adaptive .amc-NKpi-desc { grid-area: desc; align-self: start; }
+  .amc-NKpi--adaptive .amc-NKpi-meter { grid-area: meter; }
+  .amc-NKpi--adaptive .amc-NKpi-value {
+    grid-area: value;
+    justify-content: flex-end;
+    align-self: end;
+    font-size: 1.625rem;
+  }
+  .amc-NKpi--adaptive .amc-NKpi-delta { grid-area: delta; justify-self: end; align-self: start; }
+}
+
+/* Chip: icon beside value and change, label under it; the description moves to screen readers. */
+@container (max-width: 13.99rem) {
+  .amc-NKpi--adaptive .amc-NKpi-card { border-radius: 1.25rem; }
+  .amc-NKpi--adaptive .amc-NKpi-face {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "icon value delta"
+      "icon label label"
+      "meter meter meter";
+    align-items: center;
+    column-gap: .5rem;
+    row-gap: .125rem;
+    padding: .5rem .75rem .5rem .5rem;
+  }
+  .amc-NKpi--adaptive .amc-NKpi-head { display: contents; }
+  .amc-NKpi--adaptive .amc-NKpi-icon { grid-area: icon; inline-size: 2rem; block-size: 2rem; border-radius: 50%; }
+  .amc-NKpi--adaptive .amc-NKpi-label { grid-area: label; font-size: .6875rem; color: var(--amc-nkpi-muted); }
+  .amc-NKpi--adaptive .amc-NKpi-value { grid-area: value; font-size: 1.125rem; }
+  .amc-NKpi--adaptive .amc-NKpi-unit { font-size: .6875rem; }
+  .amc-NKpi--adaptive .amc-NKpi-delta { grid-area: delta; padding: .1rem .375rem; font-size: .6875rem; }
+  .amc-NKpi--adaptive .amc-NKpi-deltaText { display: none; }
+  .amc-NKpi--adaptive .amc-NKpi-meter { grid-area: meter; margin-block-start: .25rem; }
+  .amc-NKpi--adaptive .amc-NKpi-meterTrack { block-size: .25rem; }
+  .amc-NKpi--adaptive .amc-NKpi-meterText { font-size: .625rem; }
+  .amc-NKpi--adaptive .amc-NKpi-desc {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Reduced motion: everything stops, the static design stays ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-NKpi-live::after,
+  .amc-NKpi-wave,
+  .amc-NKpi-liquid::before,
+  .amc-NKpi-liquid::after,
+  .amc-NKpi-aurora,
+  .amc-NKpi-beam,
+  .amc-NKpi--adaptive .amc-NKpi-meterTrack { animation: none; }
+  .amc-NKpi-beam { --amc-nkpi-angle: 215deg; }
+  .amc-NKpi-liquid::before,
+  .amc-NKpi-liquid::after { opacity: 0; }
+  .amc-NKpi-reel,
+  .amc-NKpi-liquid,
+  .amc-NKpi-glare,
+  .amc-NKpi-meterBar,
+  .amc-NKpi--tilt .amc-NKpi-card,
+  .amc-NKpi--neoBrutal .amc-NKpi-card,
+  .amc-NKpi--clay .amc-NKpi-card,
+  .amc-NKpi--bentoTile .amc-NKpi-card,
+  .amc-NKpi--flipDetail .amc-NKpi-card { transition: none; }
+  /* Flip becomes an instant face swap without rotation. */
+  .amc-NKpi--flipDetail .amc-NKpi-card,
+  .amc-NKpi--flipDetail .amc-NKpi-card:hover,
+  .amc-NKpi--flipDetail .amc-NKpi-card:focus-within { transform: none; }
+  .amc-NKpi--flipDetail .amc-NKpi-face--back { transform: none; opacity: 0; }
+  .amc-NKpi--flipDetail .amc-NKpi-card:focus-within .amc-NKpi-face--back { opacity: 1; }
+  .amc-NKpi--flipDetail .amc-NKpi-card:focus-within .amc-NKpi-face--front { opacity: 0; }
+  .amc-NKpi--neoBrutal .amc-NKpi-card:hover { transform: none; }
+  .amc-NKpi--clay .amc-NKpi-card:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) and (hover: hover) {
+  .amc-NKpi--flipDetail .amc-NKpi-card:hover .amc-NKpi-face--back { opacity: 1; }
+  .amc-NKpi--flipDetail .amc-NKpi-card:hover .amc-NKpi-face--front { opacity: 0; }
+}
+
+/* ---------- Windows high contrast ---------- */
+
+@media (forced-colors: active) {
+  .amc-NKpi-card,
+  .amc-NKpi--flipDetail .amc-NKpi-face,
+  .amc-NKpi--bentoTile .amc-NKpi-value,
+  .amc-NKpi--bentoTile .amc-NKpi-delta,
+  .amc-NKpi--bentoTile .amc-NKpi-ring,
+  .amc-NKpi--bentoTile .amc-NKpi-spark { border: 1px solid CanvasText; }
+  .amc-NKpi-beam,
+  .amc-NKpi-aurora,
+  .amc-NKpi-glare,
+  .amc-NKpi-stack,
+  .amc-NKpi--auroraGlow .amc-NKpi-card::after { display: none; }
+  .amc-NKpi--beam .amc-NKpi-num { background: none; color: CanvasText; }
+  .amc-NKpi-liquid,
+  .amc-NKpi-wave,
+  .amc-NKpi-meterBar,
+  .amc-NKpi-sparkBar.is-current { background: Highlight; forced-color-adjust: none; }
+  .amc-NKpi-ringDial { background: conic-gradient(Highlight calc(var(--amc-nkpi-pct, 0) * 1%), Canvas 0); forced-color-adjust: none; }
+}

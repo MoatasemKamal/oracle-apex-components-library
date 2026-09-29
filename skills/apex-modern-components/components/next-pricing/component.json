@@ -1,0 +1,210 @@
+{
+  "name": "Next Pricing",
+  "apexlangName": "nextPricing",
+  "staticId": "AMC_NEXT_PRICING",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["pricing", "plan", "tier", "subscription", "price", "package", "offer", "upgrade", "compare plans", "border beam", "spotlight", "tilt", "3d", "flip", "annual", "neo brutalism", "claymorphism", "holographic", "aurora", "container query", "next collection"],
+  "description": "Next Collection family of ten current-generation pricing plan designs chosen with Style, covering four directions. Motion: Beam Featured (the highlighted plan carries a travelling border beam and a glow) and Spotlight (one pointer spotlight lights the borders of every plan card). Depth: Tilt 3D (plans tilt toward the pointer with the price on a floating layer) and Flip Annual (the price slab flips from monthly to annual price and savings). Bold: Neo Brutal, Clay, Holo Premium (holographic foil premium tier) and Aurora Dark. Smart: Expand Features (compact plans that open the full feature list on hover or focus) and Comparison Adaptive (cards when the region is wide, aligned comparison rows when it is narrow). Effects follow Magic UI patterns (border-beam, magic-card, shine-border) rebuilt on Universal Theme variables.",
+  "helpText": "Pick a Style, then map Plan, Price, Currency, Period, Description and Features (separated by |). CTA Label and CTA URL add a native Universal Theme button. Highlight = Y marks the recommended plan; Beam Featured, Holo Premium and Tilt 3D give it their strongest treatment. Flip Annual also uses Annual Price, Annual Period and Savings. Every style is complete without JavaScript; the runtime file only builds the feature lists and adds the pointer spotlight and tilt.",
+  "source": {
+    "url": "https://github.com/magicuidesign/magicui",
+    "author": "Magic UI",
+    "license": "MIT"
+  },
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-pricing.css", "files/amc-next-pricing.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-pricing.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-pricing.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "beamFeatured",
+      "sequence": 10,
+      "helpText": "The pricing design, grouped by direction. Motion - Beam Featured: the highlighted plan has a travelling border beam and a glow. Motion - Spotlight: a pointer spotlight lights the borders of all plan cards at once. Depth - Tilt 3D: plans tilt toward the pointer, the price floats on its own layer and the highlighted plan stands forward. Depth - Flip Annual: the price slab flips on hover or focus to show Annual Price and Savings. Bold - Neo Brutal: ink borders, hard shadows, sticker badge. Bold - Clay: soft pillowy plans with clay check bubbles. Bold - Holo Premium: the highlighted plan becomes a holographic foil card. Bold - Aurora Dark: night cards with an aurora glow and grain. Smart - Expand Features: compact plans show three features and open the full list on hover or focus. Smart - Comparison Adaptive: cards when the region is wide, aligned comparison rows when it is narrow. Under reduced motion every effect stops and the static design stays.",
+      "entries": [
+        { "name": "beamFeatured", "display": "Beam Featured - motion", "return": "beamFeatured", "sequence": 10 },
+        { "name": "spotlight", "display": "Spotlight - motion", "return": "spotlight", "sequence": 20 },
+        { "name": "tilt3d", "display": "Tilt 3D - depth", "return": "tilt3d", "sequence": 30 },
+        { "name": "flipAnnual", "display": "Flip Annual - depth", "return": "flipAnnual", "sequence": 40 },
+        { "name": "neoBrutal", "display": "Neo Brutal - bold", "return": "neoBrutal", "sequence": 50 },
+        { "name": "clay", "display": "Clay - bold", "return": "clay", "sequence": 60 },
+        { "name": "holoPremium", "display": "Holo Premium - bold", "return": "holoPremium", "sequence": 70 },
+        { "name": "auroraDark", "display": "Aurora Dark - bold", "return": "auroraDark", "sequence": 80 },
+        { "name": "expandFeatures", "display": "Expand Features - smart", "return": "expandFeatures", "sequence": 90 },
+        { "name": "comparisonAdaptive", "display": "Comparison Adaptive - smart", "return": "comparisonAdaptive", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "PLAN",
+      "apexlangName": "plan",
+      "attribute": 2,
+      "name": "Plan",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Plan name, for example Starter, Business or Enterprise."
+    },
+    {
+      "staticId": "PRICE",
+      "apexlangName": "price",
+      "attribute": 3,
+      "name": "Price",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "The amount. Format it in SQL with the application's NLS settings, for example to_char(monthly_fee, 'FML999G990'). Text such as Custom also works."
+    },
+    {
+      "staticId": "CURRENCY",
+      "apexlangName": "currency",
+      "attribute": 4,
+      "name": "Currency",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Currency symbol or code shown before the amount, for example SAR, USD or $. Leave empty for text prices such as Custom."
+    },
+    {
+      "staticId": "PERIOD",
+      "apexlangName": "period",
+      "attribute": 5,
+      "name": "Period",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Billing period shown after the amount, for example / month or per user / month."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 6,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "One short sentence about who the plan is for."
+    },
+    {
+      "staticId": "FEATURES",
+      "apexlangName": "features",
+      "attribute": 7,
+      "name": "Features",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Features separated by |, for example 5 users|Unlimited orders|Email support. The runtime file turns them into a check list; Expand Features shows the first three and opens the rest on hover or focus. Without JavaScript the plain text stays visible."
+    },
+    {
+      "staticId": "CTA_LABEL",
+      "apexlangName": "ctaLabel",
+      "attribute": 8,
+      "name": "CTA Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "Call to action label, for example Start free trial or Contact sales. Leave empty to hide the button."
+    },
+    {
+      "staticId": "CTA_URL",
+      "apexlangName": "ctaUrl",
+      "attribute": 9,
+      "name": "CTA URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Target URL of the call to action, for example f?p=&APP_ID.:20:&SESSION.::NO::P20_PLAN:BUSINESS. Must be a developer-controlled value, never raw user input. Without a URL the call to action renders as a button for Dynamic Actions."
+    },
+    {
+      "staticId": "BADGE",
+      "apexlangName": "badge",
+      "attribute": 10,
+      "name": "Badge",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Optional short badge, for example Most popular or Best value."
+    },
+    {
+      "staticId": "HIGHLIGHT",
+      "apexlangName": "highlight",
+      "attribute": 11,
+      "name": "Highlight",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "Y marks the recommended plan and makes its button the hot button. Any other value, or empty, renders a normal plan."
+    },
+    {
+      "staticId": "ANNUAL_PRICE",
+      "apexlangName": "annualPrice",
+      "attribute": 12,
+      "name": "Annual Price",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 120,
+      "helpText": "Flip Annual style: the price when billed yearly, formatted in SQL like Price, for example 4,690. Leave empty to show only the monthly price."
+    },
+    {
+      "staticId": "ANNUAL_PERIOD",
+      "apexlangName": "annualPeriod",
+      "attribute": 13,
+      "name": "Annual Period",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 130,
+      "helpText": "Flip Annual style: period text for Annual Price, for example / year. Defaults to / year."
+    },
+    {
+      "staticId": "SAVINGS",
+      "apexlangName": "savings",
+      "attribute": 14,
+      "name": "Savings",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 140,
+      "helpText": "Flip Annual style: saving text for yearly billing, for example Save 20% or 2 months free. Shown on the front as a hint and on the back beside the annual price."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 15,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 150,
+      "helpText": "Optional Font APEX icon class for the plan, for example fa-rocket. Shown beside the plan name."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<div class="amc-NPricing amc-NPricing--#STYLE#{case HIGHLIGHT/}{when Y/} is-featured{endcase/}">
+  <div class="amc-NPricing-card"{case STYLE/}{when spotlight/} data-amc-pointer="spot"{when holoPremium/} data-amc-pointer="holo"{when tilt3d/} data-amc-pointer="tilt"{otherwise/}{endcase/}>
+    {case STYLE/}{when beamFeatured/}<span class="amc-NPricing-beam" aria-hidden="true"></span>{when spotlight/}<span class="amc-NPricing-spot" aria-hidden="true"></span>{when holoPremium/}<span class="amc-NPricing-foil" aria-hidden="true"></span>{when auroraDark/}<span class="amc-NPricing-aurora" aria-hidden="true"></span>{when tilt3d/}<span class="amc-NPricing-glare" aria-hidden="true"></span>{otherwise/}{endcase/}
+    <div class="amc-NPricing-top">
+      <div class="amc-NPricing-head">
+        {if ?ICON/}<span class="amc-NPricing-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+        <h3 class="amc-NPricing-plan">#PLAN#</h3>
+        {if ?BADGE/}<span class="amc-NPricing-badge">#BADGE#</span>{endif/}
+      </div>
+      {if ?DESCRIPTION/}<p class="amc-NPricing-desc">#DESCRIPTION#</p>{endif/}
+      {case STYLE/}{when flipAnnual/}<div class="amc-NPricing-flip" tabindex="0" role="group">
+        <div class="amc-NPricing-flipInner">
+          <div class="amc-NPricing-side amc-NPricing-side--month">
+            <p class="amc-NPricing-price">{if ?CURRENCY/}<span class="amc-NPricing-currency">#CURRENCY#</span>{endif/}<span class="amc-NPricing-amount">#PRICE#</span>{if ?PERIOD/}<span class="amc-NPricing-period">#PERIOD#</span>{endif/}</p>
+            {if ?ANNUAL_PRICE/}<span class="amc-NPricing-flipHint" aria-hidden="true"><span class="fa fa-refresh"></span>{if ?SAVINGS/}<span class="amc-NPricing-flipHintText">#SAVINGS#</span>{endif/}</span>{endif/}
+          </div>
+          {if ?ANNUAL_PRICE/}<div class="amc-NPricing-side amc-NPricing-side--year">
+            <p class="amc-NPricing-price">{if ?CURRENCY/}<span class="amc-NPricing-currency">#CURRENCY#</span>{endif/}<span class="amc-NPricing-amount">#ANNUAL_PRICE#</span><span class="amc-NPricing-period">{if ?ANNUAL_PERIOD/}#ANNUAL_PERIOD#{else/}/ year{endif/}</span></p>
+            {if ?SAVINGS/}<span class="amc-NPricing-save">#SAVINGS#</span>{endif/}
+          </div>{endif/}
+        </div>
+      </div>{otherwise/}<p class="amc-NPricing-price">{if ?CURRENCY/}<span class="amc-NPricing-currency">#CURRENCY#</span>{endif/}<span class="amc-NPricing-amount">#PRICE#</span>{if ?PERIOD/}<span class="amc-NPricing-period">#PERIOD#</span>{endif/}</p>{endcase/}
+    </div>
+    <div class="amc-NPricing-body">
+      {if ?FEATURES/}<div class="amc-NPricing-features">#FEATURES#</div>{endif/}
+      {if ?CTA_LABEL/}<div class="amc-NPricing-action">{if ?CTA_URL/}<a class="t-Button{case HIGHLIGHT/}{when Y/} t-Button--hot{endcase/} amc-NPricing-cta" href="#CTA_URL#">{else/}<button class="t-Button{case HIGHLIGHT/}{when Y/} t-Button--hot{endcase/} amc-NPricing-cta" type="button">{endif/}<span class="t-Button-label">#CTA_LABEL#</span>{if ?CTA_URL/}</a>{else/}</button>{endif/}</div>{endif/}
+    </div>
+  </div>
+</div>

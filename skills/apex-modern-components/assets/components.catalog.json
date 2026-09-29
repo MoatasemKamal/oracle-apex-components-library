@@ -2382,6 +2382,1406 @@
       }
     },
     {
+      "slug": "next-alert",
+      "name": "Next Alert",
+      "apexlangName": "nextAlert",
+      "staticId": "AMC_NEXT_ALERT",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextAlert",
+      "apexlangItemType": null,
+      "keywords": [
+        "alert",
+        "notice",
+        "banner",
+        "toast",
+        "notification",
+        "announcement",
+        "ticker",
+        "marquee",
+        "border beam",
+        "critical",
+        "warning",
+        "hazard",
+        "glass",
+        "neo brutalism",
+        "claymorphism",
+        "details",
+        "expandable",
+        "container query",
+        "next collection"
+      ],
+      "description": "Next Collection family of 10 current-generation alert, toast and announcement designs with success, warning, danger, info and neutral states, in four directions: motion (toast with a travelling border beam, critical banner with a breathing glow ring, announcement ticker that stops on hover, focus and reduced motion), depth (report rows as a 3D toast stack that fans out, floating glass alert with light edge and depth shadow), bold (neo-brutalism, claymorphism, animated hazard stripes) and smart layout (one-line alert that expands with details and summary, adaptive alert that container queries turn into an inline bar, a card or an icon chip). Follows the inline alert and toast patterns of Universal Theme, Sonner and Magic UI: state is always shown by semantic color plus an icon and a text label. CSS only, no JavaScript. The border beam adapts the Magic UI border-beam design.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "beamToast",
+            "pulseCritical",
+            "tickerBar",
+            "stackedToasts",
+            "liftGlass",
+            "neoBrutal",
+            "clay",
+            "hazardStripe",
+            "expandDetails",
+            "adaptiveBar"
+          ]
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "message",
+          "staticId": "MESSAGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-alert/README.md",
+        "example": "components/next-alert/examples",
+        "apexlang": "components/next-alert/dist/apexlang/shared-components/plugins/next-alert",
+        "legacySql": "components/next-alert/dist/legacy/amc_next_alert.sql"
+      }
+    },
+    {
+      "slug": "next-badge",
+      "name": "Next Badge",
+      "apexlangName": "nextBadge",
+      "staticId": "AMC_NEXT_BADGE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextBadge",
+      "apexlangItemType": null,
+      "keywords": [
+        "badge",
+        "status",
+        "tag",
+        "label",
+        "pill",
+        "live",
+        "sticker",
+        "neo brutalism",
+        "claymorphism",
+        "holographic",
+        "border beam",
+        "stacked badges",
+        "next collection"
+      ],
+      "description": "Status badges in 10 current-generation designs from the Next Collection: motion (shine glint, live pulse with activity bars, border beam outline), depth (tilted die-cut sticker, extruded 3D pill), bold aesthetics (neo-brutal, clay, holographic foil) and smart shape changes (an icon dot that grows into its label, and a stack that shows a count and fans out into labeled pills). Border beam and shine adapt Magic UI's border-beam and shine-border; every color comes from the Universal Theme palette. One badge (partial) or a wrapping group (report).",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "shine",
+            "pulseLive",
+            "beamOutline",
+            "stickerTilt",
+            "extruded",
+            "neoBrutal",
+            "clay",
+            "holo",
+            "expandLabel",
+            "stackCount"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-badge/README.md",
+        "example": "components/next-badge/examples",
+        "apexlang": "components/next-badge/dist/apexlang/shared-components/plugins/next-badge",
+        "legacySql": "components/next-badge/dist/legacy/amc_next_badge.sql"
+      }
+    },
+    {
+      "slug": "next-bento",
+      "name": "Next Bento",
+      "apexlangName": "nextBento",
+      "staticId": "AMC_NEXT_BENTO",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextBento",
+      "apexlangItemType": null,
+      "keywords": [
+        "bento",
+        "bento grid",
+        "launchpad",
+        "home page",
+        "dashboard",
+        "tiles",
+        "feature grid",
+        "spotlight",
+        "border beam",
+        "tilt",
+        "glass",
+        "neo brutalism",
+        "clay",
+        "aurora",
+        "grid pattern",
+        "magazine",
+        "expanding",
+        "next collection"
+      ],
+      "description": "Next Collection bento family: a report-driven grid of launchpad tiles (title, description, icon, optional figure, link, span) in 10 current-generation styles across the four Next directions: motion (pointer spotlight, travelling border beam), depth (pointer tilt with inner parallax, floating glass over a blurred color field), bold (neo-brutal, clay, one continuous aurora cut into tiles, oversized outline icons on grid patterns) and smart layout (container-query magazine recomposition, tiles that expand while siblings shrink). Follows the Magic UI bento-grid, magic-card, border-beam and grid-pattern patterns, rebuilt as plain CSS on Universal Theme variables so every style follows the active theme style.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "spotlightGlow",
+            "beamFeature",
+            "tiltTiles",
+            "layeredGlass",
+            "neoBrutal",
+            "clay",
+            "auroraMosaic",
+            "gridPattern",
+            "magazine",
+            "expandingTiles"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "eyebrow",
+          "staticId": "EYEBROW",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "valueLabel",
+          "staticId": "VALUE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "span",
+          "staticId": "SPAN",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "featured",
+          "staticId": "HIGHLIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "rowHeight",
+          "staticId": "ROW_HEIGHT",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "compact",
+            "standard",
+            "tall"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/next-bento/README.md",
+        "example": "components/next-bento/examples",
+        "apexlang": "components/next-bento/dist/apexlang/shared-components/plugins/next-bento",
+        "legacySql": "components/next-bento/dist/legacy/amc_next_bento.sql"
+      }
+    },
+    {
+      "slug": "next-button",
+      "name": "Next Button",
+      "apexlangName": "nextButton",
+      "staticId": "AMC_NEXT_BUTTON",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextButton",
+      "apexlangItemType": null,
+      "keywords": [
+        "button",
+        "call to action",
+        "cta",
+        "border beam",
+        "shimmer",
+        "rainbow",
+        "pulse",
+        "keycap",
+        "magnetic",
+        "neo brutalism",
+        "claymorphism",
+        "holographic",
+        "hold to confirm",
+        "next collection"
+      ],
+      "description": "Call-to-action buttons in 12 current-generation designs from the Next Collection, covering motion (border beam, shimmer sweep, rainbow glow, pulse ring), depth (mechanical keycap, layered stack, magnetic float), bold aesthetics (neo-brutal, clay, holographic foil) and smart shape changes (icon that morphs into a label, hold-to-confirm fill). Motion designs adapt Magic UI's shimmer, rainbow, pulsating and border-beam buttons; every color is resolved from the Universal Theme palette so the buttons follow Vita, Vita Dark, Redwood and Theme Roller. Report mode renders a wrapping action bar.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "borderBeam",
+            "shimmer",
+            "rainbowGlow",
+            "pulseRing",
+            "keycap",
+            "layered",
+            "magnetic",
+            "neoBrutal",
+            "clay",
+            "holo",
+            "morphIcon",
+            "confirmHold"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "hint",
+          "staticId": "HINT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "color",
+          "staticId": "COLOR",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/next-button/README.md",
+        "example": "components/next-button/examples",
+        "apexlang": "components/next-button/dist/apexlang/shared-components/plugins/next-button",
+        "legacySql": "components/next-button/dist/legacy/amc_next_button.sql"
+      }
+    },
+    {
+      "slug": "next-card",
+      "name": "Next Card",
+      "apexlangName": "nextCard",
+      "staticId": "AMC_NEXT_CARD",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextCard",
+      "apexlangItemType": null,
+      "keywords": [
+        "card",
+        "tile",
+        "next collection",
+        "border beam",
+        "spotlight",
+        "meteors",
+        "3d tilt",
+        "flip card",
+        "neo brutalism",
+        "claymorphism",
+        "aurora",
+        "holographic",
+        "container query",
+        "expanding card",
+        "record card"
+      ],
+      "description": "Next Collection card family: one record (order, project, invoice, customer) as a current-generation card in 12 styles across four directions. Motion: border beam, pointer spotlight, meteors. Depth: pointer tilt with parallax layers, flip card, fanned layered stack. Bold: neo-brutalism, claymorphism, aurora with film grain, holographic foil. Smart: a compact card that morphs open, and an adaptive card whose composition switches by container width. It keeps the Universal Theme Cards anatomy (eyebrow, title, body, figure, action) so it reads as a native region, and every color comes from the active theme style. Techniques adapted from Magic UI (border-beam, magic-card, meteors), MIT.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "borderBeam",
+            "spotlight",
+            "meteors",
+            "tilt3d",
+            "flip",
+            "layeredStack",
+            "neoBrutal",
+            "clay",
+            "auroraGrain",
+            "holoFoil",
+            "expandReveal",
+            "adaptive"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "eyebrow",
+          "staticId": "EYEBROW",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "details",
+          "staticId": "DETAILS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "badge",
+          "staticId": "BADGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "valueLabel",
+          "staticId": "VALUE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "columns",
+          "staticId": "COLUMNS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "two",
+            "three",
+            "four"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/next-card/README.md",
+        "example": "components/next-card/examples",
+        "apexlang": "components/next-card/dist/apexlang/shared-components/plugins/next-card",
+        "legacySql": "components/next-card/dist/legacy/amc_next_card.sql"
+      }
+    },
+    {
+      "slug": "next-hero",
+      "name": "Next Hero",
+      "apexlangName": "nextHero",
+      "staticId": "AMC_NEXT_HERO",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/nextHero",
+      "apexlangItemType": null,
+      "keywords": [
+        "hero",
+        "banner",
+        "page header",
+        "landing",
+        "login page",
+        "home page",
+        "welcome",
+        "aurora",
+        "meteors",
+        "retro grid",
+        "spotlight",
+        "parallax",
+        "kinetic type",
+        "neo brutalism",
+        "mesh gradient",
+        "grain",
+        "container query",
+        "scroll reveal",
+        "next collection"
+      ],
+      "description": "Next Collection family of 10 current-generation page and region heroes for home pages, dashboards and login pages, in four directions: motion (aurora ribbons, meteor shower, grid revealed by a pointer spotlight), depth (retro perspective floor grid, pointer parallax layers), bold (kinetic outline type, neo-brutalism, mesh gradient with film grain) and smart layout (container queries that morph between split, centered and compact bar compositions; words revealed by scroll-driven animation). Follows the landing-page hero patterns of Magic UI and 21st.dev (announcement pill, oversized balanced headline with a highlighted phrase, two actions) rebuilt on Universal Theme variables: every color derives from the theme palette, so Vita, Vita Dark, Redwood and Theme Roller styles are followed. Complete at rest, and every animation stops under reduced motion. Aurora, meteors and retro grid adapt Magic UI designs.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "aurora",
+            "meteors",
+            "gridSpotlight",
+            "retroGrid",
+            "parallaxLayers",
+            "kineticType",
+            "neoBrutal",
+            "meshGrain",
+            "splitMorph",
+            "scrollReveal"
+          ]
+        },
+        {
+          "apexlangName": "eyebrow",
+          "staticId": "EYEBROW",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "highlight",
+          "staticId": "HIGHLIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "subtitle",
+          "staticId": "SUBTITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "primaryUrl",
+          "staticId": "PRIMARY_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "primaryLabel",
+          "staticId": "PRIMARY_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "secondaryUrl",
+          "staticId": "SECONDARY_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "secondaryLabel",
+          "staticId": "SECONDARY_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-hero/README.md",
+        "example": "components/next-hero/examples",
+        "apexlang": "components/next-hero/dist/apexlang/shared-components/plugins/next-hero",
+        "legacySql": "components/next-hero/dist/legacy/amc_next_hero.sql"
+      }
+    },
+    {
+      "slug": "next-kpi",
+      "name": "Next KPI",
+      "apexlangName": "nextKpi",
+      "staticId": "AMC_NEXT_KPI",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextKpi",
+      "apexlangItemType": null,
+      "keywords": [
+        "kpi",
+        "metric",
+        "stat",
+        "figure",
+        "dashboard",
+        "tile",
+        "trend",
+        "delta",
+        "ticker",
+        "odometer",
+        "border beam",
+        "liquid",
+        "gauge",
+        "tilt",
+        "3d",
+        "flip",
+        "neo brutalism",
+        "claymorphism",
+        "aurora",
+        "bento",
+        "container query",
+        "adaptive",
+        "sparkline",
+        "next collection"
+      ],
+      "description": "Next Collection family of ten current-generation KPI tiles chosen with Style, covering four directions. Motion: Ticker (odometer digit wheels that spin when scrolled into view), Beam (travelling border beam over a dot grid) and Liquid Fill (tile fills with a moving wave up to Percent). Depth: Tilt (pointer tilt with a floating number plate) and Flip Detail (front figure, back comparison and breakdown). Bold: Neo Brutal, Clay and Aurora Glow. Smart: Bento Tile (container queries recompose number, sparkline, change and ring into bento sub-tiles) and Adaptive (switches between chip, big-number and row layouts by its own width). Effects follow Magic UI patterns (number-ticker, border-beam, magic-card) rebuilt on Universal Theme variables, so every tile follows Vita, Vita Dark, Redwood and Theme Roller changes.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "ticker",
+            "beam",
+            "liquidFill",
+            "tilt",
+            "flipDetail",
+            "neoBrutal",
+            "clay",
+            "auroraGlow",
+            "bentoTile",
+            "adaptive"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "unit",
+          "staticId": "UNIT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "change",
+          "staticId": "CHANGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "trend",
+          "staticId": "TREND",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "invertTrend",
+          "staticId": "INVERT_TREND",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "percent",
+          "staticId": "PERCENT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "series",
+          "staticId": "SERIES",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "compareValue",
+          "staticId": "COMPARE_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "compareLabel",
+          "staticId": "COMPARE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "breakdown",
+          "staticId": "BREAKDOWN",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-kpi/README.md",
+        "example": "components/next-kpi/examples",
+        "apexlang": "components/next-kpi/dist/apexlang/shared-components/plugins/next-kpi",
+        "legacySql": "components/next-kpi/dist/legacy/amc_next_kpi.sql"
+      }
+    },
+    {
+      "slug": "next-list",
+      "name": "Next List",
+      "apexlangName": "nextList",
+      "staticId": "AMC_NEXT_LIST",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextList",
+      "apexlangItemType": null,
+      "keywords": [
+        "list",
+        "feed",
+        "activity feed",
+        "notifications",
+        "marquee",
+        "logos",
+        "customers",
+        "partners",
+        "spotlight",
+        "stack",
+        "3d",
+        "neo brutalism",
+        "claymorphism",
+        "terminal",
+        "console",
+        "log",
+        "accordion",
+        "details",
+        "scroll reveal",
+        "next collection"
+      ],
+      "description": "Next Collection family of ten current-generation lists: animated notification feed, logo marquee, pointer spotlight rows, 3D perspective stack, lifting slabs, neo-brutal, clay, terminal log, accordion rows and scroll-reveal rows. Follows the native Universal Theme Content Row pattern: one query row per list row with a lead avatar or icon, title, subtitle, meta text, state and an optional link. Animated feed and marquee are adapted from Magic UI animated-list and marquee, MIT.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "animatedFeed",
+            "marqueeLogos",
+            "spotlightRows",
+            "stack3d",
+            "liftRows",
+            "neoBrutal",
+            "clay",
+            "terminal",
+            "accordionRows",
+            "scrollReveal"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "subtitle",
+          "staticId": "SUBTITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "meta",
+          "staticId": "META",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stateLabel",
+          "staticId": "STATE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "details",
+          "staticId": "DETAILS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-list/README.md",
+        "example": "components/next-list/examples",
+        "apexlang": "components/next-list/dist/apexlang/shared-components/plugins/next-list",
+        "legacySql": "components/next-list/dist/legacy/amc_next_list.sql"
+      }
+    },
+    {
+      "slug": "next-pricing",
+      "name": "Next Pricing",
+      "apexlangName": "nextPricing",
+      "staticId": "AMC_NEXT_PRICING",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextPricing",
+      "apexlangItemType": null,
+      "keywords": [
+        "pricing",
+        "plan",
+        "tier",
+        "subscription",
+        "price",
+        "package",
+        "offer",
+        "upgrade",
+        "compare plans",
+        "border beam",
+        "spotlight",
+        "tilt",
+        "3d",
+        "flip",
+        "annual",
+        "neo brutalism",
+        "claymorphism",
+        "holographic",
+        "aurora",
+        "container query",
+        "next collection"
+      ],
+      "description": "Next Collection family of ten current-generation pricing plan designs chosen with Style, covering four directions. Motion: Beam Featured (the highlighted plan carries a travelling border beam and a glow) and Spotlight (one pointer spotlight lights the borders of every plan card). Depth: Tilt 3D (plans tilt toward the pointer with the price on a floating layer) and Flip Annual (the price slab flips from monthly to annual price and savings). Bold: Neo Brutal, Clay, Holo Premium (holographic foil premium tier) and Aurora Dark. Smart: Expand Features (compact plans that open the full feature list on hover or focus) and Comparison Adaptive (cards when the region is wide, aligned comparison rows when it is narrow). Effects follow Magic UI patterns (border-beam, magic-card, shine-border) rebuilt on Universal Theme variables.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "beamFeatured",
+            "spotlight",
+            "tilt3d",
+            "flipAnnual",
+            "neoBrutal",
+            "clay",
+            "holoPremium",
+            "auroraDark",
+            "expandFeatures",
+            "comparisonAdaptive"
+          ]
+        },
+        {
+          "apexlangName": "plan",
+          "staticId": "PLAN",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "price",
+          "staticId": "PRICE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "currency",
+          "staticId": "CURRENCY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "period",
+          "staticId": "PERIOD",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "features",
+          "staticId": "FEATURES",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "ctaLabel",
+          "staticId": "CTA_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "ctaUrl",
+          "staticId": "CTA_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "badge",
+          "staticId": "BADGE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "highlight",
+          "staticId": "HIGHLIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "annualPrice",
+          "staticId": "ANNUAL_PRICE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "annualPeriod",
+          "staticId": "ANNUAL_PERIOD",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "savings",
+          "staticId": "SAVINGS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-pricing/README.md",
+        "example": "components/next-pricing/examples",
+        "apexlang": "components/next-pricing/dist/apexlang/shared-components/plugins/next-pricing",
+        "legacySql": "components/next-pricing/dist/legacy/amc_next_pricing.sql"
+      }
+    },
+    {
+      "slug": "next-profile",
+      "name": "Next Profile",
+      "apexlangName": "nextProfile",
+      "staticId": "AMC_NEXT_PROFILE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial",
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextProfile",
+      "apexlangItemType": null,
+      "keywords": [
+        "profile",
+        "person",
+        "employee",
+        "contact card",
+        "team member",
+        "next collection",
+        "orbit ring",
+        "border beam",
+        "id card",
+        "holographic",
+        "flip card",
+        "lanyard",
+        "conference badge",
+        "neo brutalism",
+        "claymorphism",
+        "sticker",
+        "bento",
+        "expanding card"
+      ],
+      "description": "Next Collection profile family: one person (employee, customer contact, speaker) in 10 current-generation styles across four directions. Motion: an orbiting light ring around the avatar and a card frame with travelling beams. Depth: a tilting holographic staff ID, a flip card with contact details on the back, and a swaying lanyard badge. Bold: neo-brutalism, claymorphism and a die-cut sticker. Smart: a bento profile that recomposes its tiles by width and a compact row that expands into a full bio. It keeps the anatomy of the Universal Theme profile patterns (avatar, name, role, presence, figures, action) and every color comes from the active theme style. Beam and ring techniques adapted from Magic UI (border-beam, orbiting-circles), MIT.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "orbitRing",
+            "beamFrame",
+            "tiltHolo",
+            "flipContact",
+            "lanyardBadge",
+            "neoBrutal",
+            "clay",
+            "sticker",
+            "bentoProfile",
+            "expandBio"
+          ]
+        },
+        {
+          "apexlangName": "name",
+          "staticId": "NAME",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "role",
+          "staticId": "ROLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "initials",
+          "staticId": "INITIALS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "bio",
+          "staticId": "BIO",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "status",
+          "staticId": "STATUS",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat1Value",
+          "staticId": "STAT1_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat1Label",
+          "staticId": "STAT1_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat2Value",
+          "staticId": "STAT2_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat2Label",
+          "staticId": "STAT2_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat3Value",
+          "staticId": "STAT3_VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "stat3Label",
+          "staticId": "STAT3_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkLabel",
+          "staticId": "LINK_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "email",
+          "staticId": "EMAIL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "phone",
+          "staticId": "PHONE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "location",
+          "staticId": "LOCATION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "organization",
+          "staticId": "ORGANIZATION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "reference",
+          "staticId": "REFERENCE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "columns",
+          "staticId": "COLUMNS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "two",
+            "three",
+            "four"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/next-profile/README.md",
+        "example": "components/next-profile/examples",
+        "apexlang": "components/next-profile/dist/apexlang/shared-components/plugins/next-profile",
+        "legacySql": "components/next-profile/dist/legacy/amc_next_profile.sql"
+      }
+    },
+    {
+      "slug": "next-timeline",
+      "name": "Next Timeline",
+      "apexlangName": "nextTimeline",
+      "staticId": "AMC_NEXT_TIMELINE",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextTimeline",
+      "apexlangItemType": null,
+      "keywords": [
+        "timeline",
+        "history",
+        "activity",
+        "roadmap",
+        "milestones",
+        "progress",
+        "stepper",
+        "steps",
+        "journey",
+        "beam",
+        "pulse",
+        "perspective",
+        "3d",
+        "neo brutalism",
+        "claymorphism",
+        "kinetic type",
+        "metro",
+        "transit map",
+        "scroll progress",
+        "next collection"
+      ],
+      "description": "Next Collection family of ten current-generation timelines: beam rail, pulsing current step, perspective road, 3D card cascade, neo-brutal, clay, kinetic years, metro line, scroll progress and expanding steps. Follows the native Universal Theme Timeline pattern: one query row per event, state shown on the marker and as text, with a current value for progress-style journeys. The beam rail light pulse and border beam are adapted from Magic UI animated-beam and border-beam, MIT.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "beamRail",
+            "pulseNow",
+            "perspectiveRoad",
+            "stackedCards3d",
+            "neoBrutal",
+            "clay",
+            "kineticYears",
+            "metroLine",
+            "scrollProgress",
+            "expandSteps"
+          ]
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "body",
+          "staticId": "BODY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "date",
+          "staticId": "DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "icon",
+          "staticId": "ICON",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "tag",
+          "staticId": "TAG",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-timeline/README.md",
+        "example": "components/next-timeline/examples",
+        "apexlang": "components/next-timeline/dist/apexlang/shared-components/plugins/next-timeline",
+        "legacySql": "components/next-timeline/dist/legacy/amc_next_timeline.sql"
+      }
+    },
+    {
       "slug": "progress-meter",
       "name": "Progress Meter",
       "apexlangName": "progressMeter",

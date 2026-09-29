@@ -39,7 +39,35 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
-## Design Collection (120+ modern designs)
+## Next Collection (114 new-generation designs)
+
+Eleven template components with designs in four directions: **motion** (border beams,
+spotlights, shimmer, meteors, tickers, marquees), **3D depth** (pointer tilt, flip cards,
+layered stacks, perspective), **bold aesthetics** (neo-brutalism, claymorphism, aurora and
+film grain, holographic foil, kinetic type) and **smart layout** (container-query
+recomposition, scroll-driven reveals, expanding cards). Every style still reads the
+Universal Theme variables, works in RTL and stops all motion under reduced motion. See
+[`references/next-collection.md`](skills/apex-modern-components/references/next-collection.md).
+
+| Component | Styles | Modes | Designs |
+|---|---:|---|---|
+| [Next Card](skills/apex-modern-components/components/next-card) | 12 | partial, report | border beam, spotlight, meteors, tilt 3D, flip, layered stack, neo-brutal, clay, aurora grain, holo foil, expand reveal, adaptive |
+| [Next Button](skills/apex-modern-components/components/next-button) | 12 | partial, report | border beam, shimmer, rainbow glow, pulse ring, keycap, layered, magnetic, neo-brutal, clay, holo, morph icon, confirm hold |
+| [Next Badge](skills/apex-modern-components/components/next-badge) | 10 | partial, report | shine, pulse live, beam outline, sticker tilt, extruded, neo-brutal, clay, holo, expand label, stack count |
+| [Next KPI](skills/apex-modern-components/components/next-kpi) | 10 | partial, report | odometer ticker, beam, liquid fill, tilt, flip detail, neo-brutal, clay, aurora glow, bento tile, adaptive |
+| [Next Profile](skills/apex-modern-components/components/next-profile) | 10 | partial, report | orbit ring, beam frame, tilt holo ID, flip contact, lanyard badge, neo-brutal, clay, sticker, bento profile, expand bio |
+| [Next List](skills/apex-modern-components/components/next-list) | 10 | report | animated feed, marquee logos, spotlight rows, 3D stack, lift rows, neo-brutal, clay, terminal, accordion rows, scroll reveal |
+| [Next Timeline](skills/apex-modern-components/components/next-timeline) | 10 | report | beam rail, pulse now, perspective road, stacked 3D cards, neo-brutal, clay, kinetic years, metro line, scroll progress, expand steps |
+| [Next Pricing](skills/apex-modern-components/components/next-pricing) | 10 | partial, report | beam featured, spotlight, tilt 3D, flip annual, neo-brutal, clay, holo premium, aurora dark, expand features, comparison adaptive |
+| [Next Alert](skills/apex-modern-components/components/next-alert) | 10 | partial, report | beam toast, pulse critical, ticker bar, stacked toasts, lift glass, neo-brutal, clay, hazard stripe, expand details, adaptive bar |
+| [Next Hero](skills/apex-modern-components/components/next-hero) | 10 | partial | aurora, meteors, grid spotlight, retro grid, parallax layers, kinetic type, neo-brutal, mesh grain, split morph, scroll reveal |
+| [Next Bento](skills/apex-modern-components/components/next-bento) | 10 | report | spotlight glow, beam feature, tilt tiles, layered glass, neo-brutal, clay, aurora mosaic, grid pattern, magazine, expanding tiles |
+| **Total** | **114** | | |
+
+Techniques adapted from [Magic UI](https://magicui.design) (MIT) are credited in each
+component's `source` and file headers.
+
+## Design Collection (123 classic designs)
 
 Twelve template components, each a **family** of distinct modern designs picked with one
 **Style** setting. All of them read the Universal Theme variables, so every style follows

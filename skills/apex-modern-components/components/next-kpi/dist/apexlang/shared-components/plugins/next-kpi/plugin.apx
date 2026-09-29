@@ -1,0 +1,448 @@
+plugin nextKpi (
+    name: Next KPI
+    staticId: AMC_NEXT_KPI
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-NKpi amc-NKpi--#STYLE# {case TREND/}{when up/}amc-NKpi--up{when down/}amc-NKpi--down{otherwise/}amc-NKpi--flat{endcase/}{if INVERT_TREND/} amc-NKpi--invert{endif/}">
+              <div class="amc-NKpi-card" data-percent="#PERCENT#"{case STYLE/}{when flipDetail/} tabindex="0" role="group" aria-label="#LABEL!ATTR#"{when tilt/} data-amc-pointer="tilt"{otherwise/}{endcase/}>
+                {case STYLE/}{when beam/}<span class="amc-NKpi-beam" aria-hidden="true"></span>{when liquidFill/}<span class="amc-NKpi-liquid" aria-hidden="true"><span class="amc-NKpi-wave amc-NKpi-wave--back"></span><span class="amc-NKpi-wave"></span></span>{when auroraGlow/}<span class="amc-NKpi-aurora" aria-hidden="true"></span>{when tilt/}<span class="amc-NKpi-stack" aria-hidden="true"></span><span class="amc-NKpi-glare" aria-hidden="true"></span>{otherwise/}{endcase/}
+                <div class="amc-NKpi-face amc-NKpi-face--front">
+                  <div class="amc-NKpi-head">
+                    {if ?ICON/}<span class="amc-NKpi-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}
+                    <h3 class="amc-NKpi-label">#LABEL#</h3>
+                    {case STYLE/}{when ticker/}<span class="amc-NKpi-live" aria-hidden="true"></span>{when flipDetail/}<span class="amc-NKpi-flipHint" aria-hidden="true"><span class="fa fa-refresh"></span></span>{otherwise/}{endcase/}
+                  </div>
+                  <p class="amc-NKpi-value"><span class="amc-NKpi-num"{case STYLE/}{when ticker/} data-amc-ticker="Y"{otherwise/}{endcase/}>#VALUE#</span>{if ?UNIT/}<span class="amc-NKpi-unit">#UNIT#</span>{endif/}</p>
+                  {if ?CHANGE/}<p class="amc-NKpi-delta"><span class="amc-NKpi-deltaIcon fa {case TREND/}{when up/}fa-arrow-up{when down/}fa-arrow-down{otherwise/}fa-minus{endcase/}" aria-hidden="true"></span><span class="amc-NKpi-sr">{case TREND/}{when up/}Increase{when down/}Decrease{otherwise/}No change{endcase/}</span><span class="amc-NKpi-deltaText">#CHANGE#</span></p>{endif/}
+                  {case STYLE/}{when liquidFill/}{if ?PERCENT/}<p class="amc-NKpi-level"><span class="amc-NKpi-levelNum">#PERCENT#</span><span class="amc-NKpi-levelUnit">%</span></p>{endif/}{when bentoTile/}{if ?PERCENT/}<div class="amc-NKpi-ring"><span class="amc-NKpi-ringDial" aria-hidden="true"></span><span class="amc-NKpi-ringText"><span class="amc-NKpi-levelNum">#PERCENT#</span>%</span></div>{endif/}{when adaptive/}{if ?PERCENT/}<div class="amc-NKpi-meter"><span class="amc-NKpi-meterTrack" aria-hidden="true"><span class="amc-NKpi-meterBar"></span></span><span class="amc-NKpi-meterText"><span class="amc-NKpi-levelNum">#PERCENT#</span>%</span></div>{endif/}{otherwise/}{endcase/}
+                  {case STYLE/}{when tilt/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="line" aria-hidden="true"></div>{endif/}{when auroraGlow/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="line" aria-hidden="true"></div>{endif/}{when bentoTile/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="line" aria-hidden="true"></div>{endif/}{when neoBrutal/}{if ?SERIES/}<div class="amc-NKpi-spark" data-series="#SERIES#" data-kind="bars" aria-hidden="true"></div>{endif/}{otherwise/}{endcase/}
+                  {if ?DESCRIPTION/}<p class="amc-NKpi-desc">#DESCRIPTION#</p>{endif/}
+                  {case STYLE/}{when flipDetail/}{if ?COMPARE_VALUE/}<p class="amc-NKpi-teaser" aria-hidden="true"><span class="amc-NKpi-teaserLabel">{if ?COMPARE_LABEL/}#COMPARE_LABEL#{else/}Previous{endif/}</span><span class="amc-NKpi-teaserValue">#COMPARE_VALUE#</span></p>{endif/}{otherwise/}{endcase/}
+                </div>
+                {case STYLE/}{when flipDetail/}<div class="amc-NKpi-face amc-NKpi-face--back">
+                  <p class="amc-NKpi-backTitle">#LABEL#</p>
+                  <dl class="amc-NKpi-compare">
+                    <div class="amc-NKpi-side amc-NKpi-side--now"><dt class="amc-NKpi-sideLabel">{if ?DESCRIPTION/}#DESCRIPTION#{else/}Current{endif/}</dt><dd class="amc-NKpi-sideValue">#VALUE#{if ?UNIT/} <span class="amc-NKpi-unit">#UNIT#</span>{endif/}</dd></div>
+                    {if ?COMPARE_VALUE/}<div class="amc-NKpi-side amc-NKpi-side--was"><dt class="amc-NKpi-sideLabel">{if ?COMPARE_LABEL/}#COMPARE_LABEL#{else/}Previous{endif/}</dt><dd class="amc-NKpi-sideValue">#COMPARE_VALUE#{if ?UNIT/} <span class="amc-NKpi-unit">#UNIT#</span>{endif/}</dd></div>{endif/}
+                  </dl>
+                  {if ?BREAKDOWN/}<div class="amc-NKpi-breakdown">#BREAKDOWN#</div>{endif/}
+                </div>{otherwise/}{endcase/}
+              </div>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NKpis-frame"><ul class="amc-NKpis amc-NKpis--#STYLE#">#APEX$ROWS#</ul></div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NKpis-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-kpi.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-kpi.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (0 to 100) drives Liquid Fill, the Bento Tile ring and the Adaptive bar. Series (comma-separated numbers) draws the sparkline of Tilt, Aurora Glow and Bento Tile and the bars of Neo Brutal. Compare Value, Compare Label and Breakdown fill the back of Flip Detail. Every style is complete without JavaScript; the runtime file only adds the ticker, the pointer tilt, sparklines and the Percent level.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: ticker
+        }
+        help {
+            helpText:
+                ```
+                The tile design, grouped by direction. Motion - Ticker: odometer digit wheels spin to the value when the tile scrolls into view. Motion - Beam: a light beam travels around the border. Motion - Liquid Fill: the tile fills with a moving wave up to Percent. Depth - Tilt: the tile tilts toward the pointer and the number floats on its own layer. Depth - Flip Detail: hover or focus turns the tile to show Compare Value and Breakdown. Bold - Neo Brutal: ink border, hard shadow, flat fills, bars from Series. Bold - Clay: soft pillowy surface with inner and outer shadows. Bold - Aurora Glow: dark aurora tile with a glowing number. Smart - Bento Tile: container queries recompose number, sparkline, change and ring into bento sub-tiles. Smart - Adaptive: becomes a chip, a big number or a row depending on its own width. Under reduced motion every effect stops and the static design stays.
+                ```
+        }
+        entry ticker (
+            sequence: 10
+            display: Ticker - motion
+            return: ticker
+        )
+        entry beam (
+            sequence: 20
+            display: Beam - motion
+            return: beam
+        )
+        entry liquidFill (
+            sequence: 30
+            display: Liquid Fill - motion
+            return: liquidFill
+        )
+        entry tilt (
+            sequence: 40
+            display: Tilt - depth
+            return: tilt
+        )
+        entry flipDetail (
+            sequence: 50
+            display: Flip Detail - depth
+            return: flipDetail
+        )
+        entry neoBrutal (
+            sequence: 60
+            display: Neo Brutal - bold
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 70
+            display: Clay - bold
+            return: clay
+        )
+        entry auroraGlow (
+            sequence: 80
+            display: Aurora Glow - bold
+            return: auroraGlow
+        )
+        entry bentoTile (
+            sequence: 90
+            display: Bento Tile - smart
+            return: bentoTile
+        )
+        entry adaptive (
+            sequence: 100
+            display: Adaptive - smart
+            return: adaptive
+        )
+    )
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 2
+        name: Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Name of the metric, for example Monthly Revenue. Rendered as the tile heading.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 3
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                The key figure as display text. Format it in SQL, for example to_char(amount, 'FML999G999G990'), so it follows the application's NLS settings. The Ticker style spins every digit 0 to 9 in place and keeps separators, signs and letters as they are.
+                ```
+        }
+    )
+    customAttribute UNIT (
+        apexlangName: unit
+        attribute: 4
+        name: Unit
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional unit shown after the value, for example SAR, %, h or orders.
+                ```
+        }
+    )
+    customAttribute CHANGE (
+        apexlangName: change
+        attribute: 5
+        name: Change
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional change text such as +12.4% or -9. Leave empty to hide the trend indicator.
+                ```
+        }
+    )
+    customAttribute TREND (
+        apexlangName: trend
+        attribute: 6
+        name: Trend
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Direction of the change: up, down or flat. Any other value renders as flat. Up is shown in the success color and down in the danger color unless Down Is Good is set; the direction is also announced as text.
+                ```
+        }
+    )
+    customAttribute INVERT_TREND (
+        apexlangName: invertTrend
+        attribute: 7
+        name: Down Is Good
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 70
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: false
+        }
+        help {
+            helpText:
+                ```
+                Swap the trend colors so a decrease is shown as positive, for example for costs, churn or error rates.
+                ```
+        }
+    )
+    customAttribute PERCENT (
+        apexlangName: percent
+        attribute: 8
+        name: Percent
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                A number from 0 to 100 with a period as decimal separator, for example 72 or 64.5. Liquid Fill uses it as the liquid level, Bento Tile as a ring sub-tile and Adaptive as a progress bar. Values outside the range are clamped; non-numeric values show an empty level.
+                ```
+        }
+    )
+    customAttribute SERIES (
+        apexlangName: series
+        attribute: 9
+        name: Series
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Comma-separated numbers, oldest first, with a period as decimal separator, for example 12,18,15,22,27. Tilt, Aurora Glow and Bento Tile draw a sparkline, Neo Brutal draws chunky bars. Up to 24 values are used. Build it in SQL with listagg.
+                ```
+        }
+    )
+    customAttribute COMPARE_VALUE (
+        apexlangName: compareValue
+        attribute: 10
+        name: Compare Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Flip Detail back face: the reference figure, for example last quarter's value or the target. Format it in SQL like Value.
+                ```
+        }
+    )
+    customAttribute COMPARE_LABEL (
+        apexlangName: compareLabel
+        attribute: 11
+        name: Compare Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Compare Value, for example Q2 2026 or Target. Defaults to Previous.
+                ```
+        }
+    )
+    customAttribute BREAKDOWN (
+        apexlangName: breakdown
+        attribute: 12
+        name: Breakdown
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Flip Detail back face: parts of the figure separated by |, each written as name: value, for example Riyadh: 540K|Jeddah: 410K|Dammam: 334K. The runtime file turns it into a list of name and value pairs; without JavaScript the text stays readable as is.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 13
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-line-chart. Shown beside the label; Clay and Adaptive give it a larger badge.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 14
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional footnote, for example vs. last month or rolling 30 days.
+                ```
+        }
+    )
+    file "amc-next-kpi.css" (
+        fileName: amc-next-kpi.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-kpi.js" (
+        fileName: amc-next-kpi.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)
