@@ -1,0 +1,117 @@
+listTemplate amc-bento-launchpad (
+    name: AMC Bento Launchpad
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TBentoLaunchpad #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <ul class="amc-TBentoLaunchpad-grid">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TBentoLaunchpad-item amc-TBentoLaunchpad-item--#A01# is-current"><a class="amc-TBentoLaunchpad-link" href="#LINK#" aria-current="page"><span class="amc-TBentoLaunchpad-glyph fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TBentoLaunchpad-chip"><span class="amc-TBentoLaunchpad-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span></span><span class="amc-TBentoLaunchpad-body"><span class="amc-TBentoLaunchpad-title">#TEXT#</span><span class="amc-TBentoLaunchpad-desc">#A02#</span></span><span class="amc-TBentoLaunchpad-metric">#A03#</span><span class="amc-TBentoLaunchpad-go fa fa-arrow-right" aria-hidden="true"></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TBentoLaunchpad-item amc-TBentoLaunchpad-item--#A01#"><a class="amc-TBentoLaunchpad-link" href="#LINK#"><span class="amc-TBentoLaunchpad-glyph fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TBentoLaunchpad-chip"><span class="amc-TBentoLaunchpad-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span></span><span class="amc-TBentoLaunchpad-body"><span class="amc-TBentoLaunchpad-title">#TEXT#</span><span class="amc-TBentoLaunchpad-desc">#A02#</span></span><span class="amc-TBentoLaunchpad-metric">#A03#</span><span class="amc-TBentoLaunchpad-go fa fa-arrow-right" aria-hidden="true"></span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-bento-launchpad.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Tile size
+        a02: Description
+        a03: Metric
+    }
+    advanced {
+        staticId: AMC_TPL_BENTO_LAUNCHPAD
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a List region. User Defined Attribute 1 sets the tile size: wide (two columns), tall (two rows) or large (two by two, filled with the primary color); leave it empty for a normal tile, and other values are ignored. Attribute 2 is a short description and Attribute 3 a metric such as '128' or 'SAR 4.2M' (use an application item substitution to keep it live). The grid uses 1 column below 480px of region width (tiles become rows), 2 columns up to 760px, 4 up to 1180px and 6 beyond; tall, wide and large tiles switch their inner layout to show a big metric. While one tile has the pointer the others step back. Everything works with the keyboard in list order, with a visible focus ring. Template options: Tinted tiles, Compact rows, Mono large tile, Hide big icons.
+            ```
+    }
+
+    templateOption amc-bento-launchpad-tinted (
+        name: Tinted tiles
+        sequence: 10
+        appearance {
+            cssClasses: amc-TBentoLaunchpad--tinted
+        }
+        help {
+            helpText:
+                ```text
+                Each tile takes a hue derived from the theme's primary color, for launchpads with many destinations. Browsers without relative color syntax keep the primary color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TINTED
+        }
+    )
+
+    templateOption amc-bento-launchpad-compact (
+        name: Compact rows
+        sequence: 20
+        appearance {
+            cssClasses: amc-TBentoLaunchpad--compact
+        }
+        help {
+            helpText:
+                ```text
+                Rows of 118px instead of 150px, for launchpads above a report.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-bento-launchpad-mono (
+        name: Mono large tile
+        sequence: 30
+        appearance {
+            cssClasses: amc-TBentoLaunchpad--mono
+        }
+        help {
+            helpText:
+                ```text
+                Large tiles keep the light surface instead of a primary fill.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MONO
+        }
+    )
+
+    templateOption amc-bento-launchpad-no-glyph (
+        name: Hide big icons
+        sequence: 40
+        appearance {
+            cssClasses: amc-TBentoLaunchpad--noGlyph
+        }
+        help {
+            helpText:
+                ```text
+                Removes the oversized background icons and keeps the small icon chip, for dense dashboards.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_GLYPH
+        }
+    )
+)

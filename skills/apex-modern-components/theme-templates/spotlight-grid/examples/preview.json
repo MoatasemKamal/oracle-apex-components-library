@@ -1,0 +1,25 @@
+{
+  "samples": [
+    { "title": "Procurement hub", "options": [], "entries": [
+      { "text": "Purchase requests", "link": "#", "icon": "fa-shopping-basket", "a01": "Raise and track requests for goods and services.", "a02": "4 open" },
+      { "text": "Purchase orders", "link": "#", "icon": "fa-file-text-o", "a01": "Orders sent to suppliers and their delivery status.", "current": true },
+      { "text": "Suppliers", "link": "#", "icon": "fa-building-o", "a01": "Contacts, contracts and performance ratings." },
+      { "text": "Goods receipts", "link": "#", "icon": "fa-download", "a01": "Confirm deliveries against orders.", "a02": "New" },
+      { "text": "Invoice matching", "link": "#", "icon": "fa-exchange", "a01": "Three-way match for supplier invoices.", "a02": "12 due" },
+      { "text": "Spend analysis", "link": "#", "icon": "fa-pie-chart", "a01": "Spend by category, supplier and cost center." }
+    ] },
+    { "title": "Admin settings, night tiles, compact", "options": ["amc-TSpotlightGrid--night", "amc-TSpotlightGrid--compact"], "entries": [
+      { "text": "Users", "link": "#", "icon": "fa-users", "a02": "182" },
+      { "text": "Roles", "link": "#", "icon": "fa-key", "current": true },
+      { "text": "Approval rules", "link": "#", "icon": "fa-sitemap" },
+      { "text": "Email templates", "link": "#", "icon": "fa-envelope-o" },
+      { "text": "Audit log", "link": "#", "icon": "fa-history", "a02": "Today" },
+      { "text": "Integrations", "link": "#", "icon": "fa-plug" }
+    ] },
+    { "title": "HR requests as rows, intense", "options": ["amc-TSpotlightGrid--rows", "amc-TSpotlightGrid--intense"], "entries": [
+      { "text": "Annual leave", "link": "#", "icon": "fa-plane", "a01": "12 days left this year", "a02": "2 pending" },
+      { "text": "Salary certificate", "link": "#", "icon": "fa-certificate", "a01": "Ready in one working day" },
+      { "text": "Expense claim", "link": "#", "icon": "fa-credit-card", "a01": "Attach receipts and submit for approval" }
+    ] }
+  ]
+}

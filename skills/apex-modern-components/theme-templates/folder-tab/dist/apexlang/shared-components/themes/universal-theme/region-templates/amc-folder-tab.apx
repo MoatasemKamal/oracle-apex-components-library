@@ -40,7 +40,7 @@ regionTemplate amc-folder-tab (
     }
 
     templateOption amc-folder-tab-tab-primary (
-        name: Tab color: primary
+        name: Primary tab
         sequence: 10
         appearance {
             cssClasses: amc-TFolderTab--primary
@@ -58,7 +58,7 @@ regionTemplate amc-folder-tab (
     )
 
     templateOption amc-folder-tab-tab-success (
-        name: Tab color: success
+        name: Success tab
         sequence: 20
         appearance {
             cssClasses: amc-TFolderTab--success
@@ -76,7 +76,7 @@ regionTemplate amc-folder-tab (
     )
 
     templateOption amc-folder-tab-tab-danger (
-        name: Tab color: danger
+        name: Danger tab
         sequence: 30
         appearance {
             cssClasses: amc-TFolderTab--danger

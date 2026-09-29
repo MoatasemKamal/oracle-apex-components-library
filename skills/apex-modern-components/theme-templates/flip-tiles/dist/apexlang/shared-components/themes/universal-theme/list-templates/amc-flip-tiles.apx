@@ -1,0 +1,116 @@
+listTemplate amc-flip-tiles (
+    name: AMC Flip Tiles
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TFlipTiles #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <ul class="amc-TFlipTiles-grid">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TFlipTiles-item is-current"><a class="amc-TFlipTiles-link" href="#LINK#" aria-current="page"><span class="amc-TFlipTiles-card"><span class="amc-TFlipTiles-face amc-TFlipTiles-front"><span class="amc-TFlipTiles-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TFlipTiles-label">#TEXT#</span><span class="amc-TFlipTiles-fold" aria-hidden="true"></span></span><span class="amc-TFlipTiles-face amc-TFlipTiles-back"><span class="amc-TFlipTiles-backTitle" aria-hidden="true">#TEXT#</span><span class="amc-TFlipTiles-desc">#A01#</span><span class="amc-TFlipTiles-cta"><span class="amc-TFlipTiles-ctaText">#A02#</span><span class="amc-TFlipTiles-arrow fa fa-arrow-right" aria-hidden="true"></span></span></span></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TFlipTiles-item"><a class="amc-TFlipTiles-link" href="#LINK#"><span class="amc-TFlipTiles-card"><span class="amc-TFlipTiles-face amc-TFlipTiles-front"><span class="amc-TFlipTiles-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TFlipTiles-label">#TEXT#</span><span class="amc-TFlipTiles-fold" aria-hidden="true"></span></span><span class="amc-TFlipTiles-face amc-TFlipTiles-back"><span class="amc-TFlipTiles-backTitle" aria-hidden="true">#TEXT#</span><span class="amc-TFlipTiles-desc">#A01#</span><span class="amc-TFlipTiles-cta"><span class="amc-TFlipTiles-ctaText">#A02#</span><span class="amc-TFlipTiles-arrow fa fa-arrow-right" aria-hidden="true"></span></span></span></span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-flip-tiles.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Call to action
+    }
+    advanced {
+        staticId: AMC_TPL_FLIP_TILES
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a List region. Front: the entry icon and text. Back: User Defined Attribute 1 as the description and Attribute 2 as the call-to-action text, for example 'Request leave'; when Attribute 2 is empty only an arrow is shown. Tiles turn over on hover and on keyboard focus; each tile is a single link, so Tab moves through the tiles in list order and Enter opens the destination. The current entry has a filled front. On touch screens and under reduced motion both faces are shown together as one tile, so nothing is hover-only and nothing moves. Template options: Flip vertically, Compact, Palette, Ink.
+            ```
+    }
+
+    templateOption amc-flip-tiles-flip-x (
+        name: Flip vertically
+        sequence: 10
+        appearance {
+            cssClasses: amc-TFlipTiles--flipX
+        }
+        help {
+            helpText:
+                ```text
+                Tiles turn over top to bottom instead of sideways.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FLIP_X
+        }
+    )
+
+    templateOption amc-flip-tiles-compact (
+        name: Compact
+        sequence: 20
+        appearance {
+            cssClasses: amc-TFlipTiles--compact
+        }
+        help {
+            helpText:
+                ```text
+                Smaller tiles of 138px, for side columns and dense menus.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-flip-tiles-palette (
+        name: Palette
+        sequence: 30
+        appearance {
+            cssClasses: amc-TFlipTiles--palette
+        }
+        help {
+            helpText:
+                ```text
+                Each tile takes a hue derived from the theme's primary color. Browsers without relative color syntax keep the primary color.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PALETTE
+        }
+    )
+
+    templateOption amc-flip-tiles-ink (
+        name: Ink
+        sequence: 40
+        appearance {
+            cssClasses: amc-TFlipTiles--ink
+        }
+        help {
+            helpText:
+                ```text
+                Neo-brutal look: ink borders in the theme text color, flat fills and hard offset shadows.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: INK
+        }
+    )
+)

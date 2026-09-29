@@ -1,0 +1,21 @@
+{
+  "kind": "list",
+  "name": "AMC Flip Tiles",
+  "staticId": "AMC_TPL_FLIP_TILES",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "Launch tiles that turn over in 3D on hover and keyboard focus: icon and label on the front, a description and a call to action on a colored back face, while each tile stays one real link.",
+  "useFor": "Launchpads and module menus with 3 to 16 entries where a destination needs one or two lines of explanation, such as self-service portals and onboarding hubs.",
+  "keywords": ["flip card", "3d", "launchpad", "tiles", "self-service", "portal"],
+  "helpText": "List template for a List region. Front: the entry icon and text. Back: User Defined Attribute 1 as the description and Attribute 2 as the call-to-action text, for example 'Request leave'; when Attribute 2 is empty only an arrow is shown. Tiles turn over on hover and on keyboard focus; each tile is a single link, so Tab moves through the tiles in list order and Enter opens the destination. The current entry has a filled front. On touch screens and under reduced motion both faces are shown together as one tile, so nothing is hover-only and nothing moves. Template options: Flip vertically, Compact, Palette, Ink.",
+  "attributes": { "a01": "Description", "a02": "Call to action" },
+  "templateOptions": [
+    { "staticId": "FLIP_X", "name": "Flip vertically", "cssClass": "amc-TFlipTiles--flipX", "sequence": 10, "help": "Tiles turn over top to bottom instead of sideways." },
+    { "staticId": "COMPACT", "name": "Compact", "cssClass": "amc-TFlipTiles--compact", "sequence": 20, "help": "Smaller tiles of 138px, for side columns and dense menus." },
+    { "staticId": "PALETTE", "name": "Palette", "cssClass": "amc-TFlipTiles--palette", "sequence": 30, "help": "Each tile takes a hue derived from the theme's primary color. Browsers without relative color syntax keep the primary color." },
+    { "staticId": "INK", "name": "Ink", "cssClass": "amc-TFlipTiles--ink", "sequence": 40, "help": "Neo-brutal look: ink borders in the theme text color, flat fills and hard offset shadows." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

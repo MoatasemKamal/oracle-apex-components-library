@@ -1,0 +1,133 @@
+listTemplate amc-orbit-launcher (
+    name: AMC Orbit Launcher
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TOrbitLauncher #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <ul class="amc-TOrbitLauncher-orbit">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TOrbitLauncher-item is-current"><a class="amc-TOrbitLauncher-link" href="#LINK#" aria-current="page"><span class="amc-TOrbitLauncher-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TOrbitLauncher-text"><span class="amc-TOrbitLauncher-pill"><span class="amc-TOrbitLauncher-label">#TEXT#</span><span class="amc-TOrbitLauncher-caption">#A01#</span></span></span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TOrbitLauncher-item"><a class="amc-TOrbitLauncher-link" href="#LINK#"><span class="amc-TOrbitLauncher-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TOrbitLauncher-text"><span class="amc-TOrbitLauncher-pill"><span class="amc-TOrbitLauncher-label">#TEXT#</span><span class="amc-TOrbitLauncher-caption">#A01#</span></span></span></a></li>
+            ```
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-orbit-launcher.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Caption
+    }
+    advanced {
+        staticId: AMC_TPL_ORBIT_LAUNCHER
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a static or dynamic List region. The first entry becomes the hub in the center (use it for the app home or the main workspace); entries 2 to 13 orbit it, in list order, clockwise from the top. User Defined Attribute 1 is a short caption, for example '14 pending'. The orbit pauses while the pointer is over an entry or an entry has keyboard focus; the entry grows and shows its label and caption. Keyboard order follows the list order. On touch screens labels are always visible. Containers narrower than 360px and users who prefer reduced motion get a tidy icon grid with the hub as a banner. Template options: Calm orbit, Still orbit, Always show labels, Compact, Success color.
+            ```
+    }
+
+    templateOption amc-orbit-launcher-calm (
+        name: Calm orbit
+        sequence: 10
+        appearance {
+            cssClasses: amc-TOrbitLauncher--calm
+        }
+        help {
+            helpText:
+                ```text
+                Halves the orbit speed for pages people keep open all day.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CALM
+        }
+    )
+
+    templateOption amc-orbit-launcher-still (
+        name: Still orbit
+        sequence: 20
+        appearance {
+            cssClasses: amc-TOrbitLauncher--still
+        }
+        help {
+            helpText:
+                ```text
+                Keeps the orbit layout but stops rotation and the hub pulse; labels are always shown.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STILL
+        }
+    )
+
+    templateOption amc-orbit-launcher-labels (
+        name: Always show labels
+        sequence: 30
+        appearance {
+            cssClasses: amc-TOrbitLauncher--labels
+        }
+        help {
+            helpText:
+                ```text
+                Shows every label and caption under its entry, not only on hover or focus, and enlarges the orbit a little to fit them.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LABELS
+        }
+    )
+
+    templateOption amc-orbit-launcher-compact (
+        name: Compact
+        sequence: 40
+        appearance {
+            cssClasses: amc-TOrbitLauncher--compact
+        }
+        help {
+            helpText:
+                ```text
+                Limits the orbit to 340px, for side columns and dashboards.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-orbit-launcher-success (
+        name: Success color
+        sequence: 50
+        appearance {
+            cssClasses: amc-TOrbitLauncher--success
+        }
+        help {
+            helpText:
+                ```text
+                Hub, comet and current entry use the success palette color instead of primary.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SUCCESS
+        }
+    )
+)

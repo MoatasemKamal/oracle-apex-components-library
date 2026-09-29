@@ -1,0 +1,20 @@
+{
+  "samples": [
+    { "title": "Finance workspace", "options": [], "entries": [
+      { "text": "Receivables", "link": "#", "icon": "fa-money", "a01": "large", "a02": "Invoices issued this quarter and what customers still owe.", "a03": "SAR 4.2M", "current": true },
+      { "text": "Overdue invoices", "link": "#", "icon": "fa-exclamation-circle", "a02": "Past due more than 30 days", "a03": "14" },
+      { "text": "Supplier payments", "link": "#", "icon": "fa-university", "a02": "Due this week", "a03": "36" },
+      { "text": "Approvals", "link": "#", "icon": "fa-check-square-o", "a01": "tall", "a02": "Purchase orders and expense claims waiting for your decision.", "a03": "6" },
+      { "text": "Month-end close", "link": "#", "icon": "fa-calendar-check-o", "a01": "wide", "a02": "Close runs on 30 September", "a03": "72%" },
+      { "text": "Cash position", "link": "#", "icon": "fa-line-chart", "a02": "All bank accounts" }
+    ] },
+    { "title": "Operations launchpad, tinted and compact", "options": ["amc-TBentoLaunchpad--tinted", "amc-TBentoLaunchpad--compact"], "entries": [
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "a01": "wide", "a02": "Open sales orders", "a03": "128" },
+      { "text": "Shipments", "link": "#", "icon": "fa-truck", "a02": "In transit", "a03": "31" },
+      { "text": "Returns", "link": "#", "icon": "fa-undo", "a02": "New this week", "a03": "3" },
+      { "text": "Warehouse", "link": "#", "icon": "fa-cubes", "a01": "tall", "a02": "Stock, picking waves and cycle counts for Dock 4.", "a03": "98.6%" },
+      { "text": "Customers", "link": "#", "icon": "fa-users", "a02": "Active accounts", "a03": "2,340" },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart", "a02": "Daily and monthly" }
+    ] }
+  ]
+}

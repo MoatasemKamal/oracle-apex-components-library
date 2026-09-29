@@ -2,6 +2,98 @@
   "generatedBy": "tools/build-templates.mjs",
   "templates": [
     {
+      "slug": "accordion-rail",
+      "kind": "list",
+      "name": "AMC Accordion Rail",
+      "staticId": "AMC_TPL_ACCORDION_RAIL",
+      "apexlangId": "amc-accordion-rail",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Side navigation drawn as a rail: every entry is a node on one line, groups open like an accordion with a smooth height morph, and the path from the current parent down to the current page glows along the rail.",
+      "useFor": "Navigation lists with one level of sub entries in a Left Column or side region: Orders with Open, Backorders and Returns, Invoices with Drafts and Overdue, Admin with Users and Settings.",
+      "keywords": [
+        "side navigation",
+        "accordion",
+        "rail",
+        "tree",
+        "sub menu",
+        "icon rail"
+      ],
+      "attributes": {
+        "a01": "Badge"
+      },
+      "templateOptions": [
+        {
+          "name": "Icon rail",
+          "cssClass": "amc-TAccordionRail--iconRail"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TAccordionRail--compact"
+        },
+        {
+          "name": "Panel",
+          "cssClass": "amc-TAccordionRail--panel"
+        },
+        {
+          "name": "Flowing light",
+          "cssClass": "amc-TAccordionRail--pulse"
+        }
+      ],
+      "apexlang": "theme-templates/accordion-rail/dist/apexlang",
+      "legacySql": "theme-templates/accordion-rail/dist/legacy/amc_tpl_accordion_rail.sql"
+    },
+    {
+      "slug": "aurora-header",
+      "kind": "region",
+      "name": "AMC Aurora Header",
+      "staticId": "AMC_TPL_AURORA_HEADER",
+      "apexlangId": "amc-aurora-header",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region with a tall header band of slowly drifting aurora light and film grain, carrying a large title and icon, and a calm content sheet that overlaps the band.",
+      "useFor": "Landing regions of a page or dashboard: a Cards region of KPIs, a Chart, a Classic Report of today's work or a Static Content welcome. Use one per page; it is a headline, not a panel for every region.",
+      "keywords": [
+        "aurora",
+        "gradient header",
+        "hero region",
+        "grain",
+        "banner",
+        "overlap card"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Tall band",
+          "cssClass": "amc-TAuroraHeader--tall"
+        },
+        {
+          "name": "Compact band",
+          "cssClass": "amc-TAuroraHeader--compact"
+        },
+        {
+          "name": "Sunset colors",
+          "cssClass": "amc-TAuroraHeader--sunset"
+        },
+        {
+          "name": "Lagoon colors",
+          "cssClass": "amc-TAuroraHeader--lagoon"
+        },
+        {
+          "name": "Still aurora",
+          "cssClass": "amc-TAuroraHeader--still"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TAuroraHeader--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/aurora-header/dist/apexlang",
+      "legacySql": "theme-templates/aurora-header/dist/legacy/amc_tpl_aurora_header.sql"
+    },
+    {
       "slug": "beam-frame",
       "kind": "region",
       "name": "AMC Beam Frame",
@@ -48,6 +140,1305 @@
       ],
       "apexlang": "theme-templates/beam-frame/dist/apexlang",
       "legacySql": "theme-templates/beam-frame/dist/legacy/amc_tpl_beam_frame.sql"
+    },
+    {
+      "slug": "bento-launchpad",
+      "kind": "list",
+      "name": "AMC Bento Launchpad",
+      "staticId": "AMC_TPL_BENTO_LAUNCHPAD",
+      "apexlangId": "amc-bento-launchpad",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A bento launchpad: list entries become tiles of mixed sizes with an oversized tilted icon, a description and a live metric, and the grid and every tile recompose with container queries as the region changes width.",
+      "useFor": "Home pages and workspace launchpads with 4 to 12 entries, where each destination has a short description and a number worth showing (open orders, overdue invoices, pending approvals).",
+      "keywords": [
+        "bento",
+        "launchpad",
+        "home page",
+        "tiles",
+        "dashboard",
+        "container queries",
+        "shortcuts"
+      ],
+      "attributes": {
+        "a01": "Tile size",
+        "a02": "Description",
+        "a03": "Metric"
+      },
+      "templateOptions": [
+        {
+          "name": "Tinted tiles",
+          "cssClass": "amc-TBentoLaunchpad--tinted"
+        },
+        {
+          "name": "Compact rows",
+          "cssClass": "amc-TBentoLaunchpad--compact"
+        },
+        {
+          "name": "Mono large tile",
+          "cssClass": "amc-TBentoLaunchpad--mono"
+        },
+        {
+          "name": "Hide big icons",
+          "cssClass": "amc-TBentoLaunchpad--noGlyph"
+        }
+      ],
+      "apexlang": "theme-templates/bento-launchpad/dist/apexlang",
+      "legacySql": "theme-templates/bento-launchpad/dist/legacy/amc_tpl_bento_launchpad.sql"
+    },
+    {
+      "slug": "browser-window",
+      "kind": "region",
+      "name": "AMC Browser Window",
+      "staticId": "AMC_TPL_BROWSER_WINDOW",
+      "apexlangId": "amc-browser-window",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A browser-window mockup with real depth: a tab strip whose active tab carries the title and icon as favicon, a toolbar with an address pill, and a layered window shadow, with phone and tablet device frames for previewing pages.",
+      "useFor": "Previews and showcases: a Static Content or Cards region that previews a customer portal page, a release-notes region, a Form that edits what a public page shows, or a Chart embedded as a page mockup. Phone and tablet frames suit responsive previews.",
+      "keywords": [
+        "browser mockup",
+        "safari",
+        "chrome window",
+        "device frame",
+        "phone frame",
+        "tablet frame",
+        "preview"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Phone frame",
+          "cssClass": "amc-TBrowserWindow--phone"
+        },
+        {
+          "name": "Tablet frame",
+          "cssClass": "amc-TBrowserWindow--tablet"
+        },
+        {
+          "name": "Minimal chrome",
+          "cssClass": "amc-TBrowserWindow--minimal"
+        },
+        {
+          "name": "Stacked windows",
+          "cssClass": "amc-TBrowserWindow--stacked"
+        },
+        {
+          "name": "Dark chrome",
+          "cssClass": "amc-TBrowserWindow--darkChrome"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TBrowserWindow--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/browser-window/dist/apexlang",
+      "legacySql": "theme-templates/browser-window/dist/legacy/amc_tpl_browser_window.sql"
+    },
+    {
+      "slug": "brutal-block",
+      "kind": "region",
+      "name": "AMC Brutal Block",
+      "staticId": "AMC_TPL_BRUTAL_BLOCK",
+      "apexlangId": "amc-brutal-block",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A neo-brutalist region: thick ink border, hard offset shadow, a flat striped palette band and the title in a tilted sticker label that breaks out of the top edge.",
+      "useFor": "Regions that should shout on internal tools and admin pages: a work queue Classic Report, a checklist Form, a Chart on a status board or a Static Content notice.",
+      "keywords": [
+        "neo brutalism",
+        "brutalist",
+        "hard shadow",
+        "sticker",
+        "bold",
+        "flat"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Warning band",
+          "cssClass": "amc-TBrutalBlock--warning"
+        },
+        {
+          "name": "Success band",
+          "cssClass": "amc-TBrutalBlock--success"
+        },
+        {
+          "name": "Danger band",
+          "cssClass": "amc-TBrutalBlock--danger"
+        },
+        {
+          "name": "Ink band",
+          "cssClass": "amc-TBrutalBlock--ink"
+        },
+        {
+          "name": "Shadow to start side",
+          "cssClass": "amc-TBrutalBlock--shadowStart"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TBrutalBlock--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/brutal-block/dist/apexlang",
+      "legacySql": "theme-templates/brutal-block/dist/legacy/amc_tpl_brutal_block.sql"
+    },
+    {
+      "slug": "brutal-links",
+      "kind": "list",
+      "name": "AMC Brutal Links",
+      "staticId": "AMC_TPL_BRUTAL_LINKS",
+      "apexlangId": "amc-brutal-links",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Neo-brutalist link cards with ink borders, hard offset shadows, flat palette fills that rotate per entry, an oversized arrow and a press-down click.",
+      "useFor": "Launchpads and quick links on home pages and landing dashboards: module shortcuts, report hubs, self-service portals, onboarding steps.",
+      "keywords": [
+        "neo-brutalism",
+        "brutalist",
+        "link cards",
+        "launchpad",
+        "hard shadow",
+        "quick links"
+      ],
+      "attributes": {
+        "a01": "Description"
+      },
+      "templateOptions": [
+        {
+          "name": "Sticker tilt",
+          "cssClass": "amc-TBrutalLinks--sticker"
+        },
+        {
+          "name": "Monochrome",
+          "cssClass": "amc-TBrutalLinks--mono"
+        },
+        {
+          "name": "Rows",
+          "cssClass": "amc-TBrutalLinks--rows"
+        },
+        {
+          "name": "Heavy",
+          "cssClass": "amc-TBrutalLinks--heavy"
+        }
+      ],
+      "apexlang": "theme-templates/brutal-links/dist/apexlang",
+      "legacySql": "theme-templates/brutal-links/dist/legacy/amc_tpl_brutal_links.sql"
+    },
+    {
+      "slug": "clay-menu",
+      "kind": "list",
+      "name": "AMC Clay Menu",
+      "staticId": "AMC_TPL_CLAY_MENU",
+      "apexlangId": "amc-clay-menu",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A claymorphism pill menu on a soft tray: pillowy pills with glossy icon bubbles, soft inner and outer shadows, and the current entry pressed into the tray.",
+      "useFor": "Page-level menus and filters with 3 to 10 entries: module sub-navigation, report views, status filters, a toolbar of quick actions above a report.",
+      "keywords": [
+        "claymorphism",
+        "clay",
+        "pills",
+        "menu",
+        "soft ui",
+        "tabs",
+        "navigation"
+      ],
+      "attributes": {
+        "a01": "Badge"
+      },
+      "templateOptions": [
+        {
+          "name": "Vertical",
+          "cssClass": "amc-TClayMenu--vertical"
+        },
+        {
+          "name": "Large",
+          "cssClass": "amc-TClayMenu--large"
+        },
+        {
+          "name": "Single color",
+          "cssClass": "amc-TClayMenu--mono"
+        },
+        {
+          "name": "Icons only",
+          "cssClass": "amc-TClayMenu--iconsOnly"
+        },
+        {
+          "name": "Fill row",
+          "cssClass": "amc-TClayMenu--fill"
+        }
+      ],
+      "apexlang": "theme-templates/clay-menu/dist/apexlang",
+      "legacySql": "theme-templates/clay-menu/dist/legacy/amc_tpl_clay_menu.sql"
+    },
+    {
+      "slug": "clay-panel",
+      "kind": "region",
+      "name": "AMC Clay Panel",
+      "staticId": "AMC_TPL_CLAY_PANEL",
+      "apexlangId": "amc-clay-panel",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A claymorphism region: a pillowy, softly lit panel with the title in a raised clay pill, the icon in a glossy clay bubble and the native content in a gently pressed tray.",
+      "useFor": "Friendly, consumer-style pages: a self-service portal Form, a Cards or KPI region, a Chart on a personal dashboard, or a short Classic Report.",
+      "keywords": [
+        "claymorphism",
+        "clay",
+        "soft ui",
+        "pillowy",
+        "3d",
+        "friendly"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Success clay",
+          "cssClass": "amc-TClayPanel--success"
+        },
+        {
+          "name": "Danger clay",
+          "cssClass": "amc-TClayPanel--danger"
+        },
+        {
+          "name": "Warm clay",
+          "cssClass": "amc-TClayPanel--warm"
+        },
+        {
+          "name": "Neutral clay",
+          "cssClass": "amc-TClayPanel--neutral"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TClayPanel--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/clay-panel/dist/apexlang",
+      "legacySql": "theme-templates/clay-panel/dist/legacy/amc_tpl_clay_panel.sql"
+    },
+    {
+      "slug": "collapsible-morph",
+      "kind": "region",
+      "name": "AMC Collapsible Morph",
+      "staticId": "AMC_TPL_COLLAPSIBLE_MORPH",
+      "apexlangId": "amc-collapsible-morph",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A collapsible region whose card morphs into a compact pill when collapsed: width, corners and header shape change together while the body folds away, instead of a classic chevron header with a sliding body.",
+      "useFor": "Secondary or optional content that users open on demand: search filters above an Interactive Report, an advanced section of a Form, a Chart or a notes region on a dashboard.",
+      "keywords": [
+        "collapsible",
+        "accordion",
+        "morph",
+        "pill",
+        "toggle",
+        "expand"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Collapsed by default",
+          "cssClass": "amc-TCollapsibleMorph--collapsed"
+        },
+        {
+          "name": "Remember state",
+          "cssClass": "amc-TCollapsibleMorph--remember"
+        },
+        {
+          "name": "Pill at end",
+          "cssClass": "amc-TCollapsibleMorph--pillEnd"
+        },
+        {
+          "name": "Primary pill",
+          "cssClass": "amc-TCollapsibleMorph--primary"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TCollapsibleMorph--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/collapsible-morph/dist/apexlang",
+      "legacySql": "theme-templates/collapsible-morph/dist/legacy/amc_tpl_collapsible_morph.sql"
+    },
+    {
+      "slug": "command-list",
+      "kind": "list",
+      "name": "AMC Command List",
+      "staticId": "AMC_TPL_COMMAND_LIST",
+      "apexlangId": "amc-command-list",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A command-palette list: a search box filters the entries as you type and highlights the match, arrow keys move between commands, and each row shows an icon, a description and its keyboard-shortcut chip.",
+      "useFor": "Action menus and power-user navigation: a Quick actions region on a dashboard, a task list on a record page, an admin or settings index with many entries.",
+      "keywords": [
+        "command palette",
+        "command menu",
+        "search",
+        "filter",
+        "kbd",
+        "shortcuts",
+        "quick actions"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Shortcut"
+      },
+      "templateOptions": [
+        {
+          "name": "Compact",
+          "cssClass": "amc-TCommandList--compact"
+        },
+        {
+          "name": "Hide search",
+          "cssClass": "amc-TCommandList--noSearch"
+        },
+        {
+          "name": "Elevated",
+          "cssClass": "amc-TCommandList--elevated"
+        },
+        {
+          "name": "Two columns",
+          "cssClass": "amc-TCommandList--columns"
+        }
+      ],
+      "apexlang": "theme-templates/command-list/dist/apexlang",
+      "legacySql": "theme-templates/command-list/dist/legacy/amc_tpl_command_list.sql"
+    },
+    {
+      "slug": "dock-bar",
+      "kind": "list",
+      "name": "AMC Dock Bar",
+      "staticId": "AMC_TPL_DOCK_BAR",
+      "apexlangId": "amc-dock-bar",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A desktop-style dock: glossy icon tiles stand on a 3D glass shelf with reflections, magnify with their neighbours under the pointer or keyboard focus, and show their label as a tooltip.",
+      "useFor": "Short launch lists of 4 to 10 entries: app switchers, module shortcuts on a home page, a floating quick-launch bar with the Float at page bottom option.",
+      "keywords": [
+        "dock",
+        "launcher",
+        "magnification",
+        "app switcher",
+        "quick launch",
+        "shelf"
+      ],
+      "attributes": {
+        "a01": "Badge count"
+      },
+      "templateOptions": [
+        {
+          "name": "Large tiles",
+          "cssClass": "amc-TDockBar--large"
+        },
+        {
+          "name": "Always show labels",
+          "cssClass": "amc-TDockBar--labels"
+        },
+        {
+          "name": "Soft tiles",
+          "cssClass": "amc-TDockBar--soft"
+        },
+        {
+          "name": "Flat glass dock",
+          "cssClass": "amc-TDockBar--flat"
+        },
+        {
+          "name": "Float at page bottom",
+          "cssClass": "amc-TDockBar--fixed"
+        }
+      ],
+      "apexlang": "theme-templates/dock-bar/dist/apexlang",
+      "legacySql": "theme-templates/dock-bar/dist/legacy/amc_tpl_dock_bar.sql"
+    },
+    {
+      "slug": "flip-tiles",
+      "kind": "list",
+      "name": "AMC Flip Tiles",
+      "staticId": "AMC_TPL_FLIP_TILES",
+      "apexlangId": "amc-flip-tiles",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Launch tiles that turn over in 3D on hover and keyboard focus: icon and label on the front, a description and a call to action on a colored back face, while each tile stays one real link.",
+      "useFor": "Launchpads and module menus with 3 to 16 entries where a destination needs one or two lines of explanation, such as self-service portals and onboarding hubs.",
+      "keywords": [
+        "flip card",
+        "3d",
+        "launchpad",
+        "tiles",
+        "self-service",
+        "portal"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Call to action"
+      },
+      "templateOptions": [
+        {
+          "name": "Flip vertically",
+          "cssClass": "amc-TFlipTiles--flipX"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TFlipTiles--compact"
+        },
+        {
+          "name": "Palette",
+          "cssClass": "amc-TFlipTiles--palette"
+        },
+        {
+          "name": "Ink",
+          "cssClass": "amc-TFlipTiles--ink"
+        }
+      ],
+      "apexlang": "theme-templates/flip-tiles/dist/apexlang",
+      "legacySql": "theme-templates/flip-tiles/dist/legacy/amc_tpl_flip_tiles.sql"
+    },
+    {
+      "slug": "folder-tab",
+      "kind": "region",
+      "name": "AMC Folder Tab",
+      "staticId": "AMC_TPL_FOLDER_TAB",
+      "apexlangId": "amc-folder-tab",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "The region is a physical file folder: a trapezoid tab with the icon and title rises from the top edge, and the content sits on a sheet of grained paper tucked into a manila or palette-colored folder, optionally with more sheets peeking out behind it.",
+      "useFor": "Record-centred regions that read like a file: a customer or supplier Form, a contract or case summary in Static Content, the lines of an order in a Classic Report or Interactive Report, or a small Chart in a dossier page.",
+      "keywords": [
+        "folder",
+        "file",
+        "tab",
+        "paper",
+        "dossier",
+        "record",
+        "neo-brutal"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Primary tab",
+          "cssClass": "amc-TFolderTab--primary"
+        },
+        {
+          "name": "Success tab",
+          "cssClass": "amc-TFolderTab--success"
+        },
+        {
+          "name": "Danger tab",
+          "cssClass": "amc-TFolderTab--danger"
+        },
+        {
+          "name": "Stacked papers",
+          "cssClass": "amc-TFolderTab--stacked"
+        },
+        {
+          "name": "Ink outline",
+          "cssClass": "amc-TFolderTab--ink"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TFolderTab--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/folder-tab/dist/apexlang",
+      "legacySql": "theme-templates/folder-tab/dist/legacy/amc_tpl_folder_tab.sql"
+    },
+    {
+      "slug": "glass-depth",
+      "kind": "region",
+      "name": "AMC Glass Depth",
+      "staticId": "AMC_TPL_GLASS_DEPTH",
+      "apexlangId": "amc-glass-depth",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A frosted-glass panel with a light top edge and layered depth shadow floats over soft colored light drawn on the region frame, with a second glass sheet peeking out beneath it, while the body sits on a calm readable sheet.",
+      "useFor": "Hero or summary regions on dashboards and home pages: a KPI Cards region, a Chart, a short Classic Report or a Form that should feel lifted off the page.",
+      "keywords": [
+        "glassmorphism",
+        "frosted glass",
+        "depth",
+        "floating panel",
+        "blob backdrop",
+        "layered"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Success tint",
+          "cssClass": "amc-TGlassDepth--success"
+        },
+        {
+          "name": "Danger tint",
+          "cssClass": "amc-TGlassDepth--danger"
+        },
+        {
+          "name": "Warm tint",
+          "cssClass": "amc-TGlassDepth--warm"
+        },
+        {
+          "name": "Deep float",
+          "cssClass": "amc-TGlassDepth--deep"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TGlassDepth--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/glass-depth/dist/apexlang",
+      "legacySql": "theme-templates/glass-depth/dist/legacy/amc_tpl_glass_depth.sql"
+    },
+    {
+      "slug": "holo-edge",
+      "kind": "region",
+      "name": "AMC Holo Edge",
+      "staticId": "AMC_TPL_HOLO_EDGE",
+      "apexlangId": "amc-holo-edge",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A holographic foil edge and header strip built from the theme palette, with a sheen that shifts with the pointer or drifts slowly, around a calm, plain body.",
+      "useFor": "Premium or celebratory regions: a membership or entitlement Form, a rewards Cards region, a year-in-review Chart or a Static Content announcement; also a single featured Classic Report.",
+      "keywords": [
+        "holographic",
+        "foil",
+        "iridescent",
+        "sheen",
+        "premium",
+        "rainbow border"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Thick edge",
+          "cssClass": "amc-THoloEdge--thick"
+        },
+        {
+          "name": "Brand foil",
+          "cssClass": "amc-THoloEdge--brand"
+        },
+        {
+          "name": "Sunset foil",
+          "cssClass": "amc-THoloEdge--sunset"
+        },
+        {
+          "name": "Static foil",
+          "cssClass": "amc-THoloEdge--static"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-THoloEdge--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/holo-edge/dist/apexlang",
+      "legacySql": "theme-templates/holo-edge/dist/legacy/amc_tpl_holo_edge.sql"
+    },
+    {
+      "slug": "kinetic-title",
+      "kind": "region",
+      "name": "AMC Kinetic Title",
+      "staticId": "AMC_TPL_KINETIC_TITLE",
+      "apexlangId": "amc-kinetic-title",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A magazine-style region: an oversized outlined title that fills with color in a wipe on hover or keyboard focus, a small eyebrow from the icon, a thin rule that grows an accent, and the native content on a plain sheet below.",
+      "useFor": "Section openers on dashboards and report pages: a Chart, a Cards region of KPIs, a Classic Report or a Static Content summary that starts a new topic. Use it for a few regions per page; the title is meant to be short.",
+      "keywords": [
+        "kinetic type",
+        "outline text",
+        "magazine",
+        "editorial",
+        "wipe",
+        "ghost title",
+        "oversized title"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Giant ghost title",
+          "cssClass": "amc-TKineticTitle--ghost"
+        },
+        {
+          "name": "Solid title",
+          "cssClass": "amc-TKineticTitle--solid"
+        },
+        {
+          "name": "Huge title",
+          "cssClass": "amc-TKineticTitle--huge"
+        },
+        {
+          "name": "Ink fill",
+          "cssClass": "amc-TKineticTitle--inkFill"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TKineticTitle--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/kinetic-title/dist/apexlang",
+      "legacySql": "theme-templates/kinetic-title/dist/legacy/amc_tpl_kinetic_title.sql"
+    },
+    {
+      "slug": "liquid-tabs",
+      "kind": "list",
+      "name": "AMC Liquid Tabs",
+      "staticId": "AMC_TPL_LIQUID_TABS",
+      "apexlangId": "amc-liquid-tabs",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Tab navigation whose indicator behaves like a drop of liquid: it stretches toward the hovered or focused tab through an SVG goo filter and snaps back to the current page, instead of the flat underline of classic tabs.",
+      "useFor": "Page-level or section tabs on a List region: switching between sibling pages such as Dashboard, Orders, Invoices and Reports, or the tabs of a record page. One level; sub entries are ignored.",
+      "keywords": [
+        "tabs",
+        "liquid",
+        "gooey",
+        "indicator",
+        "navigation",
+        "pill"
+      ],
+      "attributes": {
+        "a01": "Count badge"
+      },
+      "templateOptions": [
+        {
+          "name": "Solid pill",
+          "cssClass": "amc-TLiquidTabs--solid"
+        },
+        {
+          "name": "Liquid underline",
+          "cssClass": "amc-TLiquidTabs--drop"
+        },
+        {
+          "name": "Fill width",
+          "cssClass": "amc-TLiquidTabs--fill"
+        },
+        {
+          "name": "Large",
+          "cssClass": "amc-TLiquidTabs--large"
+        },
+        {
+          "name": "No track",
+          "cssClass": "amc-TLiquidTabs--bare"
+        }
+      ],
+      "apexlang": "theme-templates/liquid-tabs/dist/apexlang",
+      "legacySql": "theme-templates/liquid-tabs/dist/legacy/amc_tpl_liquid_tabs.sql"
+    },
+    {
+      "slug": "marquee-links",
+      "kind": "list",
+      "name": "AMC Marquee Links",
+      "staticId": "AMC_TPL_MARQUEE_LINKS",
+      "apexlangId": "amc-marquee-links",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "An announcement ticker: the list's links glide past in a seamless loop with faded edges and a live pulse, and pause on hover, keyboard focus or the pause button.",
+      "useFor": "A single strip of announcements, quick links or partner and supplier links at the top of a home page, portal or dashboard; 4 to 12 short entries.",
+      "keywords": [
+        "marquee",
+        "ticker",
+        "announcements",
+        "news",
+        "quick links",
+        "partners",
+        "loop"
+      ],
+      "attributes": {
+        "a01": "Tag"
+      },
+      "templateOptions": [
+        {
+          "name": "Slow",
+          "cssClass": "amc-TMarqueeLinks--slow"
+        },
+        {
+          "name": "Fast",
+          "cssClass": "amc-TMarqueeLinks--fast"
+        },
+        {
+          "name": "Reverse",
+          "cssClass": "amc-TMarqueeLinks--reverse"
+        },
+        {
+          "name": "Band",
+          "cssClass": "amc-TMarqueeLinks--band"
+        },
+        {
+          "name": "Plain",
+          "cssClass": "amc-TMarqueeLinks--plain"
+        }
+      ],
+      "apexlang": "theme-templates/marquee-links/dist/apexlang",
+      "legacySql": "theme-templates/marquee-links/dist/legacy/amc_tpl_marquee_links.sql"
+    },
+    {
+      "slug": "mega-menu",
+      "kind": "list",
+      "name": "AMC Mega Menu",
+      "staticId": "AMC_TPL_MEGA_MENU",
+      "apexlangId": "amc-mega-menu",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A floating top menu bar whose parent entries swing open a glass mega panel on a perspective hinge, with a feature card for the parent page and a grid of sub pages with 3D icon tiles and descriptions.",
+      "useFor": "Top navigation lists with one level of sub entries: Sales with Orders, Invoices and Customers, Inventory with Stock, Warehouses and Transfers, Reports and Admin as plain links. Place the List region in the Before Navigation Bar, Breadcrumb Bar or top of Body.",
+      "keywords": [
+        "mega menu",
+        "top navigation",
+        "dropdown",
+        "glass",
+        "menu bar",
+        "depth"
+      ],
+      "attributes": {
+        "a01": "Description"
+      },
+      "templateOptions": [
+        {
+          "name": "Solid panel",
+          "cssClass": "amc-TMegaMenu--solid"
+        },
+        {
+          "name": "Compact bar",
+          "cssClass": "amc-TMegaMenu--compact"
+        },
+        {
+          "name": "Hide feature card",
+          "cssClass": "amc-TMegaMenu--noFeature"
+        },
+        {
+          "name": "Three columns",
+          "cssClass": "amc-TMegaMenu--cols3"
+        },
+        {
+          "name": "Full width bar",
+          "cssClass": "amc-TMegaMenu--fullBar"
+        }
+      ],
+      "apexlang": "theme-templates/mega-menu/dist/apexlang",
+      "legacySql": "theme-templates/mega-menu/dist/legacy/amc_tpl_mega_menu.sql"
+    },
+    {
+      "slug": "metro-steps",
+      "kind": "list",
+      "name": "AMC Metro Steps",
+      "staticId": "AMC_TPL_METRO_STEPS",
+      "apexlangId": "amc-metro-steps",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Wizard progress drawn as a transit line: completed stations are ticked on a solid colored line, the current station is a large pulsing stop with a station sign, and stations still to come sit on a dashed planned line.",
+      "useFor": "Wizard progress lists and process steps: order checkout, employee onboarding, approval chains, goods receipt, month-end close. Best with 3 to 8 entries.",
+      "keywords": [
+        "wizard",
+        "steps",
+        "progress",
+        "metro",
+        "transit",
+        "stepper",
+        "process"
+      ],
+      "attributes": {
+        "a01": "Caption"
+      },
+      "templateOptions": [
+        {
+          "name": "Vertical",
+          "cssClass": "amc-TMetroSteps--vertical"
+        },
+        {
+          "name": "Staggered labels",
+          "cssClass": "amc-TMetroSteps--staggered"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TMetroSteps--compact"
+        },
+        {
+          "name": "Numbers only",
+          "cssClass": "amc-TMetroSteps--numbers"
+        },
+        {
+          "name": "Calm",
+          "cssClass": "amc-TMetroSteps--calm"
+        }
+      ],
+      "apexlang": "theme-templates/metro-steps/dist/apexlang",
+      "legacySql": "theme-templates/metro-steps/dist/legacy/amc_tpl_metro_steps.sql"
+    },
+    {
+      "slug": "orbit-launcher",
+      "kind": "list",
+      "name": "AMC Orbit Launcher",
+      "staticId": "AMC_TPL_ORBIT_LAUNCHER",
+      "apexlangId": "amc-orbit-launcher",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "An app launcher where the first list entry is a glowing hub and the other entries orbit it on a slowly turning ring with a travelling comet, instead of a flat grid of tiles.",
+      "useFor": "Home page and launchpad lists with 4 to 12 entries: module shortcuts, quick actions, a workspace hub.",
+      "keywords": [
+        "orbit",
+        "launcher",
+        "launchpad",
+        "home page",
+        "hub",
+        "radial menu",
+        "quick actions"
+      ],
+      "attributes": {
+        "a01": "Caption"
+      },
+      "templateOptions": [
+        {
+          "name": "Calm orbit",
+          "cssClass": "amc-TOrbitLauncher--calm"
+        },
+        {
+          "name": "Still orbit",
+          "cssClass": "amc-TOrbitLauncher--still"
+        },
+        {
+          "name": "Always show labels",
+          "cssClass": "amc-TOrbitLauncher--labels"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TOrbitLauncher--compact"
+        },
+        {
+          "name": "Success color",
+          "cssClass": "amc-TOrbitLauncher--success"
+        }
+      ],
+      "apexlang": "theme-templates/orbit-launcher/dist/apexlang",
+      "legacySql": "theme-templates/orbit-launcher/dist/legacy/amc_tpl_orbit_launcher.sql"
+    },
+    {
+      "slug": "segmented-glass",
+      "kind": "list",
+      "name": "AMC Segmented Glass",
+      "staticId": "AMC_TPL_SEGMENTED_GLASS",
+      "apexlangId": "amc-segmented-glass",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A frosted-glass segmented control for page navigation: a recessed glass tray with a raised glass thumb that sits on the current page and glides to the segment under the pointer or keyboard focus, driven by CSS :has() alone.",
+      "useFor": "Two to eight sibling pages or views on a List region: switching a page between Board, List and Calendar views, or between Orders, Invoices and Customers. One level; sub entries are ignored.",
+      "keywords": [
+        "segmented control",
+        "glass",
+        "view switcher",
+        "tabs",
+        "toggle",
+        "depth"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Icon only",
+          "cssClass": "amc-TSegmentedGlass--iconOnly"
+        },
+        {
+          "name": "Stacked icon and label",
+          "cssClass": "amc-TSegmentedGlass--stacked"
+        },
+        {
+          "name": "Primary thumb",
+          "cssClass": "amc-TSegmentedGlass--primary"
+        },
+        {
+          "name": "Stretch",
+          "cssClass": "amc-TSegmentedGlass--stretch"
+        },
+        {
+          "name": "Large",
+          "cssClass": "amc-TSegmentedGlass--large"
+        }
+      ],
+      "apexlang": "theme-templates/segmented-glass/dist/apexlang",
+      "legacySql": "theme-templates/segmented-glass/dist/legacy/amc_tpl_segmented_glass.sql"
+    },
+    {
+      "slug": "side-rail",
+      "kind": "region",
+      "name": "AMC Side Rail",
+      "staticId": "AMC_TPL_SIDE_RAIL",
+      "apexlangId": "amc-side-rail",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "An editorial region: under a heavy top rule the title runs vertically in a side rail with the icon and header buttons stacked in it, and the native content takes the rest; in narrow containers it switches to a normal top header by itself.",
+      "useFor": "Sections of a report-style page or a magazine-like dashboard: a Classic Report or Interactive Report of a topic, a Chart with commentary, a Static Content article, Cards of highlights. Works well in wide body columns and still fits a narrow side column.",
+      "keywords": [
+        "editorial",
+        "vertical title",
+        "side rail",
+        "writing-mode",
+        "container query",
+        "magazine"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Filled rail",
+          "cssClass": "amc-TSideRail--filled"
+        },
+        {
+          "name": "Read downward",
+          "cssClass": "amc-TSideRail--readDown"
+        },
+        {
+          "name": "Late switch",
+          "cssClass": "amc-TSideRail--lateSwitch"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TSideRail--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/side-rail/dist/apexlang",
+      "legacySql": "theme-templates/side-rail/dist/legacy/amc_tpl_side_rail.sql"
+    },
+    {
+      "slug": "speed-dial",
+      "kind": "list",
+      "name": "AMC Speed Dial",
+      "staticId": "AMC_TPL_SPEED_DIAL",
+      "apexlangId": "amc-speed-dial",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A floating action button that springs the list entries out as mini buttons in a stack or a quarter arc, with labels sliding out beside them, instead of a static button bar.",
+      "useFor": "Quick action lists of 2 to 10 entries: create shortcuts on a dashboard, record actions on a detail page, a page-wide create menu on page 0 with Float on page.",
+      "keywords": [
+        "speed dial",
+        "floating action button",
+        "fab",
+        "quick actions",
+        "create menu",
+        "radial"
+      ],
+      "attributes": {
+        "a01": "Hint"
+      },
+      "templateOptions": [
+        {
+          "name": "Quarter arc",
+          "cssClass": "amc-TSpeedDial--arc"
+        },
+        {
+          "name": "Start corner",
+          "cssClass": "amc-TSpeedDial--start"
+        },
+        {
+          "name": "Top corner",
+          "cssClass": "amc-TSpeedDial--top"
+        },
+        {
+          "name": "Icon only button",
+          "cssClass": "amc-TSpeedDial--iconOnly"
+        },
+        {
+          "name": "Float on page",
+          "cssClass": "amc-TSpeedDial--fixed"
+        }
+      ],
+      "apexlang": "theme-templates/speed-dial/dist/apexlang",
+      "legacySql": "theme-templates/speed-dial/dist/legacy/amc_tpl_speed_dial.sql"
+    },
+    {
+      "slug": "spotlight-frame",
+      "kind": "region",
+      "name": "AMC Spotlight Frame",
+      "staticId": "AMC_TPL_SPOTLIGHT_FRAME",
+      "apexlangId": "amc-spotlight-frame",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame where a pointer spotlight and a glowing border follow the mouse, and a faint grid lights up under the beam in the header only.",
+      "useFor": "Dashboard regions a user works in: a Classic or Interactive Report, a Chart, a Form or a KPI Cards region on a landing page.",
+      "keywords": [
+        "spotlight",
+        "magic card",
+        "border glow",
+        "pointer",
+        "grid pattern",
+        "hover light"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Success light",
+          "cssClass": "amc-TSpotlightFrame--success"
+        },
+        {
+          "name": "Danger light",
+          "cssClass": "amc-TSpotlightFrame--danger"
+        },
+        {
+          "name": "Wide light",
+          "cssClass": "amc-TSpotlightFrame--wide"
+        },
+        {
+          "name": "Dot pattern",
+          "cssClass": "amc-TSpotlightFrame--dots"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TSpotlightFrame--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/spotlight-frame/dist/apexlang",
+      "legacySql": "theme-templates/spotlight-frame/dist/legacy/amc_tpl_spotlight_frame.sql"
+    },
+    {
+      "slug": "spotlight-grid",
+      "kind": "list",
+      "name": "AMC Spotlight Grid",
+      "staticId": "AMC_TPL_SPOTLIGHT_GRID",
+      "apexlangId": "amc-spotlight-grid",
+      "direction": "motion",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A tile grid lit by one pointer spotlight that travels across all tiles at once, revealing a dot pattern and making nearby tile edges glow, while the current tile keeps a soft resting glow.",
+      "useFor": "Launchpads, module menus and settings hubs with 3 to 16 entries that each deserve a short description.",
+      "keywords": [
+        "spotlight",
+        "glow",
+        "launchpad",
+        "tiles",
+        "magic card",
+        "pointer",
+        "hover"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Tag"
+      },
+      "templateOptions": [
+        {
+          "name": "Intense light",
+          "cssClass": "amc-TSpotlightGrid--intense"
+        },
+        {
+          "name": "Compact tiles",
+          "cssClass": "amc-TSpotlightGrid--compact"
+        },
+        {
+          "name": "Rows",
+          "cssClass": "amc-TSpotlightGrid--rows"
+        },
+        {
+          "name": "Night tiles",
+          "cssClass": "amc-TSpotlightGrid--night"
+        }
+      ],
+      "apexlang": "theme-templates/spotlight-grid/dist/apexlang",
+      "legacySql": "theme-templates/spotlight-grid/dist/legacy/amc_tpl_spotlight_grid.sql"
+    },
+    {
+      "slug": "stacked-deck",
+      "kind": "list",
+      "name": "AMC Stacked Deck",
+      "staticId": "AMC_TPL_STACKED_DECK",
+      "apexlangId": "amc-stacked-deck",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "List entries rest as a deck of cards stacked in perspective, each one peeking out behind the one in front, and fan out into a readable list while the deck has hover or keyboard focus.",
+      "useFor": "Short lists of 3 to 8 entries on dashboards and home pages: pending approvals, recent orders, inbox shortcuts, quick actions next to a chart.",
+      "keywords": [
+        "stack",
+        "deck",
+        "cards",
+        "perspective",
+        "fan out",
+        "notifications",
+        "3d"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Meta"
+      },
+      "templateOptions": [
+        {
+          "name": "Always open",
+          "cssClass": "amc-TStackedDeck--open"
+        },
+        {
+          "name": "Tilted deck",
+          "cssClass": "amc-TStackedDeck--tilt"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TStackedDeck--compact"
+        },
+        {
+          "name": "Solid current",
+          "cssClass": "amc-TStackedDeck--solidCurrent"
+        }
+      ],
+      "apexlang": "theme-templates/stacked-deck/dist/apexlang",
+      "legacySql": "theme-templates/stacked-deck/dist/legacy/amc_tpl_stacked_deck.sql"
+    },
+    {
+      "slug": "stacked-sheets",
+      "kind": "region",
+      "name": "AMC Stacked Sheets",
+      "staticId": "AMC_TPL_STACKED_SHEETS",
+      "apexlangId": "amc-stacked-sheets",
+      "direction": "depth",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "The region is the top sheet of a small pile of offset, palette-tinted paper sheets held by a strip of tape; the sheets fan out further on hover or keyboard focus.",
+      "useFor": "Regions that feel like documents or drafts: a Form for a proposal or claim, a Classic Report of recent documents, a Static Content brief or note, Cards of attachments. Works best as one or two accents per page.",
+      "keywords": [
+        "paper stack",
+        "sheets",
+        "pile",
+        "document",
+        "fan out",
+        "tape",
+        "depth"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Single sheet",
+          "cssClass": "amc-TStackedSheets--single"
+        },
+        {
+          "name": "Four sheets",
+          "cssClass": "amc-TStackedSheets--four"
+        },
+        {
+          "name": "Straight stack",
+          "cssClass": "amc-TStackedSheets--straight"
+        },
+        {
+          "name": "Strong tilt",
+          "cssClass": "amc-TStackedSheets--strongTilt"
+        },
+        {
+          "name": "Plain paper",
+          "cssClass": "amc-TStackedSheets--plain"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TStackedSheets--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/stacked-sheets/dist/apexlang",
+      "legacySql": "theme-templates/stacked-sheets/dist/legacy/amc_tpl_stacked_sheets.sql"
+    },
+    {
+      "slug": "terminal-window",
+      "kind": "region",
+      "name": "AMC Terminal Window",
+      "staticId": "AMC_TPL_TERMINAL_WINDOW",
+      "apexlangId": "amc-terminal-window",
+      "direction": "bold",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A desktop terminal window: an inverse-colored bezel and title bar with three window dots and the title centered in monospace after a prompt, around a readable content pane.",
+      "useFor": "Technical and operational regions: job logs and scheduler runs in a Classic Report, integration status Cards, an API settings Form, a code or SQL snippet in Static Content, or a Chart of error rates.",
+      "keywords": [
+        "terminal",
+        "console",
+        "macos window",
+        "window chrome",
+        "developer",
+        "monospace",
+        "scanlines"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Theme chrome",
+          "cssClass": "amc-TTerminalWindow--themeChrome"
+        },
+        {
+          "name": "Console pane",
+          "cssClass": "amc-TTerminalWindow--console"
+        },
+        {
+          "name": "Scanlines",
+          "cssClass": "amc-TTerminalWindow--scanlines"
+        },
+        {
+          "name": "Blinking caret",
+          "cssClass": "amc-TTerminalWindow--caret"
+        },
+        {
+          "name": "Monospace body",
+          "cssClass": "amc-TTerminalWindow--monoBody"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TTerminalWindow--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/terminal-window/dist/apexlang",
+      "legacySql": "theme-templates/terminal-window/dist/legacy/amc_tpl_terminal_window.sql"
+    },
+    {
+      "slug": "ticket-stub",
+      "kind": "region",
+      "name": "AMC Ticket Stub",
+      "staticId": "AMC_TPL_TICKET_STUB",
+      "apexlangId": "amc-ticket-stub",
+      "direction": "smart",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "The region is a ticket: a tinted stub with icon, title, buttons and a barcode is torn off from the body by a perforated line with punched notches, and the stub moves from the side to the top when the region gets narrow.",
+      "useFor": "Record-centric regions: a booking, voucher, shipment or approval Form, a Classic Report of one order's lines, a Cards region of passes, or a Chart for one event.",
+      "keywords": [
+        "ticket",
+        "voucher",
+        "boarding pass",
+        "perforation",
+        "stub",
+        "responsive layout"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Stub at end",
+          "cssClass": "amc-TTicketStub--stubEnd"
+        },
+        {
+          "name": "Stub always on top",
+          "cssClass": "amc-TTicketStub--top"
+        },
+        {
+          "name": "Success stub",
+          "cssClass": "amc-TTicketStub--success"
+        },
+        {
+          "name": "Danger stub",
+          "cssClass": "amc-TTicketStub--danger"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TTicketStub--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/ticket-stub/dist/apexlang",
+      "legacySql": "theme-templates/ticket-stub/dist/legacy/amc_tpl_ticket_stub.sql"
     }
   ]
 }

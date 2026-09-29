@@ -232,7 +232,7 @@ wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(522745120380673226)
 ,p_theme_id=>42
 ,p_name=>'TAB_PRIMARY'
-,p_display_name=>'Tab color: primary'
+,p_display_name=>'Primary tab'
 ,p_display_sequence=>10
 ,p_region_template_id=>wwv_flow_imp.id(337550765997668034)
 ,p_css_classes=>'amc-TFolderTab--primary'
@@ -246,7 +246,7 @@ wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(856861904673212209)
 ,p_theme_id=>42
 ,p_name=>'TAB_SUCCESS'
-,p_display_name=>'Tab color: success'
+,p_display_name=>'Success tab'
 ,p_display_sequence=>20
 ,p_region_template_id=>wwv_flow_imp.id(337550765997668034)
 ,p_css_classes=>'amc-TFolderTab--success'
@@ -260,7 +260,7 @@ wwv_flow_imp_shared.create_template_option(
  p_id=>wwv_flow_imp.id(327579438499268255)
 ,p_theme_id=>42
 ,p_name=>'TAB_DANGER'
-,p_display_name=>'Tab color: danger'
+,p_display_name=>'Danger tab'
 ,p_display_sequence=>30
 ,p_region_template_id=>wwv_flow_imp.id(337550765997668034)
 ,p_css_classes=>'amc-TFolderTab--danger'

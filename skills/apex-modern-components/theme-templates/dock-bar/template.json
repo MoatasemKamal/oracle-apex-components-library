@@ -1,0 +1,23 @@
+{
+  "kind": "list",
+  "name": "AMC Dock Bar",
+  "staticId": "AMC_TPL_DOCK_BAR",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "depth",
+  "description": "A desktop-style dock: glossy icon tiles stand on a 3D glass shelf with reflections, magnify with their neighbours under the pointer or keyboard focus, and show their label as a tooltip.",
+  "useFor": "Short launch lists of 4 to 10 entries: app switchers, module shortcuts on a home page, a floating quick-launch bar with the Float at page bottom option.",
+  "keywords": ["dock", "launcher", "magnification", "app switcher", "quick launch", "shelf"],
+  "helpText": "List template for a List region. Each entry is an icon tile; the entry text is the tooltip label and User Defined Attribute 1 is an optional badge count shown in the danger color, for example 12. The tile under the pointer or with keyboard focus grows, and its two neighbours on each side grow less (pure CSS, no JavaScript). The current entry gets a glowing dot on the shelf. Neighbouring tiles rotate the theme's primary hue in browsers with relative color syntax. On touch screens labels are always visible; in containers narrower than 420px the dock wraps into a glass tray with labels under the tiles. Reduced motion turns magnification into a focus ring. Template options: Large tiles, Always show labels, Soft tiles, Flat glass dock, Float at page bottom.",
+  "attributes": { "a01": "Badge count" },
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "LARGE", "name": "Large tiles", "cssClass": "amc-TDockBar--large", "sequence": 10, "help": "64px tiles instead of 52px, for home pages with few entries." },
+    { "staticId": "LABELS", "name": "Always show labels", "cssClass": "amc-TDockBar--labels", "sequence": 20, "help": "Shows every label above its tile, not only on hover and focus." },
+    { "staticId": "SOFT", "name": "Soft tiles", "cssClass": "amc-TDockBar--soft", "sequence": 30, "help": "Light tiles with a primary-colored icon instead of glossy colored tiles, for calmer pages." },
+    { "staticId": "FLAT", "name": "Flat glass dock", "cssClass": "amc-TDockBar--flat", "sequence": 40, "help": "Replaces the 3D shelf and reflections with a frosted glass bar around the tiles." },
+    { "staticId": "FIXED", "name": "Float at page bottom", "cssClass": "amc-TDockBar--fixed", "sequence": 50, "help": "Pins the dock to the bottom center of the browser window above the page content. Use it once per page, for example on page 0." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

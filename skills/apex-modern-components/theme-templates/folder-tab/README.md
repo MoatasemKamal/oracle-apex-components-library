@@ -27,9 +27,9 @@ Region template shaped like a file folder. The region title and icon sit on the 
 
 | Option | Class | What it does |
 |---|---|---|
-| Tab color: primary | `amc-TFolderTab--primary` | Folder and tab use the primary palette color; the title switches to the primary contrast color. Without a tab color the folder is manila, mixed from the warning color. |
-| Tab color: success | `amc-TFolderTab--success` | Folder and tab use the success palette color, for approved or closed files. |
-| Tab color: danger | `amc-TFolderTab--danger` | Folder and tab use the danger palette color, for escalations and blocked files. |
+| Primary tab | `amc-TFolderTab--primary` | Folder and tab use the primary palette color; the title switches to the primary contrast color. Without a tab color the folder is manila, mixed from the warning color. |
+| Success tab | `amc-TFolderTab--success` | Folder and tab use the success palette color, for approved or closed files. |
+| Danger tab | `amc-TFolderTab--danger` | Folder and tab use the danger palette color, for escalations and blocked files. |
 | Stacked papers | `amc-TFolderTab--stacked` | Two more sheets peek out at slight angles behind the paper, for files that hold several documents. |
 | Ink outline | `amc-TFolderTab--ink` | Bold neo-brutal look: 2px ink borders on folder, tab and paper and a hard offset shadow. The ink follows the theme text color, so it inverts in dark styles. |
 | No body padding | `amc-TFolderTab--noPadding` | Removes side padding so reports and grids run edge to edge on the paper. |

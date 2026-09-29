@@ -39,6 +39,56 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Creative Templates (31 native List and Region templates)
+
+Native **List Templates** and **Region Templates** for Universal Theme, not plug-ins: pick them in
+**Appearance > List Template** or **Appearance > Template**, and switch variants with **Template Options**.
+Region templates frame any native region (reports, forms, charts) without restyling its content.
+Each template ships as an APEXlang file (26.1+) and a 23.1 component export that also installs its CSS/JS
+as Static Application Files; `theme-templates/dist/legacy/install_amc_templates.sql` installs all of them.
+See [`references/theme-templates.md`](skills/apex-modern-components/references/theme-templates.md).
+
+**List templates**
+
+| Template | Direction | Look |
+|---|---|---|
+| [Accordion Rail](skills/apex-modern-components/theme-templates/accordion-rail) | smart | Side navigation drawn as a rail: every entry is a node on one line, groups open like an accordion with a smooth height morph, and the path from the current parent down to the current page glows along the rail. |
+| [Bento Launchpad](skills/apex-modern-components/theme-templates/bento-launchpad) | smart | A bento launchpad: list entries become tiles of mixed sizes with an oversized tilted icon, a description and a live metric, and the grid and every tile recompose with container queries as the region changes width. |
+| [Brutal Links](skills/apex-modern-components/theme-templates/brutal-links) | bold | Neo-brutalist link cards with ink borders, hard offset shadows, flat palette fills that rotate per entry, an oversized arrow and a press-down click. |
+| [Clay Menu](skills/apex-modern-components/theme-templates/clay-menu) | bold | A claymorphism pill menu on a soft tray: pillowy pills with glossy icon bubbles, soft inner and outer shadows, and the current entry pressed into the tray. |
+| [Command List](skills/apex-modern-components/theme-templates/command-list) | smart | A command-palette list: a search box filters the entries as you type and highlights the match, arrow keys move between commands, and each row shows an icon, a description and its keyboard-shortcut chip. |
+| [Dock Bar](skills/apex-modern-components/theme-templates/dock-bar) | depth | A desktop-style dock: glossy icon tiles stand on a 3D glass shelf with reflections, magnify with their neighbours under the pointer or keyboard focus, and show their label as a tooltip. |
+| [Flip Tiles](skills/apex-modern-components/theme-templates/flip-tiles) | depth | Launch tiles that turn over in 3D on hover and keyboard focus: icon and label on the front, a description and a call to action on a colored back face, while each tile stays one real link. |
+| [Liquid Tabs](skills/apex-modern-components/theme-templates/liquid-tabs) | motion | Tab navigation whose indicator behaves like a drop of liquid: it stretches toward the hovered or focused tab through an SVG goo filter and snaps back to the current page, instead of the flat underline of classic tabs. |
+| [Marquee Links](skills/apex-modern-components/theme-templates/marquee-links) | motion | An announcement ticker: the list's links glide past in a seamless loop with faded edges and a live pulse, and pause on hover, keyboard focus or the pause button. |
+| [Mega Menu](skills/apex-modern-components/theme-templates/mega-menu) | depth | A floating top menu bar whose parent entries swing open a glass mega panel on a perspective hinge, with a feature card for the parent page and a grid of sub pages with 3D icon tiles and descriptions. |
+| [Metro Steps](skills/apex-modern-components/theme-templates/metro-steps) | bold | Wizard progress drawn as a transit line: completed stations are ticked on a solid colored line, the current station is a large pulsing stop with a station sign, and stations still to come sit on a dashed planned line. |
+| [Orbit Launcher](skills/apex-modern-components/theme-templates/orbit-launcher) | motion | An app launcher where the first list entry is a glowing hub and the other entries orbit it on a slowly turning ring with a travelling comet, instead of a flat grid of tiles. |
+| [Segmented Glass](skills/apex-modern-components/theme-templates/segmented-glass) | depth | A frosted-glass segmented control for page navigation: a recessed glass tray with a raised glass thumb that sits on the current page and glides to the segment under the pointer or keyboard focus, driven by CSS :has() alone. |
+| [Speed Dial](skills/apex-modern-components/theme-templates/speed-dial) | motion | A floating action button that springs the list entries out as mini buttons in a stack or a quarter arc, with labels sliding out beside them, instead of a static button bar. |
+| [Spotlight Grid](skills/apex-modern-components/theme-templates/spotlight-grid) | motion | A tile grid lit by one pointer spotlight that travels across all tiles at once, revealing a dot pattern and making nearby tile edges glow, while the current tile keeps a soft resting glow. |
+| [Stacked Deck](skills/apex-modern-components/theme-templates/stacked-deck) | depth | List entries rest as a deck of cards stacked in perspective, each one peeking out behind the one in front, and fan out into a readable list while the deck has hover or keyboard focus. |
+
+**Region templates**
+
+| Template | Direction | Look |
+|---|---|---|
+| [Aurora Header](skills/apex-modern-components/theme-templates/aurora-header) | motion | A region with a tall header band of slowly drifting aurora light and film grain, carrying a large title and icon, and a calm content sheet that overlaps the band. |
+| [Beam Frame](skills/apex-modern-components/theme-templates/beam-frame) | motion | A region frame with a beam of light that travels around its border and speeds up while the region has hover or focus. |
+| [Browser Window](skills/apex-modern-components/theme-templates/browser-window) | depth | A browser-window mockup with real depth: a tab strip whose active tab carries the title and icon as favicon, a toolbar with an address pill, and a layered window shadow, with phone and tablet device frames for previewing pages. |
+| [Brutal Block](skills/apex-modern-components/theme-templates/brutal-block) | bold | A neo-brutalist region: thick ink border, hard offset shadow, a flat striped palette band and the title in a tilted sticker label that breaks out of the top edge. |
+| [Clay Panel](skills/apex-modern-components/theme-templates/clay-panel) | bold | A claymorphism region: a pillowy, softly lit panel with the title in a raised clay pill, the icon in a glossy clay bubble and the native content in a gently pressed tray. |
+| [Collapsible Morph](skills/apex-modern-components/theme-templates/collapsible-morph) | smart | A collapsible region whose card morphs into a compact pill when collapsed: width, corners and header shape change together while the body folds away, instead of a classic chevron header with a sliding body. |
+| [Folder Tab](skills/apex-modern-components/theme-templates/folder-tab) | bold | The region is a physical file folder: a trapezoid tab with the icon and title rises from the top edge, and the content sits on a sheet of grained paper tucked into a manila or palette-colored folder, optionally with more sheets peeking out behind it. |
+| [Glass Depth](skills/apex-modern-components/theme-templates/glass-depth) | depth | A frosted-glass panel with a light top edge and layered depth shadow floats over soft colored light drawn on the region frame, with a second glass sheet peeking out beneath it, while the body sits on a calm readable sheet. |
+| [Holo Edge](skills/apex-modern-components/theme-templates/holo-edge) | bold | A holographic foil edge and header strip built from the theme palette, with a sheen that shifts with the pointer or drifts slowly, around a calm, plain body. |
+| [Kinetic Title](skills/apex-modern-components/theme-templates/kinetic-title) | bold | A magazine-style region: an oversized outlined title that fills with color in a wipe on hover or keyboard focus, a small eyebrow from the icon, a thin rule that grows an accent, and the native content on a plain sheet below. |
+| [Side Rail](skills/apex-modern-components/theme-templates/side-rail) | smart | An editorial region: under a heavy top rule the title runs vertically in a side rail with the icon and header buttons stacked in it, and the native content takes the rest; in narrow containers it switches to a normal top header by itself. |
+| [Spotlight Frame](skills/apex-modern-components/theme-templates/spotlight-frame) | motion | A region frame where a pointer spotlight and a glowing border follow the mouse, and a faint grid lights up under the beam in the header only. |
+| [Stacked Sheets](skills/apex-modern-components/theme-templates/stacked-sheets) | depth | The region is the top sheet of a small pile of offset, palette-tinted paper sheets held by a strip of tape; the sheets fan out further on hover or keyboard focus. |
+| [Terminal Window](skills/apex-modern-components/theme-templates/terminal-window) | bold | A desktop terminal window: an inverse-colored bezel and title bar with three window dots and the title centered in monospace after a prompt, around a readable content pane. |
+| [Ticket Stub](skills/apex-modern-components/theme-templates/ticket-stub) | smart | The region is a ticket: a tinted stub with icon, title, buttons and a barcode is torn off from the body by a perforated line with punched notches, and the stub moves from the side to the top when the region gets narrow. |
+
 ## Next Collection (114 new-generation designs)
 
 Eleven template components with designs in four directions: **motion** (border beams,
@@ -148,6 +198,9 @@ node tools/preview.mjs        # preview/index.html: light, dark, RTL
 node tools/apexlang-check.mjs --apexlang <path>/oracle-skills/apex/apexlang
 node tools/design-md-to-ut.mjs <path>/DESIGN.md             # design system -> UT style
 node tools/build-kit.mjs                                    # package the Motion Kit
+node tools/new-template.mjs orbit-menu list "Orbit Menu"   # scaffold a theme template
+node tools/build-templates.mjs                              # validate + package theme templates
+node tools/preview-templates.mjs                            # preview/templates.html
 ```
 
 See [`SKILL.md`](skills/apex-modern-components/SKILL.md) and the

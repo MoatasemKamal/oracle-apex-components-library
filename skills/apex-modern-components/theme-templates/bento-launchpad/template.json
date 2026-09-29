@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Bento Launchpad",
+  "staticId": "AMC_TPL_BENTO_LAUNCHPAD",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "smart",
+  "description": "A bento launchpad: list entries become tiles of mixed sizes with an oversized tilted icon, a description and a live metric, and the grid and every tile recompose with container queries as the region changes width.",
+  "useFor": "Home pages and workspace launchpads with 4 to 12 entries, where each destination has a short description and a number worth showing (open orders, overdue invoices, pending approvals).",
+  "keywords": ["bento", "launchpad", "home page", "tiles", "dashboard", "container queries", "shortcuts"],
+  "helpText": "List template for a List region. User Defined Attribute 1 sets the tile size: wide (two columns), tall (two rows) or large (two by two, filled with the primary color); leave it empty for a normal tile, and other values are ignored. Attribute 2 is a short description and Attribute 3 a metric such as '128' or 'SAR 4.2M' (use an application item substitution to keep it live). The grid uses 1 column below 480px of region width (tiles become rows), 2 columns up to 760px, 4 up to 1180px and 6 beyond; tall, wide and large tiles switch their inner layout to show a big metric. While one tile has the pointer the others step back. Everything works with the keyboard in list order, with a visible focus ring. Template options: Tinted tiles, Compact rows, Mono large tile, Hide big icons.",
+  "attributes": { "a01": "Tile size", "a02": "Description", "a03": "Metric" },
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "TINTED", "name": "Tinted tiles", "cssClass": "amc-TBentoLaunchpad--tinted", "sequence": 10, "help": "Each tile takes a hue derived from the theme's primary color, for launchpads with many destinations. Browsers without relative color syntax keep the primary color." },
+    { "staticId": "COMPACT", "name": "Compact rows", "cssClass": "amc-TBentoLaunchpad--compact", "sequence": 20, "help": "Rows of 118px instead of 150px, for launchpads above a report." },
+    { "staticId": "MONO", "name": "Mono large tile", "cssClass": "amc-TBentoLaunchpad--mono", "sequence": 30, "help": "Large tiles keep the light surface instead of a primary fill." },
+    { "staticId": "NO_GLYPH", "name": "Hide big icons", "cssClass": "amc-TBentoLaunchpad--noGlyph", "sequence": 40, "help": "Removes the oversized background icons and keeps the small icon chip, for dense dashboards." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

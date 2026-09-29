@@ -1,0 +1,173 @@
+/* Spotlight Grid: list template for Universal Theme. One pointer spotlight moves across all
+   tiles at once: it lights the tile surface, reveals a dot pattern and makes the tile borders
+   glow near the pointer, including the edges of neighbouring tiles. The small script only sets
+   --amc-tspot-x / --amc-tspot-y per tile; at rest the current tile keeps a soft glow.
+   Technique adapted from Magic UI magic-card (MIT, https://github.com/magicuidesign/magicui). */
+.amc-TSpotlightGrid {
+  --amc-tspot-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tspot-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tspot-accent-2: color-mix(in oklab, var(--amc-tspot-accent) 50%, var(--ut-palette-info, #0076df));
+  --amc-tspot-surface: var(--ut-component-background-color, #fff);
+  --amc-tspot-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tspot-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tspot-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tspot-shadow: var(--amc-tspot-shadow-color, rgba(0, 0, 0, .14));
+  --amc-tspot-radius: max(var(--ut-component-border-radius, 4px) + 10px, 14px);
+  --amc-tspot-size: 280px;
+  --amc-tspot-fill: 28%;
+  --amc-tspot-min: 210px;
+  color: var(--amc-tspot-ink);
+}
+.amc-TSpotlightGrid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-tspot-min), 100%), 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TSpotlightGrid-item { min-inline-size: 0; }
+.amc-TSpotlightGrid-link {
+  --amc-tspot-x: 50%;
+  --amc-tspot-y: -40%;
+  --amc-tspot-on: 0;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "icon tag" "body body";
+  align-items: start;
+  gap: 14px 10px;
+  block-size: 100%;
+  box-sizing: border-box;
+  padding: 18px;
+  border-radius: var(--amc-tspot-radius);
+  color: inherit;
+  text-decoration: none;
+  background: var(--amc-tspot-surface);
+  box-shadow: 0 1px 2px var(--amc-tspot-shadow);
+}
+/* surface light + dot pattern revealed around the pointer */
+.amc-TSpotlightGrid-link::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(var(--amc-tspot-size) circle at var(--amc-tspot-x) var(--amc-tspot-y), color-mix(in srgb, var(--amc-tspot-accent) var(--amc-tspot-fill), transparent), transparent 70%),
+    radial-gradient(circle, color-mix(in srgb, var(--amc-tspot-accent) 40%, transparent) 1px, transparent 1.5px) 0 0 / 14px 14px;
+  -webkit-mask: radial-gradient(var(--amc-tspot-size) circle at var(--amc-tspot-x) var(--amc-tspot-y), black, transparent 80%);
+  mask: radial-gradient(var(--amc-tspot-size) circle at var(--amc-tspot-x) var(--amc-tspot-y), black, transparent 80%);
+  opacity: var(--amc-tspot-on);
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+/* border: a static hairline plus a glowing ring near the pointer */
+.amc-TSpotlightGrid-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background:
+    radial-gradient(calc(var(--amc-tspot-size) * .75) circle at var(--amc-tspot-x) var(--amc-tspot-y), color-mix(in srgb, var(--amc-tspot-accent) calc(var(--amc-tspot-on) * 100%), transparent), transparent 75%),
+    linear-gradient(90deg, transparent 10%, color-mix(in srgb, var(--amc-tspot-accent) 30%, var(--amc-tspot-line)) 50%, transparent 90%) top / 100% 1.5px no-repeat,
+    var(--amc-tspot-line);
+  -webkit-mask: linear-gradient(black 0 0) content-box, linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(black 0 0) content-box exclude, linear-gradient(black 0 0);
+  pointer-events: none;
+}
+.amc-TSpotlightGrid-grid:hover .amc-TSpotlightGrid-link { --amc-tspot-on: 1; }
+.amc-TSpotlightGrid-link { transition: box-shadow .3s ease, transform .3s ease; }
+.amc-TSpotlightGrid-link:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-tspot-accent) 30%, transparent), 0 16px 36px -16px color-mix(in srgb, var(--amc-tspot-accent) 55%, transparent); }
+.amc-TSpotlightGrid-link:focus-visible { --amc-tspot-on: 1; --amc-tspot-x: 50%; --amc-tspot-y: 0%; outline: 2px solid var(--amc-tspot-accent); outline-offset: 3px; }
+/* resting glow in the current tile */
+.amc-TSpotlightGrid-item.is-current .amc-TSpotlightGrid-link { --amc-tspot-on: .9; box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--amc-tspot-accent) 70%, transparent); }
+.amc-TSpotlightGrid-grid:not(:hover) .amc-TSpotlightGrid-item.is-current .amc-TSpotlightGrid-link { --amc-tspot-x: 50%; --amc-tspot-y: -30%; }
+
+.amc-TSpotlightGrid-icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  inline-size: 42px;
+  block-size: 42px;
+  border-radius: 12px;
+  font-size: 18px;
+  color: var(--amc-tspot-accent);
+  background: color-mix(in srgb, var(--amc-tspot-accent) 10%, var(--amc-tspot-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tspot-accent) 22%, transparent);
+  transition: color .25s ease, background-color .25s ease, box-shadow .25s ease;
+}
+.amc-TSpotlightGrid-icon.fa:not([class*="fa-"])::before { content: ""; inline-size: 8px; block-size: 8px; border-radius: 50%; background: currentColor; }
+.amc-TSpotlightGrid-link:hover .amc-TSpotlightGrid-icon,
+.amc-TSpotlightGrid-link:focus-visible .amc-TSpotlightGrid-icon,
+.amc-TSpotlightGrid-item.is-current .amc-TSpotlightGrid-icon {
+  color: var(--amc-tspot-accent-fg);
+  background: linear-gradient(145deg, var(--amc-tspot-accent-2), var(--amc-tspot-accent));
+  box-shadow: 0 8px 18px -8px color-mix(in srgb, var(--amc-tspot-accent) 80%, transparent);
+}
+.amc-TSpotlightGrid-body { grid-area: body; display: grid; gap: 4px; min-inline-size: 0; }
+.amc-TSpotlightGrid-label { font-size: .9375rem; font-weight: 650; line-height: 1.25; overflow-wrap: break-word; unicode-bidi: isolate; }
+.amc-TSpotlightGrid-label::after {
+  content: "";
+  display: inline-block;
+  inline-size: .5em;
+  block-size: .5em;
+  margin-inline-start: .45em;
+  border-block-start: 2px solid currentColor;
+  border-inline-end: 2px solid currentColor;
+  transform: translateY(-.1em) rotate(45deg) translate(-3px, 3px);
+  opacity: 0;
+  transition: opacity .2s ease, transform .25s ease;
+}
+.amc-TSpotlightGrid-label:dir(rtl)::after { transform: translateY(-.1em) rotate(-45deg) translate(3px, 3px); }
+.amc-TSpotlightGrid-link:hover .amc-TSpotlightGrid-label::after,
+.amc-TSpotlightGrid-link:focus-visible .amc-TSpotlightGrid-label::after { opacity: .7; transform: translateY(-.1em) rotate(45deg); }
+.amc-TSpotlightGrid-link:hover .amc-TSpotlightGrid-label:dir(rtl)::after,
+.amc-TSpotlightGrid-link:focus-visible .amc-TSpotlightGrid-label:dir(rtl)::after { transform: translateY(-.1em) rotate(-45deg); }
+.amc-TSpotlightGrid-desc { font-size: .8125rem; line-height: 1.4; color: var(--amc-tspot-muted); }
+.amc-TSpotlightGrid-desc:empty, .amc-TSpotlightGrid-tag:empty { display: none; }
+.amc-TSpotlightGrid-tag {
+  grid-area: tag;
+  justify-self: end;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--amc-tspot-accent);
+  background: color-mix(in srgb, var(--amc-tspot-accent) 10%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tspot-accent) 25%, transparent);
+  unicode-bidi: plaintext;
+}
+
+/* ---------- Template options ---------- */
+.amc-TSpotlightGrid--intense { --amc-tspot-size: 400px; --amc-tspot-fill: 30%; }
+.amc-TSpotlightGrid--intense .amc-TSpotlightGrid-link::after { padding: 2px; }
+.amc-TSpotlightGrid--compact { --amc-tspot-min: 170px; }
+.amc-TSpotlightGrid--compact .amc-TSpotlightGrid-link { grid-template-areas: "icon body" "icon tag"; grid-template-columns: auto 1fr; align-items: center; gap: 4px 12px; padding: 12px 14px; }
+.amc-TSpotlightGrid--compact .amc-TSpotlightGrid-tag { justify-self: start; }
+.amc-TSpotlightGrid--compact .amc-TSpotlightGrid-desc { display: none; }
+.amc-TSpotlightGrid--compact .amc-TSpotlightGrid-icon { inline-size: 36px; block-size: 36px; }
+.amc-TSpotlightGrid--rows .amc-TSpotlightGrid-grid { grid-template-columns: 1fr; gap: 8px; }
+.amc-TSpotlightGrid--rows .amc-TSpotlightGrid-link { grid-template-columns: auto 1fr auto; grid-template-areas: "icon body tag"; align-items: center; padding: 14px 16px; }
+.amc-TSpotlightGrid--night {
+  --amc-tspot-surface: color-mix(in srgb, var(--ut-component-text-default-color, #262626) 92%, var(--ut-palette-primary, #056ac8));
+  --amc-tspot-ink: var(--ut-component-background-color, #fff);
+  --amc-tspot-muted: color-mix(in srgb, var(--ut-component-background-color, #fff) 65%, transparent);
+  --amc-tspot-line: color-mix(in srgb, var(--ut-component-background-color, #fff) 12%, transparent);
+  --amc-tspot-accent: color-mix(in oklab, var(--ut-palette-primary, #056ac8) 70%, var(--ut-component-background-color, #fff));
+  --amc-tspot-fill: 30%;
+}
+.amc-TSpotlightGrid--night .amc-TSpotlightGrid-link { color: var(--amc-tspot-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSpotlightGrid-link, .amc-TSpotlightGrid-link::before, .amc-TSpotlightGrid-icon, .amc-TSpotlightGrid-label::after { transition: none; }
+  .amc-TSpotlightGrid-link:hover { transform: none; }
+}
+@media (forced-colors: active) {
+  .amc-TSpotlightGrid-link { border: 1px solid CanvasText; }
+  .amc-TSpotlightGrid-link::before, .amc-TSpotlightGrid-link::after { display: none; }
+  .amc-TSpotlightGrid-link[aria-current="page"] { outline: 3px solid Highlight; }
+}

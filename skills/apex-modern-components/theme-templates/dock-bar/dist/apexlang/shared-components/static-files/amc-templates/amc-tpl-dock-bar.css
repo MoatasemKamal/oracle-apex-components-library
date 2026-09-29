@@ -1,0 +1,335 @@
+/* Dock Bar: list template for Universal Theme. Icon tiles stand on a 3D glass shelf with
+   reflections; the hovered or focused tile and its neighbours magnify (pure CSS, :has()
+   sibling selectors), labels float above as tooltips and the current entry gets a glowing dot.
+   Magnification idea after Magic UI dock (MIT, https://github.com/magicuidesign/magicui). */
+@property --amc-tdock-m { syntax: "<number>"; inherits: true; initial-value: 1; }
+
+.amc-TDockBar {
+  --amc-tdock-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tdock-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tdock-accent-2: color-mix(in oklab, var(--amc-tdock-accent) 55%, var(--ut-palette-info, #0076df));
+  --amc-tdock-accent-3: color-mix(in oklab, var(--amc-tdock-accent) 70%, var(--amc-tdock-ink));
+  --amc-tdock-surface: var(--ut-component-background-color, #fff);
+  --amc-tdock-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-tdock-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tdock-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tdock-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tdock-danger: var(--ut-palette-danger, #cb1100);
+  --amc-tdock-danger-fg: var(--ut-palette-danger-contrast, #fff);
+  --amc-tdock-shadow: var(--amc-tdock-shadow-color, rgba(0, 0, 0, .22));
+  --amc-tdock-shine: var(--amc-tdock-shine-color, rgba(255, 255, 255, .55));
+  --amc-tdock-reflect: var(--amc-tdock-reflect-color, rgba(0, 0, 0, .2));
+  --amc-tdock-base: 52px;
+  --amc-tdock-gap: 10px;
+  --amc-tdock-n: 6;
+  container: amc-tdock / inline-size;
+  display: flex;
+  justify-content: center;
+  padding-block: calc(var(--amc-tdock-base) * .55 + 12px) 6px;
+  color: var(--amc-tdock-ink);
+}
+.amc-TDockBar-shelf {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  /* shrink tiles so the dock still fits its container when fully magnified */
+  --amc-tdock-fit: max(34px, min(var(--amc-tdock-base), calc((100cqi - 44px - var(--amc-tdock-gap) * (var(--amc-tdock-n) - 1)) / (var(--amc-tdock-n) + 1.4))));
+  box-sizing: content-box;
+  block-size: var(--amc-tdock-fit);
+  gap: var(--amc-tdock-gap);
+  max-inline-size: 100%;
+  margin: 0;
+  padding: 0 22px 26px;
+  list-style: none;
+}
+/* the 3D glass shelf the tiles stand on */
+.amc-TDockBar-shelf::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  inset-block-end: 6px;
+  block-size: 46px;
+  border-radius: 14px 14px 6px 6px;
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--amc-tdock-accent) 8%, transparent), transparent 70%),
+    linear-gradient(to bottom, color-mix(in srgb, var(--amc-tdock-surface) 45%, transparent), color-mix(in srgb, var(--amc-tdock-surface) 92%, transparent));
+  box-shadow: inset 0 1px 0 var(--amc-tdock-shine), 0 0 0 1px color-mix(in srgb, var(--amc-tdock-ink) 10%, transparent), 0 22px 30px -18px var(--amc-tdock-shadow);
+  transform: perspective(260px) rotateX(52deg);
+  transform-origin: 50% 100%;
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
+}
+/* front edge of the shelf */
+.amc-TDockBar-shelf::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 7px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--amc-tdock-ink) 14%, var(--amc-tdock-surface)), color-mix(in srgb, var(--amc-tdock-ink) 24%, var(--amc-tdock-surface)));
+  box-shadow: inset 0 1px 0 var(--amc-tdock-shine);
+}
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(2):last-child) { --amc-tdock-n: 2; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(3):last-child) { --amc-tdock-n: 3; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(4):last-child) { --amc-tdock-n: 4; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(5):last-child) { --amc-tdock-n: 5; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(6):last-child) { --amc-tdock-n: 6; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(7):last-child) { --amc-tdock-n: 7; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(8):last-child) { --amc-tdock-n: 8; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(9):last-child) { --amc-tdock-n: 9; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(10):last-child) { --amc-tdock-n: 10; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(11):last-child) { --amc-tdock-n: 11; }
+.amc-TDockBar-shelf:has(> .amc-TDockBar-item:nth-child(12):last-child) { --amc-tdock-n: 12; }
+
+.amc-TDockBar-item {
+  --amc-tdock-m: 1;
+  --amc-tdock-size: calc(var(--amc-tdock-fit) * var(--amc-tdock-m));
+  position: relative;
+  flex: none;
+  transition: --amc-tdock-m .22s cubic-bezier(.2, .8, .2, 1);
+}
+.amc-TDockBar-item:has(.amc-TDockBar-link:hover, .amc-TDockBar-link:focus-visible) { z-index: 2; }
+.amc-TDockBar-link {
+  position: relative;
+  display: block;
+  border-radius: 26%;
+  color: inherit;
+  text-decoration: none;
+}
+.amc-TDockBar-link:focus-visible { outline: 2px solid var(--amc-tdock-accent); outline-offset: 4px; }
+.amc-TDockBar-tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: var(--amc-tdock-size);
+  block-size: var(--amc-tdock-size);
+  border-radius: 26%;
+  font-size: calc(var(--amc-tdock-size) * .42);
+  color: var(--amc-tdock-accent-fg);
+  background: linear-gradient(160deg, var(--amc-tdock-accent-2), var(--amc-tdock-accent) 55%, var(--amc-tdock-accent-3));
+  box-shadow: inset 0 1px 0 var(--amc-tdock-shine), inset 0 -2px 6px color-mix(in srgb, var(--amc-tdock-ink) 18%, transparent), 0 10px 16px -8px var(--amc-tdock-shadow);
+  -webkit-box-reflect: below 4px linear-gradient(transparent 62%, var(--amc-tdock-reflect));
+}
+/* glossy highlight */
+.amc-TDockBar-tile::before {
+  content: "";
+  position: absolute;
+  inset: 1px 1px 52%;
+  border-radius: 24% 24% 40% 40% / 30% 30% 60% 60%;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--amc-tdock-shine) 70%, transparent), transparent);
+  pointer-events: none;
+}
+.amc-TDockBar-icon { position: relative; line-height: 1; }
+.amc-TDockBar-icon.fa:not([class*="fa-"])::before { content: ""; display: block; inline-size: .5em; block-size: .5em; border-radius: 50%; background: currentColor; }
+/* hue cycle: neighbouring tiles rotate the theme's primary hue (relative color syntax; older
+   browsers keep the primary gradient) */
+@supports (color: oklch(from red l c h)) {
+  .amc-TDockBar-item:nth-child(4n+2) { --amc-tdock-accent-2: oklch(from var(--amc-tdock-accent) calc(l + .06) c calc(h + 48)); --amc-tdock-accent-3: oklch(from var(--amc-tdock-accent) calc(l - .12) c calc(h + 30)); }
+  .amc-TDockBar-item:nth-child(4n+3) { --amc-tdock-accent-2: oklch(from var(--amc-tdock-accent) calc(l + .08) c calc(h - 50)); --amc-tdock-accent-3: oklch(from var(--amc-tdock-accent) calc(l - .1) c calc(h - 70)); }
+  .amc-TDockBar-item:nth-child(4n) { --amc-tdock-accent-2: oklch(from var(--amc-tdock-accent) calc(l + .1) c calc(h + 150)); --amc-tdock-accent-3: oklch(from var(--amc-tdock-accent) calc(l - .1) c calc(h + 120)); }
+}
+
+.amc-TDockBar-badge {
+  position: absolute;
+  inset-block-start: -5px;
+  inset-inline-end: -5px;
+  min-inline-size: 20px;
+  block-size: 20px;
+  padding-inline: 6px;
+  border-radius: 10px;
+  font-size: .6875rem;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  color: var(--amc-tdock-danger-fg);
+  background: var(--amc-tdock-danger);
+  box-shadow: 0 0 0 2px var(--amc-tdock-surface), 0 4px 8px -3px var(--amc-tdock-shadow);
+  unicode-bidi: plaintext;
+}
+.amc-TDockBar-badge:empty { display: none; }
+
+/* current entry: glowing dot on the shelf */
+.amc-TDockBar-item.is-current::after {
+  content: "";
+  position: absolute;
+  inset-block-end: -16px;
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: 50%;
+  background: var(--amc-tdock-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--amc-tdock-accent) 25%, transparent), 0 0 12px 2px var(--amc-tdock-accent);
+}
+
+/* tooltip label above the tile */
+.amc-TDockBar-tip {
+  position: absolute;
+  inset-block-end: calc(100% + 10px);
+  inset-inline: -80px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.amc-TDockBar-label {
+  position: relative;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: .75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--amc-tdock-surface);
+  background: color-mix(in srgb, var(--amc-tdock-ink) 88%, transparent);
+  box-shadow: 0 8px 18px -8px var(--amc-tdock-shadow);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .15s ease, transform .2s ease;
+  unicode-bidi: isolate;
+}
+.amc-TDockBar-label::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline: 0;
+  margin-inline: auto;
+  inline-size: 0;
+  border: 5px solid transparent;
+  border-block-start-color: color-mix(in srgb, var(--amc-tdock-ink) 88%, transparent);
+}
+.amc-TDockBar-link:hover .amc-TDockBar-label,
+.amc-TDockBar-link:focus-visible .amc-TDockBar-label { opacity: 1; transform: none; }
+
+/* magnification: hovered or focused tile, neighbours and second neighbours */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  @container amc-tdock (min-width: 420px) {
+    .amc-TDockBar-item:has(.amc-TDockBar-link:hover),
+    .amc-TDockBar-item:has(.amc-TDockBar-link:focus-visible) { --amc-tdock-m: 1.55; }
+    .amc-TDockBar-item:has(.amc-TDockBar-link:hover) + .amc-TDockBar-item,
+    .amc-TDockBar-item:has(+ .amc-TDockBar-item .amc-TDockBar-link:hover),
+    .amc-TDockBar-item:has(.amc-TDockBar-link:focus-visible) + .amc-TDockBar-item,
+    .amc-TDockBar-item:has(+ .amc-TDockBar-item .amc-TDockBar-link:focus-visible) { --amc-tdock-m: 1.28; }
+    .amc-TDockBar-item:has(.amc-TDockBar-link:hover) + .amc-TDockBar-item + .amc-TDockBar-item,
+    .amc-TDockBar-item:has(+ .amc-TDockBar-item + .amc-TDockBar-item .amc-TDockBar-link:hover),
+    .amc-TDockBar-item:has(.amc-TDockBar-link:focus-visible) + .amc-TDockBar-item + .amc-TDockBar-item,
+    .amc-TDockBar-item:has(+ .amc-TDockBar-item + .amc-TDockBar-item .amc-TDockBar-link:focus-visible) { --amc-tdock-m: 1.1; }
+  }
+}
+
+/* narrow containers: tiles wrap on a flat glass tray, labels under the tiles */
+@container amc-tdock (max-width: 419px) {
+  .amc-TDockBar { padding-block-start: 6px; }
+  .amc-TDockBar-shelf {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 10px;
+    padding: 14px 12px 12px;
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--amc-tdock-surface) 80%, transparent);
+    box-shadow: inset 0 1px 0 var(--amc-tdock-shine), 0 0 0 1px var(--amc-tdock-line), 0 18px 30px -20px var(--amc-tdock-shadow);
+  }
+  .amc-TDockBar-shelf::before, .amc-TDockBar-shelf::after { display: none; }
+  .amc-TDockBar-tile { -webkit-box-reflect: unset; }
+  .amc-TDockBar-shelf { --amc-tdock-fit: var(--amc-tdock-base); block-size: auto; }
+  .amc-TDockBar-item { inline-size: 72px; display: flex; justify-content: center; }
+  .amc-TDockBar-link { display: grid; justify-items: center; gap: 6px; border-radius: 12px; }
+  .amc-TDockBar-tip { position: static; order: 2; }
+  .amc-TDockBar-label { padding: 0; opacity: 1; transform: none; white-space: normal; text-align: center; font-size: .6875rem; color: inherit; background: none; box-shadow: none; overflow-wrap: break-word; }
+  .amc-TDockBar-label::after { display: none; }
+  .amc-TDockBar-item.is-current::after { inset-block-end: auto; inset-block-start: calc(var(--amc-tdock-size) + 1px); }
+}
+
+
+/* ---------- Template options ---------- */
+.amc-TDockBar--large { --amc-tdock-base: 64px; }
+.amc-TDockBar--large { --amc-tdock-gap: 14px; }
+.amc-TDockBar--labels .amc-TDockBar-shelf { --amc-tdock-gap: 20px; padding-block-end: 34px; }
+.amc-TDockBar--labels .amc-TDockBar-shelf { --amc-tdock-fit: max(34px, min(var(--amc-tdock-base), calc((100cqi - 44px) / var(--amc-tdock-n) - var(--amc-tdock-gap) - 16px))); }
+.amc-TDockBar--labels .amc-TDockBar-tile { -webkit-box-reflect: unset; }
+.amc-TDockBar--labels .amc-TDockBar-tip { inset-block: calc(100% + 5px) auto; inset-inline: -12px; }
+.amc-TDockBar--labels .amc-TDockBar-label {
+  padding: 0;
+  opacity: 1;
+  transform: none;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: .6875rem;
+  color: var(--amc-tdock-ink);
+  background: none;
+  box-shadow: none;
+}
+.amc-TDockBar--labels .amc-TDockBar-label::after { display: none; }
+.amc-TDockBar--labels .amc-TDockBar-item.is-current .amc-TDockBar-label { color: var(--amc-tdock-accent); }
+.amc-TDockBar--labels .amc-TDockBar-item.is-current::after { inset-block-end: -30px; }
+/* touch screens: labels are never hover-only, same layout as Always show labels */
+@media (hover: none) {
+  .amc-TDockBar .amc-TDockBar-shelf { --amc-tdock-gap: 20px; padding-block-end: 34px; }
+  .amc-TDockBar .amc-TDockBar-shelf { --amc-tdock-fit: max(34px, min(var(--amc-tdock-base), calc((100cqi - 44px) / var(--amc-tdock-n) - var(--amc-tdock-gap) - 16px))); }
+  .amc-TDockBar .amc-TDockBar-tile { -webkit-box-reflect: unset; }
+  .amc-TDockBar .amc-TDockBar-tip { inset-block: calc(100% + 5px) auto; inset-inline: -12px; }
+  .amc-TDockBar .amc-TDockBar-label {
+    padding: 0;
+    opacity: 1;
+    transform: none;
+    max-inline-size: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: .6875rem;
+    color: var(--amc-tdock-ink);
+    background: none;
+    box-shadow: none;
+  }
+  .amc-TDockBar .amc-TDockBar-label::after { display: none; }
+  .amc-TDockBar .amc-TDockBar-item.is-current .amc-TDockBar-label { color: var(--amc-tdock-accent); }
+  .amc-TDockBar .amc-TDockBar-item.is-current::after { inset-block-end: -30px; }
+}
+.amc-TDockBar--soft .amc-TDockBar-item .amc-TDockBar-tile {
+  color: var(--amc-tdock-accent);
+  background: linear-gradient(160deg, var(--amc-tdock-surface), color-mix(in srgb, var(--amc-tdock-accent) 12%, var(--amc-tdock-surface)));
+  box-shadow: inset 0 1px 0 var(--amc-tdock-shine), 0 0 0 1px var(--amc-tdock-line), 0 10px 16px -10px var(--amc-tdock-shadow);
+}
+.amc-TDockBar--soft .amc-TDockBar-item.is-current .amc-TDockBar-tile { box-shadow: inset 0 1px 0 var(--amc-tdock-shine), 0 0 0 1.5px var(--amc-tdock-accent), 0 10px 16px -10px var(--amc-tdock-shadow); }
+.amc-TDockBar--flat .amc-TDockBar-shelf {
+  padding: 10px 12px 14px;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--amc-tdock-surface) 62%, transparent);
+  box-shadow: inset 0 1px 0 var(--amc-tdock-shine), 0 0 0 1px var(--amc-tdock-line), 0 24px 40px -22px var(--amc-tdock-shadow);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  backdrop-filter: blur(14px) saturate(1.5);
+}
+.amc-TDockBar--flat .amc-TDockBar-shelf::before, .amc-TDockBar--flat .amc-TDockBar-shelf::after { display: none; }
+.amc-TDockBar--flat .amc-TDockBar-tile { -webkit-box-reflect: unset; }
+.amc-TDockBar--flat .amc-TDockBar-item.is-current::after { inset-block-end: -10px; inline-size: 5px; block-size: 5px; }
+.amc-TDockBar--fixed {
+  position: fixed;
+  z-index: 800;
+  inset-inline: 0;
+  inset-block-end: 12px;
+  margin-inline: auto;
+  inline-size: calc(100% - 24px);
+  padding-block-end: 0;
+  pointer-events: none;
+}
+.amc-TDockBar--fixed .amc-TDockBar-shelf { pointer-events: auto; }
+
+.amc-TDockBar--flat.amc-TDockBar--labels .amc-TDockBar-shelf { padding-block-end: 30px; }
+.amc-TDockBar--flat.amc-TDockBar--labels .amc-TDockBar-item.is-current::after { inset-block-end: -26px; }
+@media (hover: none) {
+  .amc-TDockBar--flat .amc-TDockBar-shelf { padding-block-end: 30px; }
+  .amc-TDockBar--flat .amc-TDockBar-item.is-current::after { inset-block-end: -26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TDockBar-item, .amc-TDockBar-label { transition: none; }
+  .amc-TDockBar-link:hover .amc-TDockBar-tile { box-shadow: 0 0 0 2px var(--amc-tdock-accent), 0 10px 16px -8px var(--amc-tdock-shadow); }
+}
+@media (forced-colors: active) {
+  .amc-TDockBar-tile { border: 1px solid CanvasText; -webkit-box-reflect: unset; }
+  .amc-TDockBar-shelf::before, .amc-TDockBar-shelf::after { border: 1px solid CanvasText; }
+  .amc-TDockBar-item.is-current::after { background: Highlight; }
+  .amc-TDockBar-label { border: 1px solid CanvasText; }
+}

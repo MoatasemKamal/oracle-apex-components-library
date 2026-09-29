@@ -1,0 +1,21 @@
+{
+  "samples": [
+    { "title": "Create menu on an orders dashboard", "options": [], "entries": [
+      { "text": "New order", "link": "#", "icon": "fa-cart-plus", "a01": "Ctrl+Alt+N" },
+      { "text": "New invoice", "link": "#", "icon": "fa-file-text-o" },
+      { "text": "Register customer", "link": "#", "icon": "fa-user-plus" },
+      { "text": "Log a return", "link": "#", "icon": "fa-undo", "a01": "3 drafts" }
+    ] },
+    { "title": "Approval actions, quarter arc", "options": ["amc-TSpeedDial--arc", "amc-TSpeedDial--iconOnly"], "entries": [
+      { "text": "Approve", "link": "#", "icon": "fa-check" },
+      { "text": "Request changes", "link": "#", "icon": "fa-comment-o" },
+      { "text": "Delegate", "link": "#", "icon": "fa-share" },
+      { "text": "Reject", "link": "#", "icon": "fa-times" }
+    ] },
+    { "title": "Warehouse tasks, start and top corner", "options": ["amc-TSpeedDial--start", "amc-TSpeedDial--top"], "entries": [
+      { "text": "Receive shipment", "link": "#", "icon": "fa-download", "a01": "9 ASNs due" },
+      { "text": "Start cycle count", "link": "#", "icon": "fa-list-ol" },
+      { "text": "Report damage", "link": "#", "icon": "fa-exclamation-triangle" }
+    ] }
+  ]
+}

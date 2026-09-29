@@ -1,0 +1,121 @@
+listTemplate amc-spotlight-grid (
+    name: AMC Spotlight Grid
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TSpotlightGrid #COMPONENT_CSS_CLASSES#" id="#LIST_ID#">
+            <ul class="amc-TSpotlightGrid-grid">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TSpotlightGrid-item is-current"><a class="amc-TSpotlightGrid-link" href="#LINK#" aria-current="page"><span class="amc-TSpotlightGrid-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TSpotlightGrid-body"><span class="amc-TSpotlightGrid-label">#TEXT#</span><span class="amc-TSpotlightGrid-desc">#A01#</span></span><span class="amc-TSpotlightGrid-tag">#A02#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TSpotlightGrid-item"><a class="amc-TSpotlightGrid-link" href="#LINK#"><span class="amc-TSpotlightGrid-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TSpotlightGrid-body"><span class="amc-TSpotlightGrid-label">#TEXT#</span><span class="amc-TSpotlightGrid-desc">#A01#</span></span><span class="amc-TSpotlightGrid-tag">#A02#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-spotlight-grid.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-spotlight-grid.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Tag
+    }
+    advanced {
+        staticId: AMC_TPL_SPOTLIGHT_GRID
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a List region. Each entry is a tile with its icon, text, a description from User Defined Attribute 1 and an optional tag from Attribute 2, for example 'New' or '3 due'. The optional JavaScript file moves the spotlight with the pointer across the whole grid; without it, or on touch screens and under reduced motion, tiles light up statically on hover. Keyboard focus lights the focused tile and shows a focus ring. The current entry keeps a soft glow at rest. Template options: Intense light, Compact tiles, Rows, Night tiles.
+            ```
+    }
+
+    templateOption amc-spotlight-grid-intense (
+        name: Intense light
+        sequence: 10
+        appearance {
+            cssClasses: amc-TSpotlightGrid--intense
+        }
+        help {
+            helpText:
+                ```text
+                A larger, brighter spotlight and a thicker glowing edge.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: INTENSE
+        }
+    )
+
+    templateOption amc-spotlight-grid-compact (
+        name: Compact tiles
+        sequence: 20
+        appearance {
+            cssClasses: amc-TSpotlightGrid--compact
+        }
+        help {
+            helpText:
+                ```text
+                Smaller tiles with the icon beside the text; descriptions are hidden.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-spotlight-grid-rows (
+        name: Rows
+        sequence: 30
+        appearance {
+            cssClasses: amc-TSpotlightGrid--rows
+        }
+        help {
+            helpText:
+                ```text
+                One full-width row per entry, for side columns and settings menus.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ROWS
+        }
+    )
+
+    templateOption amc-spotlight-grid-night (
+        name: Night tiles
+        sequence: 40
+        appearance {
+            cssClasses: amc-TSpotlightGrid--night
+        }
+        help {
+            helpText:
+                ```text
+                Inverts the tiles to a dark surface derived from the theme text color, where the spotlight is most visible. In a dark theme style the tiles become light.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NIGHT
+        }
+    )
+)

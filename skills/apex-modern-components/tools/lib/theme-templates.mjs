@@ -108,7 +108,7 @@ export function validateTemplate(t) {
   }
   // apexlang treats ( ) { } on unfenced lines as structure.
   const inline = [s.name, ...(s.templateOptions || []).map((o) => o.name), ...Object.values(s.attributes || {})];
-  for (const v of inline) if (v && /[(){}]/.test(String(v))) errors.push(`${slug}: value "${v}" contains ( ) { }; rephrase it`);
+  for (const v of inline) if (v && /[(){}:]/.test(String(v))) errors.push(`${slug}: value "${v}" contains ( ) { } or a colon, which APEXlang reads as structure; rephrase it`);
 
   for (const p of partsDef) if (p.required) need(parts[p.file] !== undefined, `parts/${p.file} is required`);
   const allowedFor = (file) => (s.kind === "region" ? REGION_TOKENS : /^(before|after|between|sublist-before|sublist-after)\.html$/.test(file) ? LIST_WRAP_TOKENS : LIST_ENTRY_TOKENS);

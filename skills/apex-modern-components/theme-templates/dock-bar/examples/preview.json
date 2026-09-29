@@ -1,0 +1,26 @@
+{
+  "samples": [
+    { "title": "Sales app switcher with badges", "options": [], "entries": [
+      { "text": "Dashboard", "link": "#", "icon": "fa-tachometer" },
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "a01": "12", "current": true },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "3" },
+      { "text": "Customers", "link": "#", "icon": "fa-users" },
+      { "text": "Approvals", "link": "#", "icon": "fa-check-square-o", "a01": "7" },
+      { "text": "Warehouse", "link": "#", "icon": "fa-cubes" },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" }
+    ] },
+    { "title": "HR portal, soft tiles, labels always on", "options": ["amc-TDockBar--soft", "amc-TDockBar--labels"], "entries": [
+      { "text": "Leave", "link": "#", "icon": "fa-calendar", "current": true },
+      { "text": "Payslips", "link": "#", "icon": "fa-money" },
+      { "text": "Expenses", "link": "#", "icon": "fa-credit-card", "a01": "2" },
+      { "text": "Training", "link": "#", "icon": "fa-graduation-cap" },
+      { "text": "Directory", "link": "#", "icon": "fa-address-book-o" }
+    ] },
+    { "title": "Warehouse quick launch, flat glass, large", "options": ["amc-TDockBar--flat", "amc-TDockBar--large"], "entries": [
+      { "text": "Receiving", "link": "#", "icon": "fa-download", "a01": "9" },
+      { "text": "Put-away", "link": "#", "icon": "fa-archive" },
+      { "text": "Picking", "link": "#", "icon": "fa-hand-paper-o", "current": true },
+      { "text": "Shipping", "link": "#", "icon": "fa-truck", "a01": "24" }
+    ] }
+  ]
+}

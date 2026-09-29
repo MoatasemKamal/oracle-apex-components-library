@@ -1,0 +1,336 @@
+/* Speed Dial: list template for Universal Theme. A floating action button that fans the list
+   entries out in a stack or a quarter arc on hover, click, tap or Enter; labels slide out beside
+   each mini button. Built on <details>/<summary>, so it opens without JavaScript; the optional
+   script adds Escape and click-outside closing. */
+.amc-TSpeedDial {
+  --amc-tsd-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tsd-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tsd-accent-2: color-mix(in oklab, var(--amc-tsd-accent) 55%, var(--ut-palette-info, #0076df));
+  --amc-tsd-surface: var(--ut-component-background-color, #fff);
+  --amc-tsd-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tsd-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tsd-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tsd-shadow: var(--amc-tsd-shadow-color, rgba(0, 0, 0, .22));
+  --amc-tsd-fab: 56px;
+  --amc-tsd-mini: 44px;
+  --amc-tsd-step: 56px;
+  --amc-tsd-n: 4;
+  --amc-tsd-i: 0;
+  /* open side: sx = horizontal, sy = vertical (-1 up / left, 1 down / right) */
+  --amc-tsd-sx: -1;
+  --amc-tsd-sy: -1;
+  --amc-tsd-arc: 0;
+  --amc-tsd-r: max(128px, calc(var(--amc-tsd-n) * 34px));
+  --amc-tsd-reach: calc((1 - var(--amc-tsd-arc)) * var(--amc-tsd-n) * var(--amc-tsd-step) + var(--amc-tsd-arc) * var(--amc-tsd-r));
+  --amc-tsd-origin: calc(8px + 6px + (var(--amc-tsd-fab) - 12px) / 2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  box-sizing: border-box;
+  min-block-size: calc(var(--amc-tsd-reach) + var(--amc-tsd-fab) + 28px);
+  padding: 8px;
+  color: var(--amc-tsd-ink);
+}
+.amc-TSpeedDial:dir(rtl) { --amc-tsd-sx: 1; }
+
+/* ---------- FAB ---------- */
+.amc-TSpeedDial-toggle { position: relative; z-index: 2; }
+.amc-TSpeedDial-fab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  block-size: var(--amc-tsd-fab);
+  padding-inline: 20px 6px;
+  border-radius: 999px;
+  list-style: none;
+  cursor: pointer;
+  font-weight: 650;
+  font-size: .875rem;
+  color: var(--amc-tsd-accent-fg);
+  background: linear-gradient(135deg, var(--amc-tsd-accent-2), var(--amc-tsd-accent) 60%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-tsd-accent-fg) 30%, transparent), 0 14px 28px -12px color-mix(in srgb, var(--amc-tsd-accent) 85%, transparent), 0 0 0 5px color-mix(in srgb, var(--amc-tsd-accent) 14%, transparent);
+  user-select: none;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.amc-TSpeedDial-fab::-webkit-details-marker { display: none; }
+.amc-TSpeedDial-fab::marker { content: ""; }
+.amc-TSpeedDial-fab:hover { transform: translateY(-1px); }
+.amc-TSpeedDial-fab:focus-visible { outline: 2px solid var(--amc-tsd-accent); outline-offset: 5px; }
+.amc-TSpeedDial-fab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--amc-tsd-accent);
+  opacity: 0;
+  pointer-events: none;
+}
+.amc-TSpeedDial-fabText { white-space: nowrap; unicode-bidi: isolate; }
+.amc-TSpeedDial-fabIcon {
+  display: grid;
+  place-items: center;
+  inline-size: calc(var(--amc-tsd-fab) - 12px);
+  block-size: calc(var(--amc-tsd-fab) - 12px);
+  border-radius: 50%;
+  font-size: 18px;
+  background: color-mix(in srgb, var(--amc-tsd-accent-fg) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tsd-accent-fg) 30%, transparent);
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* ---------- Fan ---------- */
+.amc-TSpeedDial-list {
+  position: absolute;
+  z-index: 1;
+  inset-block-end: calc(8px + var(--amc-tsd-fab) / 2);
+  inset-inline-end: var(--amc-tsd-origin);
+  inline-size: 0;
+  block-size: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* resting hint: a dotted rail (or arc) that marks where the actions appear */
+.amc-TSpeedDial-list::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -3px;
+  inset-block-end: calc(var(--amc-tsd-step) / 2 + var(--amc-tsd-mini) / 2);
+  inline-size: 6px;
+  block-size: calc(var(--amc-tsd-n) * var(--amc-tsd-step) - var(--amc-tsd-mini) / 2);
+  background: radial-gradient(circle, color-mix(in srgb, var(--amc-tsd-accent) 45%, transparent) 2.5px, transparent 3px) 50% 0 / 6px var(--amc-tsd-step) repeat-y;
+  -webkit-mask: linear-gradient(to top, black, transparent);
+  mask: linear-gradient(to top, black, transparent);
+  transition: opacity .2s ease;
+  pointer-events: none;
+}
+.amc-TSpeedDial-item:nth-child(1) { --amc-tsd-i: 0; }
+.amc-TSpeedDial-item:nth-child(2) { --amc-tsd-i: 1; }
+.amc-TSpeedDial-item:nth-child(3) { --amc-tsd-i: 2; }
+.amc-TSpeedDial-item:nth-child(4) { --amc-tsd-i: 3; }
+.amc-TSpeedDial-item:nth-child(5) { --amc-tsd-i: 4; }
+.amc-TSpeedDial-item:nth-child(6) { --amc-tsd-i: 5; }
+.amc-TSpeedDial-item:nth-child(7) { --amc-tsd-i: 6; }
+.amc-TSpeedDial-item:nth-child(8) { --amc-tsd-i: 7; }
+.amc-TSpeedDial-item:nth-child(9) { --amc-tsd-i: 8; }
+.amc-TSpeedDial-item:nth-child(10) { --amc-tsd-i: 9; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(1):last-child) { --amc-tsd-n: 1; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(2):last-child) { --amc-tsd-n: 2; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(3):last-child) { --amc-tsd-n: 3; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(4):last-child) { --amc-tsd-n: 4; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(5):last-child) { --amc-tsd-n: 5; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6):last-child) { --amc-tsd-n: 6; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(7):last-child) { --amc-tsd-n: 7; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(8):last-child) { --amc-tsd-n: 8; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(9):last-child) { --amc-tsd-n: 9; }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(10):last-child) { --amc-tsd-n: 10; }
+.amc-TSpeedDial-item {
+  /* stack position; the arc position below needs CSS trigonometry */
+  --amc-tsd-x: 0px;
+  --amc-tsd-y: calc(var(--amc-tsd-sy) * (var(--amc-tsd-i) + 1) * var(--amc-tsd-step));
+  position: absolute;
+  inset-block-start: calc(var(--amc-tsd-mini) / -2);
+  inset-inline-start: calc(var(--amc-tsd-mini) / -2);
+  inline-size: var(--amc-tsd-mini);
+  block-size: var(--amc-tsd-mini);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.3);
+  transition: transform .2s ease, opacity .15s ease, visibility 0s linear .2s;
+}
+.amc-TSpeedDial-item:hover, .amc-TSpeedDial-item:focus-within { z-index: 2; }
+@supports (width: calc(1px * sin(1deg))) {
+  .amc-TSpeedDial-item {
+    --amc-tsd-phi: calc(90deg * var(--amc-tsd-i) / max(var(--amc-tsd-n) - 1, 1));
+    --amc-tsd-x: calc(var(--amc-tsd-sx) * var(--amc-tsd-arc) * var(--amc-tsd-r) * sin(var(--amc-tsd-phi)));
+    --amc-tsd-y: calc(var(--amc-tsd-sy) * ((1 - var(--amc-tsd-arc)) * (var(--amc-tsd-i) + 1) * var(--amc-tsd-step) + var(--amc-tsd-arc) * var(--amc-tsd-r) * cos(var(--amc-tsd-phi))));
+  }
+}
+.amc-TSpeedDial-link {
+  position: relative;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: 50%;
+  color: inherit;
+  text-decoration: none;
+}
+.amc-TSpeedDial-link:focus-visible { outline: 2px solid var(--amc-tsd-accent); outline-offset: 3px; }
+.amc-TSpeedDial-mini {
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: 50%;
+  font-size: 17px;
+  color: var(--amc-tsd-accent);
+  background: var(--amc-tsd-surface);
+  box-shadow: 0 0 0 1px var(--amc-tsd-line), 0 10px 20px -10px var(--amc-tsd-shadow);
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+.amc-TSpeedDial-link:hover .amc-TSpeedDial-mini,
+.amc-TSpeedDial-link:focus-visible .amc-TSpeedDial-mini { color: var(--amc-tsd-accent-fg); background: var(--amc-tsd-accent); transform: scale(1.08); }
+.amc-TSpeedDial-item.is-current .amc-TSpeedDial-mini { box-shadow: 0 0 0 2px var(--amc-tsd-accent), 0 10px 20px -10px var(--amc-tsd-shadow); }
+.amc-TSpeedDial-icon.fa:not([class*="fa-"])::before { content: ""; display: block; inline-size: 8px; block-size: 8px; border-radius: 50%; background: currentColor; }
+/* label pill beside the mini button, on the side away from the page edge */
+.amc-TSpeedDial-label {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: calc(100% + 12px);
+  display: grid;
+  margin-block-start: -17px;
+  min-block-size: 34px;
+  align-content: center;
+  padding: 4px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  background: var(--amc-tsd-surface);
+  box-shadow: 0 0 0 1px var(--amc-tsd-line), 0 10px 20px -12px var(--amc-tsd-shadow);
+  opacity: 0;
+  transform: translateX(calc(var(--amc-tsd-sx) * -14px));
+  transition: opacity .2s ease, transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+.amc-TSpeedDial-text { font-size: .8125rem; font-weight: 600; unicode-bidi: isolate; }
+.amc-TSpeedDial-hint { font-size: .6875rem; color: var(--amc-tsd-muted); unicode-bidi: plaintext; }
+.amc-TSpeedDial-hint:empty { display: none; }
+.amc-TSpeedDial-link:hover .amc-TSpeedDial-text, .amc-TSpeedDial-link:focus-visible .amc-TSpeedDial-text { color: var(--amc-tsd-accent); }
+
+/* ---------- Open state: details open, pointer on the FAB or fan, or focus inside the fan ---------- */
+.amc-TSpeedDial:has(> .amc-TSpeedDial-toggle[open]) .amc-TSpeedDial-item,
+.amc-TSpeedDial:has(.amc-TSpeedDial-list:focus-within) .amc-TSpeedDial-item {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(var(--amc-tsd-x), var(--amc-tsd-y));
+  transition: transform .42s cubic-bezier(.34, 1.45, .64, 1) calc(var(--amc-tsd-i) * 40ms), opacity .2s ease calc(var(--amc-tsd-i) * 40ms), visibility 0s;
+}
+.amc-TSpeedDial:has(> .amc-TSpeedDial-toggle[open]) .amc-TSpeedDial-label,
+.amc-TSpeedDial:has(.amc-TSpeedDial-list:focus-within) .amc-TSpeedDial-label {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--amc-tsd-i) * 40ms + 120ms);
+}
+.amc-TSpeedDial:has(> .amc-TSpeedDial-toggle[open]) .amc-TSpeedDial-fabIcon,
+.amc-TSpeedDial:has(.amc-TSpeedDial-list:focus-within) .amc-TSpeedDial-fabIcon { transform: rotate(135deg); }
+.amc-TSpeedDial:has(> .amc-TSpeedDial-toggle[open]) .amc-TSpeedDial-list::before,
+.amc-TSpeedDial:has(.amc-TSpeedDial-list:focus-within) .amc-TSpeedDial-list::before { opacity: 0; }
+@media (hover: hover) {
+  .amc-TSpeedDial:has(.amc-TSpeedDial-fab:hover, .amc-TSpeedDial-list:hover) .amc-TSpeedDial-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(var(--amc-tsd-x), var(--amc-tsd-y));
+    transition: transform .42s cubic-bezier(.34, 1.45, .64, 1) calc(var(--amc-tsd-i) * 40ms), opacity .2s ease calc(var(--amc-tsd-i) * 40ms), visibility 0s;
+  }
+  .amc-TSpeedDial:has(.amc-TSpeedDial-fab:hover, .amc-TSpeedDial-list:hover) .amc-TSpeedDial-label { opacity: 1; transform: none; transition-delay: calc(var(--amc-tsd-i) * 40ms + 120ms); }
+  .amc-TSpeedDial:has(.amc-TSpeedDial-fab:hover, .amc-TSpeedDial-list:hover) .amc-TSpeedDial-fabIcon { transform: rotate(135deg); }
+  .amc-TSpeedDial:has(.amc-TSpeedDial-fab:hover, .amc-TSpeedDial-list:hover) .amc-TSpeedDial-list::before { opacity: 0; }
+  /* hover bridge: keeps the fan open while the pointer travels from the FAB to an entry */
+  .amc-TSpeedDial:has(.amc-TSpeedDial-fab:hover, .amc-TSpeedDial-list:hover) .amc-TSpeedDial-list::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset-inline-end: calc(var(--amc-tsd-mini) / -2 - 8px);
+    inset-block-end: calc(var(--amc-tsd-mini) / -2 - 8px);
+    inline-size: calc(var(--amc-tsd-arc) * var(--amc-tsd-r) + var(--amc-tsd-mini) + 16px);
+    block-size: calc(var(--amc-tsd-reach) + var(--amc-tsd-mini) + 16px);
+  }
+  .amc-TSpeedDial--start .amc-TSpeedDial-list::after { inset-inline: calc(var(--amc-tsd-mini) / -2 - 8px) auto; }
+  .amc-TSpeedDial--top .amc-TSpeedDial-list::after { inset-block: calc(var(--amc-tsd-mini) / -2 - 8px) auto; }
+  .amc-TSpeedDial:has(.amc-TSpeedDial-fab:hover, .amc-TSpeedDial-list:hover) .amc-TSpeedDial-item::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+  }
+}
+
+/* ---------- Template options ---------- */
+/* Quarter arc: entries spread around the FAB; labels show on hover and focus. Touch screens keep the stack. */
+.amc-TSpeedDial--arc { --amc-tsd-arc: 1; }
+.amc-TSpeedDial--arc .amc-TSpeedDial-list::before {
+  inset: auto;
+  inset-inline-start: calc(-1 * var(--amc-tsd-r));
+  inset-block-end: calc(-1 * var(--amc-tsd-r));
+  inline-size: calc(2 * var(--amc-tsd-r));
+  block-size: calc(2 * var(--amc-tsd-r));
+  border-radius: 50%;
+  border: 1.5px dashed color-mix(in srgb, var(--amc-tsd-accent) 40%, transparent);
+  background: radial-gradient(circle, color-mix(in srgb, var(--amc-tsd-accent) 10%, transparent), transparent 70%);
+  -webkit-mask: conic-gradient(from 270deg, black 0 25%, transparent 25%);
+  mask: conic-gradient(from 270deg, black 0 25%, transparent 25%);
+}
+.amc-TSpeedDial--arc:dir(rtl) .amc-TSpeedDial-list::before { -webkit-mask: conic-gradient(black 0 25%, transparent 25%); mask: conic-gradient(black 0 25%, transparent 25%); }
+@media (hover: hover) {
+  .amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-item .amc-TSpeedDial-link .amc-TSpeedDial-label {
+    inset-block-start: auto;
+    inset-block-end: calc(100% + 8px);
+    inset-inline-end: 50%;
+    margin: 0;
+    margin-inline-end: -60px;
+    inline-size: 120px;
+    min-block-size: 0;
+    padding: 4px 8px;
+    justify-items: center;
+    white-space: normal;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  .amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-item .amc-TSpeedDial-link:hover .amc-TSpeedDial-label,
+  .amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-item .amc-TSpeedDial-link:focus-visible .amc-TSpeedDial-label { opacity: 1; transform: none; transition-delay: 0s; }
+}
+@media (hover: none) {
+  .amc-TSpeedDial--arc { --amc-tsd-arc: 0; }
+  .amc-TSpeedDial--arc .amc-TSpeedDial-list::before { display: none; }
+}
+/* Start corner: FAB on the inline-start side, fan and labels open toward the end */
+.amc-TSpeedDial--start { align-items: flex-start; --amc-tsd-sx: 1; }
+.amc-TSpeedDial--start:dir(rtl) { --amc-tsd-sx: -1; }
+.amc-TSpeedDial--start .amc-TSpeedDial-fab { flex-direction: row-reverse; padding-inline: 6px 20px; }
+.amc-TSpeedDial--start .amc-TSpeedDial-list { inset-inline: var(--amc-tsd-origin) auto; }
+.amc-TSpeedDial--start .amc-TSpeedDial-label { inset-inline: calc(100% + 12px) auto; }
+.amc-TSpeedDial--start.amc-TSpeedDial--arc .amc-TSpeedDial-list::before { inset-inline-start: calc(-1 * var(--amc-tsd-r)); -webkit-mask: conic-gradient(black 0 25%, transparent 25%); mask: conic-gradient(black 0 25%, transparent 25%); }
+.amc-TSpeedDial--start.amc-TSpeedDial--arc:dir(rtl) .amc-TSpeedDial-list::before { -webkit-mask: conic-gradient(from 270deg, black 0 25%, transparent 25%); mask: conic-gradient(from 270deg, black 0 25%, transparent 25%); }
+/* Top corner: FAB at the top, fan opens downward */
+.amc-TSpeedDial--top { justify-content: flex-start; --amc-tsd-sy: 1; }
+.amc-TSpeedDial--top .amc-TSpeedDial-list { inset-block: calc(8px + var(--amc-tsd-fab) / 2) auto; }
+.amc-TSpeedDial--top .amc-TSpeedDial-list::before { inset-block: calc(var(--amc-tsd-step) / 2 + var(--amc-tsd-mini) / 2) auto; -webkit-mask: linear-gradient(to bottom, black, transparent); mask: linear-gradient(to bottom, black, transparent); }
+.amc-TSpeedDial--top.amc-TSpeedDial--arc .amc-TSpeedDial-list::before { inset-block: calc(-1 * var(--amc-tsd-r)) auto; -webkit-mask: conic-gradient(from 180deg, black 0 25%, transparent 25%); mask: conic-gradient(from 180deg, black 0 25%, transparent 25%); }
+.amc-TSpeedDial--top.amc-TSpeedDial--arc:dir(rtl) .amc-TSpeedDial-list::before,
+.amc-TSpeedDial--top.amc-TSpeedDial--start.amc-TSpeedDial--arc .amc-TSpeedDial-list::before { -webkit-mask: conic-gradient(from 90deg, black 0 25%, transparent 25%); mask: conic-gradient(from 90deg, black 0 25%, transparent 25%); }
+/* Icon only FAB */
+.amc-TSpeedDial--iconOnly .amc-TSpeedDial-fab { padding: 6px; gap: 0; }
+.amc-TSpeedDial--iconOnly .amc-TSpeedDial-fabText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+/* Float on page: fixed to the browser window corner, no reserved space */
+.amc-TSpeedDial--fixed {
+  position: fixed;
+  z-index: 800;
+  inset-block-end: 16px;
+  inset-inline-end: 16px;
+  min-block-size: 0;
+  pointer-events: none;
+}
+.amc-TSpeedDial--fixed > * { pointer-events: auto; }
+.amc-TSpeedDial--fixed .amc-TSpeedDial-list::before { display: none; }
+.amc-TSpeedDial--fixed.amc-TSpeedDial--start { inset-inline: 16px auto; }
+.amc-TSpeedDial--fixed.amc-TSpeedDial--top { inset-block: 16px auto; }
+
+/* ---------- Resting pulse ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .amc-TSpeedDial-fab::before { animation: amc-tsd-pulse 2.8s ease-out infinite; }
+  .amc-TSpeedDial:has(> .amc-TSpeedDial-toggle[open]) .amc-TSpeedDial-fab::before { animation: none; }
+}
+@keyframes amc-tsd-pulse { 0% { opacity: .5; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(1.2); } }
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSpeedDial-item, .amc-TSpeedDial-label, .amc-TSpeedDial-mini, .amc-TSpeedDial-fab, .amc-TSpeedDial-fabIcon, .amc-TSpeedDial-list::before { transition: none !important; }
+  .amc-TSpeedDial-item { transform: translate(var(--amc-tsd-x), var(--amc-tsd-y)); }
+  .amc-TSpeedDial-label { transform: none; }
+  .amc-TSpeedDial-fab:hover { transform: none; }
+}
+@media (forced-colors: active) {
+  .amc-TSpeedDial-fab, .amc-TSpeedDial-mini, .amc-TSpeedDial-label { border: 1px solid CanvasText; }
+  .amc-TSpeedDial-link[aria-current="page"] .amc-TSpeedDial-mini { outline: 2px solid Highlight; }
+}

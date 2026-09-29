@@ -1,0 +1,233 @@
+/* Flip Tiles: list template for Universal Theme. Every entry is a 3D tile: icon and label on
+   the front, description and call to action on the back. The tile flips on hover and keyboard
+   focus; the whole tile stays one real link. Touch screens and reduced motion show both faces
+   together without any flipping. */
+.amc-TFlipTiles {
+  --amc-tflip-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tflip-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tflip-accent-2: color-mix(in oklab, var(--amc-tflip-accent) 55%, var(--ut-palette-info, #0076df));
+  --amc-tflip-tile: var(--amc-tflip-accent);
+  --amc-tflip-tile-2: var(--amc-tflip-accent-2);
+  --amc-tflip-surface: var(--ut-component-background-color, #fff);
+  --amc-tflip-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-tflip-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tflip-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tflip-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tflip-shadow: var(--amc-tflip-shadow-color, rgba(0, 0, 0, .2));
+  --amc-tflip-radius: max(var(--ut-component-border-radius, 4px) + 12px, 16px);
+  --amc-tflip-row: 176px;
+  --amc-tflip-min: 176px;
+  --amc-tflip-turn: rotateY(180deg);
+  --amc-tflip-back: rotateY(180deg);
+  color: var(--amc-tflip-ink);
+}
+.amc-TFlipTiles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-tflip-min), 100%), 1fr));
+  grid-auto-rows: var(--amc-tflip-row);
+  gap: 20px 14px;
+  margin: 0;
+  padding-block-end: 7px;
+  padding: 0;
+  list-style: none;
+}
+.amc-TFlipTiles-item { min-inline-size: 0; }
+.amc-TFlipTiles-link {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  block-size: 100%;
+  border-radius: var(--amc-tflip-radius);
+  color: inherit;
+  text-decoration: none;
+  perspective: 900px;
+}
+.amc-TFlipTiles-link::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 12px 10px -7px;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--amc-tflip-tile) 22%, var(--amc-tflip-surface));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-tflip-tile) 20%, transparent);
+}
+.amc-TFlipTiles-link:focus-visible { outline: 2px solid var(--amc-tflip-accent); outline-offset: 4px; }
+.amc-TFlipTiles-card {
+  position: relative;
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(.3, 1.3, .5, 1);
+}
+.amc-TFlipTiles-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 18px;
+  border-radius: inherit;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+/* front: icon medallion, label, a folded corner that hints at the back */
+.amc-TFlipTiles-front {
+  justify-content: space-between;
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--amc-tflip-tile) 10%, transparent), transparent 60%),
+    var(--amc-tflip-surface);
+  box-shadow: 0 0 0 1px var(--amc-tflip-line), 0 1px 0 color-mix(in srgb, var(--amc-tflip-ink) 6%, transparent), 0 14px 26px -18px var(--amc-tflip-shadow);
+}
+.amc-TFlipTiles-icon {
+  display: grid;
+  place-items: center;
+  inline-size: 52px;
+  block-size: 52px;
+  border-radius: 16px;
+  font-size: 22px;
+  color: var(--amc-tflip-accent-fg);
+  background: linear-gradient(145deg, var(--amc-tflip-tile-2), var(--amc-tflip-tile));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-tflip-accent-fg) 35%, transparent), 0 10px 18px -8px color-mix(in srgb, var(--amc-tflip-tile) 75%, transparent);
+  transform: translateZ(0);
+}
+.amc-TFlipTiles-icon.fa:not([class*="fa-"])::before { content: ""; inline-size: 10px; block-size: 10px; border-radius: 50%; background: currentColor; }
+.amc-TFlipTiles-label { font-size: 1.0625rem; font-weight: 700; line-height: 1.25; letter-spacing: -.01em; overflow-wrap: break-word; unicode-bidi: isolate; }
+.amc-TFlipTiles-fold {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  inline-size: 28px;
+  block-size: 28px;
+  background: linear-gradient(225deg, var(--amc-tflip-page) 0 50%, color-mix(in srgb, var(--amc-tflip-tile) 30%, var(--amc-tflip-surface)) 50%);
+  border-end-start-radius: 7px;
+  box-shadow: -3px 3px 6px -3px var(--amc-tflip-shadow);
+}
+.amc-TFlipTiles-fold:dir(rtl) { background: linear-gradient(135deg, var(--amc-tflip-page) 0 50%, color-mix(in srgb, var(--amc-tflip-tile) 30%, var(--amc-tflip-surface)) 50%); box-shadow: 3px 3px 6px -3px var(--amc-tflip-shadow); }
+/* back: filled gradient with the description and call to action */
+.amc-TFlipTiles-back {
+  gap: 6px;
+  color: var(--amc-tflip-accent-fg);
+  background:
+    radial-gradient(90% 80% at 100% 0%, color-mix(in srgb, var(--amc-tflip-accent-fg) 20%, transparent), transparent 60%),
+    linear-gradient(150deg, var(--amc-tflip-tile-2), var(--amc-tflip-tile) 60%, color-mix(in oklab, var(--amc-tflip-tile) 70%, var(--amc-tflip-ink)));
+  box-shadow: 0 18px 32px -18px color-mix(in srgb, var(--amc-tflip-tile) 90%, transparent);
+  transform: var(--amc-tflip-back);
+}
+.amc-TFlipTiles-backTitle { font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+.amc-TFlipTiles-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+.amc-TFlipTiles-desc:empty { display: none; }
+.amc-TFlipTiles-cta {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 8px;
+  margin-block-start: auto;
+  padding: 6px 8px 6px 14px;
+  border-radius: 999px;
+  font-size: .8125rem;
+  font-weight: 700;
+  color: var(--amc-tflip-tile);
+  background: var(--amc-tflip-accent-fg);
+  box-shadow: 0 8px 16px -8px color-mix(in srgb, var(--amc-tflip-ink) 50%, transparent);
+}
+.amc-TFlipTiles-cta:dir(rtl) { padding: 6px 14px 6px 8px; }
+.amc-TFlipTiles-ctaText:empty { display: none; }
+.amc-TFlipTiles-cta:has(.amc-TFlipTiles-ctaText:empty) { padding: 6px; }
+.amc-TFlipTiles-arrow {
+  display: grid;
+  place-items: center;
+  inline-size: 24px;
+  block-size: 24px;
+  border-radius: 50%;
+  font-size: 11px;
+  color: var(--amc-tflip-accent-fg);
+  background: var(--amc-tflip-tile);
+}
+.amc-TFlipTiles-arrow:dir(rtl) { rotate: 180deg; }
+
+/* current entry: highlighted front */
+.amc-TFlipTiles-item.is-current .amc-TFlipTiles-front {
+  color: var(--amc-tflip-accent-fg);
+  background:
+    radial-gradient(100% 80% at 100% 0%, color-mix(in srgb, var(--amc-tflip-accent-fg) 22%, transparent), transparent 60%),
+    linear-gradient(150deg, var(--amc-tflip-tile-2), var(--amc-tflip-tile));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-tflip-tile) 30%, transparent), 0 20px 34px -18px color-mix(in srgb, var(--amc-tflip-tile) 90%, transparent);
+}
+.amc-TFlipTiles-item.is-current .amc-TFlipTiles-icon { color: var(--amc-tflip-tile); background: var(--amc-tflip-accent-fg); }
+.amc-TFlipTiles-item.is-current .amc-TFlipTiles-fold { background: linear-gradient(225deg, var(--amc-tflip-page) 0 50%, color-mix(in srgb, var(--amc-tflip-accent-fg) 45%, var(--amc-tflip-tile)) 50%); }
+.amc-TFlipTiles-item.is-current .amc-TFlipTiles-fold:dir(rtl) { background: linear-gradient(135deg, var(--amc-tflip-page) 0 50%, color-mix(in srgb, var(--amc-tflip-accent-fg) 45%, var(--amc-tflip-tile)) 50%); }
+.amc-TFlipTiles-item.is-current .amc-TFlipTiles-label::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  inline-size: 7px;
+  block-size: 7px;
+  margin-inline-start: 8px;
+  border-radius: 50%;
+  background: var(--amc-tflip-accent-fg);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-tflip-accent-fg) 30%, transparent);
+}
+
+/* flip on hover and keyboard focus (pointer devices with motion allowed) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .amc-TFlipTiles-link:hover .amc-TFlipTiles-card,
+  .amc-TFlipTiles-link:focus-visible .amc-TFlipTiles-card { transform: var(--amc-tflip-turn); }
+  .amc-TFlipTiles-link:hover { position: relative; z-index: 1; }
+}
+/* keyboard focus flips even where hover is unavailable */
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .amc-TFlipTiles-link:focus-visible .amc-TFlipTiles-card { transform: var(--amc-tflip-turn); }
+}
+
+/* touch screens and reduced motion: both faces visible, no flipping */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .amc-TFlipTiles-grid { grid-auto-rows: auto; gap: 14px; }
+  .amc-TFlipTiles-link::before, .amc-TFlipTiles-fold { display: none; }
+  .amc-TFlipTiles-card { display: grid; grid-template-rows: auto 1fr; transform-style: flat; border-radius: var(--amc-tflip-radius); overflow: hidden; box-shadow: 0 0 0 1px var(--amc-tflip-line), 0 14px 26px -18px var(--amc-tflip-shadow); }
+  .amc-TFlipTiles-face { position: relative; inset: auto; border-radius: 0; -webkit-backface-visibility: visible; backface-visibility: visible; box-shadow: none; }
+  .amc-TFlipTiles-front { flex-direction: row; justify-content: flex-start; align-items: center; gap: 12px; padding: 14px 16px; box-shadow: none; }
+  .amc-TFlipTiles-back { transform: none; padding: 12px 16px 14px; }
+  .amc-TFlipTiles-backTitle { display: none; }
+  .amc-TFlipTiles-icon { inline-size: 44px; block-size: 44px; font-size: 19px; flex: none; }
+  .amc-TFlipTiles-item.is-current .amc-TFlipTiles-front { box-shadow: none; }
+  .amc-TFlipTiles-item.is-current .amc-TFlipTiles-card { outline: 2px solid var(--amc-tflip-tile); outline-offset: 3px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TFlipTiles-card { transition: none; }
+}
+
+/* ---------- Template options ---------- */
+.amc-TFlipTiles--flipX { --amc-tflip-turn: rotateX(-180deg); --amc-tflip-back: rotateX(180deg); }
+.amc-TFlipTiles--compact { --amc-tflip-row: 138px; --amc-tflip-min: 150px; }
+.amc-TFlipTiles--compact .amc-TFlipTiles-face { padding: 14px; }
+.amc-TFlipTiles--compact .amc-TFlipTiles-icon { inline-size: 42px; block-size: 42px; font-size: 18px; border-radius: 13px; }
+.amc-TFlipTiles--compact .amc-TFlipTiles-desc { -webkit-line-clamp: 3; font-size: .8125rem; }
+@supports (color: oklch(from red l c h)) {
+  .amc-TFlipTiles--palette .amc-TFlipTiles-item:nth-child(5n+2) { --amc-tflip-tile: oklch(from var(--amc-tflip-accent) l c calc(h + 55)); --amc-tflip-tile-2: oklch(from var(--amc-tflip-accent) calc(l + .08) c calc(h + 80)); }
+  .amc-TFlipTiles--palette .amc-TFlipTiles-item:nth-child(5n+3) { --amc-tflip-tile: oklch(from var(--amc-tflip-accent) l c calc(h - 60)); --amc-tflip-tile-2: oklch(from var(--amc-tflip-accent) calc(l + .08) c calc(h - 30)); }
+  .amc-TFlipTiles--palette .amc-TFlipTiles-item:nth-child(5n+4) { --amc-tflip-tile: oklch(from var(--amc-tflip-accent) l c calc(h + 150)); --amc-tflip-tile-2: oklch(from var(--amc-tflip-accent) calc(l + .08) c calc(h + 175)); }
+  .amc-TFlipTiles--palette .amc-TFlipTiles-item:nth-child(5n) { --amc-tflip-tile: oklch(from var(--amc-tflip-accent) l c calc(h - 125)); --amc-tflip-tile-2: oklch(from var(--amc-tflip-accent) calc(l + .08) c calc(h - 100)); }
+}
+/* Ink: neo-brutal edges, a flat fill and a hard offset shadow */
+.amc-TFlipTiles--ink .amc-TFlipTiles-face { border: 2px solid var(--amc-tflip-ink); box-shadow: 4px 4px 0 var(--amc-tflip-ink); }
+.amc-TFlipTiles--ink .amc-TFlipTiles-front { background: var(--amc-tflip-surface); }
+.amc-TFlipTiles--ink .amc-TFlipTiles-back { background: var(--amc-tflip-tile); box-shadow: -4px 4px 0 var(--amc-tflip-ink); }
+.amc-TFlipTiles--ink .amc-TFlipTiles-icon { border: 2px solid var(--amc-tflip-ink); background: var(--amc-tflip-tile); box-shadow: 2px 2px 0 var(--amc-tflip-ink); }
+.amc-TFlipTiles--ink .amc-TFlipTiles-cta { border: 2px solid var(--amc-tflip-ink); box-shadow: 2px 2px 0 var(--amc-tflip-ink); }
+.amc-TFlipTiles--ink .amc-TFlipTiles-fold { display: none; }
+.amc-TFlipTiles--ink .amc-TFlipTiles-link::before { background: var(--amc-tflip-tile); box-shadow: none; border: 2px solid var(--amc-tflip-ink); }
+.amc-TFlipTiles--ink .amc-TFlipTiles-item.is-current .amc-TFlipTiles-front { background: var(--amc-tflip-tile); box-shadow: 4px 4px 0 var(--amc-tflip-ink); }
+
+@media (forced-colors: active) {
+  .amc-TFlipTiles-face { border: 1px solid CanvasText; }
+  .amc-TFlipTiles-link[aria-current="page"] .amc-TFlipTiles-front { outline: 3px solid Highlight; }
+}

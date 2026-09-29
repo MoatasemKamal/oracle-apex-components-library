@@ -12,9 +12,9 @@
   "landmarkType": "region",
   "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
   "templateOptions": [
-    { "staticId": "TAB_PRIMARY", "name": "Tab color: primary", "cssClass": "amc-TFolderTab--primary", "sequence": 10, "help": "Folder and tab use the primary palette color; the title switches to the primary contrast color. Without a tab color the folder is manila, mixed from the warning color." },
-    { "staticId": "TAB_SUCCESS", "name": "Tab color: success", "cssClass": "amc-TFolderTab--success", "sequence": 20, "help": "Folder and tab use the success palette color, for approved or closed files." },
-    { "staticId": "TAB_DANGER", "name": "Tab color: danger", "cssClass": "amc-TFolderTab--danger", "sequence": 30, "help": "Folder and tab use the danger palette color, for escalations and blocked files." },
+    { "staticId": "TAB_PRIMARY", "name": "Primary tab", "cssClass": "amc-TFolderTab--primary", "sequence": 10, "help": "Folder and tab use the primary palette color; the title switches to the primary contrast color. Without a tab color the folder is manila, mixed from the warning color." },
+    { "staticId": "TAB_SUCCESS", "name": "Success tab", "cssClass": "amc-TFolderTab--success", "sequence": 20, "help": "Folder and tab use the success palette color, for approved or closed files." },
+    { "staticId": "TAB_DANGER", "name": "Danger tab", "cssClass": "amc-TFolderTab--danger", "sequence": 30, "help": "Folder and tab use the danger palette color, for escalations and blocked files." },
     { "staticId": "STACKED", "name": "Stacked papers", "cssClass": "amc-TFolderTab--stacked", "sequence": 40, "help": "Two more sheets peek out at slight angles behind the paper, for files that hold several documents." },
     { "staticId": "INK", "name": "Ink outline", "cssClass": "amc-TFolderTab--ink", "sequence": 50, "help": "Bold neo-brutal look: 2px ink borders on folder, tab and paper and a hard offset shadow. The ink follows the theme text color, so it inverts in dark styles." },
     { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TFolderTab--noPadding", "sequence": 60, "help": "Removes side padding so reports and grids run edge to edge on the paper." }

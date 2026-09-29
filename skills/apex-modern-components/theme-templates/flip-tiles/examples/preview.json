@@ -1,0 +1,23 @@
+{
+  "samples": [
+    { "title": "Employee self-service", "options": [], "entries": [
+      { "text": "Leave", "link": "#", "icon": "fa-plane", "a01": "12 days of annual leave left. Requests go to your line manager.", "a02": "Request leave" },
+      { "text": "Payslips", "link": "#", "icon": "fa-money", "a01": "Download payslips and yearly salary statements.", "a02": "View payslips", "current": true },
+      { "text": "Expenses", "link": "#", "icon": "fa-credit-card", "a01": "Claim travel and business expenses with receipts.", "a02": "New claim" },
+      { "text": "Training", "link": "#", "icon": "fa-graduation-cap", "a01": "Mandatory courses due this quarter: 2." },
+      { "text": "IT help", "link": "#", "icon": "fa-life-ring", "a01": "Report a laptop, access or email issue.", "a02": "Open ticket" },
+      { "text": "Directory", "link": "#", "icon": "fa-address-book-o", "a01": "Find colleagues, teams and office locations." }
+    ] },
+    { "title": "Customer portal, palette and compact", "options": ["amc-TFlipTiles--palette", "amc-TFlipTiles--compact"], "entries": [
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "a01": "Track open orders and deliveries.", "a02": "Track" },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "3 invoices due this month.", "a02": "Pay now" },
+      { "text": "Returns", "link": "#", "icon": "fa-undo", "a01": "Return an item within 30 days." },
+      { "text": "Support", "link": "#", "icon": "fa-comments-o", "a01": "Chat with our service team." }
+    ] },
+    { "title": "Warehouse onboarding, ink, vertical flip", "options": ["amc-TFlipTiles--ink", "amc-TFlipTiles--flipX"], "entries": [
+      { "text": "Safety briefing", "link": "#", "icon": "fa-shield", "a01": "Watch before your first shift on the floor.", "a02": "Start", "current": true },
+      { "text": "Scanner setup", "link": "#", "icon": "fa-barcode", "a01": "Pair your handheld scanner with Dock 4.", "a02": "Set up" },
+      { "text": "Shift rota", "link": "#", "icon": "fa-calendar", "a01": "Your shifts for the next two weeks." }
+    ] }
+  ]
+}

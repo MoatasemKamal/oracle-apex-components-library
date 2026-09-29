@@ -1,0 +1,29 @@
+{
+  "samples": [
+    { "title": "Sales workspace hub", "options": [], "entries": [
+      { "text": "Sales Home", "link": "#", "icon": "fa-home", "a01": "Q3 · 82% of target" },
+      { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "a01": "128 open", "current": true },
+      { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "14 overdue" },
+      { "text": "Customers", "link": "#", "icon": "fa-users", "a01": "2,340 active" },
+      { "text": "Approvals", "link": "#", "icon": "fa-check-square-o", "a01": "6 waiting" },
+      { "text": "Shipments", "link": "#", "icon": "fa-truck", "a01": "31 in transit" },
+      { "text": "Returns", "link": "#", "icon": "fa-undo", "a01": "3 new" },
+      { "text": "Reports", "link": "#", "icon": "fa-bar-chart" }
+    ] },
+    { "title": "HR self-service, labels always on, calm", "options": ["amc-TOrbitLauncher--labels", "amc-TOrbitLauncher--calm", "amc-TOrbitLauncher--success"], "entries": [
+      { "text": "My HR", "link": "#", "icon": "fa-user-circle", "a01": "Welcome back" },
+      { "text": "Leave", "link": "#", "icon": "fa-calendar", "a01": "12 days left" },
+      { "text": "Payslips", "link": "#", "icon": "fa-money" },
+      { "text": "Expenses", "link": "#", "icon": "fa-credit-card", "a01": "2 drafts" },
+      { "text": "Training", "link": "#", "icon": "fa-graduation-cap" },
+      { "text": "Directory", "link": "#", "icon": "fa-address-book-o" }
+    ] },
+    { "title": "Warehouse, compact and still", "options": ["amc-TOrbitLauncher--compact", "amc-TOrbitLauncher--still"], "entries": [
+      { "text": "Dock 4", "link": "#", "icon": "fa-cubes", "a01": "Shift B" },
+      { "text": "Receiving", "link": "#", "icon": "fa-download", "a01": "9 ASNs" },
+      { "text": "Put-away", "link": "#", "icon": "fa-archive" },
+      { "text": "Picking", "link": "#", "icon": "fa-hand-paper-o", "a01": "42 lines" },
+      { "text": "Cycle count", "link": "#", "icon": "fa-list-ol" }
+    ] }
+  ]
+}

@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-speed-dial.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-speed-dial.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

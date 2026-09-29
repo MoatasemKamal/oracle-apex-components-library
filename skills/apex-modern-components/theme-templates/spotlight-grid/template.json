@@ -1,0 +1,22 @@
+{
+  "kind": "list",
+  "name": "AMC Spotlight Grid",
+  "staticId": "AMC_TPL_SPOTLIGHT_GRID",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "A tile grid lit by one pointer spotlight that travels across all tiles at once, revealing a dot pattern and making nearby tile edges glow, while the current tile keeps a soft resting glow.",
+  "useFor": "Launchpads, module menus and settings hubs with 3 to 16 entries that each deserve a short description.",
+  "keywords": ["spotlight", "glow", "launchpad", "tiles", "magic card", "pointer", "hover"],
+  "helpText": "List template for a List region. Each entry is a tile with its icon, text, a description from User Defined Attribute 1 and an optional tag from Attribute 2, for example 'New' or '3 due'. The optional JavaScript file moves the spotlight with the pointer across the whole grid; without it, or on touch screens and under reduced motion, tiles light up statically on hover. Keyboard focus lights the focused tile and shows a focus ring. The current entry keeps a soft glow at rest. Template options: Intense light, Compact tiles, Rows, Night tiles.",
+  "attributes": { "a01": "Description", "a02": "Tag" },
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "INTENSE", "name": "Intense light", "cssClass": "amc-TSpotlightGrid--intense", "sequence": 10, "help": "A larger, brighter spotlight and a thicker glowing edge." },
+    { "staticId": "COMPACT", "name": "Compact tiles", "cssClass": "amc-TSpotlightGrid--compact", "sequence": 20, "help": "Smaller tiles with the icon beside the text; descriptions are hidden." },
+    { "staticId": "ROWS", "name": "Rows", "cssClass": "amc-TSpotlightGrid--rows", "sequence": 30, "help": "One full-width row per entry, for side columns and settings menus." },
+    { "staticId": "NIGHT", "name": "Night tiles", "cssClass": "amc-TSpotlightGrid--night", "sequence": 40, "help": "Inverts the tiles to a dark surface derived from the theme text color, where the spotlight is most visible. In a dark theme style the tiles become light." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

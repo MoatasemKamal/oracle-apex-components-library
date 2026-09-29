@@ -1,0 +1,23 @@
+{
+  "kind": "list",
+  "name": "AMC Orbit Launcher",
+  "staticId": "AMC_TPL_ORBIT_LAUNCHER",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "An app launcher where the first list entry is a glowing hub and the other entries orbit it on a slowly turning ring with a travelling comet, instead of a flat grid of tiles.",
+  "useFor": "Home page and launchpad lists with 4 to 12 entries: module shortcuts, quick actions, a workspace hub.",
+  "keywords": ["orbit", "launcher", "launchpad", "home page", "hub", "radial menu", "quick actions"],
+  "helpText": "List template for a static or dynamic List region. The first entry becomes the hub in the center (use it for the app home or the main workspace); entries 2 to 13 orbit it, in list order, clockwise from the top. User Defined Attribute 1 is a short caption, for example '14 pending'. The orbit pauses while the pointer is over an entry or an entry has keyboard focus; the entry grows and shows its label and caption. Keyboard order follows the list order. On touch screens labels are always visible. Containers narrower than 360px and users who prefer reduced motion get a tidy icon grid with the hub as a banner. Template options: Calm orbit, Still orbit, Always show labels, Compact, Success color.",
+  "attributes": { "a01": "Caption" },
+  "source": { "url": "https://github.com/magicuidesign/magicui", "author": "Magic UI", "license": "MIT" },
+  "templateOptions": [
+    { "staticId": "CALM", "name": "Calm orbit", "cssClass": "amc-TOrbitLauncher--calm", "sequence": 10, "help": "Halves the orbit speed for pages people keep open all day." },
+    { "staticId": "STILL", "name": "Still orbit", "cssClass": "amc-TOrbitLauncher--still", "sequence": 20, "help": "Keeps the orbit layout but stops rotation and the hub pulse; labels are always shown." },
+    { "staticId": "LABELS", "name": "Always show labels", "cssClass": "amc-TOrbitLauncher--labels", "sequence": 30, "help": "Shows every label and caption under its entry, not only on hover or focus, and enlarges the orbit a little to fit them." },
+    { "staticId": "COMPACT", "name": "Compact", "cssClass": "amc-TOrbitLauncher--compact", "sequence": 40, "help": "Limits the orbit to 340px, for side columns and dashboards." },
+    { "staticId": "SUCCESS", "name": "Success color", "cssClass": "amc-TOrbitLauncher--success", "sequence": 50, "help": "Hub, comet and current entry use the success palette color instead of primary." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

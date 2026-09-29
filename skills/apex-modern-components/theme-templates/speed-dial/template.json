@@ -1,0 +1,61 @@
+{
+  "kind": "list",
+  "name": "AMC Speed Dial",
+  "staticId": "AMC_TPL_SPEED_DIAL",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "motion",
+  "description": "A floating action button that springs the list entries out as mini buttons in a stack or a quarter arc, with labels sliding out beside them, instead of a static button bar.",
+  "useFor": "Quick action lists of 2 to 10 entries: create shortcuts on a dashboard, record actions on a detail page, a page-wide create menu on page 0 with Float on page.",
+  "keywords": [
+    "speed dial",
+    "floating action button",
+    "fab",
+    "quick actions",
+    "create menu",
+    "radial"
+  ],
+  "helpText": "List template for a List region. The entries open from a floating action button: pointer hover opens the dial, a click or tap on the button keeps it open, and keyboard users press Enter or Space on the button and then Tab through the actions. The first entry sits closest to the button. User Defined Attribute 1 is an optional hint under the label, for example 'Ctrl+Alt+N' or '3 drafts'. The button text 'Quick actions' lives in Before List Entry; edit it there to translate it. The optional JavaScript file closes the dial with Escape, on a click outside and when focus leaves it. Template options set the corner (Start corner, Top corner), the direction (Quarter arc), Icon only button and Float on page. By default the region reserves room for the fan; Float on page pins the button to the browser window corner instead. Under reduced motion the dial opens without movement; browsers without CSS trigonometry show the arc as a stack; on touch screens the arc falls back to the stack so labels stay visible.",
+  "attributes": {
+    "a01": "Hint"
+  },
+  "templateOptions": [
+    {
+      "staticId": "ARC",
+      "name": "Quarter arc",
+      "cssClass": "amc-TSpeedDial--arc",
+      "sequence": 10,
+      "help": "Spreads the actions on a quarter circle around the button; labels appear on hover and focus. Touch screens keep the stack."
+    },
+    {
+      "staticId": "START",
+      "name": "Start corner",
+      "cssClass": "amc-TSpeedDial--start",
+      "sequence": 20,
+      "help": "Places the button in the inline-start corner (left in LTR, right in RTL); the fan opens toward the end."
+    },
+    {
+      "staticId": "TOP",
+      "name": "Top corner",
+      "cssClass": "amc-TSpeedDial--top",
+      "sequence": 30,
+      "help": "Places the button at the top and opens the fan downward."
+    },
+    {
+      "staticId": "ICON_ONLY",
+      "name": "Icon only button",
+      "cssClass": "amc-TSpeedDial--iconOnly",
+      "sequence": 40,
+      "help": "Round button without the visible text; the text stays available to screen readers."
+    },
+    {
+      "staticId": "FIXED",
+      "name": "Float on page",
+      "cssClass": "amc-TSpeedDial--fixed",
+      "sequence": 50,
+      "help": "Pins the button to the corner of the browser window above the page and removes the reserved space. Use it once per page, for example on page 0."
+    }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}
