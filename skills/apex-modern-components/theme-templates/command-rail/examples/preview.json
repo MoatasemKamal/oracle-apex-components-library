@@ -1,0 +1,85 @@
+{
+  "samples": [
+    {
+      "title": "Expanded, current page Orders in Sales",
+      "options": [],
+      "entries": [
+        { "text": "Dashboard", "link": "#dashboard", "icon": "fa-dashboard", "a01": "home overview kpi" },
+        { "text": "Sales", "link": "#sales", "icon": "fa-line-chart", "current": true, "children": [
+          { "text": "Quotes", "link": "#quotes", "a01": "offers estimates proposals" },
+          { "text": "Orders", "link": "#orders", "current": true, "a01": "sales orders purchase po", "a02": "128" },
+          { "text": "Customers", "link": "#customers", "a01": "accounts clients contacts crm" }
+        ] },
+        { "text": "Finance", "link": "#finance", "icon": "fa-bank", "a02": "14", "children": [
+          { "text": "Invoices", "link": "#invoices", "a01": "billing bills receivables ar", "a02": "14" },
+          { "text": "Payments", "link": "#payments", "a01": "receipts cash bank" },
+          { "text": "Month-end close", "link": "#month-end", "a01": "period closing accruals" }
+        ] },
+        { "text": "Operations", "link": "#operations", "icon": "fa-cubes", "children": [
+          { "text": "Inventory", "link": "#inventory", "a01": "stock warehouse items" },
+          { "text": "Shipments", "link": "#shipments", "a01": "delivery tracking freight" },
+          { "text": "Suppliers", "link": "#suppliers", "a01": "vendors purchasing" }
+        ] },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "analytics charts" },
+        { "text": "Administration", "link": "#", "icon": "fa-cog", "children": [
+          { "text": "Users", "link": "#users", "a01": "roles access permissions" },
+          { "text": "Settings", "link": "#settings", "a01": "preferences configuration" }
+        ] }
+      ]
+    },
+    {
+      "title": "Icon rail, start collapsed, dark rail",
+      "options": ["amc-TCommandRail--startCollapsed", "amc-TCommandRail--dark"],
+      "entries": [
+        { "text": "Dashboard", "link": "#dashboard", "icon": "fa-dashboard", "a01": "home overview kpi" },
+        { "text": "Sales", "link": "#sales", "icon": "fa-line-chart", "current": true, "children": [
+          { "text": "Quotes", "link": "#quotes", "a01": "offers estimates proposals" },
+          { "text": "Orders", "link": "#orders", "current": true, "a01": "sales orders purchase po", "a02": "128" },
+          { "text": "Customers", "link": "#customers", "a01": "accounts clients contacts crm" }
+        ] },
+        { "text": "Finance", "link": "#finance", "icon": "fa-bank", "a02": "14", "children": [
+          { "text": "Invoices", "link": "#invoices", "a01": "billing bills receivables ar", "a02": "14" },
+          { "text": "Payments", "link": "#payments", "a01": "receipts cash bank" },
+          { "text": "Month-end close", "link": "#month-end", "a01": "period closing accruals" }
+        ] },
+        { "text": "Operations", "link": "#operations", "icon": "fa-cubes", "children": [
+          { "text": "Inventory", "link": "#inventory", "a01": "stock warehouse items" },
+          { "text": "Shipments", "link": "#shipments", "a01": "delivery tracking freight" },
+          { "text": "Suppliers", "link": "#suppliers", "a01": "vendors purchasing" }
+        ] },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "analytics charts" },
+        { "text": "Administration", "link": "#", "icon": "fa-cog", "children": [
+          { "text": "Users", "link": "#users", "a01": "roles access permissions" },
+          { "text": "Settings", "link": "#settings", "a01": "preferences configuration" }
+        ] }
+      ]
+    },
+    {
+      "title": "Compact, accent current group, current page Invoices",
+      "options": ["amc-TCommandRail--compact", "amc-TCommandRail--accentGroup"],
+      "entries": [
+        { "text": "Dashboard", "link": "#dashboard", "icon": "fa-dashboard", "a01": "home overview kpi" },
+        { "text": "Sales", "link": "#sales", "icon": "fa-line-chart", "children": [
+          { "text": "Quotes", "link": "#quotes", "a01": "offers estimates proposals" },
+          { "text": "Orders", "link": "#orders", "a01": "sales orders purchase po", "a02": "128" },
+          { "text": "Customers", "link": "#customers", "a01": "accounts clients contacts crm" }
+        ] },
+        { "text": "Finance", "link": "#finance", "icon": "fa-bank", "current": true, "a02": "14", "children": [
+          { "text": "Invoices", "link": "#invoices", "current": true, "a01": "billing bills receivables ar", "a02": "14" },
+          { "text": "Payments", "link": "#payments", "a01": "receipts cash bank" },
+          { "text": "Month-end close", "link": "#month-end", "a01": "period closing accruals" }
+        ] },
+        { "text": "Operations", "link": "#operations", "icon": "fa-cubes", "children": [
+          { "text": "Inventory", "link": "#inventory", "a01": "stock warehouse items" },
+          { "text": "Shipments", "link": "#shipments", "a01": "delivery tracking freight" },
+          { "text": "Suppliers", "link": "#suppliers", "a01": "vendors purchasing" }
+        ] },
+        { "text": "Reports", "link": "#reports", "icon": "fa-bar-chart", "a01": "analytics charts" },
+        { "text": "Administration", "link": "#", "icon": "fa-cog", "children": [
+          { "text": "Users", "link": "#users", "a01": "roles access permissions" },
+          { "text": "Settings", "link": "#settings", "a01": "preferences configuration" }
+        ] }
+      ]
+    }
+  ]
+}

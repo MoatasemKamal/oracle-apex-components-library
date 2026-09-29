@@ -561,6 +561,64 @@
       "legacySql": "theme-templates/command-list/dist/legacy/amc_tpl_command_list.sql"
     },
     {
+      "slug": "command-rail",
+      "kind": "list",
+      "name": "AMC Command Rail",
+      "staticId": "AMC_TPL_COMMAND_RAIL",
+      "apexlangId": "amc-command-rail",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Side navigation that learns and searches: a Ctrl K search box filters every page and sub page, a star pins pages to the top, recent pages are learned by frecency, groups open smoothly with a glowing line from the current group down to the current page, and it folds into an icon rail with flyouts or a phone bottom sheet.",
+      "useFor": "The application Navigation Menu, side navigation, in User Interface > Navigation Menu, with one level of sub entries: Dashboard; Sales with Quotes, Orders and Customers; Finance with Invoices, Payments and Month-end close; Administration with Users and Settings. It also works in a List region in a Left Column.",
+      "keywords": [
+        "navigation menu",
+        "side navigation",
+        "search",
+        "command",
+        "pinned",
+        "favourites",
+        "recent",
+        "frecency",
+        "icon rail",
+        "flyout",
+        "bottom sheet",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Search keywords",
+        "a02": "Badge"
+      },
+      "templateOptions": [
+        {
+          "name": "Start collapsed",
+          "cssClass": "amc-TCommandRail--startCollapsed"
+        },
+        {
+          "name": "Hide recent",
+          "cssClass": "amc-TCommandRail--noRecent"
+        },
+        {
+          "name": "Hide pins",
+          "cssClass": "amc-TCommandRail--noPins"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TCommandRail--compact"
+        },
+        {
+          "name": "Accent current group",
+          "cssClass": "amc-TCommandRail--accentGroup"
+        },
+        {
+          "name": "Dark rail",
+          "cssClass": "amc-TCommandRail--dark"
+        }
+      ],
+      "apexlang": "theme-templates/command-rail/dist/apexlang",
+      "legacySql": "theme-templates/command-rail/dist/legacy/amc_tpl_command_rail.sql"
+    },
+    {
       "slug": "constellation-map",
       "kind": "list",
       "name": "AMC Constellation Map",
@@ -1649,6 +1707,65 @@
       ],
       "apexlang": "theme-templates/side-rail/dist/apexlang",
       "legacySql": "theme-templates/side-rail/dist/legacy/amc_tpl_side_rail.sql"
+    },
+    {
+      "slug": "smart-nav-bar",
+      "kind": "list",
+      "name": "AMC Smart Nav Bar",
+      "staticId": "AMC_TPL_SMART_NAV_BAR",
+      "apexlangId": "amc-smart-nav-bar",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A calm, compact pill cluster for the application Navigation Bar that knows what each entry is for: a search button that opens a command palette over the page's navigation menu, a notification bell with a remembered unread state and a feed dropdown, a help menu and an initials avatar with a user menu, and it folds extra entries into that menu by itself when the header runs out of room.",
+      "useFor": "The application Navigation Bar slot, User Interface > Navigation Bar > List Template, with the Navigation Bar list: Search, Notifications with one sub entry per notification from a dynamic list, Help as a link or with sub entries, and the user entry, usually &APP_USER., with Profile, Language, Preferences and Sign out as sub entries. It also works in a List region placed in the header.",
+      "keywords": [
+        "navigation bar",
+        "header",
+        "user menu",
+        "avatar",
+        "notifications",
+        "bell",
+        "badge",
+        "search",
+        "command palette",
+        "ctrl k",
+        "overflow",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Role - search, notifications, help, user - or the notification key on sub entries",
+        "a02": "Badge count, or read on a notification sub entry",
+        "a03": "Secondary text - email or time"
+      },
+      "templateOptions": [
+        {
+          "name": "Labels visible",
+          "cssClass": "amc-TSmartNavBar--labels"
+        },
+        {
+          "name": "Flat buttons",
+          "cssClass": "amc-TSmartNavBar--flat"
+        },
+        {
+          "name": "Show user name",
+          "cssClass": "amc-TSmartNavBar--userName"
+        },
+        {
+          "name": "Pulse on new notifications",
+          "cssClass": "amc-TSmartNavBar--pulse"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TSmartNavBar--compact"
+        },
+        {
+          "name": "Search field",
+          "cssClass": "amc-TSmartNavBar--searchField"
+        }
+      ],
+      "apexlang": "theme-templates/smart-nav-bar/dist/apexlang",
+      "legacySql": "theme-templates/smart-nav-bar/dist/legacy/amc_tpl_smart_nav_bar.sql"
     },
     {
       "slug": "speed-dial",

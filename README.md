@@ -39,6 +39,17 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## App navigation (Navigation Menu and Navigation Bar)
+
+Two templates for the application-level slots in User Interface, set once for the whole app:
+
+| Template | Slot | What it does |
+|---|---|---|
+| [Command Rail](skills/apex-modern-components/theme-templates/command-rail) | Navigation Menu | Side menu with search (Ctrl K and /), pinned pages, learned recent pages, smooth groups with a lit path to the current page, icon rail with flyouts that follows the Universal Theme collapse state, full keyboard model, and a bottom sheet on phones |
+| [Smart Nav Bar](skills/apex-modern-components/theme-templates/smart-nav-bar) | Navigation Bar | Role-based cluster of at most four items: command-palette search, notification bell with a feed and persistent read state, help, and an avatar user menu; extras overflow into the user menu |
+
+Both share one Ctrl K: the nav bar's search hands over to the Command Rail when both are present.
+
 ## Theme Styles (13 whole-app looks)
 
 Universal Theme **styles**, like Vita or Redwood, that restyle native APEX and every component and

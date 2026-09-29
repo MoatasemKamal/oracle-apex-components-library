@@ -1,0 +1,216 @@
+listTemplate amc-command-rail (
+    name: AMC Command Rail
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TCommandRail #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-pin="Pin" data-pinned="Pinned:" data-unpinned="Removed from Pinned:" data-results="pages found" data-cleared="Recent pages cleared" data-collapse="Collapse navigation" data-expand="Expand navigation" data-sheet="Navigation menu" data-mac-key="&#8984; K">
+            <div class="amc-TCommandRail-panel" id="#LIST_ID#_panel">
+            <div class="amc-TCommandRail-handleBar" hidden><button type="button" class="amc-TCommandRail-handle" aria-label="Close menu"></button></div>
+            <div class="amc-TCommandRail-head" hidden>
+            <button type="button" class="amc-TCommandRail-searchBtn" aria-label="Search navigation"><span class="amc-TCommandRail-btnIcon fa fa-search" aria-hidden="true"></span></button>
+            <div class="amc-TCommandRail-search" role="search">
+            <span class="amc-TCommandRail-searchIcon fa fa-search" aria-hidden="true"></span>
+            <input type="search" class="amc-TCommandRail-input" placeholder="Search&#8230;" aria-label="Search navigation" autocomplete="off" spellcheck="false">
+            <kbd class="amc-TCommandRail-kbd" aria-hidden="true">Ctrl K</kbd>
+            </div>
+            <button type="button" class="amc-TCommandRail-collapse" aria-label="Collapse navigation" hidden><span class="amc-TCommandRail-btnIcon amc-TCommandRail-collapseIcon fa fa-angle-double-left" aria-hidden="true"></span></button>
+            </div>
+            <div class="amc-TCommandRail-section amc-TCommandRail-section--pins" hidden>
+            <p class="amc-TCommandRail-heading" id="#LIST_ID#_pinsHead">Pinned</p>
+            <ul class="amc-TCommandRail-pins" aria-labelledby="#LIST_ID#_pinsHead"></ul>
+            </div>
+            <div class="amc-TCommandRail-section amc-TCommandRail-section--recent" hidden>
+            <p class="amc-TCommandRail-heading" id="#LIST_ID#_recentHead">Recent</p>
+            <button type="button" class="amc-TCommandRail-clear">Clear<span class="amc-TCommandRail-srOnly"> recent pages</span></button>
+            <ul class="amc-TCommandRail-recent" aria-labelledby="#LIST_ID#_recentHead"></ul>
+            </div>
+            <ul class="amc-TCommandRail-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <p class="amc-TCommandRail-empty" hidden>No pages match your search</p>
+            </div>
+            <div class="amc-TCommandRail-dock">
+            <button type="button" class="amc-TCommandRail-dockSearch" aria-label="Search navigation"><span class="amc-TCommandRail-btnIcon fa fa-search" aria-hidden="true"></span></button>
+            <ul class="amc-TCommandRail-dockPins"></ul>
+            <button type="button" class="amc-TCommandRail-menu" aria-expanded="false" aria-controls="#LIST_ID#_panel"><span class="amc-TCommandRail-btnIcon fa fa-bars" aria-hidden="true"></span><span class="amc-TCommandRail-menuLabel">Menu</span></button>
+            </div>
+            <div class="amc-TCommandRail-backdrop"></div>
+            <div class="amc-TCommandRail-flyout" role="group" hidden></div>
+            <span class="amc-TCommandRail-tip" aria-hidden="true" hidden></span>
+            <p class="amc-TCommandRail-status" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TCommandRail-item is-current"><a class="amc-TCommandRail-link" href="#LINK#" aria-current="page"><span class="amc-TCommandRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandRail-label">#TEXT#</span><span class="amc-TCommandRail-badge">#A02#</span></a><span class="amc-TCommandRail-keywords" hidden>#A01#</span></li>
+            ```
+        currentWithSublist:
+            ```html
+            <li class="amc-TCommandRail-item amc-TCommandRail-item--group is-current"><a class="amc-TCommandRail-link" href="#LINK#"><span class="amc-TCommandRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandRail-label">#TEXT#</span><span class="amc-TCommandRail-badge">#A02#</span></a><span class="amc-TCommandRail-keywords" hidden>#A01#</span><details class="amc-TCommandRail-group" open><summary class="amc-TCommandRail-toggle"><span class="amc-TCommandRail-srOnly">Show pages in #TEXT#</span></summary>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TCommandRail-item"><a class="amc-TCommandRail-link" href="#LINK#"><span class="amc-TCommandRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandRail-label">#TEXT#</span><span class="amc-TCommandRail-badge">#A02#</span></a><span class="amc-TCommandRail-keywords" hidden>#A01#</span></li>
+            ```
+        noncurrentWithSublist:
+            ```html
+            <li class="amc-TCommandRail-item amc-TCommandRail-item--group"><a class="amc-TCommandRail-link" href="#LINK#"><span class="amc-TCommandRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandRail-label">#TEXT#</span><span class="amc-TCommandRail-badge">#A02#</span></a><span class="amc-TCommandRail-keywords" hidden>#A01#</span><details class="amc-TCommandRail-group"><summary class="amc-TCommandRail-toggle"><span class="amc-TCommandRail-srOnly">Show pages in #TEXT#</span></summary>
+            ```
+    }
+    sublist {
+        beforeEntries:
+            ```html
+            <ul class="amc-TCommandRail-sub">
+            ```
+        afterEntries:
+            ```html
+            </ul></details></li>
+            ```
+    }
+    sublistEntry {
+        current:
+            ```html
+            <li class="amc-TCommandRail-item amc-TCommandRail-item--sub is-current"><a class="amc-TCommandRail-link amc-TCommandRail-link--sub" href="#LINK#" aria-current="page"><span class="amc-TCommandRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandRail-label">#TEXT#</span><span class="amc-TCommandRail-badge">#A02#</span></a><span class="amc-TCommandRail-keywords" hidden>#A01#</span></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TCommandRail-item amc-TCommandRail-item--sub"><a class="amc-TCommandRail-link amc-TCommandRail-link--sub" href="#LINK#"><span class="amc-TCommandRail-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TCommandRail-label">#TEXT#</span><span class="amc-TCommandRail-badge">#A02#</span></a><span class="amc-TCommandRail-keywords" hidden>#A01#</span></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-command-rail.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-command-rail.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Search keywords
+        a02: Badge
+    }
+    advanced {
+        staticId: AMC_TPL_COMMAND_RAIL
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for the application Navigation Menu, side navigation. Every entry is a real link; the current entry gets aria-current=page and its group opens, with a glowing line from the group down to the current page. Groups are native disclosures that open smoothly where ::details-content is supported. Search: the box at the top, hint Ctrl K, filters all entries and sub entries by label and by the keywords in Attribute 1, highlights the match, opens groups that contain matches and announces the count; Enter opens the first match, Escape clears. Ctrl+K or Cmd+K, and / when focus is not in a field, focus it from anywhere on the page. One shortcut per app: window.amcCommandK holds the name of the one AMC template that binds Ctrl+K, set by the first one that loads; the rail claims it as command-rail when it is free and leaves Ctrl+K and / alone when another template, such as the Smart Nav Bar, owns it, and it ignores key presses another handler already called preventDefault on. Whoever owns the shortcut, the rail listens on document for the cancelable CustomEvent amc:command-search, which the Smart Nav Bar dispatches from its search button and shortcut with detail source smart-nav-bar; the rail calls preventDefault and opens its own search, over the page on the icon rail and in the bottom sheet on phones, so the app has one search. Pinned: every link gets a star button on hover or keyboard focus, touch screens show it faintly; pinned pages are listed first under Pinned and can be unpinned there. Recent: each click on a menu link and each load of the current page is counted, a click and the page load it causes count once; every visit weighs 0.5 to the power of its age divided by 10 days, and the top 3 pages that are not pinned and not the current page are listed under Recent, hidden until there is data, with a Clear button. Stored only in this browser's localStorage, per application: amc-tpl-command-rail:<application id>:pins (the pinned link keys), :recent (visit time stamps per link, at most 30 per link, links unused for 120 days are forgotten) and :collapsed (the rail state when the template shows its own toggle). A link key is the link without session, checksum, clear-cache and debug values. Nothing is sent to the server; when storage is blocked the stars and Recent do not appear and everything else works. Icon rail: in the Universal Theme side navigation slot the template follows the page's collapsed and expanded state, the js-navCollapsed and js-navExpanded body classes set by the navigation toggle button, falling back to the width of the navigation column; elsewhere it shows its own collapse button. On the icon rail groups open a flyout with their sub pages on hover or focus, single links show a tooltip, and Ctrl K opens the full menu over the page for searching. Keyboard: Tab reaches the search box and then the menu, which is one tab stop with roving focus; Up and Down move, Home and End jump, Right opens a group or enters it, or opens the flyout on the icon rail, Left closes a group or goes back to the parent, typing letters jumps to the next page starting with them, Enter follows the link, Tab from a row reaches its star, Escape closes a flyout, clears the search, or closes the phone sheet. Phones, viewport up to 640 pixels: the first Command Rail on the page becomes a bottom bar with Search, up to 4 pinned pages and a Menu button; Menu, or a swipe up on the bar, slides up a bottom sheet with the full menu, focus moves into it and stays there; drag the handle down, tap it, tap the backdrop or press Escape to close, and focus returns to Menu. A parent entry whose target is empty, # or javascript:void(0) opens its group instead of navigating. Attribute 1 holds search keywords, never shown; Attribute 2 is a badge such as a count, hidden when empty and shown as a dot on the icon rail. Without JavaScript it is a plain grouped list of links with every group open. Under prefers-reduced-motion nothing slides or grows; forced-colors mode uses system colors for the current page and the lit path. English strings to translate in the template: Search..., Search navigation, Ctrl K, Pinned, Recent, Clear, recent pages, No pages match your search, Show pages in, Menu, Close menu, and the data-pin, data-pinned, data-unpinned, data-results, data-cleared, data-collapse, data-expand, data-sheet and data-mac-key attributes on the wrapper. Universal Theme caveat: the side navigation slot, id t_Body_nav with class t-Body-nav, the toggle button t_Button_navControl and the js-navCollapsed and js-navExpanded body classes were not checked on a live APEX page; if they differ, the rail falls back to the column width or shows its own toggle and stays a working menu. On phones the rail moves itself to the end of the page while it is a bottom sheet when its column is transformed or hidden, and moves back afterwards; the bottom bar covers about 64 pixels at the bottom of the page.
+            ```
+    }
+
+    templateOption amc-command-rail-start-collapsed (
+        name: Start collapsed
+        sequence: 10
+        appearance {
+            cssClasses: amc-TCommandRail--startCollapsed
+        }
+        help {
+            helpText:
+                ```text
+                Shows the icon rail on a user's first visit when the template uses its own collapse button. The user's own choice is remembered afterwards. In the Universal Theme side navigation slot the page template's state wins.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: START_COLLAPSED
+        }
+    )
+
+    templateOption amc-command-rail-hide-recent (
+        name: Hide recent
+        sequence: 20
+        appearance {
+            cssClasses: amc-TCommandRail--noRecent
+        }
+        help {
+            helpText:
+                ```text
+                Neither learns nor shows recent pages, for shared screens and kiosks; nothing is written to storage for them.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: HIDE_RECENT
+        }
+    )
+
+    templateOption amc-command-rail-hide-pins (
+        name: Hide pins
+        sequence: 30
+        appearance {
+            cssClasses: amc-TCommandRail--noPins
+        }
+        help {
+            helpText:
+                ```text
+                Removes the star buttons and the Pinned section.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: HIDE_PINS
+        }
+    )
+
+    templateOption amc-command-rail-compact (
+        name: Compact
+        sequence: 40
+        appearance {
+            cssClasses: amc-TCommandRail--compact
+        }
+        help {
+            helpText:
+                ```text
+                Shorter rows and smaller text for long menus.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COMPACT
+        }
+    )
+
+    templateOption amc-command-rail-accent-group (
+        name: Accent current group
+        sequence: 50
+        appearance {
+            cssClasses: amc-TCommandRail--accentGroup
+        }
+        help {
+            helpText:
+                ```text
+                Places the group that holds the current page on a soft primary-tinted panel.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ACCENT_GROUP
+        }
+    )
+
+    templateOption amc-command-rail-dark-rail (
+        name: Dark rail
+        sequence: 60
+        appearance {
+            cssClasses: amc-TCommandRail--dark
+        }
+        help {
+            helpText:
+                ```text
+                Paints the navigation on a deep surface tinted with the theme's primary color, with light text, in light and dark theme styles.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DARK_RAIL
+        }
+    )
+)
