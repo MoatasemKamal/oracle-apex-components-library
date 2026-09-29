@@ -1,0 +1,135 @@
+{
+  "name": "Motion Loader",
+  "apexlangName": "motionLoader",
+  "staticId": "AMC_MOTION_LOADER",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": [
+    "loader",
+    "spinner",
+    "loading",
+    "busy",
+    "progress",
+    "wait",
+    "animation"
+  ],
+  "description": "Seven animated loading indicators from the Motion Gallery: ring, dots, equalizer bars, orbiting moons, counter-rotating arcs, grid wave and indeterminate bar. Announced to screen readers as a status.",
+  "helpText": "Shows an animated loading indicator in the theme's colors. Show and hide it with a Dynamic Action, or place it in a region that is replaced when data arrives. Users with reduced motion see a still frame.",
+  "source": {
+    "url": "https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html",
+    "author": "Motion Gallery",
+    "license": "Original"
+  },
+  "templateComponent": {
+    "availableAs": [
+      "partial"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": [
+    "files/amc-motion-loader.css"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-motion-loader.css"
+  ],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "ring",
+      "sequence": 10,
+      "helpText": "The loader animation.",
+      "entries": [
+        {
+          "name": "ring",
+          "display": "Ring spinner",
+          "return": "ring",
+          "sequence": 10
+        },
+        {
+          "name": "dots",
+          "display": "Pulsing dots",
+          "return": "dots",
+          "sequence": 20
+        },
+        {
+          "name": "bars",
+          "display": "Equalizer bars",
+          "return": "bars",
+          "sequence": 30
+        },
+        {
+          "name": "orbit",
+          "display": "Orbiting moons",
+          "return": "orbit",
+          "sequence": 40
+        },
+        {
+          "name": "dualRing",
+          "display": "Counter-rotating arcs",
+          "return": "dualRing",
+          "sequence": 50
+        },
+        {
+          "name": "gridWave",
+          "display": "Diagonal grid wave",
+          "return": "gridWave",
+          "sequence": 60
+        },
+        {
+          "name": "indeterminate",
+          "display": "Indeterminate bar",
+          "return": "indeterminate",
+          "sequence": 70
+        }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Accessible Label",
+      "type": "text",
+      "required": false,
+      "escapeMode": "html",
+      "translatable": true,
+      "sequence": 20,
+      "helpText": "What screen readers announce. Defaults to Loading."
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 3,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Leave empty for the medium size.",
+      "entries": [
+        {
+          "name": "small",
+          "display": "Small",
+          "return": "sm",
+          "sequence": 10
+        },
+        {
+          "name": "large",
+          "display": "Large",
+          "return": "lg",
+          "sequence": 20
+        }
+      ]
+    }
+  ]
+}

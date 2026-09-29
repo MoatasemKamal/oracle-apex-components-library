@@ -1,0 +1,175 @@
+plugin motionLoader (
+    name: Motion Loader
+    staticId: AMC_MOTION_LOADER
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+        ]
+        partial:
+            ```html
+            <div class="amc-Motion amc-Motion--loader{if ?SIZE/} amc-Motion--#SIZE#{endif/}" role="status" aria-label="{if ?LABEL/}#LABEL!ATTR#{else/}Loading{endif/}">
+              <div class="amc-Motion-inner" aria-hidden="true">{case STYLE/}
+              {when ring/}<div class="amc-ld-ring"></div>
+              {when dots/}<div class="amc-ld-dots"><i></i><i></i><i></i></div>
+              {when bars/}<div class="amc-ld-bars"><i></i><i></i><i></i><i></i><i></i></div>
+              {when orbit/}<div class="amc-ld-orbit"><i class="amc-ring amc-r1"></i><i class="amc-ring amc-r2"></i><i class="amc-core"></i></div>
+              {when dualRing/}<div class="amc-ld-dual"></div>
+              {when gridWave/}<div class="amc-ld-grid">
+              <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i>
+              <i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i>
+              <i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i>
+              </div>
+              {when indeterminate/}<div class="amc-ld-indet"></div>
+              {otherwise/}<div class="amc-ld-ring"></div>
+              {endcase/}</div>
+            </div>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-motion-loader.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Shows an animated loading indicator in the theme's colors. Show and hide it with a Dynamic Action, or place it in a region that is replaced when data arrives. Users with reduced motion see a still frame.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: ring
+        }
+        help {
+            helpText:
+                ```
+                The loader animation.
+                ```
+        }
+        entry ring (
+            sequence: 10
+            display: Ring spinner
+            return: ring
+        )
+        entry dots (
+            sequence: 20
+            display: Pulsing dots
+            return: dots
+        )
+        entry bars (
+            sequence: 30
+            display: Equalizer bars
+            return: bars
+        )
+        entry orbit (
+            sequence: 40
+            display: Orbiting moons
+            return: orbit
+        )
+        entry dualRing (
+            sequence: 50
+            display: Counter-rotating arcs
+            return: dualRing
+        )
+        entry gridWave (
+            sequence: 60
+            display: Diagonal grid wave
+            return: gridWave
+        )
+        entry indeterminate (
+            sequence: 70
+            display: Indeterminate bar
+            return: indeterminate
+        )
+    )
+    customAttribute LABEL (
+        apexlangName: label
+        attribute: 2
+        name: Accessible Label
+        scope: component
+        type: text
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                What screen readers announce. Defaults to Loading.
+                ```
+        }
+    )
+    customAttribute SIZE (
+        apexlangName: size
+        attribute: 3
+        name: Size
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 30
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Leave empty for the medium size.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small
+            return: sm
+        )
+        entry large (
+            sequence: 20
+            display: Large
+            return: lg
+        )
+    )
+    file "amc-motion-loader.css" (
+        fileName: amc-motion-loader.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

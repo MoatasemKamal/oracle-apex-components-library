@@ -1,0 +1,53 @@
+{
+ "samples": [
+  {
+   "title": "Ring spinner",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "ring"
+   }
+  },
+  {
+   "title": "Pulsing dots",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "dots"
+   }
+  },
+  {
+   "title": "Equalizer bars",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "bars"
+   }
+  },
+  {
+   "title": "Orbiting moons",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "orbit"
+   }
+  },
+  {
+   "title": "Counter-rotating arcs",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "dualRing"
+   }
+  },
+  {
+   "title": "Diagonal grid wave",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "gridWave"
+   }
+  },
+  {
+   "title": "Indeterminate bar",
+   "mode": "partial",
+   "settings": {
+    "STYLE": "indeterminate"
+   }
+  }
+ ]
+}

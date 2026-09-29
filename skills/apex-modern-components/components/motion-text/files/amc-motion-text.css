@@ -1,0 +1,95 @@
+/* APEX Modern Components - Motion Text
+ * Text effects from the Motion Gallery (motion-gallery/index.html). Letters and words
+ * are split by amc-motion-text.js; without JavaScript the plain text still shows. */
+
+.amc-Motion {
+  --amc-fx-1: var(--ut-palette-primary, #0b7d8c);
+  --amc-fx-2: var(--ut-palette-danger, #df5637);
+  --amc-fx-3: var(--ut-palette-warning, #df9c12);
+  --amc-fx-4: var(--ut-palette-success, #3a8d58);
+  --amc-fx-fg: var(--ut-component-text-default-color, #262626);
+  --amc-fx-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-fx-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-fx-surface: var(--ut-component-background-color, #fff);
+  --amc-fx-surface-2: color-mix(in srgb, var(--amc-fx-fg) 9%, transparent);
+  --amc-fx-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-fx-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --amc-fx-h: 172px;
+  --amc-fx-scale: 1;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: var(--amc-fx-h);
+  overflow: hidden;
+  color: var(--amc-fx-fg);
+}
+.amc-Motion--sm { --amc-fx-h: 120px; --amc-fx-scale: .7; }
+.amc-Motion--lg { --amc-fx-h: 240px; --amc-fx-scale: 1.35; }
+.amc-Motion-inner { display: grid; place-items: center; transform: scale(var(--amc-fx-scale)); }
+.amc-Motion--replay { cursor: pointer; }
+.amc-Motion .amc-cv { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+
+/* Text effects size with the component: every effect uses 1em. */
+.amc-Motion--text { --amc-fx-h: auto; min-block-size: 2.2em; padding-block: .35em; font-size: 26px; line-height: 1.2; text-align: center; }
+.amc-Motion--text.amc-Motion--sm { font-size: 18px; }
+.amc-Motion--text.amc-Motion--lg { font-size: 40px; }
+.amc-Motion--text.amc-Motion--xl { font-size: 60px; }
+.amc-Motion--text .amc-Motion-inner { transform: none; max-inline-size: 100%; }
+.amc-Motion--start { text-align: start; place-items: center start; }
+.amc-Motion--start .amc-tx-reveal { text-align: start; }
+.amc-tx-wave, .amc-tx-flip { overflow-wrap: anywhere; }
+
+/* ---- text: typewriter (JS types and deletes) ---- */
+.amc-tx-type { font-weight: 600; font-size: 1em; font-family: var(--amc-fx-mono); }
+.amc-tx-type .amc-caret { display: inline-block; width: 2px; height: 1.15em; margin-inline-start: 2px; vertical-align: -3px; background: var(--amc-fx-1); animation: amc-tx-caret 1s steps(1) infinite; }
+@keyframes amc-tx-caret { 50% { opacity: 0; } }
+
+/* ---- text: wave letters ---- */
+.amc-tx-wave { font-weight: 700; font-size: 1em; letter-spacing: .02em; }
+.amc-tx-wave span { display: inline-block; animation: amc-tx-wave 1.5s ease-in-out infinite; animation-delay: calc(var(--i) * .08s); }
+@keyframes amc-tx-wave { 0%, 60%, 100% { transform: translateY(0); color: var(--amc-fx-fg); } 30% { transform: translateY(-.5em); color: var(--amc-fx-1); } }
+
+/* ---- text: glitch ---- */
+.amc-tx-glitch { position: relative; font-weight: 600; font-size: 1em; font-family: var(--amc-fx-mono); letter-spacing: .04em; animation: amc-tx-glitch 2.2s steps(1) infinite; }
+.amc-tx-glitch::before, .amc-tx-glitch::after { content: attr(data-text); position: absolute; inset: 0; }
+.amc-tx-glitch::before { color: var(--amc-fx-2); animation: amc-tx-glitch-a 2.2s steps(1) infinite; }
+.amc-tx-glitch::after { color: var(--amc-fx-1); animation: amc-tx-glitch-b 2.2s steps(1) infinite; }
+@keyframes amc-tx-glitch { 0%, 100% { transform: none; } 10% { transform: skewX(-10deg); } 13% { transform: none; } 62% { transform: skewX(6deg); } 64% { transform: none; } }
+@keyframes amc-tx-glitch-a {
+  0%, 20%, 58%, 70%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  10% { clip-path: inset(10% 0 60% 0); transform: translate(-5px, 1px); }
+  14% { clip-path: inset(55% 0 18% 0); transform: translate(4px, -1px); }
+  62% { clip-path: inset(30% 0 42% 0); transform: translate(6px, 0); }
+}
+@keyframes amc-tx-glitch-b {
+  0%, 22%, 60%, 72%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+  11% { clip-path: inset(62% 0 8% 0); transform: translate(5px, 1px); }
+  16% { clip-path: inset(20% 0 55% 0); transform: translate(-4px, 0); }
+  64% { clip-path: inset(70% 0 4% 0); transform: translate(-6px, -1px); }
+}
+
+/* ---- text: word reveal ---- */
+.amc-tx-reveal { margin: 0; font-weight: 600; font-size: 1em; line-height: 1.25; text-align: center; }
+.amc-tx-reveal .amc-w { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.amc-tx-reveal .amc-w > span { display: inline-block; animation: amc-tx-reveal 3.4s cubic-bezier(.2, .8, .2, 1) infinite; animation-delay: calc(var(--i) * .12s); }
+@keyframes amc-tx-reveal { 0% { transform: translateY(110%); } 25%, 72% { transform: translateY(0); } 97%, 100% { transform: translateY(-110%); } }
+
+/* ---- text: flip letters ---- */
+.amc-tx-flip { font-weight: 700; font-size: 1em; perspective: 300px; }
+.amc-tx-flip span { display: inline-block; color: var(--amc-fx-4); animation: amc-tx-flip 2.6s ease-in-out infinite; animation-delay: calc(var(--i) * .1s); }
+@keyframes amc-tx-flip { 0% { transform: rotateX(90deg); opacity: 0; } 15%, 70% { transform: rotateX(0); opacity: 1; } 85%, 100% { transform: rotateX(-90deg); opacity: 0; } }
+
+/* ---- text: scramble (JS decodes random glyphs) ---- */
+.amc-tx-scr { font-weight: 600; font-size: 1em; font-family: var(--amc-fx-mono); letter-spacing: .12em; color: var(--amc-fx-2); }
+
+/* Reduced motion: freeze every animation at a representative frame. */
+@media (prefers-reduced-motion: reduce) {
+  .amc-Motion *,
+  .amc-Motion *::before,
+  .amc-Motion *::after {
+    animation-delay: -1.2s !important;
+    animation-play-state: paused !important;
+    transition: none !important;
+  }
+}

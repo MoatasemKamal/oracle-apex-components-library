@@ -1,0 +1,52 @@
+{
+ "samples": [
+  {
+   "title": "Wave letters",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "wave",
+    "TEXT": "MOTION"
+   }
+  },
+  {
+   "title": "Glitch",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "glitch",
+    "TEXT": "GLITCH"
+   }
+  },
+  {
+   "title": "Masked word reveal",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "reveal",
+    "TEXT": "Reveal every word in turn"
+   }
+  },
+  {
+   "title": "3D letter flip",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "flip",
+    "TEXT": "FLIP IT"
+   }
+  },
+  {
+   "title": "Typewriter",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "typewriter",
+    "TEXT": "Hello, motion.|Type. Pause. Delete."
+   }
+  },
+  {
+   "title": "Decode scramble",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "scramble",
+    "TEXT": "DECODE|SIGNAL"
+   }
+  }
+ ]
+}

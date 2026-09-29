@@ -1,0 +1,16 @@
+<div class="amc-Motion amc-Motion--loader{if ?SIZE/} amc-Motion--#SIZE#{endif/}" role="status" aria-label="{if ?LABEL/}#LABEL!ATTR#{else/}Loading{endif/}">
+  <div class="amc-Motion-inner" aria-hidden="true">{case STYLE/}
+  {when ring/}<div class="amc-ld-ring"></div>
+  {when dots/}<div class="amc-ld-dots"><i></i><i></i><i></i></div>
+  {when bars/}<div class="amc-ld-bars"><i></i><i></i><i></i><i></i><i></i></div>
+  {when orbit/}<div class="amc-ld-orbit"><i class="amc-ring amc-r1"></i><i class="amc-ring amc-r2"></i><i class="amc-core"></i></div>
+  {when dualRing/}<div class="amc-ld-dual"></div>
+  {when gridWave/}<div class="amc-ld-grid">
+  <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i>
+  <i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i>
+  <i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i>
+  </div>
+  {when indeterminate/}<div class="amc-ld-indet"></div>
+  {otherwise/}<div class="amc-ld-ring"></div>
+  {endcase/}</div>
+</div>

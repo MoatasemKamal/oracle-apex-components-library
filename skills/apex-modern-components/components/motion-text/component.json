@@ -1,0 +1,154 @@
+{
+  "name": "Motion Text",
+  "apexlangName": "motionText",
+  "staticId": "AMC_MOTION_TEXT",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": [
+    "text",
+    "headline",
+    "typewriter",
+    "glitch",
+    "wave",
+    "reveal",
+    "flip",
+    "scramble",
+    "hero",
+    "animation",
+    "creative"
+  ],
+  "description": "Animated headline text from the Motion Gallery: wave letters, glitch, masked word reveal, 3D letter flip, typewriter and decode scramble. Text can come from a column or page item.",
+  "helpText": "For Typewriter and Scramble, separate several phrases with |, for example Welcome back|Your orders are ready. Screen readers get the plain text; users with reduced motion see it without animation.",
+  "source": {
+    "url": "https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html",
+    "author": "Motion Gallery",
+    "license": "Original"
+  },
+  "templateComponent": {
+    "availableAs": [
+      "partial"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": [
+    "files/amc-motion-text.css",
+    "files/amc-motion-text.js"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-motion-text.css"
+  ],
+  "jsFileUrls": [
+    "#PLUGIN_FILES#amc-motion-text.js"
+  ],
+  "attributes": [
+    {
+      "staticId": "TEXT",
+      "apexlangName": "text",
+      "attribute": 1,
+      "name": "Text",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 10,
+      "helpText": "The text to animate. Static text, &ITEM. substitution or a column."
+    },
+    {
+      "staticId": "EFFECT",
+      "apexlangName": "effect",
+      "attribute": 2,
+      "name": "Effect",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "wave",
+      "sequence": 20,
+      "helpText": "The text animation.",
+      "entries": [
+        {
+          "name": "wave",
+          "display": "Wave letters",
+          "return": "wave",
+          "sequence": 10
+        },
+        {
+          "name": "glitch",
+          "display": "Glitch",
+          "return": "glitch",
+          "sequence": 20
+        },
+        {
+          "name": "reveal",
+          "display": "Masked word reveal",
+          "return": "reveal",
+          "sequence": 30
+        },
+        {
+          "name": "flip",
+          "display": "3D letter flip",
+          "return": "flip",
+          "sequence": 40
+        },
+        {
+          "name": "typewriter",
+          "display": "Typewriter",
+          "return": "typewriter",
+          "sequence": 50
+        },
+        {
+          "name": "scramble",
+          "display": "Decode scramble",
+          "return": "scramble",
+          "sequence": 60
+        }
+      ]
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 3,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Leave empty for the medium size.",
+      "entries": [
+        {
+          "name": "small",
+          "display": "Small",
+          "return": "sm",
+          "sequence": 10
+        },
+        {
+          "name": "large",
+          "display": "Large",
+          "return": "lg",
+          "sequence": 20
+        },
+        {
+          "name": "extraLarge",
+          "display": "Extra large",
+          "return": "xl",
+          "sequence": 30
+        }
+      ]
+    },
+    {
+      "staticId": "ALIGN_START",
+      "apexlangName": "alignStart",
+      "attribute": 4,
+      "name": "Align to Start",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 40,
+      "helpText": "Align the text to the start edge instead of centering it."
+    }
+  ]
+}

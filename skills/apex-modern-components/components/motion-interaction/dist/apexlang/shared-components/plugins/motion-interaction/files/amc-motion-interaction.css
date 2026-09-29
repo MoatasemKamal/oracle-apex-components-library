@@ -1,0 +1,96 @@
+/* APEX Modern Components - Motion Interaction
+ * Interactions from the Motion Gallery. Buttons are native Universal Theme buttons
+ * (t-Button classes), so they look like every other button in the app; this file
+ * only adds the motion. */
+
+.amc-Motion--ix {
+  --amc-fx-1: var(--ut-palette-primary, #0b7d8c);
+  --amc-fx-2: var(--ut-palette-danger, #df5637);
+  --amc-fx-3: var(--ut-palette-warning, #df9c12);
+  --amc-fx-4: var(--ut-palette-success, #3a8d58);
+  --amc-fx-fg: var(--ut-component-text-default-color, #262626);
+  --amc-fx-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-fx-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-fx-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-fx-radius: var(--ut-component-border-radius, .5rem);
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  color: var(--amc-fx-fg);
+}
+
+/* ---- ripple: expanding circle from the click point ---- */
+.amc-ix-ripple { position: relative; overflow: hidden; }
+.amc-ix-ripple .amc-rp { position: absolute; inline-size: 20px; block-size: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: currentColor; opacity: .35; pointer-events: none; animation: amc-ix-ripple .7s ease-out forwards; }
+@keyframes amc-ix-ripple { to { transform: scale(14); opacity: 0; } }
+
+/* ---- magnetic: the runtime springs the button toward the pointer ---- */
+.amc-ix-mag { will-change: transform; }
+
+/* ---- squish: press state with a springy release ---- */
+.amc-ix-squish { transition: transform .55s cubic-bezier(.2, 1.9, .4, 1); }
+.amc-ix-squish:active { transform: scale(1.12, .8); transition-duration: .08s; }
+
+/* ---- tilt: 3D card that follows the pointer ---- */
+.amc-ix-tiltwrap { perspective: 600px; }
+.amc-ix-tilt {
+  position: relative;
+  display: grid;
+  align-content: end;
+  inline-size: 200px;
+  min-block-size: 240px;
+  padding: 1.25rem;
+  border-radius: calc(var(--amc-fx-radius) * 2);
+  background: linear-gradient(145deg, var(--amc-fx-4), var(--amc-fx-1));
+  color: var(--amc-fx-on);
+  text-decoration: none;
+  transform-style: preserve-3d;
+  box-shadow: 0 16px 34px -14px color-mix(in srgb, var(--amc-fx-fg) 45%, transparent);
+}
+.amc-ix-tilt-body { display: grid; gap: .25rem; transform: translateZ(30px); }
+.amc-ix-tilt .amc-glare { position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), var(--amc-fx-glare, rgba(255, 255, 255, .45)), transparent 55%); pointer-events: none; }
+.amc-ix-title { font-size: 1.125rem; font-weight: 700; }
+.amc-ix-text { font-size: .875rem; opacity: .85; }
+
+/* ---- spotlight: radial light follows the pointer ---- */
+.amc-ix-spot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  min-block-size: 180px;
+  overflow: hidden;
+  border: 1px solid var(--amc-fx-line);
+  border-radius: var(--amc-fx-radius);
+  background-image: radial-gradient(var(--amc-fx-line) 1.2px, transparent 1.2px);
+  background-size: 14px 14px;
+}
+.amc-ix-spot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(160px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--amc-fx-3) 45%, transparent), transparent 70%); pointer-events: none; }
+.amc-ix-spot-link { position: relative; display: grid; gap: .25rem; padding: 1rem; color: inherit; text-align: center; text-decoration: none; }
+.amc-ix-spot .amc-ix-text { color: var(--amc-fx-muted); opacity: 1; }
+
+/* ---- like: toggle with pop and particle ring ---- */
+.amc-ix-heart { position: relative; inline-size: 72px; block-size: 72px; padding: 14px; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.amc-ix-heart svg { inline-size: 100%; block-size: 100%; overflow: visible; }
+.amc-ix-heart path { fill: transparent; stroke: var(--amc-fx-fg); stroke-width: 1.6; transition: fill .2s ease, stroke .2s ease; }
+.amc-ix-heart.amc-on path { fill: var(--amc-fx-2); stroke: var(--amc-fx-2); }
+.amc-ix-heart.amc-pop svg { animation: amc-ix-heart .5s cubic-bezier(.2, 1.7, .4, 1); }
+.amc-ix-heart .amc-dot { position: absolute; top: 50%; left: 50%; inline-size: 7px; block-size: 7px; margin: -3.5px; border-radius: 50%; background: var(--amc-fx-3); opacity: 0; }
+.amc-ix-heart .amc-dot:nth-of-type(even) { background: var(--amc-fx-1); }
+.amc-ix-heart.amc-pop .amc-dot { animation: amc-ix-dot .6s ease-out; }
+@keyframes amc-ix-heart { 0% { transform: scale(.3); } 100% { transform: scale(1); } }
+@keyframes amc-ix-dot { from { transform: rotate(var(--a)) translateY(-10px) scale(1); opacity: 1; } to { transform: rotate(var(--a)) translateY(-42px) scale(0); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-ix-squish,
+  .amc-ix-heart path { transition: none; }
+  .amc-ix-heart.amc-pop svg,
+  .amc-ix-heart.amc-pop .amc-dot,
+  .amc-ix-ripple .amc-rp { animation: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-ix-heart.amc-on path { fill: Highlight; stroke: Highlight; }
+}

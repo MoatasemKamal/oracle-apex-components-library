@@ -1,0 +1,11 @@
+<div class="amc-Motion amc-Motion--text{if ?SIZE/} amc-Motion--#SIZE#{endif/}{if ALIGN_START/} amc-Motion--start{endif/}" data-amc-text="#EFFECT#">
+  <div class="amc-Motion-inner">{case EFFECT/}
+  {when wave/}<span class="amc-tx-wave" data-amc-split="letters">#TEXT#</span>
+  {when flip/}<span class="amc-tx-flip" data-amc-split="letters">#TEXT#</span>
+  {when glitch/}<span class="amc-tx-glitch" data-text="#TEXT!ATTR#">#TEXT#</span>
+  {when reveal/}<p class="amc-tx-reveal" data-amc-split="words">#TEXT#</p>
+  {when typewriter/}<span class="amc-tx-type" data-amc-phrases="#TEXT!ATTR#"><span class="amc-tx-text">#TEXT#</span><span class="amc-caret" aria-hidden="true"></span></span>
+  {when scramble/}<span class="amc-tx-scr" data-amc-phrases="#TEXT!ATTR#">#TEXT#</span>
+  {otherwise/}<span>#TEXT#</span>
+  {endcase/}</div>
+</div>

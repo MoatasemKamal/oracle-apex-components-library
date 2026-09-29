@@ -392,6 +392,342 @@
       }
     },
     {
+      "slug": "motion-effect",
+      "name": "Motion Effect",
+      "apexlangName": "motionEffect",
+      "staticId": "AMC_MOTION_EFFECT",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/motionEffect",
+      "apexlangItemType": null,
+      "keywords": [
+        "animation",
+        "motion",
+        "effect",
+        "3d",
+        "particles",
+        "confetti",
+        "fireworks",
+        "physics",
+        "morph",
+        "svg",
+        "decoration",
+        "hero",
+        "empty state",
+        "celebration",
+        "creative"
+      ],
+      "description": "31 decorative animations from the Motion Gallery: physics, shape morphing, SVG paths, 3D transforms and canvas particle effects such as confetti, fireworks and a spiral galaxy.",
+      "settings": [
+        {
+          "apexlangName": "effect",
+          "staticId": "EFFECT",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "bounce",
+            "elastic",
+            "spring",
+            "pendulum",
+            "cradle",
+            "gravity",
+            "jelly",
+            "circleSquare",
+            "blob",
+            "polygon",
+            "polySpin",
+            "goo",
+            "pillRing",
+            "signature",
+            "ants",
+            "check",
+            "pathMorph",
+            "motionPath",
+            "heartbeat",
+            "flipCard",
+            "cube",
+            "carousel",
+            "fold",
+            "coin",
+            "layers",
+            "confetti",
+            "starfield",
+            "fireworks",
+            "network",
+            "flowField",
+            "galaxy"
+          ]
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        },
+        {
+          "apexlangName": "speed",
+          "staticId": "SPEED",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "half",
+            "oneAndHalf",
+            "double"
+          ]
+        },
+        {
+          "apexlangName": "replayOnClick",
+          "staticId": "REPLAY_ON_CLICK",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "text",
+          "staticId": "TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "backText",
+          "staticId": "BACK_TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-effect/README.md",
+        "example": "components/motion-effect/examples",
+        "apexlang": "components/motion-effect/dist/apexlang/shared-components/plugins/motion-effect",
+        "legacySql": "components/motion-effect/dist/legacy/amc_motion_effect.sql"
+      }
+    },
+    {
+      "slug": "motion-interaction",
+      "name": "Motion Interaction",
+      "apexlangName": "motionInteraction",
+      "staticId": "AMC_MOTION_INTERACTION",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/motionInteraction",
+      "apexlangItemType": null,
+      "keywords": [
+        "button",
+        "hover",
+        "click",
+        "ripple",
+        "magnetic",
+        "squish",
+        "tilt",
+        "spotlight",
+        "like",
+        "favorite",
+        "interaction",
+        "micro-interaction",
+        "creative"
+      ],
+      "description": "Interactive micro-animations from the Motion Gallery: ripple, magnetic and squish buttons built on native Universal Theme buttons, a 3D tilt card, a cursor spotlight panel and a like toggle.",
+      "settings": [
+        {
+          "apexlangName": "effect",
+          "staticId": "EFFECT",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "ripple",
+            "magnetic",
+            "squish",
+            "tilt",
+            "spotlight",
+            "like"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "text",
+          "staticId": "TEXT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "liked",
+          "staticId": "LIKED",
+          "type": "sessionStateValue",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-interaction/README.md",
+        "example": "components/motion-interaction/examples",
+        "apexlang": "components/motion-interaction/dist/apexlang/shared-components/plugins/motion-interaction",
+        "legacySql": "components/motion-interaction/dist/legacy/amc_motion_interaction.sql"
+      }
+    },
+    {
+      "slug": "motion-loader",
+      "name": "Motion Loader",
+      "apexlangName": "motionLoader",
+      "staticId": "AMC_MOTION_LOADER",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/motionLoader",
+      "apexlangItemType": null,
+      "keywords": [
+        "loader",
+        "spinner",
+        "loading",
+        "busy",
+        "progress",
+        "wait",
+        "animation"
+      ],
+      "description": "Seven animated loading indicators from the Motion Gallery: ring, dots, equalizer bars, orbiting moons, counter-rotating arcs, grid wave and indeterminate bar. Announced to screen readers as a status.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "ring",
+            "dots",
+            "bars",
+            "orbit",
+            "dualRing",
+            "gridWave",
+            "indeterminate"
+          ]
+        },
+        {
+          "apexlangName": "label",
+          "staticId": "LABEL",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large"
+          ]
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-loader/README.md",
+        "example": "components/motion-loader/examples",
+        "apexlang": "components/motion-loader/dist/apexlang/shared-components/plugins/motion-loader",
+        "legacySql": "components/motion-loader/dist/legacy/amc_motion_loader.sql"
+      }
+    },
+    {
+      "slug": "motion-text",
+      "name": "Motion Text",
+      "apexlangName": "motionText",
+      "staticId": "AMC_MOTION_TEXT",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "partial"
+      ],
+      "apexlangRegionType": "plugin/motionText",
+      "apexlangItemType": null,
+      "keywords": [
+        "text",
+        "headline",
+        "typewriter",
+        "glitch",
+        "wave",
+        "reveal",
+        "flip",
+        "scramble",
+        "hero",
+        "animation",
+        "creative"
+      ],
+      "description": "Animated headline text from the Motion Gallery: wave letters, glitch, masked word reveal, 3D letter flip, typewriter and decode scramble. Text can come from a column or page item.",
+      "settings": [
+        {
+          "apexlangName": "text",
+          "staticId": "TEXT",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "effect",
+          "staticId": "EFFECT",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "wave",
+            "glitch",
+            "reveal",
+            "flip",
+            "typewriter",
+            "scramble"
+          ]
+        },
+        {
+          "apexlangName": "size",
+          "staticId": "SIZE",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "large",
+            "extraLarge"
+          ]
+        },
+        {
+          "apexlangName": "alignStart",
+          "staticId": "ALIGN_START",
+          "type": "yesNo",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/motion-text/README.md",
+        "example": "components/motion-text/examples",
+        "apexlang": "components/motion-text/dist/apexlang/shared-components/plugins/motion-text",
+        "legacySql": "components/motion-text/dist/legacy/amc_motion_text.sql"
+      }
+    },
+    {
       "slug": "progress-meter",
       "name": "Progress Meter",
       "apexlangName": "progressMeter",

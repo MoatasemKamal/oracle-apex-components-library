@@ -1,0 +1,365 @@
+{
+  "name": "Motion Effect",
+  "apexlangName": "motionEffect",
+  "staticId": "AMC_MOTION_EFFECT",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": [
+    "animation",
+    "motion",
+    "effect",
+    "3d",
+    "particles",
+    "confetti",
+    "fireworks",
+    "physics",
+    "morph",
+    "svg",
+    "decoration",
+    "hero",
+    "empty state",
+    "celebration",
+    "creative"
+  ],
+  "description": "31 decorative animations from the Motion Gallery: physics, shape morphing, SVG paths, 3D transforms and canvas particle effects such as confetti, fireworks and a spiral galaxy.",
+  "helpText": "Pick an effect for hero areas, empty states, success pages or celebrations. Colors follow the theme; override the CSS variables --amc-fx-1 to --amc-fx-4 on a parent to rebrand them. Canvas effects pause while off screen, and users with reduced motion see a still frame.",
+  "source": {
+    "url": "https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html",
+    "author": "Motion Gallery",
+    "license": "Original"
+  },
+  "templateComponent": {
+    "availableAs": [
+      "partial"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": [
+    "files/amc-motion-effect.css",
+    "files/amc-motion-effect.js"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-motion-effect.css"
+  ],
+  "jsFileUrls": [
+    "#PLUGIN_FILES#amc-motion-effect.js"
+  ],
+  "attributes": [
+    {
+      "staticId": "EFFECT",
+      "apexlangName": "effect",
+      "attribute": 1,
+      "name": "Effect",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "confetti",
+      "sequence": 10,
+      "helpText": "The animation. Names start with their group: Physics, Morph, SVG, 3D or Particles.",
+      "entries": [
+        {
+          "name": "bounce",
+          "display": "Physics - Squash and bounce",
+          "return": "bounce",
+          "sequence": 10
+        },
+        {
+          "name": "elastic",
+          "display": "Physics - Elastic overshoot",
+          "return": "elastic",
+          "sequence": 20
+        },
+        {
+          "name": "spring",
+          "display": "Physics - Damped spring",
+          "return": "spring",
+          "sequence": 30
+        },
+        {
+          "name": "pendulum",
+          "display": "Physics - Pendulum",
+          "return": "pendulum",
+          "sequence": 40
+        },
+        {
+          "name": "cradle",
+          "display": "Physics - Newton cradle",
+          "return": "cradle",
+          "sequence": 50
+        },
+        {
+          "name": "gravity",
+          "display": "Physics - Gravity drop",
+          "return": "gravity",
+          "sequence": 60
+        },
+        {
+          "name": "jelly",
+          "display": "Physics - Jelly wobble",
+          "return": "jelly",
+          "sequence": 70
+        },
+        {
+          "name": "circleSquare",
+          "display": "Morph - Circle to square",
+          "return": "circleSquare",
+          "sequence": 80
+        },
+        {
+          "name": "blob",
+          "display": "Morph - Liquid blob",
+          "return": "blob",
+          "sequence": 90
+        },
+        {
+          "name": "polygon",
+          "display": "Morph - Triangle, square, hexagon",
+          "return": "polygon",
+          "sequence": 100
+        },
+        {
+          "name": "polySpin",
+          "display": "Morph - Nested rotating polygons",
+          "return": "polySpin",
+          "sequence": 110
+        },
+        {
+          "name": "goo",
+          "display": "Morph - Gooey merge",
+          "return": "goo",
+          "sequence": 120
+        },
+        {
+          "name": "pillRing",
+          "display": "Morph - Pill, dot, ring",
+          "return": "pillRing",
+          "sequence": 130
+        },
+        {
+          "name": "signature",
+          "display": "SVG - Line drawing",
+          "return": "signature",
+          "sequence": 140
+        },
+        {
+          "name": "ants",
+          "display": "SVG - Marching ants",
+          "return": "ants",
+          "sequence": 150
+        },
+        {
+          "name": "check",
+          "display": "SVG - Success check",
+          "return": "check",
+          "sequence": 160
+        },
+        {
+          "name": "pathMorph",
+          "display": "SVG - Path morph",
+          "return": "pathMorph",
+          "sequence": 170
+        },
+        {
+          "name": "motionPath",
+          "display": "SVG - Motion along a path",
+          "return": "motionPath",
+          "sequence": 180
+        },
+        {
+          "name": "heartbeat",
+          "display": "SVG - Heartbeat line",
+          "return": "heartbeat",
+          "sequence": 190
+        },
+        {
+          "name": "flipCard",
+          "display": "3D - Flipping card",
+          "return": "flipCard",
+          "sequence": 200
+        },
+        {
+          "name": "cube",
+          "display": "3D - Tumbling cube",
+          "return": "cube",
+          "sequence": 210
+        },
+        {
+          "name": "carousel",
+          "display": "3D - Carousel ring",
+          "return": "carousel",
+          "sequence": 220
+        },
+        {
+          "name": "fold",
+          "display": "3D - Accordion fold",
+          "return": "fold",
+          "sequence": 230
+        },
+        {
+          "name": "coin",
+          "display": "3D - Coin toss",
+          "return": "coin",
+          "sequence": 240
+        },
+        {
+          "name": "layers",
+          "display": "3D - Exploded layers",
+          "return": "layers",
+          "sequence": 250
+        },
+        {
+          "name": "confetti",
+          "display": "Particles - Confetti burst",
+          "return": "confetti",
+          "sequence": 260
+        },
+        {
+          "name": "starfield",
+          "display": "Particles - Warp starfield",
+          "return": "starfield",
+          "sequence": 270
+        },
+        {
+          "name": "fireworks",
+          "display": "Particles - Fireworks",
+          "return": "fireworks",
+          "sequence": 280
+        },
+        {
+          "name": "network",
+          "display": "Particles - Drifting network",
+          "return": "network",
+          "sequence": 290
+        },
+        {
+          "name": "flowField",
+          "display": "Particles - Flow field",
+          "return": "flowField",
+          "sequence": 300
+        },
+        {
+          "name": "galaxy",
+          "display": "Particles - Spiral galaxy",
+          "return": "galaxy",
+          "sequence": 310
+        }
+      ]
+    },
+    {
+      "staticId": "SIZE",
+      "apexlangName": "size",
+      "attribute": 2,
+      "name": "Size",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "Leave empty for the medium size.",
+      "entries": [
+        {
+          "name": "small",
+          "display": "Small",
+          "return": "sm",
+          "sequence": 10
+        },
+        {
+          "name": "large",
+          "display": "Large",
+          "return": "lg",
+          "sequence": 20
+        }
+      ]
+    },
+    {
+      "staticId": "SPEED",
+      "apexlangName": "speed",
+      "attribute": 3,
+      "name": "Speed",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Playback speed. Leave empty for normal speed.",
+      "entries": [
+        {
+          "name": "half",
+          "display": "Slow, 0.5x",
+          "return": "0.5",
+          "sequence": 10
+        },
+        {
+          "name": "oneAndHalf",
+          "display": "Fast, 1.5x",
+          "return": "1.5",
+          "sequence": 20
+        },
+        {
+          "name": "double",
+          "display": "Very fast, 2x",
+          "return": "2",
+          "sequence": 30
+        }
+      ]
+    },
+    {
+      "staticId": "REPLAY_ON_CLICK",
+      "apexlangName": "replayOnClick",
+      "attribute": 4,
+      "name": "Replay on Click",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 40,
+      "helpText": "Restart the animation when the user clicks it."
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 5,
+      "name": "Accessible Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Describe the animation when it carries meaning, for example Order placed. Leave empty for purely decorative use; it is then hidden from screen readers."
+    },
+    {
+      "staticId": "TEXT",
+      "apexlangName": "text",
+      "attribute": 6,
+      "name": "Front Text",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Flipping card only: text on the front face.",
+      "dependsOn": {
+        "attribute": "EFFECT",
+        "condition": "equals",
+        "value": "flipCard"
+      }
+    },
+    {
+      "staticId": "BACK_TEXT",
+      "apexlangName": "backText",
+      "attribute": 7,
+      "name": "Back Text",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Flipping card only: text on the back face.",
+      "dependsOn": {
+        "attribute": "EFFECT",
+        "condition": "equals",
+        "value": "flipCard"
+      }
+    }
+  ]
+}

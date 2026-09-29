@@ -1,0 +1,151 @@
+{
+  "name": "Motion Interaction",
+  "apexlangName": "motionInteraction",
+  "staticId": "AMC_MOTION_INTERACTION",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": [
+    "button",
+    "hover",
+    "click",
+    "ripple",
+    "magnetic",
+    "squish",
+    "tilt",
+    "spotlight",
+    "like",
+    "favorite",
+    "interaction",
+    "micro-interaction",
+    "creative"
+  ],
+  "description": "Interactive micro-animations from the Motion Gallery: ripple, magnetic and squish buttons built on native Universal Theme buttons, a 3D tilt card, a cursor spotlight panel and a like toggle.",
+  "helpText": "Buttons and cards navigate to Link URL when it is set. The like toggle fires the custom event amc-like-change with detail.liked and detail.value; catch it with a Dynamic Action to save the choice.",
+  "source": {
+    "url": "https://github.com/MoatasemKamal/oracle-apex-components-library/blob/main/motion-gallery/index.html",
+    "author": "Motion Gallery",
+    "license": "Original"
+  },
+  "templateComponent": {
+    "availableAs": [
+      "partial"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": [
+    "files/amc-motion-interaction.css",
+    "files/amc-motion-interaction.js"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-motion-interaction.css"
+  ],
+  "jsFileUrls": [
+    "#PLUGIN_FILES#amc-motion-interaction.js"
+  ],
+  "attributes": [
+    {
+      "staticId": "EFFECT",
+      "apexlangName": "effect",
+      "attribute": 1,
+      "name": "Effect",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "ripple",
+      "sequence": 10,
+      "helpText": "The interaction.",
+      "entries": [
+        {
+          "name": "ripple",
+          "display": "Ripple button",
+          "return": "ripple",
+          "sequence": 10
+        },
+        {
+          "name": "magnetic",
+          "display": "Magnetic button",
+          "return": "magnetic",
+          "sequence": 20
+        },
+        {
+          "name": "squish",
+          "display": "Squish button",
+          "return": "squish",
+          "sequence": 30
+        },
+        {
+          "name": "tilt",
+          "display": "Tilt card",
+          "return": "tilt",
+          "sequence": 40
+        },
+        {
+          "name": "spotlight",
+          "display": "Spotlight panel",
+          "return": "spotlight",
+          "sequence": 50
+        },
+        {
+          "name": "like",
+          "display": "Like toggle",
+          "return": "like",
+          "sequence": 60
+        }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Button label, card or panel title, or the accessible name of the like toggle."
+    },
+    {
+      "staticId": "TEXT",
+      "apexlangName": "text",
+      "attribute": 3,
+      "name": "Text",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Tilt card and spotlight: supporting text. Like toggle: a value passed in the amc-like-change event, for example the record ID."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 4,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Optional target for buttons, tilt card and spotlight, for example from apex_page.get_url. Must be developer-controlled."
+    },
+    {
+      "staticId": "LIKED",
+      "apexlangName": "liked",
+      "attribute": 5,
+      "name": "Liked",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Like toggle only: Y to show it as liked, for example from a column.",
+      "dependsOn": {
+        "attribute": "EFFECT",
+        "condition": "equals",
+        "value": "like"
+      }
+    }
+  ]
+}

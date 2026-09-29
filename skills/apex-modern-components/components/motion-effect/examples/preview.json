@@ -1,0 +1,314 @@
+{
+ "samples": [
+  {
+   "title": "Physics - Squash and bounce",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "bounce",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Physics - Elastic overshoot",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "elastic",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Physics - Damped spring",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "spring",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Physics - Pendulum",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "pendulum",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Physics - Newton cradle",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "cradle",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Physics - Gravity drop",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "gravity",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Physics - Jelly wobble",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "jelly",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Morph - Circle to square",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "circleSquare",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Morph - Liquid blob",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "blob",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Morph - Triangle, square, hexagon",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "polygon",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Morph - Nested rotating polygons",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "polySpin",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Morph - Gooey merge",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "goo",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Morph - Pill, dot, ring",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "pillRing",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "SVG - Line drawing",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "signature",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "SVG - Marching ants",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "ants",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "SVG - Success check",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "check",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "SVG - Path morph",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "pathMorph",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "SVG - Motion along a path",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "motionPath",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "SVG - Heartbeat line",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "heartbeat",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "3D - Flipping card",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "flipCard",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "3D - Tumbling cube",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "cube",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "3D - Carousel ring",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "carousel",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "3D - Accordion fold",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "fold",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "3D - Coin toss",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "coin",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "3D - Exploded layers",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "layers",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Particles - Confetti burst",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "confetti",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Particles - Warp starfield",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "starfield",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Particles - Fireworks",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "fireworks",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Particles - Drifting network",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "network",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Particles - Flow field",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "flowField",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  },
+  {
+   "title": "Particles - Spiral galaxy",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "galaxy",
+    "REPLAY_ON_CLICK": "Y",
+    "TEXT": "Front",
+    "BACK_TEXT": "Back"
+   }
+  }
+ ]
+}

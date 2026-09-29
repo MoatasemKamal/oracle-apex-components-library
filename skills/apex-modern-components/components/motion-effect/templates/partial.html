@@ -1,0 +1,63 @@
+<div class="amc-Motion amc-Motion--effect{if ?SIZE/} amc-Motion--#SIZE#{endif/}{if REPLAY_ON_CLICK/} amc-Motion--replay{endif/}" data-amc-fx="#EFFECT#"{if ?SPEED/} data-amc-speed="#SPEED#"{endif/}{if REPLAY_ON_CLICK/} data-amc-replay="Y"{endif/}{if ?LABEL/} role="img" aria-label="#LABEL!ATTR#"{else/} aria-hidden="true"{endif/}>
+  <div class="amc-Motion-inner">{case EFFECT/}
+  {when bounce/}<div class="amc-ph-bounce"><i class="amc-shadow"></i><i class="amc-ball"></i></div>
+  {when elastic/}<div class="amc-ph-elastic"><i></i></div>
+  {when spring/}<div class="amc-ph-spring">
+  <i class="amc-wall"></i>
+  <svg class="amc-coil" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,10 6,10 11,2 20,18 29,2 38,18 47,2 56,18 65,2 74,18 83,2 89,10 100,10"/></svg>
+  <i class="amc-mass"></i>
+  </div>
+  {when pendulum/}<div class="amc-ph-pend"><i class="amc-arm"></i><i class="amc-pivot"></i></div>
+  {when cradle/}<div class="amc-ph-cradle"><i></i><i></i><i></i><i></i><i></i></div>
+  {when gravity/}<div class="amc-ph-drop"><i class="amc-b"></i><i class="amc-b"></i><i class="amc-b"></i><i class="amc-b"></i><i class="amc-b"></i></div>
+  {when jelly/}<div class="amc-ph-jelly"></div>
+  {when circleSquare/}<div class="amc-mo-cs"></div>
+  {when blob/}<div class="amc-mo-blob"></div>
+  {when polygon/}<div class="amc-mo-poly"></div>
+  {when polySpin/}<svg class="amc-mo-spin" width="130" height="130" viewBox="-62 -62 124 124" aria-hidden="true">
+  <polygon class="amc-p1" points="50,0 25,43.3 -25,43.3 -50,0 -25,-43.3 25,-43.3"/>
+  <polygon class="amc-p2" points="-26,-26 26,-26 26,26 -26,26"/>
+  <polygon class="amc-p3" points="0,-24 20.8,12 -20.8,12"/>
+  </svg>
+  {when goo/}<svg class="amc-fx-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="amc-fx-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></svg><div class="amc-mo-goo"><i></i><i></i><i></i></div>
+  {when pillRing/}<div class="amc-mo-shift"></div>
+  {when signature/}<svg class="amc-sv-sign" width="200" height="100" viewBox="0 0 200 100" aria-hidden="true">
+  <path pathLength="1" d="M10 70 C 30 18, 48 18, 54 58 S 74 92, 84 50 S 108 18, 120 56 S 146 88, 158 46 S 184 28, 190 62"/>
+  </svg>
+  {when ants/}<svg class="amc-sv-ants" width="150" height="100" viewBox="0 0 150 100" aria-hidden="true">
+  <rect x="10" y="10" width="130" height="80" rx="4"/>
+  <circle cx="75" cy="50" r="22"/>
+  <rect class="amc-h" x="6" y="6" width="8" height="8"/><rect class="amc-h" x="136" y="6" width="8" height="8"/>
+  <rect class="amc-h" x="6" y="86" width="8" height="8"/><rect class="amc-h" x="136" y="86" width="8" height="8"/>
+  </svg>
+  {when check/}<svg class="amc-sv-check" width="84" height="84" viewBox="0 0 80 80" aria-hidden="true">
+  <circle class="amc-c" pathLength="1" cx="40" cy="40" r="30" transform="rotate(-90 40 40)"/>
+  <path class="amc-k" pathLength="1" d="M26 41 L36 51 L56 29"/>
+  </svg>
+  {when pathMorph/}<svg class="amc-sv-morph" width="130" height="130" viewBox="-62 -62 124 124" aria-hidden="true">
+  <path d="M0 -40 Z"/>
+  </svg>
+  {when motionPath/}<div class="amc-sv-mp">
+  <svg width="200" height="120" viewBox="0 0 200 120" aria-hidden="true"><path d="M10 90 C 60 0, 140 120, 190 30"/></svg>
+  <i class="amc-mover"></i>
+  </div>
+  {when heartbeat/}<svg class="amc-sv-ecg" width="200" height="100" viewBox="0 0 200 100" aria-hidden="true">
+  <polyline class="amc-base" points="0,55 44,55 52,55 58,40 66,72 74,14 83,88 91,55 124,55 132,55 138,46 144,55 200,55"/>
+  <polyline class="amc-pulse" pathLength="1" points="0,55 44,55 52,55 58,40 66,72 74,14 83,88 91,55 124,55 132,55 138,46 144,55 200,55"/>
+  </svg>
+  {when flipCard/}<div class="amc-d3-flip"><div class="amc-inner"><div class="amc-face amc-front">{if ?TEXT/}#TEXT#{else/}Front{endif/}</div><div class="amc-face amc-back">{if ?BACK_TEXT/}#BACK_TEXT#{else/}Back{endif/}</div></div></div>
+  {when cube/}<div class="amc-d3-cube"><div class="amc-cube"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  {when carousel/}<div class="amc-d3-carousel"><div class="amc-tilt"><div class="amc-ring">
+  <i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i>
+  </div></div></div>
+  {when fold/}<div class="amc-d3-fold"><div class="amc-s amc-s1"><div class="amc-s amc-s2"><div class="amc-s amc-s3"><div class="amc-s amc-s4"></div></div></div></div></div>
+  {when coin/}<div class="amc-d3-coin"><i class="amc-sh"></i><div class="amc-coin"><div class="amc-face amc-front">1</div><div class="amc-face amc-back">★</div></div></div>
+  {when layers/}<div class="amc-d3-stack"><div class="amc-st"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i></div></div>
+  {when confetti/}
+  {when starfield/}
+  {when fireworks/}
+  {when network/}
+  {when flowField/}
+  {when galaxy/}
+  {endcase/}</div>
+</div>

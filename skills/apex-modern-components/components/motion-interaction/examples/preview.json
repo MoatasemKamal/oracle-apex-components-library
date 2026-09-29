@@ -1,0 +1,55 @@
+{
+ "samples": [
+  {
+   "title": "Ripple button",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "ripple",
+    "LABEL": "Click me"
+   }
+  },
+  {
+   "title": "Magnetic button",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "magnetic",
+    "LABEL": "Magnetic"
+   }
+  },
+  {
+   "title": "Squish button",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "squish",
+    "LABEL": "Press"
+   }
+  },
+  {
+   "title": "Tilt card",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "tilt",
+    "LABEL": "Quarterly report",
+    "TEXT": "Revenue up 12%"
+   }
+  },
+  {
+   "title": "Spotlight panel",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "spotlight",
+    "LABEL": "Move your pointer",
+    "TEXT": "The light follows you"
+   }
+  },
+  {
+   "title": "Like toggle",
+   "mode": "partial",
+   "settings": {
+    "EFFECT": "like",
+    "LABEL": "Like",
+    "TEXT": "42"
+   }
+  }
+ ]
+}

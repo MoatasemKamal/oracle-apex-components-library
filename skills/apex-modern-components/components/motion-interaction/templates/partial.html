@@ -1,0 +1,12 @@
+<div class="amc-Motion amc-Motion--ix" data-amc-ix="#EFFECT#">{case EFFECT/}
+  {when ripple/}{if ?LINK_URL/}<a class="t-Button t-Button--hot amc-ix-ripple" href="#LINK_URL#"><span class="t-Button-label">#LABEL#</span></a>{else/}<button class="t-Button t-Button--hot amc-ix-ripple" type="button"><span class="t-Button-label">#LABEL#</span></button>{endif/}
+  {when magnetic/}{if ?LINK_URL/}<a class="t-Button t-Button--hot amc-ix-mag" href="#LINK_URL#"><span class="t-Button-label">#LABEL#</span></a>{else/}<button class="t-Button t-Button--hot amc-ix-mag" type="button"><span class="t-Button-label">#LABEL#</span></button>{endif/}
+  {when squish/}{if ?LINK_URL/}<a class="t-Button t-Button--hot amc-ix-squish" href="#LINK_URL#"><span class="t-Button-label">#LABEL#</span></a>{else/}<button class="t-Button t-Button--hot amc-ix-squish" type="button"><span class="t-Button-label">#LABEL#</span></button>{endif/}
+  {when tilt/}<div class="amc-ix-tiltwrap">{if ?LINK_URL/}<a class="amc-ix-tilt" href="#LINK_URL#">{else/}<div class="amc-ix-tilt">{endif/}<span class="amc-glare" aria-hidden="true"></span><span class="amc-ix-tilt-body"><strong class="amc-ix-title">#LABEL#</strong>{if ?TEXT/}<span class="amc-ix-text">#TEXT#</span>{endif/}</span>{if ?LINK_URL/}</a>{else/}</div>{endif/}</div>
+  {when spotlight/}<div class="amc-ix-spot">{if ?LINK_URL/}<a class="amc-ix-spot-link" href="#LINK_URL#">{else/}<span class="amc-ix-spot-link">{endif/}<strong class="amc-ix-title">#LABEL#</strong>{if ?TEXT/}<span class="amc-ix-text">#TEXT#</span>{endif/}{if ?LINK_URL/}</a>{else/}</span>{endif/}</div>
+  {when like/}<button class="amc-ix-heart{if LIKED/} amc-on{endif/}" type="button" aria-pressed="{if LIKED/}true{else/}false{endif/}" aria-label="#LABEL!ATTR#"{if ?TEXT/} data-amc-value="#TEXT!ATTR#"{endif/}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 4.4 2.5.8-1.3 2.3-2.5 4.4-2.5 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+    <i class="amc-dot" style="--a:0deg"></i><i class="amc-dot" style="--a:45deg"></i><i class="amc-dot" style="--a:90deg"></i><i class="amc-dot" style="--a:135deg"></i>
+    <i class="amc-dot" style="--a:180deg"></i><i class="amc-dot" style="--a:225deg"></i><i class="amc-dot" style="--a:270deg"></i><i class="amc-dot" style="--a:315deg"></i>
+  </button>
+{endcase/}</div>

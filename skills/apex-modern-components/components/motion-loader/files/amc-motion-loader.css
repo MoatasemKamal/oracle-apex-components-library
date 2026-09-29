@@ -1,0 +1,90 @@
+/* APEX Modern Components - Motion Loader
+ * Animations from the Motion Gallery (motion-gallery/index.html), rewritten to use
+ * Universal Theme variables. Override --amc-fx-1..4 on a parent to rebrand them. */
+
+.amc-Motion {
+  --amc-fx-1: var(--ut-palette-primary, #0b7d8c);
+  --amc-fx-2: var(--ut-palette-danger, #df5637);
+  --amc-fx-3: var(--ut-palette-warning, #df9c12);
+  --amc-fx-4: var(--ut-palette-success, #3a8d58);
+  --amc-fx-fg: var(--ut-component-text-default-color, #262626);
+  --amc-fx-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-fx-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-fx-surface: var(--ut-component-background-color, #fff);
+  --amc-fx-surface-2: color-mix(in srgb, var(--amc-fx-fg) 9%, transparent);
+  --amc-fx-on: var(--ut-palette-primary-contrast, #fff);
+  --amc-fx-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --amc-fx-h: 96px;
+  --amc-fx-scale: 1;
+
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: var(--amc-fx-h);
+  overflow: hidden;
+  color: var(--amc-fx-fg);
+}
+.amc-Motion--sm { --amc-fx-h: 120px; --amc-fx-scale: .7; }
+.amc-Motion--lg { --amc-fx-h: 240px; --amc-fx-scale: 1.35; }
+.amc-Motion-inner { display: grid; place-items: center; transform: scale(var(--amc-fx-scale)); }
+.amc-Motion--replay { cursor: pointer; }
+.amc-Motion .amc-cv { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; }
+
+/* ---- loaders: ring ---- */
+.amc-ld-ring { width: 56px; height: 56px; border: 5px solid var(--amc-fx-surface-2); border-top-color: var(--amc-fx-1); border-radius: 50%; animation: amc-ld-ring .9s linear infinite; }
+@keyframes amc-ld-ring { to { transform: rotate(360deg); } }
+
+/* ---- loaders: dots ---- */
+.amc-ld-dots { display: flex; gap: 10px; }
+.amc-ld-dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--amc-fx-2); animation: amc-ld-dots 1.2s ease-in-out infinite; }
+.amc-ld-dots i:nth-child(2) { animation-delay: .15s; }
+.amc-ld-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes amc-ld-dots { 0%, 80%, 100% { transform: scale(.4); opacity: .35; } 40% { transform: scale(1); opacity: 1; } }
+
+/* ---- loaders: bars ---- */
+.amc-ld-bars { display: flex; align-items: flex-end; gap: 5px; height: 52px; }
+.amc-ld-bars i { width: 8px; height: 100%; border-radius: 3px; background: var(--amc-fx-3); transform-origin: bottom; animation: amc-ld-bars 1s ease-in-out infinite; }
+.amc-ld-bars i:nth-child(1) { animation-delay: -.1s; }
+.amc-ld-bars i:nth-child(2) { animation-delay: -.35s; }
+.amc-ld-bars i:nth-child(3) { animation-delay: -.6s; }
+.amc-ld-bars i:nth-child(4) { animation-delay: -.2s; }
+.amc-ld-bars i:nth-child(5) { animation-delay: -.45s; }
+@keyframes amc-ld-bars { 0%, 100% { transform: scaleY(.2); } 50% { transform: scaleY(1); } }
+
+/* ---- loaders: orbit ---- */
+.amc-ld-orbit { position: relative; width: 88px; height: 88px; }
+.amc-ld-orbit .amc-core { position: absolute; inset: 36px; border-radius: 50%; background: var(--amc-fx-1); }
+.amc-ld-orbit .amc-ring { position: absolute; border: 1px dashed var(--amc-fx-line); border-radius: 50%; }
+.amc-ld-orbit .amc-r1 { inset: 0; animation: amc-ld-orbit 1.8s linear infinite; }
+.amc-ld-orbit .amc-r2 { inset: 18px; animation: amc-ld-orbit 1.1s linear infinite reverse; }
+.amc-ld-orbit .amc-ring::before { content: ""; position: absolute; top: -6px; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--amc-fx-2); }
+.amc-ld-orbit .amc-r2::before { top: -4px; width: 8px; height: 8px; margin-left: -4px; background: var(--amc-fx-3); }
+@keyframes amc-ld-orbit { to { transform: rotate(360deg); } }
+
+/* ---- loaders: dual ring ---- */
+.amc-ld-dual { position: relative; width: 64px; height: 64px; }
+.amc-ld-dual::before, .amc-ld-dual::after { content: ""; position: absolute; border: 4px solid transparent; border-radius: 50%; }
+.amc-ld-dual::before { inset: 0; border-top-color: var(--amc-fx-4); border-bottom-color: var(--amc-fx-4); animation: amc-ld-dual 1.3s cubic-bezier(.6, .1, .4, .9) infinite; }
+.amc-ld-dual::after { inset: 13px; border-left-color: var(--amc-fx-2); border-right-color: var(--amc-fx-2); animation: amc-ld-dual .8s linear infinite reverse; }
+@keyframes amc-ld-dual { to { transform: rotate(360deg); } }
+
+/* ---- loaders: grid wave ---- */
+.amc-ld-grid { display: grid; grid-template-columns: repeat(3, 16px); gap: 5px; }
+.amc-ld-grid i { width: 16px; height: 16px; border-radius: 3px; background: var(--amc-fx-1); animation: amc-ld-grid 1.3s ease-in-out infinite; animation-delay: calc(var(--i) * .12s); }
+@keyframes amc-ld-grid { 0%, 70%, 100% { transform: scale(1); opacity: 1; } 35% { transform: scale(.2); opacity: .3; } }
+
+/* ---- loaders: indeterminate bar ---- */
+.amc-ld-indet { position: relative; width: 150px; height: 6px; overflow: hidden; border-radius: 3px; background: var(--amc-fx-surface-2); }
+.amc-ld-indet::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; border-radius: 3px; background: var(--amc-fx-4); animation: amc-ld-indet 1.4s cubic-bezier(.65, .05, .35, 1) infinite; }
+@keyframes amc-ld-indet { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* Reduced motion: freeze every animation at a representative frame. */
+@media (prefers-reduced-motion: reduce) {
+  .amc-Motion *,
+  .amc-Motion *::before,
+  .amc-Motion *::after {
+    animation-delay: -1.2s !important;
+    animation-play-state: paused !important;
+    transition: none !important;
+  }
+}

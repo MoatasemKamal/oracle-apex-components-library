@@ -27,9 +27,19 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 | [Circular Progress](skills/apex-modern-components/components/circular-progress) | template component | partial, report | Animated ring gauges (adapted from Magic UI, MIT) |
 | [Avatar Group](skills/apex-modern-components/components/avatar-group) | template component | report | Overlapping team avatars with +N counter (adapted from Magic UI, MIT) |
 | [Bento Grid](skills/apex-modern-components/components/bento-grid) | template component | report | Home page launchpad tiles in a bento layout (adapted from Magic UI, MIT) |
+| [Motion Loader](skills/apex-modern-components/components/motion-loader) | template component | partial | 7 animated loading indicators |
+| [Motion Effect](skills/apex-modern-components/components/motion-effect) | template component | partial | 31 decorative animations: physics, morphing, SVG, 3D and canvas particles (confetti, fireworks, galaxy) |
+| [Motion Text](skills/apex-modern-components/components/motion-text) | template component | partial | Animated headlines: wave, glitch, reveal, flip, typewriter, scramble |
+| [Motion Interaction](skills/apex-modern-components/components/motion-interaction) | template component | partial | Ripple, magnetic and squish buttons, tilt card, spotlight, like toggle |
 
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
+
+## Motion Gallery
+
+[`motion-gallery/index.html`](motion-gallery/index.html) is a standalone showcase of 50
+animations (pure CSS keyframes and vanilla JS). All 50 are available in APEX through the
+four Motion components above.
 
 ## Design systems (DESIGN.md)
 
