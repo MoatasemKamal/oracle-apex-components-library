@@ -11,6 +11,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { THEME_STYLES } from "./lib/preview-themes.mjs";
+import { BODIES, PREVIEW_BODY_CSS } from "./lib/preview-bodies.mjs";
 import { listTemplateDirs, loadTemplate, renderList, renderRegion } from "./lib/theme-templates.mjs";
 
 const SKILL_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -18,16 +19,6 @@ const args = process.argv.slice(2);
 const only = args.includes("--only") ? args[args.indexOf("--only") + 1] : null;
 const styles = THEME_STYLES.slice(0, 3);
 
-const BODIES = {
-  report: `<table class="pv-report"><thead><tr><th>Order</th><th>Customer</th><th>Status</th><th class="pv-num">Amount</th></tr></thead><tbody>
-<tr><td>SO-55120</td><td>Al Noor Trading</td><td>Shipped</td><td class="pv-num">48,300</td></tr>
-<tr><td>SO-55127</td><td>Gulf Medical Supplies</td><td>Picking</td><td class="pv-num">12,780</td></tr>
-<tr><td>SO-55131</td><td>Red Sea Logistics</td><td>On hold</td><td class="pv-num">7,450</td></tr></tbody></table>`,
-  form: `<div class="pv-form"><label>Customer<input value="Al Noor Trading Co." readonly></label><label>Credit limit<input value="SAR 250,000" readonly></label><label class="pv-wide">Notes<textarea readonly>Net-30 terms. Key account for wholesale electronics.</textarea></label></div>`,
-  chart: `<svg class="pv-chart" viewBox="0 0 320 120" role="img" aria-label="Monthly revenue"><g>${[48, 62, 55, 80, 72, 95, 88].map((v, i) => `<rect x="${12 + i * 44}" y="${110 - v}" width="28" height="${v}" rx="4"></rect>`).join("")}</g></svg>`,
-  cards: `<div class="pv-cards">${["Open orders|128", "Revenue|SAR 4.2M", "Avg. response|3.4 h"].map((s) => `<div><span>${s.split("|")[0]}</span><strong>${s.split("|")[1]}</strong></div>`).join("")}</div>`,
-  text: `<p class="pv-text">Quarter close runs on 30 September. Post all supplier invoices by the 27th so accruals are complete; late items move to October.</p>`
-};
 
 let dirs = listTemplateDirs(path.join(SKILL_ROOT, "theme-templates"));
 if (only) dirs = dirs.filter((d) => path.basename(d) === only);
@@ -67,22 +58,7 @@ h1 { margin: 0; padding: 16px; font-size: 18px; }
 .pv-theme > h2 { margin: 0 0 12px; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; opacity: .7; }
 .pv-sample { margin-block-end: 22px; }
 .pv-sample > h3 { margin: 0 0 8px; font-size: 12px; font-weight: 600; opacity: .7; }
-/* Stand-ins for native Universal Theme content inside region templates */
-.pv-report { width: 100%; border-collapse: collapse; font-size: 13px; }
-.pv-report th, .pv-report td { padding: 8px 10px; border-bottom: 1px solid var(--ut-component-border-color); text-align: start; }
-.pv-report th { font-weight: 600; color: var(--ut-component-text-muted-color); font-size: 12px; }
-.pv-num { text-align: end !important; font-variant-numeric: tabular-nums; }
-.pv-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.pv-form label { display: grid; gap: 4px; font-size: 12px; color: var(--ut-component-text-muted-color); }
-.pv-form .pv-wide { grid-column: 1 / -1; }
-.pv-form input, .pv-form textarea { font: inherit; font-size: 14px; padding: 8px 10px; border-radius: 4px; border: 1px solid var(--ut-component-border-color); background: var(--ut-component-background-color); color: var(--ut-component-text-default-color); }
-.pv-chart { width: 100%; height: auto; display: block; } .pv-chart rect { fill: var(--ut-palette-primary); opacity: .85; }
-.pv-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-.pv-cards div { display: grid; gap: 2px; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--ut-component-border-color); background: var(--ut-component-background-color); }
-.pv-cards span { font-size: 12px; color: var(--ut-component-text-muted-color); } .pv-cards strong { font-size: 18px; }
-.pv-text { margin: 0; line-height: 1.5; max-width: 65ch; }
-.t-Button { display: inline-flex; align-items: center; padding: 6px 10px; border-radius: 4px; border: 1px solid var(--ut-component-border-color); font: inherit; font-size: 12px; background: var(--ut-component-background-color); color: var(--ut-component-text-default-color); }
-.t-Button--hot { background: var(--ut-palette-primary); border-color: transparent; color: var(--ut-palette-primary-contrast, #fff); }
+${PREVIEW_BODY_CSS}
 .fa { font-style: normal; }
 ${css.join("\n")}
 </style>
