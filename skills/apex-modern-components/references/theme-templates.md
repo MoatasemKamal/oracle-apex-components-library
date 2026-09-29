@@ -148,3 +148,43 @@ Rules on top of the general ones:
 - Prove the logic, not only the look: the preview samples must exercise the behaviour, and the
   author checks results by script (for example that the computed total of the preview
   report is 68,530).
+
+## Application navigation templates (Navigation Menu and Navigation Bar)
+
+Two list templates are meant for the application-level slots rather than a List region:
+`navigationMenu.listTemplate` (User Interface > Navigation Menu) and
+`navigationBar.listTemplate` (User Interface > Navigation Bar). In APEXlang they are set in
+`application.apx`, for example:
+
+```apexlang
+navigationMenu {
+    listTemplate: @amc-command-rail
+    templateOptions: [
+        #DEFAULT#
+    ]
+    list: @navigation-menu
+}
+navigationBar {
+    list: @navigation-bar
+    listTemplate: @amc-smart-nav-bar
+    templateOptions: #DEFAULT#
+}
+```
+
+Universal Theme renders the navigation menu inside its page template (a side column for the
+side menu, a header bar for the top menu) and its own JavaScript owns the collapse toggle
+button and the body classes that open or close the side column. A navigation template must
+**cooperate with that shell, never replace it**:
+
+- Detect the Universal Theme shell by feature (the page-body side-navigation classes, the
+  navigation toggle button, the expanded/collapsed body classes) and follow its state:
+  expanded shows the full rail, collapsed shows the icon rail. Observe the body class with a
+  MutationObserver instead of hooking UT internals. When no UT shell is present (preview, other
+  page templates) provide the template's own collapse button.
+- Never remove or restyle UT page-template elements; style only the template's own `amc-T...`
+  markup inside the slot.
+- Keep one keyboard model: Tab reaches the menu, arrow keys move within it (roving tabindex),
+  Enter follows the link, and Escape closes flyouts. Every behaviour also works by pointer and
+  touch.
+- The exact UT class names and the slot markup must be confirmed on a live APEX page; the
+  template's helpText says so, and its JS must degrade to a working plain menu if they differ.
