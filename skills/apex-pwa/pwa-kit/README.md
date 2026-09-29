@@ -9,9 +9,12 @@ dark mode and RTL. No page changes needed.
 
 1. Shared Components > Static Application Files: upload `amc-pwa-kit.css` and
    `amc-pwa-kit.js` into a folder `amc-pwa-kit/`.
-   (APEXlang 26.1+: add them under `shared-components/static-files/amc-pwa-kit/` and
-   register them the same way the Motion Kit snippets do in
-   `skills/apex-modern-components/motion-kit/dist/apexlang/`, then run apexlang's gates.)
+   **APEXlang (26.1+)** instead of steps 1-3: copy
+   `dist/apexlang/shared-components/static-files/amc-pwa-kit/` into
+   `applications/<app>/shared-components/static-files/`, append
+   `dist/apexlang/static-files.snippet.apx` to `shared-components/static-files.apx`, merge the
+   blocks of `dist/apexlang/application.snippet.apx` into `application.apx` (add to existing
+   `fileUrls`, e.g. next to the Motion Kit), then run apexlang's gates.
 2. Shared Components > User Interface Attributes > JavaScript > File URLs:
    `#APP_FILES#amc-pwa-kit/amc-pwa-kit.js`
 3. Same page > Cascading Style Sheets > File URLs: `#APP_FILES#amc-pwa-kit/amc-pwa-kit.css`
@@ -30,6 +33,7 @@ dark mode and RTL. No page changes needed.
 | Floating primary action on phones | CSS class `amc-pwa-fab` on a Buttons Container region (static on wide screens) |
 | Clear local drafts on logout | `amcPwa.clearLocal();` before logout; keys you store yourself should start with `amc-pwa.` |
 | Show your own message in the banner | `amcPwa.showMessage("Saved offline", "success", 3000);` |
+| Keep `dist/` in sync | After editing `amc-pwa-kit.{css,js}`, copy them again into `dist/apexlang/shared-components/static-files/amc-pwa-kit/`. |
 | Translate texts | Before the kit: `window.amcPwaConfig = { offlineText: "...", onlineText: "...", networkErrorText: "...", updateText: "...", reloadText: "...", iosHintText: "..." };` or from Text Messages with `apex.lang.getMessage`. |
 
 `<html>` gets `amc-is-standalone`, `amc-is-ios`, `amc-is-offline` and (after install in this

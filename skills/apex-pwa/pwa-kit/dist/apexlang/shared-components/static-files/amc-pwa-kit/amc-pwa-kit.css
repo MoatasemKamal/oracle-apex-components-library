@@ -1,0 +1,97 @@
+/* =========================================================================
+   APEX Modern Components - PWA Kit styles
+   Colors come from Universal Theme variables; literal values are fallbacks only.
+   ========================================================================= */
+:root {
+  --amc-pwa-bg: var(--ut-component-background-color, #fff);
+  --amc-pwa-fg: var(--ut-component-text-default-color, #262626);
+  --amc-pwa-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-pwa-radius: var(--ut-component-border-radius, .5rem);
+  --amc-pwa-shadow: var(--ut-component-box-shadow, 0 .5rem 1.5rem rgba(0, 0, 0, .18));
+  --amc-pwa-info: var(--ut-palette-info, #056ac8);
+  --amc-pwa-warning: var(--ut-palette-warning, #b25a00);
+  --amc-pwa-success: var(--ut-palette-success, #1e7b34);
+  --amc-pwa-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- banner / toast ---------- */
+.amc-PwaBanner {
+  position: fixed;
+  z-index: 1100;
+  inset-inline: 1rem;
+  inset-block-end: calc(1rem + var(--amc-pwa-safe-bottom));
+  margin-inline: auto;
+  max-inline-size: 36rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1rem;
+  border: 1px solid var(--amc-pwa-line);
+  border-inline-start: .25rem solid var(--amc-pwa-accent, var(--amc-pwa-info));
+  border-radius: var(--amc-pwa-radius);
+  background: var(--amc-pwa-bg);
+  color: var(--amc-pwa-fg);
+  box-shadow: var(--amc-pwa-shadow);
+  font-size: .875rem;
+  line-height: 1.4;
+}
+.amc-PwaBanner[hidden] { display: none; }
+.amc-PwaBanner--warning { --amc-pwa-accent: var(--amc-pwa-warning); }
+.amc-PwaBanner--success { --amc-pwa-accent: var(--amc-pwa-success); }
+.amc-PwaBanner-text { flex: 1; unicode-bidi: isolate; }
+.amc-PwaBanner-action { flex: none; min-block-size: 2.75rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .amc-PwaBanner:not([hidden]) { animation: amc-pwa-rise .24s ease-out; }
+  @keyframes amc-pwa-rise {
+    from { opacity: 0; transform: translateY(.75rem); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@media (forced-colors: active) {
+  .amc-PwaBanner { border-color: CanvasText; }
+}
+
+/* ---------- install button: hidden until installable ---------- */
+[data-amc-pwa-install]:not(.is-installable),
+.amc-is-standalone [data-amc-pwa-install] { display: none !important; }
+
+/* ---------- offline state ---------- */
+.amc-is-offline .amc-pwa-online-only { opacity: .5; pointer-events: none; }
+.amc-pwa-offline-only { display: none; }
+.amc-is-offline .amc-pwa-offline-only { display: revert; }
+
+/* ---------- standalone (installed) window ---------- */
+.amc-is-standalone .amc-pwa-browser-only { display: none !important; }
+.amc-is-standalone .t-Header,
+.amc-is-standalone .t-NavigationBar,
+.amc-is-standalone .t-Button {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.amc-is-standalone { -webkit-tap-highlight-color: transparent; }
+.amc-is-standalone .t-Body-content,
+.amc-is-standalone .t-Dialog-body { overscroll-behavior-y: contain; }
+
+/* ---------- touch ergonomics: add "amc-pwa-touch" to Page > CSS Classes ---------- */
+@media (pointer: coarse) {
+  .amc-pwa-touch .t-Button,
+  .amc-pwa-touch .t-Button--small,
+  .amc-pwa-touch .t-NavigationBar-item .t-Button { min-block-size: 2.75rem; min-inline-size: 2.75rem; }
+  .amc-pwa-touch input,
+  .amc-pwa-touch select,
+  .amc-pwa-touch textarea { font-size: max(1rem, 16px); }
+}
+
+/* ---------- floating primary action: add "amc-pwa-fab" to a region or button container ---------- */
+.amc-pwa-fab {
+  position: fixed;
+  z-index: 900;
+  inset-inline-end: 1rem;
+  inset-block-end: calc(1rem + var(--amc-pwa-safe-bottom));
+}
+@media (min-width: 64em) {
+  .amc-pwa-fab { position: static; }
+}

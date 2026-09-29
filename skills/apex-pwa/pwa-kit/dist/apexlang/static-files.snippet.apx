@@ -1,0 +1,9 @@
+file "amc-pwa-kit/amc-pwa-kit.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-pwa-kit/amc-pwa-kit.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)
