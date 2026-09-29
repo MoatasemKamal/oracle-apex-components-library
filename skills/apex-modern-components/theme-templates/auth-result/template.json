@@ -2,7 +2,7 @@
   "kind": "region",
   "name": "AMC Auth Result",
   "staticId": "AMC_TPL_AUTH_RESULT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "motion",
   "description": "An outcome screen for authentication and other flows whose inline SVG symbol draws itself inside a glowing orbit ring, a checkmark in a filling ring, a paper plane landing on an envelope, a shield, a door, a draining hourglass, a shaking cross or a latching lock, over optional full-page aurora, meteor, grid, mesh, retro or particle scenes, with an optional countdown redirect.",

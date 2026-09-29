@@ -54,10 +54,8 @@
 .amc-TMomentLauncher-heading {
   margin: 0;
   white-space: nowrap;
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 650;
   color: var(--amc-tml-muted);
 }
 .amc-TMomentLauncher-now .amc-TMomentLauncher-heading { color: var(--amc-tml-ink); }
@@ -159,7 +157,7 @@
   background: var(--amc-tml-surface);
   box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-tml-ink) 6%, transparent), 0 10px 22px -18px color-mix(in srgb, var(--amc-tml-ink) 45%, transparent);
 }
-.amc-TMomentLauncher-item.is-now .amc-TMomentLauncher-link:hover { border-color: color-mix(in srgb, var(--amc-tml-accent) 45%, var(--amc-tml-line)); translate: 0 -2px; }
+.amc-TMomentLauncher-item.is-now .amc-TMomentLauncher-link:hover { border-color: color-mix(in srgb, var(--amc-tml-accent) 45%, var(--amc-tml-line)); }
 .amc-TMomentLauncher-item.is-now .amc-TMomentLauncher-link:focus-visible { outline-offset: 2px; }
 .amc-TMomentLauncher-item.is-now .amc-TMomentLauncher-icon {
   inline-size: 2.5rem;
@@ -285,12 +283,11 @@
 }
 @media (prefers-reduced-motion: no-preference) {
   .amc-TMomentLauncher-pulse { animation: amc-tml-pulse 2s ease-out infinite; }
-  .amc-TMomentLauncher-link { transition: background-color .15s ease, border-color .2s ease, translate .2s cubic-bezier(.2, .8, .2, 1); }
+  .amc-TMomentLauncher-link { transition: background-color .15s ease, border-color .2s ease; }
   .amc-TMomentLauncher-toggleIcon { transition: rotate .2s ease; }
 }
 @media (prefers-reduced-motion: reduce) {
   .amc-TMomentLauncher-pulse { animation: none; }
-  .amc-TMomentLauncher-item.is-now .amc-TMomentLauncher-link:hover { translate: none; }
 }
 @media (forced-colors: active) {
   .amc-TMomentLauncher-now, .amc-TMomentLauncher-list { border: 1px solid CanvasText; }

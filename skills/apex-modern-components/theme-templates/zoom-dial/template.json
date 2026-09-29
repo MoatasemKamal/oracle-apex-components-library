@@ -2,7 +2,7 @@
   "kind": "region",
   "name": "AMC Zoom Dial",
   "staticId": "AMC_TPL_ZOOM_DIAL",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A region with its own size dial: each user picks Compact, Cozy, Comfortable or Large for this one region and the native content inside is re-laid out at that size and remembered, instead of one fixed density for everybody or a browser zoom that scales the whole page.",

@@ -435,7 +435,8 @@
     p.chart.appendChild(node);
     var cap2 = el("figcaption", P + "caption");
     cap2.appendChild(el("span", P + "capTitle", caption));
-    cap2.appendChild(el("span", P + "capMeta", label(root, "rows", "Rows") + " " + res.items.length + " \u00b7 " + label(root, "total", "Total") + " " + fmt(res.total, meta)));
+    cap2.appendChild(el("span", P + "capMeta", label(root, "rows", "Rows") + " " + res.items.length));
+    cap2.appendChild(el("span", P + "capMeta", label(root, "total", "Total") + " " + fmt(res.total, meta)));
     if (shown.length < items.length) cap2.appendChild(el("span", P + "capMeta", label(root, "first", "Showing the first %0 of %1 rows").replace("%0", shown.length).replace("%1", items.length)));
     p.chart.appendChild(cap2);
   }

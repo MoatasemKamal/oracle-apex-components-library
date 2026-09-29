@@ -2,7 +2,7 @@
   "kind": "region",
   "name": "AMC Dual View",
   "staticId": "AMC_TPL_DUAL_VIEW",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A region frame that turns the report it wraps into a chart of the same rows: a Table / Chart switch in the header draws a to-scale SVG bar chart or donut from the table itself, with no chart region, query or configuration, and keeps the table as the accessible source.",

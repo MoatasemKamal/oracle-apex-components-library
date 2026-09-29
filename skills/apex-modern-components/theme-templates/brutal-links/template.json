@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Brutal Links",
   "staticId": "AMC_TPL_BRUTAL_LINKS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "bold",
   "description": "Neo-brutalist link cards with ink borders, hard offset shadows, flat palette fills that rotate per entry, an oversized arrow and a press-down click.",

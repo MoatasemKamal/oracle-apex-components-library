@@ -218,7 +218,7 @@
     box.hidden = past.length === 0;
     if (destHead) { destHead.hidden = past.length === 0; }
 
-    // Destinations visited in this tab get a quiet "Visited · 5 minutes ago".
+    // Destinations visited in this tab get a quiet "Visited 5 minutes ago".
     var seenAt = {};
     trail.forEach(function (t) { seenAt[t.k] = t.at; });
     var items = root.querySelectorAll(C("item"));
@@ -236,8 +236,9 @@
         ic.setAttribute("aria-hidden", "true");
         seen.appendChild(ic);
         var label = root.getAttribute("data-visited") || "";
-        var seenText = el("span", "seenText", times ? label + " · " + ago(now - at) : label);
-        seenText.setAttribute("data-at", String(at));
+        var seenText = el("span", "seenText", times && now - at >= 45000 ? label + " " + ago(now - at) : label);
+        if (times) { seenText.setAttribute("data-at", String(at)); }
+        seenText.setAttribute("data-label", label);
         seen.appendChild(seenText);
         link.appendChild(seen);
       }
@@ -293,7 +294,7 @@
       var at = +nodes[i].getAttribute("data-at");
       if (!at) { continue; }
       var t = ago(now - at);
-      nodes[i].textContent = nodes[i].classList.contains(ROOT + "-seenText") ? nodes[i].textContent.replace(/·.*$/, "· " + t) : t;
+      nodes[i].textContent = nodes[i].classList.contains(ROOT + "-seenText") ? (nodes[i].getAttribute("data-label") || "") + (now - at >= 45000 ? " " + t : "") : t;
     }
   }, 60000);
 

@@ -75,10 +75,8 @@
 .amc-TConstellationMap-group {
   flex-basis: 100%;
   order: -1;
-  font-size: .6875rem;
+  font-size: .75rem;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
   color: var(--amc-cm-muted);
 }
 .amc-TConstellationMap-group:empty { display: none; }
@@ -372,10 +370,8 @@
 .amc-TConstellationMap-card[hidden] { display: none; }
 .amc-TConstellationMap-cardName { font-size: .875rem; }
 .amc-TConstellationMap-cardMeta {
-  font-size: .6875rem;
+  font-size: .75rem;
   font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
   color: var(--amc-cm-accent);
 }
 .amc-TConstellationMap-cardMeta:empty,

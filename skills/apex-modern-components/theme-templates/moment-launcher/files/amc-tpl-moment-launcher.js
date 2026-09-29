@@ -1,5 +1,5 @@
 /* Moment Launcher: lifts the entries whose moments match the user's local date and time into a
-   "Right now" section and says why ("Month-end · 2 working days left"). Moments come from
+   "Right now" section and says why ("Month-end: 2 working days left"). Moments come from
    Attribute 1: space-separated alternatives, each one or more tokens joined with "+" that must all
    match (friday+afternoon). Working days skip the weekend of the page locale (Intl.Locale week
    info) unless data-weekend on the wrapper names the days. Names of days and dates come from Intl.
@@ -142,7 +142,7 @@
     if (hit.kind === "dom") { return fmt({ day: "numeric", month: "long" }, date); }
     var label = root.getAttribute("data-l-" + t) || t;
     if (hit.left !== undefined) {
-      label += " · " + (hit.left === 1 ? root.getAttribute("data-left-last") : plural(root, hit.left));
+      label += ": " + (hit.left === 1 ? root.getAttribute("data-left-last") : plural(root, hit.left));
     }
     return label;
   }
@@ -234,7 +234,7 @@
       // workhours and weekday only qualify another token; they are named only when alone.
       var shown = r.m.hits.filter(function (h) { return h.token !== "workhours" && h.token !== "weekday"; });
       if (!shown.length) { shown = r.m.hits; }
-      why.appendChild(el("span", "whyText", shown.map(function (h) { return reason(root, h, ev.f, ev.date); }).join(" · ")));
+      why.appendChild(el("span", "whyText", shown.map(function (h) { return reason(root, h, ev.f, ev.date); }).join(", ")));
       var left = r.m.hits.filter(function (h) { return h.left !== undefined; });
       if (left.length && left[0].left <= 1) { r.li.classList.add("is-urgent"); }
       if (link) { link.appendChild(why); }

@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Constellation Map",
   "staticId": "AMC_TPL_CONSTELLATION_MAP",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A spatial map of the whole app: every list entry is a star, entries with the same group form a constellation joined by lines, the current page glows and, optionally, the pages you use most shine brighter, on a sky you can pan and zoom. The layout is stable across visits, so people remember where things are instead of reading menus.",

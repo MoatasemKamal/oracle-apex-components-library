@@ -2,7 +2,7 @@
   "kind": "region",
   "name": "AMC Insight Frame",
   "staticId": "AMC_TPL_INSIGHT_FRAME",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A region frame that reads the report it wraps and states what the numbers say: an insight strip under the title with the total or average, row count, largest and smallest row and a share-of-total bar, plus a thin share bar under every row; no design system frame understands its content this way.",

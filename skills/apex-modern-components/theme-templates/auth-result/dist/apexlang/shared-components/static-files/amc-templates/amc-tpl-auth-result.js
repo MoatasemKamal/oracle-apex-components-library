@@ -70,7 +70,7 @@
   function render(root, s) {
     var left = Math.max(0, Math.ceil((s.total - s.elapsed) / 1000));
     s.count.textContent = String(left);
-    s.label.textContent = s.paused ? text(root, "paused", "Paused") + " · " + text(root, "continuing", "Continuing in %0…", left) : text(root, "continuing", "Continuing in %0…", left);
+    s.label.textContent = s.paused ? text(root, "paused", "Paused") : text(root, "continuing", "Continuing in %0…", left);
     root.style.setProperty("--amc-tar-p", String(Math.max(0, 1 - s.elapsed / s.total)));
   }
   function stop(s) { if (s.timer) { w.clearInterval(s.timer); s.timer = null; } }

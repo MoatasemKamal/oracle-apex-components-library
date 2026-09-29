@@ -1,7 +1,7 @@
 {
   "samples": [
     { "title": "Sales workspace hub", "options": [], "entries": [
-      { "text": "Sales Home", "link": "#", "icon": "fa-home", "a01": "Q3 · 82% of target" },
+      { "text": "Sales Home", "link": "#", "icon": "fa-home", "a01": "82% of Q3 target" },
       { "text": "Orders", "link": "#", "icon": "fa-shopping-cart", "a01": "128 open", "current": true },
       { "text": "Invoices", "link": "#", "icon": "fa-file-text-o", "a01": "14 overdue" },
       { "text": "Customers", "link": "#", "icon": "fa-users", "a01": "2,340 active" },
@@ -11,7 +11,7 @@
       { "text": "Reports", "link": "#", "icon": "fa-bar-chart" }
     ] },
     { "title": "HR self-service, labels always on, calm", "options": ["amc-TOrbitLauncher--labels", "amc-TOrbitLauncher--calm", "amc-TOrbitLauncher--success"], "entries": [
-      { "text": "My HR", "link": "#", "icon": "fa-user-circle", "a01": "Welcome back" },
+      { "text": "My HR", "link": "#", "icon": "fa-user-circle", "a01": "3 open requests" },
       { "text": "Leave", "link": "#", "icon": "fa-calendar", "a01": "12 days left" },
       { "text": "Payslips", "link": "#", "icon": "fa-money" },
       { "text": "Expenses", "link": "#", "icon": "fa-credit-card", "a01": "2 drafts" },

@@ -46,7 +46,7 @@
     root._amcLevel = level;
     var z = part(root, "zoom"), r = part(root, "readout");
     var factor = z ? parseFloat(w.getComputedStyle(z).zoom) || 1 : 1;
-    if (r) r.textContent = name + " · " + percent(factor);
+    if (r) r.textContent = name + " (" + percent(factor) + ")";
     if (user) {
       save(root, level);
       w.requestAnimationFrame(function () {

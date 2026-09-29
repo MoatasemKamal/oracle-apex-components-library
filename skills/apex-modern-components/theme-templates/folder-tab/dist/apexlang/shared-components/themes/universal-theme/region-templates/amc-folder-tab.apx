@@ -35,7 +35,7 @@ regionTemplate amc-folder-tab (
     comments {
         comments:
             ```text
-            Region template shaped like a file folder. The region title and icon sit on the folder tab; buttons in Help, Edit, Change, Copy, Delete and Create sit beside the tab, and Previous, Close and Next in the paper's footer. The body is a sheet of paper with a light grain and is never clipped or transformed, so report menus, date pickers and popups work normally. Template options: Primary, Success or Danger tab color the whole folder with that palette color and switch the tab text to its contrast color; Stacked papers shows two more sheets peeking out behind the paper; Ink outline gives folder, tab and paper a bold ink border with a hard offset shadow; No body padding lets reports run edge to edge. The tab lifts slightly on hover and focus except under prefers-reduced-motion; forced-colors mode draws plain system borders.
+            Region template shaped like a file folder. The region title and icon sit on the folder tab; buttons in Help, Edit, Change, Copy, Delete and Create sit beside the tab, and Previous, Close and Next in the paper's footer. The body is a sheet of paper with a light grain and is never clipped or transformed, so report menus, date pickers and popups work normally. Template options: Primary, Success or Danger tab color the whole folder with that palette color and switch the tab text to its contrast color; Stacked papers shows two more sheets peeking out behind the paper; Ink outline gives folder, tab and paper a bold ink border with a hard offset shadow; No body padding lets reports run edge to edge. Forced-colors mode draws plain system borders.
             ```
     }
 

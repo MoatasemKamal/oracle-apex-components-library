@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Journey Trail",
   "staticId": "AMC_TPL_JOURNEY_TRAIL",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A destinations list that remembers the user's path through the app in this tab and shows Continue where you left off as a trail of the recent pages with relative times, the page to resume highlighted and the current page marked, while destinations already visited get a quiet check.",

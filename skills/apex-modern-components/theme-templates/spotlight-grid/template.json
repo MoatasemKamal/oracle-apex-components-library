@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Spotlight Grid",
   "staticId": "AMC_TPL_SPOTLIGHT_GRID",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "motion",
   "description": "A tile grid lit by one pointer spotlight that travels across all tiles at once, revealing a dot pattern and making nearby tile edges glow, while the current tile keeps a soft resting glow.",

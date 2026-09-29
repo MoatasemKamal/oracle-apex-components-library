@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Command Rail",
   "staticId": "AMC_TPL_COMMAND_RAIL",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "Side navigation that learns and searches: a Ctrl K search box filters every page and sub page, a star pins pages to the top, recent pages are learned by frecency, groups open smoothly with a glowing line from the current group down to the current page, and it folds into an icon rail with flyouts or a phone bottom sheet.",

@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Orbit Launcher",
   "staticId": "AMC_TPL_ORBIT_LAUNCHER",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "motion",
   "description": "An app launcher where the first list entry is a glowing hub and the other entries orbit it on a slowly turning ring with a travelling comet, instead of a flat grid of tiles.",

@@ -45,7 +45,7 @@
   box-shadow: 0 0 0 1px var(--amc-torb-line), 0 8px 20px -14px var(--amc-torb-shadow);
   transition: transform .25s ease, box-shadow .25s ease;
 }
-.amc-TOrbitLauncher-link:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-torb-accent) 45%, transparent), 0 12px 24px -14px var(--amc-torb-shadow); }
+.amc-TOrbitLauncher-link:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-torb-accent) 45%, transparent), 0 12px 24px -14px var(--amc-torb-shadow); }
 .amc-TOrbitLauncher-link:focus-visible { outline: 2px solid var(--amc-torb-accent); outline-offset: 3px; }
 .amc-TOrbitLauncher-icon {
   display: grid;

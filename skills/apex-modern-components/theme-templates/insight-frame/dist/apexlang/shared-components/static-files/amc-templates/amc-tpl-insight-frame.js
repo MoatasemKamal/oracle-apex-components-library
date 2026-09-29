@@ -302,7 +302,7 @@
       ro.setAttribute("aria-hidden", "true");
       ins.appendChild(ro);
       root._amcReadout = ro;
-      root._amcDefaultReadout = maxWho ? maxWho + " \u00b7 " + pct(res.max.v / res.total) + " " + L.share : "";
+      root._amcDefaultReadout = maxWho ? maxWho + ": " + pct(res.max.v / res.total) + " " + L.share : "";
       ro.textContent = root._amcDefaultReadout;
     }
 
@@ -393,8 +393,8 @@
     if (root._amcMark) root._amcMark.classList.add("is-on");
     var row = res.rows[i];
     if (root._amcReadout && row) {
-      root._amcReadout.textContent = (row.label ? row.label + " \u00b7 " : "") + row.text +
-        (res.shares && row.v > 0 ? " \u00b7 " + pct(row.v / res.total) + " " + label(root, "share", "of total") : "");
+      root._amcReadout.textContent = (row.label ? row.label + ": " : "") + row.text +
+        (res.shares && row.v > 0 ? " (" + pct(row.v / res.total) + " " + label(root, "share", "of total") + ")" : "");
     }
   }
 

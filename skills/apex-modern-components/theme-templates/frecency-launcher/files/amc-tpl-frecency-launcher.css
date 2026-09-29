@@ -77,10 +77,8 @@
   align-items: center;
   gap: .625rem;
   margin: 0 0 .5rem;
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: .8125rem;
+  font-weight: 600;
   color: var(--amc-tfr-muted);
 }
 .amc-TFrecencyLauncher-heading::after {
@@ -126,7 +124,6 @@
 }
 .amc-TFrecencyLauncher-link:hover {
   border-color: color-mix(in srgb, var(--amc-tfr-accent) 40%, var(--amc-tfr-line));
-  translate: 0 -2px;
 }
 .amc-TFrecencyLauncher-link:focus-visible { outline: 2px solid var(--amc-tfr-accent); outline-offset: 2px; }
 .amc-TFrecencyLauncher-icon {
@@ -303,7 +300,7 @@
 .amc-TFrecencyLauncher--rows.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link { border-radius: 0; border-width: 0 0 1px; box-shadow: none; background: transparent; }
 .amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-item:last-child .amc-TFrecencyLauncher-link { border-block-end-width: 0; }
 .amc-TFrecencyLauncher--rows.is-learned .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link { background: transparent; }
-.amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link:hover { translate: none; background: color-mix(in srgb, var(--amc-tfr-accent) 6%, transparent); }
+.amc-TFrecencyLauncher--rows .amc-TFrecencyLauncher-grid .amc-TFrecencyLauncher-link:hover { background: color-mix(in srgb, var(--amc-tfr-accent) 6%, transparent); }
 
 /* ---------------------------------------------------------------- motion */
 @keyframes amc-tfr-arrive {
@@ -312,13 +309,12 @@
 }
 @keyframes amc-tfr-fill { from { inline-size: 0; } }
 @media (prefers-reduced-motion: no-preference) {
-  .amc-TFrecencyLauncher-link { transition: translate .2s cubic-bezier(.2, .8, .2, 1), border-color .2s ease, background-color .2s ease; }
+  .amc-TFrecencyLauncher-link { transition: border-color .2s ease, background-color .2s ease; }
   .amc-TFrecencyLauncher-reset { transition: border-color .15s ease, color .15s ease; }
   .amc-TFrecencyLauncher-item.is-new .amc-TFrecencyLauncher-link { animation: amc-tfr-arrive 1.2s ease-out 2; }
   .amc-TFrecencyLauncher-heatFill { animation: amc-tfr-fill .9s cubic-bezier(.2, .8, .2, 1) both; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .amc-TFrecencyLauncher-link:hover { translate: none; }
   .amc-TFrecencyLauncher-item.is-new .amc-TFrecencyLauncher-link { animation: none; }
 }
 @media (forced-colors: active) {

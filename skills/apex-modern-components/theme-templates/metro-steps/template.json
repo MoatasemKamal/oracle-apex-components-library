@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Metro Steps",
   "staticId": "AMC_TPL_METRO_STEPS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "bold",
   "description": "Wizard progress drawn as a transit line: completed stations are ticked on a solid colored line, the current station is a large pulsing stop with a station sign, and stations still to come sit on a dashed planned line.",

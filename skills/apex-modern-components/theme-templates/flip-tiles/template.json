@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Flip Tiles",
   "staticId": "AMC_TPL_FLIP_TILES",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "depth",
   "description": "Launch tiles that turn over in 3D on hover and keyboard focus: icon and label on the front, a description and a call to action on a colored back face, while each tile stays one real link.",

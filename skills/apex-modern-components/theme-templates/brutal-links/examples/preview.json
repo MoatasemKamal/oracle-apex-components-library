@@ -17,7 +17,7 @@
       "options": ["amc-TBrutalLinks--sticker", "amc-TBrutalLinks--heavy"],
       "entries": [
         { "text": "Request leave", "link": "#", "icon": "fa-plane", "a01": "Takes two minutes." },
-        { "text": "Submit an expense", "link": "#", "icon": "fa-credit-card", "a01": "Snap the receipt, we do the rest." },
+        { "text": "Submit an expense", "link": "#", "icon": "fa-credit-card", "a01": "Attach a photo of the receipt and send it for approval." },
         { "text": "Book a meeting room", "link": "#", "icon": "fa-calendar", "a01": "12 rooms free this afternoon." },
         { "text": "IT help desk", "link": "#", "icon": "fa-life-ring", "a01": "Average reply in 3.4 hours." }
       ]

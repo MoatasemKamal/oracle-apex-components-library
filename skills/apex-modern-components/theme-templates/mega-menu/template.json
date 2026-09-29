@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Mega Menu",
   "staticId": "AMC_TPL_MEGA_MENU",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "depth",
   "description": "A floating top menu bar whose parent entries swing open a glass mega panel on a perspective hinge, with a feature card for the parent page and a grid of sub pages with 3D icon tiles and descriptions.",

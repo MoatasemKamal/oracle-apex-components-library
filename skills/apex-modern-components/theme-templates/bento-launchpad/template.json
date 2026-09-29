@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Bento Launchpad",
   "staticId": "AMC_TPL_BENTO_LAUNCHPAD",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "smart",
   "description": "A bento launchpad: list entries become tiles of mixed sizes with an oversized tilted icon, a description and a live metric, and the grid and every tile recompose with container queries as the region changes width.",

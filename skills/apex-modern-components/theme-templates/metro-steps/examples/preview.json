@@ -29,7 +29,7 @@
       "entries": [
         { "text": "Request submitted", "link": "#", "a01": "Sara Al-Qahtani, 12 Sep" },
         { "text": "Line manager approval", "link": "#", "a01": "Approved by Omar Haddad" },
-        { "text": "Finance review", "link": "#", "current": true, "a01": "Waiting since 2 days" },
+        { "text": "Finance review", "link": "#", "current": true, "a01": "Waiting for 2 days" },
         { "text": "Purchase order issued", "link": "#" },
         { "text": "Goods received", "link": "#" }
       ]

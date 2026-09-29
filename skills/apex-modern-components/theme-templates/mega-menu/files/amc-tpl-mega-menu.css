@@ -250,11 +250,10 @@
   color: var(--amc-tmm-accent);
   font-size: 15px;
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-tmm-glint) 55%, transparent), 0 0 0 1px var(--amc-tmm-line), 0 3px 6px -3px var(--amc-tmm-shadow);
-  transition: transform .3s cubic-bezier(.3, 1.4, .5, 1), box-shadow .3s ease;
+  transition: box-shadow .3s ease;
 }
 .amc-TMegaMenu-cardIcon.fa:not([class*="fa-"])::before { content: ""; }
 .amc-TMegaMenu-card:is(:hover, :focus-visible) .amc-TMegaMenu-cardIcon {
-  transform: translateY(-2px) rotateX(12deg) rotateY(-12deg);
   box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-tmm-glint) 55%, transparent), 0 0 0 1px color-mix(in srgb, var(--amc-tmm-accent) 30%, transparent), 0 10px 16px -8px color-mix(in srgb, var(--amc-tmm-accent) 60%, transparent);
 }
 .amc-TMegaMenu-cardText { display: grid; gap: 3px; min-inline-size: 0; padding-block-start: 1px; }
@@ -294,7 +293,6 @@
   .amc-TMegaMenu-link, .amc-TMegaMenu-chevron, .amc-TMegaMenu-card, .amc-TMegaMenu-cardIcon,
   .amc-TMegaMenu-featureIcon, .amc-TMegaMenu-featureGo, .amc-TMegaMenu-panel { transition: none !important; }
   .amc-TMegaMenu-panel, .amc-TMegaMenu-featureIcon { transform: none !important; }
-  .amc-TMegaMenu-card:is(:hover, :focus-visible) .amc-TMegaMenu-cardIcon { transform: none; }
 }
 @media (forced-colors: active) {
   .amc-TMegaMenu-bar, .amc-TMegaMenu-panelInner { border: 1px solid CanvasText; }

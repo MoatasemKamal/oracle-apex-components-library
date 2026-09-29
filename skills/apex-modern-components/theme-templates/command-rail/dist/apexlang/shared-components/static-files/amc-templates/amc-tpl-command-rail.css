@@ -138,11 +138,9 @@
 .amc-TCommandRail-heading {
   margin: 4px 10px 2px;
   color: var(--amc-tcr-muted);
-  font-size: .6875rem;
-  font-weight: 650;
-  letter-spacing: .06em;
+  font-size: .75rem;
+  font-weight: 600;
   line-height: 1.6rem;
-  text-transform: uppercase;
 }
 .amc-TCommandRail-clear {
   position: absolute;

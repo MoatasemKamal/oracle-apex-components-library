@@ -80,8 +80,8 @@
   pointer-events: none;
 }
 .amc-TSpotlightGrid-grid:hover .amc-TSpotlightGrid-link { --amc-tspot-on: 1; }
-.amc-TSpotlightGrid-link { transition: box-shadow .3s ease, transform .3s ease; }
-.amc-TSpotlightGrid-link:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-tspot-accent) 30%, transparent), 0 16px 36px -16px color-mix(in srgb, var(--amc-tspot-accent) 55%, transparent); }
+.amc-TSpotlightGrid-link { transition: box-shadow .3s ease; }
+.amc-TSpotlightGrid-link:hover { box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-tspot-accent) 30%, transparent), 0 16px 36px -16px color-mix(in srgb, var(--amc-tspot-accent) 55%, transparent); }
 .amc-TSpotlightGrid-link:focus-visible { --amc-tspot-on: 1; --amc-tspot-x: 50%; --amc-tspot-y: 0%; outline: 2px solid var(--amc-tspot-accent); outline-offset: 3px; }
 /* resting glow in the current tile */
 .amc-TSpotlightGrid-item.is-current .amc-TSpotlightGrid-link { --amc-tspot-on: .9; box-shadow: 0 14px 30px -18px color-mix(in srgb, var(--amc-tspot-accent) 70%, transparent); }
@@ -110,23 +110,6 @@
 }
 .amc-TSpotlightGrid-body { grid-area: body; display: grid; gap: 4px; min-inline-size: 0; }
 .amc-TSpotlightGrid-label { font-size: .9375rem; font-weight: 650; line-height: 1.25; overflow-wrap: break-word; unicode-bidi: isolate; }
-.amc-TSpotlightGrid-label::after {
-  content: "";
-  display: inline-block;
-  inline-size: .5em;
-  block-size: .5em;
-  margin-inline-start: .45em;
-  border-block-start: 2px solid currentColor;
-  border-inline-end: 2px solid currentColor;
-  transform: translateY(-.1em) rotate(45deg) translate(-3px, 3px);
-  opacity: 0;
-  transition: opacity .2s ease, transform .25s ease;
-}
-.amc-TSpotlightGrid-label:dir(rtl)::after { transform: translateY(-.1em) rotate(-45deg) translate(3px, 3px); }
-.amc-TSpotlightGrid-link:hover .amc-TSpotlightGrid-label::after,
-.amc-TSpotlightGrid-link:focus-visible .amc-TSpotlightGrid-label::after { opacity: .7; transform: translateY(-.1em) rotate(45deg); }
-.amc-TSpotlightGrid-link:hover .amc-TSpotlightGrid-label:dir(rtl)::after,
-.amc-TSpotlightGrid-link:focus-visible .amc-TSpotlightGrid-label:dir(rtl)::after { transform: translateY(-.1em) rotate(-45deg); }
 .amc-TSpotlightGrid-desc { font-size: .8125rem; line-height: 1.4; color: var(--amc-tspot-muted); }
 .amc-TSpotlightGrid-desc:empty, .amc-TSpotlightGrid-tag:empty { display: none; }
 .amc-TSpotlightGrid-tag {
@@ -163,8 +146,7 @@
 .amc-TSpotlightGrid--night .amc-TSpotlightGrid-link { color: var(--amc-tspot-ink); }
 
 @media (prefers-reduced-motion: reduce) {
-  .amc-TSpotlightGrid-link, .amc-TSpotlightGrid-link::before, .amc-TSpotlightGrid-icon, .amc-TSpotlightGrid-label::after { transition: none; }
-  .amc-TSpotlightGrid-link:hover { transform: none; }
+  .amc-TSpotlightGrid-link, .amc-TSpotlightGrid-link::before, .amc-TSpotlightGrid-icon { transition: none; }
 }
 @media (forced-colors: active) {
   .amc-TSpotlightGrid-link { border: 1px solid CanvasText; }
