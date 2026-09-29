@@ -1,0 +1,24 @@
+{
+  "samples": [
+    {
+      "title": "Invoices page tour, manual start; steps whose target is missing are skipped",
+      "options": ["amc-TCoachTour--manual"],
+      "entries": [
+        { "text": "Welcome to Invoices", "a02": "Every supplier invoice for your cost centres lands here, from the scan to the payment run." },
+        { "text": "Find any invoice", "a01": "#invoice-search", "a02": "Search by invoice number, supplier or VAT number. Arabic and English names both match." },
+        { "text": "Your templates", "a01": "h1", "a02": "This page lists the templates of the library, as a stand-in target in the preview." },
+        { "text": "Approve in bulk", "a01": "#approve-selected", "a02": "Tick the invoices under SAR 5,000 and approve them in one go." },
+        { "text": "Month-end cut-off", "a02": "Invoices approved after the 25th are paid in next month's run." }
+      ]
+    },
+    {
+      "title": "Launcher only, pulse ring, docked card",
+      "options": ["amc-TCoachTour--manual", "amc-TCoachTour--launcherOnly", "amc-TCoachTour--pulse", "amc-TCoachTour--docked"],
+      "entries": [
+        { "text": "Your leave balance", "a01": ".pv-theme h2", "a02": "Annual leave left this year, including days carried over." },
+        { "text": "Request leave", "a01": "#request-leave", "a02": "Pick the dates; your manager is notified at once." },
+        { "text": "Public holidays", "a02": "Eid al-Fitr, Eid al-Adha and National Day are added for you." }
+      ]
+    }
+  ]
+}

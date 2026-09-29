@@ -1,0 +1,123 @@
+listTemplate amc-spotlight-choice (
+    name: AMC Spotlight Choice
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TSpotlightChoice #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-item="" data-group-label="Choose an option">
+            <ul class="amc-TSpotlightChoice-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TSpotlightChoice-item is-current amc-TSpotlightChoice-item--#A02#" data-value="#A04#"><a class="amc-TSpotlightChoice-card" href="#LINK#" aria-current="page"><span class="amc-TSpotlightChoice-flag">Recommended</span><span class="amc-TSpotlightChoice-top"><span class="amc-TSpotlightChoice-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TSpotlightChoice-name">#TEXT#</span><span class="amc-TSpotlightChoice-radio" aria-hidden="true"></span></span><span class="amc-TSpotlightChoice-price">#A03#</span><span class="amc-TSpotlightChoice-desc">#A01#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TSpotlightChoice-item amc-TSpotlightChoice-item--#A02#" data-value="#A04#"><a class="amc-TSpotlightChoice-card" href="#LINK#"><span class="amc-TSpotlightChoice-flag">Recommended</span><span class="amc-TSpotlightChoice-top"><span class="amc-TSpotlightChoice-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TSpotlightChoice-name">#TEXT#</span><span class="amc-TSpotlightChoice-radio" aria-hidden="true"></span></span><span class="amc-TSpotlightChoice-price">#A03#</span><span class="amc-TSpotlightChoice-desc">#A01#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-spotlight-choice.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-spotlight-choice.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Description
+        a02: Recommended
+        a03: Price or value
+        a04: Return value
+    }
+    advanced {
+        staticId: AMC_TPL_SPOTLIGHT_CHOICE
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a List region of options. Principles applied: von Restorff, the isolation effect: the entry with Attribute 2 = recommended is the only solid, raised card with a Recommended flag in words, so it is not recognised by colour alone, while every other card stays quiet and identical; if several entries say recommended, only the first one is highlighted. Serial position: the script places the recommended entry first, where primacy makes it noticed and remembered; with Centre stage it goes in the middle of the row, the natural comparison anchor, and its isolation keeps it out of the serial-position valley. Attributes: Attribute 1 is the description, Attribute 2 is recommended or empty, Attribute 3 is the price or value, such as SAR 1,200 per month or Delivered tomorrow, Attribute 4 is the value written to the page item, the label when empty. The icon is the entry image. Selection: name the page item that receives the choice either in the region's Custom Attributes as data-amc-choice-item="P20_PLAN" or in data-item on the wrapper in Before List Entry. The list then becomes a radio group: the card that matches the item's current value is selected on load, a click, Space or Enter selects a card and writes its value with apex.item().setValue, which fires the item's change event for dynamic actions, and the arrow keys move and select as native radios do, Home and End go to the first and last, and Tab enters and leaves the group on the selected card, else the recommended one. Without a page item the cards are plain links to each entry's target. Template options: Centre stage puts the recommended entry in the middle. Stacked rows shows one option per row with the price at the end, for long descriptions and narrow columns. Quiet highlight isolates the recommended card with a tinted fill and a strong outline instead of a solid fill, for pages that already have a strong primary button. Preselect recommended selects the recommended entry and writes its value when the item is empty. Without JavaScript the cards are links in the order of the list and the recommended card is still highlighted. English UI strings to translate in the template: Recommended, in each entry, and data-group-label, the radio group's name when the region has no heading. Reduced motion removes the hover transitions.
+            ```
+    }
+
+    templateOption amc-spotlight-choice-middle (
+        name: Centre stage
+        sequence: 10
+        appearance {
+            cssClasses: amc-TSpotlightChoice--middle
+        }
+        help {
+            helpText:
+                ```text
+                Places the recommended entry in the middle of the options, where it anchors the comparison, instead of first. Best for three options in a row.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MIDDLE
+        }
+    )
+
+    templateOption amc-spotlight-choice-stack (
+        name: Stacked rows
+        sequence: 20
+        appearance {
+            cssClasses: amc-TSpotlightChoice--stack
+        }
+        help {
+            helpText:
+                ```text
+                One option per row, with name and description at the start and the price at the end. For narrow columns, long descriptions or more than four options.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STACK
+        }
+    )
+
+    templateOption amc-spotlight-choice-quiet (
+        name: Quiet highlight
+        sequence: 30
+        appearance {
+            cssClasses: amc-TSpotlightChoice--quiet
+        }
+        help {
+            helpText:
+                ```text
+                Isolates the recommended option with a tinted fill and a strong outline instead of a solid colour, when the page already has a strong primary button.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: QUIET
+        }
+    )
+
+    templateOption amc-spotlight-choice-preselect (
+        name: Preselect recommended
+        sequence: 40
+        appearance {
+            cssClasses: amc-TSpotlightChoice--preselect
+        }
+        help {
+            helpText:
+                ```text
+                When a page item is named and it is empty, selects the recommended option on load and writes its value, as a smart default.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PRESELECT
+        }
+    )
+)

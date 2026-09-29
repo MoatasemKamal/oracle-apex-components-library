@@ -1,0 +1,219 @@
+/* Coach Tour: list template for Universal Theme. A guided page tour: a spotlight cut out of a
+   dimmed page around each step's target, with a coach card (Step 2 of 5, Back, Next, Skip).
+   Without JavaScript the list is a plain checklist of tips. The tour layer is appended to
+   <body> by the script and never prints. */
+.amc-TCoachTour, .amc-TCoachTour-layer {
+  --amc-tct-surface: var(--ut-component-background-color, #fff);
+  --amc-tct-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tct-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-tct-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-tct-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tct-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tct-radius: var(--ut-component-border-radius, 6px);
+  --amc-tct-scrim: var(--amc-tct-scrim-color, rgba(10, 14, 22, .58));
+  --amc-tct-shade: var(--amc-tct-shade-color, rgba(0, 0, 0, .35));
+  --amc-tct-tint: color-mix(in srgb, var(--amc-tct-accent) 10%, transparent);
+  color: var(--amc-tct-ink);
+}
+
+/* ---------- the list: a checklist of tips ---------- */
+.amc-TCoachTour { font-size: .875rem; }
+.amc-TCoachTour-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-block-end: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--amc-tct-line);
+  border-radius: calc(var(--amc-tct-radius) * 1.5);
+  background: var(--amc-tct-surface);
+}
+.amc-TCoachTour-head[hidden] { display: none; }
+.amc-TCoachTour-headIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  background: var(--amc-tct-tint);
+  color: var(--amc-tct-accent);
+  font-size: 18px;
+}
+.amc-TCoachTour-headText { flex: 1 1 auto; display: flex; flex-direction: column; min-inline-size: 0; margin: 0; }
+.amc-TCoachTour-headTitle { font-weight: 700; }
+.amc-TCoachTour-headMeta { color: var(--amc-tct-muted); font-size: .8125rem; unicode-bidi: plaintext; align-self: flex-start; }
+.amc-TCoachTour-start, .amc-TCoachTour-next, .amc-TCoachTour-back, .amc-TCoachTour-skip {
+  flex: none;
+  min-block-size: 40px;
+  padding-inline: 14px;
+  border-radius: var(--amc-tct-radius);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+.amc-TCoachTour-start { border: 1px solid var(--amc-tct-accent); background: var(--amc-tct-surface); color: var(--amc-tct-accent); }
+.amc-TCoachTour-start:hover { background: var(--amc-tct-tint); }
+.amc-TCoachTour-start:focus-visible, .amc-TCoachTour-next:focus-visible, .amc-TCoachTour-back:focus-visible,
+.amc-TCoachTour-skip:focus-visible, .amc-TCoachTour-close:focus-visible { outline: 2px solid var(--amc-tct-accent); outline-offset: 2px; }
+.amc-TCoachTour-tips { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.amc-TCoachTour-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--amc-tct-radius);
+}
+.amc-TCoachTour-tick {
+  flex: none;
+  position: relative;
+  inline-size: 20px;
+  block-size: 20px;
+  margin-block-start: 1px;
+  box-sizing: border-box;
+  border: 2px solid var(--amc-tct-line);
+  border-radius: 50%;
+}
+.amc-TCoachTour-tip.is-seen .amc-TCoachTour-tick { border-color: var(--amc-tct-accent); background: var(--amc-tct-accent); }
+.amc-TCoachTour-tip.is-seen .amc-TCoachTour-tick::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 3px;
+  inset-inline-start: 5px;
+  inline-size: 4px;
+  block-size: 8px;
+  border: solid var(--amc-tct-accent-fg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.amc-TCoachTour-tip.is-now { background: var(--amc-tct-tint); }
+.amc-TCoachTour-tipText { display: flex; flex-direction: column; gap: 2px; min-inline-size: 0; }
+.amc-TCoachTour-tipTitle { font-weight: 650; unicode-bidi: isolate; }
+.amc-TCoachTour-tipBody { color: var(--amc-tct-muted); unicode-bidi: isolate; }
+.amc-TCoachTour-tipBody:empty { display: none; }
+.amc-TCoachTour-status:empty { display: none; }
+.amc-TCoachTour-status { margin: 8px 0 0; color: var(--amc-tct-muted); font-size: .8125rem; }
+
+/* ---------- the tour layer ---------- */
+.amc-TCoachTour-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1060;
+  font-size: .875rem;
+  line-height: 1.45;
+}
+.amc-TCoachTour-layer.is-centred { background: var(--amc-tct-scrim); }
+.amc-TCoachTour-spot {
+  position: absolute;
+  inset: 0 auto auto 0;
+  border-radius: calc(var(--amc-tct-radius) + 6px);
+  box-shadow: 0 0 0 2px var(--amc-tct-accent), 0 0 0 200vmax var(--amc-tct-scrim);
+  pointer-events: none;
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1), width .28s cubic-bezier(.2, .8, .2, 1), height .28s cubic-bezier(.2, .8, .2, 1);
+}
+.amc-TCoachTour-spot[hidden] { display: none; }
+.amc-TCoachTour-card {
+  position: absolute;
+  box-sizing: border-box;
+  inline-size: min(360px, calc(100vw - 24px));
+  padding: 14px 16px 16px;
+  border: 1px solid var(--amc-tct-line);
+  border-radius: 14px;
+  background: var(--amc-tct-surface);
+  color: var(--amc-tct-ink);
+  box-shadow: 0 24px 48px -16px var(--amc-tct-shade), 0 2px 8px -2px var(--amc-tct-shade);
+  transition: inset-block-start .28s cubic-bezier(.2, .8, .2, 1), inset-inline-start .28s cubic-bezier(.2, .8, .2, 1);
+}
+.amc-TCoachTour-card:focus { outline: none; }
+.amc-TCoachTour-layer.is-centred .amc-TCoachTour-card { inset: 0; block-size: fit-content; margin: auto; inline-size: min(420px, calc(100vw - 24px)); }
+.amc-TCoachTour-layer.is-docked .amc-TCoachTour-card {
+  inset-block: auto calc(12px + env(safe-area-inset-bottom, 0px));
+  inset-inline: 12px;
+  inline-size: auto;
+  max-inline-size: 560px;
+  margin-inline: auto;
+}
+.amc-TCoachTour-cardTop { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.amc-TCoachTour-progress { unicode-bidi: plaintext; margin: 0; color: var(--amc-tct-muted); font-size: .8125rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.amc-TCoachTour-close {
+  display: grid;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  margin: -6px;
+  margin-inline-end: -8px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--amc-tct-muted);
+  cursor: pointer;
+}
+.amc-TCoachTour-close:hover { background: var(--amc-tct-tint); color: var(--amc-tct-ink); }
+.amc-TCoachTour-bar { display: flex; gap: 4px; margin-block: 8px 12px; }
+.amc-TCoachTour-seg { flex: 1 1 0; block-size: 4px; border-radius: 999px; background: var(--amc-tct-line); }
+.amc-TCoachTour-seg.is-done { background: color-mix(in srgb, var(--amc-tct-accent) 45%, var(--amc-tct-line)); }
+.amc-TCoachTour-seg.is-now { background: var(--amc-tct-accent); }
+.amc-TCoachTour-title { margin: 0 0 4px; font-size: 1.0625rem; font-weight: 700; line-height: 1.3; unicode-bidi: isolate; }
+.amc-TCoachTour-body { margin: 0; color: var(--amc-tct-ink); unicode-bidi: isolate; }
+.amc-TCoachTour-body[hidden] { display: none; }
+.amc-TCoachTour-foot { display: flex; align-items: center; gap: 8px; margin-block-start: 16px; }
+.amc-TCoachTour-skip { margin-inline-end: auto; padding-inline: 6px; border: 0; background: transparent; color: var(--amc-tct-muted); font-weight: 600; }
+.amc-TCoachTour-skip:hover { color: var(--amc-tct-ink); text-decoration: underline; }
+.amc-TCoachTour-back { border: 1px solid var(--amc-tct-line); background: var(--amc-tct-surface); color: var(--amc-tct-ink); }
+.amc-TCoachTour-back:hover { background: var(--amc-tct-tint); }
+.amc-TCoachTour-next { margin-inline-start: auto; border: 1px solid transparent; background: var(--amc-tct-accent); color: var(--amc-tct-accent-fg); min-inline-size: 88px; }
+.amc-TCoachTour-back:not([hidden]) + .amc-TCoachTour-next, .amc-TCoachTour-skip:not([hidden]) ~ .amc-TCoachTour-next { margin-inline-start: 0; }
+.amc-TCoachTour-next:hover { background: color-mix(in srgb, var(--amc-tct-accent) 88%, var(--amc-tct-ink)); }
+.amc-TCoachTour-skip[hidden], .amc-TCoachTour-back[hidden] { display: none; }
+.amc-TCoachTour-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- options ---------- */
+/* Manual start: never starts by itself; the launcher is the way in, so it gets more presence. */
+.amc-TCoachTour--manual .amc-TCoachTour-head { border-color: color-mix(in srgb, var(--amc-tct-accent) 35%, var(--amc-tct-line)); background: color-mix(in srgb, var(--amc-tct-accent) 6%, var(--amc-tct-surface)); }
+/* Launcher only: with JavaScript only the launcher shows; the tips are in the tour. */
+.amc-TCoachTour--launcherOnly.is-enhanced .amc-TCoachTour-tips { display: none; }
+/* Pulse: a ring breathes around the spotlight to draw the eye to small targets. */
+.amc-TCoachTour--pulse .amc-TCoachTour-headIcon { box-shadow: 0 0 0 4px var(--amc-tct-tint); }
+.amc-TCoachTour-layer--pulse .amc-TCoachTour-spot::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 var(--amc-tct-accent);
+  animation: amc-TCoachTour-pulse 1.8s ease-out infinite;
+}
+@keyframes amc-TCoachTour-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--amc-tct-accent) 70%, transparent); }
+  100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--amc-tct-accent) 0%, transparent); }
+}
+/* Docked card: the coach card always sits at the bottom of the screen (as on phones). */
+.amc-TCoachTour--docked .amc-TCoachTour-headIcon { border-radius: 10px; }
+
+@media (pointer: coarse) {
+  .amc-TCoachTour-start, .amc-TCoachTour-next, .amc-TCoachTour-back, .amc-TCoachTour-skip, .amc-TCoachTour-close { min-block-size: 44px; min-inline-size: 44px; }
+}
+@media (max-width: 30em) {
+  .amc-TCoachTour-head { flex-wrap: wrap; }
+  .amc-TCoachTour-start { inline-size: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TCoachTour-spot, .amc-TCoachTour-card { transition: none; }
+  .amc-TCoachTour-layer--pulse .amc-TCoachTour-spot::after { animation: none; }
+}
+@media (forced-colors: active) {
+  .amc-TCoachTour-spot { border: 3px solid Highlight; }
+  .amc-TCoachTour-card { border: 2px solid CanvasText; }
+  .amc-TCoachTour-seg.is-now, .amc-TCoachTour-seg.is-done { background: Highlight; forced-color-adjust: none; }
+  .amc-TCoachTour-tip.is-seen .amc-TCoachTour-tick { background: Highlight; forced-color-adjust: none; }
+}
+@media print {
+  .amc-TCoachTour-layer, .amc-TCoachTour-head { display: none; }
+  .amc-TCoachTour--launcherOnly.is-enhanced .amc-TCoachTour-tips { display: grid; }
+}

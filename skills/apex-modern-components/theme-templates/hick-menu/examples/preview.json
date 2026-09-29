@@ -1,0 +1,557 @@
+{
+  "samples": [
+    {
+      "title": "Report catalogue, 34 reports in four groups, filter appears past 15",
+      "options": [],
+      "entries": [
+        {
+          "text": "Trial balance",
+          "link": "#fin1",
+          "icon": "fa-balance-scale",
+          "a01": "Finance",
+          "a02": "Balances by account for any period",
+          "a03": "Daily"
+        },
+        {
+          "text": "General ledger detail",
+          "link": "#fin2",
+          "icon": "fa-book",
+          "a01": "Finance",
+          "a02": "Every journal line with source document",
+          "a03": "On demand"
+        },
+        {
+          "text": "Aged receivables",
+          "link": "#fin3",
+          "icon": "fa-hourglass-half",
+          "a01": "Finance",
+          "a02": "Customer balances by 30, 60, 90 and 120 days",
+          "a03": "Daily"
+        },
+        {
+          "text": "Aged payables",
+          "link": "#fin4",
+          "icon": "fa-hourglass-end",
+          "a01": "Finance",
+          "a02": "Supplier balances due this month and overdue",
+          "a03": "Daily"
+        },
+        {
+          "text": "VAT return, 15%",
+          "link": "#fin5",
+          "icon": "fa-percent",
+          "a01": "Finance",
+          "a02": "Output and input VAT ready for the ZATCA filing",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Cash position by bank",
+          "link": "#fin6",
+          "icon": "fa-university",
+          "a01": "Finance",
+          "a02": "Al Rajhi, SNB and Emirates NBD balances in SAR",
+          "a03": "Daily"
+        },
+        {
+          "text": "Budget against actual",
+          "link": "#fin7",
+          "icon": "fa-bar-chart",
+          "a01": "Finance",
+          "a02": "Cost centres over budget highlighted",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Profit and loss by branch",
+          "link": "#fin8",
+          "icon": "fa-line-chart",
+          "a01": "Finance",
+          "a02": "Riyadh, Jeddah, Dammam and Dubai side by side",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Balance sheet",
+          "link": "#fin9",
+          "icon": "fa-columns",
+          "a01": "Finance",
+          "a02": "Consolidated, with prior-year comparison",
+          "a03": "Quarterly"
+        },
+        {
+          "text": "Zakat base",
+          "link": "#fin10",
+          "icon": "fa-calculator",
+          "a01": "Finance",
+          "a02": "Adjusted net worth and zakat due",
+          "a03": "Yearly"
+        },
+        {
+          "text": "Intercompany reconciliation",
+          "link": "#fin11",
+          "icon": "fa-exchange",
+          "a01": "Finance",
+          "a02": "Differences between KSA and UAE entities",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Fixed asset register",
+          "link": "#fin12",
+          "icon": "fa-building",
+          "a01": "Finance",
+          "a02": "Cost, depreciation and net book value",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Sales by branch",
+          "link": "#sal1",
+          "icon": "fa-shopping-cart",
+          "a01": "Sales",
+          "a02": "Invoiced sales against target",
+          "a03": "Daily"
+        },
+        {
+          "text": "Top customers",
+          "link": "#sal2",
+          "icon": "fa-star",
+          "a01": "Sales",
+          "a02": "The 50 customers with the highest sales this year",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Quotation pipeline",
+          "link": "#sal3",
+          "icon": "fa-filter",
+          "a01": "Sales",
+          "a02": "Open quotations by stage and salesperson",
+          "a03": "Daily"
+        },
+        {
+          "text": "Delivered, not invoiced",
+          "link": "#sal4",
+          "icon": "fa-truck",
+          "a01": "Sales",
+          "a02": "Delivery notes waiting for an invoice",
+          "a03": "Daily"
+        },
+        {
+          "text": "Credit limit exceptions",
+          "link": "#sal5",
+          "icon": "fa-exclamation-triangle",
+          "a01": "Sales",
+          "a02": "Orders released over the customer limit",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Returns and credit notes",
+          "link": "#sal6",
+          "icon": "fa-undo",
+          "a01": "Sales",
+          "a02": "Reasons and value by product line",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Salesperson commission",
+          "link": "#sal7",
+          "icon": "fa-money",
+          "a01": "Sales",
+          "a02": "Earned, approved and paid",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Price list changes",
+          "link": "#sal8",
+          "icon": "fa-tags",
+          "a01": "Sales",
+          "a02": "Every change with who approved it",
+          "a03": "On demand"
+        },
+        {
+          "text": "Open purchase orders",
+          "link": "#pro1",
+          "icon": "fa-file-text-o",
+          "a01": "Procurement",
+          "a02": "Ordered and not yet received",
+          "a03": "Daily"
+        },
+        {
+          "text": "Supplier performance",
+          "link": "#pro2",
+          "icon": "fa-thumbs-up",
+          "a01": "Procurement",
+          "a02": "On-time delivery and rejection rate",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Received, not invoiced",
+          "link": "#pro3",
+          "icon": "fa-inbox",
+          "a01": "Procurement",
+          "a02": "Goods receipts without a supplier invoice",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Contract expiry",
+          "link": "#pro4",
+          "icon": "fa-calendar",
+          "a01": "Procurement",
+          "a02": "Supply contracts ending in the next 90 days",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Local content spend",
+          "link": "#pro5",
+          "icon": "fa-flag",
+          "a01": "Procurement",
+          "a02": "Spend with Saudi suppliers against target",
+          "a03": "Quarterly"
+        },
+        {
+          "text": "Customs duties",
+          "link": "#pro6",
+          "icon": "fa-ship",
+          "a01": "Procurement",
+          "a02": "Import duties by shipment and HS code",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Payroll register",
+          "link": "#hr1",
+          "icon": "fa-list-alt",
+          "a01": "HR and payroll",
+          "a02": "Gross to net by employee",
+          "a03": "Monthly"
+        },
+        {
+          "text": "WPS salary file",
+          "link": "#hr2",
+          "icon": "fa-file-code-o",
+          "a01": "HR and payroll",
+          "a02": "Wage protection file for the bank upload",
+          "a03": "Monthly"
+        },
+        {
+          "text": "GOSI contributions",
+          "link": "#hr3",
+          "icon": "fa-shield",
+          "a01": "HR and payroll",
+          "a02": "Employer and employee shares by nationality",
+          "a03": "Monthly",
+          "current": true
+        },
+        {
+          "text": "Iqama expiry",
+          "link": "#hr4",
+          "icon": "fa-id-card-o",
+          "a01": "HR and payroll",
+          "a02": "Residence permits ending in the next 60 days",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Nitaqat ratio",
+          "link": "#hr5",
+          "icon": "fa-pie-chart",
+          "a01": "HR and payroll",
+          "a02": "Saudization by entity and band",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Leave balances",
+          "link": "#hr6",
+          "icon": "fa-plane",
+          "a01": "HR and payroll",
+          "a02": "Annual leave taken and remaining",
+          "a03": "On demand"
+        },
+        {
+          "text": "End of service provision",
+          "link": "#hr7",
+          "icon": "fa-briefcase",
+          "a01": "HR and payroll",
+          "a02": "Accrued gratuity by employee",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Overtime by department",
+          "link": "#hr8",
+          "icon": "fa-clock-o",
+          "a01": "HR and payroll",
+          "a02": "Hours and cost against plan",
+          "a03": "Monthly"
+        }
+      ]
+    },
+    {
+      "title": "Columns, catalogue page",
+      "options": [
+        "amc-THickMenu--columns"
+      ],
+      "entries": [
+        {
+          "text": "Trial balance",
+          "link": "#f1",
+          "icon": "fa-balance-scale",
+          "a01": "Finance",
+          "a02": "Balances by account for any period",
+          "a03": "Daily"
+        },
+        {
+          "text": "General ledger detail",
+          "link": "#f2",
+          "icon": "fa-book",
+          "a01": "Finance",
+          "a02": "Every journal line with source document",
+          "a03": "On demand"
+        },
+        {
+          "text": "Aged receivables",
+          "link": "#f3",
+          "icon": "fa-hourglass-half",
+          "a01": "Finance",
+          "a02": "Customer balances by 30, 60, 90 and 120 days",
+          "a03": "Daily"
+        },
+        {
+          "text": "Aged payables",
+          "link": "#f4",
+          "icon": "fa-hourglass-end",
+          "a01": "Finance",
+          "a02": "Supplier balances due this month and overdue",
+          "a03": "Daily"
+        },
+        {
+          "text": "VAT return, 15%",
+          "link": "#f5",
+          "icon": "fa-percent",
+          "a01": "Finance",
+          "a02": "Output and input VAT ready for the ZATCA filing",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Cash position by bank",
+          "link": "#f6",
+          "icon": "fa-university",
+          "a01": "Finance",
+          "a02": "Al Rajhi, SNB and Emirates NBD balances in SAR",
+          "a03": "Daily"
+        },
+        {
+          "text": "Budget against actual",
+          "link": "#f7",
+          "icon": "fa-bar-chart",
+          "a01": "Finance",
+          "a02": "Cost centres over budget highlighted",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Profit and loss by branch",
+          "link": "#f8",
+          "icon": "fa-line-chart",
+          "a01": "Finance",
+          "a02": "Riyadh, Jeddah, Dammam and Dubai side by side",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Balance sheet",
+          "link": "#f9",
+          "icon": "fa-columns",
+          "a01": "Finance",
+          "a02": "Consolidated, with prior-year comparison",
+          "a03": "Quarterly"
+        },
+        {
+          "text": "Sales by branch",
+          "link": "#s1",
+          "icon": "fa-shopping-cart",
+          "a01": "Sales",
+          "a02": "Invoiced sales against target",
+          "a03": "Daily"
+        },
+        {
+          "text": "Top customers",
+          "link": "#s2",
+          "icon": "fa-star",
+          "a01": "Sales",
+          "a02": "The 50 customers with the highest sales this year",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Quotation pipeline",
+          "link": "#s3",
+          "icon": "fa-filter",
+          "a01": "Sales",
+          "a02": "Open quotations by stage and salesperson",
+          "a03": "Daily"
+        },
+        {
+          "text": "Delivered, not invoiced",
+          "link": "#s4",
+          "icon": "fa-truck",
+          "a01": "Sales",
+          "a02": "Delivery notes waiting for an invoice",
+          "a03": "Daily"
+        },
+        {
+          "text": "Open purchase orders",
+          "link": "#pp1",
+          "icon": "fa-file-text-o",
+          "a01": "Procurement",
+          "a02": "Ordered and not yet received",
+          "a03": "Daily"
+        },
+        {
+          "text": "Supplier performance",
+          "link": "#pp2",
+          "icon": "fa-thumbs-up",
+          "a01": "Procurement",
+          "a02": "On-time delivery and rejection rate",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Received, not invoiced",
+          "link": "#pp3",
+          "icon": "fa-inbox",
+          "a01": "Procurement",
+          "a02": "Goods receipts without a supplier invoice",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Contract expiry",
+          "link": "#pp4",
+          "icon": "fa-calendar",
+          "a01": "Procurement",
+          "a02": "Supply contracts ending in the next 90 days",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Local content spend",
+          "link": "#pp5",
+          "icon": "fa-flag",
+          "a01": "Procurement",
+          "a02": "Spend with Saudi suppliers against target",
+          "a03": "Quarterly"
+        }
+      ]
+    },
+    {
+      "title": "Folded groups with tight chunks, side column",
+      "options": [
+        "amc-THickMenu--folded",
+        "amc-THickMenu--tight"
+      ],
+      "entries": [
+        {
+          "text": "Payroll register",
+          "link": "#p1",
+          "icon": "fa-list-alt",
+          "a01": "Payroll",
+          "a02": "Gross to net by employee",
+          "a03": "Monthly"
+        },
+        {
+          "text": "WPS salary file",
+          "link": "#p2",
+          "icon": "fa-file-code-o",
+          "a01": "Payroll",
+          "a02": "Wage protection file for the bank upload",
+          "a03": "Monthly"
+        },
+        {
+          "text": "GOSI contributions",
+          "link": "#p3",
+          "icon": "fa-shield",
+          "a01": "Payroll",
+          "a02": "Employer and employee shares by nationality",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Iqama expiry",
+          "link": "#p4",
+          "icon": "fa-id-card-o",
+          "a01": "Payroll",
+          "a02": "Residence permits ending in the next 60 days",
+          "a03": "Weekly"
+        },
+        {
+          "text": "Nitaqat ratio",
+          "link": "#p5",
+          "icon": "fa-pie-chart",
+          "a01": "Payroll",
+          "a02": "Saudization by entity and band",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Leave balances",
+          "link": "#p6",
+          "icon": "fa-plane",
+          "a01": "Payroll",
+          "a02": "Annual leave taken and remaining",
+          "a03": "On demand"
+        },
+        {
+          "text": "VAT return, 15%",
+          "link": "#q1",
+          "icon": "fa-percent",
+          "a01": "Finance",
+          "a02": "Output and input VAT ready for the ZATCA filing",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Cash position by bank",
+          "link": "#q2",
+          "icon": "fa-university",
+          "a01": "Finance",
+          "a02": "Al Rajhi, SNB and Emirates NBD balances in SAR",
+          "a03": "Daily"
+        },
+        {
+          "text": "Budget against actual",
+          "link": "#q3",
+          "icon": "fa-bar-chart",
+          "a01": "Finance",
+          "a02": "Cost centres over budget highlighted",
+          "a03": "Monthly"
+        },
+        {
+          "text": "Sales by branch",
+          "link": "#ss1",
+          "icon": "fa-shopping-cart",
+          "a01": "Sales",
+          "a02": "Invoiced sales against target",
+          "a03": "Daily"
+        },
+        {
+          "text": "Top customers",
+          "link": "#ss2",
+          "icon": "fa-star",
+          "a01": "Sales",
+          "a02": "The 50 customers with the highest sales this year",
+          "a03": "Weekly",
+          "current": true
+        },
+        {
+          "text": "Quotation pipeline",
+          "link": "#ss3",
+          "icon": "fa-filter",
+          "a01": "Sales",
+          "a02": "Open quotations by stage and salesperson",
+          "a03": "Daily"
+        },
+        {
+          "text": "Delivered, not invoiced",
+          "link": "#ss4",
+          "icon": "fa-truck",
+          "a01": "Sales",
+          "a02": "Delivery notes waiting for an invoice",
+          "a03": "Daily"
+        },
+        {
+          "text": "Credit limit exceptions",
+          "link": "#ss5",
+          "icon": "fa-exclamation-triangle",
+          "a01": "Sales",
+          "a02": "Orders released over the customer limit",
+          "a03": "Weekly"
+        }
+      ]
+    }
+  ]
+}

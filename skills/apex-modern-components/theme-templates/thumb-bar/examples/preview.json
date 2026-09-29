@@ -1,0 +1,39 @@
+{
+  "samples": [
+    {
+      "title": "Invoice approval, primary is Approve invoice by Attribute 2",
+      "options": ["amc-TThumbBar--success"],
+      "entries": [
+        { "text": "Add note", "link": "#note", "icon": "fa-comment-o", "a01": "3" },
+        { "text": "Attach file", "link": "#attach", "icon": "fa-paperclip" },
+        { "text": "Approve invoice", "link": "#approve", "icon": "fa-check", "a02": "primary" },
+        { "text": "Call supplier", "link": "#call", "icon": "fa-phone" },
+        { "text": "Share", "link": "#share", "icon": "fa-share-alt" },
+        { "text": "Print", "link": "#print", "icon": "fa-print" },
+        { "text": "Return to sender", "link": "#reject", "icon": "fa-reply", "a02": "overflow" }
+      ]
+    },
+    {
+      "title": "Delivery stop, centre primary, stay in place",
+      "options": ["amc-TThumbBar--center", "amc-TThumbBar--static"],
+      "entries": [
+        { "text": "Confirm delivery", "link": "#confirm", "icon": "fa-truck" },
+        { "text": "Navigate", "link": "#map", "icon": "fa-map-marker" },
+        { "text": "Call customer", "link": "#call", "icon": "fa-phone" },
+        { "text": "Photo proof", "link": "#photo", "icon": "fa-camera" },
+        { "text": "Report issue", "link": "#issue", "icon": "fa-exclamation-circle", "a02": "overflow" }
+      ]
+    },
+    {
+      "title": "Sales order, icon only secondaries, floating bar, stay in place",
+      "options": ["amc-TThumbBar--iconOnly", "amc-TThumbBar--floating", "amc-TThumbBar--static"],
+      "entries": [
+        { "text": "Submit order", "link": "#submit", "icon": "fa-paper-plane", "a02": "primary" },
+        { "text": "Add line", "link": "#line", "icon": "fa-plus" },
+        { "text": "Scan barcode", "link": "#scan", "icon": "fa-barcode" },
+        { "text": "Customer", "link": "#cust", "icon": "fa-user" },
+        { "text": "Discount", "link": "#disc", "icon": "fa-percent", "a01": "5%" }
+      ]
+    }
+  ]
+}

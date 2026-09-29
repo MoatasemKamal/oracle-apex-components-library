@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-spotlight-choice.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-spotlight-choice.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

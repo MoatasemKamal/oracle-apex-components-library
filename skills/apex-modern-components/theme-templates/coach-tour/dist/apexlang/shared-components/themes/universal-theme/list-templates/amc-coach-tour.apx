@@ -1,0 +1,123 @@
+listTemplate amc-coach-tour (
+    name: AMC Coach Tour
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TCoachTour #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-label="Page tour" data-step="Step {n} of {total}" data-next="Next" data-back="Back" data-skip="Skip tour" data-done="Done" data-close="Close tour" data-start="Start tour" data-restart="Take the tour again" data-count="{total} tips, about a minute" data-finished="Tour finished. You can take it again at any time.">
+            <div class="amc-TCoachTour-head" hidden><span class="amc-TCoachTour-headIcon fa fa-compass" aria-hidden="true"></span><p class="amc-TCoachTour-headText"><span class="amc-TCoachTour-headTitle">Tour of this page</span><span class="amc-TCoachTour-headMeta"></span></p><button type="button" class="amc-TCoachTour-start">Start tour</button></div>
+            <ol class="amc-TCoachTour-tips">
+            ```
+        afterEntries:
+            ```html
+            </ol>
+            <p class="amc-TCoachTour-status" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TCoachTour-tip" data-target="#A01#"><span class="amc-TCoachTour-tick" aria-hidden="true"></span><span class="amc-TCoachTour-tipText"><span class="amc-TCoachTour-tipTitle">#TEXT#</span><span class="amc-TCoachTour-tipBody">#A02#</span></span></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TCoachTour-tip" data-target="#A01#"><span class="amc-TCoachTour-tick" aria-hidden="true"></span><span class="amc-TCoachTour-tipText"><span class="amc-TCoachTour-tipTitle">#TEXT#</span><span class="amc-TCoachTour-tipBody">#A02#</span></span></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-coach-tour.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-coach-tour.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Target selector
+        a02: Step text
+    }
+    advanced {
+        staticId: AMC_TPL_COACH_TOUR
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a List region that turns its entries into a guided tour of the page. Principles applied, onboarding design: orient, do not educate, so a tour of 3 to 5 steps that shows what to do on this page; it is dismissable at every step with Skip tour, the close button or Escape, never locks the user in, can be taken again from the launcher, and runs by itself only once. Attributes: the entry label is the step title, Attribute 1 is a CSS selector of the element to point at, such as #orders_ig or .t-Button--hot, and Attribute 2 is the step text. A step with an empty Attribute 1 is a centred step without a target, for a welcome or a closing message. A step whose selector is invalid, finds nothing, or finds a hidden element is skipped, and the progress, Step 2 of 5, only counts the steps that can be shown; a target that disappears during the tour is skipped too. Behaviour: the page is dimmed except a spotlight around the target, which is scrolled into view; the coach card sits below or above it and stays on screen, and on screens narrower than 640 pixels, or with Docked card, it sits at the bottom. The card is a modal dialog: it takes focus, keeps Tab inside, Arrow Right and Arrow Left step forward and back, Escape closes, and focus returns to where it was. The list above the tour shows a launcher, Tour of this page with the number of tips and Start tour, and the tips as a checklist in which the steps already seen are ticked. The tour starts by itself about a second after the page loads when this user has neither finished nor skipped it in this application, and never when the page is printed. The outcome and the seen steps are kept in localStorage under amc-tpl-coach-tour:<application id>:<list id>; nothing leaves the browser. JavaScript API: amcTplCoachTour.start() runs the tour again whatever was stored, and accepts a list id, region static id or element; amcTplCoachTour.reset() forgets the outcome so it starts by itself on the next visit; amcTplCoachTour.close() and amcTplCoachTour.isDone() are also available. Template options: Manual start never starts by itself, only from Start tour or the API. Launcher only hides the checklist when JavaScript runs. Pulse ring draws a breathing ring around the spotlight for small targets. Docked card always places the coach card at the bottom of the screen. Without JavaScript the template is a plain checklist of tips with titles and texts. Print never shows the tour or the launcher. English UI strings to translate in Before List Entry: Tour of this page, Start tour, and the wrapper attributes data-label, data-step, data-next, data-back, data-skip, data-done, data-close, data-start, data-restart, data-count and data-finished; {n} and {total} are filled in. Reduced motion removes the spotlight and card movement and the pulse.
+            ```
+    }
+
+    templateOption amc-coach-tour-manual (
+        name: Manual start
+        sequence: 10
+        appearance {
+            cssClasses: amc-TCoachTour--manual
+        }
+        help {
+            helpText:
+                ```text
+                The tour never starts by itself; users start it with Start tour, or your code calls amcTplCoachTour.start(). The launcher gets a tinted background.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MANUAL
+        }
+    )
+
+    templateOption amc-coach-tour-launcher-only (
+        name: Launcher only
+        sequence: 20
+        appearance {
+            cssClasses: amc-TCoachTour--launcherOnly
+        }
+        help {
+            helpText:
+                ```text
+                With JavaScript only the launcher row shows; the tips are read in the tour. Without JavaScript and in print the checklist still shows.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: LAUNCHER_ONLY
+        }
+    )
+
+    templateOption amc-coach-tour-pulse (
+        name: Pulse ring
+        sequence: 30
+        appearance {
+            cssClasses: amc-TCoachTour--pulse
+        }
+        help {
+            helpText:
+                ```text
+                A ring breathes around the spotlight to draw the eye to small targets such as an icon button. Off under reduced motion.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: PULSE
+        }
+    )
+
+    templateOption amc-coach-tour-docked (
+        name: Docked card
+        sequence: 40
+        appearance {
+            cssClasses: amc-TCoachTour--docked
+        }
+        help {
+            helpText:
+                ```text
+                The coach card always sits at the bottom of the screen instead of next to the target, so it never covers the target area. Phones always use it.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DOCKED
+        }
+    )
+)

@@ -1,0 +1,298 @@
+/* Thumb Bar: list template for Universal Theme. The page's main actions as a bottom action bar
+   on phones, with the primary action as the largest target in the thumb zone, compact
+   secondary actions and the rest in a bottom sheet; on wider screens an inline action row.
+   Put amc-TThumbBar-pad on the page body (the script does it for you) so the bar never covers
+   the end of the page. */
+.amc-TThumbBar {
+  --amc-ttb-surface: var(--ut-component-background-color, #fff);
+  --amc-ttb-ink: var(--ut-component-text-default-color, #262626);
+  --amc-ttb-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ttb-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-ttb-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ttb-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-ttb-radius: var(--ut-component-border-radius, 8px);
+  --amc-ttb-shade: var(--amc-ttb-shade-color, rgba(0, 0, 0, .28));
+  --amc-ttb-scrim: var(--amc-ttb-scrim-color, rgba(0, 0, 0, .42));
+  --amc-ttb-hover: color-mix(in srgb, var(--amc-ttb-accent) 8%, transparent);
+  --amc-ttb-z: 470;
+  color: var(--amc-ttb-ink);
+  font-size: .875rem;
+}
+.amc-TThumbBar-sr, .amc-TThumbBar-close .amc-TThumbBar-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.amc-TThumbBar-list, .amc-TThumbBar-sheetList { margin: 0; padding: 0; list-style: none; }
+
+/* ---------- wide screens: an inline action row, primary at the end ---------- */
+.amc-TThumbBar-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+.amc-TThumbBar-item { display: flex; min-inline-size: 0; }
+.amc-TThumbBar-item[hidden] { display: none; }
+.amc-TThumbBar-link, .amc-TThumbBar-moreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  padding-inline: 14px;
+  border: 1px solid var(--amc-ttb-line);
+  border-radius: var(--amc-ttb-radius);
+  background: var(--amc-ttb-surface);
+  color: var(--amc-ttb-ink);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .12s ease, box-shadow .15s ease, transform .15s ease;
+}
+.amc-TThumbBar-link:hover, .amc-TThumbBar-moreBtn:hover { background: var(--amc-ttb-hover); }
+.amc-TThumbBar-link:focus-visible, .amc-TThumbBar-moreBtn:focus-visible, .amc-TThumbBar-close:focus-visible {
+  outline: 2px solid var(--amc-ttb-accent);
+  outline-offset: 2px;
+}
+.amc-TThumbBar-icon { flex: none; font-size: 16px; line-height: 1; }
+.amc-TThumbBar-icon:not([class*="fa-"]) { display: none; }
+.amc-TThumbBar-label { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; unicode-bidi: isolate; }
+.amc-TThumbBar-badge {
+  min-inline-size: 20px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-ttb-accent) 14%, transparent);
+  color: var(--amc-ttb-accent);
+  font-size: .75rem;
+  font-weight: 700;
+  text-align: center;
+  unicode-bidi: plaintext;
+}
+.amc-TThumbBar-badge:empty { display: none; }
+.amc-TThumbBar-item.is-current > .amc-TThumbBar-link { border-color: var(--amc-ttb-accent); }
+
+/* The primary action: one filled, larger target (the only filled control in the bar).
+   Without JavaScript: Attribute 2 = primary, or the first entry. */
+.amc-TThumbBar-item.is-primary > .amc-TThumbBar-link,
+.amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-item--primary > .amc-TThumbBar-link,
+.amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-list:not(:has(.amc-TThumbBar-item--primary)) > .amc-TThumbBar-item:first-child > .amc-TThumbBar-link {
+  min-block-size: 48px;
+  padding-inline: 22px;
+  border-color: transparent;
+  background: var(--amc-ttb-accent);
+  color: var(--amc-ttb-accent-fg);
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--amc-ttb-accent-fg) 22%, transparent), 0 8px 18px -10px var(--amc-ttb-accent);
+}
+.amc-TThumbBar-item.is-primary > .amc-TThumbBar-link:hover { background: color-mix(in srgb, var(--amc-ttb-accent) 88%, var(--amc-ttb-ink)); }
+.amc-TThumbBar-item.is-primary .amc-TThumbBar-badge { background: color-mix(in srgb, var(--amc-ttb-accent-fg) 22%, transparent); color: inherit; }
+.amc-TThumbBar-moreBtn[hidden], .amc-TThumbBar-scrim[hidden], .amc-TThumbBar-sheet[hidden] { display: none; }
+
+/* ---------- phones: the bottom bar ---------- */
+@media (max-width: 39.99em) {
+  .amc-TThumbBar-list {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2px;
+    box-sizing: border-box;
+    padding-block: 8px;
+    padding-block-end: calc(8px + env(safe-area-inset-bottom, 0px));
+    padding-inline: calc(8px + env(safe-area-inset-left, 0px)) calc(8px + env(safe-area-inset-right, 0px));
+    border-block-start: 1px solid var(--amc-ttb-line);
+    background: var(--amc-ttb-surface);
+  }
+  .amc-TThumbBar:not(.amc-TThumbBar--static) .amc-TThumbBar-list {
+    position: fixed;
+    z-index: var(--amc-ttb-z);
+    inset-inline: 0;
+    inset-block-end: 0;
+    box-shadow: 0 -12px 28px -16px var(--amc-ttb-shade);
+  }
+  /* compact secondaries: icon over a short label, 56 x 52 px at least */
+  .amc-TThumbBar-item { flex: 0 1 auto; }
+  .amc-TThumbBar-link, .amc-TThumbBar-moreBtn {
+    flex-direction: column;
+    gap: 3px;
+    inline-size: 100%;
+    min-inline-size: 56px;
+    max-inline-size: 76px;
+    min-block-size: 52px;
+    padding: 4px 6px;
+    border: 0;
+    background: transparent;
+    font-size: .6875rem;
+    font-weight: 600;
+    color: var(--amc-ttb-muted);
+    position: relative;
+  }
+  .amc-TThumbBar-link .amc-TThumbBar-icon, .amc-TThumbBar-moreBtn .amc-TThumbBar-icon { font-size: 19px; color: var(--amc-ttb-ink); }
+  .amc-TThumbBar-link .amc-TThumbBar-label, .amc-TThumbBar-moreBtn .amc-TThumbBar-label {
+    display: -webkit-box;
+    max-inline-size: 100%;
+    white-space: normal;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .amc-TThumbBar-item.is-primary .amc-TThumbBar-label { text-align: start; overflow-wrap: normal; }
+  /* without JavaScript nothing moves to the sheet: the bar scrolls sideways instead of squeezing */
+  .amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-item { flex-shrink: 0; }
+  .amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-list { overflow-x: auto; }
+  .amc-TThumbBar-link .amc-TThumbBar-badge { position: absolute; inset-block-start: 2px; inset-inline-start: calc(50% + 4px); padding: 0 5px; min-inline-size: 16px; font-size: .625rem; line-height: 16px; }
+  /* the primary fills the rest of the bar: the largest target, nearest the thumb */
+  .amc-TThumbBar-item.is-primary,
+  .amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-item--primary,
+  .amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-list:not(:has(.amc-TThumbBar-item--primary)) > .amc-TThumbBar-item:first-child { flex: 1 0 150px; margin-inline-start: 6px; }
+  .amc-TThumbBar-item.is-primary > .amc-TThumbBar-link,
+  .amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-item--primary > .amc-TThumbBar-link,
+  .amc-TThumbBar:not(.is-enhanced) .amc-TThumbBar-list:not(:has(.amc-TThumbBar-item--primary)) > .amc-TThumbBar-item:first-child > .amc-TThumbBar-link {
+    flex-direction: row;
+    gap: 8px;
+    max-inline-size: none;
+    min-block-size: 56px;
+    padding-inline: 16px;
+    border-radius: 999px;
+    font-size: .9375rem;
+  }
+  .amc-TThumbBar-item.is-primary .amc-TThumbBar-icon { color: inherit; font-size: 18px; }
+  .amc-TThumbBar-item.is-primary .amc-TThumbBar-badge { position: static; }
+  .amc-TThumbBar-link:hover, .amc-TThumbBar-moreBtn:hover { background: var(--amc-ttb-hover); }
+  .amc-TThumbBar-link:active { transform: scale(.97); }
+
+  /* bottom sheet for the rest */
+  .amc-TThumbBar-scrim { position: fixed; inset: 0; z-index: calc(var(--amc-ttb-z) + 1); background: var(--amc-ttb-scrim); }
+  .amc-TThumbBar-sheet {
+    position: fixed;
+    z-index: calc(var(--amc-ttb-z) + 2);
+    inset-inline: 0;
+    inset-block-end: 0;
+    display: flex;
+    flex-direction: column;
+    max-block-size: min(70vh, 560px);
+    box-sizing: border-box;
+    padding-block: 6px calc(10px + env(safe-area-inset-bottom, 0px));
+    padding-inline: 10px;
+    border-radius: 18px 18px 0 0;
+    background: var(--amc-ttb-surface);
+    box-shadow: 0 -18px 40px -12px var(--amc-ttb-shade);
+    animation: amc-TThumbBar-up .22s cubic-bezier(.2, .8, .2, 1);
+    transition: transform .2s ease;
+  }
+  .amc-TThumbBar-sheet.is-dragging { transition: none; }
+  .amc-TThumbBar-handle { align-self: stretch; block-size: 22px; margin-block: -6px -4px; cursor: grab; touch-action: none; }
+  .amc-TThumbBar-handle::before { content: ""; display: block; inline-size: 40px; block-size: 5px; margin: 9px auto 0; border-radius: 999px; background: var(--amc-ttb-line); }
+  .amc-TThumbBar-sheetHead { touch-action: none; display: flex; align-items: center; justify-content: space-between; padding-inline: 8px 0; }
+  .amc-TThumbBar-sheetTitle { margin: 0; font-size: 1rem; font-weight: 700; }
+  .amc-TThumbBar-close {
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--amc-ttb-muted);
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .amc-TThumbBar-sheetList { overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y; }
+  .amc-TThumbBar-sheetList .amc-TThumbBar-link {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
+    max-inline-size: none;
+    min-block-size: 52px;
+    padding-inline: 12px;
+    border-radius: 12px;
+    color: var(--amc-ttb-ink);
+    font-size: .9375rem;
+  }
+  .amc-TThumbBar-sheetList .amc-TThumbBar-icon { inline-size: 22px; text-align: center; }
+  .amc-TThumbBar-sheetList .amc-TThumbBar-badge { position: static; margin-inline-start: auto; }
+}
+/* The helper that keeps the end of the page clear of the floating bar. */
+@media (max-width: 39.99em) {
+  .amc-TThumbBar-pad { padding-block-end: calc(var(--amc-tthumb-h, calc(72px + env(safe-area-inset-bottom, 0px))) + 8px); }
+}
+@keyframes amc-TThumbBar-up { from { transform: translateY(100%); } }
+
+/* ---------- options ---------- */
+/* Centre: primary in the middle, lifted above the bar like a floating action button. */
+@media (max-width: 39.99em) {
+  .amc-TThumbBar--center .amc-TThumbBar-item.is-primary { flex: 0 0 auto; margin-inline: 6px; }
+  .amc-TThumbBar--center .amc-TThumbBar-item.is-primary > .amc-TThumbBar-link {
+    flex-direction: column;
+    gap: 2px;
+    min-inline-size: 76px;
+    min-block-size: 64px;
+    margin-block-start: -18px;
+    padding-inline: 10px;
+    border-radius: 22px;
+    font-size: .75rem;
+    box-shadow: 0 0 0 5px var(--amc-ttb-surface), 0 14px 24px -10px var(--amc-ttb-accent);
+  }
+  .amc-TThumbBar--center .amc-TThumbBar-item.is-primary .amc-TThumbBar-icon { font-size: 22px; }
+}
+/* Icon only secondaries: room for 4 of them; the primary keeps its words. */
+.amc-TThumbBar--iconOnly .amc-TThumbBar-item:not(.is-primary) > .amc-TThumbBar-link .amc-TThumbBar-label,
+.amc-TThumbBar--iconOnly .amc-TThumbBar-moreBtn .amc-TThumbBar-label {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.amc-TThumbBar--iconOnly .amc-TThumbBar-item:not(.is-primary) > .amc-TThumbBar-link { padding-inline: 0; inline-size: 44px; }
+.amc-TThumbBar--iconOnly .amc-TThumbBar-sheetList .amc-TThumbBar-link .amc-TThumbBar-label { position: static; inline-size: auto; block-size: auto; clip-path: none; }
+.amc-TThumbBar--iconOnly .amc-TThumbBar-sheetList .amc-TThumbBar-link { inline-size: 100%; padding-inline: 12px; }
+@media (max-width: 39.99em) {
+  .amc-TThumbBar--iconOnly .amc-TThumbBar-item:not(.is-primary) > .amc-TThumbBar-link { inline-size: 52px; min-inline-size: 52px; }
+  .amc-TThumbBar--iconOnly .amc-TThumbBar-item.is-primary { flex-basis: 120px; }
+}
+/* Stay in place: never floats; a compact bar inside the region, for dialog footers and cards. */
+.amc-TThumbBar--static .amc-TThumbBar-list { position: static; }
+@media (max-width: 39.99em) {
+  .amc-TThumbBar--static .amc-TThumbBar-list { border: 1px solid var(--amc-ttb-line); border-radius: var(--amc-ttb-radius); padding-block-end: 8px; }
+}
+/* Floating: a detached pill bar with depth instead of an edge-to-edge bar. */
+@media (max-width: 39.99em) {
+  .amc-TThumbBar--floating:not(.amc-TThumbBar--static) .amc-TThumbBar-list {
+    inset-inline: 10px;
+    inset-block-end: calc(10px + env(safe-area-inset-bottom, 0px));
+    padding-block-end: 8px;
+    border: 1px solid var(--amc-ttb-line);
+    border-radius: 24px;
+    box-shadow: 0 18px 40px -14px var(--amc-ttb-shade), 0 2px 6px -2px var(--amc-ttb-shade);
+  }
+}
+.amc-TThumbBar--floating .amc-TThumbBar-item.is-primary > .amc-TThumbBar-link { box-shadow: 0 10px 22px -10px var(--amc-ttb-accent), inset 0 1px 0 color-mix(in srgb, var(--amc-ttb-accent-fg) 25%, transparent); }
+/* Success primary: for Approve, Confirm delivery, Mark paid. */
+.amc-TThumbBar--success {
+  --amc-ttb-accent: var(--ut-palette-success, #278701);
+  --amc-ttb-accent-fg: var(--ut-palette-success-contrast, #fff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TThumbBar-link, .amc-TThumbBar-moreBtn, .amc-TThumbBar-sheet { transition: none; animation: none; }
+  .amc-TThumbBar-link:active { transform: none; }
+}
+@media (forced-colors: active) {
+  .amc-TThumbBar-item.is-primary > .amc-TThumbBar-link { border: 3px solid ButtonText; }
+  .amc-TThumbBar-list, .amc-TThumbBar-sheet { border: 1px solid CanvasText; }
+  .amc-TThumbBar-link:focus-visible, .amc-TThumbBar-moreBtn:focus-visible { outline-color: Highlight; }
+}
+@media print {
+  .amc-TThumbBar, .amc-TThumbBar-sheet, .amc-TThumbBar-scrim { display: none; }
+  .amc-TThumbBar-pad { padding-block-end: 0; }
+}

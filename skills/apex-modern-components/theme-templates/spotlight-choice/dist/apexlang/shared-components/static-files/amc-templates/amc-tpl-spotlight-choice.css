@@ -1,0 +1,174 @@
+/* Spotlight Choice: list template for Universal Theme. A plan or option chooser in which exactly
+   one recommended entry is isolated (solid fill, raised, a Recommended flag in words) while
+   the others stay quiet and alike, so the one that differs is the one noticed and remembered. */
+.amc-TSpotlightChoice {
+  --amc-tsc-surface: var(--ut-component-background-color, #fff);
+  --amc-tsc-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tsc-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-tsc-line: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-tsc-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tsc-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-tsc-radius: calc(var(--ut-component-border-radius, 6px) * 2);
+  --amc-tsc-lift: 10px;
+  color: var(--amc-tsc-ink);
+  padding-block-start: 16px;
+}
+.amc-TSpotlightChoice-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(13.5rem, 100%), 1fr));
+  gap: 14px;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-TSpotlightChoice-item { position: relative; display: flex; min-inline-size: 0; }
+
+/* ---------- the quiet, identical cards ---------- */
+.amc-TSpotlightChoice-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  inline-size: 100%;
+  box-sizing: border-box;
+  padding: 18px 18px 20px;
+  border: 1px solid var(--amc-tsc-line);
+  border-radius: var(--amc-tsc-radius);
+  background: var(--amc-tsc-surface);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.amc-TSpotlightChoice-card:hover { border-color: color-mix(in srgb, var(--amc-tsc-accent) 55%, var(--amc-tsc-line)); }
+.amc-TSpotlightChoice-card:focus-visible { outline: 2px solid var(--amc-tsc-accent); outline-offset: 4px; }
+.amc-TSpotlightChoice-top { display: flex; align-items: center; gap: 10px; min-inline-size: 0; }
+.amc-TSpotlightChoice-icon { flex: none; font-size: 18px; color: var(--amc-tsc-muted); }
+.amc-TSpotlightChoice-icon:not([class*="fa-"]) { display: none; }
+.amc-TSpotlightChoice-name { flex: 1 1 auto; min-inline-size: 0; font-size: 1rem; font-weight: 700; unicode-bidi: isolate; overflow-wrap: anywhere; }
+.amc-TSpotlightChoice-price {
+  font-size: 1.375rem;
+  font-weight: 800;
+  text-wrap: balance;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+.amc-TSpotlightChoice-desc { color: var(--amc-tsc-muted); font-size: .8125rem; line-height: 1.45; unicode-bidi: isolate; }
+.amc-TSpotlightChoice-price:empty, .amc-TSpotlightChoice-desc:empty { display: none; }
+
+/* radio ring: only when the list writes to a page item */
+.amc-TSpotlightChoice-radio {
+  display: none;
+  flex: none;
+  inline-size: 20px;
+  block-size: 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--amc-tsc-muted);
+  border-radius: 50%;
+  margin-inline-start: auto;
+}
+.amc-TSpotlightChoice.is-choice .amc-TSpotlightChoice-radio { display: block; }
+.amc-TSpotlightChoice-item.is-selected .amc-TSpotlightChoice-radio {
+  border-color: var(--amc-tsc-accent);
+  background: radial-gradient(circle, var(--amc-tsc-accent) 0 4.5px, transparent 5px);
+}
+.amc-TSpotlightChoice-item.is-selected > .amc-TSpotlightChoice-card {
+  border-color: var(--amc-tsc-accent);
+  box-shadow: 0 0 0 2px var(--amc-tsc-accent);
+}
+
+/* ---------- the one that differs ---------- */
+.amc-TSpotlightChoice-flag { display: none; }
+.amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card {
+  z-index: 1;
+  margin-block-start: calc(var(--amc-tsc-lift) * -1);
+  padding-block: 26px 28px;
+  border-color: transparent;
+  background: var(--amc-tsc-accent);
+  color: var(--amc-tsc-accent-fg);
+  box-shadow: 0 22px 40px -22px var(--amc-tsc-accent), 0 2px 0 color-mix(in srgb, var(--amc-tsc-ink) 12%, transparent);
+}
+.amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-flag {
+  position: absolute;
+  inset-block-start: -11px;
+  inset-inline-start: 16px;
+  display: block;
+  padding: 3px 10px;
+  border: 1px solid var(--amc-tsc-accent);
+  border-radius: 999px;
+  background: var(--amc-tsc-surface);
+  color: var(--amc-tsc-accent);
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-icon,
+.amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-desc { color: color-mix(in srgb, var(--amc-tsc-accent-fg) 84%, transparent); }
+.amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-price { font-size: 1.625rem; }
+.amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-radio { border-color: var(--amc-tsc-accent-fg); }
+.amc-TSpotlightChoice-item--recommended.is-selected .amc-TSpotlightChoice-radio {
+  border-color: var(--amc-tsc-accent-fg);
+  background: radial-gradient(circle, var(--amc-tsc-accent-fg) 0 4.5px, transparent 5px);
+}
+.amc-TSpotlightChoice-item--recommended.is-selected > .amc-TSpotlightChoice-card { box-shadow: 0 0 0 3px var(--amc-tsc-surface), 0 0 0 5px var(--amc-tsc-accent), 0 22px 40px -22px var(--amc-tsc-accent); }
+.amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card:hover { background: color-mix(in srgb, var(--amc-tsc-accent) 90%, var(--amc-tsc-ink)); }
+.amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card:focus-visible { outline-color: var(--amc-tsc-ink); }
+.amc-TSpotlightChoice-item.is-current > .amc-TSpotlightChoice-card { border-style: dashed; }
+
+/* ---------- options ---------- */
+/* Centre stage: the script moves the recommended entry to the middle. Styled here so the
+   option is visible to the build; the look is the same. */
+.amc-TSpotlightChoice--middle { --amc-tsc-lift: 14px; }
+/* Stacked rows: one option per row, name and description at the start, price at the end. */
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-list { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "top price" "desc price";
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 2px;
+  padding: 14px 16px;
+}
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-top { grid-area: top; }
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-desc { grid-area: desc; }
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-price { grid-area: price; font-size: 1.25rem; text-align: end; }
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-radio { order: -1; margin-inline-start: 0; }
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card { margin-block-start: 8px; padding-block: 20px 18px; }
+.amc-TSpotlightChoice--stack .amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-price { font-size: 1.5rem; }
+/* Quiet highlight: a tinted, outlined recommended card instead of a solid one. */
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card {
+  border: 2px solid var(--amc-tsc-accent);
+  background: color-mix(in srgb, var(--amc-tsc-accent) 9%, var(--amc-tsc-surface));
+  color: var(--amc-tsc-ink);
+  box-shadow: 0 18px 34px -24px var(--amc-tsc-accent);
+}
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-desc { color: var(--amc-tsc-muted); }
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-icon { color: var(--amc-tsc-accent); }
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-radio { border-color: var(--amc-tsc-accent); }
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended.is-selected .amc-TSpotlightChoice-radio { background: radial-gradient(circle, var(--amc-tsc-accent) 0 4.5px, transparent 5px); }
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card:hover { background: color-mix(in srgb, var(--amc-tsc-accent) 14%, var(--amc-tsc-surface)); }
+.amc-TSpotlightChoice--quiet .amc-TSpotlightChoice-item--recommended .amc-TSpotlightChoice-flag { background: var(--amc-tsc-accent); color: var(--amc-tsc-accent-fg); }
+/* Preselect recommended: the script selects it when the item is empty. */
+.amc-TSpotlightChoice--preselect .amc-TSpotlightChoice-item.is-selected > .amc-TSpotlightChoice-card { transition-duration: 0s; }
+
+@media (max-width: 40em) {
+  .amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card { margin-block-start: 0; }
+  .amc-TSpotlightChoice-list { gap: 18px; }
+}
+@media (pointer: coarse) {
+  .amc-TSpotlightChoice-card { min-block-size: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSpotlightChoice-card { transition: none; }
+}
+@media (forced-colors: active) {
+  .amc-TSpotlightChoice-item--recommended > .amc-TSpotlightChoice-card { border: 4px double CanvasText; }
+  .amc-TSpotlightChoice-item.is-selected > .amc-TSpotlightChoice-card { outline: 3px solid Highlight; }
+  .amc-TSpotlightChoice-item.is-selected .amc-TSpotlightChoice-radio { background: Highlight; forced-color-adjust: none; }
+}

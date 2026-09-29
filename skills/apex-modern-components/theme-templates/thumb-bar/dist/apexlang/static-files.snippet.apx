@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-thumb-bar.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-thumb-bar.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

@@ -1,0 +1,146 @@
+listTemplate amc-thumb-bar (
+    name: AMC Thumb Bar
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-TThumbBar #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" role="group" aria-label="Page actions">
+            <ul class="amc-TThumbBar-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <button type="button" class="amc-TThumbBar-moreBtn" aria-haspopup="dialog" aria-expanded="false" hidden><span class="amc-TThumbBar-icon fa fa-ellipsis-h" aria-hidden="true"></span><span class="amc-TThumbBar-label">More</span></button>
+            <div class="amc-TThumbBar-scrim" hidden></div>
+            <div class="amc-TThumbBar-sheet" role="dialog" aria-modal="true" aria-labelledby="#LIST_ID#_sheet" hidden>
+            <div class="amc-TThumbBar-handle" aria-hidden="true"></div>
+            <div class="amc-TThumbBar-sheetHead"><h2 class="amc-TThumbBar-sheetTitle" id="#LIST_ID#_sheet">More actions</h2><button type="button" class="amc-TThumbBar-close"><span class="fa fa-times" aria-hidden="true"></span><span class="amc-TThumbBar-sr">Close</span></button></div>
+            <ul class="amc-TThumbBar-sheetList"></ul>
+            </div>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-TThumbBar-item is-current amc-TThumbBar-item--#A02#"><a class="amc-TThumbBar-link" href="#LINK#" aria-current="page"><span class="amc-TThumbBar-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TThumbBar-label">#TEXT#</span><span class="amc-TThumbBar-badge">#A01#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-TThumbBar-item amc-TThumbBar-item--#A02#"><a class="amc-TThumbBar-link" href="#LINK#"><span class="amc-TThumbBar-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-TThumbBar-label">#TEXT#</span><span class="amc-TThumbBar-badge">#A01#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-thumb-bar.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-thumb-bar.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Badge
+        a02: Role, primary or overflow
+    }
+    advanced {
+        staticId: AMC_TPL_THUMB_BAR
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for a List region with the page's actions. Principles applied: Fitts's law, the time to hit a target depends on its size and distance, so on phones, below 640 pixels, the bar sits at the bottom edge where the thumb rests, the primary action is the largest target, at least 56 pixels high and filling the free width at the inline end, right in left-to-right pages, and every other target is at least 52 by 56 pixels. Hick's law: at most 3 secondary actions show in the bar, 4 with Icon only secondaries, and the rest go to a More bottom sheet. Gesture patterns: the sheet closes with a swipe down on it, with a dead zone, direction lock and spring back, and always also with Close, Escape or a tap on the dimmed page. Attributes: Attribute 1 is an optional badge, such as a count of notes. Attribute 2 is the role: primary marks the primary action, otherwise the first entry is primary; overflow always puts an action in the More sheet on phones, for rare or destructive actions that should be far from the thumb, such as Cancel order. Other values are ignored. The icon is the entry image. On wider screens the template is an inline row of buttons aligned to the end, with the primary as the only filled button, last. The script moves the primary last in the DOM so focus order follows what is seen. The floating bar never covers content: the script adds the class amc-TThumbBar-pad to the page body with the bar's height, which pads the end of the page on phones; without JavaScript add amc-TThumbBar-pad yourself in Page, CSS Classes. Safe-area insets are respected; add viewport-fit=cover to the page's viewport meta tag to let the bar extend under a home indicator. Template options: Centre primary lifts the primary into the middle of the bar, for apps used with either hand. Icon only secondaries hides the secondary labels, which stay available to screen readers, and allows 4 in the bar. Stay in place keeps the bar inside its region on phones, for dialog footers and cards. Floating bar detaches the bar as a rounded panel above the page. Success primary colours the primary with the success colour, for Approve or Confirm. Keyboard: Tab through the actions, Enter follows a link; the More sheet takes focus, keeps Tab inside, and Escape closes it and returns focus to More. Without JavaScript all actions are in the bar, which scrolls sideways if they do not fit, and the first entry or the primary is still the large one. English UI strings to translate in After List Entry: More, More actions, Close; and Page actions, the group label, in Before List Entry. Reduced motion removes the sheet slide and the press effect. Print hides the bar.
+            ```
+    }
+
+    templateOption amc-thumb-bar-center (
+        name: Centre primary
+        sequence: 10
+        appearance {
+            cssClasses: amc-TThumbBar--center
+        }
+        help {
+            helpText:
+                ```text
+                On phones the primary action sits in the middle of the bar, lifted above it like a floating action button, reachable by either thumb.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: CENTER
+        }
+    )
+
+    templateOption amc-thumb-bar-icon-only (
+        name: Icon only secondaries
+        sequence: 20
+        appearance {
+            cssClasses: amc-TThumbBar--iconOnly
+        }
+        help {
+            helpText:
+                ```text
+                Secondary actions show only their icon, labels stay for screen readers, so 4 fit next to the primary. Use it only with well-known icons.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: ICON_ONLY
+        }
+    )
+
+    templateOption amc-thumb-bar-static (
+        name: Stay in place
+        sequence: 30
+        appearance {
+            cssClasses: amc-TThumbBar--static
+        }
+        help {
+            helpText:
+                ```text
+                On phones the bar stays inside its region instead of floating at the bottom of the screen, for modal dialog footers and cards. No page padding is added.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STATIC
+        }
+    )
+
+    templateOption amc-thumb-bar-floating (
+        name: Floating bar
+        sequence: 40
+        appearance {
+            cssClasses: amc-TThumbBar--floating
+        }
+        help {
+            helpText:
+                ```text
+                On phones the bar is a rounded panel that floats above the page with a gap to the screen edges and a deeper shadow.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FLOATING
+        }
+    )
+
+    templateOption amc-thumb-bar-success (
+        name: Success primary
+        sequence: 50
+        appearance {
+            cssClasses: amc-TThumbBar--success
+        }
+        help {
+            helpText:
+                ```text
+                The primary action uses the theme's success colour instead of the primary colour, for Approve, Confirm delivery or Mark as paid.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: SUCCESS
+        }
+    )
+)

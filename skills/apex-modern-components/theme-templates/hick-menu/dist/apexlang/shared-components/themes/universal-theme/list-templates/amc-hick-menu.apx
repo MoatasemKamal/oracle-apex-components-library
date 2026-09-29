@@ -1,0 +1,131 @@
+listTemplate amc-hick-menu (
+    name: AMC Hick Menu
+    list {
+        beforeEntries:
+            ```html
+            <div class="amc-THickMenu #COMPONENT_CSS_CLASSES#" id="#LIST_ID#" data-chunk="7" data-threshold="15" data-recent-max="5" data-show-all="Show all {count} in {group}" data-show-fewer="Show fewer in {group}" data-more-count="+{count}" data-filter-label="Filter {count} entries" data-matches="{count} of {total} entries match" data-no-match="Nothing matches {query}. Clear the filter to see every entry." data-cleared="Recent entries cleared" data-other="Other" data-shown="{count} entries shown in {group}">
+            <div class="amc-THickMenu-tools" hidden>
+            <span class="amc-THickMenu-search"><span class="amc-THickMenu-searchIcon fa fa-search" aria-hidden="true"></span><input type="search" class="amc-THickMenu-input" autocomplete="off" spellcheck="false" aria-label="Filter entries" placeholder="Filter entries"><button type="button" class="amc-THickMenu-clearFilter" hidden><span class="fa fa-times" aria-hidden="true"></span><span class="amc-THickMenu-sr">Clear filter</span></button></span>
+            </div>
+            <section class="amc-THickMenu-recent" hidden>
+            <div class="amc-THickMenu-recentHead"><h3 class="amc-THickMenu-recentTitle">Recent</h3><button type="button" class="amc-THickMenu-reset">Clear recent</button></div>
+            <ul class="amc-THickMenu-recentList"></ul>
+            </section>
+            <ul class="amc-THickMenu-list">
+            ```
+        afterEntries:
+            ```html
+            </ul>
+            <p class="amc-THickMenu-empty" hidden></p>
+            <p class="amc-THickMenu-status amc-THickMenu-sr" role="status" aria-live="polite"></p>
+            </div>
+            ```
+    }
+    entry {
+        current:
+            ```html
+            <li class="amc-THickMenu-item is-current" data-group="#A01#"><a class="amc-THickMenu-link" href="#LINK#" aria-current="page"><span class="amc-THickMenu-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-THickMenu-text"><span class="amc-THickMenu-label">#TEXT#</span><span class="amc-THickMenu-desc">#A02#</span></span><span class="amc-THickMenu-meta">#A03#</span><span class="amc-THickMenu-tag">#A01#</span></a></li>
+            ```
+        noncurrent:
+            ```html
+            <li class="amc-THickMenu-item" data-group="#A01#"><a class="amc-THickMenu-link" href="#LINK#"><span class="amc-THickMenu-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span><span class="amc-THickMenu-text"><span class="amc-THickMenu-label">#TEXT#</span><span class="amc-THickMenu-desc">#A02#</span></span><span class="amc-THickMenu-meta">#A03#</span><span class="amc-THickMenu-tag">#A01#</span></a></li>
+            ```
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-hick-menu.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-hick-menu.css
+        ]
+    }
+    attributeDescriptions {
+        a01: Group
+        a02: Description
+        a03: Meta
+    }
+    advanced {
+        staticId: AMC_TPL_HICK_MENU
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            List template for long lists. Principles applied: Hick's law, decision time grows with the number of simultaneous choices, so each group shows at most 7 entries (4 with Tight chunks) and the rest stay behind one button per group, the filter narrows the choice to what the user typed, and recent entries skip the choice entirely for repeat visits. Miller's law, chunking: entries are grouped under their Attribute 1 value in the order the groups first appear, and each group is a meaningful, named chunk with its count. Attributes: Attribute 1 is the group name, such as Finance or HR and payroll; entries without one go to Other. Attribute 2 is a one-line description. Attribute 3 is a short meta text at the end of the row, such as Daily or Monthly. The icon is the entry image. Behaviour: when a group has two or more entries beyond the chunk, the extra entries are hidden behind Show all 12 in Finance; pressing it shows the whole group and moves focus to the first entry that appeared, and Show fewer in Finance hides them again. A group that contains the current page is always open and shows the current entry. When the list has more than 15 entries, set with data-threshold on the wrapper, a filter box appears above the groups: it matches label, description, meta and group, case and accent insensitive, every typed word must match, groups without matches disappear, the count is announced politely, Escape clears it and Arrow Down moves to the first result. Recent: when the user opens an entry the template remembers it in localStorage under amc-tpl-hick-menu:<application id>:<list id>, and the last 5, set with data-recent-max, appear as a strip of chips above the groups; Clear recent forgets them. Nothing leaves the browser. Group headings are buttons that fold a group. Template options: Columns lays the groups side by side for a catalogue page. Tight chunks shows 4 entries per group and hides descriptions, for side columns. No recent strip turns the learning off. Folded groups starts with only the group names, and the group of the current page open. Keyboard: Tab through filter, recent chips, group buttons, entries and Show all buttons; Enter follows a link. Without JavaScript the template is a flat list of links with the group name beside each entry. English UI strings to translate in Before List Entry: Filter entries, Clear filter, Recent, Clear recent, and the wrapper attributes data-show-all, data-show-fewer, data-more-count, data-filter-label, data-matches, data-no-match, data-cleared, data-other and data-shown; {count}, {total}, {group} and {query} are filled in. data-chunk, data-threshold and data-recent-max set the numbers. Reduced motion removes the chevron and hover transitions.
+            ```
+    }
+
+    templateOption amc-hick-menu-columns (
+        name: Columns
+        sequence: 10
+        appearance {
+            cssClasses: amc-THickMenu--columns
+        }
+        help {
+            helpText:
+                ```text
+                Lays the groups out side by side in as many columns as fit, for a full catalogue page. On phones the groups stack.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: COLUMNS
+        }
+    )
+
+    templateOption amc-hick-menu-tight (
+        name: Tight chunks
+        sequence: 20
+        appearance {
+            cssClasses: amc-THickMenu--tight
+        }
+        help {
+            helpText:
+                ```text
+                Shows at most 4 entries per group, the working-memory size of about four chunks, and hides the descriptions. For side columns and dashboards.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TIGHT
+        }
+    )
+
+    templateOption amc-hick-menu-no-recent (
+        name: No recent strip
+        sequence: 30
+        appearance {
+            cssClasses: amc-THickMenu--noRecent
+        }
+        help {
+            helpText:
+                ```text
+                Does not remember or show the recently opened entries, for shared kiosk devices or when the order must stay fixed.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_RECENT
+        }
+    )
+
+    templateOption amc-hick-menu-folded (
+        name: Folded groups
+        sequence: 40
+        appearance {
+            cssClasses: amc-THickMenu--folded
+        }
+        help {
+            helpText:
+                ```text
+                Starts with only the group names as large rows, so the first choice is between a handful of groups. The group of the current page opens, and a filter opens every group with a match.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: FOLDED
+        }
+    )
+)

@@ -1,0 +1,32 @@
+{
+  "samples": [
+    {
+      "title": "Support plans, recommended placed first",
+      "options": [],
+      "entries": [
+        { "text": "Essential", "link": "#essential", "icon": "fa-life-ring", "a01": "Email support in business hours, Sunday to Thursday, answer within one working day.", "a03": "SAR 450 / month", "a04": "ESSENTIAL" },
+        { "text": "Enterprise", "link": "#enterprise", "icon": "fa-building", "a01": "Named account manager, on-site visits in Riyadh, Jeddah and Dubai, 1-hour response.", "a03": "SAR 3,900 / month", "a04": "ENTERPRISE" },
+        { "text": "Business", "link": "#business", "icon": "fa-briefcase", "a01": "Phone and chat 7 days a week in Arabic and English, 4-hour response, quarterly health check.", "a02": "recommended", "a03": "SAR 1,200 / month", "a04": "BUSINESS" }
+      ]
+    },
+    {
+      "title": "Delivery service, centre stage",
+      "options": ["amc-TSpotlightChoice--middle"],
+      "entries": [
+        { "text": "Same day", "link": "#same-day", "icon": "fa-bolt", "a01": "Order before 12:00, delivered today inside Riyadh.", "a03": "SAR 45", "a04": "SAME_DAY" },
+        { "text": "Next day", "link": "#next-day", "icon": "fa-truck", "a01": "Delivered tomorrow to any city in the Kingdom, tracked.", "a02": "recommended", "a03": "SAR 18", "a04": "NEXT_DAY" },
+        { "text": "Scheduled", "link": "#scheduled", "icon": "fa-calendar", "a01": "Pick a 2-hour window up to 7 days ahead.", "a03": "SAR 25", "a04": "SCHEDULED" }
+      ]
+    },
+    {
+      "title": "Payment terms, stacked rows, quiet highlight",
+      "options": ["amc-TSpotlightChoice--stack", "amc-TSpotlightChoice--quiet"],
+      "entries": [
+        { "text": "Pay now by bank transfer", "link": "#now", "icon": "fa-university", "a01": "2% early payment discount on the invoice total.", "a02": "recommended", "a03": "SAR 47,334", "a04": "PREPAID" },
+        { "text": "Net 30", "link": "#net30", "icon": "fa-calendar-o", "a01": "Due 30 days after the invoice date.", "a03": "SAR 48,300", "a04": "NET30" },
+        { "text": "Net 60", "link": "#net60", "icon": "fa-calendar", "a01": "Due 60 days after the invoice date, needs credit approval.", "a03": "SAR 48,300", "a04": "NET60" },
+        { "text": "Three instalments", "link": "#inst", "icon": "fa-th-large", "a01": "Monthly, the first on delivery.", "a03": "3 x SAR 16,100", "a04": "INSTALMENTS" }
+      ]
+    }
+  ]
+}
