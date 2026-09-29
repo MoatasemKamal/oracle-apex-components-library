@@ -39,6 +39,29 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Design Collection (120+ modern designs)
+
+Twelve template components, each a **family** of distinct modern designs picked with one
+**Style** setting. All of them read the Universal Theme variables, so every style follows
+Vita, Vita Dark, Redwood and Theme Roller, and works in RTL. See
+[`references/design-collection.md`](skills/apex-modern-components/references/design-collection.md).
+
+| Component | Styles | Modes | Designs |
+|---|---:|---|---|
+| [Design Card](skills/apex-modern-components/components/design-card) | 12 | partial, report | elevated, outline, glass, gradient border, image top, image overlay, horizontal, accent top, ticket, stacked paper, soft inset, corner icon |
+| [Design Badge](skills/apex-modern-components/components/design-badge) | 12 | partial, report | soft, solid, outline, dot, live, gradient pill, counter, icon tag, chip, ribbon, code, status bar |
+| [Design Button](skills/apex-modern-components/components/design-button) | 12 | partial, report | soft, gradient, glass, outline draw, pill arrow, icon circle, 3D press, shimmer, underline, ghost glow, split icon, neon border |
+| [Design List](skills/apex-modern-components/components/design-list) | 11 | report | avatar rows, file rows, checklist, leaderboard, contacts, settings, notifications, inbox, metric rows, compact, pills |
+| [Design Alert](skills/apex-modern-components/components/design-alert) | 10 | partial, report | soft, side icon, solid, gradient banner, toast card, announcement, tip, quote, inline, panel |
+| [Design Timeline](skills/apex-modern-components/components/design-timeline) | 10 | report | dots, icon rail, alternating, cards, log, milestones, changelog, numbered, date blocks, branch |
+| [Design KPI](skills/apex-modern-components/components/design-kpi) | 10 | partial, report | big number, delta chip, glass, gradient, compare, target bar, ring, spark bars, icon left, minimal |
+| [Design Profile](skills/apex-modern-components/components/design-profile) | 10 | partial, report | centered, cover, horizontal, glass, minimal, stats, gradient ring, business card, chip, compact row |
+| [Design Pricing](skills/apex-modern-components/components/design-pricing) | 10 | partial, report | classic, highlighted, glass, gradient header, minimal, horizontal, checklist, compact, dark enterprise, outline bold |
+| [Design Header](skills/apex-modern-components/components/design-header) | 10 | partial | gradient hero, split, minimal, image overlay, dotted grid, card header, centered icon, wave bottom, glass panel, eyebrow |
+| [Design Avatar](skills/apex-modern-components/components/design-avatar) | 8 | partial, report | ring, status dot, squircle, gradient ring, initials, with name, count badge, square tile |
+| [Design Divider](skills/apex-modern-components/components/design-divider) | 8 | partial | line title, eyebrow title, gradient line, icon center, pill label, accent underline, dotted, side label |
+| **Total** | **123** | | |
+
 ## Motion Kit (native buttons, forms, reports, icons, breadcrumbs, nav bar, menu bar)
 
 [`motion-kit/`](skills/apex-modern-components/motion-kit) adds motion to the native
