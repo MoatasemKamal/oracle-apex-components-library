@@ -1,0 +1,11 @@
+{
+  "name": "AMC Vector",
+  "staticId": "AMC_STYLE_VECTOR",
+  "version": "1.0.0",
+  "base": "vita",
+  "scheme": "light",
+  "description": "A field-operations style for courier and warehouse apps: a violet dispatch header crossed by the logo's orange and sky-blue speed streaks, flat label-white regions on a dock-grey page, strong ink text for reading in sunlight, and tabular numbers for waybills and counts.",
+  "keywords": ["vector", "courier", "delivery", "logistics", "warehouse", "field", "scan", "violet", "pwa", "mobile", "light"],
+  "helpText": "Light style built on Vita for installable field apps. The only bold element is the header: brand violet (#5B4BE1, WCAG AA with white text) with slanted orange and sky-blue speed streaks at the inline end, taken from the app icon and mirrored in RTL. Everything else stays quiet for work: flat white regions with a hairline edge and no shadow, a radius that shrinks with hierarchy (regions 14px, buttons 10px, fields 8px, badges pill), near-black ink text and darker field borders that hold up outdoors, and tabular figures in reports. Orange is decoration only and never carries text or status. Set the PWA theme color to #5B4BE1 and background color to #F4F4F7. Uses the system font stack; Atkinson Hyperlegible is used first when the app ships it as a static file. Header and navigation refinements target Universal Theme classes and should be checked on a live page.",
+  "endUserCanPick": true
+}

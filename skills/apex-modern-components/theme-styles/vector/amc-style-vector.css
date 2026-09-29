@@ -1,0 +1,100 @@
+/* AMC Vector: Universal Theme style (light), layered on Vita.
+   Field operations: one bold violet header with the logo's speed streaks, quiet flat work surfaces. */
+:root {
+  --ut-body-background-color: #f4f4f7;
+  --ut-body-text-color: #17152e;
+  --ut-component-background-color: #ffffff;
+  --ut-component-text-default-color: #17152e;
+  --ut-component-text-muted-color: #5e5b72;
+  --ut-component-border-color: rgba(23, 21, 46, .12);
+  --ut-component-border-radius: 14px;
+  --ut-component-box-shadow: none;
+  --ut-link-text-color: #4b3bd1;
+  --ut-focus-outline-color: #4b3bd1;
+  --ut-palette-primary: #5b4be1;
+  --ut-palette-primary-contrast: #ffffff;
+  --ut-palette-success: #1f6e43;
+  --ut-palette-success-contrast: #ffffff;
+  --ut-palette-warning: #e09b2d;
+  --ut-palette-warning-contrast: #1f1604;
+  --ut-palette-danger: #b42318;
+  --ut-palette-danger-contrast: #ffffff;
+  --ut-palette-info: #1b6fc2;
+  --ut-palette-info-contrast: #ffffff;
+  --ut-header-background-color: #5b4be1;
+  --ut-header-text-color: #ffffff;
+  --ut-nav-background-color: #ffffff;
+  --ut-font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Arabic", sans-serif;
+  --amc-vector-ink: #17152e;
+  --amc-vector-violet-deep: #3f31b8;
+  --amc-vector-streak-orange: #f28a1e;
+  --amc-vector-streak-sky: #36a3f2;
+  --amc-vector-field-line: rgba(23, 21, 46, .34);
+  /* Speed trail from the app icon along the header's bottom edge, fading toward the start edge. */
+  --amc-vector-streaks: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='12' viewBox='0 0 480 12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='f' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='.55' stop-color='%23fff'/%3E%3C/linearGradient%3E%3Cmask id='m'%3E%3Crect width='480' height='12' fill='url(%23f)'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)'%3E%3Cpath d='M0 12 L480 5 L480 8 L0 12 Z' fill='%2336a3f2'/%3E%3Cpath d='M60 12 L480 8.5 L480 12 Z' fill='%23f28a1e'/%3E%3C/g%3E%3C/svg%3E");
+  --amc-vector-streaks-rtl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='12' viewBox='0 0 480 12' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='f' x1='1' x2='0'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='.55' stop-color='%23fff'/%3E%3C/linearGradient%3E%3Cmask id='m'%3E%3Crect width='480' height='12' fill='url(%23f)'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)'%3E%3Cpath d='M480 12 L0 5 L0 8 L480 12 Z' fill='%2336a3f2'/%3E%3Cpath d='M420 12 L0 8.5 L0 12 Z' fill='%23f28a1e'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Header: the one bold element. Violet dispatch bar with a sky-blue and orange speed trail along its
+   bottom edge (below the text, so the logo and navigation bar stay on plain violet). */
+.t-Header {
+  background:
+    var(--amc-vector-streaks) right bottom / min(560px, 75%) 10px no-repeat,
+    var(--ut-header-background-color);
+  color: var(--ut-header-text-color);
+  box-shadow: 0 1px 0 var(--amc-vector-violet-deep);
+}
+[dir="rtl"] .t-Header {
+  background:
+    var(--amc-vector-streaks-rtl) left bottom / min(560px, 75%) 10px no-repeat,
+    var(--ut-header-background-color);
+}
+.t-Header-logo, .t-Header-logo-link { color: var(--ut-header-text-color); }
+.t-Header .t-Button--header { color: var(--ut-header-text-color); }
+
+/* Side navigation: white, current entry marked by a violet bar and tint. */
+.t-Body-nav { background: var(--ut-nav-background-color); border-inline-end-color: rgba(23, 21, 46, .08); }
+.t-TreeNav .is-current > a {
+  background: color-mix(in srgb, var(--ut-palette-primary) 10%, transparent);
+  color: var(--amc-vector-violet-deep);
+  box-shadow: inset 4px 0 0 var(--ut-palette-primary);
+}
+[dir="rtl"] .t-TreeNav .is-current > a { box-shadow: inset -4px 0 0 var(--ut-palette-primary); }
+
+/* Regions: flat label-white sheets with a hairline edge; no shadow, so the header stays the only accent. */
+.t-Region { border-color: var(--ut-component-border-color); box-shadow: none; }
+.t-Region-header { border-bottom-color: rgba(23, 21, 46, .08); }
+.t-Region-title, .t-BreadcrumbRegion-title { color: var(--amc-vector-ink); font-weight: 700; letter-spacing: -.005em; }
+
+/* Buttons: radius one step below regions; hot is solid violet, pressed goes deeper. */
+.t-Button { border-radius: 10px; }
+.t-Button--hot { background: var(--ut-palette-primary); color: var(--ut-palette-primary-contrast); }
+.t-Button--hot:active { background: var(--amc-vector-violet-deep); }
+.t-Button:not(.t-Button--hot):not(.t-Button--noUI):not(.t-Button--header) {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(23, 21, 46, .18);
+}
+
+/* Fields: darker edges than Vita so they read outdoors; radius another step down. */
+.apex-item-text, .apex-item-select, .apex-item-textarea, .t-Form-field {
+  background-color: #ffffff;
+  border-color: var(--amc-vector-field-line);
+  border-radius: 8px;
+}
+
+/* Badges and chips: pill shaped, like a parcel status tag. */
+.t-Badge, .a-Chip { border-radius: 999px; }
+
+/* Reports: quiet grey head row, tabular figures for waybills, counts and times. */
+.t-Report-colHead, .a-IRR-header, .a-GV-header {
+  background: #eeedf4;
+  color: #3a3752;
+  border-bottom-color: rgba(23, 21, 46, .14);
+}
+.t-Report-report, .a-IRR-table, .a-GV-table, .t-Cards, .a-CardView { font-variant-numeric: tabular-nums; }
+
+@media (forced-colors: active) {
+  .t-Header { background: Canvas; box-shadow: none; border-bottom: 2px solid CanvasText; }
+  .t-Region { border-color: CanvasText; }
+  .t-TreeNav .is-current > a { box-shadow: none; outline: 2px solid Highlight; outline-offset: -2px; }
+}

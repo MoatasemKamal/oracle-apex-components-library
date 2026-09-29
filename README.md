@@ -81,7 +81,7 @@ Two templates for the application-level slots in User Interface, set once for th
 
 Both share one Ctrl K: the nav bar's search hands over to the Command Rail when both are present.
 
-## Theme Styles (13 whole-app looks)
+## Theme Styles (14 whole-app looks)
 
 Universal Theme **styles**, like Vita or Redwood, that restyle native APEX and every component and
 template in this library at once. Set one as current in Theme Roller or let users pick their own.
@@ -104,6 +104,7 @@ See [`references/theme-styles.md`](skills/apex-modern-components/references/them
 | [Nordic](skills/apex-modern-components/theme-styles/nordic) | light | A cool, minimal Scandinavian style: pale grey-blue page, white regions with almost no shadow, slate text, a muted fjord-blue primary, soft 12px corners and a thin white header with a slate rule. |
 | [Paper](skills/apex-modern-components/theme-styles/paper) | light | An editorial style for reports and document-heavy apps: near-white paper, ink-black text, one strong ink-blue accent, serif headings and hairline rules instead of boxes. |
 | [Royal](skills/apex-modern-components/theme-styles/royal) | light | A formal government and enterprise style: a deep indigo header with a thin gold rule, a warm ivory page, ivory-white regions, an indigo primary, and gold kept for accents only (current menu marker, focus ring, badges). |
+| [Vector](skills/apex-modern-components/theme-styles/vector) | light | A field-operations style for courier and warehouse apps: a violet dispatch header crossed by the logo's orange and sky-blue speed streaks, flat label-white regions on a dock-grey page, strong ink text for reading in sunlight, and tabular numbers for waybills and counts. |
 | [Vita Auto](skills/apex-modern-components/theme-styles/vita-auto) | auto | The familiar Vita look that follows the operating system: Vita light by day and a Vita Dark style palette when the user's device is set to dark mode, with no page reload or user preference to manage. |
 
 ## Living Templates (12 templates that understand content and users)

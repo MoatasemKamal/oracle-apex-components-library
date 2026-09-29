@@ -723,6 +723,69 @@
       "legacySql": "theme-styles/royal/dist/legacy/amc_style_royal.sql"
     },
     {
+      "slug": "vector",
+      "name": "AMC Vector",
+      "staticId": "AMC_STYLE_VECTOR",
+      "apexlangId": "amc-vector",
+      "base": "vita",
+      "scheme": "light",
+      "version": "1.0.0",
+      "description": "A field-operations style for courier and warehouse apps: a violet dispatch header crossed by the logo's orange and sky-blue speed streaks, flat label-white regions on a dock-grey page, strong ink text for reading in sunlight, and tabular numbers for waybills and counts.",
+      "keywords": [
+        "vector",
+        "courier",
+        "delivery",
+        "logistics",
+        "warehouse",
+        "field",
+        "scan",
+        "violet",
+        "pwa",
+        "mobile",
+        "light"
+      ],
+      "contrast": [
+        {
+          "scheme": "light",
+          "pair": "--ut-body-text-color on --ut-body-background-color",
+          "ratio": 16.17,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-default-color on --ut-component-background-color",
+          "ratio": 17.75,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-component-text-muted-color on --ut-component-background-color",
+          "ratio": 6.53,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-link-text-color on --ut-component-background-color",
+          "ratio": 7.38,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary-contrast on --ut-palette-primary",
+          "ratio": 5.93,
+          "min": 4.5
+        },
+        {
+          "scheme": "light",
+          "pair": "--ut-palette-primary on --ut-component-background-color",
+          "ratio": 5.93,
+          "min": 3
+        }
+      ],
+      "apexlang": "theme-styles/vector/dist/apexlang",
+      "legacySql": "theme-styles/vector/dist/legacy/amc_style_vector.sql"
+    },
+    {
       "slug": "vita-auto",
       "name": "AMC Vita Auto",
       "staticId": "AMC_STYLE_VITA_AUTO",

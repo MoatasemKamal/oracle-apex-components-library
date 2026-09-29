@@ -31,7 +31,8 @@ Division of work:
    (blockers, then high-impact design, then polish).
 3. Fix in this order, loading only the reference you need:
    1. Installability and manifest: `references/pwa-settings.md`
-   2. Visual direction (brief, token plan, Theme Style): `references/design-direction.md`,
+   2. Visual direction (brief, token plan, Theme Style): `references/design-direction.md`
+      (worked example: `examples/vector-courier.md`),
       with the `frontend-design` skill loaded if it is installed
    3. App-like design (standalone chrome, safe areas, touch, navigation, theme color):
       `references/pwa-design.md`
