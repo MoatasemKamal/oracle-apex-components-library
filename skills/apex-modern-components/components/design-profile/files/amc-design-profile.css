@@ -672,6 +672,10 @@
 
 /* ---------- 8. Business Card: brand panel plus contact lines ---------- */
 
+/* A single business card (partial, outside the report grid) keeps card proportions on wide
+   regions instead of stretching across a 1920px+ page. */
+.amc-DProfile--businessCard:not(.amc-DProfiles-item > *) { max-inline-size: 36rem; }
+
 .amc-DProfile--businessCard .amc-DProfile-card {
   --amc-dprof-av: 4rem;
   grid-template-columns: 7rem minmax(0, 1fr);

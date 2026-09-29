@@ -64,7 +64,7 @@ plugin designProfile (
         ]
     }
     information {
-        version: 1.0.1
+        version: 1.0.2
         helpText:
             ```
             Pick a Style, then map Name and either Image URL or Initials. Role, Bio, Status (online, away, busy, offline), up to three stats, a link and, for the Cover and Business Card styles, Cover Image URL, Email and Phone are optional. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.
