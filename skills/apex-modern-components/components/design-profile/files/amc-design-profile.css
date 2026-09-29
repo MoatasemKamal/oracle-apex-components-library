@@ -1,0 +1,854 @@
+/* APEX Modern Components - Design Profile (Design Collection)
+ * Ten person/profile designs selected with the Style setting. Every color,
+ * radius and shadow resolves from Universal Theme variables (--ut-*) with
+ * literal fallbacks, so profiles follow Vita, Vita Dark, Redwood, Theme Roller
+ * and custom styles. Tints and gradients are color-mix() of palette variables. */
+
+.amc-DProfile,
+.amc-DProfiles {
+  --amc-dprof-bg: var(--ut-component-background-color, #fff);
+  --amc-dprof-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dprof-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dprof-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-dprof-radius: var(--ut-component-border-radius, .5rem);
+  --amc-dprof-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .06));
+  --amc-dprof-accent: var(--ut-palette-primary, #056ac8);
+  --amc-dprof-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-dprof-online: var(--ut-palette-success, #278701);
+  --amc-dprof-away: var(--ut-palette-warning, #fbce4a);
+  --amc-dprof-busy: var(--ut-palette-danger, #cb1100);
+  --amc-dprof-offline: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dprof-min: 15rem;
+}
+
+/* ---------- Report layouts ---------- */
+
+.amc-DProfiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-dprof-min), 100%), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-DProfiles--horizontal,
+.amc-DProfiles--businessCard { --amc-dprof-min: 20rem; }
+.amc-DProfiles--minimal { --amc-dprof-min: 16rem; gap: 1.75rem 2rem; }
+
+.amc-DProfiles--chip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.amc-DProfiles--compactRow {
+  display: block;
+  border: 1px solid var(--amc-dprof-line);
+  border-radius: var(--amc-dprof-radius);
+  background-color: var(--amc-dprof-bg);
+  overflow: hidden;
+}
+
+.amc-DProfiles-item {
+  display: flex;
+  min-inline-size: 0;
+}
+
+.amc-DProfiles--chip .amc-DProfiles-item { display: block; max-inline-size: 100%; }
+.amc-DProfiles--compactRow .amc-DProfiles-item + .amc-DProfiles-item { border-block-start: 1px solid var(--amc-dprof-line); }
+
+/* ---------- Shared anatomy ---------- */
+
+.amc-DProfile {
+  --amc-dprof-av: 3.5rem;
+  --amc-dprof-status: var(--amc-dprof-offline);
+  flex: 1;
+  min-inline-size: 0;
+  container-type: inline-size;
+  color: var(--amc-dprof-fg);
+}
+
+.amc-DProfile--online { --amc-dprof-status: var(--amc-dprof-online); }
+.amc-DProfile--away { --amc-dprof-status: var(--amc-dprof-away); }
+.amc-DProfile--busy { --amc-dprof-status: var(--amc-dprof-busy); }
+
+.amc-DProfile-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: .75rem;
+  box-sizing: border-box;
+  block-size: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--amc-dprof-line);
+  border-radius: var(--amc-dprof-radius);
+  background-color: var(--amc-dprof-bg);
+  box-shadow: var(--amc-dprof-shadow);
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+.amc-DProfile--linked .amc-DProfile-card:hover {
+  border-color: color-mix(in srgb, var(--amc-dprof-accent) 45%, var(--amc-dprof-line));
+  box-shadow: 0 .5rem 1.25rem -.5rem color-mix(in srgb, var(--amc-dprof-fg) 22%, transparent);
+}
+
+/* Avatar */
+.amc-DProfile-avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  inline-size: var(--amc-dprof-av);
+  block-size: var(--amc-dprof-av);
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 14%, var(--amc-dprof-bg));
+  color: color-mix(in srgb, var(--amc-dprof-accent) 80%, var(--amc-dprof-fg));
+}
+
+.amc-DProfile-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.amc-DProfile-initials {
+  font-size: calc(var(--amc-dprof-av) * .36);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .02em;
+  unicode-bidi: isolate;
+}
+
+.amc-DProfile-dot {
+  position: absolute;
+  inset-block-end: 2%;
+  inset-inline-end: 2%;
+  box-sizing: border-box;
+  inline-size: max(.75rem, calc(var(--amc-dprof-av) * .24));
+  block-size: max(.75rem, calc(var(--amc-dprof-av) * .24));
+  border: 2px solid var(--amc-dprof-bg);
+  border-radius: 50%;
+  background-color: var(--amc-dprof-status);
+}
+
+.amc-DProfile--other .amc-DProfile-dot,
+.amc-DProfile--offline .amc-DProfile-dot {
+  background-color: var(--amc-dprof-bg);
+  box-shadow: inset 0 0 0 2px var(--amc-dprof-offline);
+}
+
+/* Text */
+.amc-DProfile-main {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: .125rem;
+  min-inline-size: 0;
+}
+
+.amc-DProfile-name {
+  max-inline-size: 100%;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+
+.amc-DProfile-role {
+  max-inline-size: 100%;
+  margin: 0;
+  color: var(--amc-dprof-muted);
+  font-size: .8125rem;
+  line-height: 1.35;
+  unicode-bidi: isolate;
+}
+
+.amc-DProfile-bio {
+  display: -webkit-box;
+  max-inline-size: 100%;
+  margin: .375rem 0 0;
+  overflow: hidden;
+  color: var(--amc-dprof-muted);
+  font-size: .8125rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-align: match-parent;
+  unicode-bidi: plaintext;
+}
+
+/* Status as text (styles that show it); otherwise read by screen readers only */
+.amc-DProfile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  margin: .25rem 0 0;
+  color: var(--amc-dprof-muted);
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.amc-DProfile-statusDot {
+  flex-shrink: 0;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background-color: var(--amc-dprof-status);
+}
+
+.amc-DProfile--offline .amc-DProfile-statusDot,
+.amc-DProfile--other .amc-DProfile-statusDot {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--amc-dprof-offline);
+}
+
+.amc-DProfile--centered .amc-DProfile-status,
+.amc-DProfile--cover .amc-DProfile-status,
+.amc-DProfile--stats .amc-DProfile-status,
+.amc-DProfile--gradientRing .amc-DProfile-status,
+.amc-DProfile--chip .amc-DProfile-status,
+.amc-DProfile-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Styles that print the status as text do not repeat it on the avatar. */
+.amc-DProfile--horizontal .amc-DProfile-dot,
+.amc-DProfile--glass .amc-DProfile-dot,
+.amc-DProfile--minimal .amc-DProfile-dot,
+.amc-DProfile--businessCard .amc-DProfile-dot,
+.amc-DProfile--compactRow .amc-DProfile-dot { display: none; }
+
+/* Stats */
+.amc-DProfile-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+  margin: 0;
+}
+
+.amc-DProfile-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  min-inline-size: 0;
+}
+
+.amc-DProfile-statLabel {
+  color: var(--amc-dprof-muted);
+  font-size: .75rem;
+  line-height: 1.3;
+  unicode-bidi: plaintext;
+}
+
+.amc-DProfile-statValue {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+  unicode-bidi: plaintext;
+}
+
+/* Link: one stretched link makes the whole profile clickable */
+.amc-DProfile-link {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: .375rem;
+  color: var(--amc-dprof-accent);
+  font-size: .8125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.amc-DProfile-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.amc-DProfile-link:focus-visible { outline: none; }
+
+.amc-DProfile-link:focus-visible::after {
+  outline: 2px solid var(--amc-dprof-accent);
+  outline-offset: 2px;
+  border-radius: var(--amc-dprof-radius);
+}
+
+.amc-DProfile-linkIcon { font-size: .6875rem; }
+.amc-DProfile-linkIcon:dir(rtl) { transform: scaleX(-1); }
+
+/* Contact lines (Business Card) */
+.amc-DProfile-contact {
+  display: grid;
+  gap: .25rem;
+  max-inline-size: 100%;
+  margin: .625rem 0 0;
+  padding: .625rem 0 0;
+  border-block-start: 1px solid var(--amc-dprof-line);
+  list-style: none;
+}
+
+.amc-DProfile-contactItem {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-inline-size: 0;
+  font-size: .8125rem;
+}
+
+.amc-DProfile-contactIcon {
+  flex-shrink: 0;
+  inline-size: 1rem;
+  color: var(--amc-dprof-muted);
+  text-align: center;
+}
+
+.amc-DProfile-contactLink,
+.amc-DProfile-contactText {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: plaintext;
+}
+
+.amc-DProfile-contactLink {
+  position: relative;
+  z-index: 2;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--amc-dprof-fg) 30%, transparent);
+  text-underline-offset: .2em;
+}
+
+.amc-DProfile-contactLink:hover { color: var(--amc-dprof-accent); }
+.amc-DProfile-contactLink:focus-visible { outline: 2px solid var(--amc-dprof-accent); outline-offset: 2px; }
+.amc-DProfile-contactText { font-variant-numeric: tabular-nums; }
+
+/* ---------- 1. Centered: stacked card, full-width soft button ---------- */
+
+.amc-DProfile--centered .amc-DProfile-card {
+  --amc-dprof-av: 4.5rem;
+  justify-items: center;
+  padding: 1.5rem 1.25rem 1.25rem;
+  text-align: center;
+}
+
+.amc-DProfile--centered .amc-DProfile-avatar {
+  box-shadow: 0 0 0 4px var(--amc-dprof-bg), 0 0 0 5px var(--amc-dprof-line);
+}
+
+.amc-DProfile--centered .amc-DProfile-main { justify-items: center; }
+
+.amc-DProfile--centered .amc-DProfile-link {
+  justify-self: stretch;
+  justify-content: center;
+  margin-block-start: auto;
+  padding: .5rem .75rem;
+  border-radius: calc(var(--amc-dprof-radius) * .75);
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 10%, transparent);
+  transition: background-color .15s ease;
+}
+
+.amc-DProfile--centered .amc-DProfile-card:hover .amc-DProfile-link {
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 16%, transparent);
+}
+
+/* ---------- 2. Cover: banner with an overlapping avatar ---------- */
+
+.amc-DProfile--cover .amc-DProfile-card {
+  --amc-dprof-av: 4.5rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "cover cover"
+    "avatar link"
+    "main main"
+    "stats stats";
+  gap: .5rem 1rem;
+  padding: 0 0 1.25rem;
+  overflow: hidden;
+}
+
+.amc-DProfile-cover {
+  grid-area: cover;
+  position: relative;
+  block-size: 5.5rem;
+  background-color: var(--amc-dprof-accent);
+  background-image:
+    radial-gradient(80% 140% at 85% 0%, color-mix(in srgb, var(--amc-dprof-accent-fg) 22%, transparent), transparent 60%),
+    linear-gradient(120deg, var(--amc-dprof-accent), color-mix(in oklab, var(--amc-dprof-accent), var(--amc-dprof-fg) 35%));
+}
+
+.amc-DProfile-coverImg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.amc-DProfile--cover .amc-DProfile-avatar {
+  grid-area: avatar;
+  margin-block-start: calc(var(--amc-dprof-av) * -.55);
+  margin-inline-start: 1.25rem;
+  border: 3px solid var(--amc-dprof-bg);
+  box-shadow: 0 .25rem .75rem -.25rem color-mix(in srgb, var(--amc-dprof-fg) 35%, transparent);
+}
+
+.amc-DProfile--cover .amc-DProfile-dot { border-width: 3px; }
+.amc-DProfile--cover .amc-DProfile-main { grid-area: main; padding-inline: 1.25rem; }
+.amc-DProfile--cover .amc-DProfile-name { font-size: 1.0625rem; }
+
+.amc-DProfile--cover .amc-DProfile-stats {
+  grid-area: stats;
+  gap: .25rem 1.5rem;
+  padding-inline: 1.25rem;
+}
+
+.amc-DProfile--cover .amc-DProfile-stat { flex-direction: row-reverse; align-items: baseline; gap: .3rem; }
+.amc-DProfile--cover .amc-DProfile-statValue { font-size: .875rem; }
+
+.amc-DProfile--cover .amc-DProfile-link {
+  grid-area: link;
+  align-self: start;
+  justify-self: end;
+  margin-inline-end: 1rem;
+  padding: .3125rem .75rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dprof-accent) 45%, transparent);
+  border-radius: 999px;
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.amc-DProfile--cover .amc-DProfile-linkIcon { display: none; }
+
+/* ---------- 3. Horizontal: avatar beside the text ---------- */
+
+.amc-DProfile--horizontal .amc-DProfile-card {
+  --amc-dprof-av: 3.5rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "avatar main link";
+  align-items: start;
+  gap: 1rem;
+  box-shadow: none;
+}
+
+.amc-DProfile--horizontal .amc-DProfile-avatar { grid-area: avatar; border-radius: 30%; }
+.amc-DProfile--horizontal .amc-DProfile-main { grid-area: main; }
+.amc-DProfile--horizontal .amc-DProfile-bio { -webkit-line-clamp: 2; }
+
+.amc-DProfile--horizontal .amc-DProfile-status {
+  order: -1;
+  margin: 0 0 .25rem;
+  padding: .0625rem .5rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dprof-status) 12%, transparent);
+  color: var(--amc-dprof-fg);
+}
+
+.amc-DProfile--horizontal .amc-DProfile-link {
+  grid-area: link;
+  align-self: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 10%, transparent);
+}
+
+.amc-DProfile--horizontal .amc-DProfile-linkText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- 4. Glass: translucent blurred surface with a status pill ---------- */
+
+.amc-DProfile--glass .amc-DProfile-card {
+  --amc-dprof-av: 3.75rem;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "avatar"
+    "main"
+    "link";
+  gap: 0;
+  border-color: color-mix(in srgb, var(--amc-dprof-fg) 12%, transparent);
+  border-radius: calc(var(--amc-dprof-radius) * 2);
+  background-color: color-mix(in srgb, var(--amc-dprof-bg) 60%, transparent);
+  background-image:
+    radial-gradient(100% 70% at 0% 0%, color-mix(in srgb, var(--amc-dprof-accent) 16%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-dprof-bg) 40%, transparent), transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-dprof-bg) 80%, transparent),
+    0 .75rem 2rem -1rem color-mix(in srgb, var(--amc-dprof-accent) 45%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.amc-DProfile--glass .amc-DProfile-card:dir(rtl) {
+  background-image:
+    radial-gradient(100% 70% at 100% 0%, color-mix(in srgb, var(--amc-dprof-accent) 16%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-dprof-bg) 40%, transparent), transparent);
+}
+
+.amc-DProfile--glass .amc-DProfile-avatar {
+  grid-area: avatar;
+  justify-self: start;
+  border: 1px solid color-mix(in srgb, var(--amc-dprof-fg) 12%, transparent);
+  padding: 3px;
+  background-clip: content-box;
+  box-shadow: 0 .375rem 1rem -.5rem color-mix(in srgb, var(--amc-dprof-accent) 60%, transparent);
+}
+
+.amc-DProfile--glass .amc-DProfile-avatar { margin-block-end: .75rem; }
+.amc-DProfile--glass .amc-DProfile-main { grid-area: main; }
+.amc-DProfile--glass .amc-DProfile-name { font-size: 1.0625rem; }
+
+.amc-DProfile--glass .amc-DProfile-status {
+  position: absolute;
+  inset-block-start: 1.25rem;
+  inset-inline-end: 1.25rem;
+  margin: 0;
+  padding: .25rem .625rem;
+  border: 1px solid color-mix(in srgb, var(--amc-dprof-fg) 12%, transparent);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dprof-bg) 55%, transparent);
+  color: var(--amc-dprof-fg);
+}
+
+.amc-DProfile--glass .amc-DProfile-link {
+  grid-area: link;
+  justify-self: stretch;
+  justify-content: space-between;
+  margin-block-start: .75rem;
+  padding-block-start: .75rem;
+  border-block-start: 1px solid color-mix(in srgb, var(--amc-dprof-fg) 10%, transparent);
+}
+
+/* ---------- 5. Minimal: no card, text first ---------- */
+
+.amc-DProfile--minimal .amc-DProfile-card {
+  --amc-dprof-av: 2.75rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "avatar main"
+    ". link";
+  gap: .5rem .875rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.amc-DProfile--minimal .amc-DProfile-avatar { grid-area: avatar; }
+.amc-DProfile--minimal .amc-DProfile-main { grid-area: main; align-self: center; }
+.amc-DProfile--minimal .amc-DProfile-name { font-size: 1.0625rem; }
+.amc-DProfile--minimal .amc-DProfile-bio { color: var(--amc-dprof-fg); opacity: .82; }
+
+.amc-DProfile--minimal .amc-DProfile-link {
+  grid-area: link;
+  color: var(--amc-dprof-fg);
+}
+
+.amc-DProfile--minimal .amc-DProfile-linkText {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--amc-dprof-accent) 60%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: .3em;
+}
+
+.amc-DProfile--minimal .amc-DProfile-link:hover { color: var(--amc-dprof-accent); }
+.amc-DProfile--linked.amc-DProfile--minimal .amc-DProfile-card:hover { box-shadow: none; }
+
+/* ---------- 6. Stats: header plus a three-figure strip ---------- */
+
+.amc-DProfile--stats .amc-DProfile-card {
+  --amc-dprof-av: 3rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "avatar main link"
+    "stats stats stats";
+  gap: 1rem .875rem;
+  padding: 1.125rem 1.125rem 0;
+  overflow: hidden;
+}
+
+.amc-DProfile--stats .amc-DProfile-avatar { grid-area: avatar; }
+.amc-DProfile--stats .amc-DProfile-main { grid-area: main; align-self: center; }
+.amc-DProfile--stats .amc-DProfile-bio { -webkit-line-clamp: 2; }
+
+.amc-DProfile--stats .amc-DProfile-link {
+  grid-area: link;
+  white-space: nowrap;
+  align-self: start;
+  font-size: .75rem;
+}
+
+.amc-DProfile--stats .amc-DProfile-stats {
+  grid-area: stats;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 0;
+  margin-inline: -1.125rem;
+  border-block-start: 1px solid var(--amc-dprof-line);
+  background-color: color-mix(in srgb, var(--amc-dprof-fg) 3%, transparent);
+}
+
+.amc-DProfile--stats .amc-DProfile-stat {
+  align-items: center;
+  justify-content: flex-end;
+  padding: .75rem .5rem;
+  text-align: center;
+}
+
+.amc-DProfile--stats .amc-DProfile-stat + .amc-DProfile-stat { border-inline-start: 1px solid var(--amc-dprof-line); }
+.amc-DProfile--stats .amc-DProfile-statValue { font-size: 1.125rem; }
+
+/* ---------- 7. Gradient Ring: large avatar inside a primary gradient ring ---------- */
+
+.amc-DProfile--gradientRing .amc-DProfile-card {
+  --amc-dprof-av: 5.5rem;
+  justify-items: center;
+  padding: 1.75rem 1.25rem 1.25rem;
+  border-color: transparent;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--amc-dprof-accent) 9%, transparent), transparent 55%);
+  box-shadow:
+    0 0 0 1px var(--amc-dprof-line),
+    0 .75rem 1.75rem -1rem color-mix(in srgb, var(--amc-dprof-fg) 30%, transparent);
+  text-align: center;
+}
+
+.amc-DProfile--gradientRing .amc-DProfile-avatar {
+  padding: 4px;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--amc-dprof-bg), var(--amc-dprof-bg)) padding-box,
+    conic-gradient(from 200deg, var(--amc-dprof-accent), color-mix(in srgb, var(--amc-dprof-accent) 25%, var(--amc-dprof-bg)), var(--amc-dprof-accent)) border-box;
+}
+
+.amc-DProfile--gradientRing .amc-DProfile-img,
+.amc-DProfile--gradientRing .amc-DProfile-initials {
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 14%, var(--amc-dprof-bg));
+}
+
+.amc-DProfile--gradientRing .amc-DProfile-initials { font-size: calc(var(--amc-dprof-av) * .3); }
+.amc-DProfile--gradientRing .amc-DProfile-dot { inset-block-end: 6%; inset-inline-end: 6%; border-width: 3px; }
+.amc-DProfile--gradientRing .amc-DProfile-main { justify-items: center; gap: .375rem; }
+.amc-DProfile--gradientRing .amc-DProfile-name { font-size: 1.125rem; font-weight: 700; }
+.amc-DProfile--gradientRing .amc-DProfile-link { justify-self: center; }
+
+.amc-DProfile--gradientRing .amc-DProfile-role {
+  padding: .125rem .625rem;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 12%, transparent);
+  color: color-mix(in srgb, var(--amc-dprof-accent) 75%, var(--amc-dprof-fg));
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+/* ---------- 8. Business Card: brand panel plus contact lines ---------- */
+
+.amc-DProfile--businessCard .amc-DProfile-card {
+  --amc-dprof-av: 4rem;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  grid-template-areas:
+    "avatar main"
+    "avatar link";
+  gap: .5rem 1.25rem;
+  min-block-size: 10rem;
+  padding-block: 1.25rem;
+  padding-inline: 0 1.25rem;
+  overflow: hidden;
+}
+
+/* Primary panel painted behind the avatar column */
+.amc-DProfile--businessCard .amc-DProfile-card::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1 / -1;
+  margin-block: -1.25rem;
+  background-color: var(--amc-dprof-accent);
+  background-image:
+    radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--amc-dprof-accent-fg) 18%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--amc-dprof-accent), color-mix(in oklab, var(--amc-dprof-accent), var(--amc-dprof-fg) 30%));
+}
+
+.amc-DProfile--businessCard .amc-DProfile-avatar {
+  grid-area: avatar;
+  align-self: center;
+  justify-self: center;
+  border: 2px solid color-mix(in srgb, var(--amc-dprof-accent-fg) 55%, transparent);
+  background-color: color-mix(in srgb, var(--amc-dprof-accent-fg) 16%, transparent);
+  color: var(--amc-dprof-accent-fg);
+}
+
+.amc-DProfile--businessCard .amc-DProfile-main { grid-area: main; align-self: center; }
+.amc-DProfile--businessCard .amc-DProfile-name { font-size: 1.0625rem; font-weight: 700; }
+.amc-DProfile--businessCard .amc-DProfile-role { color: var(--amc-dprof-accent); font-weight: 600; }
+.amc-DProfile--businessCard .amc-DProfile-bio { -webkit-line-clamp: 2; font-size: .75rem; }
+.amc-DProfile--businessCard .amc-DProfile-status { order: 1; }
+.amc-DProfile--businessCard .amc-DProfile-contact { justify-self: stretch; }
+.amc-DProfile--businessCard .amc-DProfile-link { grid-area: link; font-size: .75rem; }
+
+/* ---------- 9. Chip: compact inline pill ---------- */
+
+.amc-DProfile--chip {
+  display: inline-flex;
+  max-inline-size: 100%;
+  container-type: normal;
+  vertical-align: middle;
+}
+
+.amc-DProfile--chip .amc-DProfile-card {
+  --amc-dprof-av: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  max-inline-size: 100%;
+  padding-block: .1875rem;
+  padding-inline: .1875rem .75rem;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.amc-DProfile--chip .amc-DProfile-initials { font-size: .6875rem; }
+.amc-DProfile--chip .amc-DProfile-dot { inline-size: .625rem; block-size: .625rem; inset-block-end: -1px; inset-inline-end: -1px; }
+
+.amc-DProfile--chip .amc-DProfile-main {
+  display: flex;
+  align-items: baseline;
+  gap: .375rem;
+  min-inline-size: 0;
+}
+
+.amc-DProfile--chip .amc-DProfile-name,
+.amc-DProfile--chip .amc-DProfile-role {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amc-DProfile--chip .amc-DProfile-name { font-size: .8125rem; line-height: 1.2; }
+.amc-DProfile--chip .amc-DProfile-role { font-size: .75rem; }
+.amc-DProfile--chip .amc-DProfile-link .amc-DProfile-linkText,
+.amc-DProfile--chip .amc-DProfile-linkIcon { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.amc-DProfile--chip .amc-DProfile-link { margin-inline-start: -.5rem; }
+.amc-DProfile--chip .amc-DProfile-link::after { border-radius: 999px; }
+.amc-DProfile--chip .amc-DProfile-link:focus-visible::after { border-radius: 999px; }
+
+.amc-DProfile--linked.amc-DProfile--chip .amc-DProfile-card:hover {
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 8%, var(--amc-dprof-bg));
+  box-shadow: none;
+}
+
+/* ---------- 10. Compact Row: dense directory row ---------- */
+
+.amc-DProfile--compactRow .amc-DProfile-card {
+  --amc-dprof-av: 2.25rem;
+  grid-template-columns: auto minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: .75rem;
+  padding: .625rem 1rem;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.amc-DProfile--linked.amc-DProfile--compactRow .amc-DProfile-card:hover {
+  background-color: color-mix(in srgb, var(--amc-dprof-accent) 6%, transparent);
+  box-shadow: none;
+}
+
+.amc-DProfile--compactRow .amc-DProfile-avatar { grid-column: 1; border-radius: 30%; }
+.amc-DProfile--compactRow .amc-DProfile-initials { font-size: .8125rem; }
+.amc-DProfile--compactRow .amc-DProfile-main { display: contents; }
+.amc-DProfile--compactRow .amc-DProfile-name,
+.amc-DProfile--compactRow .amc-DProfile-role { grid-column: 2; justify-self: start; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.amc-DProfile--compactRow .amc-DProfile-name { grid-row: 1; align-self: end; font-size: .875rem; }
+.amc-DProfile--compactRow .amc-DProfile-role { grid-row: 2; align-self: start; font-size: .75rem; }
+.amc-DProfile--compactRow .amc-DProfile-card { grid-template-rows: auto auto; row-gap: 0; }
+.amc-DProfile--compactRow .amc-DProfile-avatar,
+.amc-DProfile--compactRow .amc-DProfile-status,
+.amc-DProfile--compactRow .amc-DProfile-stats,
+.amc-DProfile--compactRow .amc-DProfile-link { grid-row: 1 / span 2; }
+
+.amc-DProfile--compactRow .amc-DProfile-status { grid-column: 3; margin: 0; white-space: nowrap; }
+.amc-DProfile--compactRow .amc-DProfile-stats { grid-column: 4; }
+.amc-DProfile--compactRow .amc-DProfile-stat { align-items: flex-end; text-align: end; }
+.amc-DProfile--compactRow .amc-DProfile-statValue { font-size: .875rem; }
+.amc-DProfile--compactRow .amc-DProfile-statLabel { font-size: .6875rem; }
+.amc-DProfile--compactRow .amc-DProfile-link { grid-column: 5; color: var(--amc-dprof-muted); }
+.amc-DProfile--compactRow .amc-DProfile-linkText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.amc-DProfile--compactRow .amc-DProfile-link:focus-visible::after { outline-offset: -2px; border-radius: 0; }
+
+/* ---------- Narrow containers (220px columns, phones) ---------- */
+
+@container (max-width: 18rem) {
+  .amc-DProfile--horizontal .amc-DProfile-card {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "avatar link" "main main";
+    gap: .75rem;
+  }
+  .amc-DProfile--horizontal .amc-DProfile-link { justify-self: end; align-self: start; }
+
+  .amc-DProfile--businessCard .amc-DProfile-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "avatar" "main" "link";
+    gap: .5rem;
+    padding: 0 1.25rem 1.25rem;
+  }
+  .amc-DProfile--businessCard .amc-DProfile-card::before {
+    grid-row: 1;
+    margin-block: 0 calc(var(--amc-dprof-av) * .5);
+    margin-inline: -1.25rem;
+  }
+  .amc-DProfile--businessCard .amc-DProfile-avatar { justify-self: start; margin-block-start: 1rem; }
+  .amc-DProfile--businessCard .amc-DProfile-avatar { border-color: var(--amc-dprof-bg); background-color: color-mix(in srgb, var(--amc-dprof-accent) 80%, var(--amc-dprof-fg)); }
+
+  .amc-DProfile--stats .amc-DProfile-card { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "avatar link" "main main" "stats stats"; }
+  .amc-DProfile--stats .amc-DProfile-link { justify-self: end; }
+
+  .amc-DProfile--compactRow .amc-DProfile-card { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .amc-DProfile--compactRow .amc-DProfile-stats { display: none; }
+  .amc-DProfile--compactRow .amc-DProfile-status { grid-column: 2; grid-row: 3; justify-self: start; margin-block-start: .25rem; }
+  .amc-DProfile--compactRow .amc-DProfile-link { grid-column: 3; }
+}
+
+/* ---------- Motion and high contrast ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-DProfile-card,
+  .amc-DProfile--centered .amc-DProfile-link { transition: none; }
+}
+
+@media (forced-colors: active) {
+  .amc-DProfile-card { border: 1px solid CanvasText; }
+  .amc-DProfile--minimal .amc-DProfile-card,
+  .amc-DProfile--compactRow .amc-DProfile-card { border: 0; }
+  .amc-DProfile-dot,
+  .amc-DProfile-statusDot { forced-color-adjust: none; border: 1px solid CanvasText; }
+  .amc-DProfile--gradientRing .amc-DProfile-avatar { border-color: CanvasText; }
+  .amc-DProfile-link:focus-visible::after { outline-color: Highlight; }
+}

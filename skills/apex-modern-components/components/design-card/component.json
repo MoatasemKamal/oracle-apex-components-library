@@ -1,0 +1,199 @@
+{
+  "name": "Design Card",
+  "apexlangName": "designCard",
+  "staticId": "AMC_DESIGN_CARD",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["card", "tile", "design", "record", "image card", "ticket", "glass", "gradient", "content card", "design collection"],
+  "description": "Design Collection card family: one record (order, project, invoice, customer) as a card in 12 distinct styles, from a quiet elevated or outlined card to image, horizontal media, ticket, stacked-paper and corner-icon layouts. Follows the Universal Theme Cards pattern (eyebrow, title, body, footer with figure and action) and takes every color from the active theme style.",
+  "helpText": "Pick a Style, then map Title (required) and any of Eyebrow, Description, Icon, Image URL, Badge, State, Value, Value Label, Meta, Link URL and Link Label to columns or static text. Empty settings are simply left out. The whole card becomes clickable when Link URL is set. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.",
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-design-card.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-card.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "elevated",
+      "sequence": 10,
+      "helpText": "Card design. Elevated: soft shadow, no border. Outline: hairline border, no shadow. Glass: translucent frosted surface. Gradient Border: gradient frame in the theme primary color. Image Top: picture above the text. Image Overlay: text on top of the picture. Horizontal: picture or icon beside the text. Accent Top: thick top edge in the State color. Ticket: main part plus a perforated stub for Value. Stacked Paper: sheets peeking out behind the card. Soft Inset: recessed surface. Corner Icon: large icon in the top corner.",
+      "entries": [
+        { "name": "elevated", "display": "Elevated", "return": "elevated", "sequence": 10 },
+        { "name": "outline", "display": "Outline", "return": "outline", "sequence": 20 },
+        { "name": "glass", "display": "Glass", "return": "glass", "sequence": 30 },
+        { "name": "gradientBorder", "display": "Gradient Border", "return": "gradientBorder", "sequence": 40 },
+        { "name": "imageTop", "display": "Image Top", "return": "imageTop", "sequence": 50 },
+        { "name": "imageOverlay", "display": "Image Overlay", "return": "imageOverlay", "sequence": 60 },
+        { "name": "horizontal", "display": "Horizontal", "return": "horizontal", "sequence": 70 },
+        { "name": "accentTop", "display": "Accent Top", "return": "accentTop", "sequence": 80 },
+        { "name": "ticket", "display": "Ticket", "return": "ticket", "sequence": 90 },
+        { "name": "stackedPaper", "display": "Stacked Paper", "return": "stackedPaper", "sequence": 100 },
+        { "name": "softInset", "display": "Soft Inset", "return": "softInset", "sequence": 110 },
+        { "name": "cornerIcon", "display": "Corner Icon", "return": "cornerIcon", "sequence": 120 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Card heading, for example the project or customer name. Rendered as an h3."
+    },
+    {
+      "staticId": "EYEBROW",
+      "apexlangName": "eyebrow",
+      "attribute": 3,
+      "name": "Eyebrow",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional short line above the title, for example an order number or category."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 4,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Optional body text of one to three sentences."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Optional Font APEX icon class, for example fa-truck. Static text or a column. Image styles show it only when there is no image, except Image Top, which overlaps it on the picture."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 6,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Optional picture URL, used by the Image Top, Image Overlay and Horizontal styles. The URL must come from a developer-controlled source (a table you own or #APP_FILES#), never from free user input. The image is decorative (empty alt); put the meaning in the Title."
+    },
+    {
+      "staticId": "BADGE",
+      "apexlangName": "badge",
+      "attribute": 7,
+      "name": "Badge",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Optional status text shown as a small badge, for example Shipped or Overdue. Colored by State."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 8,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Semantic color of the badge and of the Accent Top edge: success, warning, danger, info or neutral. Any other value renders as neutral. Always pair it with Badge text so the state is not shown by color alone."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 9,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "Optional key figure in the footer, for example an amount. Format it in SQL with the application's NLS settings. The Ticket style shows it in the stub."
+    },
+    {
+      "staticId": "VALUE_LABEL",
+      "apexlangName": "valueLabel",
+      "attribute": 10,
+      "name": "Value Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Optional caption for Value, for example Total or Budget."
+    },
+    {
+      "staticId": "META",
+      "apexlangName": "meta",
+      "attribute": 11,
+      "name": "Meta",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Optional small footer text, for example a due date or owner."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 12,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 120,
+      "helpText": "Optional target URL. When set, the title becomes a link that covers the whole card. Build it with apex_page.get_url in SQL; the value must be developer-controlled, never free user input."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 13,
+      "name": "Link Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 130,
+      "helpText": "Optional visible call to action shown in the footer when Link URL is set, for example View Order."
+    },
+    {
+      "staticId": "COLUMNS",
+      "apexlangName": "columns",
+      "attribute": 14,
+      "name": "Columns",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 140,
+      "helpText": "Report mode only. Empty fits as many cards as the region width allows. The fixed options are a maximum: columns drop automatically when a card would get too narrow.",
+      "entries": [
+        { "name": "two", "display": "Up to 2 Columns", "return": "2", "sequence": 10 },
+        { "name": "three", "display": "Up to 3 Columns", "return": "3", "sequence": 20 },
+        { "name": "four", "display": "Up to 4 Columns", "return": "4", "sequence": 30 }
+      ]
+    }
+  ]
+}

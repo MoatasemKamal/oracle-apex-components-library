@@ -1,0 +1,382 @@
+{
+  "samples": [
+    {
+      "title": "elevated",
+      "mode": "report",
+      "settings": {
+        "STYLE": "elevated"
+      },
+      "rows": [
+        {
+          "TITLE": "Riyadh Distribution Center",
+          "EYEBROW": "Project PRJ-2041",
+          "DESCRIPTION": "Fit-out of the new cold-storage wing, phase 2 of 3.",
+          "ICON": "fa-building-o",
+          "BADGE": "On track",
+          "STATE": "success",
+          "VALUE": "SAR 4.2M",
+          "VALUE_LABEL": "Budget",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Open project"
+        },
+        {
+          "TITLE": "ERP Cloud Migration",
+          "EYEBROW": "Project PRJ-2057",
+          "DESCRIPTION": "Finance and procurement modules move to the new tenant.",
+          "ICON": "fa-cloud",
+          "BADGE": "At risk",
+          "STATE": "warning",
+          "VALUE": "SAR 1.8M",
+          "VALUE_LABEL": "Budget",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Open project"
+        }
+      ]
+    },
+    {
+      "title": "outline",
+      "mode": "report",
+      "settings": {
+        "STYLE": "outline"
+      },
+      "rows": [
+        {
+          "TITLE": "Al Noor Trading Co.",
+          "EYEBROW": "Customer since 2019",
+          "DESCRIPTION": "Key account, wholesale electronics. 14 open orders.",
+          "ICON": "fa-user",
+          "META": "Account owner: Sara Haddad",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "View customer"
+        },
+        {
+          "TITLE": "Gulf Medical Supplies",
+          "EYEBROW": "Customer since 2022",
+          "DESCRIPTION": "Hospital consumables, net-30 terms.",
+          "ICON": "fa-user",
+          "BADGE": "Credit hold",
+          "STATE": "danger",
+          "META": "Account owner: Omar Aziz",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "View customer"
+        }
+      ]
+    },
+    {
+      "title": "glass",
+      "mode": "report",
+      "settings": {
+        "STYLE": "glass"
+      },
+      "rows": [
+        {
+          "TITLE": "Q3 Revenue Review",
+          "EYEBROW": "Finance",
+          "DESCRIPTION": "Board pack with regional breakdown and forecast update.",
+          "ICON": "fa-line-chart",
+          "BADGE": "Ready",
+          "STATE": "info",
+          "META": "Updated 2 hours ago",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Open report"
+        },
+        {
+          "TITLE": "Vendor Scorecards",
+          "EYEBROW": "Procurement",
+          "DESCRIPTION": "Delivery, quality and price scores for 48 suppliers.",
+          "ICON": "fa-star",
+          "META": "Updated yesterday"
+        }
+      ]
+    },
+    {
+      "title": "gradientBorder",
+      "mode": "report",
+      "settings": {
+        "STYLE": "gradientBorder"
+      },
+      "rows": [
+        {
+          "TITLE": "Enterprise Support Plan",
+          "EYEBROW": "Renewal due 30 Nov",
+          "DESCRIPTION": "24x7 support, 1-hour response and a named engineer.",
+          "ICON": "fa-shield",
+          "VALUE": "SAR 96,000",
+          "VALUE_LABEL": "Annual",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Renew"
+        },
+        {
+          "TITLE": "Data Platform Add-on",
+          "EYEBROW": "Recommended",
+          "DESCRIPTION": "Adds 5 TB storage and daily replicated backups.",
+          "ICON": "fa-database",
+          "VALUE": "SAR 18,500",
+          "VALUE_LABEL": "Annual"
+        }
+      ]
+    },
+    {
+      "title": "imageTop",
+      "mode": "report",
+      "settings": {
+        "STYLE": "imageTop"
+      },
+      "rows": [
+        {
+          "TITLE": "Jeddah Warehouse Expansion",
+          "EYEBROW": "Facilities",
+          "DESCRIPTION": "Adds 12,000 pallet positions and two loading docks.",
+          "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNkZmU4ZjEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5ZmI2Y2MiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxyZWN0IHg9IjYwIiB5PSI5MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIyMzAiIGZpbGw9IiM1ZDc4OTIiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjcwIiB5PSIxMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHg9IjcwIiB5PSIxNzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2U5YTU1YSIvPjxyZWN0IHg9IjcwIiB5PSIyMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHg9IjIwMCIgeT0iOTAiIHdpZHRoPSIxMDAiIGhlaWdodD0iMjMwIiBmaWxsPSIjNWQ3ODkyIiBvcGFjaXR5PSIuODUiLz48cmVjdCB4PSIyMTAiIHk9IjExMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjJjMjdiIi8+PHJlY3QgeD0iMjEwIiB5PSIxNzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2U5YTU1YSIvPjxyZWN0IHg9IjIxMCIgeT0iMjMwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNmMmMyN2IiLz48cmVjdCB4PSIzNDAiIHk9IjkwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjIzMCIgZmlsbD0iIzVkNzg5MiIgb3BhY2l0eT0iLjg1Ii8+PHJlY3QgeD0iMzUwIiB5PSIxMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHg9IjM1MCIgeT0iMTcwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNlOWE1NWEiLz48cmVjdCB4PSIzNTAiIHk9IjIzMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZjJjMjdiIi8+PHJlY3QgeD0iNDgwIiB5PSI5MCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIyMzAiIGZpbGw9IiM1ZDc4OTIiIG9wYWNpdHk9Ii44NSIvPjxyZWN0IHg9IjQ5MCIgeT0iMTEwIiB3aWR0aD0iODAiIGhlaWdodD0iNDAiIGZpbGw9IiNmMmMyN2IiLz48cmVjdCB4PSI0OTAiIHk9IjE3MCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZTlhNTVhIi8+PHJlY3QgeD0iNDkwIiB5PSIyMzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2YyYzI3YiIvPjxyZWN0IHk9IjMyMCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzQ0NWE3MCIvPjwvc3ZnPg==",
+          "ICON": "fa-truck",
+          "BADGE": "In progress",
+          "STATE": "info",
+          "META": "Due 14 Dec 2026",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Details"
+        },
+        {
+          "TITLE": "Head Office Refurbishment",
+          "EYEBROW": "Facilities",
+          "DESCRIPTION": "Open-plan floor 4 with 60 hot desks.",
+          "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmMWU5ZGMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkOWM3YWIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxyZWN0IHg9IjAiIHk9IjI1MCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIxMTAiIGZpbGw9IiM2YjRmM2EiLz48cmVjdCB4PSIyMDAiIHk9IjExMCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxNDAiIHJ4PSIxMCIgZmlsbD0iIzIyMzEzZiIvPjxyZWN0IHg9IjIxNCIgeT0iMTI0IiB3aWR0aD0iMjEyIiBoZWlnaHQ9IjExMiIgZmlsbD0iIzRmODZjNiIvPjxyZWN0IHg9IjMwMCIgeT0iMjUwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTIiIGZpbGw9IiMyMjMxM2YiLz48Y2lyY2xlIGN4PSI1MjAiIGN5PSIyMjAiIHI9IjI2IiBmaWxsPSIjZmZmZmZmIi8+PHJlY3QgeD0iODAiIHk9IjE3MCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjgwIiByeD0iOCIgZmlsbD0iIzJhOWQ4ZiIvPjwvc3ZnPg==",
+          "BADGE": "Completed",
+          "STATE": "success",
+          "META": "Closed 02 Sep 2026"
+        }
+      ]
+    },
+    {
+      "title": "imageOverlay",
+      "mode": "report",
+      "settings": {
+        "STYLE": "imageOverlay"
+      },
+      "rows": [
+        {
+          "TITLE": "Dammam Port Logistics Hub",
+          "EYEBROW": "Region East",
+          "DESCRIPTION": "Container throughput up 18% since the new cranes went live.",
+          "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNhOGRhZGMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmMWZhZWUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxyZWN0IHg9IjQwIiB5PSIyMjAiIHdpZHRoPSIxMDUiIGhlaWdodD0iNTYiIGZpbGw9IiNlNjM5NDYiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMTUwIiB5PSIyMjAiIHdpZHRoPSIxMDUiIGhlaWdodD0iNTYiIGZpbGw9IiM0NTdiOWQiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iMjYwIiB5PSIyMjAiIHdpZHRoPSIxMDUiIGhlaWdodD0iNTYiIGZpbGw9IiNmNGEyNjEiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+PHJlY3QgeD0iOTUiIHk9IjE2MCIgd2lkdGg9IjEwNSIgaGVpZ2h0PSI1NiIgZmlsbD0iIzJhOWQ4ZiIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIyMDUiIHk9IjE2MCIgd2lkdGg9IjEwNSIgaGVpZ2h0PSI1NiIgZmlsbD0iI2U5YzQ2YSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSIzNzAiIHk9IjIyMCIgd2lkdGg9IjEwNSIgaGVpZ2h0PSI1NiIgZmlsbD0iIzFkMzU1NyIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMiLz48cmVjdCB4PSI1MDAiIHk9IjYwIiB3aWR0aD0iMTQiIGhlaWdodD0iMjE2IiBmaWxsPSIjMWQzNTU3Ii8+PHJlY3QgeD0iNDIwIiB5PSI2MCIgd2lkdGg9IjE4MCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzFkMzU1NyIvPjxyZWN0IHk9IjI3NiIgd2lkdGg9IjY0MCIgaGVpZ2h0PSI4NCIgZmlsbD0iIzM1NTA3MCIvPjwvc3ZnPg==",
+          "BADGE": "Live",
+          "STATE": "success",
+          "META": "212 shipments this week",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Explore"
+        },
+        {
+          "TITLE": "NEOM Solar Farm",
+          "EYEBROW": "Energy",
+          "DESCRIPTION": "Phase 1 grid connection scheduled for Q1.",
+          "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM4N2MxZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlMGYwZmYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUwIDE3MCkgc2tld1goLTE4KSI+PHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMTAiIGZpbGw9IiMxZjNiNzMiLz48bGluZSB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIxMTAiIHN0cm9rZT0iIzljYzNmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjgwIiB5MT0iMCIgeDI9IjgwIiB5Mj0iMTEwIiBzdHJva2U9IiM5Y2MzZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIxMjAiIHkxPSIwIiB4Mj0iMTIwIiB5Mj0iMTEwIiBzdHJva2U9IiM5Y2MzZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIwIiB5MT0iNTUiIHgyPSIxNjAiIHkyPSI1NSIgc3Ryb2tlPSIjOWNjM2ZmIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjQwIDE3MCkgc2tld1goLTE4KSI+PHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMTAiIGZpbGw9IiMxZjNiNzMiLz48bGluZSB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIxMTAiIHN0cm9rZT0iIzljYzNmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjgwIiB5MT0iMCIgeDI9IjgwIiB5Mj0iMTEwIiBzdHJva2U9IiM5Y2MzZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIxMjAiIHkxPSIwIiB4Mj0iMTIwIiB5Mj0iMTEwIiBzdHJva2U9IiM5Y2MzZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIwIiB5MT0iNTUiIHgyPSIxNjAiIHkyPSI1NSIgc3Ryb2tlPSIjOWNjM2ZmIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDMwIDE3MCkgc2tld1goLTE4KSI+PHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMTAiIGZpbGw9IiMxZjNiNzMiLz48bGluZSB4MT0iNDAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIxMTAiIHN0cm9rZT0iIzljYzNmZiIgc3Ryb2tlLXdpZHRoPSIyIi8+PGxpbmUgeDE9IjgwIiB5MT0iMCIgeDI9IjgwIiB5Mj0iMTEwIiBzdHJva2U9IiM5Y2MzZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIxMjAiIHkxPSIwIiB4Mj0iMTIwIiB5Mj0iMTEwIiBzdHJva2U9IiM5Y2MzZmYiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIwIiB5MT0iNTUiIHgyPSIxNjAiIHkyPSI1NSIgc3Ryb2tlPSIjOWNjM2ZmIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PGNpcmNsZSBjeD0iNTYwIiBjeT0iNzAiIHI9IjM2IiBmaWxsPSIjZmZkMTY2Ii8+PHJlY3QgeT0iMzAwIiB3aWR0aD0iNjQwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjN2ZiMDY5Ii8+PC9zdmc+",
+          "BADGE": "Planned",
+          "STATE": "neutral"
+        },
+        {
+          "TITLE": "Customer Success Program",
+          "EYEBROW": "No image",
+          "DESCRIPTION": "Without an image the card falls back to a primary gradient.",
+          "ICON": "fa-users",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Join"
+        }
+      ]
+    },
+    {
+      "title": "horizontal",
+      "mode": "report",
+      "settings": {
+        "STYLE": "horizontal"
+      },
+      "rows": [
+        {
+          "TITLE": "Makkah Retail Tower",
+          "EYEBROW": "Lease LS-3308",
+          "DESCRIPTION": "Ground floor unit, 420 m2, renewal under negotiation.",
+          "IMAGE_URL": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgMzYwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxZDM1NTciLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNzZmNTEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNnKSIvPjxjaXJjbGUgY3g9IjQ4MCIgY3k9IjE0MCIgcj0iNDYiIGZpbGw9IiNmZmQxNjYiIG9wYWNpdHk9Ii45Ii8+PHJlY3QgeD0iMzAiIHk9IjIwMCIgd2lkdGg9IjcwIiBoZWlnaHQ9IjE2MCIgZmlsbD0iIzE0MjEzZCIvPjxyZWN0IHg9IjExMCIgeT0iMjUwIiB3aWR0aD0iNjAiIGhlaWdodD0iMTEwIiBmaWxsPSIjMTQyMTNkIi8+PHJlY3QgeD0iMTgwIiB5PSIxNzAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIxOTAiIGZpbGw9IiMxNDIxM2QiLz48cmVjdCB4PSIyNzAiIHk9IjIyMCIgd2lkdGg9IjUwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzE0MjEzZCIvPjxyZWN0IHg9IjMzMCIgeT0iMjcwIiB3aWR0aD0iNzAiIGhlaWdodD0iOTAiIGZpbGw9IiMxNDIxM2QiLz48cmVjdCB4PSI0MTAiIHk9IjE5MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE3MCIgZmlsbD0iIzE0MjEzZCIvPjxyZWN0IHg9IjQ4MCIgeT0iMjQwIiB3aWR0aD0iNzAiIGhlaWdodD0iMTIwIiBmaWxsPSIjMTQyMTNkIi8+PHJlY3QgeD0iNTYwIiB5PSIyMTAiIHdpZHRoPSI3MCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiMxNDIxM2QiLz48L3N2Zz4=",
+          "BADGE": "Expiring",
+          "STATE": "warning",
+          "META": "Ends 31 Jan 2027",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Open lease"
+        },
+        {
+          "TITLE": "Invoice INV-88213",
+          "EYEBROW": "Accounts receivable",
+          "DESCRIPTION": "Al Noor Trading Co., 3 line items.",
+          "ICON": "fa-file-text-o",
+          "VALUE": "SAR 42,750",
+          "VALUE_LABEL": "Amount due",
+          "BADGE": "Overdue",
+          "STATE": "danger"
+        }
+      ]
+    },
+    {
+      "title": "accentTop",
+      "mode": "report",
+      "settings": {
+        "STYLE": "accentTop"
+      },
+      "rows": [
+        {
+          "TITLE": "Server Room Cooling",
+          "EYEBROW": "Incident INC-5521",
+          "DESCRIPTION": "Rack temperature above threshold in hall B.",
+          "ICON": "fa-thermometer-three-quarters",
+          "BADGE": "Critical",
+          "STATE": "danger",
+          "META": "Opened 09:42"
+        },
+        {
+          "TITLE": "Payroll Run September",
+          "EYEBROW": "HR Operations",
+          "DESCRIPTION": "All 1,204 payslips generated and approved.",
+          "ICON": "fa-check",
+          "BADGE": "Done",
+          "STATE": "success",
+          "META": "Closed 28 Sep"
+        },
+        {
+          "TITLE": "Annual Audit Prep",
+          "EYEBROW": "Compliance",
+          "DESCRIPTION": "Evidence folders for 3 of 5 controls uploaded.",
+          "ICON": "fa-folder-open-o",
+          "BADGE": "Pending",
+          "STATE": "warning",
+          "META": "Due 15 Oct"
+        }
+      ]
+    },
+    {
+      "title": "ticket",
+      "mode": "report",
+      "settings": {
+        "STYLE": "ticket"
+      },
+      "rows": [
+        {
+          "TITLE": "Order SO-10482",
+          "EYEBROW": "Al Noor Trading Co.",
+          "DESCRIPTION": "6 items, express delivery to Riyadh.",
+          "ICON": "fa-shopping-cart",
+          "BADGE": "Shipped",
+          "STATE": "success",
+          "VALUE": "SAR 12,400",
+          "VALUE_LABEL": "Total",
+          "META": "Paid by card"
+        },
+        {
+          "TITLE": "Order SO-10497",
+          "EYEBROW": "Gulf Medical Supplies",
+          "DESCRIPTION": "Awaiting stock for 2 of 11 lines.",
+          "ICON": "fa-shopping-cart",
+          "BADGE": "Backorder",
+          "STATE": "warning",
+          "VALUE": "SAR 3,980",
+          "VALUE_LABEL": "Total",
+          "META": "Net 30"
+        }
+      ]
+    },
+    {
+      "title": "stackedPaper",
+      "mode": "report",
+      "settings": {
+        "STYLE": "stackedPaper"
+      },
+      "rows": [
+        {
+          "TITLE": "Supplier Contracts 2026",
+          "EYEBROW": "Folder",
+          "DESCRIPTION": "Signed master agreements and annexes for active suppliers.",
+          "ICON": "fa-files-o",
+          "BADGE": "38 documents",
+          "STATE": "neutral",
+          "META": "Last change 3 days ago",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Open folder"
+        },
+        {
+          "TITLE": "Purchase Requests to Approve",
+          "EYEBROW": "Queue",
+          "DESCRIPTION": "Requests waiting for your approval, oldest first.",
+          "ICON": "fa-inbox",
+          "BADGE": "7 waiting",
+          "STATE": "warning",
+          "META": "Oldest: 5 days"
+        }
+      ]
+    },
+    {
+      "title": "softInset",
+      "mode": "report",
+      "settings": {
+        "STYLE": "softInset"
+      },
+      "rows": [
+        {
+          "TITLE": "Monthly Operating Costs",
+          "EYEBROW": "Cost center CC-400",
+          "DESCRIPTION": "Utilities, maintenance and security for all sites.",
+          "ICON": "fa-money",
+          "VALUE": "SAR 318,200",
+          "VALUE_LABEL": "September",
+          "META": "-4.1% vs. August"
+        },
+        {
+          "TITLE": "Fleet Utilization",
+          "EYEBROW": "Logistics",
+          "DESCRIPTION": "Share of trucks on the road during working hours.",
+          "ICON": "fa-truck",
+          "VALUE": "87%",
+          "VALUE_LABEL": "This week",
+          "META": "Target 85%"
+        }
+      ]
+    },
+    {
+      "title": "cornerIcon",
+      "mode": "report",
+      "settings": {
+        "STYLE": "cornerIcon"
+      },
+      "rows": [
+        {
+          "TITLE": "Open Support Tickets",
+          "EYEBROW": "Service desk",
+          "DESCRIPTION": "Across all priority levels.",
+          "ICON": "fa-ticket",
+          "VALUE": "86",
+          "META": "12 opened today",
+          "LINK_URL": "f?p=100:12",
+          "LINK_LABEL": "Go to queue"
+        },
+        {
+          "TITLE": "New Customers",
+          "EYEBROW": "Sales",
+          "DESCRIPTION": "Accounts created this quarter.",
+          "ICON": "fa-user-plus",
+          "VALUE": "1,284",
+          "META": "+9% vs. Q2"
+        }
+      ]
+    },
+    {
+      "title": "partial, elevated, one card",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "elevated",
+        "TITLE": "Invoice INV-88240",
+        "EYEBROW": "Accounts payable",
+        "DESCRIPTION": "Office supplies from Tamimi Stationery.",
+        "ICON": "fa-file-text-o",
+        "BADGE": "Approved",
+        "STATE": "success",
+        "VALUE": "SAR 2,315",
+        "VALUE_LABEL": "Amount",
+        "META": "Due 12 Oct"
+      }
+    }
+  ]
+}

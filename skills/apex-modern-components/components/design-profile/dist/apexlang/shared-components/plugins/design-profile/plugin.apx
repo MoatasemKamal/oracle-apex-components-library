@@ -1,0 +1,530 @@
+plugin designProfile (
+    name: Design Profile
+    staticId: AMC_DESIGN_PROFILE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <article class="amc-DProfile amc-DProfile--#STYLE#{if ?STATUS/} {case STATUS/}{when online/}amc-DProfile--online{when away/}amc-DProfile--away{when busy/}amc-DProfile--busy{when offline/}amc-DProfile--offline{otherwise/}amc-DProfile--other{endcase/}{endif/}{if ?LINK_URL/} amc-DProfile--linked{endif/}">
+              <div class="amc-DProfile-card">
+                {case STYLE/}{when cover/}<div class="amc-DProfile-cover" aria-hidden="true">{if ?COVER_URL/}<img class="amc-DProfile-coverImg" src="#COVER_URL#" alt="" width="640" height="160" loading="lazy">{endif/}</div>{otherwise/}{endcase/}
+                <div class="amc-DProfile-avatar">{if ?IMAGE_URL/}<img class="amc-DProfile-img" src="#IMAGE_URL#" alt="" width="96" height="96" loading="lazy">{else/}{if ?INITIALS/}<span class="amc-DProfile-initials" aria-hidden="true">#INITIALS#</span>{else/}<span class="amc-DProfile-initials fa fa-user" aria-hidden="true"></span>{endif/}{endif/}{if ?STATUS/}<span class="amc-DProfile-dot" aria-hidden="true"></span>{endif/}</div>
+                <div class="amc-DProfile-main">
+                  <h3 class="amc-DProfile-name">#NAME#</h3>
+                  {if ?ROLE/}<p class="amc-DProfile-role">#ROLE#</p>{endif/}
+                  {if ?STATUS/}<p class="amc-DProfile-status"><span class="amc-DProfile-statusDot" aria-hidden="true"></span><span class="amc-DProfile-statusText">{case STATUS/}{when online/}Online{when away/}Away{when busy/}Busy{when offline/}Offline{otherwise/}#STATUS#{endcase/}</span></p>{endif/}
+                  {case STYLE/}{when chip/}{when compactRow/}{otherwise/}{if ?BIO/}<p class="amc-DProfile-bio">#BIO#</p>{endif/}{endcase/}
+                  {case STYLE/}{when businessCard/}{if ?EMAIL/}<ul class="amc-DProfile-contact">
+                    <li class="amc-DProfile-contactItem"><span class="amc-DProfile-contactIcon fa fa-envelope-o" aria-hidden="true"></span><a class="amc-DProfile-contactLink" href="mailto:#EMAIL!ATTR#">#EMAIL#</a></li>
+                    {if ?PHONE/}<li class="amc-DProfile-contactItem"><span class="amc-DProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-DProfile-contactText">#PHONE#</span></li>{endif/}
+                  </ul>{else/}{if ?PHONE/}<ul class="amc-DProfile-contact">
+                    <li class="amc-DProfile-contactItem"><span class="amc-DProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-DProfile-contactText">#PHONE#</span></li>
+                  </ul>{endif/}{endif/}{otherwise/}{endcase/}
+                </div>
+                {case STYLE/}{when stats/}{if ?STAT1_VALUE/}<dl class="amc-DProfile-stats">
+                  <div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT1_VALUE#</dd></div>
+                  {if ?STAT2_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT2_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT2_VALUE#</dd></div>{endif/}
+                  {if ?STAT3_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT3_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT3_VALUE#</dd></div>{endif/}
+                </dl>{endif/}{when cover/}{if ?STAT1_VALUE/}<dl class="amc-DProfile-stats">
+                  <div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT1_VALUE#</dd></div>
+                  {if ?STAT2_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT2_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT2_VALUE#</dd></div>{endif/}
+                  {if ?STAT3_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT3_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT3_VALUE#</dd></div>{endif/}
+                </dl>{endif/}{when compactRow/}{if ?STAT1_VALUE/}<dl class="amc-DProfile-stats">
+                  <div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT1_VALUE#</dd></div>
+                </dl>{endif/}{otherwise/}{endcase/}
+                {if ?LINK_URL/}<a class="amc-DProfile-link" href="#LINK_URL#"><span class="amc-DProfile-linkText">{if ?LINK_LABEL/}#LINK_LABEL#{else/}View profile{endif/}<span class="amc-DProfile-sr">, #NAME#</span></span><span class="amc-DProfile-linkIcon fa fa-chevron-right" aria-hidden="true"></span></a>{endif/}
+              </div>
+            </article>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-DProfiles amc-DProfiles--#STYLE#">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-DProfiles-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-profile.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style, then map Name and either Image URL or Initials. Role, Bio, Status (online, away, busy, offline), up to three stats, a link and, for the Cover and Business Card styles, Cover Image URL, Email and Phone are optional. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: centered
+        }
+        help {
+            helpText:
+                ```
+                The profile design. Centered: stacked card with a full-width link. Cover: cover band with an overlapping avatar, uses Cover Image URL. Horizontal: avatar beside the text. Glass: translucent blurred surface with a status pill. Minimal: no card, text first. Stats: header plus a three-figure strip. Gradient Ring: large avatar inside a primary gradient ring. Business Card: brand panel plus contact lines. Chip: compact inline pill for mentions and assignees. Compact Row: dense list row for directories.
+                ```
+        }
+        entry centered (
+            sequence: 10
+            display: Centered
+            return: centered
+        )
+        entry cover (
+            sequence: 20
+            display: Cover
+            return: cover
+        )
+        entry horizontal (
+            sequence: 30
+            display: Horizontal
+            return: horizontal
+        )
+        entry glass (
+            sequence: 40
+            display: Glass
+            return: glass
+        )
+        entry minimal (
+            sequence: 50
+            display: Minimal
+            return: minimal
+        )
+        entry stats (
+            sequence: 60
+            display: Stats
+            return: stats
+        )
+        entry gradientRing (
+            sequence: 70
+            display: Gradient Ring
+            return: gradientRing
+        )
+        entry businessCard (
+            sequence: 80
+            display: Business Card
+            return: businessCard
+        )
+        entry chip (
+            sequence: 90
+            display: Chip
+            return: chip
+        )
+        entry compactRow (
+            sequence: 100
+            display: Compact Row
+            return: compactRow
+        )
+    )
+    customAttribute NAME (
+        apexlangName: name
+        attribute: 2
+        name: Name
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Full name of the person, for example Sara Al-Harbi. Rendered as the heading.
+                ```
+        }
+    )
+    customAttribute ROLE (
+        apexlangName: role
+        attribute: 3
+        name: Role
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Job title or team, for example Senior Account Manager.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 4
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional avatar image URL. Must be a developer-controlled URL, for example an APEX_UTIL.GET_BLOB_FILE_SRC or a static application file. When empty, Initials are shown.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 5
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no image, for example SH. Build them in SQL from the name.
+                ```
+        }
+    )
+    customAttribute BIO (
+        apexlangName: bio
+        attribute: 6
+        name: Bio
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short description, one or two sentences. Long text is clamped to three lines.
+                ```
+        }
+    )
+    customAttribute STATUS (
+        apexlangName: status
+        attribute: 7
+        name: Status
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional presence: online, away, busy or offline. Any other value is shown as neutral text, for example On leave.
+                ```
+        }
+    )
+    customAttribute STAT1_VALUE (
+        apexlangName: stat1Value
+        attribute: 8
+        name: Stat 1 Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                First figure for the Stats, Cover and Compact Row styles, for example 128. Format it in SQL.
+                ```
+        }
+    )
+    customAttribute STAT1_LABEL (
+        apexlangName: stat1Label
+        attribute: 9
+        name: Stat 1 Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Stat 1, for example Deals.
+                ```
+        }
+    )
+    customAttribute STAT2_VALUE (
+        apexlangName: stat2Value
+        attribute: 10
+        name: Stat 2 Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Second figure for the Stats and Cover styles.
+                ```
+        }
+    )
+    customAttribute STAT2_LABEL (
+        apexlangName: stat2Label
+        attribute: 11
+        name: Stat 2 Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Stat 2.
+                ```
+        }
+    )
+    customAttribute STAT3_VALUE (
+        apexlangName: stat3Value
+        attribute: 12
+        name: Stat 3 Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Third figure for the Stats and Cover styles.
+                ```
+        }
+    )
+    customAttribute STAT3_LABEL (
+        apexlangName: stat3Label
+        attribute: 13
+        name: Stat 3 Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Stat 3.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 14
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target of the whole profile, for example an f?p or apex_page.get_url link to the employee page. Must be developer-controlled. The entire card becomes clickable.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 15
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 150
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible text of the link, for example View profile. Defaults to View profile.
+                ```
+        }
+    )
+    customAttribute COVER_URL (
+        apexlangName: coverUrl
+        attribute: 16
+        name: Cover Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 160
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Cover style: optional banner image URL, developer-controlled. When empty, a gradient from the theme's primary color is used.
+                ```
+        }
+    )
+    customAttribute EMAIL (
+        apexlangName: email
+        attribute: 17
+        name: Email
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 170
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Business Card style: email address shown as a mailto link, for example sara.alharbi@example.com.
+                ```
+        }
+    )
+    customAttribute PHONE (
+        apexlangName: phone
+        attribute: 18
+        name: Phone
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 180
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Business Card style: phone number shown as text, for example +966 11 555 0142.
+                ```
+        }
+    )
+    file "amc-design-profile.css" (
+        fileName: amc-design-profile.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

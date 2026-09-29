@@ -1,0 +1,6 @@
+<div class="amc-DDivider amc-DDivider--#STYLE#{case ALIGN/}{when start/} amc-DDivider--alignStart{when center/} amc-DDivider--alignCenter{when end/} amc-DDivider--alignEnd{otherwise/}{endcase/}{case SPACING/}{when compact/} amc-DDivider--spaceCompact{when large/} amc-DDivider--spaceLarge{otherwise/}{endcase/}{if ?ICON/} amc-DDivider--hasIcon{endif/}{if ?TITLE/} amc-DDivider--hasTitle{endif/}"{if ?TITLE/}{else/} role="separator"{endif/}>
+  <span class="amc-DDivider-line amc-DDivider-line--start" aria-hidden="true"></span>
+  <div class="amc-DDivider-content">{if ?ICON/}<span class="amc-DDivider-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{if ?TITLE/}<div class="amc-DDivider-text">{if ?EYEBROW/}<p class="amc-DDivider-eyebrow">#EYEBROW#</p>{endif/}<h3 class="amc-DDivider-title">#TITLE#</h3>{if ?DESCRIPTION/}<p class="amc-DDivider-desc">#DESCRIPTION#</p>{endif/}</div>{endif/}</div>
+  <span class="amc-DDivider-line amc-DDivider-line--end" aria-hidden="true"></span>
+  {if ?META/}<span class="amc-DDivider-meta">#META#</span>{endif/}
+</div>

@@ -1,0 +1,12 @@
+<div class="amc-DCard amc-DCard--#STYLE# {case STATE/}{when success/}amc-DCard--stateSuccess{when warning/}amc-DCard--stateWarning{when danger/}amc-DCard--stateDanger{when info/}amc-DCard--stateInfo{otherwise/}amc-DCard--stateNeutral{endcase/}">
+  <article class="amc-DCard-card">
+    {if ?IMAGE_URL/}<figure class="amc-DCard-media"><img class="amc-DCard-img" src="#IMAGE_URL#" width="640" height="360" alt="" loading="lazy"></figure>{endif/}
+    {if ?ICON/}<span class="amc-DCard-icon" aria-hidden="true"><span class="amc-DCard-glyph fa #ICON#"></span></span>{endif/}
+    <div class="amc-DCard-body">
+      <div class="amc-DCard-top">{if ?EYEBROW/}<p class="amc-DCard-eyebrow">#EYEBROW#</p>{endif/}{if ?BADGE/}<span class="amc-DCard-badge"><span class="amc-DCard-badgeDot" aria-hidden="true"></span>#BADGE#</span>{endif/}</div>
+      <h3 class="amc-DCard-title">{if ?LINK_URL/}<a class="amc-DCard-link" href="#LINK_URL#">#TITLE#</a>{else/}#TITLE#{endif/}</h3>
+      {if ?DESCRIPTION/}<p class="amc-DCard-desc">#DESCRIPTION#</p>{endif/}
+    </div>
+    <div class="amc-DCard-foot">{if ?VALUE/}<p class="amc-DCard-figure">{if ?VALUE_LABEL/}<span class="amc-DCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-DCard-value">#VALUE#</span></p>{endif/}{if ?META/}<span class="amc-DCard-meta">#META#</span>{endif/}{if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-DCard-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-DCard-ctaIcon fa fa-arrow-right"></span></span>{endif/}{endif/}</div>
+  </article>
+</div>

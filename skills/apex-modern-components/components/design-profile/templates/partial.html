@@ -1,0 +1,30 @@
+<article class="amc-DProfile amc-DProfile--#STYLE#{if ?STATUS/} {case STATUS/}{when online/}amc-DProfile--online{when away/}amc-DProfile--away{when busy/}amc-DProfile--busy{when offline/}amc-DProfile--offline{otherwise/}amc-DProfile--other{endcase/}{endif/}{if ?LINK_URL/} amc-DProfile--linked{endif/}">
+  <div class="amc-DProfile-card">
+    {case STYLE/}{when cover/}<div class="amc-DProfile-cover" aria-hidden="true">{if ?COVER_URL/}<img class="amc-DProfile-coverImg" src="#COVER_URL#" alt="" width="640" height="160" loading="lazy">{endif/}</div>{otherwise/}{endcase/}
+    <div class="amc-DProfile-avatar">{if ?IMAGE_URL/}<img class="amc-DProfile-img" src="#IMAGE_URL#" alt="" width="96" height="96" loading="lazy">{else/}{if ?INITIALS/}<span class="amc-DProfile-initials" aria-hidden="true">#INITIALS#</span>{else/}<span class="amc-DProfile-initials fa fa-user" aria-hidden="true"></span>{endif/}{endif/}{if ?STATUS/}<span class="amc-DProfile-dot" aria-hidden="true"></span>{endif/}</div>
+    <div class="amc-DProfile-main">
+      <h3 class="amc-DProfile-name">#NAME#</h3>
+      {if ?ROLE/}<p class="amc-DProfile-role">#ROLE#</p>{endif/}
+      {if ?STATUS/}<p class="amc-DProfile-status"><span class="amc-DProfile-statusDot" aria-hidden="true"></span><span class="amc-DProfile-statusText">{case STATUS/}{when online/}Online{when away/}Away{when busy/}Busy{when offline/}Offline{otherwise/}#STATUS#{endcase/}</span></p>{endif/}
+      {case STYLE/}{when chip/}{when compactRow/}{otherwise/}{if ?BIO/}<p class="amc-DProfile-bio">#BIO#</p>{endif/}{endcase/}
+      {case STYLE/}{when businessCard/}{if ?EMAIL/}<ul class="amc-DProfile-contact">
+        <li class="amc-DProfile-contactItem"><span class="amc-DProfile-contactIcon fa fa-envelope-o" aria-hidden="true"></span><a class="amc-DProfile-contactLink" href="mailto:#EMAIL!ATTR#">#EMAIL#</a></li>
+        {if ?PHONE/}<li class="amc-DProfile-contactItem"><span class="amc-DProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-DProfile-contactText">#PHONE#</span></li>{endif/}
+      </ul>{else/}{if ?PHONE/}<ul class="amc-DProfile-contact">
+        <li class="amc-DProfile-contactItem"><span class="amc-DProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-DProfile-contactText">#PHONE#</span></li>
+      </ul>{endif/}{endif/}{otherwise/}{endcase/}
+    </div>
+    {case STYLE/}{when stats/}{if ?STAT1_VALUE/}<dl class="amc-DProfile-stats">
+      <div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT1_VALUE#</dd></div>
+      {if ?STAT2_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT2_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT2_VALUE#</dd></div>{endif/}
+      {if ?STAT3_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT3_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT3_VALUE#</dd></div>{endif/}
+    </dl>{endif/}{when cover/}{if ?STAT1_VALUE/}<dl class="amc-DProfile-stats">
+      <div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT1_VALUE#</dd></div>
+      {if ?STAT2_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT2_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT2_VALUE#</dd></div>{endif/}
+      {if ?STAT3_VALUE/}<div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT3_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT3_VALUE#</dd></div>{endif/}
+    </dl>{endif/}{when compactRow/}{if ?STAT1_VALUE/}<dl class="amc-DProfile-stats">
+      <div class="amc-DProfile-stat"><dt class="amc-DProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-DProfile-statValue">#STAT1_VALUE#</dd></div>
+    </dl>{endif/}{otherwise/}{endcase/}
+    {if ?LINK_URL/}<a class="amc-DProfile-link" href="#LINK_URL#"><span class="amc-DProfile-linkText">{if ?LINK_LABEL/}#LINK_LABEL#{else/}View profile{endif/}<span class="amc-DProfile-sr">, #NAME#</span></span><span class="amc-DProfile-linkIcon fa fa-chevron-right" aria-hidden="true"></span></a>{endif/}
+  </div>
+</article>

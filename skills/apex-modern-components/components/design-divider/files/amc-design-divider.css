@@ -1,0 +1,595 @@
+/* APEX Modern Components - Design Divider (Design Collection)
+ * Eight section dividers that share one markup: two rules, a content block
+ * (icon + text) and an optional meta. Colors resolve from Universal Theme
+ * variables (--ut-*), so each style follows Vita, Vita Dark, Redwood Light,
+ * Theme Roller and custom styles. Override any --amc-ddiv-* token on a parent. */
+
+.amc-DDivider {
+  --amc-ddiv-fg: var(--ut-component-text-default-color, #262626);
+  --amc-ddiv-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ddiv-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-ddiv-bg: var(--ut-component-background-color, #fff);
+  --amc-ddiv-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ddiv-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-ddiv-info: var(--ut-palette-info, #0076df);
+  --amc-ddiv-ink: var(--amc-ddiv-shadow-tone, #000);
+  --amc-ddiv-radius: max(var(--ut-component-border-radius, .5rem), .375rem);
+  --amc-ddiv-space: 1.5rem;
+  --amc-ddiv-gap: .875rem;
+  --amc-ddiv-weight: 1px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--amc-ddiv-gap);
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-block: var(--amc-ddiv-space);
+  color: var(--amc-ddiv-fg);
+}
+
+.amc-DDivider *,
+.amc-DDivider *::before,
+.amc-DDivider *::after {
+  box-sizing: border-box;
+}
+
+.amc-DDivider--spaceCompact { --amc-ddiv-space: .75rem; }
+.amc-DDivider--spaceLarge { --amc-ddiv-space: 2.75rem; }
+
+/* ---------- Shared parts ---------- */
+
+.amc-DDivider-line {
+  flex: 1 1 0;
+  min-inline-size: 1.5rem;
+  block-size: var(--amc-ddiv-weight);
+  background: var(--amc-ddiv-line);
+}
+
+.amc-DDivider-content {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: .5rem;
+  min-inline-size: 0;
+}
+
+.amc-DDivider-content:empty {
+  display: none;
+}
+
+.amc-DDivider-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--amc-ddiv-accent);
+  line-height: 1;
+}
+
+.amc-DDivider-text {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  min-inline-size: 0;
+}
+
+.amc-DDivider-title {
+  margin: 0;
+  color: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  unicode-bidi: isolate;
+}
+
+.amc-DDivider-eyebrow,
+.amc-DDivider-desc {
+  display: none;
+  margin: 0;
+  unicode-bidi: isolate;
+}
+
+.amc-DDivider-meta {
+  flex-shrink: 0;
+  color: var(--amc-ddiv-muted);
+  font-size: .75rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+/* Row styles: the title sits between the rules; Alignment removes one rule. */
+.amc-DDivider--alignStart:not(.amc-DDivider--eyebrowTitle, .amc-DDivider--accentUnderline, .amc-DDivider--sideLabel) .amc-DDivider-line--start,
+.amc-DDivider--alignEnd:not(.amc-DDivider--eyebrowTitle, .amc-DDivider--accentUnderline, .amc-DDivider--sideLabel) .amc-DDivider-line--end {
+  display: none;
+}
+
+/* ---------- 1. Line Title: hairline, title, hairline ---------- */
+
+.amc-DDivider--lineTitle .amc-DDivider-title {
+  color: var(--amc-ddiv-muted);
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+
+.amc-DDivider--lineTitle .amc-DDivider-icon {
+  font-size: .875rem;
+  color: var(--amc-ddiv-muted);
+}
+
+/* ---------- 2. Eyebrow Title: eyebrow + large title, rule below ---------- */
+
+.amc-DDivider--eyebrowTitle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "content meta"
+    "rule rule";
+  align-items: end;
+  gap: .875rem 1rem;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-line--start {
+  display: none;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-line--end {
+  grid-area: rule;
+  min-inline-size: 0;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-content {
+  grid-area: content;
+  align-items: flex-start;
+  gap: .875rem;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-meta {
+  grid-area: meta;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-icon {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: var(--amc-ddiv-radius);
+  background: color-mix(in srgb, var(--amc-ddiv-accent) 12%, transparent);
+  font-size: 1.25rem;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-eyebrow {
+  display: block;
+  color: var(--amc-ddiv-accent);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+
+.amc-DDivider--eyebrowTitle .amc-DDivider-desc {
+  display: block;
+  max-inline-size: 40rem;
+  color: var(--amc-ddiv-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+.amc-DDivider--eyebrowTitle.amc-DDivider--alignCenter {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "content" "meta" "rule";
+  justify-items: center;
+  text-align: center;
+}
+
+.amc-DDivider--eyebrowTitle.amc-DDivider--alignCenter .amc-DDivider-content {
+  flex-direction: column;
+  align-items: center;
+}
+
+.amc-DDivider--eyebrowTitle.amc-DDivider--alignCenter .amc-DDivider-line--end {
+  justify-self: stretch;
+}
+
+.amc-DDivider--eyebrowTitle.amc-DDivider--alignEnd .amc-DDivider-content {
+  flex-direction: row-reverse;
+  text-align: end;
+}
+
+.amc-DDivider--eyebrowTitle.amc-DDivider--alignEnd {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "meta content"
+    "rule rule";
+}
+
+/* ---------- 3. Gradient Line: glowing primary rule, caption below ---------- */
+
+.amc-DDivider--gradientLine {
+  --amc-ddiv-weight: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: .625rem;
+}
+
+.amc-DDivider--gradientLine .amc-DDivider-line--start {
+  flex: 1 0 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--amc-ddiv-accent) 30%, color-mix(in srgb, var(--amc-ddiv-accent) 50%, var(--amc-ddiv-info)) 50%, var(--amc-ddiv-accent) 70%, transparent);
+  background: linear-gradient(90deg, transparent, var(--amc-ddiv-accent) 30%, oklch(from var(--amc-ddiv-accent) l c calc(h + 55)) 50%, var(--amc-ddiv-accent) 70%, transparent);
+  box-shadow: 0 0 .75rem color-mix(in srgb, var(--amc-ddiv-accent) 45%, transparent);
+}
+
+.amc-DDivider--gradientLine .amc-DDivider-line--end {
+  display: none;
+}
+
+.amc-DDivider--gradientLine.amc-DDivider--alignStart .amc-DDivider-line--start,
+.amc-DDivider--gradientLine.amc-DDivider--alignEnd .amc-DDivider-line--start {
+  display: block;
+}
+
+.amc-DDivider--gradientLine.amc-DDivider--alignStart {
+  justify-content: flex-start;
+}
+
+.amc-DDivider--gradientLine.amc-DDivider--alignStart .amc-DDivider-line--start {
+  background: linear-gradient(90deg, var(--amc-ddiv-accent), color-mix(in srgb, var(--amc-ddiv-accent) 50%, transparent) 55%, transparent);
+}
+
+.amc-DDivider--gradientLine.amc-DDivider--alignEnd {
+  justify-content: flex-end;
+}
+
+.amc-DDivider--gradientLine.amc-DDivider--alignEnd .amc-DDivider-line--start {
+  background: linear-gradient(270deg, var(--amc-ddiv-accent), color-mix(in srgb, var(--amc-ddiv-accent) 50%, transparent) 55%, transparent);
+}
+
+.amc-DDivider--gradientLine:dir(rtl) .amc-DDivider-line--start {
+  transform: scaleX(-1);
+}
+
+.amc-DDivider--gradientLine .amc-DDivider-title {
+  color: var(--amc-ddiv-muted);
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+.amc-DDivider--gradientLine .amc-DDivider-icon {
+  font-size: .75rem;
+}
+
+/* ---------- 4. Icon Center: medallion on the rule ---------- */
+
+.amc-DDivider--iconCenter .amc-DDivider-line--start {
+  background: linear-gradient(90deg, transparent, var(--amc-ddiv-line) 40%);
+}
+
+.amc-DDivider--iconCenter .amc-DDivider-line--end {
+  background: linear-gradient(270deg, transparent, var(--amc-ddiv-line) 40%);
+}
+
+.amc-DDivider--iconCenter:dir(rtl) .amc-DDivider-line {
+  transform: scaleX(-1);
+}
+
+.amc-DDivider--iconCenter .amc-DDivider-icon {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border: 1px solid color-mix(in srgb, var(--amc-ddiv-accent) 30%, var(--amc-ddiv-line));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-ddiv-accent) 10%, var(--amc-ddiv-bg));
+  box-shadow: 0 0 0 .3125rem color-mix(in srgb, var(--amc-ddiv-accent) 5%, transparent);
+  font-size: 1rem;
+}
+
+/* No icon: a small rotated square keeps the medallion. */
+.amc-DDivider--iconCenter:not(.amc-DDivider--hasIcon) .amc-DDivider-content {
+  display: flex;
+}
+
+.amc-DDivider--iconCenter:not(.amc-DDivider--hasIcon) .amc-DDivider-content::before {
+  content: "";
+  inline-size: .625rem;
+  block-size: .625rem;
+  border: 2px solid var(--amc-ddiv-accent);
+  background: var(--amc-ddiv-bg);
+  transform: rotate(45deg);
+}
+
+/* The title is for screen readers only; the medallion carries the look. */
+.amc-DDivider--iconCenter .amc-DDivider-text {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.amc-DDivider--iconCenter {
+  position: relative;
+}
+
+/* ---------- 5. Pill Label: title in a chip on the rule ---------- */
+
+.amc-DDivider--pillLabel {
+  gap: 0;
+}
+
+.amc-DDivider--pillLabel .amc-DDivider-content {
+  padding: .3125rem .875rem;
+  border: 1px solid var(--amc-ddiv-line);
+  border-radius: 999px;
+  background: var(--amc-ddiv-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-ddiv-ink) 6%, transparent);
+  gap: .4375rem;
+}
+
+.amc-DDivider--pillLabel .amc-DDivider-icon {
+  font-size: .8125rem;
+}
+
+.amc-DDivider--pillLabel .amc-DDivider-title {
+  font-size: .8125rem;
+}
+
+.amc-DDivider--pillLabel .amc-DDivider-meta {
+  margin-inline-start: .625rem;
+  padding: .0625rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-ddiv-accent) 12%, transparent);
+  color: var(--amc-ddiv-accent);
+  font-weight: 600;
+}
+
+/* ---------- 6. Accent Underline: hairline with a thick primary segment ---------- */
+
+.amc-DDivider--accentUnderline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "content meta"
+    "rule rule";
+  align-items: end;
+  gap: .625rem 1rem;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-content {
+  grid-area: content;
+  gap: .625rem;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-meta {
+  grid-area: meta;
+  padding-block-end: .125rem;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-line--end {
+  grid-area: rule;
+  min-inline-size: 0;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-line--start {
+  z-index: 1;
+  grid-area: rule;
+  justify-self: start;
+  align-self: end;
+  inline-size: 3rem;
+  min-inline-size: 0;
+  block-size: 3px;
+  border-radius: 3px;
+  background: var(--amc-ddiv-accent);
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-line--end {
+  align-self: end;
+  margin-block-end: 1px;
+}
+
+.amc-DDivider--accentUnderline.amc-DDivider--alignCenter .amc-DDivider-line--start {
+  justify-self: center;
+}
+
+.amc-DDivider--accentUnderline.amc-DDivider--alignCenter {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "content" "meta" "rule";
+  justify-items: center;
+  text-align: center;
+}
+
+.amc-DDivider--accentUnderline.amc-DDivider--alignCenter .amc-DDivider-line--end {
+  justify-self: stretch;
+}
+
+.amc-DDivider--accentUnderline.amc-DDivider--alignEnd .amc-DDivider-line--start {
+  justify-self: end;
+}
+
+.amc-DDivider--accentUnderline.amc-DDivider--alignEnd {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "meta content"
+    "rule rule";
+  text-align: end;
+}
+
+.amc-DDivider--accentUnderline.amc-DDivider--alignEnd .amc-DDivider-content {
+  flex-direction: row-reverse;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-icon {
+  font-size: 1.125rem;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-eyebrow {
+  display: block;
+  color: var(--amc-ddiv-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.amc-DDivider--accentUnderline .amc-DDivider-desc {
+  display: block;
+  color: var(--amc-ddiv-muted);
+  font-size: .8125rem;
+  line-height: 1.45;
+}
+
+/* ---------- 7. Dotted: dotted rule, small caps title or ornament ---------- */
+
+.amc-DDivider--dotted {
+  --amc-ddiv-weight: 4px;
+}
+
+.amc-DDivider--dotted .amc-DDivider-line {
+  background: radial-gradient(circle, color-mix(in srgb, var(--amc-ddiv-muted) 70%, transparent) 1.25px, transparent 1.75px) center / .625rem 4px repeat-x;
+}
+
+.amc-DDivider--dotted .amc-DDivider-content {
+  gap: .625rem;
+}
+
+.amc-DDivider--dotted .amc-DDivider-title {
+  color: var(--amc-ddiv-muted);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.amc-DDivider--dotted .amc-DDivider-icon {
+  color: var(--amc-ddiv-muted);
+  font-size: .75rem;
+}
+
+/* No title and no icon: a three-dot ornament marks the break. */
+.amc-DDivider--dotted:not(.amc-DDivider--hasTitle, .amc-DDivider--hasIcon) .amc-DDivider-content {
+  display: flex;
+}
+
+.amc-DDivider--dotted:not(.amc-DDivider--hasTitle, .amc-DDivider--hasIcon) .amc-DDivider-content::before {
+  content: "";
+  inline-size: 2.25rem;
+  block-size: .4375rem;
+  background: radial-gradient(circle, var(--amc-ddiv-accent) 3px, transparent 3.5px) center / .75rem .4375rem repeat-x;
+}
+
+/* ---------- 8. Side Label: icon + title at start, rule, count chip ---------- */
+
+.amc-DDivider--sideLabel {
+  gap: .75rem;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-line--start {
+  display: none;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-content {
+  order: 0;
+  gap: .625rem;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-icon {
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: calc(var(--amc-ddiv-radius) * .75);
+  background: var(--amc-ddiv-accent);
+  color: var(--amc-ddiv-accent-fg);
+  font-size: .875rem;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-eyebrow {
+  display: block;
+  color: var(--amc-ddiv-muted);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-desc {
+  display: block;
+  color: var(--amc-ddiv-muted);
+  font-size: .75rem;
+  line-height: 1.35;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-text {
+  gap: .125rem;
+}
+
+.amc-DDivider--sideLabel .amc-DDivider-meta {
+  padding: .125rem .625rem;
+  border: 1px solid var(--amc-ddiv-line);
+  border-radius: 999px;
+  color: var(--amc-ddiv-fg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-DDivider--sideLabel.amc-DDivider--alignEnd {
+  flex-direction: row-reverse;
+}
+
+.amc-DDivider--sideLabel.amc-DDivider--alignEnd .amc-DDivider-content {
+  flex-direction: row-reverse;
+  text-align: end;
+}
+
+.amc-DDivider--sideLabel.amc-DDivider--alignCenter .amc-DDivider-line--start {
+  display: block;
+}
+
+.amc-DDivider--sideLabel.amc-DDivider--alignCenter .amc-DDivider-meta {
+  order: 3;
+}
+
+/* ---------- Narrow containers ---------- */
+
+@media (max-width: 30rem) {
+  .amc-DDivider--eyebrowTitle .amc-DDivider-title {
+    font-size: 1.1875rem;
+  }
+}
+
+/* ---------- High contrast ---------- */
+
+@media (forced-colors: active) {
+  .amc-DDivider-line,
+  .amc-DDivider--gradientLine .amc-DDivider-line--start,
+  .amc-DDivider--accentUnderline .amc-DDivider-line--start {
+    background: CanvasText;
+  }
+
+  .amc-DDivider--dotted .amc-DDivider-line {
+    background: none;
+    border-block-start: 2px dotted CanvasText;
+  }
+
+  .amc-DDivider--pillLabel .amc-DDivider-content,
+  .amc-DDivider--iconCenter .amc-DDivider-icon {
+    border-color: CanvasText;
+  }
+}

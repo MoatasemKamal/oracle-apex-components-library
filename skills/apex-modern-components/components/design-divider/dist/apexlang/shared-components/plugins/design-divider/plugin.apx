@@ -1,0 +1,306 @@
+plugin designDivider (
+    name: Design Divider
+    staticId: AMC_DESIGN_DIVIDER
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+        ]
+        partial:
+            ```html
+            <div class="amc-DDivider amc-DDivider--#STYLE#{case ALIGN/}{when start/} amc-DDivider--alignStart{when center/} amc-DDivider--alignCenter{when end/} amc-DDivider--alignEnd{otherwise/}{endcase/}{case SPACING/}{when compact/} amc-DDivider--spaceCompact{when large/} amc-DDivider--spaceLarge{otherwise/}{endcase/}{if ?ICON/} amc-DDivider--hasIcon{endif/}{if ?TITLE/} amc-DDivider--hasTitle{endif/}"{if ?TITLE/}{else/} role="separator"{endif/}>
+              <span class="amc-DDivider-line amc-DDivider-line--start" aria-hidden="true"></span>
+              <div class="amc-DDivider-content">{if ?ICON/}<span class="amc-DDivider-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{if ?TITLE/}<div class="amc-DDivider-text">{if ?EYEBROW/}<p class="amc-DDivider-eyebrow">#EYEBROW#</p>{endif/}<h3 class="amc-DDivider-title">#TITLE#</h3>{if ?DESCRIPTION/}<p class="amc-DDivider-desc">#DESCRIPTION#</p>{endif/}</div>{endif/}</div>
+              <span class="amc-DDivider-line amc-DDivider-line--end" aria-hidden="true"></span>
+              {if ?META/}<span class="amc-DDivider-meta">#META#</span>{endif/}
+            </div>
+            ```
+        translateTemplates: false
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-design-divider.css
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style. Title is optional: without it the divider is a pure separator (role separator); with it the divider is a section heading (h3). Eyebrow and Description are shown by Eyebrow Title, Accent Underline and Side Label. Meta, for example a count, is shown at the end of the row. Colors follow the active Universal Theme style.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: lineTitle
+        }
+        help {
+            helpText:
+                ```
+                Divider design. Line Title: hairlines on both sides of the title. Eyebrow Title: small primary eyebrow over a large title and a rule below. Gradient Line: glowing primary gradient rule with an optional caption. Icon Center: icon medallion on the line, title read by screen readers only. Pill Label: title in a rounded chip on the line. Accent Underline: title over a hairline with a short thick primary segment. Dotted: dotted rule with a small caps title or a three-dot ornament. Side Label: icon and title at the start, rule to the end, Meta as a count chip.
+                ```
+        }
+        entry lineTitle (
+            sequence: 10
+            display: Line Title
+            return: lineTitle
+        )
+        entry eyebrowTitle (
+            sequence: 20
+            display: Eyebrow Title
+            return: eyebrowTitle
+        )
+        entry gradientLine (
+            sequence: 30
+            display: Gradient Line
+            return: gradientLine
+        )
+        entry iconCenter (
+            sequence: 40
+            display: Icon Center
+            return: iconCenter
+        )
+        entry pillLabel (
+            sequence: 50
+            display: Pill Label
+            return: pillLabel
+        )
+        entry accentUnderline (
+            sequence: 60
+            display: Accent Underline
+            return: accentUnderline
+        )
+        entry dotted (
+            sequence: 70
+            display: Dotted
+            return: dotted
+        )
+        entry sideLabel (
+            sequence: 80
+            display: Side Label
+            return: sideLabel
+        )
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional section title, rendered as an h3. Leave empty for a plain separator.
+                ```
+        }
+    )
+    customAttribute EYEBROW (
+        apexlangName: eyebrow
+        attribute: 3
+        name: Eyebrow
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short line above the title, for example Step 2 or Finance. Shown by Eyebrow Title, Accent Underline and Side Label; needs a Title.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 4
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional sentence below the title. Shown by Eyebrow Title, Accent Underline and Side Label; needs a Title.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 5
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-calendar. Icon Center uses it as the medallion; without it a small diamond is shown.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 6
+        name: Meta
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short text at the end of the row, for example 12 orders. Side Label shows it as a count chip.
+                ```
+        }
+    )
+    customAttribute ALIGN (
+        apexlangName: align
+        attribute: 7
+        name: Alignment
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 70
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Where the title sits. Empty uses the style default: centered for Line Title, Gradient Line, Icon Center, Pill Label and Dotted; start for Eyebrow Title, Accent Underline and Side Label.
+                ```
+        }
+        entry start (
+            sequence: 10
+            display: Start
+            return: start
+        )
+        entry center (
+            sequence: 20
+            display: Center
+            return: center
+        )
+        entry end (
+            sequence: 30
+            display: End
+            return: end
+        )
+    )
+    customAttribute SPACING (
+        apexlangName: spacing
+        attribute: 8
+        name: Spacing
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 80
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: normal
+        }
+        help {
+            helpText:
+                ```
+                Space above and below the divider.
+                ```
+        }
+        entry compact (
+            sequence: 10
+            display: Compact
+            return: compact
+        )
+        entry normal (
+            sequence: 20
+            display: Normal
+            return: normal
+        )
+        entry large (
+            sequence: 30
+            display: Large
+            return: large
+        )
+    )
+    file "amc-design-divider.css" (
+        fileName: amc-design-divider.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+)

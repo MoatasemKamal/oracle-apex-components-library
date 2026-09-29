@@ -1,0 +1,184 @@
+{
+  "name": "Design KPI",
+  "apexlangName": "designKpi",
+  "staticId": "AMC_DESIGN_KPI",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["kpi", "metric", "stat", "figure", "dashboard", "tile", "trend", "delta", "target", "gauge", "ring", "sparkline", "comparison", "design collection"],
+  "description": "Design Collection family of ten KPI tile designs chosen with Style: big number, delta chip, glass, gradient, compare, target bar, ring, spark bars, icon left and minimal. Follows the dashboard metric patterns of modern design systems (hero figure first, trend as colored text plus arrow, target as a native progress bar) while every color comes from the Universal Theme palette. One tile (partial) or a responsive grid of tiles (report).",
+  "helpText": "Pick a Style, then map Label and Value (formatted in SQL with the application's NLS settings). Change and Trend (up, down or flat) add a trend indicator. Percent (a number from 0 to 100) drives the Target Bar and Ring styles, Series (comma-separated numbers) drives Spark Bars, and Compare Value / Compare Label drive the Compare and Target Bar styles. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.",
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-design-kpi.css", "files/amc-design-kpi.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-kpi.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-design-kpi.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "bigNumber",
+      "sequence": 10,
+      "helpText": "The tile design. Big Number: oversized figure with a footer. Delta Chip: change shown as a colored pill. Glass: translucent blurred surface. Gradient: filled with the primary color. Compare: current value next to a comparison value. Target Bar: progress toward a target, uses Percent. Ring: circular gauge, uses Percent. Spark Bars: mini bar chart, uses Series. Icon Left: solid icon tile beside the figure. Minimal: no card, typographic only.",
+      "entries": [
+        { "name": "bigNumber", "display": "Big Number", "return": "bigNumber", "sequence": 10 },
+        { "name": "deltaChip", "display": "Delta Chip", "return": "deltaChip", "sequence": 20 },
+        { "name": "glass", "display": "Glass", "return": "glass", "sequence": 30 },
+        { "name": "gradient", "display": "Gradient", "return": "gradient", "sequence": 40 },
+        { "name": "compare", "display": "Compare", "return": "compare", "sequence": 50 },
+        { "name": "targetBar", "display": "Target Bar", "return": "targetBar", "sequence": 60 },
+        { "name": "ring", "display": "Ring", "return": "ring", "sequence": 70 },
+        { "name": "sparkBars", "display": "Spark Bars", "return": "sparkBars", "sequence": 80 },
+        { "name": "iconLeft", "display": "Icon Left", "return": "iconLeft", "sequence": 90 },
+        { "name": "minimal", "display": "Minimal", "return": "minimal", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "label",
+      "attribute": 2,
+      "name": "Label",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Name of the metric, for example Monthly Revenue. Rendered as the tile heading."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 3,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "The key figure as display text. Format it in SQL, for example to_char(amount, 'FML999G999G990'), so it follows the application's NLS settings."
+    },
+    {
+      "staticId": "UNIT",
+      "apexlangName": "unit",
+      "attribute": 4,
+      "name": "Unit",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Optional unit shown after the value, for example SAR, %, h or orders."
+    },
+    {
+      "staticId": "CHANGE",
+      "apexlangName": "change",
+      "attribute": 5,
+      "name": "Change",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional change text such as +12.4% or -9. Leave empty to hide the trend indicator."
+    },
+    {
+      "staticId": "TREND",
+      "apexlangName": "trend",
+      "attribute": 6,
+      "name": "Trend",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Direction of the change: up, down or flat. Any other value renders as flat. Up is shown in the success color and down in the danger color unless Down Is Good is set."
+    },
+    {
+      "staticId": "INVERT_TREND",
+      "apexlangName": "invertTrend",
+      "attribute": 7,
+      "name": "Down Is Good",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 70,
+      "helpText": "Swap the trend colors so a decrease is shown as positive, for example for costs, churn or error rates."
+    },
+    {
+      "staticId": "PERCENT",
+      "apexlangName": "percent",
+      "attribute": 8,
+      "name": "Percent",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Target Bar and Ring styles: a number from 0 to 100 with a period as decimal separator, for example 72 or 64.5. Values outside the range are clamped; non-numeric values show an empty bar or ring."
+    },
+    {
+      "staticId": "SERIES",
+      "apexlangName": "series",
+      "attribute": 9,
+      "name": "Series",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Spark Bars style: comma-separated numbers, oldest first, with a period as decimal separator, for example 12,18,15,22,27. Up to 24 values are drawn; the last one is highlighted. Build it in SQL with listagg."
+    },
+    {
+      "staticId": "COMPARE_VALUE",
+      "apexlangName": "compareValue",
+      "attribute": 10,
+      "name": "Compare Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Compare style: the reference figure, for example last quarter's value. Target Bar style: the target, for example 1,500,000. Format it in SQL like Value."
+    },
+    {
+      "staticId": "COMPARE_LABEL",
+      "apexlangName": "compareLabel",
+      "attribute": 11,
+      "name": "Compare Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Caption for Compare Value, for example Last quarter or Target. Defaults to Previous in the Compare style and Target in the Target Bar style."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 12,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 120,
+      "helpText": "Font APEX icon class, for example fa-line-chart. Shown by the Glass, Gradient and Icon Left styles."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 13,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 130,
+      "helpText": "Optional footnote, for example vs. last month. In the Compare style it captions the current value, for example This quarter."
+    }
+  ]
+}

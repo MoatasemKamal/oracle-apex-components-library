@@ -1,0 +1,369 @@
+{
+  "samples": [
+    {
+      "title": "centered",
+      "mode": "report",
+      "settings": {
+        "STYLE": "centered"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "BIO": "Owns the Riyadh enterprise accounts and the Q4 renewal program. Ask her about pricing exceptions.",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "BIO": "Schedules outbound shipments for the Jeddah warehouse and handles carrier escalations.",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Lina Haddad",
+          "INITIALS": "LH",
+          "ROLE": "Finance Controller",
+          "STATUS": "busy",
+          "BIO": "Leads month-end close, invoice approvals above 50,000 SAR and the audit calendar.",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "cover",
+      "mode": "report",
+      "settings": {
+        "STYLE": "cover"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "BIO": "Owns the Riyadh enterprise accounts and the Q4 renewal program. Ask her about pricing exceptions.",
+          "STAT1_VALUE": "42",
+          "STAT1_LABEL": "Accounts",
+          "STAT2_VALUE": "1.9M",
+          "STAT2_LABEL": "Pipeline SAR",
+          "STAT3_VALUE": "96%",
+          "STAT3_LABEL": "Renewal rate",
+          "LINK_URL": "#",
+          "COVER_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 160'%3E%3Crect width='640' height='160' fill='%23435a6e'/%3E%3Cpath d='M0 120 L160 70 L300 110 L460 40 L640 90 L640 160 L0 160z' fill='%23627c92'/%3E%3C/svg%3E",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23c9d3de'/%3E%3Ccircle cx='48' cy='38' r='17' fill='%23788a9e'/%3E%3Cpath d='M14 96c4-22 17-31 34-31s30 9 34 31z' fill='%23788a9e'/%3E%3C/svg%3E",
+          "LINK_LABEL": "Follow"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "BIO": "Schedules outbound shipments for the Jeddah warehouse and handles carrier escalations.",
+          "STAT1_VALUE": "318",
+          "STAT1_LABEL": "Shipments",
+          "STAT2_VALUE": "2.1d",
+          "STAT2_LABEL": "Avg. lead time",
+          "STAT3_VALUE": "12",
+          "STAT3_LABEL": "Carriers",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Message"
+        }
+      ]
+    },
+    {
+      "title": "horizontal",
+      "mode": "report",
+      "settings": {
+        "STYLE": "horizontal"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "BIO": "Owns the Riyadh enterprise accounts and the Q4 renewal program. Ask her about pricing exceptions.",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "BIO": "Schedules outbound shipments for the Jeddah warehouse and handles carrier escalations.",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Lina Haddad",
+          "INITIALS": "LH",
+          "ROLE": "Finance Controller",
+          "STATUS": "busy",
+          "BIO": "Leads month-end close, invoice approvals above 50,000 SAR and the audit calendar.",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "glass",
+      "mode": "report",
+      "settings": {
+        "STYLE": "glass"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "BIO": "Owns the Riyadh enterprise accounts and the Q4 renewal program. Ask her about pricing exceptions.",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open employee record"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "BIO": "Schedules outbound shipments for the Jeddah warehouse and handles carrier escalations.",
+          "LINK_URL": "#",
+          "LINK_LABEL": "Open employee record"
+        }
+      ]
+    },
+    {
+      "title": "minimal",
+      "mode": "report",
+      "settings": {
+        "STYLE": "minimal"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "BIO": "Owns the Riyadh enterprise accounts and the Q4 renewal program. Ask her about pricing exceptions.",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "BIO": "Schedules outbound shipments for the Jeddah warehouse and handles carrier escalations.",
+          "LINK_URL": "#",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23c9d3de'/%3E%3Ccircle cx='48' cy='38' r='17' fill='%23788a9e'/%3E%3Cpath d='M14 96c4-22 17-31 34-31s30 9 34 31z' fill='%23788a9e'/%3E%3C/svg%3E"
+        },
+        {
+          "NAME": "Lina Haddad",
+          "INITIALS": "LH",
+          "ROLE": "Finance Controller",
+          "STATUS": "busy",
+          "BIO": "Leads month-end close, invoice approvals above 50,000 SAR and the audit calendar.",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "stats",
+      "mode": "report",
+      "settings": {
+        "STYLE": "stats"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "STAT1_VALUE": "42",
+          "STAT1_LABEL": "Accounts",
+          "STAT2_VALUE": "1.9M",
+          "STAT2_LABEL": "Pipeline SAR",
+          "STAT3_VALUE": "96%",
+          "STAT3_LABEL": "Renewal rate",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "STAT1_VALUE": "318",
+          "STAT1_LABEL": "Shipments",
+          "STAT2_VALUE": "2.1d",
+          "STAT2_LABEL": "Avg. lead time",
+          "STAT3_VALUE": "12",
+          "STAT3_LABEL": "Carriers",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Lina Haddad",
+          "INITIALS": "LH",
+          "ROLE": "Finance Controller",
+          "STATUS": "busy",
+          "STAT1_VALUE": "1,184",
+          "STAT1_LABEL": "Invoices",
+          "STAT2_VALUE": "4",
+          "STAT2_LABEL": "Open audits",
+          "STAT3_VALUE": "3.2d",
+          "STAT3_LABEL": "Close time",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "gradientRing",
+      "mode": "report",
+      "settings": {
+        "STYLE": "gradientRing"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "BIO": "Owns the Riyadh enterprise accounts and the Q4 renewal program. Ask her about pricing exceptions.",
+          "LINK_URL": "#",
+          "IMAGE_URL": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23c9d3de'/%3E%3Ccircle cx='48' cy='38' r='17' fill='%23788a9e'/%3E%3Cpath d='M14 96c4-22 17-31 34-31s30 9 34 31z' fill='%23788a9e'/%3E%3C/svg%3E"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "BIO": "Schedules outbound shipments for the Jeddah warehouse and handles carrier escalations.",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "businessCard",
+      "mode": "report",
+      "settings": {
+        "STYLE": "businessCard"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "LINK_URL": "#",
+          "EMAIL": "sara.alharbi@example.com",
+          "PHONE": "+966 11 555 0142",
+          "LINK_LABEL": "Add to contacts"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "LINK_URL": "#",
+          "EMAIL": "omar.khaled@example.com",
+          "PHONE": "+966 12 555 0187",
+          "LINK_LABEL": "Add to contacts"
+        }
+      ]
+    },
+    {
+      "title": "chip",
+      "mode": "report",
+      "settings": {
+        "STYLE": "chip"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "STATUS": "online",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "STATUS": "away",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Lina Haddad",
+          "INITIALS": "LH",
+          "STATUS": "busy",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Yusuf Ali",
+          "INITIALS": "YA",
+          "STATUS": "offline",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Hana Mansour",
+          "INITIALS": "HM",
+          "STATUS": "On leave"
+        }
+      ]
+    },
+    {
+      "title": "compactRow",
+      "mode": "report",
+      "settings": {
+        "STYLE": "compactRow"
+      },
+      "rows": [
+        {
+          "NAME": "Sara Al-Harbi",
+          "INITIALS": "SH",
+          "ROLE": "Senior Account Manager",
+          "STATUS": "online",
+          "STAT1_VALUE": "42",
+          "STAT1_LABEL": "Accounts",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Omar Khaled",
+          "INITIALS": "OK",
+          "ROLE": "Logistics Coordinator",
+          "STATUS": "away",
+          "STAT1_VALUE": "318",
+          "STAT1_LABEL": "Shipments",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Lina Haddad",
+          "INITIALS": "LH",
+          "ROLE": "Finance Controller",
+          "STATUS": "busy",
+          "STAT1_VALUE": "1,184",
+          "STAT1_LABEL": "Invoices",
+          "LINK_URL": "#"
+        },
+        {
+          "NAME": "Yusuf Ali",
+          "INITIALS": "YA",
+          "ROLE": "Project Manager, ERP Rollout",
+          "STATUS": "offline",
+          "STAT1_VALUE": "23",
+          "STAT1_LABEL": "Tasks",
+          "LINK_URL": "#"
+        }
+      ]
+    },
+    {
+      "title": "businessCard, partial",
+      "mode": "partial",
+      "settings": {
+        "STYLE": "businessCard",
+        "NAME": "Faisal Al-Otaibi",
+        "INITIALS": "FA",
+        "ROLE": "Head of Procurement",
+        "BIO": "Approves supplier onboarding and framework agreements.",
+        "EMAIL": "faisal.alotaibi@example.com",
+        "PHONE": "+966 13 555 0199"
+      }
+    }
+  ]
+}

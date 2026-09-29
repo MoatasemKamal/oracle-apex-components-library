@@ -1,0 +1,1054 @@
+/* APEX Modern Components - Design Card (Design Collection)
+ * Twelve card designs that share one markup. Every color, radius and shadow
+ * resolves from Universal Theme variables (--ut-*), so each style follows Vita,
+ * Vita Dark, Redwood Light, Theme Roller and custom styles. Override any
+ * --amc-dcard-* token on a parent to restyle. */
+
+.amc-DCard,
+.amc-DCards {
+  --amc-dcard-bg: var(--ut-component-background-color, #fff);
+  --amc-dcard-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-dcard-fg: var(--ut-component-text-default-color, #262626);
+  --amc-dcard-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dcard-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-dcard-radius: max(var(--ut-component-border-radius, .5rem), .5rem);
+  --amc-dcard-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .05));
+  --amc-dcard-accent: var(--ut-palette-primary, #056ac8);
+  --amc-dcard-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-dcard-info: var(--ut-palette-info, #0076df);
+  --amc-dcard-media-fg: var(--amc-dcard-on-media, #fff);
+  --amc-dcard-scrim: var(--amc-dcard-scrim-color, #000);
+  --amc-dcard-ink: var(--amc-dcard-shadow-tone, #000);
+  --amc-dcard-mask: var(--amc-dcard-mask-color, #000);
+  --amc-dcard-state: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-dcard-state-fg: var(--ut-component-background-color, #fff);
+  --amc-dcard-pad: 1.25rem;
+  --amc-dcard-gap: 1rem;
+  --amc-dcard-min: 15rem;
+}
+
+.amc-DCard--stateSuccess {
+  --amc-dcard-state: var(--ut-palette-success, #278701);
+  --amc-dcard-state-fg: var(--ut-palette-success-contrast, #fff);
+}
+.amc-DCard--stateWarning {
+  --amc-dcard-state: var(--ut-palette-warning, #fbce4a);
+  --amc-dcard-state-fg: var(--ut-palette-warning-contrast, #262626);
+}
+.amc-DCard--stateDanger {
+  --amc-dcard-state: var(--ut-palette-danger, #cb1100);
+  --amc-dcard-state-fg: var(--ut-palette-danger-contrast, #fff);
+}
+.amc-DCard--stateInfo {
+  --amc-dcard-state: var(--ut-palette-info, #0076df);
+  --amc-dcard-state-fg: var(--ut-palette-info-contrast, #fff);
+}
+
+/* ---------- Report grid ---------- */
+
+.amc-DCards {
+  --amc-dcard-cols: 12;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-dcard-min), 100%), 1fr));
+  gap: var(--amc-dcard-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* "Up to N columns": never narrower than --amc-dcard-min, never more than N. */
+.amc-DCards--cols2 { --amc-dcard-cols: 2; }
+.amc-DCards--cols3 { --amc-dcard-cols: 3; }
+.amc-DCards--cols4 { --amc-dcard-cols: 4; }
+.amc-DCards--cols2,
+.amc-DCards--cols3,
+.amc-DCards--cols4 {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, max(var(--amc-dcard-min), (100% - (var(--amc-dcard-cols) - 1) * var(--amc-dcard-gap)) / var(--amc-dcard-cols))), 1fr)
+  );
+}
+
+.amc-DCards--horizontal { --amc-dcard-min: 22rem; }
+.amc-DCards--ticket { --amc-dcard-min: 20rem; }
+.amc-DCards--stackedPaper { row-gap: 1.5rem; }
+
+.amc-DCards-item {
+  display: flex;
+  min-inline-size: 0;
+}
+
+/* ---------- Shared anatomy ---------- */
+
+.amc-DCard {
+  position: relative;
+  display: flex;
+  flex: 1;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  container-type: inline-size;
+  color: var(--amc-dcard-fg);
+}
+
+.amc-DCard *,
+.amc-DCard *::before,
+.amc-DCard *::after {
+  box-sizing: border-box;
+}
+
+.amc-DCard-card {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: .875rem;
+  min-inline-size: 0;
+  padding: var(--amc-dcard-pad);
+  border: 1px solid transparent;
+  border-radius: var(--amc-dcard-radius);
+  background-color: var(--amc-dcard-bg);
+  color: inherit;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.amc-DCard-media {
+  display: none;
+  margin: 0;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--amc-dcard-accent) 14%, var(--amc-dcard-bg));
+}
+
+.amc-DCard-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.amc-DCard-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: calc(var(--amc-dcard-radius) * .75);
+  background: color-mix(in srgb, var(--amc-dcard-accent) 12%, transparent);
+  color: var(--amc-dcard-accent);
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.amc-DCard-body {
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+  min-inline-size: 0;
+}
+
+.amc-DCard-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .375rem .75rem;
+}
+
+.amc-DCard-top:empty,
+.amc-DCard-foot:empty {
+  display: none;
+}
+
+.amc-DCard-eyebrow {
+  margin: 0;
+  color: var(--amc-dcard-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.4;
+  unicode-bidi: isolate;
+}
+
+.amc-DCard-title {
+  margin: 0;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.amc-DCard-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Stretched link: the whole card is the click target, without JavaScript. */
+.amc-DCard-link::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.amc-DCard-card:has(.amc-DCard-link) {
+  border-radius: var(--amc-dcard-radius);
+}
+
+.amc-DCard-link:focus {
+  outline: none;
+}
+
+.amc-DCard-link:focus-visible::after {
+  border-radius: var(--amc-dcard-radius);
+  outline: 2px solid var(--amc-dcard-accent);
+  outline-offset: 2px;
+}
+
+.amc-DCard-desc {
+  margin: 0;
+  color: var(--amc-dcard-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.amc-DCard-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .125rem .5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-dcard-state) 14%, transparent);
+  color: color-mix(in srgb, var(--amc-dcard-state) 62%, var(--amc-dcard-fg));
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.amc-DCard-badgeDot {
+  inline-size: .4375rem;
+  block-size: .4375rem;
+  border-radius: 50%;
+  background: var(--amc-dcard-state);
+}
+
+.amc-DCard-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: .5rem 1rem;
+  margin-block-start: auto;
+  padding-block-start: .875rem;
+  border-block-start: 1px solid var(--amc-dcard-line);
+}
+
+.amc-DCard-figure {
+  display: flex;
+  flex-direction: column;
+  gap: .125rem;
+  margin: 0;
+  margin-inline-end: auto;
+  min-inline-size: 0;
+}
+
+.amc-DCard-valueLabel {
+  color: var(--amc-dcard-muted);
+  font-size: .75rem;
+  line-height: 1.3;
+}
+
+.amc-DCard-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  overflow-wrap: anywhere;
+}
+
+.amc-DCard-meta {
+  margin-inline-end: auto;
+  color: var(--amc-dcard-muted);
+  font-size: .8125rem;
+  line-height: 1.4;
+  unicode-bidi: isolate;
+}
+
+.amc-DCard-figure + .amc-DCard-meta {
+  margin-inline-end: 0;
+}
+
+.amc-DCard-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  color: var(--amc-dcard-accent);
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.amc-DCard-ctaIcon {
+  font-size: .75rem;
+  transition: transform .2s ease;
+}
+
+.amc-DCard-ctaIcon:dir(rtl) {
+  transform: scaleX(-1);
+}
+
+.amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-ctaIcon {
+  transform: translateX(.1875rem);
+}
+
+.amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-ctaIcon:dir(rtl) {
+  transform: scaleX(-1) translateX(.1875rem);
+}
+
+/* ---------- 1. Elevated: borderless, layered soft shadow, lifts on hover ---------- */
+
+.amc-DCard--elevated .amc-DCard-card {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-dcard-fg) 5%, transparent),
+    0 1px 2px color-mix(in srgb, var(--amc-dcard-ink) 6%, transparent),
+    0 .75rem 1.75rem -.75rem color-mix(in srgb, var(--amc-dcard-ink) 22%, transparent);
+}
+
+.amc-DCard--elevated .amc-DCard-card:has(.amc-DCard-link):hover {
+  transform: translateY(-.1875rem);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-dcard-fg) 7%, transparent),
+    0 2px 4px color-mix(in srgb, var(--amc-dcard-ink) 6%, transparent),
+    0 1.25rem 2.5rem -1rem color-mix(in srgb, var(--amc-dcard-ink) 30%, transparent);
+}
+
+.amc-DCard--elevated .amc-DCard-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: .875rem 1rem;
+}
+
+.amc-DCard--elevated .amc-DCard-body,
+.amc-DCard--elevated .amc-DCard-foot {
+  grid-column: 1 / -1;
+}
+
+.amc-DCard--elevated .amc-DCard-icon {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--amc-dcard-accent) 22%, transparent), color-mix(in srgb, var(--amc-dcard-accent) 8%, transparent));
+}
+
+.amc-DCard--elevated .amc-DCard-icon + .amc-DCard-body {
+  grid-column: 2;
+}
+
+.amc-DCard--elevated .amc-DCard-foot {
+  border-block-start: 0;
+  padding-block-start: .25rem;
+}
+
+/* ---------- 2. Outline: hairline frame, circle icon, border turns primary ---------- */
+
+.amc-DCard--outline .amc-DCard-card {
+  border-color: var(--amc-dcard-line);
+  background-color: transparent;
+}
+
+.amc-DCard--outline .amc-DCard-icon {
+  border: 1.5px solid color-mix(in srgb, var(--amc-dcard-accent) 45%, transparent);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.amc-DCard--outline .amc-DCard-foot {
+  border-block-start-style: dashed;
+}
+
+.amc-DCard--outline .amc-DCard-card:has(.amc-DCard-link):hover {
+  border-color: var(--amc-dcard-accent);
+  box-shadow: 0 0 0 1px var(--amc-dcard-accent);
+}
+
+/* ---------- 3. Glass: frosted translucent surface with primary wash ---------- */
+
+.amc-DCard--glass .amc-DCard-card {
+  border-color: color-mix(in srgb, var(--amc-dcard-fg) 12%, transparent);
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--amc-dcard-accent) 20%, transparent), transparent 62%),
+    radial-gradient(90% 80% at 100% 100%, color-mix(in srgb, var(--amc-dcard-info) 12%, transparent), transparent 60%),
+    color-mix(in srgb, var(--amc-dcard-bg) 60%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--amc-dcard-bg) 70%, transparent),
+    0 .75rem 2rem -1rem color-mix(in srgb, var(--amc-dcard-accent) 45%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.amc-DCard--glass .amc-DCard-icon {
+  border: 1px solid color-mix(in srgb, var(--amc-dcard-accent) 25%, transparent);
+  background: color-mix(in srgb, var(--amc-dcard-bg) 55%, transparent);
+}
+
+.amc-DCard--glass .amc-DCard-foot {
+  border-block-start-color: color-mix(in srgb, var(--amc-dcard-fg) 10%, transparent);
+}
+
+.amc-DCard--glass .amc-DCard-card:has(.amc-DCard-link):hover {
+  border-color: color-mix(in srgb, var(--amc-dcard-accent) 45%, transparent);
+}
+
+/* ---------- 4. Gradient Border: 2px primary-derived gradient frame ---------- */
+
+.amc-DCard--gradientBorder {
+  --amc-dcard-accent-2: var(--amc-dcard-info);
+}
+
+.amc-DCard--gradientBorder .amc-DCard-card {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--amc-dcard-bg), var(--amc-dcard-bg)) padding-box,
+    linear-gradient(135deg, var(--amc-dcard-accent), color-mix(in srgb, var(--amc-dcard-accent-2) 70%, var(--amc-dcard-bg)) 55%, var(--amc-dcard-accent)) border-box;
+  background:
+    linear-gradient(var(--amc-dcard-bg), var(--amc-dcard-bg)) padding-box,
+    linear-gradient(135deg, var(--amc-dcard-accent), oklch(from var(--amc-dcard-accent) l c calc(h + 55)) 55%, oklch(from var(--amc-dcard-accent) l c calc(h - 35))) border-box;
+  box-shadow: 0 .75rem 2rem -1.25rem color-mix(in srgb, var(--amc-dcard-accent) 60%, transparent);
+}
+
+.amc-DCard--gradientBorder .amc-DCard-icon {
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--amc-dcard-accent), color-mix(in srgb, var(--amc-dcard-accent) 60%, var(--amc-dcard-info)));
+  background: linear-gradient(135deg, var(--amc-dcard-accent), oklch(from var(--amc-dcard-accent) l c calc(h + 55)));
+  color: var(--amc-dcard-accent-fg);
+}
+
+.amc-DCard--gradientBorder .amc-DCard-value {
+  font-size: 1.375rem;
+  color: var(--amc-dcard-accent);
+}
+
+.amc-DCard--gradientBorder .amc-DCard-foot {
+  border-block-start: 0;
+  padding-block-start: .25rem;
+}
+
+/* ---------- 5. Image Top: full-bleed picture, icon overlaps its edge ---------- */
+
+.amc-DCard--imageTop .amc-DCard-card {
+  overflow: hidden;
+  padding: 0;
+  border-color: var(--amc-dcard-line);
+  box-shadow: var(--amc-dcard-shadow);
+  gap: 0;
+}
+
+.amc-DCard--imageTop .amc-DCard-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+}
+
+.amc-DCard--imageTop .amc-DCard-icon {
+  position: relative;
+  z-index: 1;
+  margin-block-start: var(--amc-dcard-pad);
+  margin-inline-start: var(--amc-dcard-pad);
+  border: 3px solid var(--amc-dcard-bg);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-dcard-accent) 14%, var(--amc-dcard-bg));
+  inline-size: 3rem;
+  block-size: 3rem;
+}
+
+.amc-DCard--imageTop .amc-DCard-media + .amc-DCard-icon {
+  margin-block-start: -1.5rem;
+}
+
+.amc-DCard--imageTop .amc-DCard-body {
+  padding: 1rem var(--amc-dcard-pad) 0;
+}
+
+.amc-DCard--imageTop .amc-DCard-icon + .amc-DCard-body {
+  padding-block-start: .625rem;
+}
+
+.amc-DCard--imageTop .amc-DCard-foot {
+  margin: 1rem var(--amc-dcard-pad) 0;
+  padding-block: .75rem 1rem;
+}
+
+.amc-DCard--imageTop .amc-DCard-body:last-child {
+  padding-block-end: var(--amc-dcard-pad);
+}
+
+.amc-DCard--imageTop .amc-DCard-img {
+  transition: transform .4s ease;
+}
+
+.amc-DCard--imageTop .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-img {
+  transform: scale(1.04);
+}
+
+/* ---------- 6. Image Overlay: text on a scrim over the picture ---------- */
+
+.amc-DCard--imageOverlay .amc-DCard-card {
+  overflow: hidden;
+  justify-content: flex-end;
+  min-block-size: 19rem;
+  border: 0;
+  background:
+    linear-gradient(160deg, var(--amc-dcard-accent), color-mix(in srgb, var(--amc-dcard-accent) 45%, var(--amc-dcard-scrim)));
+  color: var(--amc-dcard-media-fg);
+  box-shadow: 0 .75rem 2rem -1.25rem color-mix(in srgb, var(--amc-dcard-scrim) 70%, transparent);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-media {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.amc-DCard--imageOverlay .amc-DCard-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, color-mix(in srgb, var(--amc-dcard-scrim) 88%, transparent) 0%, color-mix(in srgb, var(--amc-dcard-scrim) 62%, transparent) 50%, color-mix(in srgb, var(--amc-dcard-scrim) 18%, transparent) 100%);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-img {
+  transition: transform .5s ease;
+}
+
+.amc-DCard--imageOverlay .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-img {
+  transform: scale(1.05);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-icon {
+  position: relative;
+  margin-block-end: auto;
+  border: 1px solid color-mix(in srgb, var(--amc-dcard-media-fg) 30%, transparent);
+  background: color-mix(in srgb, var(--amc-dcard-media-fg) 16%, transparent);
+  color: var(--amc-dcard-media-fg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-media ~ .amc-DCard-icon {
+  display: none;
+}
+
+.amc-DCard--imageOverlay .amc-DCard-body,
+.amc-DCard--imageOverlay .amc-DCard-foot {
+  position: relative;
+}
+
+.amc-DCard--imageOverlay .amc-DCard-title {
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.amc-DCard--imageOverlay .amc-DCard-eyebrow,
+.amc-DCard--imageOverlay .amc-DCard-desc,
+.amc-DCard--imageOverlay .amc-DCard-meta,
+.amc-DCard--imageOverlay .amc-DCard-valueLabel {
+  color: color-mix(in srgb, var(--amc-dcard-media-fg) 84%, transparent);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-badge {
+  border: 1px solid color-mix(in srgb, var(--amc-dcard-media-fg) 28%, transparent);
+  background: color-mix(in srgb, var(--amc-dcard-scrim) 35%, transparent);
+  color: var(--amc-dcard-media-fg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-foot {
+  border-block-start-color: color-mix(in srgb, var(--amc-dcard-media-fg) 22%, transparent);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-cta {
+  color: var(--amc-dcard-media-fg);
+}
+
+.amc-DCard--imageOverlay .amc-DCard-link:focus-visible::after {
+  outline-color: var(--amc-dcard-media-fg);
+  outline-offset: -4px;
+}
+
+/* ---------- 7. Horizontal: media or icon panel beside the text ---------- */
+
+.amc-DCard--horizontal .amc-DCard-card {
+  display: grid;
+  grid-template-columns: minmax(7rem, 36%) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
+  border-color: var(--amc-dcard-line);
+  box-shadow: var(--amc-dcard-shadow);
+}
+
+.amc-DCard--horizontal .amc-DCard-media,
+.amc-DCard--horizontal .amc-DCard-icon {
+  display: flex;
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  min-block-size: 9rem;
+}
+
+.amc-DCard--horizontal .amc-DCard-media {
+  position: relative;
+}
+
+.amc-DCard--horizontal .amc-DCard-img {
+  position: absolute;
+  inset: 0;
+}
+
+.amc-DCard--horizontal .amc-DCard-icon {
+  inline-size: auto;
+  block-size: auto;
+  border-radius: 0;
+  background:
+    linear-gradient(160deg, color-mix(in srgb, var(--amc-dcard-accent) 22%, transparent), color-mix(in srgb, var(--amc-dcard-accent) 6%, transparent));
+  font-size: 2.25rem;
+}
+
+.amc-DCard--horizontal .amc-DCard-media ~ .amc-DCard-icon {
+  display: none;
+}
+
+.amc-DCard--horizontal .amc-DCard-body {
+  grid-column: 2;
+  padding: 1rem 1.125rem 0;
+}
+
+.amc-DCard--horizontal .amc-DCard-foot {
+  grid-column: 2;
+  align-self: end;
+  margin: .75rem 1.125rem 0;
+  padding-block: .625rem .875rem;
+}
+
+.amc-DCard--horizontal .amc-DCard-body:has(+ .amc-DCard-foot:empty) {
+  padding-block-end: 1rem;
+}
+
+@container (max-width: 22rem) {
+  .amc-DCard--horizontal .amc-DCard-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .amc-DCard--horizontal .amc-DCard-media,
+  .amc-DCard--horizontal .amc-DCard-icon {
+    grid-row: auto;
+    min-block-size: 0;
+  }
+
+  .amc-DCard--horizontal .amc-DCard-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .amc-DCard--horizontal .amc-DCard-icon {
+    block-size: 4.5rem;
+  }
+
+  .amc-DCard--horizontal .amc-DCard-body,
+  .amc-DCard--horizontal .amc-DCard-foot {
+    grid-column: 1;
+  }
+}
+
+/* ---------- 8. Accent Top: thick state-colored top edge, solid badge ---------- */
+
+.amc-DCard--accentTop .amc-DCard-card {
+  border-color: var(--amc-dcard-line);
+  border-block-start: .3125rem solid var(--amc-dcard-state);
+  box-shadow: var(--amc-dcard-shadow);
+}
+
+.amc-DCard--accentTop .amc-DCard-icon {
+  background: color-mix(in srgb, var(--amc-dcard-state) 14%, transparent);
+  color: color-mix(in srgb, var(--amc-dcard-state) 70%, var(--amc-dcard-fg));
+}
+
+.amc-DCard--accentTop.amc-DCard--stateNeutral .amc-DCard-icon {
+  color: var(--amc-dcard-accent);
+  background: color-mix(in srgb, var(--amc-dcard-accent) 12%, transparent);
+}
+
+.amc-DCard--accentTop .amc-DCard-badge {
+  border-radius: .25rem;
+  background: var(--amc-dcard-state);
+  color: var(--amc-dcard-state-fg);
+  letter-spacing: .02em;
+}
+
+.amc-DCard--accentTop .amc-DCard-badgeDot {
+  background: currentColor;
+  opacity: .7;
+}
+
+.amc-DCard--accentTop.amc-DCard--stateNeutral .amc-DCard-badge {
+  background: color-mix(in srgb, var(--amc-dcard-fg) 10%, transparent);
+  color: var(--amc-dcard-fg);
+}
+
+.amc-DCard--accentTop .amc-DCard-card {
+  flex-direction: column;
+}
+
+.amc-DCard--accentTop .amc-DCard-card:has(.amc-DCard-link):hover {
+  box-shadow: 0 .5rem 1.25rem -.75rem color-mix(in srgb, var(--amc-dcard-ink) 30%, transparent);
+}
+
+/* ---------- 9. Ticket: main part + perforated stub with the Value ---------- */
+
+.amc-DCard--ticket {
+  --amc-dcard-stub: 9.5rem;
+  --amc-dcard-notch: .6875rem;
+  filter: drop-shadow(0 1px 1px color-mix(in srgb, var(--amc-dcard-ink) 12%, transparent)) drop-shadow(0 .5rem .75rem color-mix(in srgb, var(--amc-dcard-ink) 10%, transparent));
+}
+
+.amc-DCard--ticket .amc-DCard-card {
+  --amc-dcard-cut: calc(100% - var(--amc-dcard-stub));
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) var(--amc-dcard-stub);
+  grid-template-areas: "icon body foot";
+  align-items: start;
+  gap: 0 .875rem;
+  padding: 0;
+  padding-inline-start: 1.125rem;
+  border: 0;
+  -webkit-mask:
+    radial-gradient(circle at var(--amc-dcard-cut) 0, transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at var(--amc-dcard-cut) 100%, transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) bottom / 100% 51% no-repeat;
+  mask:
+    radial-gradient(circle at var(--amc-dcard-cut) 0, transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) top / 100% 51% no-repeat,
+    radial-gradient(circle at var(--amc-dcard-cut) 100%, transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) bottom / 100% 51% no-repeat;
+}
+
+.amc-DCard--ticket .amc-DCard-card:dir(rtl) {
+  --amc-dcard-cut: var(--amc-dcard-stub);
+}
+
+.amc-DCard--ticket .amc-DCard-icon {
+  grid-area: icon;
+  margin-block-start: 1.125rem;
+  border-radius: 50%;
+}
+
+.amc-DCard--ticket .amc-DCard-body {
+  grid-area: body;
+  padding-block: 1.125rem;
+}
+
+.amc-DCard--ticket .amc-DCard-foot {
+  grid-area: foot;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  gap: .375rem;
+  margin: 0;
+  padding: 1rem .5rem;
+  border: 0;
+  border-inline-start: 2px dashed var(--amc-dcard-line);
+  background: color-mix(in srgb, var(--amc-dcard-accent) 8%, transparent);
+  text-align: center;
+}
+
+.amc-DCard--ticket .amc-DCard-foot:empty {
+  display: flex;
+}
+
+.amc-DCard--ticket .amc-DCard-figure {
+  align-items: center;
+  margin: 0;
+}
+
+.amc-DCard--ticket .amc-DCard-valueLabel {
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.amc-DCard--ticket .amc-DCard-value {
+  color: var(--amc-dcard-accent);
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+.amc-DCard--ticket .amc-DCard-meta {
+  margin: 0;
+  font-size: .75rem;
+}
+
+@container (max-width: 24rem) {
+  .amc-DCard--ticket .amc-DCard-card {
+    --amc-dcard-stub: 5.25rem;
+    --amc-dcard-cut: calc(100% - var(--amc-dcard-stub));
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto var(--amc-dcard-stub);
+    grid-template-areas:
+      "icon body"
+      "foot foot";
+    padding-inline-start: 1rem;
+    -webkit-mask:
+      radial-gradient(circle at 0 var(--amc-dcard-cut), transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% var(--amc-dcard-cut), transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) right / 51% 100% no-repeat;
+    mask:
+      radial-gradient(circle at 0 var(--amc-dcard-cut), transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) left / 51% 100% no-repeat,
+      radial-gradient(circle at 100% var(--amc-dcard-cut), transparent var(--amc-dcard-notch), var(--amc-dcard-mask) calc(var(--amc-dcard-notch) + .5px)) right / 51% 100% no-repeat;
+  }
+
+  .amc-DCard--ticket .amc-DCard-body {
+    padding-inline-end: 1rem;
+  }
+
+  .amc-DCard--ticket .amc-DCard-card:dir(rtl) {
+    --amc-dcard-cut: calc(100% - var(--amc-dcard-stub));
+  }
+
+  .amc-DCard--ticket .amc-DCard-foot {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-inline-start: -1rem;
+    padding-inline: 1.25rem;
+    border-inline-start: 0;
+    border-block-start: 2px dashed var(--amc-dcard-line);
+    text-align: start;
+  }
+
+  .amc-DCard--ticket .amc-DCard-figure {
+    align-items: flex-start;
+  }
+}
+
+/* ---------- 10. Stacked Paper: two sheets peek out below the card ---------- */
+
+.amc-DCard--stackedPaper {
+  padding-block-end: 1.125rem;
+}
+
+.amc-DCard--stackedPaper::before,
+.amc-DCard--stackedPaper::after {
+  content: "";
+  position: absolute;
+  border: 1px solid var(--amc-dcard-line);
+  border-radius: var(--amc-dcard-radius);
+  background-color: var(--amc-dcard-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dcard-ink) 8%, transparent);
+}
+
+.amc-DCard--stackedPaper::after {
+  inset: 1rem .625rem .5625rem;
+  background-color: color-mix(in srgb, var(--amc-dcard-fg) 3%, var(--amc-dcard-bg));
+}
+
+.amc-DCard--stackedPaper::before {
+  inset: 2rem 1.25rem 0;
+  background-color: color-mix(in srgb, var(--amc-dcard-fg) 6%, var(--amc-dcard-bg));
+}
+
+.amc-DCard--stackedPaper .amc-DCard-card {
+  z-index: 1;
+  border-color: var(--amc-dcard-line);
+  box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--amc-dcard-ink) 18%, transparent);
+}
+
+.amc-DCard--stackedPaper .amc-DCard-icon {
+  border-radius: .25rem;
+  background: color-mix(in srgb, var(--amc-dcard-fg) 6%, transparent);
+  color: var(--amc-dcard-muted);
+}
+
+.amc-DCard--stackedPaper .amc-DCard-title {
+  font-size: 1.0625rem;
+}
+
+.amc-DCard--stackedPaper .amc-DCard-foot {
+  border-block-start-style: dotted;
+  border-block-start-width: 2px;
+}
+
+.amc-DCard--stackedPaper:has(.amc-DCard-link):hover .amc-DCard-card {
+  transform: translateY(-.25rem) rotate(-.4deg);
+}
+
+/* ---------- 11. Soft Inset: recessed surface, raised icon ---------- */
+
+.amc-DCard--softInset .amc-DCard-card {
+  border-radius: calc(var(--amc-dcard-radius) * 2);
+  background-color: color-mix(in srgb, var(--amc-dcard-page) 75%, var(--amc-dcard-bg));
+  box-shadow:
+    inset 0 2px 6px color-mix(in srgb, var(--amc-dcard-ink) 10%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--amc-dcard-bg) 60%, transparent);
+}
+
+.amc-DCard--softInset .amc-DCard-icon {
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: 50%;
+  background: var(--amc-dcard-bg);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--amc-dcard-ink) 10%, transparent),
+    0 .375rem .875rem -.25rem color-mix(in srgb, var(--amc-dcard-ink) 22%, transparent);
+}
+
+.amc-DCard--softInset .amc-DCard-foot {
+  border: 0;
+  padding: .75rem .875rem;
+  border-radius: var(--amc-dcard-radius);
+  background: var(--amc-dcard-bg);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-dcard-ink) 8%, transparent);
+  align-items: center;
+}
+
+.amc-DCard--softInset .amc-DCard-card:has(.amc-DCard-link):hover {
+  box-shadow:
+    inset 0 3px 8px color-mix(in srgb, var(--amc-dcard-ink) 14%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--amc-dcard-accent) 35%, transparent);
+}
+
+/* ---------- 12. Corner Icon: oversized icon in a quarter circle ---------- */
+
+.amc-DCard--cornerIcon .amc-DCard-card {
+  overflow: hidden;
+  border-color: var(--amc-dcard-line);
+  box-shadow: var(--amc-dcard-shadow);
+}
+
+.amc-DCard--cornerIcon .amc-DCard-icon {
+  position: absolute;
+  inset-block-start: -1.75rem;
+  inset-inline-end: -1.75rem;
+  align-items: flex-end;
+  justify-content: flex-start;
+  inline-size: 6rem;
+  block-size: 6rem;
+  padding-block-end: 1.375rem;
+  padding-inline-start: 1.375rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-dcard-accent) 13%, transparent);
+  font-size: 1.5rem;
+  transition: transform .3s ease, background-color .3s ease;
+}
+
+.amc-DCard--cornerIcon .amc-DCard-icon + .amc-DCard-body {
+  padding-inline-end: 3.75rem;
+}
+
+.amc-DCard--cornerIcon .amc-DCard-title {
+  font-size: 1.125rem;
+}
+
+.amc-DCard--cornerIcon .amc-DCard-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.amc-DCard--cornerIcon .amc-DCard-foot {
+  border-block-start: 0;
+  padding-block-start: 0;
+}
+
+.amc-DCard--cornerIcon .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-icon {
+  transform: scale(1.08);
+  background-color: color-mix(in srgb, var(--amc-dcard-accent) 20%, transparent);
+}
+
+/* ---------- Narrow cards (about 220px columns) ---------- */
+
+@container (max-width: 17rem) {
+  .amc-DCard-card {
+    --amc-dcard-pad: 1rem;
+  }
+
+  .amc-DCard--elevated .amc-DCard-icon + .amc-DCard-body {
+    grid-column: 1 / -1;
+  }
+
+  .amc-DCard--softInset .amc-DCard-foot {
+    padding: .625rem .75rem;
+  }
+
+  .amc-DCard--cornerIcon .amc-DCard-icon {
+    inset-block-start: -1.5rem;
+    inset-inline-end: -1.5rem;
+    inline-size: 4rem;
+    block-size: 4rem;
+    padding-block-end: .9375rem;
+    padding-inline-start: .9375rem;
+    font-size: 1.125rem;
+  }
+
+  .amc-DCard--cornerIcon .amc-DCard-icon + .amc-DCard-body {
+    padding-inline-end: 0;
+  }
+
+  .amc-DCard--cornerIcon .amc-DCard-icon + .amc-DCard-body .amc-DCard-top {
+    padding-inline-end: 2.25rem;
+  }
+
+  .amc-DCard--cornerIcon .amc-DCard-title {
+    font-size: 1rem;
+  }
+
+  .amc-DCard--ticket .amc-DCard-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "body"
+      "foot";
+  }
+
+  .amc-DCard--ticket .amc-DCard-icon {
+    display: none;
+  }
+}
+
+/* ---------- Motion and high contrast ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-DCard-card,
+  .amc-DCard-img,
+  .amc-DCard-icon,
+  .amc-DCard-ctaIcon {
+    transition: none;
+  }
+
+  .amc-DCard-card:has(.amc-DCard-link):hover,
+  .amc-DCard--stackedPaper:has(.amc-DCard-link):hover .amc-DCard-card,
+  .amc-DCard-card:has(.amc-DCard-link):hover .amc-DCard-img {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .amc-DCard-card {
+    border: 1px solid CanvasText;
+  }
+
+  .amc-DCard--accentTop .amc-DCard-card {
+    border-block-start-width: .3125rem;
+  }
+
+  .amc-DCard-badge {
+    border: 1px solid CanvasText;
+  }
+
+  .amc-DCard-link:focus-visible::after {
+    outline-color: Highlight;
+  }
+}

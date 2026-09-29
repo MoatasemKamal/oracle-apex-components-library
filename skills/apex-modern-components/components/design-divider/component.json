@@ -1,0 +1,133 @@
+{
+  "name": "Design Divider",
+  "apexlangName": "designDivider",
+  "staticId": "AMC_DESIGN_DIVIDER",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "keywords": ["divider", "separator", "section title", "section header", "rule", "hr", "heading", "design collection"],
+  "description": "Design Collection divider family: a section break or section heading in 8 distinct styles, from a hairline with a centered title to an eyebrow heading, a glowing gradient rule, an icon medallion, a pill label, an accent underline, a dotted scene break and a side label with a count. Follows the Universal Theme heading and separator pattern and takes every color from the active theme style.",
+  "helpText": "Pick a Style. Title is optional: without it the divider is a pure separator (role separator); with it the divider is a section heading (h3). Eyebrow and Description are shown by Eyebrow Title, Accent Underline and Side Label. Meta, for example a count, is shown at the end of the row. Colors follow the active Universal Theme style.",
+  "templateComponent": {
+    "availableAs": ["partial"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": false,
+    "templates": {
+      "partial": "templates/partial.html"
+    }
+  },
+  "files": ["files/amc-design-divider.css"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-design-divider.css"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "lineTitle",
+      "sequence": 10,
+      "helpText": "Divider design. Line Title: hairlines on both sides of the title. Eyebrow Title: small primary eyebrow over a large title and a rule below. Gradient Line: glowing primary gradient rule with an optional caption. Icon Center: icon medallion on the line, title read by screen readers only. Pill Label: title in a rounded chip on the line. Accent Underline: title over a hairline with a short thick primary segment. Dotted: dotted rule with a small caps title or a three-dot ornament. Side Label: icon and title at the start, rule to the end, Meta as a count chip.",
+      "entries": [
+        { "name": "lineTitle", "display": "Line Title", "return": "lineTitle", "sequence": 10 },
+        { "name": "eyebrowTitle", "display": "Eyebrow Title", "return": "eyebrowTitle", "sequence": 20 },
+        { "name": "gradientLine", "display": "Gradient Line", "return": "gradientLine", "sequence": 30 },
+        { "name": "iconCenter", "display": "Icon Center", "return": "iconCenter", "sequence": 40 },
+        { "name": "pillLabel", "display": "Pill Label", "return": "pillLabel", "sequence": 50 },
+        { "name": "accentUnderline", "display": "Accent Underline", "return": "accentUnderline", "sequence": 60 },
+        { "name": "dotted", "display": "Dotted", "return": "dotted", "sequence": 70 },
+        { "name": "sideLabel", "display": "Side Label", "return": "sideLabel", "sequence": 80 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Optional section title, rendered as an h3. Leave empty for a plain separator."
+    },
+    {
+      "staticId": "EYEBROW",
+      "apexlangName": "eyebrow",
+      "attribute": 3,
+      "name": "Eyebrow",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional short line above the title, for example Step 2 or Finance. Shown by Eyebrow Title, Accent Underline and Side Label; needs a Title."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 4,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Optional sentence below the title. Shown by Eyebrow Title, Accent Underline and Side Label; needs a Title."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 5,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 50,
+      "helpText": "Optional Font APEX icon class, for example fa-calendar. Icon Center uses it as the medallion; without it a small diamond is shown."
+    },
+    {
+      "staticId": "META",
+      "apexlangName": "meta",
+      "attribute": 6,
+      "name": "Meta",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional short text at the end of the row, for example 12 orders. Side Label shows it as a count chip."
+    },
+    {
+      "staticId": "ALIGN",
+      "apexlangName": "align",
+      "attribute": 7,
+      "name": "Alignment",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Where the title sits. Empty uses the style default: centered for Line Title, Gradient Line, Icon Center, Pill Label and Dotted; start for Eyebrow Title, Accent Underline and Side Label.",
+      "entries": [
+        { "name": "start", "display": "Start", "return": "start", "sequence": 10 },
+        { "name": "center", "display": "Center", "return": "center", "sequence": 20 },
+        { "name": "end", "display": "End", "return": "end", "sequence": 30 }
+      ]
+    },
+    {
+      "staticId": "SPACING",
+      "apexlangName": "spacing",
+      "attribute": 8,
+      "name": "Spacing",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "normal",
+      "sequence": 80,
+      "helpText": "Space above and below the divider.",
+      "entries": [
+        { "name": "compact", "display": "Compact", "return": "compact", "sequence": 10 },
+        { "name": "normal", "display": "Normal", "return": "normal", "sequence": 20 },
+        { "name": "large", "display": "Large", "return": "large", "sequence": 30 }
+      ]
+    }
+  ]
+}

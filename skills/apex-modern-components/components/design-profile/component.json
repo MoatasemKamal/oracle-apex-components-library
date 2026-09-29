@@ -1,0 +1,307 @@
+{
+  "name": "Design Profile",
+  "apexlangName": "designProfile",
+  "staticId": "AMC_DESIGN_PROFILE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": [
+    "profile",
+    "person",
+    "user",
+    "employee",
+    "contact",
+    "team member",
+    "avatar",
+    "people directory",
+    "business card",
+    "author",
+    "assignee",
+    "design collection"
+  ],
+  "description": "Design Collection family of ten person/profile designs chosen with Style: centered, cover, horizontal, glass, minimal, stats, gradient ring, business card, chip and compact row. Follows the people-card patterns of modern design systems (avatar with presence, name as heading, role, optional stats and a single whole-card link) while every color comes from the Universal Theme palette. One profile (partial) or a responsive grid, wrap or list of profiles (report).",
+  "helpText": "Pick a Style, then map Name and either Image URL or Initials. Role, Bio, Status (online, away, busy, offline), up to three stats, a link and, for the Cover and Business Card styles, Cover Image URL, Email and Phone are optional. Colors follow the active Universal Theme style, including dark styles and Theme Roller changes.",
+  "templateComponent": {
+    "availableAs": [
+      "partial",
+      "report"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": [
+    "files/amc-design-profile.css"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-design-profile.css"
+  ],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "centered",
+      "sequence": 10,
+      "helpText": "The profile design. Centered: stacked card with a full-width link. Cover: cover band with an overlapping avatar, uses Cover Image URL. Horizontal: avatar beside the text. Glass: translucent blurred surface with a status pill. Minimal: no card, text first. Stats: header plus a three-figure strip. Gradient Ring: large avatar inside a primary gradient ring. Business Card: brand panel plus contact lines. Chip: compact inline pill for mentions and assignees. Compact Row: dense list row for directories.",
+      "entries": [
+        {
+          "name": "centered",
+          "display": "Centered",
+          "return": "centered",
+          "sequence": 10
+        },
+        {
+          "name": "cover",
+          "display": "Cover",
+          "return": "cover",
+          "sequence": 20
+        },
+        {
+          "name": "horizontal",
+          "display": "Horizontal",
+          "return": "horizontal",
+          "sequence": 30
+        },
+        {
+          "name": "glass",
+          "display": "Glass",
+          "return": "glass",
+          "sequence": 40
+        },
+        {
+          "name": "minimal",
+          "display": "Minimal",
+          "return": "minimal",
+          "sequence": 50
+        },
+        {
+          "name": "stats",
+          "display": "Stats",
+          "return": "stats",
+          "sequence": 60
+        },
+        {
+          "name": "gradientRing",
+          "display": "Gradient Ring",
+          "return": "gradientRing",
+          "sequence": 70
+        },
+        {
+          "name": "businessCard",
+          "display": "Business Card",
+          "return": "businessCard",
+          "sequence": 80
+        },
+        {
+          "name": "chip",
+          "display": "Chip",
+          "return": "chip",
+          "sequence": 90
+        },
+        {
+          "name": "compactRow",
+          "display": "Compact Row",
+          "return": "compactRow",
+          "sequence": 100
+        }
+      ]
+    },
+    {
+      "staticId": "NAME",
+      "apexlangName": "name",
+      "attribute": 2,
+      "name": "Name",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Full name of the person, for example Sara Al-Harbi. Rendered as the heading."
+    },
+    {
+      "staticId": "ROLE",
+      "apexlangName": "role",
+      "attribute": 3,
+      "name": "Role",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Job title or team, for example Senior Account Manager."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 4,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Optional avatar image URL. Must be a developer-controlled URL, for example an APEX_UTIL.GET_BLOB_FILE_SRC or a static application file. When empty, Initials are shown."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 5,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "One or two letters shown when there is no image, for example SH. Build them in SQL from the name."
+    },
+    {
+      "staticId": "BIO",
+      "apexlangName": "bio",
+      "attribute": 6,
+      "name": "Bio",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional short description, one or two sentences. Long text is clamped to three lines."
+    },
+    {
+      "staticId": "STATUS",
+      "apexlangName": "status",
+      "attribute": 7,
+      "name": "Status",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional presence: online, away, busy or offline. Any other value is shown as neutral text, for example On leave."
+    },
+    {
+      "staticId": "STAT1_VALUE",
+      "apexlangName": "stat1Value",
+      "attribute": 8,
+      "name": "Stat 1 Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "First figure for the Stats, Cover and Compact Row styles, for example 128. Format it in SQL."
+    },
+    {
+      "staticId": "STAT1_LABEL",
+      "apexlangName": "stat1Label",
+      "attribute": 9,
+      "name": "Stat 1 Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "Caption for Stat 1, for example Deals."
+    },
+    {
+      "staticId": "STAT2_VALUE",
+      "apexlangName": "stat2Value",
+      "attribute": 10,
+      "name": "Stat 2 Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Second figure for the Stats and Cover styles."
+    },
+    {
+      "staticId": "STAT2_LABEL",
+      "apexlangName": "stat2Label",
+      "attribute": 11,
+      "name": "Stat 2 Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Caption for Stat 2."
+    },
+    {
+      "staticId": "STAT3_VALUE",
+      "apexlangName": "stat3Value",
+      "attribute": 12,
+      "name": "Stat 3 Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 120,
+      "helpText": "Third figure for the Stats and Cover styles."
+    },
+    {
+      "staticId": "STAT3_LABEL",
+      "apexlangName": "stat3Label",
+      "attribute": 13,
+      "name": "Stat 3 Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 130,
+      "helpText": "Caption for Stat 3."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 14,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 140,
+      "helpText": "Optional target of the whole profile, for example an f?p or apex_page.get_url link to the employee page. Must be developer-controlled. The entire card becomes clickable."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 15,
+      "name": "Link Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 150,
+      "helpText": "Visible text of the link, for example View profile. Defaults to View profile."
+    },
+    {
+      "staticId": "COVER_URL",
+      "apexlangName": "coverUrl",
+      "attribute": 16,
+      "name": "Cover Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 160,
+      "helpText": "Cover style: optional banner image URL, developer-controlled. When empty, a gradient from the theme's primary color is used."
+    },
+    {
+      "staticId": "EMAIL",
+      "apexlangName": "email",
+      "attribute": 17,
+      "name": "Email",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 170,
+      "helpText": "Business Card style: email address shown as a mailto link, for example sara.alharbi@example.com."
+    },
+    {
+      "staticId": "PHONE",
+      "apexlangName": "phone",
+      "attribute": 18,
+      "name": "Phone",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 180,
+      "helpText": "Business Card style: phone number shown as text, for example +966 11 555 0142."
+    }
+  ]
+}

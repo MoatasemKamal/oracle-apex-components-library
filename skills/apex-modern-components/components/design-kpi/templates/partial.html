@@ -1,0 +1,25 @@
+<div class="amc-DKpi amc-DKpi--#STYLE# {case TREND/}{when up/}amc-DKpi--up{when down/}amc-DKpi--down{otherwise/}amc-DKpi--flat{endcase/}{if INVERT_TREND/} amc-DKpi--invert{endif/}">
+  <div class="amc-DKpi-card">
+    {case STYLE/}{when ring/}<div class="amc-DKpi-ring" data-percent="#PERCENT#">
+      <svg class="amc-DKpi-ringSvg" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle class="amc-DKpi-ringTrack" cx="20" cy="20" r="16" pathLength="100"></circle><circle class="amc-DKpi-ringBar" cx="20" cy="20" r="16" pathLength="100"></circle></svg>
+      {if ?PERCENT/}<span class="amc-DKpi-ringText">#PERCENT#%</span>{endif/}
+    </div>{when iconLeft/}{if ?ICON/}<span class="amc-DKpi-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{when glass/}{if ?ICON/}<span class="amc-DKpi-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{when gradient/}{if ?ICON/}<span class="amc-DKpi-icon" aria-hidden="true"><span class="fa #ICON#"></span></span>{endif/}{otherwise/}{endcase/}
+    <h3 class="amc-DKpi-label">#LABEL#</h3>
+    {case STYLE/}{when compare/}<dl class="amc-DKpi-compare">
+      <div class="amc-DKpi-side amc-DKpi-side--now">
+        <dt class="amc-DKpi-sideLabel">{if ?DESCRIPTION/}#DESCRIPTION#{else/}Current{endif/}</dt>
+        <dd class="amc-DKpi-value"><span class="amc-DKpi-num">#VALUE#</span>{if ?UNIT/}<span class="amc-DKpi-unit">#UNIT#</span>{endif/}</dd>
+      </div>
+      {if ?COMPARE_VALUE/}<div class="amc-DKpi-side amc-DKpi-side--was">
+        <dt class="amc-DKpi-sideLabel">{if ?COMPARE_LABEL/}#COMPARE_LABEL#{else/}Previous{endif/}</dt>
+        <dd class="amc-DKpi-value"><span class="amc-DKpi-num">#COMPARE_VALUE#</span>{if ?UNIT/}<span class="amc-DKpi-unit">#UNIT#</span>{endif/}</dd>
+      </div>{endif/}
+    </dl>{otherwise/}<p class="amc-DKpi-value"><span class="amc-DKpi-num">#VALUE#</span>{if ?UNIT/}<span class="amc-DKpi-unit">#UNIT#</span>{endif/}</p>{endcase/}
+    {case STYLE/}{when targetBar/}<div class="amc-DKpi-target">
+      <progress class="amc-DKpi-bar" max="100" value="#PERCENT#" aria-label="#LABEL!ATTR#">#PERCENT#%</progress>
+      <p class="amc-DKpi-targetMeta">{if ?PERCENT/}<span class="amc-DKpi-pct">#PERCENT#%</span>{endif/}{if ?COMPARE_VALUE/}<span class="amc-DKpi-goal">{if ?COMPARE_LABEL/}#COMPARE_LABEL#{else/}Target{endif/} <span class="amc-DKpi-goalValue">#COMPARE_VALUE#</span></span>{endif/}</p>
+    </div>{when sparkBars/}<div class="amc-DKpi-spark" data-series="#SERIES#" aria-hidden="true"></div>{otherwise/}{endcase/}
+    {if ?CHANGE/}<p class="amc-DKpi-delta"><span class="amc-DKpi-deltaIcon fa {case TREND/}{when up/}fa-arrow-up{when down/}fa-arrow-down{otherwise/}fa-minus{endcase/}" aria-hidden="true"></span><span class="amc-DKpi-sr">{case TREND/}{when up/}Increase{when down/}Decrease{otherwise/}No change{endcase/}</span><span class="amc-DKpi-deltaText">#CHANGE#</span></p>{endif/}
+    {case STYLE/}{when compare/}{otherwise/}{if ?DESCRIPTION/}<p class="amc-DKpi-desc">#DESCRIPTION#</p>{endif/}{endcase/}
+  </div>
+</div>
