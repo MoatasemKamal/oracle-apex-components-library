@@ -1,0 +1,228 @@
+{
+  "name": "Next Thread",
+  "apexlangName": "nextThread",
+  "staticId": "AMC_NEXT_THREAD",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["thread", "comments", "conversation", "activity", "activity feed", "history", "audit trail", "timeline", "notes", "internal note", "replies", "mentions", "chat", "messages", "ticket", "case", "approval", "correspondence", "email", "status change", "next collection"],
+  "description": "Next Collection comment and activity thread for a record such as a ticket, a purchase request or a case, in five layouts. Chat (motion) shows the conversation as bubbles, yours on the other side, and slides new messages in after a refresh. Audit timeline (bold) sets status changes in large type on a rail with the time beside each step, for approvals and audits. Email (smart) folds earlier messages to one line with the sender and the first words, and opens the latest, for formal correspondence. Activity feed (smart) is a compact log of who did what for a record's side panel, and moves the time into its own column when there is room. Case file (depth) layers entries as sheets in a folder, pins internal notes on top as slips and stamps status changes, for legal, HR and compliance cases. All layouts group entries by day with Intl day names and relative times, nest replies one level, fold long threads behind Show earlier updates, highlight mentions, and mark internal notes with a dashed edge and a label. There is no composer: add a native form and refresh the region after posting.",
+  "helpText": "One query row per entry. Map ID, Author and Created (required). Return Created as ISO text with TO_CHAR(created_on, 'YYYY-MM-DD\"T\"HH24:MI:SS'). Kind is comment, status, system or attachment; for status rows return the new status in Body, for example Approved. Parent ID makes a row a reply; replies to replies are shown under the first entry of their thread. Is Internal Y marks a note that the requester cannot see; Is Mine Y marks the current user's entries. Body is shown as escaped text with its line breaks. The runtime file groups by day, nests replies, folds long threads and keeps relative times current; after posting with a form, refresh the region and new entries are marked and announced.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-thread.css", "files/amc-next-thread.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-thread.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-thread.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "chat",
+      "sequence": 10,
+      "helpText": "Layout of the thread; the direction is given in brackets as motion, depth, bold or smart. chat [motion]: conversation bubbles for a customer case or a service desk ticket, your entries on the other side, consecutive messages joined, new messages slide in after a refresh. auditTimeline [bold]: a rail with the time beside each entry and status changes in large type with a state marker, for approvals and audit trails. emailThread [smart]: formal correspondence, earlier messages folded to one line with the sender and first words, the latest open, mentions shown as recipients; folds its header in narrow regions. activityFeed [smart]: a compact log of who did what, for a record's side panel; the time moves into its own column when the region is wide. caseFile [depth]: entries layered as sheets in a case folder, internal notes pinned on top as slips, status changes stamped, attachments as index tabs, for legal, HR and compliance cases.",
+      "entries": [
+        { "name": "chat", "display": "Chat", "return": "chat", "sequence": 10 },
+        { "name": "auditTimeline", "display": "Audit timeline", "return": "auditTimeline", "sequence": 20 },
+        { "name": "emailThread", "display": "Email", "return": "emailThread", "sequence": 30 },
+        { "name": "activityFeed", "display": "Activity feed", "return": "activityFeed", "sequence": 40 },
+        { "name": "caseFile", "display": "Case file", "return": "caseFile", "sequence": 50 }
+      ]
+    },
+    {
+      "staticId": "ID",
+      "apexlangName": "id",
+      "attribute": 2,
+      "name": "ID",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "Unique key of the entry, for example the comment ID. Parent ID of replies refers to it, and it is how new entries are recognised after a region refresh."
+    },
+    {
+      "staticId": "PARENT_ID",
+      "apexlangName": "parentId",
+      "attribute": 3,
+      "name": "Parent ID",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "ID of the entry this one replies to; empty for a top-level entry. Replies are nested one level under the first entry of their thread, and a reply to a reply says who it answers. A reply whose parent is not in the query is shown as a top-level entry."
+    },
+    {
+      "staticId": "AUTHOR",
+      "apexlangName": "author",
+      "attribute": 4,
+      "name": "Author",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Display name of the person or system that made the entry, for example Noura Al-Qahtani or Workflow."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 5,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "One or two letters shown when there is no Image URL, for example NQ."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 6,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Optional author photo URL, for example from apex_util.get_blob_file_src. When empty the Initials are shown."
+    },
+    {
+      "staticId": "CREATED",
+      "apexlangName": "created",
+      "attribute": 7,
+      "name": "Created",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "When the entry was made, as ISO text: TO_CHAR(created_on, 'YYYY-MM-DD\"T\"HH24:MI:SS'). Return it in the time zone users should see; it is not converted. Entries are sorted by it, grouped by day and shown as a relative time today and a clock time on earlier days."
+    },
+    {
+      "staticId": "BODY",
+      "apexlangName": "body",
+      "attribute": 8,
+      "name": "Body",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "Text of the entry, shown escaped with its line breaks; HTML is not rendered. For status rows return the new status, for example Approved or On hold, which reads as set the status to Approved. For system rows return the whole sentence, for example First response overdue by 2 hours."
+    },
+    {
+      "staticId": "KIND",
+      "apexlangName": "kind",
+      "attribute": 9,
+      "name": "Kind",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "One of comment, status, system or attachment. Status and system rows are compact events without a bubble; attachment rows read as attached a file. Empty or unknown values are comments."
+    },
+    {
+      "staticId": "ATTACHMENT_NAME",
+      "apexlangName": "attachmentName",
+      "attribute": 10,
+      "name": "Attachment Name",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Optional file name shown as a file chip on any kind of entry, for example Quotation_GPS_2231.pdf."
+    },
+    {
+      "staticId": "ATTACHMENT_URL",
+      "apexlangName": "attachmentUrl",
+      "attribute": 11,
+      "name": "Attachment URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "Optional download link of the attachment, usually apex_util.get_blob_file_src or apex_page.get_url to a download process. The URL must come from the developer, not from user input."
+    },
+    {
+      "staticId": "MENTIONS",
+      "apexlangName": "mentions",
+      "attribute": 12,
+      "name": "Mentions",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 120,
+      "helpText": "Optional names mentioned in the entry, separated by a vertical bar, for example Noura Al-Qahtani|Khalid Bin Saeed. Where a name appears in the Body, with or without an at sign, it is highlighted; names that do not appear are listed under the entry. The email style shows them as recipients."
+    },
+    {
+      "staticId": "IS_INTERNAL",
+      "apexlangName": "isInternal",
+      "attribute": 13,
+      "name": "Is Internal",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 130,
+      "helpText": "Y for an internal note that the requester cannot see, N or empty otherwise. Internal notes get a dashed edge, a tinted background and the label Internal note in every style."
+    },
+    {
+      "staticId": "IS_MINE",
+      "apexlangName": "isMine",
+      "attribute": 14,
+      "name": "Is Mine",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 140,
+      "helpText": "Y for entries made by the current user, for example case when created_by = :APP_USER then 'Y' end. Chat puts them on the other side in the theme's primary tint."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 15,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 150,
+      "helpText": "For status and system rows: success, warning, danger, info or neutral, for example success for Approved and danger for Rejected. It colors the status marker, stamp or dot; the status itself is always written in Body. Unknown values render as neutral."
+    },
+    {
+      "staticId": "SHOW_LATEST",
+      "apexlangName": "showLatest",
+      "attribute": 16,
+      "name": "Entries Shown",
+      "type": "integer",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "6",
+      "sequence": 160,
+      "helpText": "Number of latest top-level entries shown when the thread loads, 1 to 200; replies stay with their entry. Earlier entries fold behind a Show earlier updates button that says how many there are. Use 0 to show every entry."
+    },
+    {
+      "staticId": "SORT_ORDER",
+      "apexlangName": "sortOrder",
+      "attribute": 17,
+      "name": "Order",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "oldestFirst",
+      "sequence": 170,
+      "helpText": "oldestFirst reads like a conversation, with the latest entry at the bottom and the Show earlier updates button at the top. newestFirst puts the latest entry at the top, as in an activity log, and the button at the bottom. Replies are always oldest first under their entry.",
+      "entries": [
+        { "name": "oldestFirst", "display": "Oldest first", "return": "oldestFirst", "sequence": 10 },
+        { "name": "newestFirst", "display": "Newest first", "return": "newestFirst", "sequence": 20 }
+      ]
+    }
+  ]
+}

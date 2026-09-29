@@ -1,0 +1,411 @@
+plugin nextOrgChart (
+    name: Next Org Chart
+    staticId: AMC_NEXT_ORG_CHART
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-NOrgChart-card">
+              <span class="amc-NOrgChart-avatar">{if ?IMAGE_URL/}<img class="amc-NOrgChart-img" src="#IMAGE_URL#" alt="" width="48" height="48" loading="lazy">{else/}<span class="amc-NOrgChart-initials" aria-hidden="true">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user-o"></span>{endif/}</span>{endif/}</span>
+              <span class="amc-NOrgChart-text">
+                <span class="amc-NOrgChart-name">{if ?LINK_URL/}<a class="amc-NOrgChart-link" href="#LINK_URL#">{if ?NAME/}#NAME#{else/}Vacant position{endif/}</a>{else/}{if ?NAME/}#NAME#{else/}Vacant position{endif/}{endif/}</span>
+                {if ?TITLE/}<span class="amc-NOrgChart-job">#TITLE#</span>{endif/}
+                {if ?DEPARTMENT/}<span class="amc-NOrgChart-dept">#DEPARTMENT#</span>{endif/}
+                {if ?NAME/}{case VACANT/}{when Y/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when y/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when yes/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when YES/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when Yes/}<span class="amc-NOrgChart-vacant">Vacant position</span>{otherwise/}{endcase/}{endif/}
+              </span>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NOrgChart amc-NOrgChart--#STYLE#" data-layout="#STYLE#" data-expand="#EXPAND_LEVELS#" data-search="#SHOW_SEARCH#">
+              <span class="amc-NOrgChart-i18n" hidden data-search="Find a person" data-search-hint="Name, job title or department" data-clear="Clear search" data-no-match="No one matches" data-match-one="match" data-match-other="matches" data-vacant="Vacant position" data-zoom-in="Zoom in" data-zoom-out="Zoom out" data-fit="Fit chart" data-expand-all="Open all" data-collapse-all="Close all" data-reports-one="direct report" data-reports-other="direct reports" data-team="in team" data-reports-to="Reports to" data-people-one="person" data-people-other="people" data-vacant-one="vacant position" data-vacant-other="vacant positions" data-other="Other" data-chart="Organization chart" data-of="of"></span>
+              <ul class="amc-NOrgChart-source">#APEX$ROWS#</ul>
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NOrgChart-row amc-NOrgChart-row--l{case LEVEL/}{when 1/}1{when 2/}2{when 3/}3{when 4/}4{when 5/}5{when 6/}6{when 7/}7{when 8/}8{otherwise/}0{endcase/}{case VACANT/}{when Y/} amc-NOrgChart-row--vacant{when y/} amc-NOrgChart-row--vacant{when yes/} amc-NOrgChart-row--vacant{when YES/} amc-NOrgChart-row--vacant{when Yes/} amc-NOrgChart-row--vacant{otherwise/}{endcase/}" data-id="#ID#" data-parent="#PARENT_ID#" data-department="#DEPARTMENT!ATTR#" data-vacant="#VACANT#" data-headcount="#HEADCOUNT#">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-org-chart.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-org-chart.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            One query row per position. Map ID (required) and Parent ID: the ID of the manager's row, empty for the top of the chart. Rows may arrive in any order; a CONNECT BY query with ORDER SIBLINGS BY and LEVEL gives the best result without JavaScript. Name is the person, Job Title their role, Department groups the swimlanes. Set Vacant to Y for an open position; its Name may stay empty. Headcount is the size of the whole team under a person; when empty the chart counts the people it has. The runtime file builds the tree, search, keyboard navigation and zoom, and rebuilds after a region refresh.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: topDown
+        }
+        help {
+            helpText:
+                ```
+                Layout of the chart; the direction is given in brackets as motion, depth, bold or smart. topDown [depth]: the classic chart for a leadership or intranet page; name plates joined by connectors, a collapsed team shows as a stack of plates, and teams without managers below them stack vertically. leftToRight [smart]: each level is a column, for deep hierarchies such as a ministry's directorates; in regions narrower than about 560px it becomes an indented outline. swimlanes [bold]: one lane per Department with its people, headcount and vacant positions, for restructuring and workforce planning; a lane's top person shows who they report to in another department. radial [motion]: the lead in the centre and the team on rings around them, for project teams of up to about 25 people; opened branches grow out of their manager. directory [smart]: a staff directory grouped under managers; search filters the list and each result shows its chain of command.
+                ```
+        }
+        entry topDown (
+            sequence: 10
+            display: Top-down chart
+            return: topDown
+        )
+        entry leftToRight (
+            sequence: 20
+            display: Left to right
+            return: leftToRight
+        )
+        entry swimlanes (
+            sequence: 30
+            display: Department swimlanes
+            return: swimlanes
+        )
+        entry radial (
+            sequence: 40
+            display: Radial team
+            return: radial
+        )
+        entry directory (
+            sequence: 50
+            display: Staff directory
+            return: directory
+        )
+    )
+    customAttribute ID (
+        apexlangName: id
+        attribute: 2
+        name: ID
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Unique key of the row, for example the position or employee ID. Parent ID of the people who report to this row refers to it.
+                ```
+        }
+    )
+    customAttribute PARENT_ID (
+        apexlangName: parentId
+        attribute: 3
+        name: Parent ID
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                ID of the manager's row. Leave empty for the top of the chart. A row whose manager is not in the query, or that would create a loop, is shown as another top-level person, so a filtered query still renders.
+                ```
+        }
+    )
+    customAttribute NAME (
+        apexlangName: name
+        attribute: 4
+        name: Name
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Person's name, for example Noura Al-Qahtani. May be empty for a vacant position, which then reads Vacant position.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 5
+        name: Job Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Job title in sentence case, for example Head of treasury or Warehouse manager, Jebel Ali. Search also matches it.
+                ```
+        }
+    )
+    customAttribute DEPARTMENT (
+        apexlangName: department
+        attribute: 6
+        name: Department
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Department or unit, for example Finance or Customs and trade compliance. It makes the lanes of the swimlanes style, where rows without a department go to an Other lane, and search matches it.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 7
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional photo URL, for example from apex_util.get_blob_file_src or an Object Storage link. Shown as a round portrait; when empty the Initials are shown.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 8
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no photo, for example NQ. Compute them in SQL, for example upper(substr(first_name, 1, 1) || substr(last_name, 1, 1)).
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 9
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target of the person's name, usually built in SQL with apex_page.get_url, for example to the employee record. Enter on a focused person opens it. The URL must come from the developer, not from user input.
+                ```
+        }
+    )
+    customAttribute VACANT (
+        apexlangName: vacant
+        attribute: 10
+        name: Vacant
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Y for an open position, N or empty for a filled one; yes and no are also accepted. Vacant positions show as a hatched, dashed plate labelled Vacant position, and are counted separately in team and lane totals.
+                ```
+        }
+    )
+    customAttribute HEADCOUNT (
+        apexlangName: headcount
+        attribute: 11
+        name: Headcount
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional whole number: people in this person's whole team, for example 214 for a head of operations whose team is not all in the query. When empty the chart counts the filled positions below the person that are in the query.
+                ```
+        }
+    )
+    customAttribute LEVEL (
+        apexlangName: level
+        attribute: 12
+        name: Level
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional depth, 1 for the top, usually LEVEL from a CONNECT BY query ordered with ORDER SIBLINGS BY. Only used to indent the outline list shown without JavaScript, up to 8 levels; the runtime file works out the tree from Parent ID.
+                ```
+        }
+    )
+    customAttribute EXPAND_LEVELS (
+        apexlangName: expandLevels
+        attribute: 13
+        name: Open Levels
+        scope: component
+        type: integer
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 2
+        }
+        help {
+            helpText:
+                ```
+                Number of levels open when the chart loads, 1 to 12. With 2 the top person and their direct reports are visible and deeper teams start collapsed. Search opens any branch it needs. The staff directory always opens every level.
+                ```
+        }
+    )
+    customAttribute SHOW_SEARCH (
+        apexlangName: showSearch
+        attribute: 14
+        name: Show Search
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 140
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: true
+        }
+        help {
+            helpText:
+                ```
+                Y shows a Find a person field above the chart that matches names, job titles and departments, opens the branches it needs and scrolls to the person. N hides it, for small charts.
+                ```
+        }
+    )
+    file "amc-next-org-chart.css" (
+        fileName: amc-next-org-chart.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-org-chart.js" (
+        fileName: amc-next-org-chart.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

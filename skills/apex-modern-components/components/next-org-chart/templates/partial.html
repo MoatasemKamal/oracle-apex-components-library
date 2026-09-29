@@ -1,0 +1,9 @@
+<div class="amc-NOrgChart-card">
+  <span class="amc-NOrgChart-avatar">{if ?IMAGE_URL/}<img class="amc-NOrgChart-img" src="#IMAGE_URL#" alt="" width="48" height="48" loading="lazy">{else/}<span class="amc-NOrgChart-initials" aria-hidden="true">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user-o"></span>{endif/}</span>{endif/}</span>
+  <span class="amc-NOrgChart-text">
+    <span class="amc-NOrgChart-name">{if ?LINK_URL/}<a class="amc-NOrgChart-link" href="#LINK_URL#">{if ?NAME/}#NAME#{else/}Vacant position{endif/}</a>{else/}{if ?NAME/}#NAME#{else/}Vacant position{endif/}{endif/}</span>
+    {if ?TITLE/}<span class="amc-NOrgChart-job">#TITLE#</span>{endif/}
+    {if ?DEPARTMENT/}<span class="amc-NOrgChart-dept">#DEPARTMENT#</span>{endif/}
+    {if ?NAME/}{case VACANT/}{when Y/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when y/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when yes/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when YES/}<span class="amc-NOrgChart-vacant">Vacant position</span>{when Yes/}<span class="amc-NOrgChart-vacant">Vacant position</span>{otherwise/}{endcase/}{endif/}
+  </span>
+</div>

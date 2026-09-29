@@ -1,0 +1,492 @@
+plugin nextThread (
+    name: Next Thread
+    staticId: AMC_NEXT_THREAD
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <article class="amc-NThread-entry">
+              <span class="amc-NThread-avatar" aria-hidden="true">{if ?IMAGE_URL/}<img class="amc-NThread-img" src="#IMAGE_URL#" alt="" width="32" height="32" loading="lazy">{else/}{if ?INITIALS/}#INITIALS#{else/}<span class="fa {case KIND/}{when system/}fa-cog{when status/}fa-flag-o{otherwise/}fa-user-o{endcase/}"></span>{endif/}{endif/}</span>
+              <div class="amc-NThread-main">
+                <p class="amc-NThread-head"><span class="amc-NThread-author">#AUTHOR#</span> <span class="amc-NThread-verb">{case KIND/}{when status/}set the status to{when attachment/}attached a file{when system/}{otherwise/}{endcase/}</span> <time class="amc-NThread-time" datetime="#CREATED#">#CREATED#</time>{case IS_INTERNAL/}{when Y/}<span class="amc-NThread-internal"><span class="fa fa-lock" aria-hidden="true"></span>Internal note</span>{when y/}<span class="amc-NThread-internal"><span class="fa fa-lock" aria-hidden="true"></span>Internal note</span>{when yes/}<span class="amc-NThread-internal"><span class="fa fa-lock" aria-hidden="true"></span>Internal note</span>{when YES/}<span class="amc-NThread-internal"><span class="fa fa-lock" aria-hidden="true"></span>Internal note</span>{when Yes/}<span class="amc-NThread-internal"><span class="fa fa-lock" aria-hidden="true"></span>Internal note</span>{otherwise/}{endcase/}</p>
+                {if ?BODY/}<p class="amc-NThread-body">#BODY#</p>{endif/}
+                {if ?ATTACHMENT_NAME/}{if ?ATTACHMENT_URL/}<a class="amc-NThread-file" href="#ATTACHMENT_URL#"><span class="fa fa-paperclip" aria-hidden="true"></span><span class="amc-NThread-fileName">#ATTACHMENT_NAME#</span></a>{else/}<span class="amc-NThread-file"><span class="fa fa-paperclip" aria-hidden="true"></span><span class="amc-NThread-fileName">#ATTACHMENT_NAME#</span></span>{endif/}{endif/}
+              </div>
+            </article>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NThread amc-NThread--#STYLE#" data-layout="#STYLE#" data-show="#SHOW_LATEST#" data-order="#SORT_ORDER#">
+              <span class="amc-NThread-i18n" hidden data-today="Today" data-yesterday="Yesterday" data-earlier-one="Show 1 earlier update" data-earlier-other="Show %0 earlier updates" data-shown-one="1 earlier update shown" data-shown-other="%0 earlier updates shown" data-new-one="1 new update" data-new-other="%0 new updates" data-mentioned="Mentioned" data-to="To" data-replying-to="Replying to" data-commented="commented" data-replied="replied" data-noted="added an internal note" data-open="Show message" data-updates-one="update" data-updates-other="updates" data-empty="No updates yet. Add the first comment to start the thread."></span>
+              <ol class="amc-NThread-source">#APEX$ROWS#</ol>
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NThread-row amc-NThread-row--{case KIND/}{when status/}status{when system/}system{when attachment/}attachment{otherwise/}comment{endcase/} amc-NThread-state--{case STATE/}{when success/}success{when warning/}warning{when danger/}danger{when info/}info{otherwise/}neutral{endcase/}{case IS_INTERNAL/}{when Y/} is-internal{when y/} is-internal{when yes/} is-internal{when YES/} is-internal{when Yes/} is-internal{otherwise/}{endcase/}{case IS_MINE/}{when Y/} is-mine{when y/} is-mine{when yes/} is-mine{when YES/} is-mine{when Yes/} is-mine{otherwise/}{endcase/}" data-id="#ID#" data-parent="#PARENT_ID#" data-created="#CREATED#" data-mentions="#MENTIONS#">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-thread.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-thread.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            One query row per entry. Map ID, Author and Created (required). Return Created as ISO text with TO_CHAR(created_on, 'YYYY-MM-DD"T"HH24:MI:SS'). Kind is comment, status, system or attachment; for status rows return the new status in Body, for example Approved. Parent ID makes a row a reply; replies to replies are shown under the first entry of their thread. Is Internal Y marks a note that the requester cannot see; Is Mine Y marks the current user's entries. Body is shown as escaped text with its line breaks. The runtime file groups by day, nests replies, folds long threads and keeps relative times current; after posting with a form, refresh the region and new entries are marked and announced.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: chat
+        }
+        help {
+            helpText:
+                ```
+                Layout of the thread; the direction is given in brackets as motion, depth, bold or smart. chat [motion]: conversation bubbles for a customer case or a service desk ticket, your entries on the other side, consecutive messages joined, new messages slide in after a refresh. auditTimeline [bold]: a rail with the time beside each entry and status changes in large type with a state marker, for approvals and audit trails. emailThread [smart]: formal correspondence, earlier messages folded to one line with the sender and first words, the latest open, mentions shown as recipients; folds its header in narrow regions. activityFeed [smart]: a compact log of who did what, for a record's side panel; the time moves into its own column when the region is wide. caseFile [depth]: entries layered as sheets in a case folder, internal notes pinned on top as slips, status changes stamped, attachments as index tabs, for legal, HR and compliance cases.
+                ```
+        }
+        entry chat (
+            sequence: 10
+            display: Chat
+            return: chat
+        )
+        entry auditTimeline (
+            sequence: 20
+            display: Audit timeline
+            return: auditTimeline
+        )
+        entry emailThread (
+            sequence: 30
+            display: Email
+            return: emailThread
+        )
+        entry activityFeed (
+            sequence: 40
+            display: Activity feed
+            return: activityFeed
+        )
+        entry caseFile (
+            sequence: 50
+            display: Case file
+            return: caseFile
+        )
+    )
+    customAttribute ID (
+        apexlangName: id
+        attribute: 2
+        name: ID
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Unique key of the entry, for example the comment ID. Parent ID of replies refers to it, and it is how new entries are recognised after a region refresh.
+                ```
+        }
+    )
+    customAttribute PARENT_ID (
+        apexlangName: parentId
+        attribute: 3
+        name: Parent ID
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                ID of the entry this one replies to; empty for a top-level entry. Replies are nested one level under the first entry of their thread, and a reply to a reply says who it answers. A reply whose parent is not in the query is shown as a top-level entry.
+                ```
+        }
+    )
+    customAttribute AUTHOR (
+        apexlangName: author
+        attribute: 4
+        name: Author
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Display name of the person or system that made the entry, for example Noura Al-Qahtani or Workflow.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 5
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no Image URL, for example NQ.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 6
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional author photo URL, for example from apex_util.get_blob_file_src. When empty the Initials are shown.
+                ```
+        }
+    )
+    customAttribute CREATED (
+        apexlangName: created
+        attribute: 7
+        name: Created
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                When the entry was made, as ISO text: TO_CHAR(created_on, 'YYYY-MM-DD"T"HH24:MI:SS'). Return it in the time zone users should see; it is not converted. Entries are sorted by it, grouped by day and shown as a relative time today and a clock time on earlier days.
+                ```
+        }
+    )
+    customAttribute BODY (
+        apexlangName: body
+        attribute: 8
+        name: Body
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Text of the entry, shown escaped with its line breaks; HTML is not rendered. For status rows return the new status, for example Approved or On hold, which reads as set the status to Approved. For system rows return the whole sentence, for example First response overdue by 2 hours.
+                ```
+        }
+    )
+    customAttribute KIND (
+        apexlangName: kind
+        attribute: 9
+        name: Kind
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                One of comment, status, system or attachment. Status and system rows are compact events without a bubble; attachment rows read as attached a file. Empty or unknown values are comments.
+                ```
+        }
+    )
+    customAttribute ATTACHMENT_NAME (
+        apexlangName: attachmentName
+        attribute: 10
+        name: Attachment Name
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional file name shown as a file chip on any kind of entry, for example Quotation_GPS_2231.pdf.
+                ```
+        }
+    )
+    customAttribute ATTACHMENT_URL (
+        apexlangName: attachmentUrl
+        attribute: 11
+        name: Attachment URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional download link of the attachment, usually apex_util.get_blob_file_src or apex_page.get_url to a download process. The URL must come from the developer, not from user input.
+                ```
+        }
+    )
+    customAttribute MENTIONS (
+        apexlangName: mentions
+        attribute: 12
+        name: Mentions
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional names mentioned in the entry, separated by a vertical bar, for example Noura Al-Qahtani|Khalid Bin Saeed. Where a name appears in the Body, with or without an at sign, it is highlighted; names that do not appear are listed under the entry. The email style shows them as recipients.
+                ```
+        }
+    )
+    customAttribute IS_INTERNAL (
+        apexlangName: isInternal
+        attribute: 13
+        name: Is Internal
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Y for an internal note that the requester cannot see, N or empty otherwise. Internal notes get a dashed edge, a tinted background and the label Internal note in every style.
+                ```
+        }
+    )
+    customAttribute IS_MINE (
+        apexlangName: isMine
+        attribute: 14
+        name: Is Mine
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Y for entries made by the current user, for example case when created_by = :APP_USER then 'Y' end. Chat puts them on the other side in the theme's primary tint.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 15
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 150
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                For status and system rows: success, warning, danger, info or neutral, for example success for Approved and danger for Rejected. It colors the status marker, stamp or dot; the status itself is always written in Body. Unknown values render as neutral.
+                ```
+        }
+    )
+    customAttribute SHOW_LATEST (
+        apexlangName: showLatest
+        attribute: 16
+        name: Entries Shown
+        scope: component
+        type: integer
+        appearance {
+            sequence: 160
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 6
+        }
+        help {
+            helpText:
+                ```
+                Number of latest top-level entries shown when the thread loads, 1 to 200; replies stay with their entry. Earlier entries fold behind a Show earlier updates button that says how many there are. Use 0 to show every entry.
+                ```
+        }
+    )
+    customAttribute SORT_ORDER (
+        apexlangName: sortOrder
+        attribute: 17
+        name: Order
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 170
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: oldestFirst
+        }
+        help {
+            helpText:
+                ```
+                oldestFirst reads like a conversation, with the latest entry at the bottom and the Show earlier updates button at the top. newestFirst puts the latest entry at the top, as in an activity log, and the button at the bottom. Replies are always oldest first under their entry.
+                ```
+        }
+        entry oldestFirst (
+            sequence: 10
+            display: Oldest first
+            return: oldestFirst
+        )
+        entry newestFirst (
+            sequence: 20
+            display: Newest first
+            return: newestFirst
+        )
+    )
+    file "amc-next-thread.css" (
+        fileName: amc-next-thread.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-thread.js" (
+        fileName: amc-next-thread.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

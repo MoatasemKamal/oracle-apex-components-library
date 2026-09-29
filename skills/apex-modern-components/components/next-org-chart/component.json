@@ -1,0 +1,191 @@
+{
+  "name": "Next Org Chart",
+  "apexlangName": "nextOrgChart",
+  "staticId": "AMC_NEXT_ORG_CHART",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["org chart", "organization chart", "organisation chart", "hierarchy", "tree", "reporting lines", "reports to", "manager", "team", "department", "headcount", "vacancy", "vacant position", "open role", "staff directory", "who is who", "swimlanes", "radial", "connect by", "next collection"],
+  "description": "Next Collection org chart that builds a reporting hierarchy from report rows (ID and PARENT_ID, in any order) in five layouts, each made for one job. Top-down (depth) is the classic chart for leadership pages: people sit on name plates, a collapsed team becomes a stack of plates whose thickness shows its size, and teams of individual contributors stack vertically to save width. Left to right (smart) suits deep chains such as a directorate structure and turns into an indented outline in narrow regions. Department swimlanes (bold) give each department a lane with its headcount and open seats, for restructuring and workforce planning. Radial (motion) puts a small project team around its lead, and branches grow out of their manager when opened. Staff directory (smart) is a searchable list grouped under managers that filters as you type and shows each person's chain of command. All layouts share collapsible branches, search that reveals and scrolls to a person, keyboard tree navigation, zoom and drag to pan for large charts, and a hatched empty plate for vacant positions. Without JavaScript the rows show as an outline list indented by Level.",
+  "helpText": "One query row per position. Map ID (required) and Parent ID: the ID of the manager's row, empty for the top of the chart. Rows may arrive in any order; a CONNECT BY query with ORDER SIBLINGS BY and LEVEL gives the best result without JavaScript. Name is the person, Job Title their role, Department groups the swimlanes. Set Vacant to Y for an open position; its Name may stay empty. Headcount is the size of the whole team under a person; when empty the chart counts the people it has. The runtime file builds the tree, search, keyboard navigation and zoom, and rebuilds after a region refresh.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-org-chart.css", "files/amc-next-org-chart.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-org-chart.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-org-chart.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "topDown",
+      "sequence": 10,
+      "helpText": "Layout of the chart; the direction is given in brackets as motion, depth, bold or smart. topDown [depth]: the classic chart for a leadership or intranet page; name plates joined by connectors, a collapsed team shows as a stack of plates, and teams without managers below them stack vertically. leftToRight [smart]: each level is a column, for deep hierarchies such as a ministry's directorates; in regions narrower than about 560px it becomes an indented outline. swimlanes [bold]: one lane per Department with its people, headcount and vacant positions, for restructuring and workforce planning; a lane's top person shows who they report to in another department. radial [motion]: the lead in the centre and the team on rings around them, for project teams of up to about 25 people; opened branches grow out of their manager. directory [smart]: a staff directory grouped under managers; search filters the list and each result shows its chain of command.",
+      "entries": [
+        { "name": "topDown", "display": "Top-down chart", "return": "topDown", "sequence": 10 },
+        { "name": "leftToRight", "display": "Left to right", "return": "leftToRight", "sequence": 20 },
+        { "name": "swimlanes", "display": "Department swimlanes", "return": "swimlanes", "sequence": 30 },
+        { "name": "radial", "display": "Radial team", "return": "radial", "sequence": 40 },
+        { "name": "directory", "display": "Staff directory", "return": "directory", "sequence": 50 }
+      ]
+    },
+    {
+      "staticId": "ID",
+      "apexlangName": "id",
+      "attribute": 2,
+      "name": "ID",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "Unique key of the row, for example the position or employee ID. Parent ID of the people who report to this row refers to it."
+    },
+    {
+      "staticId": "PARENT_ID",
+      "apexlangName": "parentId",
+      "attribute": 3,
+      "name": "Parent ID",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "ID of the manager's row. Leave empty for the top of the chart. A row whose manager is not in the query, or that would create a loop, is shown as another top-level person, so a filtered query still renders."
+    },
+    {
+      "staticId": "NAME",
+      "apexlangName": "name",
+      "attribute": 4,
+      "name": "Name",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Person's name, for example Noura Al-Qahtani. May be empty for a vacant position, which then reads Vacant position."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 5,
+      "name": "Job Title",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Job title in sentence case, for example Head of treasury or Warehouse manager, Jebel Ali. Search also matches it."
+    },
+    {
+      "staticId": "DEPARTMENT",
+      "apexlangName": "department",
+      "attribute": 6,
+      "name": "Department",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Department or unit, for example Finance or Customs and trade compliance. It makes the lanes of the swimlanes style, where rows without a department go to an Other lane, and search matches it."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 7,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional photo URL, for example from apex_util.get_blob_file_src or an Object Storage link. Shown as a round portrait; when empty the Initials are shown."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 8,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "One or two letters shown when there is no photo, for example NQ. Compute them in SQL, for example upper(substr(first_name, 1, 1) || substr(last_name, 1, 1))."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 9,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Optional target of the person's name, usually built in SQL with apex_page.get_url, for example to the employee record. Enter on a focused person opens it. The URL must come from the developer, not from user input."
+    },
+    {
+      "staticId": "VACANT",
+      "apexlangName": "vacant",
+      "attribute": 10,
+      "name": "Vacant",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "Y for an open position, N or empty for a filled one; yes and no are also accepted. Vacant positions show as a hatched, dashed plate labelled Vacant position, and are counted separately in team and lane totals."
+    },
+    {
+      "staticId": "HEADCOUNT",
+      "apexlangName": "headcount",
+      "attribute": 11,
+      "name": "Headcount",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 110,
+      "helpText": "Optional whole number: people in this person's whole team, for example 214 for a head of operations whose team is not all in the query. When empty the chart counts the filled positions below the person that are in the query."
+    },
+    {
+      "staticId": "LEVEL",
+      "apexlangName": "level",
+      "attribute": 12,
+      "name": "Level",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 120,
+      "helpText": "Optional depth, 1 for the top, usually LEVEL from a CONNECT BY query ordered with ORDER SIBLINGS BY. Only used to indent the outline list shown without JavaScript, up to 8 levels; the runtime file works out the tree from Parent ID."
+    },
+    {
+      "staticId": "EXPAND_LEVELS",
+      "apexlangName": "expandLevels",
+      "attribute": 13,
+      "name": "Open Levels",
+      "type": "integer",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "2",
+      "sequence": 130,
+      "helpText": "Number of levels open when the chart loads, 1 to 12. With 2 the top person and their direct reports are visible and deeper teams start collapsed. Search opens any branch it needs. The staff directory always opens every level."
+    },
+    {
+      "staticId": "SHOW_SEARCH",
+      "apexlangName": "showSearch",
+      "attribute": 14,
+      "name": "Show Search",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "Y",
+      "sequence": 140,
+      "helpText": "Y shows a Find a person field above the chart that matches names, job titles and departments, opens the branches it needs and scrolls to the person. N hides it, for small charts."
+    }
+  ]
+}

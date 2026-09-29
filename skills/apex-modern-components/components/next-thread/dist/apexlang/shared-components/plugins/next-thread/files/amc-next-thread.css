@@ -1,0 +1,1050 @@
+/* APEX Modern Components - Next Thread (Next Collection)
+ * Five layouts of one record thread, built by amc-next-thread.js from report rows.
+ * Without JavaScript the rows stay a plain list in query order.
+ * Shared language: a dashed edge always means "not sent to the requester" (internal note),
+ * status changes cut across the conversation instead of sitting in bubbles, and the day is
+ * the spine of every layout. Colors are Universal Theme variables with literal fallbacks;
+ * logical properties throughout, so every layout mirrors in RTL. */
+
+/* ---------- Tokens ---------- */
+.amc-NThread {
+  --amc-nthr-surface: var(--ut-component-background-color, #fff);
+  --amc-nthr-ink: var(--ut-component-text-default-color, #262626);
+  --amc-nthr-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-nthr-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nthr-floor: var(--ut-body-background-color, #f5f5f5);
+  --amc-nthr-accent: var(--ut-palette-primary, #056ac8);
+  --amc-nthr-radius: var(--ut-component-border-radius, .5rem);
+  --amc-nthr-success: var(--ut-palette-success, #278701);
+  --amc-nthr-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-nthr-danger: var(--ut-palette-danger, #cb1100);
+  --amc-nthr-info: var(--ut-palette-info, #0076df);
+  --amc-nthr-edge: color-mix(in srgb, var(--amc-nthr-ink) 16%, var(--amc-nthr-surface));
+  --amc-nthr-bubble: color-mix(in srgb, var(--amc-nthr-ink) 6%, var(--amc-nthr-surface));
+  --amc-nthr-mine: color-mix(in srgb, var(--amc-nthr-accent) 14%, var(--amc-nthr-surface));
+  --amc-nthr-link: color-mix(in srgb, var(--amc-nthr-accent) 80%, var(--amc-nthr-ink));
+  --amc-nthr-note: color-mix(in srgb, var(--amc-nthr-warning) 15%, var(--amc-nthr-surface));
+  --amc-nthr-note-edge: color-mix(in srgb, var(--amc-nthr-warning) 55%, var(--amc-nthr-ink));
+  --amc-nthr-note-text: color-mix(in srgb, var(--amc-nthr-warning) 35%, var(--amc-nthr-ink));
+  --amc-nthr-st: var(--amc-nthr-muted);
+  --amc-nthr-st-text: var(--amc-nthr-ink);
+  --amc-nthr-dir: 1;
+  position: relative;
+  container-type: inline-size;
+  color: var(--amc-nthr-ink);
+  font-size: .875rem;
+  line-height: 1.45;
+}
+
+.amc-NThread:dir(rtl) { --amc-nthr-dir: -1; }
+
+.amc-NThread-state--success { --amc-nthr-st: var(--amc-nthr-success); --amc-nthr-st-text: color-mix(in srgb, var(--amc-nthr-success) 80%, var(--amc-nthr-ink)); }
+.amc-NThread-state--warning { --amc-nthr-st: var(--amc-nthr-warning); --amc-nthr-st-text: color-mix(in srgb, var(--amc-nthr-warning) 45%, var(--amc-nthr-ink)); }
+.amc-NThread-state--danger { --amc-nthr-st: var(--amc-nthr-danger); --amc-nthr-st-text: color-mix(in srgb, var(--amc-nthr-danger) 85%, var(--amc-nthr-ink)); }
+.amc-NThread-state--info { --amc-nthr-st: var(--amc-nthr-info); --amc-nthr-st-text: color-mix(in srgb, var(--amc-nthr-info) 80%, var(--amc-nthr-ink)); }
+
+.amc-NThread-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Entry (shared, also without JavaScript) ---------- */
+.amc-NThread-source,
+.amc-NThread-days,
+.amc-NThread-list,
+.amc-NThread-replies {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NThread.is-ready > .amc-NThread-source { display: none; }
+
+.amc-NThread-source > .amc-NThread-row {
+  padding-block: .625rem;
+  border-block-end: 1px solid var(--amc-nthr-line);
+}
+
+.amc-NThread-source > .amc-NThread-row:last-child { border-block-end: 0; }
+
+.amc-NThread-entry {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: .75rem;
+  align-items: start;
+  outline: none;
+}
+
+.amc-NThread-entry:focus-visible {
+  outline: 2px solid var(--amc-nthr-accent);
+  outline-offset: 2px;
+  border-radius: .25rem;
+}
+
+.amc-NThread-avatar {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--amc-nthr-bubble);
+  color: var(--amc-nthr-ink);
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.amc-NThread-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.amc-NThread-main { min-inline-size: 0; }
+
+.amc-NThread-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .125rem .5rem;
+  margin: 0;
+}
+
+.amc-NThread-author {
+  font-weight: 600;
+  unicode-bidi: isolate;
+}
+
+.amc-NThread-verb,
+.amc-NThread-replyTo,
+.amc-NThread-to,
+.amc-NThread-mentions { color: var(--amc-nthr-muted); }
+
+.amc-NThread-verb:empty { display: none; }
+
+.amc-NThread-time {
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  unicode-bidi: plaintext;
+}
+
+.amc-NThread-replyTo,
+.amc-NThread-to,
+.amc-NThread-mentions { font-size: .75rem; }
+
+.amc-NThread-internal {
+  display: inline-flex;
+  align-items: center;
+  gap: .3125rem;
+  padding: 0 .375rem;
+  border: 1px dashed var(--amc-nthr-note-edge);
+  border-radius: .25rem;
+  color: var(--amc-nthr-note-text);
+  font-size: .6875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.amc-NThread-body {
+  max-inline-size: 72ch;
+  margin: .25rem 0 0;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  unicode-bidi: plaintext;
+}
+
+.amc-NThread-file {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  max-inline-size: 100%;
+  margin-block-start: .5rem;
+  padding: .25rem .625rem;
+  border: 1px solid var(--amc-nthr-edge);
+  border-radius: .375rem;
+  background: var(--amc-nthr-surface);
+  color: var(--amc-nthr-ink);
+  font-size: .8125rem;
+  text-decoration: none;
+}
+
+.amc-NThread-fileName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+a.amc-NThread-file:hover { border-color: var(--amc-nthr-muted); }
+a.amc-NThread-file:hover .amc-NThread-fileName { text-decoration: underline; }
+
+a.amc-NThread-file:focus-visible {
+  outline: 2px solid var(--amc-nthr-accent);
+  outline-offset: 2px;
+}
+
+.amc-NThread-mention {
+  padding-inline: .125rem;
+  border-radius: .25rem;
+  background: color-mix(in srgb, var(--amc-nthr-accent) 11%, transparent);
+  color: var(--amc-nthr-link);
+  font-weight: 600;
+  unicode-bidi: plaintext;
+}
+
+.amc-NThread-mentions { margin: .375rem 0 0; }
+
+.amc-NThread-excerpt { display: none; }
+
+/* Status and system events are one compact line: who, what, when. */
+.amc-NThread-row--status .amc-NThread-main,
+.amc-NThread-row--system .amc-NThread-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .125rem .375rem;
+}
+
+.amc-NThread-row--status .amc-NThread-head,
+.amc-NThread-row--system .amc-NThread-head { display: contents; }
+
+.amc-NThread-row--status .amc-NThread-author,
+.amc-NThread-row--status .amc-NThread-verb,
+.amc-NThread-row--system .amc-NThread-author { order: 1; }
+
+.amc-NThread-row--status .amc-NThread-body,
+.amc-NThread-row--system .amc-NThread-body {
+  order: 2;
+  margin: 0;
+}
+
+.amc-NThread-row--status .amc-NThread-body {
+  color: var(--amc-nthr-st-text);
+  font-weight: 700;
+}
+
+.amc-NThread-row--status .amc-NThread-time,
+.amc-NThread-row--system .amc-NThread-time { order: 3; }
+
+.amc-NThread-row--status .amc-NThread-internal,
+.amc-NThread-row--system .amc-NThread-internal { order: 4; }
+
+.amc-NThread-row--system .amc-NThread-author { color: var(--amc-nthr-muted); }
+
+/* ---------- Thread chrome ---------- */
+.amc-NThread-dayHead {
+  margin: 0;
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.amc-NThread-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 2.25rem;
+  margin-block: 0 .75rem;
+  padding: .375rem .75rem;
+  border: 1px solid var(--amc-nthr-edge);
+  border-radius: var(--amc-nthr-radius);
+  background: var(--amc-nthr-surface);
+  color: var(--amc-nthr-link);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.amc-NThread-days + .amc-NThread-more { margin-block: .75rem 0; }
+
+.amc-NThread-more:hover { background: var(--amc-nthr-bubble); }
+
+.amc-NThread-more:focus-visible {
+  outline: 2px solid var(--amc-nthr-accent);
+  outline-offset: 2px;
+}
+
+.amc-NThread-empty {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  color: var(--amc-nthr-muted);
+  text-align: center;
+}
+
+/* Entries that arrived with the last refresh glow once. */
+.amc-NThread-item.is-new > .amc-NThread-entry { animation: amc-nthr-arrive 2.4s ease-out; }
+
+@keyframes amc-nthr-arrive {
+  from { background-color: color-mix(in srgb, var(--amc-nthr-accent) 16%, transparent); }
+  to { background-color: transparent; }
+}
+
+/* ==========================================================================
+   chat [motion]: bubbles, yours on the other side, runs joined
+   ========================================================================== */
+.amc-NThread--chat .amc-NThread-dayHead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding-block: .5rem;
+}
+
+.amc-NThread--chat .amc-NThread-dayLabel {
+  padding: .1875rem .75rem;
+  border-radius: 999px;
+  background: var(--amc-nthr-bubble);
+  box-shadow: 0 0 0 3px var(--amc-nthr-surface);
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+}
+
+.amc-NThread--chat .amc-NThread-list {
+  display: flex;
+  flex-direction: column;
+  padding-block-end: .5rem;
+}
+
+.amc-NThread--chat .amc-NThread-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-block-start: .75rem;
+}
+
+.amc-NThread--chat .amc-NThread-item.is-cont { margin-block-start: .1875rem; }
+
+.amc-NThread--chat .amc-NThread-entry {
+  gap: .5rem;
+  align-items: end;
+  max-inline-size: min(34rem, 88%);
+}
+
+.amc-NThread--chat .amc-NThread-main {
+  display: flex;
+  flex-direction: column;
+  padding: .4375rem .75rem .3125rem;
+  border-radius: 1rem;
+  border-end-start-radius: .25rem;
+  background: var(--amc-nthr-bubble);
+}
+
+.amc-NThread--chat .amc-NThread-head { display: contents; }
+
+.amc-NThread--chat .amc-NThread-author {
+  order: 0;
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+}
+
+.amc-NThread--chat .amc-NThread-internal {
+  order: 0;
+  align-self: flex-start;
+  margin-block: .125rem;
+}
+
+.amc-NThread--chat .amc-NThread-verb,
+.amc-NThread--chat .amc-NThread-replyTo { order: 1; font-size: .75rem; }
+
+.amc-NThread--chat .amc-NThread-body { order: 2; margin: 0; }
+.amc-NThread--chat .amc-NThread-file { order: 3; align-self: flex-start; margin-block: .375rem .125rem; }
+.amc-NThread--chat .amc-NThread-mentions { order: 4; }
+
+.amc-NThread--chat .amc-NThread-time {
+  order: 5;
+  align-self: flex-end;
+  margin-block-start: .125rem;
+  font-size: .6875rem;
+}
+
+.amc-NThread--chat .amc-NThread-item.is-cont > .amc-NThread-entry > .amc-NThread-avatar { visibility: hidden; }
+.amc-NThread--chat .amc-NThread-item.is-cont > .amc-NThread-entry .amc-NThread-author { display: none; }
+.amc-NThread--chat .amc-NThread-item.is-cont > .amc-NThread-entry > .amc-NThread-main { border-start-start-radius: .25rem; }
+
+/* Your messages: the other side, primary tint, no avatar or name. */
+.amc-NThread--chat .amc-NThread-list > .amc-NThread-item.is-mine { align-items: flex-end; }
+.amc-NThread--chat .amc-NThread-item.is-mine > .amc-NThread-entry { grid-template-columns: minmax(0, 1fr); }
+.amc-NThread--chat .amc-NThread-item.is-mine > .amc-NThread-entry > .amc-NThread-avatar { display: none; }
+.amc-NThread--chat .amc-NThread-item.is-mine > .amc-NThread-entry .amc-NThread-author { display: none; }
+
+.amc-NThread--chat .amc-NThread-item.is-mine > .amc-NThread-entry > .amc-NThread-main {
+  border-end-start-radius: 1rem;
+  border-end-end-radius: .25rem;
+  background: var(--amc-nthr-mine);
+}
+
+.amc-NThread--chat .amc-NThread-item.is-mine.is-cont > .amc-NThread-entry > .amc-NThread-main {
+  border-start-start-radius: 1rem;
+  border-start-end-radius: .25rem;
+}
+
+/* Internal notes: same bubble, tinted, dashed edge. */
+.amc-NThread--chat .amc-NThread-item.is-internal > .amc-NThread-entry > .amc-NThread-main {
+  background: var(--amc-nthr-note);
+  box-shadow: inset 0 0 0 1.5px transparent;
+  outline: 1.5px dashed var(--amc-nthr-note-edge);
+  outline-offset: -1.5px;
+}
+
+/* Status and system lines sit in the middle of the conversation. */
+.amc-NThread--chat .amc-NThread-list > .amc-NThread-row--status,
+.amc-NThread--chat .amc-NThread-list > .amc-NThread-row--system { align-items: center; }
+
+.amc-NThread--chat .amc-NThread-row--status > .amc-NThread-entry,
+.amc-NThread--chat .amc-NThread-row--system > .amc-NThread-entry {
+  grid-template-columns: minmax(0, 1fr);
+  max-inline-size: 92%;
+}
+
+.amc-NThread--chat .amc-NThread-row--status > .amc-NThread-entry > .amc-NThread-avatar,
+.amc-NThread--chat .amc-NThread-row--system > .amc-NThread-entry > .amc-NThread-avatar { display: none; }
+
+.amc-NThread--chat .amc-NThread-row--status > .amc-NThread-entry > .amc-NThread-main,
+.amc-NThread--chat .amc-NThread-row--system > .amc-NThread-entry > .amc-NThread-main {
+  flex-direction: row;
+  justify-content: center;
+  padding: .125rem .5rem;
+  border-radius: 0;
+  background: none;
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+  text-align: center;
+}
+
+.amc-NThread--chat .amc-NThread-row--status .amc-NThread-author,
+.amc-NThread--chat .amc-NThread-row--system .amc-NThread-author {
+  display: inline;
+  font-size: inherit;
+}
+
+.amc-NThread--chat .amc-NThread-row--status .amc-NThread-main::before,
+.amc-NThread--chat .amc-NThread-row--system .amc-NThread-main::before {
+  content: "";
+  align-self: center;
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background: var(--amc-nthr-st);
+}
+
+.amc-NThread--chat .amc-NThread-row--status .amc-NThread-time,
+.amc-NThread--chat .amc-NThread-row--system .amc-NThread-time { align-self: baseline; margin: 0; }
+
+/* Replies hang under their message as a short side thread; each keeps its own side. */
+.amc-NThread--chat .amc-NThread-replies {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: .25rem;
+  margin-block-start: .25rem;
+  margin-inline-start: 2.5rem;
+  padding-inline-start: .75rem;
+  border-inline-start: 2px solid var(--amc-nthr-line);
+}
+
+.amc-NThread--chat .amc-NThread-replies > .amc-NThread-item { margin: 0; }
+.amc-NThread--chat .amc-NThread-replies > .amc-NThread-item.is-mine { align-items: flex-end; }
+.amc-NThread--chat .amc-NThread-replies .amc-NThread-entry { max-inline-size: min(30rem, 92%); }
+
+.amc-NThread--chat .amc-NThread-item.is-new > .amc-NThread-entry { animation: amc-nthr-slide .45s cubic-bezier(.2, .8, .2, 1); }
+.amc-NThread--chat .amc-NThread-item.is-new.is-mine > .amc-NThread-entry { animation-name: amc-nthr-slide-mine; }
+
+@keyframes amc-nthr-slide {
+  from { opacity: .35; transform: translateX(calc(-1.5rem * var(--amc-nthr-dir))); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes amc-nthr-slide-mine {
+  from { opacity: .35; transform: translateX(calc(1.5rem * var(--amc-nthr-dir))); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   auditTimeline [bold]: a rail, the time beside it, status changes in large type
+   ========================================================================== */
+.amc-NThread--auditTimeline {
+  --amc-nthr-gutter: 5.25rem;
+  --amc-nthr-rail: calc(var(--amc-nthr-gutter) + .75rem);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-day + .amc-NThread-day { margin-block-start: 1.25rem; }
+
+.amc-NThread--auditTimeline .amc-NThread-dayHead {
+  padding-block: .5rem .625rem;
+  border-block-start: 2px solid var(--amc-nthr-ink);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item {
+  position: relative;
+  padding-block: .375rem .875rem;
+  padding-inline-start: calc(var(--amc-nthr-rail) + 1.25rem);
+}
+
+/* The rail and the marker. */
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--amc-nthr-rail);
+  border-inline-start: 2px solid var(--amc-nthr-ink);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item:last-child::before { inset-block-end: auto; block-size: .75rem; }
+
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item::after {
+  content: "";
+  position: absolute;
+  inset-block-start: .6875rem;
+  inset-inline-start: calc(var(--amc-nthr-rail) - .3125rem);
+  box-sizing: border-box;
+  inline-size: .75rem;
+  block-size: .75rem;
+  border: 2px solid var(--amc-nthr-ink);
+  border-radius: 50%;
+  background: var(--amc-nthr-surface);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-row--status::after {
+  inset-block-start: .5625rem;
+  inset-inline-start: calc(var(--amc-nthr-rail) - .5rem);
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border: 3px solid var(--amc-nthr-surface);
+  border-radius: .25rem;
+  background: var(--amc-nthr-st);
+  box-shadow: 0 0 0 2px var(--amc-nthr-ink);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-row--system::after {
+  inset-block-start: .75rem;
+  inset-inline-start: calc(var(--amc-nthr-rail) - .1875rem);
+  inline-size: .5rem;
+  block-size: .5rem;
+  border: 0;
+  background: var(--amc-nthr-ink);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-entry { display: block; }
+.amc-NThread--auditTimeline .amc-NThread-avatar { display: none; }
+
+/* The time lives in the gutter before the rail. */
+.amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry .amc-NThread-time {
+  position: absolute;
+  inset-block-start: .5rem;
+  inset-inline-start: 0;
+  inline-size: var(--amc-nthr-gutter);
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: end;
+  white-space: normal;
+}
+
+.amc-NThread--auditTimeline .amc-NThread-row--status .amc-NThread-main {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.amc-NThread--auditTimeline .amc-NThread-row--status .amc-NThread-head {
+  display: flex;
+  order: 1;
+  color: var(--amc-nthr-muted);
+  font-size: .8125rem;
+}
+
+.amc-NThread--auditTimeline .amc-NThread-row--status .amc-NThread-author { font-weight: 600; }
+
+.amc-NThread--auditTimeline .amc-NThread-row--status .amc-NThread-verb,
+.amc-NThread--caseFile .amc-NThread-row--status .amc-NThread-verb { display: none; }
+
+.amc-NThread--auditTimeline .amc-NThread-row--status .amc-NThread-body {
+  order: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+.amc-NThread--auditTimeline .amc-NThread-row--system .amc-NThread-main {
+  color: var(--amc-nthr-muted);
+  font-size: .8125rem;
+}
+
+.amc-NThread--auditTimeline .amc-NThread-row--system .amc-NThread-body { color: var(--amc-nthr-ink); }
+
+.amc-NThread--auditTimeline .amc-NThread-item.is-internal > .amc-NThread-entry > .amc-NThread-main {
+  padding: .5rem .75rem;
+  border: 1.5px dashed var(--amc-nthr-note-edge);
+  border-radius: .375rem;
+  background: var(--amc-nthr-note);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-replies {
+  margin-block-start: .625rem;
+  padding-inline-start: .875rem;
+  border-inline-start: 1px solid var(--amc-nthr-edge);
+}
+
+.amc-NThread--auditTimeline .amc-NThread-replies > .amc-NThread-item + .amc-NThread-item { margin-block-start: .5rem; }
+
+@container (max-width: 420px) {
+  /* The container cannot restyle itself, so the rail tokens are reset on the list. */
+  .amc-NThread--auditTimeline .amc-NThread-days { --amc-nthr-gutter: 0rem; --amc-nthr-rail: .375rem; }
+
+  .amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry .amc-NThread-time {
+    position: static;
+    inline-size: auto;
+    font-weight: 400;
+    text-align: start;
+    white-space: nowrap;
+  }
+
+  .amc-NThread--auditTimeline .amc-NThread-list > .amc-NThread-item { padding-inline-start: 1.625rem; }
+}
+
+/* ==========================================================================
+   emailThread [smart]: earlier messages fold to one line, the latest is open
+   ========================================================================== */
+.amc-NThread--emailThread .amc-NThread-dayHead {
+  padding-block: .75rem .25rem;
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+}
+
+.amc-NThread--emailThread .amc-NThread-list > .amc-NThread-item { border-block-end: 1px solid var(--amc-nthr-line); }
+
+.amc-NThread--emailThread .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry {
+  position: relative;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  padding: .875rem .25rem 1rem;
+}
+
+.amc-NThread--emailThread .amc-NThread-avatar {
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  font-size: .75rem;
+}
+
+.amc-NThread--emailThread .amc-NThread-row--comment .amc-NThread-head,
+.amc-NThread--emailThread .amc-NThread-row--attachment .amc-NThread-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+}
+
+.amc-NThread--emailThread .amc-NThread-row--comment .amc-NThread-author,
+.amc-NThread--emailThread .amc-NThread-row--attachment .amc-NThread-author { grid-column: 1; font-size: .9375rem; }
+
+.amc-NThread--emailThread .amc-NThread-row--comment .amc-NThread-time,
+.amc-NThread--emailThread .amc-NThread-row--attachment .amc-NThread-time { grid-row: 1; grid-column: 2; justify-self: end; }
+
+.amc-NThread--emailThread .amc-NThread-row--comment .amc-NThread-head > :not(.amc-NThread-author):not(.amc-NThread-time),
+.amc-NThread--emailThread .amc-NThread-row--attachment .amc-NThread-head > :not(.amc-NThread-author):not(.amc-NThread-time) {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.amc-NThread--emailThread .amc-NThread-verb { display: none; }
+
+.amc-NThread--emailThread .amc-NThread-body {
+  margin-block-start: .875rem;
+  line-height: 1.6;
+}
+
+.amc-NThread--emailThread .amc-NThread-file { margin-block-start: .875rem; }
+
+/* The fold. */
+.amc-NThread-open {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  block-size: 3.25rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: .25rem;
+  background: none;
+  cursor: pointer;
+}
+
+.amc-NThread-open:focus-visible {
+  outline: 2px solid var(--amc-nthr-accent);
+  outline-offset: -2px;
+}
+
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry { padding-block: .625rem; }
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry > .amc-NThread-avatar { inline-size: 1.75rem; block-size: 1.75rem; font-size: .6875rem; margin-inline-start: .25rem; }
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-open { block-size: 100%; }
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-author { font-size: .875rem; }
+
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-body,
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-file,
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-to,
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-mentions,
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-replies { display: none; }
+
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-excerpt {
+  display: block;
+  overflow: hidden;
+  color: var(--amc-nthr-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.amc-NThread--emailThread .amc-NThread-list > .amc-NThread-item:not(.is-folded) > .amc-NThread-entry .amc-NThread-open:hover ~ .amc-NThread-head .amc-NThread-author,
+.amc-NThread--emailThread .amc-NThread-item.is-folded > .amc-NThread-entry .amc-NThread-open:hover ~ .amc-NThread-head .amc-NThread-author { text-decoration: underline; }
+
+.amc-NThread--emailThread .amc-NThread-item.is-internal > .amc-NThread-entry {
+  margin-block: .5rem;
+  border: 1.5px dashed var(--amc-nthr-note-edge);
+  border-radius: .375rem;
+  background: var(--amc-nthr-note);
+}
+
+.amc-NThread--emailThread .amc-NThread-item.is-internal > .amc-NThread-entry .amc-NThread-internal { grid-column: 2; grid-row: 2; justify-self: end; }
+
+/* Status: a rule across the thread with the change in the middle. */
+.amc-NThread--emailThread .amc-NThread-list > .amc-NThread-row--status > .amc-NThread-entry,
+.amc-NThread--emailThread .amc-NThread-list > .amc-NThread-row--system > .amc-NThread-entry {
+  grid-template-columns: minmax(0, 1fr);
+  padding: .625rem 0;
+}
+
+.amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-avatar,
+.amc-NThread--emailThread .amc-NThread-row--system .amc-NThread-avatar { display: none; }
+
+.amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main,
+.amc-NThread--emailThread .amc-NThread-row--system .amc-NThread-main {
+  justify-content: center;
+  color: var(--amc-nthr-muted);
+  font-size: .8125rem;
+  text-align: center;
+}
+
+.amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main::before,
+.amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main::after {
+  content: "";
+  flex: 1 1 1.5rem;
+  align-self: center;
+  border-block-start: 1px solid var(--amc-nthr-edge);
+}
+
+.amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main::after { order: 9; }
+.amc-NThread--emailThread .amc-NThread-list > .amc-NThread-row--status { border-block-end: 0; }
+
+.amc-NThread--emailThread .amc-NThread-replies {
+  margin: 0 0 1rem 3rem;
+  padding-inline-start: .875rem;
+  border-inline-start: 2px solid var(--amc-nthr-line);
+}
+
+.amc-NThread--emailThread .amc-NThread-replies .amc-NThread-entry { padding-block: .375rem; grid-template-columns: 1.75rem minmax(0, 1fr); }
+.amc-NThread--emailThread .amc-NThread-replies .amc-NThread-avatar { inline-size: 1.75rem; block-size: 1.75rem; font-size: .625rem; }
+
+@container (max-width: 480px) {
+  .amc-NThread--emailThread .amc-NThread-row--comment .amc-NThread-head,
+  .amc-NThread--emailThread .amc-NThread-row--attachment .amc-NThread-head { grid-template-columns: minmax(0, 1fr); }
+
+  .amc-NThread--emailThread .amc-NThread-row--comment .amc-NThread-time,
+  .amc-NThread--emailThread .amc-NThread-row--attachment .amc-NThread-time { grid-row: auto; grid-column: 1; justify-self: start; }
+
+  .amc-NThread--emailThread .amc-NThread-item.is-internal > .amc-NThread-entry .amc-NThread-internal { grid-column: 1; grid-row: auto; justify-self: start; }
+  .amc-NThread--emailThread .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry { grid-template-columns: minmax(0, 1fr); }
+  .amc-NThread--emailThread .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry > .amc-NThread-avatar { display: none; }
+  .amc-NThread--emailThread .amc-NThread-replies { margin-inline-start: .5rem; }
+  .amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main::before,
+  .amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main::after { display: none; }
+  .amc-NThread--emailThread .amc-NThread-list > .amc-NThread-row--status > .amc-NThread-entry { border-block: 1px solid var(--amc-nthr-line); }
+  .amc-NThread-open { block-size: 4rem; }
+}
+
+/* ==========================================================================
+   activityFeed [smart]: who did what, compact; time gets its own column when wide
+   ========================================================================== */
+.amc-NThread--activityFeed .amc-NThread-dayHead {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding-block: .625rem .25rem;
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+}
+
+.amc-NThread--activityFeed .amc-NThread-dayHead::after {
+  content: "";
+  flex: 1;
+  border-block-start: 1px solid var(--amc-nthr-line);
+}
+
+.amc-NThread--activityFeed .amc-NThread-list { position: relative; }
+
+.amc-NThread--activityFeed .amc-NThread-list::before {
+  content: "";
+  position: absolute;
+  inset-block: .75rem;
+  inset-inline-start: .75rem;
+  border-inline-start: 1px solid var(--amc-nthr-edge);
+}
+
+.amc-NThread--activityFeed .amc-NThread-item { position: relative; }
+
+.amc-NThread--activityFeed .amc-NThread-entry {
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: .625rem;
+  padding-block: .4375rem;
+}
+
+.amc-NThread--activityFeed .amc-NThread-avatar {
+  position: relative;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  box-shadow: 0 0 0 3px var(--amc-nthr-surface);
+  font-size: .5625rem;
+}
+
+.amc-NThread--activityFeed .amc-NThread-row--status .amc-NThread-avatar {
+  background: var(--amc-nthr-surface);
+  box-shadow: 0 0 0 3px var(--amc-nthr-surface), inset 0 0 0 2px var(--amc-nthr-st);
+  color: var(--amc-nthr-st-text);
+}
+
+.amc-NThread--activityFeed .amc-NThread-row--system .amc-NThread-avatar {
+  background: var(--amc-nthr-surface);
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+}
+
+.amc-NThread--activityFeed .amc-NThread-head { font-size: .8125rem; }
+
+/* "added an internal note" already says it; the dashed box keeps the visual cue. */
+.amc-NThread--activityFeed .amc-NThread-item.is-noted > .amc-NThread-entry .amc-NThread-internal { display: none; }
+
+.amc-NThread--activityFeed .amc-NThread-body {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-block-start: .125rem;
+  color: color-mix(in srgb, var(--amc-nthr-ink) 82%, var(--amc-nthr-surface));
+  font-size: .8125rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.amc-NThread--activityFeed .amc-NThread-row--status .amc-NThread-body,
+.amc-NThread--activityFeed .amc-NThread-row--system .amc-NThread-body { display: inline; color: var(--amc-nthr-st-text); }
+
+.amc-NThread--activityFeed .amc-NThread-row--system .amc-NThread-body { color: var(--amc-nthr-ink); font-weight: 400; }
+
+.amc-NThread--activityFeed .amc-NThread-row--status .amc-NThread-main,
+.amc-NThread--activityFeed .amc-NThread-row--system .amc-NThread-main { font-size: .8125rem; }
+
+.amc-NThread--activityFeed .amc-NThread-file { margin-block-start: .25rem; padding-block: .125rem; font-size: .75rem; }
+
+.amc-NThread--activityFeed .amc-NThread-item.is-internal > .amc-NThread-entry > .amc-NThread-main {
+  padding: .25rem .5rem .375rem;
+  border: 1.5px dashed var(--amc-nthr-note-edge);
+  border-radius: .375rem;
+  background: var(--amc-nthr-note);
+}
+
+.amc-NThread--activityFeed .amc-NThread-replies { padding-inline-start: 2.125rem; }
+.amc-NThread--activityFeed .amc-NThread-replies .amc-NThread-entry { padding-block: .25rem; }
+
+@container (min-width: 560px) {
+  .amc-NThread--activityFeed .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry,
+  .amc-NThread--activityFeed .amc-NThread-replies > .amc-NThread-item > .amc-NThread-entry {
+    position: relative;
+    padding-inline-end: 8.5rem;
+  }
+
+  .amc-NThread--activityFeed .amc-NThread-entry .amc-NThread-time {
+    position: absolute;
+    inset-block-start: .5rem;
+    inset-inline-end: 0;
+    inline-size: 8rem;
+    text-align: end;
+  }
+
+  .amc-NThread--activityFeed .amc-NThread-item + .amc-NThread-item > .amc-NThread-entry { border-block-start: 1px solid color-mix(in srgb, var(--amc-nthr-line) 60%, transparent); }
+}
+
+/* ==========================================================================
+   caseFile [depth]: sheets in a folder, pinned slips, stamps and index tabs
+   ========================================================================== */
+.amc-NThread--caseFile .amc-NThread-app {
+  padding: .5rem .875rem 1.25rem;
+  border-radius: var(--amc-nthr-radius);
+  background: color-mix(in srgb, var(--amc-nthr-ink) 5%, var(--amc-nthr-floor));
+  box-shadow: inset 0 1px 0 var(--amc-nthr-edge), inset 0 0 0 1px var(--amc-nthr-line);
+}
+
+.amc-NThread--caseFile .amc-NThread-dayHead {
+  display: inline-block;
+  margin-block-start: .875rem;
+  padding: .25rem .75rem .375rem;
+  border-radius: .375rem .375rem 0 0;
+  background: var(--amc-nthr-surface);
+  box-shadow: 0 -1px 0 var(--amc-nthr-edge);
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item { position: relative; }
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item + .amc-NThread-item { margin-block-start: -.25rem; }
+
+/* A sheet. */
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry {
+  position: relative;
+  padding: 1rem 1.125rem 1.125rem;
+  border: 1px solid var(--amc-nthr-edge);
+  border-radius: .1875rem;
+  background: var(--amc-nthr-surface);
+  box-shadow: 0 1px 0 var(--amc-nthr-edge), 0 12px 20px -16px color-mix(in srgb, var(--amc-nthr-ink) 55%, transparent);
+}
+
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item.has-replies > .amc-NThread-entry { border-end-start-radius: 0; border-end-end-radius: 0; }
+
+/* Attachments are index tabs on the sheet's top edge. */
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item:has(> .amc-NThread-entry .amc-NThread-file) { margin-block-start: 1.125rem; }
+
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry .amc-NThread-file {
+  position: absolute;
+  inset-block-start: -1.625rem;
+  inset-inline-end: 1rem;
+  z-index: 1;
+  max-inline-size: calc(100% - 2rem);
+  margin: 0;
+  padding: .25rem .75rem .5rem;
+  border-color: var(--amc-nthr-edge);
+  border-block-end: 0;
+  border-radius: .375rem .375rem 0 0;
+  font-size: .75rem;
+}
+
+/* An internal note is a slip clipped on top of the file. */
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item.is-internal {
+  z-index: 2;
+  margin-block-start: -.5rem;
+  margin-inline: 2.25rem .75rem;
+}
+
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item.is-internal > .amc-NThread-entry {
+  border: 1.5px dashed var(--amc-nthr-note-edge);
+  background: var(--amc-nthr-note);
+  transform: rotate(calc(-.6deg * var(--amc-nthr-dir)));
+}
+
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item.is-internal > .amc-NThread-entry::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -.625rem;
+  inset-inline-start: 1.5rem;
+  inline-size: .5rem;
+  block-size: 1.5rem;
+  border: 2px solid var(--amc-nthr-muted);
+  border-radius: .5rem;
+}
+
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item.is-internal:first-child { margin-block-start: .5rem; }
+
+/* A status change is a stamp. */
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-row--status > .amc-NThread-entry {
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: 1.25rem;
+  text-align: center;
+}
+
+.amc-NThread--caseFile .amc-NThread-row--status .amc-NThread-avatar { display: none; }
+
+.amc-NThread--caseFile .amc-NThread-row--status .amc-NThread-main {
+  flex-direction: column;
+  align-items: center;
+  gap: .625rem;
+}
+
+.amc-NThread--caseFile .amc-NThread-row--status .amc-NThread-head {
+  display: flex;
+  order: 1;
+  justify-content: center;
+  color: var(--amc-nthr-muted);
+  font-size: .75rem;
+}
+
+.amc-NThread--caseFile .amc-NThread-row--status .amc-NThread-author { font-weight: 600; }
+
+.amc-NThread--caseFile .amc-NThread-row--status .amc-NThread-body {
+  order: 0;
+  padding: .1875rem .875rem;
+  border: 2.5px solid var(--amc-nthr-st);
+  border-radius: .375rem;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nthr-st) 35%, transparent);
+  color: var(--amc-nthr-st-text);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  transform: rotate(calc(-3deg * var(--amc-nthr-dir)));
+}
+
+/* System entries are typed file notes at the foot of the sheet. */
+.amc-NThread--caseFile .amc-NThread-list > .amc-NThread-row--system > .amc-NThread-entry {
+  grid-template-columns: minmax(0, 1fr);
+  padding-block: .625rem;
+  background: color-mix(in srgb, var(--amc-nthr-ink) 2%, var(--amc-nthr-surface));
+  color: var(--amc-nthr-muted);
+  font-size: .8125rem;
+}
+
+.amc-NThread--caseFile .amc-NThread-row--system .amc-NThread-avatar { display: none; }
+
+.amc-NThread--caseFile .amc-NThread-replies {
+  position: relative;
+  margin-inline: 1.5rem .5rem;
+  padding: .625rem .875rem .75rem;
+  border: 1px solid var(--amc-nthr-edge);
+  border-block-start: 0;
+  border-radius: 0 0 .25rem .25rem;
+  background: color-mix(in srgb, var(--amc-nthr-ink) 3%, var(--amc-nthr-surface));
+}
+
+.amc-NThread--caseFile .amc-NThread-replies > .amc-NThread-item + .amc-NThread-item { margin-block-start: .625rem; }
+
+@container (max-width: 420px) {
+  .amc-NThread--caseFile .amc-NThread-app { padding-inline: .5rem; }
+  .amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item.is-internal { margin-inline: 1rem .25rem; }
+  .amc-NThread--caseFile .amc-NThread-replies { margin-inline: .75rem .25rem; }
+  .amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry { grid-template-columns: minmax(0, 1fr); }
+  .amc-NThread--caseFile .amc-NThread-list > .amc-NThread-item > .amc-NThread-entry > .amc-NThread-avatar { display: none; }
+}
+
+/* ---------- Motion, contrast ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .amc-NThread-item.is-new > .amc-NThread-entry,
+  .amc-NThread--chat .amc-NThread-item.is-new > .amc-NThread-entry,
+  .amc-NThread--chat .amc-NThread-item.is-new.is-mine > .amc-NThread-entry { animation: none; }
+
+  .amc-NThread-item.is-new > .amc-NThread-entry { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--amc-nthr-accent) 40%, transparent); }
+}
+
+@media (forced-colors: active) {
+  .amc-NThread-internal,
+  .amc-NThread-item.is-internal > .amc-NThread-entry { border: 1px dashed CanvasText; }
+
+  .amc-NThread--chat .amc-NThread-main,
+  .amc-NThread-more { border: 1px solid CanvasText; }
+}
