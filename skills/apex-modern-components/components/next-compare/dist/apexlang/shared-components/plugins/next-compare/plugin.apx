@@ -1,0 +1,428 @@
+plugin nextCompare (
+    name: Next Compare
+    staticId: AMC_NEXT_COMPARE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <span class="amc-NCompare-srcOption" data-f="option">#OPTION#</span>{if ?OPTION_DETAIL/} <span class="amc-NCompare-srcDetail" data-f="optionDetail">#OPTION_DETAIL#</span>{endif/}
+            <span class="amc-NCompare-srcCrit">{if ?CRITERION_GROUP/}<span data-f="group">#CRITERION_GROUP#</span>: {endif/}<span data-f="criterion">#CRITERION#</span></span>
+            <span class="amc-NCompare-srcValue" data-f="value">#VALUE#</span>{if ?SCORE/} <span class="amc-NCompare-srcScore">Score <span data-f="score">#SCORE#</span></span>{endif/}{if ?WEIGHT/} <span class="amc-NCompare-srcWeight">Weight <span data-f="weight">#WEIGHT#</span></span>{endif/}
+            {if ?NOTE/}<span class="amc-NCompare-srcNote" data-f="note">#NOTE#</span>{endif/}
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NCompare amc-NCompare--#STYLE#" data-variant="#STYLE#" data-score-max="#SCORE_MAX#" data-hide-identical="#HIDE_IDENTICAL#" data-pinned="#PINNED_OPTION#" data-totals="#SHOW_TOTALS#">
+              <span class="amc-NCompare-i18n" hidden data-criterion="Criterion" data-weight="Weight" data-total="Weighted total" data-rank="Rank" data-best="Best in this row" data-leader="Leading" data-tied="Tied" data-pin="Pin %0" data-unpin="Unpin %0" data-pinned="%0 pinned as the first column" data-unpinned="Pin removed" data-hide="Hide identical rows" data-hidden="%0 identical rows hidden" data-none-identical="No identical rows" data-shown="Identical rows shown" data-prev="Previous option" data-next="Next option" data-position="%0 of %1" data-baseline="Baseline" data-same="Same as baseline" data-better="Better than baseline" data-worse="Worse than baseline" data-changed="Differs from baseline" data-yes="Included" data-no="Not included" data-standings="Weighted total out of 100" data-points="points" data-calculated="Scored from value" data-missing="No value" data-success="Strong point" data-warning="Needs attention" data-danger="Does not comply" data-info="Note" data-caption="Comparison of %0 options by %1 criteria"></span>
+              <ul class="amc-NCompare-source">#APEX$ROWS#</ul>
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NCompare-row" data-better="#BETTER#" data-highlight="#HIGHLIGHT#">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-compare.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-compare.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            One query row per option and criterion. Map Option, Criterion and Value. Score (0 to Score Maximum) and Weight turn on weighted totals and ranks; Better = lower or higher lets numeric values such as price or lead time be scored and compared without a Score. Criterion Group adds group bands such as Technical and Financial. Highlight flags a single cell. Without JavaScript the rows render as a readable list grouped by option.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: tenderTable
+        }
+        help {
+            helpText:
+                ```
+                Comparison design; the direction is given after the name. tenderTable - smart: procurement evaluation sheet with criterion groups, a weight column, a standings strip that shows the gap between bidders, weighted total and rank rows and the leading column marked. specSheet - bold: datasheet with heavy rules, large option names, inverted group bands and yes / no values shown as marks with text. scorecard - motion: every cell carries a score bar; bars grow as they scroll into view and columns glide to their new place when an option is pinned. sideCards - depth: each option is a stack of quotation pages with aligned rows, the leader lifted forward. diffView - smart: every option compared with a baseline (the pinned option, or the first one) with signed differences marked better or worse; identical rows start hidden. Every style switches to one option at a time with swipe when the region is narrower than about 640 px. Under reduced motion nothing moves.
+                ```
+        }
+        entry tenderTable (
+            sequence: 10
+            display: Tender Table - smart
+            return: tenderTable
+        )
+        entry specSheet (
+            sequence: 20
+            display: Spec Sheet - bold
+            return: specSheet
+        )
+        entry scorecard (
+            sequence: 30
+            display: Scorecard - motion
+            return: scorecard
+        )
+        entry sideCards (
+            sequence: 40
+            display: Side Cards - depth
+            return: sideCards
+        )
+        entry diffView (
+            sequence: 50
+            display: Diff View - smart
+            return: diffView
+        )
+    )
+    customAttribute OPTION (
+        apexlangName: option
+        attribute: 2
+        name: Option
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                The thing being compared, for example a vendor, plan or candidate name such as Najd Industrial Supply. Options appear in the order of their first row; order the query by option display order, then criterion order.
+                ```
+        }
+    )
+    customAttribute CRITERION (
+        apexlangName: criterion
+        attribute: 3
+        name: Criterion
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                What is compared, for example Total price incl. VAT, Delivery lead time or Warranty. Criteria appear in the order of their first row.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 4
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                The value as users should read it, for example SAR 412,500, 45 days, Yes or 24 months. When Better is set, the first number in the text is used for comparing, so keep one number per value.
+                ```
+        }
+    )
+    customAttribute SCORE (
+        apexlangName: score
+        attribute: 5
+        name: Score
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional evaluation score from 0 to Score Maximum as a plain number, for example 8.5. The highest score in a criterion is marked best. Criteria without scores but with Better set are scored automatically: lowest value / value x maximum for lower, value / highest value x maximum for higher.
+                ```
+        }
+    )
+    customAttribute WEIGHT (
+        apexlangName: weight
+        attribute: 6
+        name: Weight
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional weight of the criterion, for example 30 for 30%. The first non-empty value per criterion is used, so it may be repeated on every row. Weights do not need to add up to 100; totals are normalised to a 0 to 100 scale. When no criterion has a weight, scored criteria count equally.
+                ```
+        }
+    )
+    customAttribute NOTE (
+        apexlangName: note
+        attribute: 7
+        name: Note
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short remark shown under the value, for example Excludes installation or Confirmed by site visit.
+                ```
+        }
+    )
+    customAttribute HIGHLIGHT (
+        apexlangName: highlight
+        attribute: 8
+        name: Highlight
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional flag for one cell: success, warning, danger or Y (information). For example danger for a bid that fails a mandatory requirement. It is shown with a mark and screen-reader text, never by color alone.
+                ```
+        }
+    )
+    customAttribute CRITERION_GROUP (
+        apexlangName: criterionGroup
+        attribute: 9
+        name: Criterion Group
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional group of the criterion, for example Technical or Financial. Groups appear as bands in the order of their first row, with the sum of their weights.
+                ```
+        }
+    )
+    customAttribute BETTER (
+        apexlangName: better
+        attribute: 10
+        name: Better
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional direction per criterion: lower (price, lead time, deductible) or higher (capacity, warranty, area). It marks the best value, sets better / worse in Diff View and scores unscored criteria. The first non-empty value per criterion is used.
+                ```
+        }
+    )
+    customAttribute OPTION_DETAIL (
+        apexlangName: optionDetail
+        attribute: 11
+        name: Option Detail
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional second line under the option name, for example the city, a quotation reference such as Q-7781 or a plan price. The first non-empty value per option is used.
+                ```
+        }
+    )
+    customAttribute SCORE_MAX (
+        apexlangName: scoreMax
+        attribute: 12
+        name: Score Maximum
+        scope: component
+        type: number
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: 10
+        }
+        help {
+            helpText:
+                ```
+                The top of the Score scale, for example 10, 5 or 100. Bars and automatic scores use it.
+                ```
+        }
+    )
+    customAttribute HIDE_IDENTICAL (
+        apexlangName: hideIdentical
+        attribute: 13
+        name: Hide Identical Rows
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 130
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: false
+        }
+        help {
+            helpText:
+                ```
+                Y starts with rows hidden where every option has the same value. Users can switch it with the Hide identical rows button. Diff View always starts with them hidden.
+                ```
+        }
+    )
+    customAttribute PINNED_OPTION (
+        apexlangName: pinnedOption
+        attribute: 14
+        name: Pinned Option
+        scope: component
+        type: text
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional option name to pin first when the region loads, for example the current supplier, or a page item reference such as &P20_CURRENT_VENDOR. Diff View uses it as the baseline. Users can pin another option.
+                ```
+        }
+    )
+    customAttribute SHOW_TOTALS (
+        apexlangName: showTotals
+        attribute: 15
+        name: Show Totals
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 150
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: true
+        }
+        help {
+            helpText:
+                ```
+                Y shows the weighted total, rank and leading option when at least one criterion is scored (by Score or Better). N shows only the values and the best value per criterion.
+                ```
+        }
+    )
+    file "amc-next-compare.css" (
+        fileName: amc-next-compare.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-compare.js" (
+        fileName: amc-next-compare.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

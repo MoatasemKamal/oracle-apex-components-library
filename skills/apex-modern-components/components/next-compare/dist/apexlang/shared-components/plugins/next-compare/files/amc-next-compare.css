@@ -1,0 +1,1128 @@
+/* APEX Modern Components - Next Compare (Next Collection)
+ * Options x criteria matrix for vendor quotations, tender evaluation, plans and candidates.
+ * Colors come from --ut-* variables with literal fallbacks. The one bold element per style
+ * is the leading option: a marked column, a lifted stack or the top of the standings ladder.
+ * Sticky header row and criterion column; one option at a time when the region is narrow. */
+
+.amc-NCompare {
+  --amc-ncmp-bg: var(--ut-component-background-color, #fff);
+  --amc-ncmp-page: var(--ut-body-background-color, #f4f4f4);
+  --amc-ncmp-ink: var(--ut-component-text-default-color, #262626);
+  --amc-ncmp-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ncmp-rule: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-ncmp-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ncmp-on-accent: var(--ut-palette-primary-contrast, #fff);
+  --amc-ncmp-good: var(--ut-palette-success, #278701);
+  --amc-ncmp-warn: var(--ut-palette-warning, #b86e00);
+  --amc-ncmp-bad: var(--ut-palette-danger, #cb1100);
+  --amc-ncmp-info: var(--ut-palette-info, #0076df);
+  --amc-ncmp-radius: var(--ut-component-border-radius, 6px);
+  --amc-ncmp-band: color-mix(in srgb, var(--amc-ncmp-ink) 5%, var(--amc-ncmp-bg));
+  --amc-ncmp-lead: color-mix(in srgb, var(--amc-ncmp-accent) 7%, var(--amc-ncmp-bg));
+  --amc-ncmp-ink-rule: color-mix(in srgb, var(--amc-ncmp-ink) 75%, transparent);
+  --amc-ncmp-shade: var(--amc-compare-shadow-color, rgba(0, 0, 0, .18));
+  container-type: inline-size;
+  color: var(--amc-ncmp-ink);
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.amc-NCompare *,
+.amc-NCompare *::before,
+.amc-NCompare *::after {
+  box-sizing: border-box;
+}
+
+.amc-NCompare dl,
+.amc-NCompare dd,
+.amc-NCompare figure,
+.amc-NCompare ol {
+  margin: 0;
+}
+
+.amc-NCompare-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Without JavaScript ---------- */
+.amc-NCompare-source {
+  display: grid;
+  gap: .375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NCompare-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem .75rem;
+  padding-block: .375rem;
+  border-block-end: 1px solid var(--amc-ncmp-rule);
+}
+
+.amc-NCompare-srcOption {
+  font-weight: 600;
+}
+
+.amc-NCompare-srcDetail,
+.amc-NCompare-srcScore,
+.amc-NCompare-srcWeight,
+.amc-NCompare-srcNote {
+  color: var(--amc-ncmp-muted);
+}
+
+.amc-NCompare.is-built > .amc-NCompare-source {
+  display: none;
+}
+
+/* ---------- Toolbar ---------- */
+.amc-NCompare-ui {
+  display: grid;
+  gap: .875rem;
+  min-inline-size: 0;
+}
+
+.amc-NCompare-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1rem;
+}
+
+.amc-NCompare-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .25rem .5rem .25rem .25rem;
+  border: 0;
+  border-radius: var(--amc-ncmp-radius);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.amc-NCompare-toggle:disabled {
+  color: var(--amc-ncmp-muted);
+  cursor: default;
+}
+
+.amc-NCompare-switch {
+  position: relative;
+  inline-size: 2rem;
+  block-size: 1.125rem;
+  border-radius: .5625rem;
+  background: color-mix(in srgb, var(--amc-ncmp-ink) 22%, var(--amc-ncmp-bg));
+  transition: background-color .2s ease;
+}
+
+.amc-NCompare-switch::after {
+  content: "";
+  position: absolute;
+  inset-block-start: .1875rem;
+  inset-inline-start: .1875rem;
+  inline-size: .75rem;
+  block-size: .75rem;
+  border-radius: 50%;
+  background: var(--amc-ncmp-bg);
+  transition: transform .2s ease;
+}
+
+.amc-NCompare-toggle[aria-pressed="true"] .amc-NCompare-switch {
+  background: var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-toggle[aria-pressed="true"] .amc-NCompare-switch::after {
+  transform: translateX(.875rem);
+}
+
+[dir="rtl"] .amc-NCompare-toggle[aria-pressed="true"] .amc-NCompare-switch::after {
+  transform: translateX(-.875rem);
+}
+
+.amc-NCompare-count {
+  color: var(--amc-ncmp-muted);
+  font-size: .8125rem;
+}
+
+.amc-NCompare-toggle:focus-visible,
+.amc-NCompare-pin:focus-visible,
+.amc-NCompare-navBtn:focus-visible,
+.amc-NCompare-scroll:focus-visible,
+.amc-NCompare-track:focus-visible {
+  outline: 2px solid var(--amc-ncmp-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Option head ---------- */
+.amc-NCompare-optHead {
+  display: grid;
+  gap: .125rem;
+  text-align: start;
+}
+
+.amc-NCompare-optName {
+  font-weight: 700;
+  font-size: .9375rem;
+  line-height: 1.25;
+}
+
+.amc-NCompare-optDetail {
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+  font-weight: 400;
+}
+
+.amc-NCompare-optMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem;
+  margin-block-start: .375rem;
+}
+
+.amc-NCompare-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .3125rem;
+  padding: .0625rem .5rem;
+  border-radius: .75rem;
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.amc-NCompare-chip--lead {
+  background: var(--amc-ncmp-accent);
+  color: var(--amc-ncmp-on-accent);
+}
+
+.amc-NCompare-chip--rank {
+  border: 1px solid var(--amc-ncmp-rule);
+  color: var(--amc-ncmp-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-chip--base {
+  border: 1px solid var(--amc-ncmp-ink-rule);
+}
+
+.amc-NCompare-pin {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  margin-inline-start: auto;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: none;
+  color: var(--amc-ncmp-muted);
+  cursor: pointer;
+}
+
+.amc-NCompare-pin .amc-NCompare-icon {
+  transform: rotate(40deg);
+  transition: transform .2s ease;
+}
+
+.amc-NCompare-pin:hover {
+  border-color: var(--amc-ncmp-rule);
+  color: var(--amc-ncmp-ink);
+}
+
+.amc-NCompare-pin.is-on {
+  background: color-mix(in srgb, var(--amc-ncmp-accent) 14%, var(--amc-ncmp-bg));
+  color: var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-pin.is-on .amc-NCompare-icon {
+  transform: none;
+}
+
+/* ---------- Table ---------- */
+.amc-NCompare-scroll {
+  position: relative;
+  overflow: auto;
+  max-block-size: min(72vh, 46rem);
+  border: 1px solid var(--amc-ncmp-rule);
+  border-radius: var(--amc-ncmp-radius);
+  background: var(--amc-ncmp-bg);
+  overscroll-behavior-inline: contain;
+}
+
+.amc-NCompare-table {
+  inline-size: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.amc-NCompare-table th,
+.amc-NCompare-table td {
+  padding: .625rem .875rem;
+  border-block-end: 1px solid var(--amc-ncmp-rule);
+  text-align: start;
+  vertical-align: top;
+  background: var(--amc-ncmp-bg);
+}
+
+.amc-NCompare-table thead th {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  vertical-align: bottom;
+  border-block-end: 1.5px solid var(--amc-ncmp-ink-rule);
+  min-inline-size: 11rem;
+}
+
+.amc-NCompare-corner {
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.amc-NCompare-table .amc-NCompare-corner,
+.amc-NCompare-table .amc-NCompare-crit {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  min-inline-size: 10rem;
+  max-inline-size: 16rem;
+  box-shadow: inset -1px 0 0 var(--amc-ncmp-rule);
+}
+
+[dir="rtl"] .amc-NCompare-table .amc-NCompare-corner,
+[dir="rtl"] .amc-NCompare-table .amc-NCompare-crit {
+  box-shadow: inset 1px 0 0 var(--amc-ncmp-rule);
+}
+
+.amc-NCompare-table thead .amc-NCompare-corner {
+  z-index: 4;
+}
+
+.amc-NCompare-table .amc-NCompare-cell.is-pinned,
+.amc-NCompare-table .amc-NCompare-colHead.is-pinned {
+  position: sticky;
+  inset-inline-start: var(--amc-ncmp-c1, 10rem);
+  z-index: 1;
+  box-shadow: inset -2px 0 0 var(--amc-ncmp-accent);
+}
+
+[dir="rtl"] .amc-NCompare-table .amc-NCompare-cell.is-pinned,
+[dir="rtl"] .amc-NCompare-table .amc-NCompare-colHead.is-pinned {
+  box-shadow: inset 2px 0 0 var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-table .amc-NCompare-colHead.is-pinned {
+  z-index: 3;
+}
+
+
+.amc-NCompare-crit {
+  font-weight: 500;
+}
+
+.amc-NCompare-critName {
+  display: block;
+}
+
+.amc-NCompare-weight {
+  display: inline-block;
+  margin-block-start: .125rem;
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-group {
+  padding-block: .5rem;
+}
+
+.amc-NCompare-table .amc-NCompare-group {
+  background: var(--amc-ncmp-band);
+}
+
+/* The group label stays in view while the table scrolls sideways. */
+.amc-NCompare-groupIn {
+  position: sticky;
+  inset-inline-start: .875rem;
+  display: inline-flex;
+  gap: .625rem;
+  align-items: baseline;
+}
+
+.amc-NCompare-groupName {
+  font-weight: 700;
+}
+
+.amc-NCompare-groupWeight {
+  color: var(--amc-ncmp-muted);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cells */
+.amc-NCompare-cell {
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-val {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .375rem;
+}
+
+.amc-NCompare-cell.is-best .amc-NCompare-val {
+  color: var(--amc-ncmp-good);
+  font-weight: 700;
+}
+
+.amc-NCompare-best {
+  color: var(--amc-ncmp-good);
+}
+
+.amc-NCompare-missing {
+  color: var(--amc-ncmp-muted);
+}
+
+.amc-NCompare-note {
+  display: block;
+  margin-block-start: .1875rem;
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+}
+
+.amc-NCompare-score {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-block-start: .25rem;
+}
+
+.amc-NCompare-fig,
+.amc-NCompare-scoreText,
+.amc-NCompare-stepNum,
+.amc-NCompare-deltaText {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.amc-NCompare-scoreText {
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+  white-space: nowrap;
+}
+
+.amc-NCompare-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: .3125rem;
+  margin-block-start: .3125rem;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.amc-NCompare-flag--success { color: var(--amc-ncmp-good); }
+.amc-NCompare-flag--warning { color: color-mix(in srgb, var(--amc-ncmp-warn) 70%, var(--amc-ncmp-ink)); }
+.amc-NCompare-flag--danger { color: var(--amc-ncmp-bad); }
+.amc-NCompare-flag--info { color: var(--amc-ncmp-info); }
+
+.amc-NCompare-table td.is-flag-danger {
+  background: color-mix(in srgb, var(--amc-ncmp-bad) 7%, var(--amc-ncmp-bg));
+}
+
+/* Leading column */
+.amc-NCompare-table .amc-NCompare-cell.is-leaderCol,
+.amc-NCompare-table .amc-NCompare-colHead.is-leader {
+  background: var(--amc-ncmp-lead);
+}
+
+.amc-NCompare-table .amc-NCompare-colHead.is-leader {
+  box-shadow: inset 0 3px 0 var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-table td.is-flag-danger.is-leaderCol {
+  background: color-mix(in srgb, var(--amc-ncmp-bad) 7%, var(--amc-ncmp-lead));
+}
+
+/* Totals */
+.amc-NCompare-totals th,
+.amc-NCompare-totals td {
+  border-block-end: 0;
+}
+
+.amc-NCompare-totalRow > * {
+  border-block-start: 1.5px solid var(--amc-ncmp-ink-rule);
+  font-weight: 700;
+}
+
+.amc-NCompare-totalNum {
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-totalOf {
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+  font-weight: 400;
+}
+
+.amc-NCompare-totalCell.is-lead .amc-NCompare-totalNum,
+.amc-NCompare-rankCell.is-lead {
+  color: var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-rankRow > * {
+  padding-block-start: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-rankCell {
+  font-weight: 700;
+}
+
+/* Bars */
+.amc-NCompare-bar {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  min-inline-size: 3rem;
+  block-size: .375rem;
+  overflow: hidden;
+  border-radius: .1875rem;
+  background: color-mix(in srgb, var(--amc-ncmp-ink) 10%, var(--amc-ncmp-bg));
+}
+
+.amc-NCompare-barFill {
+  position: absolute;
+  inset: 0;
+  background: var(--amc-ncmp-accent);
+  transform: scaleX(var(--amc-ncmp-s, 0));
+  transform-origin: 0 50%;
+}
+
+[dir="rtl"] .amc-NCompare-barFill {
+  transform-origin: 100% 50%;
+}
+
+.amc-NCompare-cell.is-best .amc-NCompare-barFill {
+  background: var(--amc-ncmp-good);
+}
+
+/* Column glide after a pin (FLIP), only for user actions. */
+.amc-NCompare-cell.is-from,
+.amc-NCompare-colHead.is-from,
+.amc-NCompare-card.is-from {
+  transform: translateX(var(--amc-ncmp-dx, 0));
+}
+
+.amc-NCompare-cell.is-gliding,
+.amc-NCompare-colHead.is-gliding,
+.amc-NCompare-card.is-gliding {
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ---------- Standings ---------- */
+.amc-NCompare-standings {
+  display: grid;
+  gap: .5rem;
+}
+
+.amc-NCompare-standingsCap {
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.amc-NCompare-ladder {
+  display: grid;
+  grid-template-columns: auto minmax(6rem, max-content) minmax(6rem, 1fr) auto;
+  gap: .375rem .875rem;
+  align-items: center;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NCompare-step {
+  display: contents;
+}
+
+.amc-NCompare-stepRank,
+.amc-NCompare-stepNum {
+  color: var(--amc-ncmp-muted);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-stepNum {
+  color: var(--amc-ncmp-ink);
+  font-weight: 600;
+  text-align: end;
+}
+
+.amc-NCompare-step.is-leader .amc-NCompare-stepName,
+.amc-NCompare-step.is-leader .amc-NCompare-stepNum {
+  color: var(--amc-ncmp-accent);
+  font-weight: 700;
+}
+
+.amc-NCompare-stepTrack {
+  position: relative;
+  display: block;
+  block-size: .875rem;
+  background:
+    linear-gradient(var(--amc-ncmp-rule) 0 0) 0 50% / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--amc-ncmp-rule) 0 1px, transparent 1px 25%) 0 50% / 100% .5rem no-repeat;
+}
+
+.amc-NCompare-stepMark {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: calc(var(--amc-ncmp-x, 0) * 100%);
+  inline-size: .75rem;
+  block-size: .75rem;
+  margin-block-start: -.375rem;
+  margin-inline-start: -.375rem;
+  border: 2px solid var(--amc-ncmp-bg);
+  border-radius: 50%;
+  background: var(--amc-ncmp-muted);
+  box-shadow: 0 0 0 1px var(--amc-ncmp-muted);
+}
+
+.amc-NCompare-step.is-leader .amc-NCompare-stepMark {
+  inline-size: 1rem;
+  block-size: 1rem;
+  margin-block-start: -.5rem;
+  margin-inline-start: -.5rem;
+  background: var(--amc-ncmp-accent);
+  box-shadow: 0 0 0 1px var(--amc-ncmp-accent);
+}
+
+/* ---------- Swipe (narrow) and cards ---------- */
+.amc-NCompare-swipe {
+  display: none;
+  gap: .625rem;
+  min-inline-size: 0;
+}
+
+.amc-NCompare-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.amc-NCompare-pos {
+  color: var(--amc-ncmp-muted);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-navBtn {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--amc-ncmp-rule);
+  border-radius: 50%;
+  background: var(--amc-ncmp-bg);
+  color: var(--amc-ncmp-ink);
+  cursor: pointer;
+}
+
+.amc-NCompare-navBtn:disabled {
+  opacity: .4;
+  cursor: default;
+}
+
+[dir="rtl"] .amc-NCompare-flipRtl {
+  transform: scaleX(-1);
+}
+
+.amc-NCompare-track {
+  position: relative;
+  display: flex;
+  gap: .75rem;
+  padding: 0 0 .5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+.amc-NCompare-card {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: grid;
+  align-content: start;
+  gap: 0;
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-ncmp-rule);
+  border-radius: var(--amc-ncmp-radius);
+  background: var(--amc-ncmp-bg);
+}
+
+.amc-NCompare-card.is-leader {
+  box-shadow: inset 0 3px 0 var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-card .amc-NCompare-optHead {
+  padding-block-end: .625rem;
+}
+
+.amc-NCompare-cardTotal {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: .125rem .375rem;
+  padding-block: .5rem .625rem;
+  border-block: 1px solid var(--amc-ncmp-rule);
+}
+
+.amc-NCompare-cardTotal .amc-NCompare-bar {
+  grid-column: 1 / -1;
+  margin-block-start: .25rem;
+}
+
+.amc-NCompare-cardTotalLabel {
+  color: var(--amc-ncmp-muted);
+  font-size: .8125rem;
+}
+
+.amc-NCompare-card.is-leader .amc-NCompare-totalNum {
+  color: var(--amc-ncmp-accent);
+}
+
+.amc-NCompare-cardRows {
+  display: grid;
+}
+
+.amc-NCompare-cardGroup {
+  padding-block: .75rem .25rem;
+  color: var(--amc-ncmp-muted);
+  font-size: .75rem;
+}
+
+.amc-NCompare-cardRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: .75rem;
+  padding-block: .5rem;
+  border-block-end: 1px solid var(--amc-ncmp-rule);
+}
+
+.amc-NCompare-cardRow dt {
+  color: var(--amc-ncmp-muted);
+}
+
+.amc-NCompare-cardRow .amc-NCompare-critName {
+  color: var(--amc-ncmp-ink);
+}
+
+@container (inline-size < 40rem) {
+  .amc-NCompare-scroll {
+    display: none;
+  }
+  .amc-NCompare-swipe {
+    display: grid;
+  }
+  .amc-NCompare-ladder {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .625rem;
+  }
+  .amc-NCompare-step {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "rank name num" "track track track";
+    gap: .25rem .5rem;
+    align-items: baseline;
+  }
+  .amc-NCompare-stepRank { grid-area: rank; }
+  .amc-NCompare-stepName { grid-area: name; }
+  .amc-NCompare-stepNum { grid-area: num; }
+  .amc-NCompare-stepTrack { grid-area: track; }
+}
+
+/* ---------- Tender table (smart) ---------- */
+.amc-NCompare--tenderTable .amc-NCompare-standings {
+  padding: .875rem 1rem;
+  border: 1px solid var(--amc-ncmp-rule);
+  border-radius: var(--amc-ncmp-radius);
+  background: var(--amc-ncmp-bg);
+}
+
+/* ---------- Spec sheet (bold): a printed datasheet ---------- */
+.amc-NCompare--specSheet .amc-NCompare-scroll {
+  border: 0;
+  border-block: 3px solid var(--amc-ncmp-ink);
+  border-radius: 0;
+}
+
+.amc-NCompare--specSheet .amc-NCompare-table thead th {
+  padding-block: 1rem .75rem;
+  border-block-end: 3px solid var(--amc-ncmp-ink);
+}
+
+.amc-NCompare--specSheet .amc-NCompare-optName {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.05;
+}
+
+.amc-NCompare--specSheet .amc-NCompare-optDetail {
+  margin-block-start: .25rem;
+  color: var(--amc-ncmp-ink);
+  font-size: .8125rem;
+  font-weight: 600;
+}
+
+.amc-NCompare--specSheet .amc-NCompare-table .amc-NCompare-group {
+  background: var(--amc-ncmp-ink);
+  color: var(--amc-ncmp-bg);
+  padding-block: .375rem;
+  font-size: .8125rem;
+}
+
+.amc-NCompare--specSheet .amc-NCompare-table td,
+.amc-NCompare--specSheet .amc-NCompare-table .amc-NCompare-crit {
+  border-block-end: 1px solid color-mix(in srgb, var(--amc-ncmp-ink) 20%, transparent);
+}
+
+.amc-NCompare--specSheet .amc-NCompare-table td + td {
+  border-inline-start: 1px solid color-mix(in srgb, var(--amc-ncmp-ink) 12%, transparent);
+}
+
+.amc-NCompare--specSheet .amc-NCompare-crit {
+  font-weight: 600;
+}
+
+.amc-NCompare--specSheet .amc-NCompare-cell.is-best .amc-NCompare-val {
+  color: var(--amc-ncmp-ink);
+  background: color-mix(in srgb, var(--amc-ncmp-good) 16%, transparent);
+  box-shadow: 0 0 0 .1875rem color-mix(in srgb, var(--amc-ncmp-good) 16%, transparent);
+  border-radius: 2px;
+}
+
+.amc-NCompare-yn {
+  font-weight: 600;
+}
+
+.amc-NCompare-yn .amc-NCompare-icon {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: 50%;
+  font-size: .6875rem;
+}
+
+.amc-NCompare-yn.is-yes .amc-NCompare-icon {
+  background: var(--amc-ncmp-ink);
+  color: var(--amc-ncmp-bg);
+}
+
+.amc-NCompare-yn.is-no {
+  color: var(--amc-ncmp-muted);
+  font-weight: 400;
+}
+
+.amc-NCompare-yn.is-no .amc-NCompare-icon {
+  border: 1.5px solid var(--amc-ncmp-rule);
+}
+
+.amc-NCompare--specSheet .amc-NCompare-table .amc-NCompare-colHead.is-leader {
+  background: var(--amc-ncmp-bg);
+}
+
+/* ---------- Scorecard (motion) ---------- */
+.amc-NCompare--scorecard .amc-NCompare-cell .amc-NCompare-score {
+  margin-block-start: .375rem;
+}
+
+.amc-NCompare--scorecard .amc-NCompare-bar {
+  block-size: .5rem;
+  border-radius: .25rem;
+}
+
+.amc-NCompare--scorecard .amc-NCompare-bar--total {
+  block-size: .75rem;
+  margin-block-end: .375rem;
+}
+
+.amc-NCompare--scorecard .amc-NCompare-stepTrack {
+  block-size: .75rem;
+  border-radius: .375rem;
+  background: color-mix(in srgb, var(--amc-ncmp-ink) 10%, var(--amc-ncmp-bg));
+  overflow: hidden;
+}
+
+.amc-NCompare--scorecard .amc-NCompare-stepMark {
+  inset: 0;
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: color-mix(in srgb, var(--amc-ncmp-muted) 55%, var(--amc-ncmp-bg));
+  transform: scaleX(var(--amc-ncmp-x, 0));
+  transform-origin: 0 50%;
+}
+
+[dir="rtl"] .amc-NCompare--scorecard .amc-NCompare-stepMark {
+  transform-origin: 100% 50%;
+}
+
+.amc-NCompare--scorecard .amc-NCompare-step.is-leader .amc-NCompare-stepMark {
+  inline-size: auto;
+  block-size: auto;
+  margin: 0;
+  background: var(--amc-ncmp-accent);
+  box-shadow: none;
+}
+
+@supports (animation-timeline: view()) {
+  .amc-NCompare--scorecard .amc-NCompare-barFill,
+  .amc-NCompare--scorecard .amc-NCompare-stepMark {
+    animation: amc-ncmp-grow linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 90%;
+  }
+}
+
+@keyframes amc-ncmp-grow {
+  from { transform: scaleX(0); }
+}
+
+/* ---------- Side cards (depth): stacks of quotation pages ---------- */
+.amc-NCompare--sideCards .amc-NCompare-swipe {
+  display: grid;
+}
+
+@container (inline-size >= 40rem) {
+  .amc-NCompare--sideCards .amc-NCompare-nav {
+    display: none;
+  }
+  .amc-NCompare--sideCards .amc-NCompare-track {
+    display: grid;
+    grid-template-columns: repeat(var(--amc-ncmp-cols, 3), minmax(13.5rem, 1fr));
+    column-gap: 1.25rem;
+    row-gap: 0;
+    padding: 1rem .75rem 1.25rem;
+    scroll-snap-type: none;
+  }
+  .amc-NCompare--sideCards .amc-NCompare-card {
+    grid-row: span var(--amc-ncmp-rows, 8);
+    grid-template-rows: subgrid;
+  }
+  .amc-NCompare--sideCards .amc-NCompare-cardRows {
+    display: contents;
+  }
+}
+
+.amc-NCompare--sideCards .amc-NCompare-card {
+  position: relative;
+  box-shadow:
+    0 1px 2px var(--amc-ncmp-shade),
+    5px 5px 0 -1px var(--amc-ncmp-bg),
+    5px 5px 0 0 var(--amc-ncmp-rule);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+[dir="rtl"] .amc-NCompare--sideCards .amc-NCompare-card {
+  box-shadow:
+    0 1px 2px var(--amc-ncmp-shade),
+    -5px 5px 0 -1px var(--amc-ncmp-bg),
+    -5px 5px 0 0 var(--amc-ncmp-rule);
+}
+
+.amc-NCompare--sideCards .amc-NCompare-card.is-leader {
+  z-index: 1;
+  transform: translateY(-.5rem);
+  box-shadow:
+    inset 0 3px 0 var(--amc-ncmp-accent),
+    0 18px 30px -18px var(--amc-ncmp-shade),
+    5px 5px 0 -1px var(--amc-ncmp-bg),
+    5px 5px 0 0 var(--amc-ncmp-rule),
+    10px 10px 0 -1px var(--amc-ncmp-bg),
+    10px 10px 0 0 var(--amc-ncmp-rule);
+}
+
+[dir="rtl"] .amc-NCompare--sideCards .amc-NCompare-card.is-leader {
+  box-shadow:
+    inset 0 3px 0 var(--amc-ncmp-accent),
+    0 18px 30px -18px var(--amc-ncmp-shade),
+    -5px 5px 0 -1px var(--amc-ncmp-bg),
+    -5px 5px 0 0 var(--amc-ncmp-rule),
+    -10px 10px 0 -1px var(--amc-ncmp-bg),
+    -10px 10px 0 0 var(--amc-ncmp-rule);
+}
+
+.amc-NCompare--sideCards .amc-NCompare-card:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--amc-ncmp-accent) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.amc-NCompare--sideCards .amc-NCompare-cardRow {
+  grid-template-columns: 1fr;
+  gap: .125rem;
+}
+
+.amc-NCompare--sideCards .amc-NCompare-cardRow dt {
+  font-size: .75rem;
+}
+
+.amc-NCompare--sideCards .amc-NCompare-cardRow .amc-NCompare-critName {
+  display: inline;
+  color: var(--amc-ncmp-muted);
+}
+
+.amc-NCompare--sideCards .amc-NCompare-cardRow .amc-NCompare-weight {
+  margin-inline-start: .375rem;
+}
+
+.amc-NCompare--sideCards .amc-NCompare-cardRow dd {
+  font-size: .9375rem;
+}
+
+.amc-NCompare--sideCards .amc-NCompare-cardTotal .amc-NCompare-totalNum {
+  font-size: 1.5rem;
+}
+
+/* ---------- Diff view (smart) ---------- */
+.amc-NCompare--diffView .amc-NCompare-table th,
+.amc-NCompare--diffView .amc-NCompare-table td {
+  padding: .4375rem .75rem;
+  font-size: .8125rem;
+}
+
+.amc-NCompare--diffView .amc-NCompare-table td.is-base,
+.amc-NCompare--diffView .amc-NCompare-cell.is-base {
+  background: var(--amc-ncmp-band);
+}
+
+.amc-NCompare--diffView .amc-NCompare-table .amc-NCompare-cell.is-pinned,
+.amc-NCompare--diffView .amc-NCompare-table .amc-NCompare-colHead.is-pinned {
+  background: var(--amc-ncmp-band);
+}
+
+.amc-NCompare--diffView .amc-NCompare-cell.is-best .amc-NCompare-val {
+  color: inherit;
+  font-weight: 600;
+}
+
+.amc-NCompare-delta {
+  display: flex;
+  align-items: baseline;
+  gap: .375rem;
+  margin-block-start: .1875rem;
+  font-size: .75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NCompare-deltaSign {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border-radius: 3px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.amc-NCompare-delta--better { color: var(--amc-ncmp-good); }
+.amc-NCompare-delta--worse { color: var(--amc-ncmp-bad); }
+.amc-NCompare-delta--changed { color: color-mix(in srgb, var(--amc-ncmp-warn) 65%, var(--amc-ncmp-ink)); }
+.amc-NCompare-delta--same { color: var(--amc-ncmp-muted); font-weight: 400; }
+
+.amc-NCompare-delta--better .amc-NCompare-deltaSign { background: color-mix(in srgb, var(--amc-ncmp-good) 16%, transparent); }
+.amc-NCompare-delta--worse .amc-NCompare-deltaSign { background: color-mix(in srgb, var(--amc-ncmp-bad) 14%, transparent); }
+.amc-NCompare-delta--changed .amc-NCompare-deltaSign { background: color-mix(in srgb, var(--amc-ncmp-warn) 20%, transparent); }
+.amc-NCompare-delta--same .amc-NCompare-deltaSign { border: 1px solid var(--amc-ncmp-rule); }
+
+.amc-NCompare--diffView .amc-NCompare-table td.is-better {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--amc-ncmp-good) 60%, transparent);
+}
+
+.amc-NCompare--diffView .amc-NCompare-table td.is-worse {
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--amc-ncmp-bad) 60%, transparent);
+}
+
+[dir="rtl"] .amc-NCompare--diffView .amc-NCompare-table td.is-better {
+  box-shadow: inset -3px 0 0 color-mix(in srgb, var(--amc-ncmp-good) 60%, transparent);
+}
+
+[dir="rtl"] .amc-NCompare--diffView .amc-NCompare-table td.is-worse {
+  box-shadow: inset -3px 0 0 color-mix(in srgb, var(--amc-ncmp-bad) 60%, transparent);
+}
+
+/* ---------- Motion, contrast, print ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .amc-NCompare-cell.is-gliding,
+  .amc-NCompare-colHead.is-gliding,
+  .amc-NCompare-card.is-gliding,
+  .amc-NCompare-switch,
+  .amc-NCompare-switch::after,
+  .amc-NCompare-pin .amc-NCompare-icon,
+  .amc-NCompare--sideCards .amc-NCompare-card {
+    transition: none;
+  }
+  .amc-NCompare--scorecard .amc-NCompare-barFill,
+  .amc-NCompare--scorecard .amc-NCompare-stepMark {
+    animation: none;
+  }
+  .amc-NCompare-track {
+    scroll-behavior: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .amc-NCompare-barFill,
+  .amc-NCompare-stepMark {
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+  .amc-NCompare-table .amc-NCompare-colHead.is-leader,
+  .amc-NCompare-card.is-leader {
+    outline: 2px solid Highlight;
+  }
+}
+
+@media print {
+  .amc-NCompare-tools,
+  .amc-NCompare-pin,
+  .amc-NCompare-nav {
+    display: none;
+  }
+  .amc-NCompare-scroll {
+    display: block;
+    max-block-size: none;
+    overflow: visible;
+  }
+  .amc-NCompare--sideCards .amc-NCompare-track,
+  .amc-NCompare-track {
+    overflow: visible;
+  }
+  .amc-NCompare-table thead th,
+  .amc-NCompare-table .amc-NCompare-crit,
+  .amc-NCompare-table .amc-NCompare-corner,
+  .amc-NCompare-table .amc-NCompare-cell.is-pinned,
+  .amc-NCompare-table .amc-NCompare-colHead.is-pinned {
+    position: static;
+  }
+}

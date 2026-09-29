@@ -1,0 +1,20 @@
+<dl class="amc-NDocument-head">
+  {if ?ISSUER_NAME/}<div class="amc-NDocument-hf"><dt>From</dt><dd data-f="issuerName">#ISSUER_NAME#</dd></div>{endif/}
+  {if ?ISSUER_DETAILS/}<div class="amc-NDocument-hf amc-NDocument-hf--quiet"><dt>Issuer details</dt><dd data-f="issuerDetails">#ISSUER_DETAILS#</dd></div>{endif/}
+  {if ?ISSUER_VAT/}<div class="amc-NDocument-hf amc-NDocument-hf--quiet"><dt>Issuer VAT number</dt><dd data-f="issuerVat">#ISSUER_VAT#</dd></div>{endif/}
+  {if ?DOC_TYPE/}<div class="amc-NDocument-hf"><dt>Document</dt><dd data-f="docType">#DOC_TYPE#</dd></div>{endif/}
+  {if ?DOC_NUMBER/}<div class="amc-NDocument-hf"><dt>Number</dt><dd data-f="docNumber">#DOC_NUMBER#</dd></div>{endif/}
+  {if ?DOC_DATE/}<div class="amc-NDocument-hf"><dt>Date</dt><dd data-f="docDate">#DOC_DATE#</dd></div>{endif/}
+  {if ?DUE_DATE/}<div class="amc-NDocument-hf"><dt>Due</dt><dd data-f="dueDate">#DUE_DATE#</dd></div>{endif/}
+  {if ?PARTY_NAME/}<div class="amc-NDocument-hf"><dt>To</dt><dd data-f="partyName">#PARTY_NAME#</dd></div>{endif/}
+  {if ?PARTY_ADDRESS/}<div class="amc-NDocument-hf amc-NDocument-hf--quiet"><dt>Address</dt><dd data-f="partyAddress">#PARTY_ADDRESS#</dd></div>{endif/}
+  {if ?VAT_NUMBER/}<div class="amc-NDocument-hf amc-NDocument-hf--quiet"><dt>VAT number</dt><dd data-f="vatNumber">#VAT_NUMBER#</dd></div>{endif/}
+  {if ?CURRENCY/}<div class="amc-NDocument-hf"><dt>Currency</dt><dd data-f="currency">#CURRENCY#</dd></div>{endif/}
+  {if ?STATUS/}<div class="amc-NDocument-hf"><dt>Status</dt><dd data-f="status">#STATUS#</dd></div>{endif/}
+  {if ?NOTES/}<div class="amc-NDocument-hf amc-NDocument-hf--quiet"><dt>Notes</dt><dd data-f="notes">#NOTES#</dd></div>{endif/}
+  {if ?QR_IMAGE_URL/}<div class="amc-NDocument-hf" hidden><dt>QR</dt><dd data-f="qr" data-src="#QR_IMAGE_URL!ATTR#"></dd></div>{endif/}
+</dl>
+<div class="amc-NDocument-srcLine">
+  <span class="amc-NDocument-srcDesc" data-f="desc">#LINE_DESC#</span>
+  <span class="amc-NDocument-srcNums">{if ?QTY/}<span data-f="qty">#QTY#</span> x {endif/}{if ?UNIT_PRICE/}<span data-f="price">#UNIT_PRICE#</span>{endif/}{if ?DISCOUNT/} - <span data-f="discount">#DISCOUNT#</span>{endif/}{if ?TAX_RATE/} <span class="amc-NDocument-srcRate">VAT <span data-f="rate">#TAX_RATE#</span>%</span>{endif/}{if ?LINE_TOTAL/} = <span data-f="total">#LINE_TOTAL#</span>{endif/}</span>
+</div>

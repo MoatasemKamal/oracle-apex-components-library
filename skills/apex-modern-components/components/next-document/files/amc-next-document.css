@@ -1,0 +1,1439 @@
+/* APEX Modern Components - Next Document (Next Collection)
+ * Business documents built from line rows: tax invoice, quotation, purchase order,
+ * receipt, payslip. Colors come from --ut-* variables with literal fallbacks, so the
+ * sheet follows Vita, Vita Dark, Redwood and Theme Roller. The one bold element is the
+ * inked rubber stamp; everything else keeps to accounting conventions (tabular figures,
+ * a single rule above the subtotal and a double rule under the total). */
+
+.amc-NDocument {
+  --amc-ndoc-paper: var(--ut-component-background-color, #fff);
+  --amc-ndoc-desk: var(--ut-body-background-color, #f4f4f4);
+  --amc-ndoc-ink: var(--ut-component-text-default-color, #262626);
+  --amc-ndoc-pencil: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ndoc-rule: var(--ut-component-border-color, rgba(0, 0, 0, .12));
+  --amc-ndoc-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ndoc-ok: var(--ut-palette-success, #278701);
+  --amc-ndoc-bad: var(--ut-palette-danger, #cb1100);
+  --amc-ndoc-info: var(--ut-palette-info, #0076df);
+  --amc-ndoc-radius: var(--ut-component-border-radius, 4px);
+  --amc-ndoc-shade: var(--amc-document-shadow-color, rgba(0, 0, 0, .22));
+  --amc-ndoc-solid: var(--amc-document-mask-color, #000);
+  --amc-ndoc-ink-rule: color-mix(in srgb, var(--amc-ndoc-ink) 78%, transparent);
+  --amc-ndoc-wash: color-mix(in srgb, var(--amc-ndoc-accent) 7%, var(--amc-ndoc-paper));
+  container-type: inline-size;
+  color: var(--amc-ndoc-ink);
+  font-size: .875rem;
+  line-height: 1.45;
+}
+
+.amc-NDocument *,
+.amc-NDocument *::before,
+.amc-NDocument *::after {
+  box-sizing: border-box;
+}
+
+.amc-NDocument p,
+.amc-NDocument h3,
+.amc-NDocument h4,
+.amc-NDocument dl,
+.amc-NDocument dd,
+.amc-NDocument figure {
+  margin: 0;
+}
+
+.amc-NDocument-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Without JavaScript: a readable line list ---------- */
+.amc-NDocument-source {
+  display: grid;
+  gap: .5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NDocument-row + .amc-NDocument-row .amc-NDocument-head {
+  display: none;
+}
+
+.amc-NDocument-head {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(12rem, 100%), 1fr));
+  gap: .25rem 1rem;
+  margin-block-end: .75rem;
+}
+
+.amc-NDocument-head dt {
+  color: var(--amc-ndoc-pencil);
+  font-size: .75rem;
+}
+
+.amc-NDocument-head dd {
+  margin: 0;
+}
+
+.amc-NDocument-srcLine {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .25rem 1rem;
+  padding-block: .375rem;
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument-srcNums {
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+
+.amc-NDocument.is-built > .amc-NDocument-source {
+  display: none;
+}
+
+/* ---------- Shared document parts ---------- */
+.amc-NDocument-desk {
+  padding: clamp(.75rem, 4cqi, 2rem);
+  border-radius: var(--amc-ndoc-radius);
+  background: var(--amc-ndoc-desk);
+}
+
+.amc-NDocument-tools {
+  display: flex;
+  justify-content: flex-end;
+  max-inline-size: 52rem;
+  margin: 0 auto .5rem;
+}
+
+.amc-NDocument-print:focus-visible {
+  outline: 2px solid var(--amc-ndoc-accent);
+  outline-offset: 2px;
+}
+
+.amc-NDocument-sheet {
+  position: relative;
+  max-inline-size: 52rem;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 6cqi, 3.5rem);
+  background: var(--amc-ndoc-paper);
+  border-radius: 2px;
+  box-shadow: var(--ut-component-box-shadow, 0 1px 2px rgba(0, 0, 0, .08), 0 18px 36px -24px rgba(0, 0, 0, .4));
+  outline: 1px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument-num,
+.amc-NDocument-lines td,
+.amc-NDocument-number,
+.amc-NDocument-metaValue {
+  font-variant-numeric: tabular-nums lining-nums;
+  unicode-bidi: isolate;
+}
+
+.amc-NDocument-num {
+  unicode-bidi: plaintext;
+}
+
+.amc-NDocument-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem .75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+.amc-NDocument-title .amc-NDocument-ar {
+  font-weight: 600;
+}
+
+.amc-NDocument-number {
+  margin-block-start: .25rem;
+  color: var(--amc-ndoc-pencil);
+  font-size: .9375rem;
+}
+
+.amc-NDocument-issuerName {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.amc-NDocument-issuerLine,
+.amc-NDocument-partyLine,
+.amc-NDocument-vat {
+  color: var(--amc-ndoc-pencil);
+  font-size: .8125rem;
+}
+
+.amc-NDocument-vat {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 .375rem;
+}
+
+.amc-NDocument-vat .amc-NDocument-num {
+  color: var(--amc-ndoc-ink);
+}
+
+.amc-NDocument-partyLabel,
+.amc-NDocument-notesLabel,
+.amc-NDocument-wordsLabel {
+  margin-block-end: .25rem;
+  color: var(--amc-ndoc-pencil);
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.amc-NDocument-partyName {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.amc-NDocument-meta {
+  display: grid;
+  gap: .375rem;
+  align-content: start;
+}
+
+.amc-NDocument-metaRow {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr;
+  gap: 1rem;
+}
+
+.amc-NDocument-metaRow dt {
+  color: var(--amc-ndoc-pencil);
+  font-size: .8125rem;
+}
+
+.amc-NDocument-metaValue {
+  font-weight: 600;
+}
+
+.amc-NDocument-metaRow.is-overdue .amc-NDocument-metaValue {
+  color: var(--amc-ndoc-bad);
+}
+
+.amc-NDocument-hijri,
+.amc-NDocument-rel {
+  display: block;
+  color: var(--amc-ndoc-pencil);
+  font-size: .75rem;
+  font-weight: 400;
+}
+
+.amc-NDocument-rel.is-late {
+  color: var(--amc-ndoc-bad);
+  font-weight: 600;
+}
+
+/* Bilingual labels: English, then Arabic */
+.amc-NDocument-label {
+  unicode-bidi: isolate;
+}
+
+.amc-NDocument-label .amc-NDocument-ar {
+  display: block;
+  font-weight: 500;
+}
+
+.amc-NDocument-en {
+  unicode-bidi: isolate;
+}
+
+
+.amc-NDocument-ar {
+  unicode-bidi: isolate;
+}
+
+.amc-NDocument-rate {
+  margin-inline-start: .375rem;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+
+/* Line table */
+.amc-NDocument-linesWrap {
+  overflow-x: auto;
+  margin-block: 2rem 1.5rem;
+}
+
+.amc-NDocument-lines {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.amc-NDocument-lines th,
+.amc-NDocument-lines td {
+  padding: .625rem .5rem;
+  text-align: start;
+  vertical-align: top;
+}
+
+.amc-NDocument-lines thead th {
+  padding-block: 0 .5rem;
+  color: var(--amc-ndoc-pencil);
+  font-size: .75rem;
+  font-weight: 600;
+  vertical-align: bottom;
+  border-block-end: 1.5px solid var(--amc-ndoc-ink-rule);
+}
+
+.amc-NDocument-lines tbody th,
+.amc-NDocument-lines tbody td {
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+  font-weight: 400;
+}
+
+.amc-NDocument-lines .amc-NDocument-cNum {
+  text-align: end;
+  white-space: nowrap;
+}
+
+.amc-NDocument-lines .amc-NDocument-cNo {
+  inline-size: 2.5rem;
+  color: var(--amc-ndoc-pencil);
+}
+
+.amc-NDocument-lines tbody .amc-NDocument-cStrong {
+  font-weight: 600;
+}
+
+.amc-NDocument-desc {
+  display: block;
+}
+
+.amc-NDocument-detail {
+  display: block;
+  color: var(--amc-ndoc-pencil);
+  font-size: .8125rem;
+}
+
+/* Narrow regions: each line becomes a stacked block with labelled figures. */
+@container (inline-size < 30rem) {
+  .amc-NDocument-lines thead {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .amc-NDocument-lines,
+  .amc-NDocument-lines tbody {
+    display: block;
+  }
+  .amc-NDocument--bilingualTax .amc-NDocument-lines {
+    border: 0;
+  }
+  .amc-NDocument-lines tbody tr {
+    display: grid;
+    gap: .125rem;
+    padding-block: .625rem;
+    border-block-end: 1px solid var(--amc-ndoc-rule);
+  }
+  .amc-NDocument-lines tbody th,
+  .amc-NDocument-lines tbody td,
+  .amc-NDocument--bilingualTax .amc-NDocument-lines tbody th,
+  .amc-NDocument--bilingualTax .amc-NDocument-lines tbody td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0;
+    border: 0;
+  }
+  .amc-NDocument-lines tbody .amc-NDocument-cDesc,
+  .amc-NDocument--bilingualTax .amc-NDocument-lines tbody .amc-NDocument-cDesc {
+    display: block;
+    padding-block-end: .25rem;
+    font-weight: 600;
+  }
+  .amc-NDocument-lines tbody .amc-NDocument-cNo,
+  .amc-NDocument--bilingualTax .amc-NDocument-lines tbody .amc-NDocument-cNo {
+    display: none;
+  }
+  .amc-NDocument--bilingualTax .amc-NDocument-title .amc-NDocument-en {
+    padding: 0;
+    border: 0;
+  }
+  .amc-NDocument-lines tbody td:empty {
+    display: none;
+  }
+  .amc-NDocument-lines tbody td::before {
+    content: attr(data-label);
+    color: var(--amc-ndoc-pencil);
+    font-weight: 400;
+  }
+}
+
+/* Totals ledger */
+.amc-NDocument-totals {
+  display: grid;
+  min-inline-size: min(19rem, 100%);
+}
+
+.amc-NDocument-tRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding-block: .3rem;
+}
+
+.amc-NDocument-tRow dt {
+  color: var(--amc-ndoc-pencil);
+}
+
+.amc-NDocument-tRow dd {
+  text-align: end;
+  white-space: nowrap;
+}
+
+.amc-NDocument-tRow.is-sub {
+  border-block-start: 1px solid var(--amc-ndoc-ink-rule);
+  padding-block-start: .5rem;
+}
+
+.amc-NDocument-tRow.is-grand {
+  margin-block-start: .375rem;
+  padding-block: .5rem;
+  border-block-start: 1px solid var(--amc-ndoc-ink-rule);
+  border-block-end: 4px double var(--amc-ndoc-ink-rule);
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.amc-NDocument-tRow.is-grand dt {
+  color: var(--amc-ndoc-ink);
+}
+
+.amc-NDocument-words {
+  max-inline-size: 34rem;
+}
+
+.amc-NDocument-wordsText {
+  font-style: italic;
+}
+
+.amc-NDocument-wordsText.amc-NDocument-ar {
+  font-style: normal;
+  text-align: start;
+}
+
+.amc-NDocument-notes {
+  max-inline-size: 34rem;
+  margin-block-start: 1.25rem;
+  color: var(--amc-ndoc-pencil);
+  font-size: .8125rem;
+}
+
+/* Foot: words and notes / stamp / totals */
+.amc-NDocument-foot {
+  display: grid;
+  grid-template-columns: 1fr auto minmax(16rem, 21rem);
+  grid-template-areas: "start stamp end";
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.amc-NDocument-footStart { grid-area: start; }
+.amc-NDocument-footEnd { grid-area: end; }
+.amc-NDocument-foot > .amc-NDocument-stamp { grid-area: stamp; align-self: center; }
+
+@container (inline-size < 40rem) {
+  .amc-NDocument-foot {
+    grid-template-columns: 1fr;
+    grid-template-areas: "end" "stamp" "start";
+  }
+  .amc-NDocument-foot > .amc-NDocument-stamp {
+    justify-self: center;
+  }
+}
+
+/* ---------- The rubber stamp ---------- */
+.amc-NDocument-stamp {
+  --amc-ndoc-stamp: var(--amc-ndoc-ok);
+  --amc-ndoc-tilt: -8deg;
+  display: inline-grid;
+  justify-self: start;
+  padding: 3px;
+  border: 3px solid var(--amc-ndoc-stamp);
+  border-radius: .625rem;
+  color: var(--amc-ndoc-stamp);
+  opacity: .9;
+  transform: rotate(var(--amc-ndoc-tilt));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4.2 0 0 0 3.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4.2 0 0 0 3.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-size: 220px 220px;
+  mask-size: 220px 220px;
+  animation: amc-ndoc-thud .46s cubic-bezier(.2, .9, .3, 1.25) both;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.amc-NDocument-stampInk {
+  display: grid;
+  justify-items: center;
+  gap: .0625rem;
+  padding: .3rem 1rem .35rem;
+  border: 1.5px solid var(--amc-ndoc-stamp);
+  border-radius: .375rem;
+  line-height: 1.1;
+}
+
+.amc-NDocument-stampWord {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-inline-end: -.14em;
+}
+
+.amc-NDocument-stampAr {
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.amc-NDocument-stampSub {
+  padding-block-start: .1875rem;
+  border-block-start: 1px solid var(--amc-ndoc-stamp);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NDocument-stamp--overdue,
+.amc-NDocument-stamp--void { --amc-ndoc-stamp: var(--amc-ndoc-bad); }
+.amc-NDocument-stamp--draft { --amc-ndoc-stamp: var(--amc-ndoc-pencil); --amc-ndoc-tilt: -4deg; }
+.amc-NDocument-stamp--sent { --amc-ndoc-stamp: var(--amc-ndoc-info); }
+.amc-NDocument-stamp--approved { --amc-ndoc-stamp: var(--amc-ndoc-accent); }
+
+.amc-NDocument-stamp--draft .amc-NDocument-stampInk {
+  border-style: dashed;
+}
+
+.amc-NDocument-stamp--void .amc-NDocument-stampWord {
+  text-decoration: line-through 2px;
+}
+
+@keyframes amc-ndoc-thud {
+  0% { transform: rotate(var(--amc-ndoc-tilt)) scale(1.55); opacity: .4; }
+  62% { transform: rotate(var(--amc-ndoc-tilt)) scale(.97); opacity: .95; }
+  100% { transform: rotate(var(--amc-ndoc-tilt)) scale(1); opacity: .9; }
+}
+
+/* ---------- Classic invoice (bold): an A4 sheet with ledger rules ---------- */
+.amc-NDocument--classicInvoice .amc-NDocument-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+  padding-block-end: 1.5rem;
+  border-block-end: 1.5px solid var(--amc-ndoc-ink-rule);
+}
+
+.amc-NDocument--classicInvoice .amc-NDocument-titleBlock,
+.amc-NDocument--payslip .amc-NDocument-titleBlock {
+  text-align: end;
+}
+
+.amc-NDocument--classicInvoice .amc-NDocument-titleBlock .amc-NDocument-title,
+.amc-NDocument--payslip .amc-NDocument-titleBlock .amc-NDocument-title {
+  justify-content: flex-end;
+}
+
+.amc-NDocument--classicInvoice .amc-NDocument-parties,
+.amc-NDocument--payslip .amc-NDocument-parties {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, auto);
+  gap: 1.5rem 3rem;
+  margin-block-start: 1.5rem;
+}
+
+@container (inline-size < 34rem) {
+  .amc-NDocument--classicInvoice .amc-NDocument-top,
+  .amc-NDocument--classicInvoice .amc-NDocument-parties,
+  .amc-NDocument--payslip .amc-NDocument-top,
+  .amc-NDocument--payslip .amc-NDocument-parties {
+    grid-template-columns: 1fr;
+  }
+  .amc-NDocument--classicInvoice .amc-NDocument-titleBlock,
+  .amc-NDocument--payslip .amc-NDocument-titleBlock {
+    order: -1;
+    text-align: start;
+  }
+  .amc-NDocument--classicInvoice .amc-NDocument-titleBlock .amc-NDocument-title,
+  .amc-NDocument--payslip .amc-NDocument-titleBlock .amc-NDocument-title {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- Modern minimal (smart): meta rail beside the lines ---------- */
+.amc-NDocument--modernMinimal .amc-NDocument-desk {
+  padding: 0;
+  background: none;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-tools,
+.amc-NDocument--modernMinimal .amc-NDocument-sheet {
+  max-inline-size: 60rem;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-sheet {
+  display: grid;
+  gap: 1.75rem;
+  padding: clamp(1rem, 4cqi, 2rem);
+  border-radius: var(--amc-ndoc-radius);
+  box-shadow: none;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-rail {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-title {
+  font-size: 1rem;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-number {
+  margin: 0;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-dueBox {
+  padding-block: .25rem .75rem;
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-dueLabel {
+  color: var(--amc-ndoc-pencil);
+  font-size: .8125rem;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-dueAmount {
+  font-size: clamp(1.625rem, 3.6cqi, 2.125rem);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+  white-space: nowrap;
+}
+
+.amc-NDocument--modernMinimal[data-status="overdue"] .amc-NDocument-dueAmount {
+  color: var(--amc-ndoc-bad);
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-metaRow {
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-rail > .amc-NDocument-stamp {
+  justify-self: start;
+  margin-block: .25rem;
+  --amc-ndoc-tilt: -5deg;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-rail .amc-NDocument-stampWord {
+  font-size: 1.125rem;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-main {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  min-inline-size: 0;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  padding-block: .875rem;
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-item:first-child {
+  padding-block-start: 0;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-desc {
+  font-weight: 600;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-calc {
+  color: var(--amc-ndoc-pencil);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-itemAmount {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-totals {
+  justify-self: end;
+  inline-size: min(22rem, 100%);
+}
+
+.amc-NDocument--modernMinimal .amc-NDocument-tRow.is-grand {
+  border-block-end: 0;
+}
+
+@container (inline-size >= 44rem) {
+  .amc-NDocument--modernMinimal .amc-NDocument-sheet {
+    grid-template-columns: minmax(15rem, 18rem) 1fr;
+    gap: 2.5rem;
+  }
+  .amc-NDocument--modernMinimal .amc-NDocument-rail {
+    position: sticky;
+    inset-block-start: 1rem;
+    padding-inline-end: 2rem;
+    border-inline-end: 1px solid var(--amc-ndoc-rule);
+  }
+}
+
+/* ---------- Bilingual tax invoice (smart): English and Arabic side by side ---------- */
+.amc-NDocument--bilingualTax .amc-NDocument-label {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 .75rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-label .amc-NDocument-ar {
+  display: inline;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-top {
+  display: grid;
+  justify-items: center;
+  gap: .25rem;
+  padding-block-end: 1.25rem;
+  text-align: center;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-title {
+  justify-content: center;
+  column-gap: 1.25rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-title .amc-NDocument-en {
+  padding-inline-end: 1.25rem;
+  border-inline-end: 1.5px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-meta {
+  grid-template-columns: repeat(auto-fit, minmax(min(10rem, 100%), 1fr));
+  gap: 0;
+  border: 1px solid var(--amc-ndoc-rule);
+  border-radius: var(--amc-ndoc-radius);
+  overflow: hidden;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-metaRow {
+  grid-template-columns: 1fr;
+  gap: .125rem;
+  padding: .5rem .75rem;
+  box-shadow: 1px 0 0 var(--amc-ndoc-rule), 0 1px 0 var(--amc-ndoc-rule);
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-metaRow dt {
+  font-size: .75rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-parties {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: 1rem;
+  margin-block-start: 1rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-party {
+  border: 1px solid var(--amc-ndoc-rule);
+  border-radius: var(--amc-ndoc-radius);
+  padding: 0 .875rem .75rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-partyLabel {
+  margin: 0 -.875rem .625rem;
+  padding: .4rem .875rem;
+  background: var(--amc-ndoc-wash);
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+  color: var(--amc-ndoc-ink);
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-party .amc-NDocument-issuerName {
+  font-size: 1rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-vat {
+  margin-block-start: .375rem;
+  justify-content: space-between;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-vat .amc-NDocument-label {
+  flex: 1 1 auto;
+  order: 0;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-linesWrap {
+  margin-block: 1.25rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-lines {
+  border: 1px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-lines th,
+.amc-NDocument--bilingualTax .amc-NDocument-lines td {
+  border: 1px solid var(--amc-ndoc-rule);
+  padding: .45rem .4rem;
+  font-size: .8125rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-lines thead th {
+  padding-block: .4rem;
+  background: var(--amc-ndoc-wash);
+  color: var(--amc-ndoc-ink);
+  font-size: .6875rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-lines thead .amc-NDocument-label {
+  display: grid;
+  justify-content: stretch;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-lines thead .amc-NDocument-cNum .amc-NDocument-label {
+  justify-items: end;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-totals {
+  border: 1px solid var(--amc-ndoc-rule);
+  border-radius: var(--amc-ndoc-radius);
+  overflow: hidden;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-tRow {
+  padding: .4rem .75rem;
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-tRow.is-sub {
+  border-block-start: 0;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-tRow.is-grand {
+  margin: 0;
+  border: 0;
+  background: var(--amc-ndoc-wash);
+  font-size: 1rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-tRow dt .amc-NDocument-label {
+  gap: 0 .5rem;
+}
+
+
+.amc-NDocument--bilingualTax .amc-NDocument-foot {
+  grid-template-columns: auto 1fr minmax(17rem, 25rem);
+  grid-template-areas: "qr stamp end" "words words words" "notes notes notes";
+  gap: 1rem 1.5rem;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-footStart {
+  display: contents;
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-foot .amc-NDocument-qr { grid-area: qr; }
+.amc-NDocument--bilingualTax .amc-NDocument-foot .amc-NDocument-words { grid-area: words; max-inline-size: none; }
+.amc-NDocument--bilingualTax .amc-NDocument-foot .amc-NDocument-notes { grid-area: notes; margin: 0; max-inline-size: none; }
+
+.amc-NDocument--bilingualTax .amc-NDocument-foot > .amc-NDocument-stamp {
+  justify-self: center;
+}
+
+@container (inline-size < 40rem) {
+  .amc-NDocument--bilingualTax .amc-NDocument-foot {
+    grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+    grid-template-areas: "end end" "qr stamp" "words words" "notes notes";
+  }
+}
+
+@container (inline-size < 26rem) {
+  .amc-NDocument--bilingualTax .amc-NDocument-foot {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "end" "qr" "stamp" "words" "notes";
+  }
+  .amc-NDocument--bilingualTax .amc-NDocument-foot .amc-NDocument-qr {
+    justify-self: center;
+  }
+}
+
+.amc-NDocument--bilingualTax .amc-NDocument-lines .amc-NDocument-cDesc {
+  min-inline-size: 9rem;
+}
+
+
+.amc-NDocument--bilingualTax .amc-NDocument-wordsLabel .amc-NDocument-ar {
+  display: inline;
+}
+
+.amc-NDocument-qr {
+  padding: .375rem;
+  border: 1px solid var(--amc-ndoc-rule);
+  border-radius: var(--amc-ndoc-radius);
+  background: var(--amc-document-qr-background, #fff);
+  inline-size: max-content;
+}
+
+.amc-NDocument-qrImg {
+  display: block;
+  inline-size: 7rem;
+  block-size: 7rem;
+  image-rendering: pixelated;
+}
+
+/* ---------- Thermal receipt (depth): a torn paper strip lifted off the page ---------- */
+.amc-NDocument--thermalReceipt .amc-NDocument-tools {
+  max-inline-size: 21rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-paper {
+  max-inline-size: 21rem;
+  margin-inline: auto;
+  padding-block: .5rem 1.25rem;
+  filter: drop-shadow(0 1px 1px var(--amc-ndoc-shade)) drop-shadow(0 14px 12px color-mix(in srgb, var(--amc-ndoc-shade) 60%, transparent));
+  transform: perspective(60rem) rotateX(3deg);
+  transform-origin: 50% 0;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-sheet {
+  padding: 1.75rem 1.25rem 2rem;
+  font-size: .8125rem;
+  box-shadow: none;
+  outline: 0;
+  border-radius: 0;
+  -webkit-mask:
+    conic-gradient(from 135deg at top, transparent, var(--amc-ndoc-solid) 1deg 89deg, transparent 90deg) top / .75rem .4rem repeat-x,
+    linear-gradient(var(--amc-ndoc-solid) 0 0) center / 100% calc(100% - .78rem) no-repeat,
+    conic-gradient(from -45deg at bottom, transparent, var(--amc-ndoc-solid) 1deg 89deg, transparent 90deg) bottom / .75rem .4rem repeat-x;
+  mask:
+    conic-gradient(from 135deg at top, transparent, var(--amc-ndoc-solid) 1deg 89deg, transparent 90deg) top / .75rem .4rem repeat-x,
+    linear-gradient(var(--amc-ndoc-solid) 0 0) center / 100% calc(100% - .78rem) no-repeat,
+    conic-gradient(from -45deg at bottom, transparent, var(--amc-ndoc-solid) 1deg 89deg, transparent 90deg) bottom / .75rem .4rem repeat-x;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-top {
+  display: grid;
+  justify-items: center;
+  gap: .5rem;
+  padding-block-end: 1rem;
+  border-block-end: 1.5px dashed var(--amc-ndoc-ink-rule);
+  text-align: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-issuer {
+  display: grid;
+  justify-items: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-issuerName {
+  align-items: center;
+  font-size: 1.0625rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-vat {
+  justify-content: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-title {
+  justify-content: center;
+  font-size: 1rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-meta {
+  inline-size: 100%;
+  gap: .125rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-metaRow {
+  grid-template-columns: 1fr auto;
+  font-size: .75rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-metaRow dt {
+  text-align: start;
+  font-size: .75rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-metaValue {
+  font-weight: 500;
+  text-align: end;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 .5em;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-tRow.is-grand .amc-NDocument-label,
+.amc-NDocument--thermalReceipt .amc-NDocument-words .amc-NDocument-label,
+.amc-NDocument--thermalReceipt .amc-NDocument-notes .amc-NDocument-label {
+  justify-content: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-label .amc-NDocument-ar {
+  display: inline;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-items {
+  display: grid;
+  gap: .625rem;
+  margin: 0;
+  padding: 1rem 0;
+  list-style: none;
+  border-block-end: 1.5px dashed var(--amc-ndoc-ink-rule);
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-lead {
+  display: flex;
+  align-items: baseline;
+  gap: .375rem;
+  color: var(--amc-ndoc-pencil);
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-lead .amc-NDocument-num {
+  color: var(--amc-ndoc-ink);
+  font-weight: 600;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-calc {
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+
+.amc-NDocument-dots {
+  flex: 1;
+  min-inline-size: 1rem;
+  border-block-end: 1.5px dotted var(--amc-ndoc-rule);
+  transform: translateY(-.25em);
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-totals {
+  padding-block: .75rem;
+  min-inline-size: 0;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-tRow {
+  padding-block: .125rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-tRow.is-sub {
+  border: 0;
+  padding-block-start: .125rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-tRow.is-grand {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 0;
+  margin-block-start: .75rem;
+  padding-block: .75rem .625rem;
+  border-block-start: 1.5px dashed var(--amc-ndoc-ink-rule);
+  border-block-end: 1.5px dashed var(--amc-ndoc-ink-rule);
+  text-align: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-tRow.is-grand dt {
+  font-size: .8125rem;
+  font-weight: 600;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-tRow.is-grand dd {
+  font-size: 1.625rem;
+  letter-spacing: -.01em;
+  text-align: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-words {
+  padding-block-start: .5rem;
+  text-align: center;
+  font-size: .75rem;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-wordsText.amc-NDocument-ar {
+  text-align: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-end {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding-block-start: 1.25rem;
+  text-align: center;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-end > .amc-NDocument-stamp {
+  justify-self: center;
+  --amc-ndoc-tilt: -6deg;
+}
+
+.amc-NDocument--thermalReceipt .amc-NDocument-notes {
+  margin: 0;
+}
+
+.amc-NDocument-thanks {
+  font-weight: 600;
+}
+
+/* ---------- Payslip (motion): two ledgers and a pay split that settles ---------- */
+.amc-NDocument--payslip .amc-NDocument-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.amc-NDocument--payslip .amc-NDocument-title {
+  font-size: 1.375rem;
+}
+
+.amc-NDocument--payslip .amc-NDocument-parties {
+  padding: 1rem 1.25rem;
+  border-radius: var(--amc-ndoc-radius);
+  background: var(--amc-ndoc-wash);
+}
+
+.amc-NDocument-payCols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  gap: 1.5rem 2.5rem;
+  margin-block: 1.75rem;
+}
+
+.amc-NDocument-payHead {
+  padding-block-end: .5rem;
+  border-block-end: 1.5px solid var(--amc-ndoc-ink-rule);
+  font-size: .8125rem;
+  font-weight: 700;
+}
+
+.amc-NDocument-payTable {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.amc-NDocument-payTable th,
+.amc-NDocument-payTable td {
+  padding: .5rem 0;
+  border-block-end: 1px solid var(--amc-ndoc-rule);
+  text-align: start;
+  font-weight: 400;
+}
+
+.amc-NDocument-payTable td {
+  text-align: end;
+  white-space: nowrap;
+  padding-inline-start: 1rem;
+}
+
+.amc-NDocument-payTable .amc-NDocument-payTotal th,
+.amc-NDocument-payTable .amc-NDocument-payTotal td {
+  border-block-end: 0;
+  font-weight: 700;
+}
+
+.amc-NDocument-paySide--deductions .amc-NDocument-payTable tr:not(.amc-NDocument-payTotal) td::before {
+  content: "\2212\2009";
+  color: var(--amc-ndoc-pencil);
+}
+
+.amc-NDocument-netBox {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "net stamp" "split stamp";
+  gap: .75rem 2rem;
+  align-items: center;
+  padding-block: 1.25rem;
+  border-block: 1.5px solid var(--amc-ndoc-ink-rule);
+}
+
+.amc-NDocument-net {
+  grid-area: net;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .25rem 1rem;
+  font-weight: 700;
+}
+
+.amc-NDocument-net .amc-NDocument-label {
+  font-size: 1rem;
+}
+
+.amc-NDocument-netAmount {
+  font-size: clamp(1.5rem, 5cqi, 2rem);
+  letter-spacing: -.02em;
+}
+
+.amc-NDocument-split {
+  grid-area: split;
+  display: grid;
+  gap: .375rem;
+}
+
+.amc-NDocument-splitBar {
+  position: relative;
+  block-size: .625rem;
+  overflow: hidden;
+  border-radius: .3125rem;
+  background: color-mix(in srgb, var(--amc-ndoc-bad) 32%, var(--amc-ndoc-paper));
+}
+
+.amc-NDocument-splitNet {
+  position: absolute;
+  inset: 0;
+  background: var(--amc-ndoc-accent);
+  transform: scaleX(var(--amc-ndoc-net, 1));
+  transform-origin: 0 50%;
+  animation: amc-ndoc-settle 1.1s cubic-bezier(.25, .8, .25, 1) .25s both;
+}
+
+[dir="rtl"] .amc-NDocument-splitNet {
+  transform-origin: 100% 50%;
+}
+
+@keyframes amc-ndoc-settle {
+  from { transform: scaleX(1); }
+}
+
+.amc-NDocument-splitKey {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .25rem 1rem;
+  color: var(--amc-ndoc-pencil);
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.amc-NDocument-key::before {
+  content: "";
+  display: inline-block;
+  inline-size: .625rem;
+  block-size: .625rem;
+  margin-inline-end: .375rem;
+  border-radius: 2px;
+  background: var(--amc-ndoc-accent);
+  vertical-align: -.05em;
+}
+
+.amc-NDocument-key--ded::before {
+  background: color-mix(in srgb, var(--amc-ndoc-bad) 32%, var(--amc-ndoc-paper));
+}
+
+.amc-NDocument-netBox > .amc-NDocument-stamp {
+  grid-area: stamp;
+}
+
+.amc-NDocument--payslip .amc-NDocument-words,
+.amc-NDocument--payslip .amc-NDocument-notes {
+  margin-block-start: 1.25rem;
+}
+
+@container (inline-size < 34rem) {
+  .amc-NDocument--payslip .amc-NDocument-top {
+    grid-template-columns: 1fr;
+  }
+  .amc-NDocument-netBox {
+    grid-template-columns: 1fr;
+    grid-template-areas: "net" "split" "stamp";
+  }
+  .amc-NDocument-netBox > .amc-NDocument-stamp {
+    justify-self: center;
+  }
+}
+
+/* ---------- Motion, contrast ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .amc-NDocument-stamp,
+  .amc-NDocument-splitNet {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .amc-NDocument-stamp,
+  .amc-NDocument-stampInk {
+    border-color: CanvasText;
+    color: CanvasText;
+  }
+  .amc-NDocument-splitNet {
+    background: Highlight;
+  }
+  .amc-NDocument-tRow.is-grand {
+    border-color: CanvasText;
+  }
+}
+
+/* ---------- Print: a clean A4 page (80 mm for the receipt) ---------- */
+@page amc-ndoc-a4 {
+  size: A4;
+  margin: 14mm 14mm 16mm;
+}
+
+@page amc-ndoc-receipt {
+  size: 80mm 297mm;
+  margin: 4mm 3mm;
+}
+
+@media print {
+  .amc-NDocument {
+    --amc-ndoc-paper: var(--amc-document-print-paper, #fff);
+    --amc-ndoc-ink: var(--amc-document-print-ink, #000);
+    --amc-ndoc-pencil: var(--amc-document-print-muted, #555);
+    --amc-ndoc-rule: var(--amc-document-print-rule, #c8c8c8);
+    --amc-ndoc-wash: var(--amc-document-print-wash, #f2f2f2);
+    page: amc-ndoc-a4;
+    font-size: 9.5pt;
+    color: var(--amc-ndoc-ink);
+  }
+  .amc-NDocument--thermalReceipt {
+    page: amc-ndoc-receipt;
+    font-size: 8.5pt;
+  }
+  .amc-NDocument-desk,
+  .amc-NDocument--modernMinimal .amc-NDocument-desk {
+    padding: 0;
+    background: none;
+  }
+  .amc-NDocument-tools {
+    display: none;
+  }
+  .amc-NDocument-paper,
+  .amc-NDocument--thermalReceipt .amc-NDocument-paper {
+    filter: none;
+    transform: none;
+    padding: 0;
+    max-inline-size: none;
+  }
+  .amc-NDocument-sheet,
+  .amc-NDocument--modernMinimal .amc-NDocument-sheet {
+    max-inline-size: none;
+    padding: 0;
+    box-shadow: none;
+    outline: 0;
+    background: none;
+  }
+  .amc-NDocument--thermalReceipt .amc-NDocument-sheet {
+    -webkit-mask: none;
+    mask: none;
+    padding: 0;
+  }
+  .amc-NDocument--modernMinimal .amc-NDocument-sheet {
+    grid-template-columns: 14rem 1fr;
+    gap: 2rem;
+  }
+  .amc-NDocument--modernMinimal .amc-NDocument-dueAmount {
+    font-size: 1.375rem;
+  }
+  .amc-NDocument--modernMinimal .amc-NDocument-rail {
+    position: static;
+    padding-inline-end: 1.5rem;
+    border-inline-end: 1px solid var(--amc-ndoc-rule);
+  }
+  .amc-NDocument-words,
+  .amc-NDocument-notes,
+  .amc-NDocument-party,
+  .amc-NDocument-meta {
+    break-inside: avoid;
+  }
+  .amc-NDocument-label {
+    break-after: avoid;
+  }
+  .amc-NDocument-stamp,
+  .amc-NDocument-splitNet {
+    animation: none;
+  }
+  .amc-NDocument-linesWrap {
+    overflow: visible;
+    margin-block: 1.25rem 1rem;
+  }
+  .amc-NDocument-lines th,
+  .amc-NDocument-lines td,
+  .amc-NDocument--bilingualTax .amc-NDocument-lines th,
+  .amc-NDocument--bilingualTax .amc-NDocument-lines td {
+    padding-block: .35rem;
+  }
+  .amc-NDocument-title {
+    font-size: 1.5rem;
+  }
+  .amc-NDocument--bilingualTax .amc-NDocument-top {
+    padding-block-end: .75rem;
+  }
+  .amc-NDocument-lines tr,
+  .amc-NDocument-payTable tr,
+  .amc-NDocument-item,
+  .amc-NDocument-totals,
+  .amc-NDocument-netBox {
+    break-inside: avoid;
+  }
+  .amc-NDocument-lines thead {
+    display: table-header-group;
+  }
+  .amc-NDocument-wash,
+  .amc-NDocument-parties,
+  .amc-NDocument-splitBar,
+  .amc-NDocument-splitNet,
+  .amc-NDocument-key::before,
+  .amc-NDocument-lines thead th,
+  .amc-NDocument-tRow.is-grand,
+  .amc-NDocument-partyLabel {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Print document button: only this document is printed. */
+  .amc-NDocument-printing :not(:has(.amc-NDocument.is-printing)):not(.amc-NDocument.is-printing):not(.amc-NDocument.is-printing *) {
+    display: none;
+  }
+  .amc-NDocument-printing :has(.amc-NDocument.is-printing),
+  .amc-NDocument-printing .amc-NDocument.is-printing {
+    display: block;
+    float: none;
+    position: static;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: none;
+    max-inline-size: none;
+    inline-size: auto;
+    overflow: visible;
+    transform: none;
+  }
+}

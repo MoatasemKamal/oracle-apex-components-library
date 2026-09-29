@@ -1,0 +1,320 @@
+{
+  "name": "Next Document",
+  "apexlangName": "nextDocument",
+  "staticId": "AMC_NEXT_DOCUMENT",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["document", "invoice", "tax invoice", "zatca", "e-invoice", "vat", "quotation", "quote", "purchase order", "po", "payslip", "salary slip", "receipt", "thermal receipt", "bill", "amount in words", "tafqit", "rubber stamp", "paid stamp", "print", "a4", "bilingual", "arabic", "rtl", "next collection"],
+  "description": "Next Collection family of five business documents built from line rows: tax invoices, quotations, purchase orders, receipts and payslips. The runtime computes subtotal, discount, VAT per rate (EN 16931 / ZATCA rule: VAT on the taxable total of each rate), total and optional amount in words in English and Arabic, formats money with Intl, and marks the status with a rubber-stamp element. Bold: Classic Invoice (an A4 sheet with ledger rules, a double rule under the total and an inked stamp). Smart: Modern Minimal (meta rail beside the lines when wide, total first when narrow, due date counted in days) and Bilingual Tax Invoice (English and Arabic labels side by side in the ZATCA layout, Hijri date, QR image). Depth: Thermal Receipt (a torn paper strip lifted off the page). Motion: Payslip (earnings and deductions side by side and a pay split bar that settles once). Every style has an A4 print stylesheet (the receipt prints on 80 mm paper). The pattern follows real Gulf tax invoices and payslips rather than a SaaS card.",
+  "helpText": "One query row per line. Map Line Description plus Quantity and Unit Price, or Line Total. Header fields (Document Type, Number, dates, Party, VAT Number, Currency, Status, Notes, Issuer) are read from the first row that has them, so repeat them on every row with a join or map them to page items. Numbers are plain numbers with a period as the decimal separator. Dates are ISO text, TO_CHAR(col, 'YYYY-MM-DD'). Status paid, overdue, draft, void, sent or approved prints a stamp. Without JavaScript the lines render as a readable list.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-document.css", "files/amc-next-document.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-document.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-document.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "classicInvoice",
+      "sequence": 10,
+      "helpText": "Document design; the direction is given after the name. classicInvoice - bold: an A4 sheet on the page with ledger rules, a single rule above the subtotal, a double rule under the total and an inked rubber stamp for the status. modernMinimal - smart: no table grid; when the region is wide the dates and party sit in a rail beside the lines, when narrow the total moves to the top; the due date is counted in days. bilingualTax - smart: ZATCA-style tax invoice with every label in English and Arabic, seller and buyer VAT numbers, per-line VAT amount and total including VAT, Hijri date and an optional QR image. thermalReceipt - depth: an 80 mm paper strip with torn edges lifted off the page, dotted leaders and a centred total; prints on 80 mm paper. payslip - motion: earnings and deductions side by side, gross, deductions and net pay, and a pay split bar that settles once; VAT is ignored. Under reduced motion the stamp and the bar appear without movement.",
+      "entries": [
+        { "name": "classicInvoice", "display": "Classic Invoice - bold", "return": "classicInvoice", "sequence": 10 },
+        { "name": "modernMinimal", "display": "Modern Minimal - smart", "return": "modernMinimal", "sequence": 20 },
+        { "name": "bilingualTax", "display": "Bilingual Tax Invoice - smart", "return": "bilingualTax", "sequence": 30 },
+        { "name": "thermalReceipt", "display": "Thermal Receipt - depth", "return": "thermalReceipt", "sequence": 40 },
+        { "name": "payslip", "display": "Payslip - motion", "return": "payslip", "sequence": 50 }
+      ]
+    },
+    {
+      "staticId": "DOC_TYPE",
+      "apexlangName": "docType",
+      "attribute": 2,
+      "name": "Document Type",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Document title in sentence case, for example Tax invoice, Quotation, Purchase order, Receipt or Payslip for September 2026. For a bilingual title give both parts separated by |, for example Tax invoice|فاتورة ضريبية; otherwise the common types get their Arabic title automatically in bilingual layouts."
+    },
+    {
+      "staticId": "DOC_NUMBER",
+      "apexlangName": "docNumber",
+      "attribute": 3,
+      "name": "Document Number",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Document reference, for example INV-2026-0418, QT-1187 or PO-40912. Repeated on every row; the first non-empty value is used."
+    },
+    {
+      "staticId": "DOC_DATE",
+      "apexlangName": "docDate",
+      "attribute": 4,
+      "name": "Document Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Issue date as ISO text, TO_CHAR(invoice_date, 'YYYY-MM-DD'). It is formatted with Intl in the page language; any other text is shown as it is."
+    },
+    {
+      "staticId": "DUE_DATE",
+      "apexlangName": "dueDate",
+      "attribute": 5,
+      "name": "Due Date",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional due or valid-until date in the same ISO form. Modern Minimal also says how many days remain or have passed. For a payslip use it for the pay date."
+    },
+    {
+      "staticId": "PARTY_NAME",
+      "apexlangName": "partyName",
+      "attribute": 6,
+      "name": "Party Name",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "The customer, supplier or employee the document is addressed to, for example Al Noor Medical Supplies Co."
+    },
+    {
+      "staticId": "PARTY_ADDRESS",
+      "apexlangName": "partyAddress",
+      "attribute": 7,
+      "name": "Party Address",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Address lines separated by |, for example King Fahd Road|Al Olaya, Riyadh 12211. For a payslip use it for employee number, job title and department."
+    },
+    {
+      "staticId": "VAT_NUMBER",
+      "apexlangName": "vatNumber",
+      "attribute": 8,
+      "name": "Party VAT Number",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "The party's VAT registration number, for example 310122393500003. Shown under the party name; required on a standard tax invoice."
+    },
+    {
+      "staticId": "CURRENCY",
+      "apexlangName": "currency",
+      "attribute": 9,
+      "name": "Currency",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "ISO 4217 code such as SAR, AED, KWD or USD. It sets the number of decimals (KWD, BHD and OMR use three) and the words in the amount in words. Defaults to SAR."
+    },
+    {
+      "staticId": "STATUS",
+      "apexlangName": "status",
+      "attribute": 10,
+      "name": "Status",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "One of paid, overdue, draft, void, sent or approved (any case). It is printed as a rubber stamp and announced to screen readers. Any other value, or empty, shows no stamp."
+    },
+    {
+      "staticId": "NOTES",
+      "apexlangName": "notes",
+      "attribute": 11,
+      "name": "Notes",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Optional terms or payment instructions, lines separated by |, for example Payment within 30 days|IBAN SA03 8000 0000 6080 1016 7519."
+    },
+    {
+      "staticId": "LINE_DESC",
+      "apexlangName": "lineDesc",
+      "attribute": 12,
+      "name": "Line Description",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 120,
+      "helpText": "What the line is for, for example Nitrile examination gloves, box of 100, or Housing allowance. A second line of detail may follow a |."
+    },
+    {
+      "staticId": "QTY",
+      "apexlangName": "qty",
+      "attribute": 13,
+      "name": "Quantity",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 130,
+      "helpText": "Quantity as a plain number, for example 40 or 2.5. Defaults to 1 when Unit Price is given."
+    },
+    {
+      "staticId": "UNIT_PRICE",
+      "apexlangName": "unitPrice",
+      "attribute": 14,
+      "name": "Unit Price",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 140,
+      "helpText": "Price per unit before VAT as a plain number with a period as the decimal separator, for example 18.50. For payslip deductions return a negative amount."
+    },
+    {
+      "staticId": "DISCOUNT",
+      "apexlangName": "discount",
+      "attribute": 15,
+      "name": "Discount",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 150,
+      "helpText": "Optional line discount: an amount such as 120 or a percentage of Quantity x Unit Price such as 10%."
+    },
+    {
+      "staticId": "TAX_RATE",
+      "apexlangName": "taxRate",
+      "attribute": 16,
+      "name": "VAT Rate",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 160,
+      "helpText": "Optional VAT percentage for the line, for example 15 or 0 for zero-rated and exempt lines. Empty uses Default VAT Rate. Lines with different rates get one VAT row per rate."
+    },
+    {
+      "staticId": "LINE_TOTAL",
+      "apexlangName": "lineTotal",
+      "attribute": 17,
+      "name": "Line Total",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 170,
+      "helpText": "Optional net line amount before VAT. When given it wins over Quantity x Unit Price - Discount (a console warning names lines that differ by more than one minor unit). Use it for lines that have no quantity, such as payslip earnings and deductions."
+    },
+    {
+      "staticId": "ISSUER_NAME",
+      "apexlangName": "issuerName",
+      "attribute": 18,
+      "name": "Issuer Name",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 180,
+      "helpText": "Your company as it appears on the document, for example Tamkeen Trading Est. For a bilingual name use English|Arabic."
+    },
+    {
+      "staticId": "ISSUER_DETAILS",
+      "apexlangName": "issuerDetails",
+      "attribute": 19,
+      "name": "Issuer Details",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 190,
+      "helpText": "Issuer address and registration lines separated by |, for example Prince Sultan Street, Jeddah 23615|CR 4030285741."
+    },
+    {
+      "staticId": "ISSUER_VAT",
+      "apexlangName": "issuerVat",
+      "attribute": 20,
+      "name": "Issuer VAT Number",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 200,
+      "helpText": "Your VAT registration number, for example 300475812600003. Required on tax invoices."
+    },
+    {
+      "staticId": "DEFAULT_TAX_RATE",
+      "apexlangName": "defaultTaxRate",
+      "attribute": 21,
+      "name": "Default VAT Rate",
+      "type": "number",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "15",
+      "sequence": 210,
+      "helpText": "VAT percentage used for lines without a VAT Rate, for example 15 for Saudi Arabia or 5 for the UAE. Use 0 for documents without VAT. The payslip style always ignores VAT."
+    },
+    {
+      "staticId": "AMOUNT_IN_WORDS",
+      "apexlangName": "amountInWords",
+      "attribute": 22,
+      "name": "Amount in Words",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "english",
+      "sequence": 220,
+      "helpText": "Writes the total (net pay on a payslip) in words under the totals. english, arabic (tafqit, for example فقط ... ريال سعودي لا غير), both, or none. Currency names are known for SAR, AED, QAR, KWD, BHD, OMR, USD and EUR; other codes are written after the number.",
+      "entries": [
+        { "name": "english", "display": "English", "return": "english", "sequence": 10 },
+        { "name": "arabic", "display": "Arabic", "return": "arabic", "sequence": 20 },
+        { "name": "both", "display": "English and Arabic", "return": "both", "sequence": 30 },
+        { "name": "none", "display": "None", "return": "none", "sequence": 40 }
+      ]
+    },
+    {
+      "staticId": "BILINGUAL",
+      "apexlangName": "bilingual",
+      "attribute": 23,
+      "name": "Bilingual Labels",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 230,
+      "helpText": "Y adds the Arabic label beside every English label, as Gulf tax invoices require. The Bilingual Tax Invoice style is always bilingual. The layout mirrors itself on RTL pages."
+    },
+    {
+      "staticId": "QR_IMAGE_URL",
+      "apexlangName": "qrImageUrl",
+      "attribute": 24,
+      "name": "QR Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 240,
+      "helpText": "Optional image of the e-invoice QR code, for example a data URI built in SQL from APEX_BARCODE.GET_QRCODE_PNG, or a URL to a stored image. Shown by Bilingual Tax Invoice and Thermal Receipt. The value must be produced by the application, never taken from user input."
+    },
+    {
+      "staticId": "SHOW_PRINT",
+      "apexlangName": "showPrint",
+      "attribute": 25,
+      "name": "Show Print Button",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "Y",
+      "sequence": 250,
+      "helpText": "Y adds a Print document button that prints only this document on A4 (80 mm for the receipt). Printing the whole page with the browser also uses the clean print layout."
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "name": "Next Compare",
+  "apexlangName": "nextCompare",
+  "staticId": "AMC_NEXT_COMPARE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["compare", "comparison", "matrix", "vendor comparison", "quotation comparison", "bid evaluation", "tender", "rfq", "procurement", "weighted scoring", "scorecard", "ranking", "spec sheet", "feature comparison", "plans", "candidates", "diff", "baseline", "pin column", "sticky header", "swipe", "rtl", "next collection"],
+  "description": "Next Collection family of five comparison matrices built from one row per option and criterion, for vendor quotations, tender bid evaluation, plans and candidates. The runtime pivots the rows into options by criteria, derives price-type scores from the lowest or highest value (lowest / value x maximum, the usual tender formula), computes weighted totals and ranks, marks the best value in each criterion and the overall leader, lets users hide identical rows and pin an option, and keeps the header row and criterion column sticky. Narrow regions switch to one option at a time with swipe and previous / next buttons. Smart: Tender Table (grouped criteria with weights, standings strip, weighted total and rank rows) and Diff View (every option against a pinned baseline with signed differences, identical rows hidden). Bold: Spec Sheet (heavy datasheet rules, inverted group bands, yes / no as marks with text). Motion: Scorecard (score bars that grow as they scroll in and columns that glide when an option is pinned). Depth: Side Cards (each option as a stack of quotation pages, the leader lifted forward). Pattern follows procurement evaluation sheets used in Gulf government and corporate tenders.",
+  "helpText": "One query row per option and criterion. Map Option, Criterion and Value. Score (0 to Score Maximum) and Weight turn on weighted totals and ranks; Better = lower or higher lets numeric values such as price or lead time be scored and compared without a Score. Criterion Group adds group bands such as Technical and Financial. Highlight flags a single cell. Without JavaScript the rows render as a readable list grouped by option.",
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-compare.css", "files/amc-next-compare.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-compare.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-compare.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "tenderTable",
+      "sequence": 10,
+      "helpText": "Comparison design; the direction is given after the name. tenderTable - smart: procurement evaluation sheet with criterion groups, a weight column, a standings strip that shows the gap between bidders, weighted total and rank rows and the leading column marked. specSheet - bold: datasheet with heavy rules, large option names, inverted group bands and yes / no values shown as marks with text. scorecard - motion: every cell carries a score bar; bars grow as they scroll into view and columns glide to their new place when an option is pinned. sideCards - depth: each option is a stack of quotation pages with aligned rows, the leader lifted forward. diffView - smart: every option compared with a baseline (the pinned option, or the first one) with signed differences marked better or worse; identical rows start hidden. Every style switches to one option at a time with swipe when the region is narrower than about 640 px. Under reduced motion nothing moves.",
+      "entries": [
+        { "name": "tenderTable", "display": "Tender Table - smart", "return": "tenderTable", "sequence": 10 },
+        { "name": "specSheet", "display": "Spec Sheet - bold", "return": "specSheet", "sequence": 20 },
+        { "name": "scorecard", "display": "Scorecard - motion", "return": "scorecard", "sequence": 30 },
+        { "name": "sideCards", "display": "Side Cards - depth", "return": "sideCards", "sequence": 40 },
+        { "name": "diffView", "display": "Diff View - smart", "return": "diffView", "sequence": 50 }
+      ]
+    },
+    {
+      "staticId": "OPTION",
+      "apexlangName": "option",
+      "attribute": 2,
+      "name": "Option",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "The thing being compared, for example a vendor, plan or candidate name such as Najd Industrial Supply. Options appear in the order of their first row; order the query by option display order, then criterion order."
+    },
+    {
+      "staticId": "CRITERION",
+      "apexlangName": "criterion",
+      "attribute": 3,
+      "name": "Criterion",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "What is compared, for example Total price incl. VAT, Delivery lead time or Warranty. Criteria appear in the order of their first row."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 4,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "The value as users should read it, for example SAR 412,500, 45 days, Yes or 24 months. When Better is set, the first number in the text is used for comparing, so keep one number per value."
+    },
+    {
+      "staticId": "SCORE",
+      "apexlangName": "score",
+      "attribute": 5,
+      "name": "Score",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional evaluation score from 0 to Score Maximum as a plain number, for example 8.5. The highest score in a criterion is marked best. Criteria without scores but with Better set are scored automatically: lowest value / value x maximum for lower, value / highest value x maximum for higher."
+    },
+    {
+      "staticId": "WEIGHT",
+      "apexlangName": "weight",
+      "attribute": 6,
+      "name": "Weight",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional weight of the criterion, for example 30 for 30%. The first non-empty value per criterion is used, so it may be repeated on every row. Weights do not need to add up to 100; totals are normalised to a 0 to 100 scale. When no criterion has a weight, scored criteria count equally."
+    },
+    {
+      "staticId": "NOTE",
+      "apexlangName": "note",
+      "attribute": 7,
+      "name": "Note",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 70,
+      "helpText": "Optional short remark shown under the value, for example Excludes installation or Confirmed by site visit."
+    },
+    {
+      "staticId": "HIGHLIGHT",
+      "apexlangName": "highlight",
+      "attribute": 8,
+      "name": "Highlight",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Optional flag for one cell: success, warning, danger or Y (information). For example danger for a bid that fails a mandatory requirement. It is shown with a mark and screen-reader text, never by color alone."
+    },
+    {
+      "staticId": "CRITERION_GROUP",
+      "apexlangName": "criterionGroup",
+      "attribute": 9,
+      "name": "Criterion Group",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "Optional group of the criterion, for example Technical or Financial. Groups appear as bands in the order of their first row, with the sum of their weights."
+    },
+    {
+      "staticId": "BETTER",
+      "apexlangName": "better",
+      "attribute": 10,
+      "name": "Better",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "Optional direction per criterion: lower (price, lead time, deductible) or higher (capacity, warranty, area). It marks the best value, sets better / worse in Diff View and scores unscored criteria. The first non-empty value per criterion is used."
+    },
+    {
+      "staticId": "OPTION_DETAIL",
+      "apexlangName": "optionDetail",
+      "attribute": 11,
+      "name": "Option Detail",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Optional second line under the option name, for example the city, a quotation reference such as Q-7781 or a plan price. The first non-empty value per option is used."
+    },
+    {
+      "staticId": "SCORE_MAX",
+      "apexlangName": "scoreMax",
+      "attribute": 12,
+      "name": "Score Maximum",
+      "type": "number",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "10",
+      "sequence": 120,
+      "helpText": "The top of the Score scale, for example 10, 5 or 100. Bars and automatic scores use it."
+    },
+    {
+      "staticId": "HIDE_IDENTICAL",
+      "apexlangName": "hideIdentical",
+      "attribute": 13,
+      "name": "Hide Identical Rows",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 130,
+      "helpText": "Y starts with rows hidden where every option has the same value. Users can switch it with the Hide identical rows button. Diff View always starts with them hidden."
+    },
+    {
+      "staticId": "PINNED_OPTION",
+      "apexlangName": "pinnedOption",
+      "attribute": 14,
+      "name": "Pinned Option",
+      "type": "text",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 140,
+      "helpText": "Optional option name to pin first when the region loads, for example the current supplier, or a page item reference such as &P20_CURRENT_VENDOR. Diff View uses it as the baseline. Users can pin another option."
+    },
+    {
+      "staticId": "SHOW_TOTALS",
+      "apexlangName": "showTotals",
+      "attribute": 15,
+      "name": "Show Totals",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "Y",
+      "sequence": 150,
+      "helpText": "Y shows the weighted total, rank and leading option when at least one criterion is scored (by Score or Better). N shows only the values and the best value per criterion."
+    }
+  ]
+}
