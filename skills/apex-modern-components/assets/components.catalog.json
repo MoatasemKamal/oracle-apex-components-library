@@ -2806,6 +2806,188 @@
       }
     },
     {
+      "slug": "next-calendar",
+      "name": "Next Calendar",
+      "apexlangName": "nextCalendar",
+      "staticId": "AMC_NEXT_CALENDAR",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextCalendar",
+      "apexlangItemType": null,
+      "keywords": [
+        "calendar",
+        "events",
+        "schedule",
+        "agenda",
+        "month",
+        "week",
+        "planner",
+        "heatmap",
+        "year",
+        "resource",
+        "lanes",
+        "gantt",
+        "countdown",
+        "flip calendar",
+        "desk calendar",
+        "poster",
+        "kiosk",
+        "mini calendar",
+        "hijri",
+        "islamic",
+        "umm al-qura",
+        "rtl",
+        "next collection"
+      ],
+      "description": "Next Collection family of ten calendars that read events from a report, covering views the native APEX Calendar does not offer. Smart: Month (chips, +N more popover, today ring; turns into a dot calendar with a day agenda when narrow), Agenda (sticky day headers, relative labels, durations) and Timeline Lanes (a resource schedule with one lane per Category and day, week or month zoom). Depth: Week (hour grid, overlapping events side by side, live now line) and Flip Date (a desk tear-off calendar that flips in 3D). Bold: Heatmap (a year of activity by count or Value), Poster Day (a giant date poster for home pages and kiosks) and Circular Year (the year as a ring of month arcs). Motion: Countdown (live tiles to the next events) and Mini Dots (a sidebar mini calendar with a sliding selection and a revealed day). Month and weekday names, numbers and durations come from Intl in the page language, with the Gregorian or Islamic Umm al-Qura calendar, and every view follows the theme's Universal Theme variables, dark styles and RTL.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "month",
+            "agenda",
+            "week",
+            "heatmap",
+            "timelineLanes",
+            "posterDay",
+            "flipDate",
+            "countdown",
+            "circularYear",
+            "miniDots"
+          ]
+        },
+        {
+          "apexlangName": "startDate",
+          "staticId": "START_DATE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "endDate",
+          "staticId": "END_DATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "description",
+          "staticId": "DESCRIPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "category",
+          "staticId": "CATEGORY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "state",
+          "staticId": "STATE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "allDay",
+          "staticId": "ALL_DAY",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "value",
+          "staticId": "VALUE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "dateLabel",
+          "staticId": "DATE_LABEL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "firstDay",
+          "staticId": "FIRST_DAY",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "monday",
+            "sunday",
+            "saturday"
+          ]
+        },
+        {
+          "apexlangName": "initialDate",
+          "staticId": "INITIAL_DATE",
+          "type": "text",
+          "required": false
+        },
+        {
+          "apexlangName": "calendarSystem",
+          "staticId": "CALENDAR_SYSTEM",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "gregory",
+            "islamicUmalqura"
+          ]
+        },
+        {
+          "apexlangName": "dayStart",
+          "staticId": "DAY_START",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "apexlangName": "dayEnd",
+          "staticId": "DAY_END",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "apexlangName": "laneZoom",
+          "staticId": "LANE_ZOOM",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "day",
+            "week",
+            "month"
+          ]
+        },
+        {
+          "apexlangName": "upcomingCount",
+          "staticId": "UPCOMING_COUNT",
+          "type": "integer",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-calendar/README.md",
+        "example": "components/next-calendar/examples",
+        "apexlang": "components/next-calendar/dist/apexlang/shared-components/plugins/next-calendar",
+        "legacySql": "components/next-calendar/dist/legacy/amc_next_calendar.sql"
+      }
+    },
+    {
       "slug": "next-card",
       "name": "Next Card",
       "apexlangName": "nextCard",
@@ -2953,6 +3135,173 @@
         "example": "components/next-card/examples",
         "apexlang": "components/next-card/dist/apexlang/shared-components/plugins/next-card",
         "legacySql": "components/next-card/dist/legacy/amc_next_card.sql"
+      }
+    },
+    {
+      "slug": "next-gallery",
+      "name": "Next Gallery",
+      "apexlangName": "nextGallery",
+      "staticId": "AMC_NEXT_GALLERY",
+      "pluginType": "templateComponent",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "availableAs": [
+        "report"
+      ],
+      "apexlangRegionType": "plugin/nextGallery",
+      "apexlangItemType": null,
+      "keywords": [
+        "gallery",
+        "image gallery",
+        "photo gallery",
+        "photos",
+        "images",
+        "pictures",
+        "lightbox",
+        "masonry",
+        "justified",
+        "filmstrip",
+        "carousel",
+        "slideshow",
+        "coverflow",
+        "polaroid",
+        "mosaic",
+        "bento",
+        "hover zoom",
+        "before after",
+        "image compare",
+        "comparison slider",
+        "swipe",
+        "card stack",
+        "contact sheet",
+        "light table",
+        "loupe",
+        "blob",
+        "next collection"
+      ],
+      "description": "Next Collection gallery family: a report-driven image gallery (image, thumbnail, title, caption, alt text, link, pixel size, group) in 10 current-generation styles across the four Next directions: smart layout (column masonry with row order, Flickr-style justified rows computed from each aspect ratio, a bento mosaic that promotes wide and tall images, a before and after comparison slider), motion (a filmstrip stage with crossfade, a tight grid whose images zoom and drift under the pointer), depth (a 3D coverflow with reflections, a swipeable card deck) and bold aesthetics (scattered polaroid prints, a lit light table with film sprockets and a loupe). Every style opens the same accessible lightbox: a modal dialog with keyboard, swipe, pinch, wheel and double-click zoom with panning, captions, a counter and a thumbnail rail. Follows the justified-row pattern of Flickr and Google Photos and the lens pattern of Magic UI, rebuilt as plain CSS on Universal Theme variables with one small script.",
+      "settings": [
+        {
+          "apexlangName": "style",
+          "staticId": "STYLE",
+          "type": "selectList",
+          "required": true,
+          "values": [
+            "masonry",
+            "justified",
+            "filmstrip",
+            "coverflow",
+            "polaroid",
+            "mosaic",
+            "hoverZoom",
+            "compare",
+            "stackSwipe",
+            "lightTable"
+          ]
+        },
+        {
+          "apexlangName": "imageUrl",
+          "staticId": "IMAGE_URL",
+          "type": "sessionStateValue",
+          "required": true
+        },
+        {
+          "apexlangName": "thumbnailUrl",
+          "staticId": "THUMB_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "title",
+          "staticId": "TITLE",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "caption",
+          "staticId": "CAPTION",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "altText",
+          "staticId": "ALT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "linkUrl",
+          "staticId": "LINK_URL",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "width",
+          "staticId": "WIDTH",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "height",
+          "staticId": "HEIGHT",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "group",
+          "staticId": "GROUP",
+          "type": "sessionStateValue",
+          "required": false
+        },
+        {
+          "apexlangName": "columns",
+          "staticId": "COLUMNS",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "auto",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six"
+          ]
+        },
+        {
+          "apexlangName": "rowHeight",
+          "staticId": "ROW_HEIGHT",
+          "type": "selectList",
+          "required": false,
+          "values": [
+            "small",
+            "medium",
+            "large"
+          ]
+        },
+        {
+          "apexlangName": "lightbox",
+          "staticId": "LIGHTBOX",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "autoplay",
+          "staticId": "AUTOPLAY",
+          "type": "yesNo",
+          "required": false
+        },
+        {
+          "apexlangName": "galleryLabel",
+          "staticId": "LABEL",
+          "type": "text",
+          "required": false
+        }
+      ],
+      "paths": {
+        "readme": "components/next-gallery/README.md",
+        "example": "components/next-gallery/examples",
+        "apexlang": "components/next-gallery/dist/apexlang/shared-components/plugins/next-gallery",
+        "legacySql": "components/next-gallery/dist/legacy/amc_next_gallery.sql"
       }
     },
     {

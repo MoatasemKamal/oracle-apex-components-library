@@ -39,6 +39,37 @@ Theme components**, packaged as an agent **skill** that works together with Orac
 Each folder has a generated README (settings, install) and `examples/` with APEXlang
 usage.
 
+## Living Templates (12 templates that understand content and users)
+
+Beyond appearance: these native templates **read the content they wrap or adapt to the person
+using the app**. Region templates add totals, charts and data freshness to any Classic Report,
+or give users focus mode, zoom and their own dashboard layout; list templates learn favourites,
+surface the right link at the right moment, remember the user's journey, track onboarding and
+preview pages before navigating. Everything renders as a plain template without JavaScript,
+learned state stays in the browser, and each template offers a reset.
+
+**Living region templates**
+
+| Template | Direction | What it does |
+|---|---|---|
+| [Arrange Board](skills/apex-modern-components/theme-templates/arrange-board) | living | Experimental: plain regions become a personal dashboard; every user can reorder, resize and collapse the regions that share one parent with keyboard-friendly header buttons, and the layout is remembered per page, with no dashboard plug-in and no server-side personalisation tables. |
+| [Dual View](skills/apex-modern-components/theme-templates/dual-view) | living | A region frame that turns the report it wraps into a chart of the same rows: a Table / Chart switch in the header draws a to-scale SVG bar chart or donut from the table itself, with no chart region, query or configuration, and keeps the table as the accessible source. |
+| [Focus Stage](skills/apex-modern-components/theme-templates/focus-stage) | living | A region that can take the stage: its Focus button (or focusing a field inside it) dims and blurs the rest of the page behind a scrim and lifts the region with a sticky header, so a long form or a dense report gets the user's full attention without leaving the page. |
+| [Freshness Frame](skills/apex-modern-components/theme-templates/freshness-frame) | living | A region frame that knows how old its data is: the header says Updated just now or 3 min ago, a fuse along the top edge burns down and loses its glow as the data ages, and past a threshold the frame turns to a hatched warning Out of date state with a Refresh button, which no design system frame does. |
+| [Insight Frame](skills/apex-modern-components/theme-templates/insight-frame) | living | A region frame that reads the report it wraps and states what the numbers say: an insight strip under the title with the total or average, row count, largest and smallest row and a share-of-total bar, plus a thin share bar under every row; no design system frame understands its content this way. |
+| [Zoom Dial](skills/apex-modern-components/theme-templates/zoom-dial) | living | A region with its own size dial: each user picks Compact, Cozy, Comfortable or Large for this one region and the native content inside is re-laid out at that size and remembered, instead of one fixed density for everybody or a browser zoom that scales the whole page. |
+
+**Living list templates**
+
+| Template | Direction | What it does |
+|---|---|---|
+| [Constellation Map](skills/apex-modern-components/theme-templates/constellation-map) | living | A spatial map of the whole app: every list entry is a star, entries with the same group form a constellation joined by lines, the current page glows and, optionally, the pages you use most shine brighter, on a sky you can pan and zoom. The layout is stable across visits, so people remember where things are instead of reading menus. |
+| [Frecency Launcher](skills/apex-modern-components/theme-templates/frecency-launcher) | living | A launcher that learns: it counts which destinations this user opens and how recently, and at the next page load lifts the top three into ranked Your most used tiles with a heat meter and the last time they were opened, while the rest keep the developer's order in a compact grid. |
+| [Journey Trail](skills/apex-modern-components/theme-templates/journey-trail) | living | A destinations list that remembers the user's path through the app in this tab and shows Continue where you left off as a trail of the recent pages with relative times, the page to resume highlighted and the current page marked, while destinations already visited get a quiet check. |
+| [Moment Launcher](skills/apex-modern-components/theme-templates/moment-launcher) | living | A launcher that knows what time it is in the business: entries tagged with moments such as monthend, quarterend or friday+afternoon rise into a Right now panel when the user's local date and time match, with the reason and the working days left, and every other entry says when it comes up next. |
+| [Peek Nav](skills/apex-modern-components/theme-templates/peek-nav) | living | Navigation that lets people see before they go: resting the mouse on an entry, or pressing its eye button, floats a card with a live, scaled-down, non-interactive view of the target page, so users stop opening pages just to check whether they are the right ones. |
+| [Quest List](skills/apex-modern-components/theme-templates/quest-list) | living | An onboarding checklist that notices what the new user has already done: each task completes itself once its page has been opened, or by a tick, with a progress ring, points, the next task highlighted and a short celebration when everything is done. |
+
 ## Creative Templates (31 native List and Region templates)
 
 Native **List Templates** and **Region Templates** for Universal Theme, not plug-ins: pick them in
@@ -89,7 +120,7 @@ See [`references/theme-templates.md`](skills/apex-modern-components/references/t
 | [Terminal Window](skills/apex-modern-components/theme-templates/terminal-window) | bold | A desktop terminal window: an inverse-colored bezel and title bar with three window dots and the title centered in monospace after a prompt, around a readable content pane. |
 | [Ticket Stub](skills/apex-modern-components/theme-templates/ticket-stub) | smart | The region is a ticket: a tinted stub with icon, title, buttons and a barcode is torn off from the body by a perforated line with punched notches, and the stub moves from the side to the top when the region gets narrow. |
 
-## Next Collection (114 new-generation designs)
+## Next Collection (134 new-generation designs)
 
 Eleven template components with designs in four directions: **motion** (border beams,
 spotlights, shimmer, meteors, tickers, marquees), **3D depth** (pointer tilt, flip cards,
@@ -111,8 +142,10 @@ Universal Theme variables, works in RTL and stops all motion under reduced motio
 | [Next Pricing](skills/apex-modern-components/components/next-pricing) | 10 | partial, report | beam featured, spotlight, tilt 3D, flip annual, neo-brutal, clay, holo premium, aurora dark, expand features, comparison adaptive |
 | [Next Alert](skills/apex-modern-components/components/next-alert) | 10 | partial, report | beam toast, pulse critical, ticker bar, stacked toasts, lift glass, neo-brutal, clay, hazard stripe, expand details, adaptive bar |
 | [Next Hero](skills/apex-modern-components/components/next-hero) | 10 | partial | aurora, meteors, grid spotlight, retro grid, parallax layers, kinetic type, neo-brutal, mesh grain, split morph, scroll reveal |
+| [Next Gallery](skills/apex-modern-components/components/next-gallery) | 10 | report | justified rows, masonry, filmstrip, 3D coverflow, polaroid, mosaic, hover zoom, before/after compare, swipe stack, light table with loupe; shared lightbox with zoom, swipe and keyboard |
+| [Next Calendar](skills/apex-modern-components/components/next-calendar) | 10 | report | month, agenda, week time grid, year heatmap, resource lanes, poster day, flip calendar, countdown, circular year, mini dots; Intl names, Hijri calendar, RTL, keyboard |
 | [Next Bento](skills/apex-modern-components/components/next-bento) | 10 | report | spotlight glow, beam feature, tilt tiles, layered glass, neo-brutal, clay, aurora mosaic, grid pattern, magazine, expanding tiles |
-| **Total** | **114** | | |
+| **Total** | **134** | | |
 
 Techniques adapted from [Magic UI](https://magicui.design) (MIT) are credited in each
 component's `source` and file headers.

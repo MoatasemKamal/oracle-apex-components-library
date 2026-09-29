@@ -1,0 +1,228 @@
+{
+  "name": "Next Gallery",
+  "apexlangName": "nextGallery",
+  "staticId": "AMC_NEXT_GALLERY",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["gallery", "image gallery", "photo gallery", "photos", "images", "pictures", "lightbox", "masonry", "justified", "filmstrip", "carousel", "slideshow", "coverflow", "polaroid", "mosaic", "bento", "hover zoom", "before after", "image compare", "comparison slider", "swipe", "card stack", "contact sheet", "light table", "loupe", "blob", "next collection"],
+  "description": "Next Collection gallery family: a report-driven image gallery (image, thumbnail, title, caption, alt text, link, pixel size, group) in 10 current-generation styles across the four Next directions: smart layout (column masonry with row order, Flickr-style justified rows computed from each aspect ratio, a bento mosaic that promotes wide and tall images, a before and after comparison slider), motion (a filmstrip stage with crossfade, a tight grid whose images zoom and drift under the pointer), depth (a 3D coverflow with reflections, a swipeable card deck) and bold aesthetics (scattered polaroid prints, a lit light table with film sprockets and a loupe). Every style opens the same accessible lightbox: a modal dialog with keyboard, swipe, pinch, wheel and double-click zoom with panning, captions, a counter and a thumbnail rail. Follows the justified-row pattern of Flickr and Google Photos and the lens pattern of Magic UI, rebuilt as plain CSS on Universal Theme variables with one small script.",
+  "helpText": "Each query row is one image. Map Image URL (required), ideally Width and Height in pixels so the layout is stable before images load, and Alt Text for screen readers; Thumbnail URL, Title, Caption, Link URL and Group are optional. For BLOB columns select apex_util.get_blob_file_src with the name of a page item of type File Browse or Display Image, or build a REST or Object Storage URL. Pick a Style and, where it applies, Columns, Row Height and Autoplay. The Compare style pairs rows by Group: the first row of a group is the before image and the second row the after image. With Lightbox on, clicking an image opens the full-size viewer; with it off, the image link opens Link URL, or the image itself. Without JavaScript every image stays a normal link inside a figure. Colors follow the active Universal Theme style, including dark styles, Theme Roller changes and right-to-left pages.",
+  "source": { "url": "https://magicui.design/docs/components/lens", "author": "Magic UI", "license": "MIT" },
+  "templateComponent": {
+    "availableAs": ["report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-gallery.css", "files/amc-next-gallery.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-gallery.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-gallery.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "masonry",
+      "sequence": 10,
+      "helpText": "Gallery design, tagged with its Next direction. Masonry, smart: columns of images at their natural proportions, read row by row. Justified, smart: rows like Flickr or Google Photos, every row filled edge to edge by scaling images from their proportions, recomputed when the region resizes. Filmstrip, motion: one large stage with a crossfade and a scrollable thumbnail strip below it; arrow keys move through the strip. Coverflow, depth: a 3D carousel with reflections and the current image facing forward; use the arrow buttons, the arrow keys or swipe. Polaroid, bold: scattered instant prints with handwritten captions that straighten when hovered or focused. Mosaic, smart: a bento mosaic where the first image and wide or tall images take larger cells, recomposed by the width of the region. Hover Zoom, motion: a tight grid whose image zooms and drifts under the pointer while the caption slides up. Compare, smart: a before and after slider for each pair of rows with the same Group, with a handle you drag or move with the arrow keys. Stack Swipe, depth: a deck of photo cards you swipe or step through; nothing is removed, cards go to the back of the deck. Light Table, bold: a contact sheet of film frames with sprocket holes and frame numbers on a lit table, with a loupe that magnifies under the pointer. Every style opens the shared lightbox when Lightbox is on. Motion stops when the user prefers reduced motion; the static design stays complete.",
+      "entries": [
+        { "name": "masonry", "display": "Masonry - smart", "return": "masonry", "sequence": 10 },
+        { "name": "justified", "display": "Justified Rows - smart", "return": "justified", "sequence": 20 },
+        { "name": "filmstrip", "display": "Filmstrip - motion", "return": "filmstrip", "sequence": 30 },
+        { "name": "coverflow", "display": "Coverflow - depth", "return": "coverflow", "sequence": 40 },
+        { "name": "polaroid", "display": "Polaroid - bold", "return": "polaroid", "sequence": 50 },
+        { "name": "mosaic", "display": "Mosaic - smart", "return": "mosaic", "sequence": 60 },
+        { "name": "hoverZoom", "display": "Hover Zoom - motion", "return": "hoverZoom", "sequence": 70 },
+        { "name": "compare", "display": "Compare Before and After - smart", "return": "compare", "sequence": 80 },
+        { "name": "stackSwipe", "display": "Stack Swipe - depth", "return": "stackSwipe", "sequence": 90 },
+        { "name": "lightTable", "display": "Light Table - bold", "return": "lightTable", "sequence": 100 }
+      ]
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 2,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "sequence": 20,
+      "helpText": "URL of the full-size image, shown in the lightbox and used in the gallery when Thumbnail URL is empty. For a BLOB column select apex_util.get_blob_file_src with p_item_name set to a File Browse or Display Image page item and p_v1 set to the primary key, or return a REST or Object Storage URL. Must be a developer-controlled URL."
+    },
+    {
+      "staticId": "THUMB_URL",
+      "apexlangName": "thumbnailUrl",
+      "attribute": 3,
+      "name": "Thumbnail URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 30,
+      "helpText": "Optional smaller version of the image for the gallery itself, for example a 600 pixel wide rendition. The lightbox always loads Image URL. Must be a developer-controlled URL."
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 4,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Short title shown in the caption and the lightbox, for example Loading Dock B. Also the text alternative when Alt Text is empty."
+    },
+    {
+      "staticId": "CAPTION",
+      "apexlangName": "caption",
+      "attribute": 5,
+      "name": "Caption",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "One sentence under the title, for example the place, date or photographer. Format dates in SQL with the application NLS settings."
+    },
+    {
+      "staticId": "ALT",
+      "apexlangName": "altText",
+      "attribute": 6,
+      "name": "Alt Text",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Text alternative that describes the image for screen readers, for example Forklift stacking pallets in aisle 4. When empty, Title is used."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 7,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional detail page for the image, for example apex_page.get_url with p_page => 20. With Lightbox on, the lightbox shows an Open details link; with Lightbox off, the image opens this URL. Must be a developer-controlled URL."
+    },
+    {
+      "staticId": "WIDTH",
+      "apexlangName": "width",
+      "attribute": 8,
+      "name": "Width",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 80,
+      "helpText": "Width of the image in pixels, a whole number such as 1600. With Height it gives the proportions that Masonry, Justified, Mosaic and Coverflow lay out before the image loads. When empty the proportions are read from the loaded image."
+    },
+    {
+      "staticId": "HEIGHT",
+      "apexlangName": "height",
+      "attribute": 9,
+      "name": "Height",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Height of the image in pixels, a whole number such as 1067. See Width."
+    },
+    {
+      "staticId": "GROUP",
+      "apexlangName": "group",
+      "attribute": 10,
+      "name": "Group",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 100,
+      "helpText": "Compare style: rows with the same Group value form a before and after pair, the first row in query order being before. Order the query by group and then by a before-after sequence. Rows without a partner render as single images. Other styles ignore it."
+    },
+    {
+      "staticId": "COLUMNS",
+      "apexlangName": "columns",
+      "attribute": 11,
+      "name": "Columns",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "auto",
+      "sequence": 110,
+      "helpText": "Number of columns for Masonry, Polaroid, Mosaic, Hover Zoom and Light Table. Auto fits as many as the width of the region allows. A fixed number is reduced automatically when the region is narrow, down to one column on a phone.",
+      "entries": [
+        { "name": "auto", "display": "Auto", "return": "auto", "sequence": 10 },
+        { "name": "two", "display": "2", "return": "two", "sequence": 20 },
+        { "name": "three", "display": "3", "return": "three", "sequence": 30 },
+        { "name": "four", "display": "4", "return": "four", "sequence": 40 },
+        { "name": "five", "display": "5", "return": "five", "sequence": 50 },
+        { "name": "six", "display": "6", "return": "six", "sequence": 60 }
+      ]
+    },
+    {
+      "staticId": "ROW_HEIGHT",
+      "apexlangName": "rowHeight",
+      "attribute": 12,
+      "name": "Row Height",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "medium",
+      "sequence": 120,
+      "helpText": "Size of the images. Justified uses it as the target row height, about 10rem, 14rem or 18rem; rows then grow or shrink slightly to fill the width. Filmstrip, Coverflow and Stack Swipe use it for the stage height.",
+      "entries": [
+        { "name": "small", "display": "Small", "return": "small", "sequence": 10 },
+        { "name": "medium", "display": "Medium", "return": "medium", "sequence": 20 },
+        { "name": "large", "display": "Large", "return": "large", "sequence": 30 }
+      ]
+    },
+    {
+      "staticId": "LIGHTBOX",
+      "apexlangName": "lightbox",
+      "attribute": 13,
+      "name": "Lightbox",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "Y",
+      "sequence": 130,
+      "helpText": "Yes opens the full-size image in an accessible viewer: arrow keys, swipe and a thumbnail rail move between images, the mouse wheel, pinch, double-click or the Zoom button zoom in, dragging pans, Escape closes and returns focus to the image. No makes each image a plain link to Link URL, or to the image itself."
+    },
+    {
+      "staticId": "AUTOPLAY",
+      "apexlangName": "autoplay",
+      "attribute": 14,
+      "name": "Autoplay",
+      "type": "yesNo",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "default": "N",
+      "sequence": 140,
+      "helpText": "Filmstrip, Coverflow and Stack Swipe: Yes advances to the next image every six seconds. A Pause button is shown, and playback also pauses while the pointer or keyboard focus is on the gallery. Autoplay never starts when the user prefers reduced motion.",
+      "dependsOn": {
+        "attribute": "STYLE",
+        "condition": "inList",
+        "list": ["filmstrip", "coverflow", "stackSwipe"]
+      }
+    },
+    {
+      "staticId": "LABEL",
+      "apexlangName": "galleryLabel",
+      "attribute": 15,
+      "name": "Gallery Label",
+      "type": "text",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 150,
+      "helpText": "Accessible name of the gallery and its lightbox, for example Warehouse Photos. Use it when the region header is hidden; screen readers announce it when entering the list."
+    }
+  ]
+}

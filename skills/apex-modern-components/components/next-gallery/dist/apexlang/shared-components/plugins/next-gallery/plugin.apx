@@ -1,0 +1,536 @@
+plugin nextGallery (
+    name: Next Gallery
+    staticId: AMC_NEXT_GALLERY
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            report
+        ]
+        partial:
+            ```html
+            <figure class="amc-NGallery-figure">
+              <a class="amc-NGallery-link" href="{if LIGHTBOX/}#IMAGE_URL#{elseif ?LINK_URL/}#LINK_URL#{else/}#IMAGE_URL#{endif/}" data-full="#IMAGE_URL#"{if ?LINK_URL/} data-detail="#LINK_URL#"{endif/}>
+                <span class="amc-NGallery-frame"><img class="amc-NGallery-img" src="{if ?THUMB_URL/}#THUMB_URL#{else/}#IMAGE_URL#{endif/}" alt="{if ?ALT/}#ALT#{else/}#TITLE#{endif/}" width="{if ?WIDTH/}#WIDTH#{else/}1200{endif/}" height="{if ?HEIGHT/}#HEIGHT#{else/}900{endif/}" loading="lazy" decoding="async"{if ?WIDTH/}{if ?HEIGHT/} data-sized="Y"{endif/}{endif/}></span>
+              </a>
+              {if ?TITLE/}<figcaption class="amc-NGallery-caption"><span class="amc-NGallery-title">#TITLE#</span>{if ?CAPTION/}<span class="amc-NGallery-text">#CAPTION#</span>{endif/}</figcaption>{else/}{if ?CAPTION/}<figcaption class="amc-NGallery-caption"><span class="amc-NGallery-text">#CAPTION#</span></figcaption>{endif/}{endif/}
+            </figure>
+            ```
+        reportBody:
+            ```html
+            <div class="amc-NGallery amc-NGallery--#STYLE# {case COLUMNS/}{when two/}amc-NGallery--cols2{when three/}amc-NGallery--cols3{when four/}amc-NGallery--cols4{when five/}amc-NGallery--cols5{when six/}amc-NGallery--cols6{otherwise/}amc-NGallery--colsAuto{endcase/} {case ROW_HEIGHT/}{when small/}amc-NGallery--rowSmall{when large/}amc-NGallery--rowLarge{otherwise/}amc-NGallery--rowMedium{endcase/}{if LIGHTBOX/} amc-NGallery--lightbox{endif/}{if AUTOPLAY/} amc-NGallery--autoplay{endif/}">
+              <ul class="amc-NGallery-list"{if ?LABEL/} aria-label="#LABEL#"{endif/}>#APEX$ROWS#</ul>
+              <span class="amc-NGallery-labels" hidden><span data-key="prev">Previous image</span><span data-key="next">Next image</span><span data-key="play">Play slideshow</span><span data-key="pause">Pause slideshow</span><span data-key="compare">Move to compare before and after</span><span data-key="before">Before</span><span data-key="after">After</span><span data-key="view">View larger</span><span data-key="of">of</span></span>
+              {if LIGHTBOX/}<dialog class="amc-NGallery-lightbox" aria-label="{if ?LABEL/}#LABEL#{else/}Image viewer{endif/}">
+                <div class="amc-NGallery-lbBar">
+                  <p class="amc-NGallery-lbCount"><span class="amc-NGallery-lbIndex">1</span><span class="amc-NGallery-lbSep" aria-hidden="true"> / </span><span class="amc-NGallery-srOnly"> of </span><span class="amc-NGallery-lbTotal">1</span></p>
+                  <div class="amc-NGallery-lbTools">
+                    <a class="amc-NGallery-lbBtn amc-NGallery-lbDetail" href="#" hidden><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span class="amc-NGallery-lbBtnText">Open details</span></a>
+                    <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbZoom" aria-pressed="false"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13zM20 20l-4.8-4.8M10.5 7.5v6M7.5 10.5h6"/></svg><span class="amc-NGallery-srOnly">Zoom</span></button>
+                    <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbClose"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="amc-NGallery-srOnly">Close</span></button>
+                  </div>
+                </div>
+                <div class="amc-NGallery-lbStage"><span class="amc-NGallery-lbSpinner" aria-hidden="true"></span></div>
+                <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbNav amc-NGallery-lbPrev"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg><span class="amc-NGallery-srOnly">Previous image</span></button>
+                <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbNav amc-NGallery-lbNext"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg><span class="amc-NGallery-srOnly">Next image</span></button>
+                <div class="amc-NGallery-lbFoot">
+                  <div class="amc-NGallery-lbCaption" aria-live="polite"><p class="amc-NGallery-lbTitle"></p><p class="amc-NGallery-lbText"></p></div>
+                  <div class="amc-NGallery-lbRail"></div>
+                </div>
+              </dialog>{endif/}
+            </div>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NGallery-item"{if ?GROUP/} data-group="#GROUP#"{endif/}>#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-gallery.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-gallery.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Each query row is one image. Map Image URL (required), ideally Width and Height in pixels so the layout is stable before images load, and Alt Text for screen readers; Thumbnail URL, Title, Caption, Link URL and Group are optional. For BLOB columns select apex_util.get_blob_file_src with the name of a page item of type File Browse or Display Image, or build a REST or Object Storage URL. Pick a Style and, where it applies, Columns, Row Height and Autoplay. The Compare style pairs rows by Group: the first row of a group is the before image and the second row the after image. With Lightbox on, clicking an image opens the full-size viewer; with it off, the image link opens Link URL, or the image itself. Without JavaScript every image stays a normal link inside a figure. Colors follow the active Universal Theme style, including dark styles, Theme Roller changes and right-to-left pages.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: masonry
+        }
+        help {
+            helpText:
+                ```
+                Gallery design, tagged with its Next direction. Masonry, smart: columns of images at their natural proportions, read row by row. Justified, smart: rows like Flickr or Google Photos, every row filled edge to edge by scaling images from their proportions, recomputed when the region resizes. Filmstrip, motion: one large stage with a crossfade and a scrollable thumbnail strip below it; arrow keys move through the strip. Coverflow, depth: a 3D carousel with reflections and the current image facing forward; use the arrow buttons, the arrow keys or swipe. Polaroid, bold: scattered instant prints with handwritten captions that straighten when hovered or focused. Mosaic, smart: a bento mosaic where the first image and wide or tall images take larger cells, recomposed by the width of the region. Hover Zoom, motion: a tight grid whose image zooms and drifts under the pointer while the caption slides up. Compare, smart: a before and after slider for each pair of rows with the same Group, with a handle you drag or move with the arrow keys. Stack Swipe, depth: a deck of photo cards you swipe or step through; nothing is removed, cards go to the back of the deck. Light Table, bold: a contact sheet of film frames with sprocket holes and frame numbers on a lit table, with a loupe that magnifies under the pointer. Every style opens the shared lightbox when Lightbox is on. Motion stops when the user prefers reduced motion; the static design stays complete.
+                ```
+        }
+        entry masonry (
+            sequence: 10
+            display: Masonry - smart
+            return: masonry
+        )
+        entry justified (
+            sequence: 20
+            display: Justified Rows - smart
+            return: justified
+        )
+        entry filmstrip (
+            sequence: 30
+            display: Filmstrip - motion
+            return: filmstrip
+        )
+        entry coverflow (
+            sequence: 40
+            display: Coverflow - depth
+            return: coverflow
+        )
+        entry polaroid (
+            sequence: 50
+            display: Polaroid - bold
+            return: polaroid
+        )
+        entry mosaic (
+            sequence: 60
+            display: Mosaic - smart
+            return: mosaic
+        )
+        entry hoverZoom (
+            sequence: 70
+            display: Hover Zoom - motion
+            return: hoverZoom
+        )
+        entry compare (
+            sequence: 80
+            display: Compare Before and After - smart
+            return: compare
+        )
+        entry stackSwipe (
+            sequence: 90
+            display: Stack Swipe - depth
+            return: stackSwipe
+        )
+        entry lightTable (
+            sequence: 100
+            display: Light Table - bold
+            return: lightTable
+        )
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 2
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                URL of the full-size image, shown in the lightbox and used in the gallery when Thumbnail URL is empty. For a BLOB column select apex_util.get_blob_file_src with p_item_name set to a File Browse or Display Image page item and p_v1 set to the primary key, or return a REST or Object Storage URL. Must be a developer-controlled URL.
+                ```
+        }
+    )
+    customAttribute THUMB_URL (
+        apexlangName: thumbnailUrl
+        attribute: 3
+        name: Thumbnail URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional smaller version of the image for the gallery itself, for example a 600 pixel wide rendition. The lightbox always loads Image URL. Must be a developer-controlled URL.
+                ```
+        }
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 4
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Short title shown in the caption and the lightbox, for example Loading Dock B. Also the text alternative when Alt Text is empty.
+                ```
+        }
+    )
+    customAttribute CAPTION (
+        apexlangName: caption
+        attribute: 5
+        name: Caption
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One sentence under the title, for example the place, date or photographer. Format dates in SQL with the application NLS settings.
+                ```
+        }
+    )
+    customAttribute ALT (
+        apexlangName: altText
+        attribute: 6
+        name: Alt Text
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Text alternative that describes the image for screen readers, for example Forklift stacking pallets in aisle 4. When empty, Title is used.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 7
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional detail page for the image, for example apex_page.get_url with p_page => 20. With Lightbox on, the lightbox shows an Open details link; with Lightbox off, the image opens this URL. Must be a developer-controlled URL.
+                ```
+        }
+    )
+    customAttribute WIDTH (
+        apexlangName: width
+        attribute: 8
+        name: Width
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Width of the image in pixels, a whole number such as 1600. With Height it gives the proportions that Masonry, Justified, Mosaic and Coverflow lay out before the image loads. When empty the proportions are read from the loaded image.
+                ```
+        }
+    )
+    customAttribute HEIGHT (
+        apexlangName: height
+        attribute: 9
+        name: Height
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Height of the image in pixels, a whole number such as 1067. See Width.
+                ```
+        }
+    )
+    customAttribute GROUP (
+        apexlangName: group
+        attribute: 10
+        name: Group
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Compare style: rows with the same Group value form a before and after pair, the first row in query order being before. Order the query by group and then by a before-after sequence. Rows without a partner render as single images. Other styles ignore it.
+                ```
+        }
+    )
+    customAttribute COLUMNS (
+        apexlangName: columns
+        attribute: 11
+        name: Columns
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 110
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: auto
+        }
+        help {
+            helpText:
+                ```
+                Number of columns for Masonry, Polaroid, Mosaic, Hover Zoom and Light Table. Auto fits as many as the width of the region allows. A fixed number is reduced automatically when the region is narrow, down to one column on a phone.
+                ```
+        }
+        entry auto (
+            sequence: 10
+            display: Auto
+            return: auto
+        )
+        entry two (
+            sequence: 20
+            display: 2
+            return: two
+        )
+        entry three (
+            sequence: 30
+            display: 3
+            return: three
+        )
+        entry four (
+            sequence: 40
+            display: 4
+            return: four
+        )
+        entry five (
+            sequence: 50
+            display: 5
+            return: five
+        )
+        entry six (
+            sequence: 60
+            display: 6
+            return: six
+        )
+    )
+    customAttribute ROW_HEIGHT (
+        apexlangName: rowHeight
+        attribute: 12
+        name: Row Height
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 120
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: medium
+        }
+        help {
+            helpText:
+                ```
+                Size of the images. Justified uses it as the target row height, about 10rem, 14rem or 18rem; rows then grow or shrink slightly to fill the width. Filmstrip, Coverflow and Stack Swipe use it for the stage height.
+                ```
+        }
+        entry small (
+            sequence: 10
+            display: Small
+            return: small
+        )
+        entry medium (
+            sequence: 20
+            display: Medium
+            return: medium
+        )
+        entry large (
+            sequence: 30
+            display: Large
+            return: large
+        )
+    )
+    customAttribute LIGHTBOX (
+        apexlangName: lightbox
+        attribute: 13
+        name: Lightbox
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 130
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: true
+        }
+        help {
+            helpText:
+                ```
+                Yes opens the full-size image in an accessible viewer: arrow keys, swipe and a thumbnail rail move between images, the mouse wheel, pinch, double-click or the Zoom button zoom in, dragging pans, Escape closes and returns focus to the image. No makes each image a plain link to Link URL, or to the image itself.
+                ```
+        }
+    )
+    customAttribute AUTOPLAY (
+        apexlangName: autoplay
+        attribute: 14
+        name: Autoplay
+        scope: component
+        type: yesNo
+        appearance {
+            sequence: 140
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: false
+        }
+        dependingOn {
+            attribute: @STYLE
+            conditionType: inList
+            list: [
+                filmstrip
+                coverflow
+                stackSwipe
+            ]
+            alwaysEvaluate: false
+        }
+        help {
+            helpText:
+                ```
+                Filmstrip, Coverflow and Stack Swipe: Yes advances to the next image every six seconds. A Pause button is shown, and playback also pauses while the pointer or keyboard focus is on the gallery. Autoplay never starts when the user prefers reduced motion.
+                ```
+        }
+    )
+    customAttribute LABEL (
+        apexlangName: galleryLabel
+        attribute: 15
+        name: Gallery Label
+        scope: component
+        type: text
+        appearance {
+            sequence: 150
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Accessible name of the gallery and its lightbox, for example Warehouse Photos. Use it when the region header is hidden; screen readers announce it when entering the list.
+                ```
+        }
+    )
+    file "amc-next-gallery.css" (
+        fileName: amc-next-gallery.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-gallery.js" (
+        fileName: amc-next-gallery.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

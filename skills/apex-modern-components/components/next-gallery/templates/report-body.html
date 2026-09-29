@@ -1,0 +1,21 @@
+<div class="amc-NGallery amc-NGallery--#STYLE# {case COLUMNS/}{when two/}amc-NGallery--cols2{when three/}amc-NGallery--cols3{when four/}amc-NGallery--cols4{when five/}amc-NGallery--cols5{when six/}amc-NGallery--cols6{otherwise/}amc-NGallery--colsAuto{endcase/} {case ROW_HEIGHT/}{when small/}amc-NGallery--rowSmall{when large/}amc-NGallery--rowLarge{otherwise/}amc-NGallery--rowMedium{endcase/}{if LIGHTBOX/} amc-NGallery--lightbox{endif/}{if AUTOPLAY/} amc-NGallery--autoplay{endif/}">
+  <ul class="amc-NGallery-list"{if ?LABEL/} aria-label="#LABEL#"{endif/}>#APEX$ROWS#</ul>
+  <span class="amc-NGallery-labels" hidden><span data-key="prev">Previous image</span><span data-key="next">Next image</span><span data-key="play">Play slideshow</span><span data-key="pause">Pause slideshow</span><span data-key="compare">Move to compare before and after</span><span data-key="before">Before</span><span data-key="after">After</span><span data-key="view">View larger</span><span data-key="of">of</span></span>
+  {if LIGHTBOX/}<dialog class="amc-NGallery-lightbox" aria-label="{if ?LABEL/}#LABEL#{else/}Image viewer{endif/}">
+    <div class="amc-NGallery-lbBar">
+      <p class="amc-NGallery-lbCount"><span class="amc-NGallery-lbIndex">1</span><span class="amc-NGallery-lbSep" aria-hidden="true"> / </span><span class="amc-NGallery-srOnly"> of </span><span class="amc-NGallery-lbTotal">1</span></p>
+      <div class="amc-NGallery-lbTools">
+        <a class="amc-NGallery-lbBtn amc-NGallery-lbDetail" href="#" hidden><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span class="amc-NGallery-lbBtnText">Open details</span></a>
+        <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbZoom" aria-pressed="false"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 0 0 13a6.5 6.5 0 1 0 0-13zM20 20l-4.8-4.8M10.5 7.5v6M7.5 10.5h6"/></svg><span class="amc-NGallery-srOnly">Zoom</span></button>
+        <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbClose"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="amc-NGallery-srOnly">Close</span></button>
+      </div>
+    </div>
+    <div class="amc-NGallery-lbStage"><span class="amc-NGallery-lbSpinner" aria-hidden="true"></span></div>
+    <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbNav amc-NGallery-lbPrev"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg><span class="amc-NGallery-srOnly">Previous image</span></button>
+    <button type="button" class="amc-NGallery-lbBtn amc-NGallery-lbNav amc-NGallery-lbNext"><svg class="amc-NGallery-ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"/></svg><span class="amc-NGallery-srOnly">Next image</span></button>
+    <div class="amc-NGallery-lbFoot">
+      <div class="amc-NGallery-lbCaption" aria-live="polite"><p class="amc-NGallery-lbTitle"></p><p class="amc-NGallery-lbText"></p></div>
+      <div class="amc-NGallery-lbRail"></div>
+    </div>
+  </dialog>{endif/}
+</div>

@@ -1,0 +1,6 @@
+<figure class="amc-NGallery-figure">
+  <a class="amc-NGallery-link" href="{if LIGHTBOX/}#IMAGE_URL#{elseif ?LINK_URL/}#LINK_URL#{else/}#IMAGE_URL#{endif/}" data-full="#IMAGE_URL#"{if ?LINK_URL/} data-detail="#LINK_URL#"{endif/}>
+    <span class="amc-NGallery-frame"><img class="amc-NGallery-img" src="{if ?THUMB_URL/}#THUMB_URL#{else/}#IMAGE_URL#{endif/}" alt="{if ?ALT/}#ALT#{else/}#TITLE#{endif/}" width="{if ?WIDTH/}#WIDTH#{else/}1200{endif/}" height="{if ?HEIGHT/}#HEIGHT#{else/}900{endif/}" loading="lazy" decoding="async"{if ?WIDTH/}{if ?HEIGHT/} data-sized="Y"{endif/}{endif/}></span>
+  </a>
+  {if ?TITLE/}<figcaption class="amc-NGallery-caption"><span class="amc-NGallery-title">#TITLE#</span>{if ?CAPTION/}<span class="amc-NGallery-text">#CAPTION#</span>{endif/}</figcaption>{else/}{if ?CAPTION/}<figcaption class="amc-NGallery-caption"><span class="amc-NGallery-text">#CAPTION#</span></figcaption>{endif/}{endif/}
+</figure>

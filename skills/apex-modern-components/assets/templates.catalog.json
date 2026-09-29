@@ -45,6 +45,54 @@
       "legacySql": "theme-templates/accordion-rail/dist/legacy/amc_tpl_accordion_rail.sql"
     },
     {
+      "slug": "arrange-board",
+      "kind": "region",
+      "name": "AMC Arrange Board",
+      "staticId": "AMC_TPL_ARRANGE_BOARD",
+      "apexlangId": "amc-arrange-board",
+      "direction": "living",
+      "version": "0.9.0",
+      "minApexVersion": "23.1",
+      "description": "Experimental: plain regions become a personal dashboard; every user can reorder, resize and collapse the regions that share one parent with keyboard-friendly header buttons, and the layout is remembered per page, with no dashboard plug-in and no server-side personalisation tables.",
+      "useFor": "Home pages and dashboards built from ordinary regions: Charts, Cards, Classic and Interactive Reports, Static Content and small Forms that users want in their own order and size.",
+      "keywords": [
+        "dashboard",
+        "personalise",
+        "reorder",
+        "resize",
+        "collapse",
+        "layout",
+        "widgets",
+        "living",
+        "experimental"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Default width Small",
+          "cssClass": "amc-TArrangeBoard--defS"
+        },
+        {
+          "name": "Default width Large",
+          "cssClass": "amc-TArrangeBoard--defL"
+        },
+        {
+          "name": "Collapsed by default",
+          "cssClass": "amc-TArrangeBoard--collapsed"
+        },
+        {
+          "name": "Fixed width",
+          "cssClass": "amc-TArrangeBoard--fixed"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TArrangeBoard--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/arrange-board/dist/apexlang",
+      "legacySql": "theme-templates/arrange-board/dist/legacy/amc_tpl_arrange_board.sql"
+    },
+    {
       "slug": "aurora-header",
       "kind": "region",
       "name": "AMC Aurora Header",
@@ -513,6 +561,58 @@
       "legacySql": "theme-templates/command-list/dist/legacy/amc_tpl_command_list.sql"
     },
     {
+      "slug": "constellation-map",
+      "kind": "list",
+      "name": "AMC Constellation Map",
+      "staticId": "AMC_TPL_CONSTELLATION_MAP",
+      "apexlangId": "amc-constellation-map",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A spatial map of the whole app: every list entry is a star, entries with the same group form a constellation joined by lines, the current page glows and, optionally, the pages you use most shine brighter, on a sky you can pan and zoom. The layout is stable across visits, so people remember where things are instead of reading menus.",
+      "useFor": "Home pages, app maps and 'all pages' launchers for lists of 6 to 40 entries in 2 to 8 groups: Sales with Orders, Quotes and Customers; Finance with Invoices, Payments and Month-end; Operations; Admin.",
+      "keywords": [
+        "site map",
+        "app map",
+        "navigation",
+        "launcher",
+        "constellation",
+        "spatial",
+        "zoom",
+        "pan",
+        "living",
+        "recently used"
+      ],
+      "attributes": {
+        "a01": "Constellation",
+        "a02": "Description"
+      },
+      "templateOptions": [
+        {
+          "name": "Recently used stars shine brighter",
+          "cssClass": "amc-TConstellationMap--recent"
+        },
+        {
+          "name": "Night sky",
+          "cssClass": "amc-TConstellationMap--night"
+        },
+        {
+          "name": "Tall map",
+          "cssClass": "amc-TConstellationMap--tall"
+        },
+        {
+          "name": "Still sky",
+          "cssClass": "amc-TConstellationMap--still"
+        },
+        {
+          "name": "Start in list view",
+          "cssClass": "amc-TConstellationMap--startList"
+        }
+      ],
+      "apexlang": "theme-templates/constellation-map/dist/apexlang",
+      "legacySql": "theme-templates/constellation-map/dist/legacy/amc_tpl_constellation_map.sql"
+    },
+    {
       "slug": "dock-bar",
       "kind": "list",
       "name": "AMC Dock Bar",
@@ -560,6 +660,54 @@
       "legacySql": "theme-templates/dock-bar/dist/legacy/amc_tpl_dock_bar.sql"
     },
     {
+      "slug": "dual-view",
+      "kind": "region",
+      "name": "AMC Dual View",
+      "staticId": "AMC_TPL_DUAL_VIEW",
+      "apexlangId": "amc-dual-view",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame that turns the report it wraps into a chart of the same rows: a Table / Chart switch in the header draws a to-scale SVG bar chart or donut from the table itself, with no chart region, query or configuration, and keeps the table as the accessible source.",
+      "useFor": "Classic Report and Interactive Report regions with one text column to label the rows and one numeric column to compare: sales by region, orders by customer, spend by category, monthly totals. Around a Form, Chart or Static Content without a table it is a plain frame.",
+      "keywords": [
+        "chart",
+        "table",
+        "toggle",
+        "bar chart",
+        "donut",
+        "report",
+        "living",
+        "content-aware",
+        "data visualization"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Chart first",
+          "cssClass": "amc-TDualView--chartFirst"
+        },
+        {
+          "name": "Donut",
+          "cssClass": "amc-TDualView--donut"
+        },
+        {
+          "name": "Horizontal bars",
+          "cssClass": "amc-TDualView--horizontal"
+        },
+        {
+          "name": "Sort chart by value",
+          "cssClass": "amc-TDualView--sorted"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TDualView--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/dual-view/dist/apexlang",
+      "legacySql": "theme-templates/dual-view/dist/legacy/amc_tpl_dual_view.sql"
+    },
+    {
       "slug": "flip-tiles",
       "kind": "list",
       "name": "AMC Flip Tiles",
@@ -602,6 +750,52 @@
       ],
       "apexlang": "theme-templates/flip-tiles/dist/apexlang",
       "legacySql": "theme-templates/flip-tiles/dist/legacy/amc_tpl_flip_tiles.sql"
+    },
+    {
+      "slug": "focus-stage",
+      "kind": "region",
+      "name": "AMC Focus Stage",
+      "staticId": "AMC_TPL_FOCUS_STAGE",
+      "apexlangId": "amc-focus-stage",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region that can take the stage: its Focus button (or focusing a field inside it) dims and blurs the rest of the page behind a scrim and lifts the region with a sticky header, so a long form or a dense report gets the user's full attention without leaving the page.",
+      "useFor": "Long Forms (data entry, approvals, checklists), dense Interactive Reports or Interactive Grids, a Chart under discussion in a meeting, and any region that users work in for a long time on a busy page.",
+      "keywords": [
+        "focus mode",
+        "spotlight",
+        "distraction free",
+        "dim page",
+        "stage",
+        "zen mode",
+        "living"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Focus on input",
+          "cssClass": "amc-TFocusStage--auto"
+        },
+        {
+          "name": "Deep dim",
+          "cssClass": "amc-TFocusStage--deep"
+        },
+        {
+          "name": "Stage light",
+          "cssClass": "amc-TFocusStage--spotlight"
+        },
+        {
+          "name": "Icon-only button",
+          "cssClass": "amc-TFocusStage--iconOnly"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TFocusStage--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/focus-stage/dist/apexlang",
+      "legacySql": "theme-templates/focus-stage/dist/legacy/amc_tpl_focus_stage.sql"
     },
     {
       "slug": "folder-tab",
@@ -652,6 +846,103 @@
       ],
       "apexlang": "theme-templates/folder-tab/dist/apexlang",
       "legacySql": "theme-templates/folder-tab/dist/legacy/amc_tpl_folder_tab.sql"
+    },
+    {
+      "slug": "frecency-launcher",
+      "kind": "list",
+      "name": "AMC Frecency Launcher",
+      "staticId": "AMC_TPL_FRECENCY_LAUNCHER",
+      "apexlangId": "amc-frecency-launcher",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A launcher that learns: it counts which destinations this user opens and how recently, and at the next page load lifts the top three into ranked Your most used tiles with a heat meter and the last time they were opened, while the rest keep the developer's order in a compact grid.",
+      "useFor": "Home pages and workspace launchpads with 6 to 20 destinations, where different users live in different corners of the app: finance opens Invoices and Month-end close, sales opens Orders and Customers.",
+      "keywords": [
+        "frecency",
+        "personalised",
+        "adaptive",
+        "launcher",
+        "most used",
+        "home page",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Badge",
+        "a03": "Learning key"
+      },
+      "templateOptions": [
+        {
+          "name": "Adapt quickly",
+          "cssClass": "amc-TFrecencyLauncher--fast"
+        },
+        {
+          "name": "Four favourites",
+          "cssClass": "amc-TFrecencyLauncher--four"
+        },
+        {
+          "name": "Filled favourites",
+          "cssClass": "amc-TFrecencyLauncher--filled"
+        },
+        {
+          "name": "Discreet",
+          "cssClass": "amc-TFrecencyLauncher--discreet"
+        },
+        {
+          "name": "Rows",
+          "cssClass": "amc-TFrecencyLauncher--rows"
+        }
+      ],
+      "apexlang": "theme-templates/frecency-launcher/dist/apexlang",
+      "legacySql": "theme-templates/frecency-launcher/dist/legacy/amc_tpl_frecency_launcher.sql"
+    },
+    {
+      "slug": "freshness-frame",
+      "kind": "region",
+      "name": "AMC Freshness Frame",
+      "staticId": "AMC_TPL_FRESHNESS_FRAME",
+      "apexlangId": "amc-freshness-frame",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame that knows how old its data is: the header says Updated just now or 3 min ago, a fuse along the top edge burns down and loses its glow as the data ages, and past a threshold the frame turns to a hatched warning Out of date state with a Refresh button, which no design system frame does.",
+      "useFor": "Regions whose data changes while the page stays open: operational Classic and Interactive Reports, queues, dashboards, stock levels, Charts and Cards on wall screens, and reports loaded by a scheduled job.",
+      "keywords": [
+        "freshness",
+        "stale",
+        "last updated",
+        "refresh",
+        "live data",
+        "dashboard",
+        "living",
+        "time-aware"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Stale after 1 minute",
+          "cssClass": "amc-TFreshnessFrame--stale1"
+        },
+        {
+          "name": "Stale after 5 minutes",
+          "cssClass": "amc-TFreshnessFrame--stale5"
+        },
+        {
+          "name": "Stale after 15 minutes",
+          "cssClass": "amc-TFreshnessFrame--stale15"
+        },
+        {
+          "name": "Auto refresh when stale",
+          "cssClass": "amc-TFreshnessFrame--autoRefresh"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TFreshnessFrame--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/freshness-frame/dist/apexlang",
+      "legacySql": "theme-templates/freshness-frame/dist/legacy/amc_tpl_freshness_frame.sql"
     },
     {
       "slug": "glass-depth",
@@ -742,6 +1033,106 @@
       ],
       "apexlang": "theme-templates/holo-edge/dist/apexlang",
       "legacySql": "theme-templates/holo-edge/dist/legacy/amc_tpl_holo_edge.sql"
+    },
+    {
+      "slug": "insight-frame",
+      "kind": "region",
+      "name": "AMC Insight Frame",
+      "staticId": "AMC_TPL_INSIGHT_FRAME",
+      "apexlangId": "amc-insight-frame",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region frame that reads the report it wraps and states what the numbers say: an insight strip under the title with the total or average, row count, largest and smallest row and a share-of-total bar, plus a thin share bar under every row; no design system frame understands its content this way.",
+      "useFor": "Classic Report and Interactive Report regions with a numeric column (amounts, quantities, hours, percentages). Around a Form, Chart, Cards or Static Content without a table it is a plain frame.",
+      "keywords": [
+        "insight",
+        "summary",
+        "total",
+        "average",
+        "report",
+        "analytics",
+        "living",
+        "content-aware"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Use first numeric column",
+          "cssClass": "amc-TInsightFrame--first"
+        },
+        {
+          "name": "Show smallest",
+          "cssClass": "amc-TInsightFrame--minMax"
+        },
+        {
+          "name": "Average as headline",
+          "cssClass": "amc-TInsightFrame--avgHeadline"
+        },
+        {
+          "name": "Hide row bars",
+          "cssClass": "amc-TInsightFrame--noBars"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TInsightFrame--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/insight-frame/dist/apexlang",
+      "legacySql": "theme-templates/insight-frame/dist/legacy/amc_tpl_insight_frame.sql"
+    },
+    {
+      "slug": "journey-trail",
+      "kind": "list",
+      "name": "AMC Journey Trail",
+      "staticId": "AMC_TPL_JOURNEY_TRAIL",
+      "apexlangId": "amc-journey-trail",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A destinations list that remembers the user's path through the app in this tab and shows Continue where you left off as a trail of the recent pages with relative times, the page to resume highlighted and the current page marked, while destinations already visited get a quiet check.",
+      "useFor": "Home pages and hubs that users return to between tasks, and Page 0 as a slim recently-visited strip: order entry, case handling, approvals, any app where people jump between records and lists.",
+      "keywords": [
+        "history",
+        "recently visited",
+        "breadcrumb",
+        "continue",
+        "resume",
+        "trail",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Badge"
+      },
+      "templateOptions": [
+        {
+          "name": "Vertical timeline",
+          "cssClass": "amc-TJourneyTrail--vertical"
+        },
+        {
+          "name": "Longer trail",
+          "cssClass": "amc-TJourneyTrail--long"
+        },
+        {
+          "name": "Hide times",
+          "cssClass": "amc-TJourneyTrail--noTimes"
+        },
+        {
+          "name": "Trail only",
+          "cssClass": "amc-TJourneyTrail--trailOnly"
+        },
+        {
+          "name": "Scrolling trail",
+          "cssClass": "amc-TJourneyTrail--scroll"
+        },
+        {
+          "name": "Rows",
+          "cssClass": "amc-TJourneyTrail--rows"
+        }
+      ],
+      "apexlang": "theme-templates/journey-trail/dist/apexlang",
+      "legacySql": "theme-templates/journey-trail/dist/legacy/amc_tpl_journey_trail.sql"
     },
     {
       "slug": "kinetic-title",
@@ -980,6 +1371,52 @@
       "legacySql": "theme-templates/metro-steps/dist/legacy/amc_tpl_metro_steps.sql"
     },
     {
+      "slug": "moment-launcher",
+      "kind": "list",
+      "name": "AMC Moment Launcher",
+      "staticId": "AMC_TPL_MOMENT_LAUNCHER",
+      "apexlangId": "amc-moment-launcher",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A launcher that knows what time it is in the business: entries tagged with moments such as monthend, quarterend or friday+afternoon rise into a Right now panel when the user's local date and time match, with the reason and the working days left, and every other entry says when it comes up next.",
+      "useFor": "Home pages and workspace launchers of finance, HR and operations apps, where tasks follow the calendar: morning checks, Friday timesheets, month-end close, quarter-end VAT, year-end inventory.",
+      "keywords": [
+        "time aware",
+        "calendar",
+        "month-end",
+        "quarter-end",
+        "context",
+        "launcher",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Moments",
+        "a02": "Description",
+        "a03": "Badge"
+      },
+      "templateOptions": [
+        {
+          "name": "Focus on now",
+          "cssClass": "amc-TMomentLauncher--focus"
+        },
+        {
+          "name": "Hide next times",
+          "cssClass": "amc-TMomentLauncher--noNext"
+        },
+        {
+          "name": "Spotlight",
+          "cssClass": "amc-TMomentLauncher--spotlight"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TMomentLauncher--compact"
+        }
+      ],
+      "apexlang": "theme-templates/moment-launcher/dist/apexlang",
+      "legacySql": "theme-templates/moment-launcher/dist/legacy/amc_tpl_moment_launcher.sql"
+    },
+    {
       "slug": "orbit-launcher",
       "kind": "list",
       "name": "AMC Orbit Launcher",
@@ -1026,6 +1463,106 @@
       ],
       "apexlang": "theme-templates/orbit-launcher/dist/apexlang",
       "legacySql": "theme-templates/orbit-launcher/dist/legacy/amc_tpl_orbit_launcher.sql"
+    },
+    {
+      "slug": "peek-nav",
+      "kind": "list",
+      "name": "AMC Peek Nav",
+      "staticId": "AMC_TPL_PEEK_NAV",
+      "apexlangId": "amc-peek-nav",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "Navigation that lets people see before they go: resting the mouse on an entry, or pressing its eye button, floats a card with a live, scaled-down, non-interactive view of the target page, so users stop opening pages just to check whether they are the right ones.",
+      "useFor": "Side navigation and page lists of 3 to 15 entries whose targets are read-mostly pages in the same app: Orders, Quotes, Customers, Invoices, Inventory. Not for pages that change data when they load.",
+      "keywords": [
+        "navigation",
+        "preview",
+        "peek",
+        "hover card",
+        "side navigation",
+        "living",
+        "link preview",
+        "iframe"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Preview URL or none"
+      },
+      "templateOptions": [
+        {
+          "name": "Preview on click of the eye button only",
+          "cssClass": "amc-TPeekNav--eyeOnly"
+        },
+        {
+          "name": "Description card only",
+          "cssClass": "amc-TPeekNav--textOnly"
+        },
+        {
+          "name": "Show descriptions",
+          "cssClass": "amc-TPeekNav--descriptions"
+        },
+        {
+          "name": "Horizontal bar",
+          "cssClass": "amc-TPeekNav--bar"
+        },
+        {
+          "name": "Large preview",
+          "cssClass": "amc-TPeekNav--large"
+        }
+      ],
+      "apexlang": "theme-templates/peek-nav/dist/apexlang",
+      "legacySql": "theme-templates/peek-nav/dist/legacy/amc_tpl_peek_nav.sql"
+    },
+    {
+      "slug": "quest-list",
+      "kind": "list",
+      "name": "AMC Quest List",
+      "staticId": "AMC_TPL_QUEST_LIST",
+      "apexlangId": "amc-quest-list",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "An onboarding checklist that notices what the new user has already done: each task completes itself once its page has been opened, or by a tick, with a progress ring, points, the next task highlighted and a short celebration when everything is done.",
+      "useFor": "Getting-started regions on the home page of a new or newly rolled-out app, training environments, and role checklists such as first week in finance: open Orders, create an invoice, submit a timesheet, approve a request.",
+      "keywords": [
+        "onboarding",
+        "checklist",
+        "getting started",
+        "progress",
+        "gamification",
+        "quest",
+        "living"
+      ],
+      "attributes": {
+        "a01": "Description",
+        "a02": "Points",
+        "a03": "Completion page"
+      },
+      "templateOptions": [
+        {
+          "name": "Manual only",
+          "cssClass": "amc-TQuestList--manual"
+        },
+        {
+          "name": "Hide points",
+          "cssClass": "amc-TQuestList--noPoints"
+        },
+        {
+          "name": "Fold when complete",
+          "cssClass": "amc-TQuestList--fold"
+        },
+        {
+          "name": "Compact",
+          "cssClass": "amc-TQuestList--compact"
+        },
+        {
+          "name": "Hero header",
+          "cssClass": "amc-TQuestList--hero"
+        }
+      ],
+      "apexlang": "theme-templates/quest-list/dist/apexlang",
+      "legacySql": "theme-templates/quest-list/dist/legacy/amc_tpl_quest_list.sql"
     },
     {
       "slug": "segmented-glass",
@@ -1439,6 +1976,53 @@
       ],
       "apexlang": "theme-templates/ticket-stub/dist/apexlang",
       "legacySql": "theme-templates/ticket-stub/dist/legacy/amc_tpl_ticket_stub.sql"
+    },
+    {
+      "slug": "zoom-dial",
+      "kind": "region",
+      "name": "AMC Zoom Dial",
+      "staticId": "AMC_TPL_ZOOM_DIAL",
+      "apexlangId": "amc-zoom-dial",
+      "direction": "living",
+      "version": "1.0.0",
+      "minApexVersion": "23.1",
+      "description": "A region with its own size dial: each user picks Compact, Cozy, Comfortable or Large for this one region and the native content inside is re-laid out at that size and remembered, instead of one fixed density for everybody or a browser zoom that scales the whole page.",
+      "useFor": "Dense Interactive Reports and Interactive Grids that power users want smaller, Forms and Classic Reports that users on large screens or with low vision want larger, Charts on wall displays, and Cards regions.",
+      "keywords": [
+        "zoom",
+        "density",
+        "text size",
+        "compact",
+        "large",
+        "accessibility",
+        "personalisation",
+        "living"
+      ],
+      "attributes": {},
+      "templateOptions": [
+        {
+          "name": "Default Compact",
+          "cssClass": "amc-TZoomDial--defCompact"
+        },
+        {
+          "name": "Default Comfortable",
+          "cssClass": "amc-TZoomDial--defComfortable"
+        },
+        {
+          "name": "Default Large",
+          "cssClass": "amc-TZoomDial--defLarge"
+        },
+        {
+          "name": "Hide readout",
+          "cssClass": "amc-TZoomDial--noReadout"
+        },
+        {
+          "name": "No body padding",
+          "cssClass": "amc-TZoomDial--noPadding"
+        }
+      ],
+      "apexlang": "theme-templates/zoom-dial/dist/apexlang",
+      "legacySql": "theme-templates/zoom-dial/dist/legacy/amc_tpl_zoom_dial.sql"
     }
   ]
 }
