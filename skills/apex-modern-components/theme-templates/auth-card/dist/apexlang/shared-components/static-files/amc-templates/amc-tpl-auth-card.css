@@ -825,7 +825,9 @@
 .amc-TAuthCard--minimal .amc-TAuthCard-beam { display: none; }
 /* No card, only a soft halo of the page color so text stays readable over any scene. */
 .amc-TAuthCard--minimal .amc-TAuthCard-surface {
-  inset: -2.5rem -3rem;
+  /* The halo bleeds 3rem to the sides only where the page has room for it (the card is
+     centered), so on a phone it never pushes the page into sideways scrolling. */
+  inset: -2.5rem max(-3rem, (100% - 100vw) / 2);
   border-radius: 50%;
   background: radial-gradient(closest-side, color-mix(in srgb, var(--amc-ta-page) 88%, transparent) 55%, transparent);
   -webkit-backdrop-filter: none;

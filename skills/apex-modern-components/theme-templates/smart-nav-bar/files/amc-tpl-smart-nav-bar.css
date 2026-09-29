@@ -44,6 +44,17 @@
   background: var(--amc-snb-tint);
   box-shadow: inset 0 0 0 1px var(--amc-snb-tint-line);
 }
+/* Without JavaScript nothing folds into the overflow menu, so a long bar wraps onto more
+   lines instead of running past the header on a phone. */
+.amc-TSmartNavBar:not(.is-js) .amc-TSmartNavBar-list {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-inline-size: 0;
+  border-radius: calc(var(--amc-snb-size) / 2 + 3px);
+}
+.amc-TSmartNavBar:not(.is-js) .amc-TSmartNavBar-link { min-inline-size: 0; }
+
 .amc-TSmartNavBar--flat .amc-TSmartNavBar-list {
   gap: 4px;
   padding: 0;

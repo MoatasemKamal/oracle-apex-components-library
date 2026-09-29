@@ -935,6 +935,19 @@
   background: color-mix(in srgb, var(--amc-norg-floor) 88%, transparent);
 }
 
+/* Before JavaScript has placed the ring (or without it) the radial style keeps the plain
+   outline list: its cards stay in the flow instead of stacking at the region's corner. */
+.amc-NOrgChart--radial .amc-NOrgChart-source .amc-NOrgChart-card {
+  position: relative;
+  inset: auto;
+  flex-direction: row;
+  gap: .625rem;
+  inline-size: auto;
+  text-align: start;
+}
+.amc-NOrgChart--radial .amc-NOrgChart-source .amc-NOrgChart-avatar { box-shadow: none; }
+.amc-NOrgChart--radial .amc-NOrgChart-source .amc-NOrgChart-text { align-items: flex-start; padding: 0; background: none; }
+
 .amc-NOrgChart--radial .amc-NOrgChart-name { font-size: .8125rem; line-height: 1.25; }
 .amc-NOrgChart--radial .amc-NOrgChart-job { font-size: .75rem; line-height: 1.25; }
 

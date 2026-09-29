@@ -10,7 +10,7 @@ Next Collection comment and activity thread for a record such as a ticket, a pur
 | APEXlang reference | `type: plugin/nextThread` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 One query row per entry. Map ID, Author and Created (required). Return Created as ISO text with TO_CHAR(created_on, 'YYYY-MM-DD"T"HH24:MI:SS'). Kind is comment, status, system or attachment; for status rows return the new status in Body, for example Approved. Parent ID makes a row a reply; replies to replies are shown under the first entry of their thread. Is Internal Y marks a note that the requester cannot see; Is Mine Y marks the current user's entries. Body is shown as escaped text with its line breaks. The runtime file groups by day, nests replies, folds long threads and keeps relative times current; after posting with a form, refresh the region and new entries are marked and announced.
 

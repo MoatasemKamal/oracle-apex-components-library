@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Smart Nav Bar",
   "staticId": "AMC_TPL_SMART_NAV_BAR",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A calm, compact pill cluster for the application Navigation Bar that knows what each entry is for: a search button that opens a command palette over the page's navigation menu, a notification bell with a remembered unread state and a feed dropdown, a help menu and an initials avatar with a user menu, and it folds extra entries into that menu by itself when the header runs out of room.",

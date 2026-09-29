@@ -2,7 +2,7 @@
   "kind": "region",
   "name": "AMC Focus Stage",
   "staticId": "AMC_TPL_FOCUS_STAGE",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "living",
   "description": "A region that can take the stage: its Focus button (or focusing a field inside it) dims and blurs the rest of the page behind a scrim and lifts the region with a sticky header, so a long form or a dense report gets the user's full attention without leaving the page.",

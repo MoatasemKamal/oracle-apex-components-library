@@ -2,7 +2,7 @@
   "kind": "list",
   "name": "AMC Speed Dial",
   "staticId": "AMC_TPL_SPEED_DIAL",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minApexVersion": "23.1",
   "direction": "motion",
   "description": "A floating action button that springs the list entries out as mini buttons in a stack or a quarter arc, with labels sliding out beside them, instead of a static button bar.",

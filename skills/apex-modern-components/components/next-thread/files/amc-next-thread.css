@@ -727,8 +727,10 @@ a.amc-NThread-file:focus-visible {
   padding: .625rem 0;
 }
 
-.amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-avatar,
-.amc-NThread--emailThread .amc-NThread-row--system .amc-NThread-avatar { display: none; }
+/* Only in the built thread: the plain list without JavaScript keeps the avatar column
+   (hiding it there would squeeze the line into the 2rem avatar track). */
+.amc-NThread--emailThread :not(.amc-NThread-source) > .amc-NThread-row--status .amc-NThread-avatar,
+.amc-NThread--emailThread :not(.amc-NThread-source) > .amc-NThread-row--system .amc-NThread-avatar { display: none; }
 
 .amc-NThread--emailThread .amc-NThread-row--status .amc-NThread-main,
 .amc-NThread--emailThread .amc-NThread-row--system .amc-NThread-main {

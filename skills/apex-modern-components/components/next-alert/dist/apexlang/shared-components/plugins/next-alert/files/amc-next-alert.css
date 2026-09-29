@@ -571,12 +571,15 @@
 .amc-NAlert--liftGlass .amc-NAlert-fx {
   display: block;
   position: absolute;
-  inset: -2rem;
+  /* Bleeds above and below only: an inline bleed would push a full-width alert past the
+     page edge and make the page scroll sideways. The glows sit far enough inside that
+     they fade out before the box edge. */
+  inset: -2rem 0;
   z-index: -1;
   background:
-    radial-gradient(circle 4.5rem at 4.5rem 4.25rem, color-mix(in srgb, var(--amc-na-tone) 70%, transparent), transparent 70%),
+    radial-gradient(circle 4.5rem at 3.5rem 4.25rem, color-mix(in srgb, var(--amc-na-tone) 70%, transparent), transparent 70%),
     radial-gradient(ellipse 8rem 4rem at 35% calc(100% - 3rem), color-mix(in srgb, var(--ut-palette-primary, #056ac8) 28%, transparent), transparent 70%),
-    radial-gradient(circle 5.5rem at calc(100% - 5rem) calc(100% - 4.5rem), color-mix(in srgb, var(--amc-na-tone) 55%, transparent), transparent 70%);
+    radial-gradient(circle 5.5rem at calc(100% - 4rem) calc(100% - 4.5rem), color-mix(in srgb, var(--amc-na-tone) 55%, transparent), transparent 70%);
   pointer-events: none;
 }
 .amc-NAlert--liftGlass .amc-NAlert-surface {

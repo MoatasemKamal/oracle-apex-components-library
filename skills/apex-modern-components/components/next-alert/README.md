@@ -10,7 +10,7 @@ Next Collection family of 10 current-generation alert, toast and announcement de
 | APEXlang reference | `type: plugin/nextAlert` |
 | Modes | partial (single / report column), report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.1 |
+| Version | 1.0.2 |
 | Based on | [Magic UI](https://github.com/magicuidesign/magicui) (MIT) |
 
 Pick a Style for the region. Map State to a column or static value returning success, warning, danger, info or neutral; any other value renders as neutral. Danger alerts use role=alert, all others role=status. Icon defaults to a state icon when left empty. The link renders only when both Link URL and Link Label are set. In report mode Stacked Toasts shows the first three rows as a stack that fans out on hover, keyboard focus or touch devices.

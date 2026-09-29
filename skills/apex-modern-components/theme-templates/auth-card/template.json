@@ -2,7 +2,7 @@
   "kind": "region",
   "name": "AMC Auth Card",
   "staticId": "AMC_TPL_AUTH_CARD",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "minApexVersion": "23.1",
   "direction": "motion",
   "description": "A motion-rich authentication card for login, sign-up, forgot-password, OTP and reset pages: seven looks, seven full-screen scenes drawn behind the page, and opt-in field behaviour by item CSS class, while items, validations and processes stay native.",

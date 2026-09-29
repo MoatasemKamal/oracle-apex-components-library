@@ -10,7 +10,7 @@ Next Collection org chart that builds a reporting hierarchy from report rows (ID
 | APEXlang reference | `type: plugin/nextOrgChart` |
 | Modes | report (multiple rows) |
 | Minimum APEX | 23.1 (APEXlang import: 26.1+) |
-| Version | 1.0.0 |
+| Version | 1.0.1 |
 
 One query row per position. Map ID (required) and Parent ID: the ID of the manager's row, empty for the top of the chart. Rows may arrive in any order; a CONNECT BY query with ORDER SIBLINGS BY and LEVEL gives the best result without JavaScript. Name is the person, Job Title their role, Department groups the swimlanes. Set Vacant to Y for an open position; its Name may stay empty. Headcount is the size of the whole team under a person; when empty the chart counts the people it has. The runtime file builds the tree, search, keyboard navigation and zoom, and rebuilds after a region refresh.
 

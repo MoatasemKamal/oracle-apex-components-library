@@ -22,14 +22,16 @@
   color: var(--amc-tfs-ink);
 }
 
-/* Stage light: a soft halo behind the lifted surface (decoration on the frame, not the body). */
+/* Stage light: a soft halo behind the lifted surface (decoration on the frame, not the body).
+   Drawn as a spread shadow of a box that matches the region, not as a larger box: a shadow is
+   ink overflow only, so a region at the page edge never makes the page scroll sideways. */
 .amc-TFocusStage::before {
   content: "";
   position: absolute;
-  inset: -18px;
+  inset: 0;
   z-index: -1;
-  border-radius: calc(var(--amc-tfs-radius) + 18px);
-  background: radial-gradient(closest-side, var(--amc-tfs-glow), transparent);
+  border-radius: var(--amc-tfs-radius);
+  box-shadow: 0 0 22px 8px var(--amc-tfs-glow);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--amc-tfs-dur) ease;
@@ -198,7 +200,7 @@
 .amc-TFocusStage--spotlight {
   --amc-tfs-glow: color-mix(in srgb, var(--amc-tfs-accent) 42%, transparent);
 }
-.amc-TFocusStage--spotlight.is-staged::before { inset: -40px; border-radius: calc(var(--amc-tfs-radius) + 40px); }
+.amc-TFocusStage--spotlight.is-staged::before { box-shadow: 0 0 48px 18px var(--amc-tfs-glow); }
 .amc-TFocusStage--iconOnly .amc-TFocusStage-toggleLabel {
   position: absolute;
   inline-size: 1px;

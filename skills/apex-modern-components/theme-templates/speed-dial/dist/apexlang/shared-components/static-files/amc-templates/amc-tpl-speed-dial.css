@@ -250,24 +250,32 @@
 /* ---------- Template options ---------- */
 /* Quarter arc: entries spread around the FAB; labels show on hover and focus. Touch screens keep the stack. */
 .amc-TSpeedDial--arc { --amc-tsd-arc: 1; }
-.amc-TSpeedDial--arc .amc-TSpeedDial-list::before {
+/* The dashed guide is drawn in a box of exactly the open quarter (radius x radius, one corner
+   at the FAB): a full circle box would reach past the FAB and make the page scroll sideways
+   when the dial sits at the page edge. sx / sy pick the quarter, so RTL, Start and Top follow. */
+.amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-list::before {
+  --amc-tsd-l: calc((1 - var(--amc-tsd-sx)) / 2);
+  --amc-tsd-rgt: calc((1 + var(--amc-tsd-sx)) / 2);
+  --amc-tsd-t: calc((1 - var(--amc-tsd-sy)) / 2);
+  --amc-tsd-b: calc((1 + var(--amc-tsd-sy)) / 2);
   inset: auto;
-  inset-inline-start: calc(-1 * var(--amc-tsd-r));
-  inset-block-end: calc(-1 * var(--amc-tsd-r));
-  inline-size: calc(2 * var(--amc-tsd-r));
-  block-size: calc(2 * var(--amc-tsd-r));
-  border-radius: 50%;
-  border: 1.5px dashed color-mix(in srgb, var(--amc-tsd-accent) 40%, transparent);
-  background: radial-gradient(circle, color-mix(in srgb, var(--amc-tsd-accent) 10%, transparent), transparent 70%);
-  -webkit-mask: conic-gradient(from 270deg, black 0 25%, transparent 25%);
-  mask: conic-gradient(from 270deg, black 0 25%, transparent 25%);
+  left: calc((var(--amc-tsd-sx) - 1) / 2 * var(--amc-tsd-r));
+  top: calc((var(--amc-tsd-sy) - 1) / 2 * var(--amc-tsd-r));
+  inline-size: var(--amc-tsd-r);
+  block-size: var(--amc-tsd-r);
+  box-sizing: border-box;
+  border: 0 dashed color-mix(in srgb, var(--amc-tsd-accent) 40%, transparent);
+  border-width: calc(1.5px * var(--amc-tsd-t)) calc(1.5px * var(--amc-tsd-rgt)) calc(1.5px * var(--amc-tsd-b)) calc(1.5px * var(--amc-tsd-l));
+  border-radius: calc(100% * var(--amc-tsd-l) * var(--amc-tsd-t)) calc(100% * var(--amc-tsd-rgt) * var(--amc-tsd-t)) calc(100% * var(--amc-tsd-rgt) * var(--amc-tsd-b)) calc(100% * var(--amc-tsd-l) * var(--amc-tsd-b));
+  background: radial-gradient(circle at calc(100% * var(--amc-tsd-l)) calc(100% * var(--amc-tsd-t)), color-mix(in srgb, var(--amc-tsd-accent) 10%, transparent), transparent 70%);
+  -webkit-mask: none;
+  mask: none;
 }
-.amc-TSpeedDial--arc:dir(rtl) .amc-TSpeedDial-list::before { -webkit-mask: conic-gradient(black 0 25%, transparent 25%); mask: conic-gradient(black 0 25%, transparent 25%); }
 @media (hover: hover) {
-  .amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-item .amc-TSpeedDial-link .amc-TSpeedDial-label {
+  .amc-TSpeedDial.amc-TSpeedDial--arc:not(:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6))) .amc-TSpeedDial-item .amc-TSpeedDial-link .amc-TSpeedDial-label {
     inset-block-start: auto;
     inset-block-end: calc(100% + 8px);
-    inset-inline-end: 50%;
+    inset-inline: auto 50%;
     margin: 0;
     margin-inline-end: -60px;
     inline-size: 120px;
@@ -279,12 +287,45 @@
     opacity: 0;
     transform: translateY(4px);
   }
-  .amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-item .amc-TSpeedDial-link:hover .amc-TSpeedDial-label,
-  .amc-TSpeedDial.amc-TSpeedDial--arc .amc-TSpeedDial-item .amc-TSpeedDial-link:focus-visible .amc-TSpeedDial-label { opacity: 1; transform: none; transition-delay: 0s; }
+  /* The entry straight above (or below) the FAB sits on the region edge: its label lines up
+     with the entry's outer side instead of centering, so it never runs past the edge. */
+  .amc-TSpeedDial.amc-TSpeedDial--arc:not(:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6))) .amc-TSpeedDial-item:first-child .amc-TSpeedDial-link .amc-TSpeedDial-label { inset-inline-end: 0; margin-inline-end: 0; }
+  .amc-TSpeedDial.amc-TSpeedDial--arc:not(:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6))).amc-TSpeedDial--start .amc-TSpeedDial-item:first-child .amc-TSpeedDial-link .amc-TSpeedDial-label { inset-inline: 0 auto; }
+  .amc-TSpeedDial.amc-TSpeedDial--arc:not(:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6))) .amc-TSpeedDial-item .amc-TSpeedDial-link:hover .amc-TSpeedDial-label,
+  .amc-TSpeedDial.amc-TSpeedDial--arc:not(:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6))) .amc-TSpeedDial-item .amc-TSpeedDial-link:focus-visible .amc-TSpeedDial-label { opacity: 1; transform: none; transition-delay: 0s; }
+}
+@media (hover: hover) and (min-width: 30rem) {
+  .amc-TSpeedDial.amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)) .amc-TSpeedDial-item .amc-TSpeedDial-link .amc-TSpeedDial-label {
+    inset-block-start: auto;
+    inset-block-end: calc(100% + 8px);
+    inset-inline: auto 50%;
+    margin: 0;
+    margin-inline-end: -60px;
+    inline-size: 120px;
+    min-block-size: 0;
+    padding: 4px 8px;
+    justify-items: center;
+    white-space: normal;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  /* The entry straight above (or below) the FAB sits on the region edge: its label lines up
+     with the entry's outer side instead of centering, so it never runs past the edge. */
+  .amc-TSpeedDial.amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)) .amc-TSpeedDial-item:first-child .amc-TSpeedDial-link .amc-TSpeedDial-label { inset-inline-end: 0; margin-inline-end: 0; }
+  .amc-TSpeedDial.amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)).amc-TSpeedDial--start .amc-TSpeedDial-item:first-child .amc-TSpeedDial-link .amc-TSpeedDial-label { inset-inline: 0 auto; }
+  .amc-TSpeedDial.amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)) .amc-TSpeedDial-item .amc-TSpeedDial-link:hover .amc-TSpeedDial-label,
+  .amc-TSpeedDial.amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)) .amc-TSpeedDial-item .amc-TSpeedDial-link:focus-visible .amc-TSpeedDial-label { opacity: 1; transform: none; transition-delay: 0s; }
 }
 @media (hover: none) {
   .amc-TSpeedDial--arc { --amc-tsd-arc: 0; }
   .amc-TSpeedDial--arc .amc-TSpeedDial-list::before { display: none; }
+}
+/* Small screens: an arc of six or more entries (radius 204px and up) no longer fits beside the
+   page edge, so it falls back to the stack. */
+@media (max-width: 29.99rem) {
+  .amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)) { --amc-tsd-arc: 0; }
+  .amc-TSpeedDial--arc:has(> .amc-TSpeedDial-list > .amc-TSpeedDial-item:nth-child(6)) .amc-TSpeedDial-list::before { display: none; }
 }
 /* Start corner: FAB on the inline-start side, fan and labels open toward the end */
 .amc-TSpeedDial--start { align-items: flex-start; --amc-tsd-sx: 1; }
@@ -292,15 +333,10 @@
 .amc-TSpeedDial--start .amc-TSpeedDial-fab { flex-direction: row-reverse; padding-inline: 6px 20px; }
 .amc-TSpeedDial--start .amc-TSpeedDial-list { inset-inline: var(--amc-tsd-origin) auto; }
 .amc-TSpeedDial--start .amc-TSpeedDial-label { inset-inline: calc(100% + 12px) auto; }
-.amc-TSpeedDial--start.amc-TSpeedDial--arc .amc-TSpeedDial-list::before { inset-inline-start: calc(-1 * var(--amc-tsd-r)); -webkit-mask: conic-gradient(black 0 25%, transparent 25%); mask: conic-gradient(black 0 25%, transparent 25%); }
-.amc-TSpeedDial--start.amc-TSpeedDial--arc:dir(rtl) .amc-TSpeedDial-list::before { -webkit-mask: conic-gradient(from 270deg, black 0 25%, transparent 25%); mask: conic-gradient(from 270deg, black 0 25%, transparent 25%); }
 /* Top corner: FAB at the top, fan opens downward */
 .amc-TSpeedDial--top { justify-content: flex-start; --amc-tsd-sy: 1; }
 .amc-TSpeedDial--top .amc-TSpeedDial-list { inset-block: calc(8px + var(--amc-tsd-fab) / 2) auto; }
 .amc-TSpeedDial--top .amc-TSpeedDial-list::before { inset-block: calc(var(--amc-tsd-step) / 2 + var(--amc-tsd-mini) / 2) auto; -webkit-mask: linear-gradient(to bottom, black, transparent); mask: linear-gradient(to bottom, black, transparent); }
-.amc-TSpeedDial--top.amc-TSpeedDial--arc .amc-TSpeedDial-list::before { inset-block: calc(-1 * var(--amc-tsd-r)) auto; -webkit-mask: conic-gradient(from 180deg, black 0 25%, transparent 25%); mask: conic-gradient(from 180deg, black 0 25%, transparent 25%); }
-.amc-TSpeedDial--top.amc-TSpeedDial--arc:dir(rtl) .amc-TSpeedDial-list::before,
-.amc-TSpeedDial--top.amc-TSpeedDial--start.amc-TSpeedDial--arc .amc-TSpeedDial-list::before { -webkit-mask: conic-gradient(from 90deg, black 0 25%, transparent 25%); mask: conic-gradient(from 90deg, black 0 25%, transparent 25%); }
 /* Icon only FAB */
 .amc-TSpeedDial--iconOnly .amc-TSpeedDial-fab { padding: 6px; gap: 0; }
 .amc-TSpeedDial--iconOnly .amc-TSpeedDial-fabText { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }

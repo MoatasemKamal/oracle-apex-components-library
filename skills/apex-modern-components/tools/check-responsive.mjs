@@ -5,7 +5,11 @@
 //   - elements that stick out of their sample container (not inside a scrolling area).
 //
 //   node tools/check-responsive.mjs [--only <slug>] [--kind components|templates|styles]
-//                                   [--widths 320,390,768,1024,1440] [--json]
+//                                   [--widths 320,390,768,1024,1440] [--json] [--no-js]
+//
+// Every sample gets its own page (runtime load guards and observers cannot leak between
+// samples) and a short settle (fonts, two animation frames, 150ms) before it is measured.
+// --no-js skips the runtimes and checks the progressive-enhancement fallback markup instead.
 //
 // Needs the `playwright` package (npm i -D playwright, or NODE_PATH pointing at one) and a
 // Chromium (PLAYWRIGHT_BROWSERS_PATH or CHROMIUM_PATH). Exit code 1 when problems are found.
@@ -29,6 +33,7 @@ const only = opt("--only", null);
 const kinds = (opt("--kind", "components,templates,styles")).split(",");
 const widths = opt("--widths", "320,390,768,1024,1440").split(",").map(Number);
 const asJson = args.includes("--json");
+const noJs = args.includes("--no-js");
 
 let chromium;
 try {
@@ -95,14 +100,21 @@ const browser = await chromium.launch(exe ? { executablePath: exe } : {});
 const results = [];
 for (const width of widths) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "reduce" });
-  const page = await ctx.newPage();
   for (const pg of pages) {
-    const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${vars}${BASE}${pg.css}</style></head><body class="${pg.bodyClass || ""}">${pg.html}<script>window.apex=window.apex||{item:function(){return{setValue:function(){},getValue:function(){return""}}}};${(pg.js || "").replace(/<\/script/gi, "<\\/script")}</script></body></html>`;
+    // A fresh page per sample: setContent() keeps the same window, so runtime globals (the
+    // `if (window.amcX) return;` load guards, observers on the previous body, resize
+    // listeners) would leak from one sample into the next and later samples of a component
+    // would be measured without their JavaScript having run.
+    const page = await ctx.newPage();
+    const doc = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${vars}${BASE}${pg.css}</style></head><body class="${pg.bodyClass || ""}">${pg.html}<script>window.apex=window.apex||{item:function(){return{setValue:function(){},getValue:function(){return""}}}};${(noJs ? "" : pg.js || "").replace(/<\/script/gi, "<\\/script")}</script></body></html>`;
     const errors = [];
-    page.removeAllListeners("pageerror");
     page.on("pageerror", (e) => errors.push(e.message));
     await page.setContent(doc, { waitUntil: "load" });
-    await page.waitForTimeout(120);
+    // Let runtimes settle: fonts, a couple of animation frames (rAF-deferred layout,
+    // ResizeObserver callbacks) and a short timeout for debounced measuring.
+    await page.evaluate(() => (document.fonts ? document.fonts.ready : null)).catch(() => {});
+    await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => r()))));
+    await page.waitForTimeout(150);
     const found = await page.evaluate(() => {
       const out = [];
       const pageOverflow = document.documentElement.scrollWidth - window.innerWidth;
@@ -135,6 +147,7 @@ for (const width of widths) {
     });
     if (errors.length) found.push({ what: `page error: ${errors[0]}`, by: 0 });
     if (found.length) results.push({ width, id: pg.id, kind: pg.kind, problems: found });
+    await page.close();
   }
   await ctx.close();
 }

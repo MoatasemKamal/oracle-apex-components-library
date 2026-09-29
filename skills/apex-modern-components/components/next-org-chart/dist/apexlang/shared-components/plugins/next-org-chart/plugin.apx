@@ -50,7 +50,7 @@ plugin nextOrgChart (
         ]
     }
     information {
-        version: 1.0.0
+        version: 1.0.1
         helpText:
             ```
             One query row per position. Map ID (required) and Parent ID: the ID of the manager's row, empty for the top of the chart. Rows may arrive in any order; a CONNECT BY query with ORDER SIBLINGS BY and LEVEL gives the best result without JavaScript. Name is the person, Job Title their role, Department groups the swimlanes. Set Vacant to Y for an open position; its Name may stay empty. Headcount is the size of the whole team under a person; when empty the chart counts the people it has. The runtime file builds the tree, search, keyboard navigation and zoom, and rebuilds after a region refresh.
