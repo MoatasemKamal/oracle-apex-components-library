@@ -32,6 +32,7 @@ Never bypass apexlang's gates for app artifacts.
    - `references/porting-external-components.md`: 21st.dev / React / Tailwind / 3D to APEX
    - `references/design-systems.md`: turn a DESIGN.md (awesome-design-md) into a Universal Theme style
    - `references/magicui.md`: Magic UI (MIT): what is ported, what is worth porting, how to fetch source
+   - `references/frontend-design-gate.md`: how to apply the frontend-design plugin (if installed) and the audit checklist of generic tells
    - `references/design-quality.md`: research-first quality gate and craft checklist (adapted from Refero, MIT)
    - `references/design-collection.md`: the `design*` families (100+ styles chosen with a Style setting) and their shared conventions
    - `references/theme-styles.md`: Universal Theme styles (whole-app looks) and their contrast gate
