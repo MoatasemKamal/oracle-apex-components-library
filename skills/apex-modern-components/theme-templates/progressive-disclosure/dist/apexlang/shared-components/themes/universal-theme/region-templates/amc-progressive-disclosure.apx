@@ -1,0 +1,119 @@
+regionTemplate amc-progressive-disclosure (
+    name: AMC Progressive Disclosure
+    region {
+        template:
+            ```html
+            <section class="amc-TProgressiveDisclosure #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-more-class="amc-pd-more" data-amc-label-show="Show %0 more options" data-amc-label-show-one="Show 1 more option" data-amc-label-hide="Hide %0 more options" data-amc-label-hide-one="Hide 1 more option" data-amc-label-filled="%0 filled" data-amc-label-errors="%0 need attention">
+              <div class="amc-TProgressiveDisclosure-surface">
+                <header class="amc-TProgressiveDisclosure-header">
+                  <span class="amc-TProgressiveDisclosure-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TProgressiveDisclosure-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TProgressiveDisclosure-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </header>
+                <div class="amc-TProgressiveDisclosure-body">#BODY#<div class="amc-TProgressiveDisclosure-more" hidden>
+                    <div class="amc-TProgressiveDisclosure-bar">
+                      <button type="button" class="amc-TProgressiveDisclosure-toggle" aria-expanded="false"><span class="amc-TProgressiveDisclosure-chevron fa fa-chevron-down" aria-hidden="true"></span><span class="amc-TProgressiveDisclosure-toggleText"></span><span class="amc-TProgressiveDisclosure-badge" hidden></span><span class="amc-TProgressiveDisclosure-badge amc-TProgressiveDisclosure-badge--error" hidden></span></button>
+                    </div>
+                    <div class="amc-TProgressiveDisclosure-panel" hidden></div>
+                  </div>#SUB_REGIONS#</div>
+                <footer class="amc-TProgressiveDisclosure-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-progressive-disclosure.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-progressive-disclosure.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_PROGRESSIVE_DISCLOSURE
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Smart region template for forms. Design principles: Tesler's law: the complexity of a form cannot be removed, only carried by someone; the product carries the sorting so the user first sees what everyone needs, while every option stays one visible click away, counted, never removed. Form design: related optional fields are grouped together after the essentials. How it works: give the less common items the CSS class amc-pd-more (Page Item > Advanced > CSS Classes, or Column CSS Classes on the grid column). The script moves them, in page order, into a More options section after the other items, behind a real button with aria-expanded that says how many options it holds: Show 6 more options, Hide 6 more options. Grid columns keep their row: columns taken from one row share a new row with the same classes, and a row that holds only more-options moves whole. The open or closed choice is remembered per application, page and region in localStorage. Nothing is hidden silently: when the page loads or the region refreshes, a more-option that holds a value or an APEX error opens the section, and the toggle carries a 2 filled badge (accent colored while closed) and a 1 needs attention badge. A select list without a null entry counts as filled only when an entry other than the first is chosen; a Custom Attribute data-amc-default="X" on an item sets the value that counts as unset. A link to a closed option (href="#ITEM" or data-for, as in AMC Error Summary links and APEX notification links) opens the section before its click handler moves focus, and focus that reaches an option opens it too. apex.item().setFocus() on a closed option cannot focus it; open the section first with amcTplProgressiveDisclosure.open(element). Items hidden by Dynamic Actions are not counted. Items stay the same page items: session state, validations, processes and Dynamic Actions are unchanged. Without JavaScript all items stay where APEX put them. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-show Show %0 more options, data-amc-label-show-one Show 1 more option, data-amc-label-hide Hide %0 more options, data-amc-label-hide-one Hide 1 more option, data-amc-label-filled %0 filled, data-amc-label-errors %0 need attention; data-amc-more-class changes the marker class. Keyboard: the toggle is a button, Enter or Space opens and closes. Reduced motion: the section appears without fading and the chevron does not turn. JavaScript API: amcTplProgressiveDisclosure.refresh(element), open(element, true|false), result(element) and reset(element) to forget the stored choice.
+            ```
+    }
+
+    templateOption amc-progressive-disclosure-open-default (
+        name: Start open
+        sequence: 10
+        appearance {
+            cssClasses: amc-TProgressiveDisclosure--openDefault
+        }
+        help {
+            helpText:
+                ```text
+                More options are open the first time a user sees the page; afterwards the user's own choice is remembered.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: OPEN_DEFAULT
+        }
+    )
+
+    templateOption amc-progressive-disclosure-tinted (
+        name: Tinted more section
+        sequence: 20
+        appearance {
+            cssClasses: amc-TProgressiveDisclosure--tinted
+        }
+        help {
+            helpText:
+                ```text
+                The more options sit on a faint primary tint with a rule on the inline start side, so the two groups read as separate at a glance.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: TINTED
+        }
+    )
+
+    templateOption amc-progressive-disclosure-no-memory (
+        name: Do not remember
+        sequence: 30
+        appearance {
+            cssClasses: amc-TProgressiveDisclosure--noMemory
+        }
+        help {
+            helpText:
+                ```text
+                Stores nothing; every page load starts closed, or open with Start open. Use on shared or kiosk devices.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_MEMORY
+        }
+    )
+
+    templateOption amc-progressive-disclosure-no-body-padding (
+        name: No body padding
+        sequence: 40
+        appearance {
+            cssClasses: amc-TProgressiveDisclosure--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding around the items, for forms that bring their own spacing.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

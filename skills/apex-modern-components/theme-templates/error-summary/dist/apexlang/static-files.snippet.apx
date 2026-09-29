@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-error-summary.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-error-summary.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

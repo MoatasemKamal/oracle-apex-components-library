@@ -1,0 +1,154 @@
+/* Progressive Disclosure: smart region template for Universal Theme forms. Items marked with the
+   amc-pd-more class move into a "More options" section behind one divider toggle that says how
+   many options it holds and how many are filled. Native items are never restyled. Without
+   JavaScript every item stays in place and the frame is a plain quiet frame. */
+.amc-TProgressiveDisclosure {
+  --amc-tpd-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tpd-danger: var(--ut-palette-danger, #cb1100);
+  --amc-tpd-surface: var(--ut-component-background-color, #fff);
+  --amc-tpd-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tpd-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tpd-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tpd-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  margin-block-end: 16px;
+  color: var(--amc-tpd-ink);
+}
+.amc-TProgressiveDisclosure-surface {
+  display: grid;
+  border-radius: var(--amc-tpd-radius);
+  background: var(--amc-tpd-surface);
+  box-shadow: 0 0 0 1px var(--amc-tpd-line), 0 1px 2px color-mix(in srgb, var(--amc-tpd-ink) 6%, transparent);
+}
+.amc-TProgressiveDisclosure-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-inline-size: 0;
+  padding-block: 14px 10px;
+  padding-inline: 18px;
+}
+.amc-TProgressiveDisclosure-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tpd-accent) 11%, transparent);
+  color: var(--amc-tpd-accent);
+  font-size: 14px;
+}
+.amc-TProgressiveDisclosure-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TProgressiveDisclosure-title { flex: 1 1 12rem; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TProgressiveDisclosure-actions, .amc-TProgressiveDisclosure-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TProgressiveDisclosure-actions:empty, .amc-TProgressiveDisclosure-footer:empty { display: none; }
+.amc-TProgressiveDisclosure-footer { justify-content: flex-end; padding-block: 0 16px; padding-inline: 18px; }
+
+.amc-TProgressiveDisclosure-body { min-inline-size: 0; padding-block: 6px 18px; padding-inline: 18px; }
+.amc-TProgressiveDisclosure--noPadding .amc-TProgressiveDisclosure-body { padding-inline: 0; padding-block-end: 0; }
+
+/* More options: a divider toggle, the one distinctive element. The line is the boundary between
+   what everyone fills in and what only some need. */
+.amc-TProgressiveDisclosure-more { display: grid; gap: 10px; margin-block-start: 4px; }
+.amc-TProgressiveDisclosure-more[hidden] { display: none; }
+.amc-TProgressiveDisclosure-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-inline-size: 0;
+}
+.amc-TProgressiveDisclosure-bar::after {
+  content: "";
+  flex: 1 1 0;
+  min-inline-size: 0;
+  block-size: 1px;
+  background: var(--amc-tpd-line);
+}
+.amc-TProgressiveDisclosure-toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-block-size: 36px;
+  max-inline-size: 100%;
+  margin: 0;
+  margin-inline-start: -8px;
+  padding-block: 6px;
+  padding-inline: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--amc-tpd-accent);
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.amc-TProgressiveDisclosure-toggle:hover { background: color-mix(in srgb, var(--amc-tpd-accent) 9%, transparent); }
+.amc-TProgressiveDisclosure-toggle:focus-visible { outline: 2px solid var(--amc-tpd-accent); outline-offset: 1px; }
+.amc-TProgressiveDisclosure-chevron {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 20px;
+  block-size: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-tpd-accent) 12%, transparent);
+  font-size: 10px;
+  transition: transform .2s ease;
+}
+.amc-TProgressiveDisclosure-more.is-open .amc-TProgressiveDisclosure-chevron { transform: rotate(180deg); }
+.amc-TProgressiveDisclosure-badge {
+  display: inline-flex;
+  align-items: center;
+  padding-block: 1px;
+  padding-inline: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tpd-ink) 8%, transparent);
+  color: var(--amc-tpd-ink);
+  font-size: .75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.amc-TProgressiveDisclosure-badge[hidden] { display: none; }
+.amc-TProgressiveDisclosure-badge, .amc-TProgressiveDisclosure-toggleText { unicode-bidi: plaintext; }
+/* Closed with values inside: the badge takes the accent so the hidden values cannot be missed. */
+.amc-TProgressiveDisclosure-more.has-filled:not(.is-open) .amc-TProgressiveDisclosure-badge {
+  background: var(--amc-tpd-accent);
+  color: var(--ut-palette-primary-contrast, #fff);
+}
+.amc-TProgressiveDisclosure-badge--error,
+.amc-TProgressiveDisclosure-more.has-filled:not(.is-open) .amc-TProgressiveDisclosure-badge--error {
+  background: color-mix(in srgb, var(--amc-tpd-danger) 12%, transparent);
+  color: color-mix(in srgb, var(--amc-tpd-danger) 82%, var(--amc-tpd-ink));
+}
+
+.amc-TProgressiveDisclosure-panel { min-inline-size: 0; }
+.amc-TProgressiveDisclosure-panel[hidden] { display: none; }
+.amc-TProgressiveDisclosure-panel.is-entering { animation: amc-tpd-reveal .22s ease-out; }
+@keyframes amc-tpd-reveal { from { opacity: 0; } to { opacity: 1; } }
+.amc-TProgressiveDisclosure--tinted .amc-TProgressiveDisclosure-panel {
+  padding-block: 14px 2px;
+  padding-inline: 14px;
+  border-inline-start: 3px solid color-mix(in srgb, var(--amc-tpd-accent) 45%, transparent);
+  border-start-end-radius: calc(var(--amc-tpd-radius) - 4px);
+  border-end-end-radius: calc(var(--amc-tpd-radius) - 4px);
+  background: color-mix(in srgb, var(--amc-tpd-accent) 4%, var(--amc-tpd-surface));
+}
+/* Options handled by the runtime: Start open, Do not remember. */
+.amc-TProgressiveDisclosure--openDefault .amc-TProgressiveDisclosure-toggle,
+.amc-TProgressiveDisclosure--noMemory .amc-TProgressiveDisclosure-toggle { font-style: normal; }
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TProgressiveDisclosure-toggle, .amc-TProgressiveDisclosure-chevron { transition: none !important; }
+  .amc-TProgressiveDisclosure-panel.is-entering { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TProgressiveDisclosure-surface { border: 1px solid CanvasText; }
+  .amc-TProgressiveDisclosure-bar::after { background: CanvasText; }
+  .amc-TProgressiveDisclosure-badge { border: 1px solid CanvasText; }
+  .amc-TProgressiveDisclosure-toggle { color: ButtonText; }
+}

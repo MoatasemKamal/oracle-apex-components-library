@@ -1,0 +1,197 @@
+/* Form Progress: living region template for Universal Theme forms. The frame's top edge is a
+   segmented meter with one segment per required item; the header says how many are done and
+   offers a Next button to the next empty one. Only the frame is styled; native items are never
+   restyled. Without JavaScript, or without required items, it is a plain quiet frame. */
+.amc-TFormProgress {
+  --amc-tfp-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tfp-done: var(--ut-palette-success, #278701);
+  --amc-tfp-surface: var(--ut-component-background-color, #fff);
+  --amc-tfp-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tfp-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tfp-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tfp-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tfp-empty: color-mix(in srgb, var(--amc-tfp-ink) 13%, transparent);
+  margin-block-end: 16px;
+  color: var(--amc-tfp-ink);
+}
+.amc-TFormProgress-surface {
+  display: grid;
+  border-radius: var(--amc-tfp-radius);
+  background: var(--amc-tfp-surface);
+  box-shadow: 0 0 0 1px var(--amc-tfp-line), 0 1px 2px color-mix(in srgb, var(--amc-tfp-ink) 6%, transparent);
+}
+
+/* Head: meter + header + draft hint (sticky as one block with the Sticky option). */
+.amc-TFormProgress-head {
+  display: grid;
+  border-start-start-radius: var(--amc-tfp-radius);
+  border-start-end-radius: var(--amc-tfp-radius);
+  background: var(--amc-tfp-surface);
+}
+.amc-TFormProgress--sticky .amc-TFormProgress-head {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  box-shadow: 0 1px 0 var(--amc-tfp-line);
+}
+
+/* The memorable part: the top edge of the frame is the meter, one segment per required item. */
+.amc-TFormProgress-meter {
+  display: flex;
+  gap: 3px;
+  margin-block: 7px 0;
+  margin-inline: 12px;
+  block-size: 5px;
+}
+.amc-TFormProgress-meter[hidden] { display: none; }
+.amc-TFormProgress-seg {
+  flex: 1 1 0;
+  min-inline-size: 4px;
+  border-radius: 3px;
+  background: var(--amc-tfp-empty);
+  cursor: pointer;
+  transition: background-color .25s ease, box-shadow .25s ease;
+}
+.amc-TFormProgress-seg.is-filled { background: var(--amc-tfp-accent); }
+.amc-TFormProgress-seg.is-next { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--amc-tfp-accent) 70%, transparent); background: color-mix(in srgb, var(--amc-tfp-accent) 12%, transparent); }
+.amc-TFormProgress-seg:hover { background: color-mix(in srgb, var(--amc-tfp-accent) 45%, transparent); }
+.amc-TFormProgress-seg.is-filled:hover { background: color-mix(in srgb, var(--amc-tfp-accent) 80%, var(--amc-tfp-ink)); }
+/* Closure: when the last required item is filled, the segments turn to success one after another. */
+.amc-TFormProgress.is-complete .amc-TFormProgress-seg {
+  background: var(--amc-tfp-done);
+  transition-delay: calc(var(--amc-tfp-i, 0) * 35ms);
+}
+/* Continuous bar for long forms (more than 24 required items) or with the Continuous bar option. */
+.amc-TFormProgress-meter--continuous { gap: 0; border-radius: 3px; background: var(--amc-tfp-empty); }
+.amc-TFormProgress-meter--continuous .amc-TFormProgress-seg { border-radius: 0; background: transparent; box-shadow: none; }
+.amc-TFormProgress-meter--continuous .amc-TFormProgress-seg.is-filled { background: var(--amc-tfp-accent); }
+.amc-TFormProgress-meter--continuous .amc-TFormProgress-seg:first-child { border-start-start-radius: 3px; border-end-start-radius: 3px; }
+.amc-TFormProgress-meter--continuous .amc-TFormProgress-seg:last-child { border-start-end-radius: 3px; border-end-end-radius: 3px; }
+.amc-TFormProgress.is-complete .amc-TFormProgress-meter--continuous .amc-TFormProgress-seg { background: var(--amc-tfp-done); transition-delay: 0s; }
+
+/* Header */
+.amc-TFormProgress-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-inline-size: 0;
+  padding-block: 12px 10px;
+  padding-inline: 18px;
+}
+.amc-TFormProgress-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tfp-accent) 11%, transparent);
+  color: var(--amc-tfp-accent);
+  font-size: 14px;
+}
+.amc-TFormProgress-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TFormProgress-icon.fa:not([class*="fa-"]) ~ .amc-TFormProgress-status { padding-inline-start: 0; }
+.amc-TFormProgress-title { flex: 1 1 12rem; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+/* Status sits on its own row under the title, aligned with the title text. */
+.amc-TFormProgress-status {
+  order: 3;
+  flex: 1 1 100%;
+  padding-inline-start: 42px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  min-inline-size: 0;
+}
+.amc-TFormProgress-status[hidden] { display: none; }
+.amc-TFormProgress-count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: .8125rem;
+  color: var(--amc-tfp-muted);
+  font-variant-numeric: tabular-nums;
+}
+.amc-TFormProgress-countText, .amc-TFormProgress-next, .amc-TFormProgress-draft { unicode-bidi: plaintext; }
+.amc-TFormProgress-check { display: none; color: var(--amc-tfp-done); }
+.amc-TFormProgress.is-complete .amc-TFormProgress-check { display: inline-block; }
+.amc-TFormProgress.is-complete .amc-TFormProgress-count { color: var(--amc-tfp-ink); font-weight: 600; }
+.amc-TFormProgress-next {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 30px;
+  max-inline-size: 100%;
+  margin: 0;
+  padding-block: 3px;
+  padding-inline: 12px;
+  border: 1px solid color-mix(in srgb, var(--amc-tfp-accent) 40%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tfp-accent) 6%, transparent);
+  color: var(--amc-tfp-accent);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: start;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.amc-TFormProgress-next[hidden] { display: none; }
+.amc-TFormProgress-next:hover { background: color-mix(in srgb, var(--amc-tfp-accent) 14%, transparent); border-color: var(--amc-tfp-accent); }
+.amc-TFormProgress-next:focus-visible { outline: 2px solid var(--amc-tfp-accent); outline-offset: 2px; }
+.amc-TFormProgress-actions, .amc-TFormProgress-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TFormProgress-actions:empty, .amc-TFormProgress-footer:empty { display: none; }
+.amc-TFormProgress-footer { justify-content: flex-end; padding-block: 0 16px; padding-inline: 18px; }
+
+/* Save-draft hint (Zeigarnik: the open loop gets a safe place to rest). */
+.amc-TFormProgress-draft {
+  margin: 0;
+  margin-block-start: -4px;
+  padding-block: 0 10px;
+  padding-inline: 60px 18px;
+  font-size: .8125rem;
+  color: var(--amc-tfp-muted);
+}
+.amc-TFormProgress-draft[hidden] { display: none; }
+
+/* Body: native content, readable, never clipped or transformed. */
+.amc-TFormProgress-body { min-inline-size: 0; overflow-x: auto; padding-block: 6px 18px; padding-inline: 18px; }
+.amc-TFormProgress--noPadding .amc-TFormProgress-body { padding-inline: 0; padding-block-end: 0; }
+.amc-TFormProgress-optional {
+  unicode-bidi: isolate;
+  margin-inline-start: 6px;
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--amc-tfp-muted);
+}
+/* Options styled by the runtime: Mark optional fields, Continuous bar and Save-draft hint. */
+.amc-TFormProgress--markOptional .amc-TFormProgress-optional { font-style: normal; }
+.amc-TFormProgress--bar .amc-TFormProgress-meter { block-size: 6px; }
+.amc-TFormProgress--draftHint .amc-TFormProgress-draft { font-style: normal; }
+
+.amc-TFormProgress-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TFormProgress-seg, .amc-TFormProgress-next { transition: none !important; }
+  .amc-TFormProgress.is-complete .amc-TFormProgress-seg { transition-delay: 0s !important; }
+}
+@media (forced-colors: active) {
+  .amc-TFormProgress-surface { border: 1px solid CanvasText; }
+  .amc-TFormProgress-seg { background: Canvas; border: 1px solid CanvasText; forced-color-adjust: none; }
+  .amc-TFormProgress-seg.is-filled, .amc-TFormProgress.is-complete .amc-TFormProgress-seg { background: Highlight; border-color: Highlight; }
+  .amc-TFormProgress-seg.is-next { outline: 2px solid LinkText; }
+  .amc-TFormProgress-next { border-color: ButtonText; color: ButtonText; }
+}

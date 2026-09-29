@@ -1,0 +1,129 @@
+/* Skeleton Region: motion region template for Universal Theme. While the region refreshes for
+   longer than 400 ms, a skeleton with the exact shape of the current content (text lines, fields,
+   cards, report rows) is laid over the body; a slow light sweep shows it is working. The body is
+   never clipped or transformed; the skeleton is a sibling layer. Reduced motion: static skeleton. */
+.amc-TSkeletonRegion {
+  --amc-tsr-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tsr-surface: var(--ut-component-background-color, #fff);
+  --amc-tsr-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tsr-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tsr-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tsr-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  --amc-tsr-bone: color-mix(in srgb, var(--amc-tsr-ink) 13%, var(--amc-tsr-surface));
+  --amc-tsr-bone-soft: color-mix(in srgb, var(--amc-tsr-ink) 5%, var(--amc-tsr-surface));
+  --amc-tsr-sheen: color-mix(in srgb, var(--amc-tsr-surface) 70%, transparent);
+  margin-block-end: 16px;
+  color: var(--amc-tsr-ink);
+}
+.amc-TSkeletonRegion--accent {
+  --amc-tsr-bone: color-mix(in srgb, var(--amc-tsr-accent) 16%, var(--amc-tsr-surface));
+  --amc-tsr-bone-soft: color-mix(in srgb, var(--amc-tsr-accent) 7%, var(--amc-tsr-surface));
+}
+.amc-TSkeletonRegion-surface {
+  display: grid;
+  border-radius: var(--amc-tsr-radius);
+  background: var(--amc-tsr-surface);
+  box-shadow: 0 0 0 1px var(--amc-tsr-line), 0 1px 2px color-mix(in srgb, var(--amc-tsr-ink) 6%, transparent);
+}
+.amc-TSkeletonRegion-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-inline-size: 0;
+  padding-block: 14px 10px;
+  padding-inline: 18px;
+}
+.amc-TSkeletonRegion-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tsr-accent) 11%, transparent);
+  color: var(--amc-tsr-accent);
+  font-size: 14px;
+}
+.amc-TSkeletonRegion-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TSkeletonRegion-title { flex: 1 1 12rem; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TSkeletonRegion--elapsed .amc-TSkeletonRegion-elapsed {
+  font-size: .8125rem;
+  color: var(--amc-tsr-muted);
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: isolate;
+}
+.amc-TSkeletonRegion-elapsed[hidden] { display: none; }
+.amc-TSkeletonRegion-actions, .amc-TSkeletonRegion-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TSkeletonRegion-actions:empty, .amc-TSkeletonRegion-footer:empty { display: none; }
+.amc-TSkeletonRegion-footer { justify-content: flex-end; padding-block: 0 16px; padding-inline: 18px; }
+
+/* Stage: body + skeleton layer. The body keeps its native look and is never clipped. */
+.amc-TSkeletonRegion-stage { position: relative; min-inline-size: 0; }
+.amc-TSkeletonRegion-body { min-inline-size: 0; overflow-x: auto; padding-block: 6px 18px; padding-inline: 18px; }
+.amc-TSkeletonRegion--noPadding .amc-TSkeletonRegion-body { padding-inline: 0; padding-block-end: 0; }
+/* First load: an empty lazy-loading body reserves room, so content arriving does not push the page. */
+.amc-TSkeletonRegion--firstLoad .amc-TSkeletonRegion-body:empty,
+.amc-TSkeletonRegion--firstLoad.is-loading .amc-TSkeletonRegion-body { min-block-size: 7.5rem; }
+
+.amc-TSkeletonRegion-skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  border-end-start-radius: var(--amc-tsr-radius);
+  border-end-end-radius: var(--amc-tsr-radius);
+  background: var(--amc-tsr-surface);
+  pointer-events: none;
+  animation: amc-tsr-in .16s ease-out;
+}
+.amc-TSkeletonRegion-skeleton[hidden] { display: none; }
+.amc-TSkeletonRegion-skeleton.is-leaving { opacity: 0; transition: opacity .15s ease-in; }
+/* The sheen: one slow diagonal sweep of light across all bones. */
+.amc-TSkeletonRegion-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, var(--amc-tsr-sheen) 50%, transparent 70%) no-repeat;
+  background-size: 60% 100%;
+  background-position: -120% 0;
+  animation: amc-tsr-sheen 1.6s ease-in-out infinite;
+}
+.amc-TSkeletonRegion-skeleton:dir(rtl)::after { animation-direction: reverse; }
+.amc-TSkeletonRegion--pulse .amc-TSkeletonRegion-skeleton::after { display: none; }
+.amc-TSkeletonRegion--pulse .amc-TSkeletonRegion-bone { animation: amc-tsr-pulse 1.4s ease-in-out infinite; }
+@keyframes amc-tsr-sheen { from { background-position: -120% 0; } to { background-position: 220% 0; } }
+@keyframes amc-tsr-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@keyframes amc-tsr-in { from { opacity: 0; } to { opacity: 1; } }
+
+.amc-TSkeletonRegion-bone { position: absolute; display: block; border-radius: 4px; background: var(--amc-tsr-bone); }
+.amc-TSkeletonRegion-bone--field { background: var(--amc-tsr-surface); box-shadow: inset 0 0 0 1px var(--amc-tsr-bone); }
+.amc-TSkeletonRegion-bone--button { background: var(--amc-tsr-bone-soft); box-shadow: inset 0 0 0 1px var(--amc-tsr-bone); }
+.amc-TSkeletonRegion-bone--box { background: transparent; box-shadow: inset 0 0 0 1px var(--amc-tsr-bone); }
+.amc-TSkeletonRegion-bone--block { background: var(--amc-tsr-bone-soft); }
+.amc-TSkeletonRegion-bone--rule { border-radius: 0; background: var(--amc-tsr-bone-soft); }
+
+.amc-TSkeletonRegion-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TSkeletonRegion-skeleton { animation: none !important; }
+  .amc-TSkeletonRegion-skeleton::after { display: none !important; animation: none !important; }
+  .amc-TSkeletonRegion-bone { animation: none !important; }
+  .amc-TSkeletonRegion-skeleton.is-leaving { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TSkeletonRegion-surface { border: 1px solid CanvasText; }
+  .amc-TSkeletonRegion-skeleton { background: Canvas; }
+  .amc-TSkeletonRegion-bone { background: GrayText; forced-color-adjust: none; }
+  .amc-TSkeletonRegion-bone--field, .amc-TSkeletonRegion-bone--box, .amc-TSkeletonRegion-bone--button { background: Canvas; border: 1px solid GrayText; }
+}

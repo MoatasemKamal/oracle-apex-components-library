@@ -1,0 +1,141 @@
+regionTemplate amc-error-summary (
+    name: AMC Error Summary
+    region {
+        template:
+            ```html
+            <section class="amc-TErrorSummary #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-label-one="1 field needs attention" data-amc-label-many="%0 fields need attention" data-amc-label-intro="Fix these, then save again. Select a message to go to its field." data-amc-label-changed="Changed. It is checked again when you save." data-amc-label-page="Form" data-amc-hint-required="Fill in %0 to save the form." data-amc-label-this="this field" data-amc-hint-number="Use digits only, with a dot for decimals, for example 1250.50." data-amc-hint-date="Type the date as %0, or pick it from the calendar." data-amc-hint-date-any="Pick the date from the calendar, or type it like the example." data-amc-hint-email="Include an @ and a domain, for example name@company.sa." data-amc-hint-length="Shorten it to %0 characters or fewer." data-amc-hint-toolong="Remove %0 characters." data-amc-hint-unique="This value is already used. Enter a different one." data-amc-hint-match="Type the same value in both fields.">
+              <div class="amc-TErrorSummary-surface">
+                <header class="amc-TErrorSummary-header">
+                  <span class="amc-TErrorSummary-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TErrorSummary-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TErrorSummary-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </header>
+                <div class="amc-TErrorSummary-summary" tabindex="-1" hidden>
+                  <span class="amc-TErrorSummary-mark fa fa-exclamation-triangle" aria-hidden="true"></span>
+                  <div class="amc-TErrorSummary-content">
+                    <h3 class="amc-TErrorSummary-heading"></h3>
+                    <p class="amc-TErrorSummary-intro"></p>
+                    <ul class="amc-TErrorSummary-list"></ul>
+                  </div>
+                </div>
+                <div class="amc-TErrorSummary-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TErrorSummary-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+                <p class="amc-TErrorSummary-live" role="status" aria-live="polite"></p>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-error-summary.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-error-summary.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_ERROR_SUMMARY
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Smart region template for forms. Design principles: error-handling UX says forms need inline errors plus a summary at the top that says what happened and what to do; feedback patterns say errors persist until resolved and the response must be accessible, not color only. How it works: the script collects errors that belong to this region from two sources and merges them per item: inline item errors in the body (an is-error field container, a control with apex-page-item-error or aria-invalid="true" and its #ITEM_error text), and entries in the page notification (#t_Alert_Notification, .a-Notification-item or .htmlDbUlErr li) whose link points at an item in this region through data-for, href="#ITEM" or apex.item('ITEM') in the link. The summary lists them in the order of the fields: the count ("3 fields need attention"), each APEX message as a link that scrolls to and focuses its field (apex.item().setFocus() when available), the field label when the message does not already name it, and a plain-language hint read from the message: empty required value, number, date format, email, length, duplicate value or mismatch. A Custom Attribute data-amc-hint="..." on an item replaces the automatic hint. Focus moves to the summary once when errors appear, also after page load when APEX would focus the first item; if the user is already working elsewhere, or with the No focus move option, the count is announced politely instead. Editing a listed field marks its entry Changed and checked again on save, without claiming it is fixed. When APEX clears the errors (apex.message.clearErrors or a new submit) the summary disappears; it re-scans after apexafterrefresh and on DOM changes. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-one 1 field needs attention, data-amc-label-many %0 fields need attention, data-amc-label-intro Fix these, then save again. Select a message to go to its field., data-amc-label-changed Changed. It is checked again when you save., data-amc-label-this this field, and the hints data-amc-hint-required Fill in %0 to save the form., data-amc-hint-number, data-amc-hint-date (with %0 for the format), data-amc-hint-date-any, data-amc-hint-email, data-amc-hint-length (%0 = limit), data-amc-hint-toolong (%0 = characters over), data-amc-hint-unique, data-amc-hint-match. Hints are detected from English APEX messages; for translated messages set data-amc-hint per item or turn hints off. Keyboard: Tab reaches each link, Enter goes to the field. Reduced motion: scrolling jumps instead of gliding. Forced colors: the rule uses Mark and links LinkText. JavaScript API: amcTplErrorSummary.refresh(element), result(element) and hint(message, element).
+            ```
+    }
+
+    templateOption amc-error-summary-no-focus (
+        name: No focus move
+        sequence: 10
+        appearance {
+            cssClasses: amc-TErrorSummary--noFocus
+        }
+        help {
+            helpText:
+                ```text
+                Keeps focus where it is and announces the error count politely instead, for pages with several forms or a form far below the fold.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_FOCUS
+        }
+    )
+
+    templateOption amc-error-summary-no-hints (
+        name: Hide fix hints
+        sequence: 20
+        appearance {
+            cssClasses: amc-TErrorSummary--noHints
+        }
+        help {
+            helpText:
+                ```text
+                Lists only the APEX messages, for applications whose messages already explain the fix or are not in English.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_HINTS
+        }
+    )
+
+    templateOption amc-error-summary-sticky (
+        name: Sticky summary
+        sequence: 30
+        appearance {
+            cssClasses: amc-TErrorSummary--sticky
+        }
+        help {
+            helpText:
+                ```text
+                The summary stays in view while a long form scrolls, so the next error is always one click away. Set --amc-tes-sticky-top when a fixed page header covers it.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STICKY
+        }
+    )
+
+    templateOption amc-error-summary-include-page (
+        name: Include page errors
+        sequence: 40
+        appearance {
+            cssClasses: amc-TErrorSummary--includePage
+        }
+        help {
+            helpText:
+                ```text
+                Also lists page-level errors from the notification that are not tied to an item, as plain text, for pages with one form.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: INCLUDE_PAGE
+        }
+    )
+
+    templateOption amc-error-summary-no-body-padding (
+        name: No body padding
+        sequence: 50
+        appearance {
+            cssClasses: amc-TErrorSummary--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding around the items, for forms that bring their own spacing.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

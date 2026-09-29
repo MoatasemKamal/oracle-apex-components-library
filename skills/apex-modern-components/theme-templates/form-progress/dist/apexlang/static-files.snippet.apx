@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-form-progress.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-form-progress.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

@@ -1,0 +1,61 @@
+{
+  "kind": "region",
+  "name": "AMC Form Progress",
+  "staticId": "AMC_TPL_FORM_PROGRESS",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A form frame whose top edge is a segmented meter with one segment per required item, and whose header says honestly how many required fields are done and offers a Next button to the next empty one.",
+  "useFor": "Form regions and Static Content regions with page items, especially long data-entry forms such as supplier registration, customer onboarding or claims. Around a report, chart or text it is a plain frame.",
+  "keywords": [
+    "form",
+    "progress",
+    "required",
+    "completion",
+    "zeigarnik",
+    "meter",
+    "living",
+    "content-aware"
+  ],
+  "helpText": "Living region template for forms. Design principles: Zeigarnik effect, used honestly: an open task stays in mind, so the frame shows a finite, visible distance to completion; only required items count and nothing is faked, so the meter never promises more than the form asks. Form design: the next empty required field is one click away, and with the Mark optional fields option the optional items are labelled instead of the required ones. How it works: the script finds the items in the region body by Universal Theme markup and treats an item as required when its field container has is-required, its control has required or aria-required=\"true\", or its label carries a required marker: a visually hidden text containing (Value Required), a .t-Form-required element or a trailing asterisk. Hidden, disabled and conditionally not rendered items do not count. An item is filled when apex.item(id).isEmpty() is false, or, without the API, when its control has a value or a checked option. The header shows \"4 of 7 required fields done\" and a Next button naming the next empty required item after the focused one; a click on a meter segment focuses that item. When the last one is filled the segments turn to the success color one after another and the text reads \"All 7 required fields done\". The count is announced politely through a status region after each completed edit (change or leaving a field), never on every keystroke. It recalculates after apexafterrefresh, when Dynamic Actions show or hide items, and when values change. Forms with more than 24 required items get a continuous bar. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-count %0 of %1 required fields done, data-amc-label-done All %0 required fields done, data-amc-label-next Next: %0, data-amc-label-draft Save a draft now and finish the rest later., data-amc-label-optional Optional, data-amc-label-filled filled, data-amc-label-empty still empty, data-amc-required-marker Value Required (the text of the hidden required marker in your language). Keyboard: the Next button is a real button in the header; segments are a pointer shortcut and hidden from assistive technology because the count and the button carry the same information. Reduced motion: no color sweep or transitions. Forced colors: segments use Highlight. JavaScript API: amcTplFormProgress.refresh(element) and result(element) returning total, done and the items.",
+  "landmarkType": "region",
+  "templateOptions": [
+    {
+      "staticId": "DRAFT_HINT",
+      "name": "Show save-draft hint",
+      "cssClass": "amc-TFormProgress--draftHint",
+      "sequence": 10,
+      "help": "While the form is started but not complete, a short line under the header says a draft can be saved and finished later. Use it only when the page really has a Save draft button or autosave."
+    },
+    {
+      "staticId": "MARK_OPTIONAL",
+      "name": "Mark optional fields",
+      "cssClass": "amc-TFormProgress--markOptional",
+      "sequence": 20,
+      "help": "Adds a quiet Optional tag to the label of every visible item that is not required, for forms where most fields are required."
+    },
+    {
+      "staticId": "STICKY",
+      "name": "Sticky progress header",
+      "cssClass": "amc-TFormProgress--sticky",
+      "sequence": 30,
+      "help": "The meter and header stay at the top of the viewport while a long form scrolls. Set --amc-tfp-sticky-top on the page when a fixed page header covers it."
+    },
+    {
+      "staticId": "BAR",
+      "name": "Continuous bar",
+      "cssClass": "amc-TFormProgress--bar",
+      "sequence": 40,
+      "help": "One continuous bar instead of one segment per item. Used automatically when the form has more than 24 required items."
+    },
+    {
+      "staticId": "NO_BODY_PADDING",
+      "name": "No body padding",
+      "cssClass": "amc-TFormProgress--noPadding",
+      "sequence": 50,
+      "help": "Removes side padding around the items, for forms that bring their own spacing."
+    }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

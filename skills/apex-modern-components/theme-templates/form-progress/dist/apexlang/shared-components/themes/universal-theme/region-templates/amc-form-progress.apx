@@ -1,0 +1,141 @@
+regionTemplate amc-form-progress (
+    name: AMC Form Progress
+    region {
+        template:
+            ```html
+            <section class="amc-TFormProgress #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-label-count="%0 of %1 required fields done" data-amc-label-done="All %0 required fields done" data-amc-label-next="Next: %0" data-amc-label-draft="Save a draft now and finish the rest later." data-amc-label-optional="Optional" data-amc-label-filled="filled" data-amc-label-empty="still empty" data-amc-required-marker="Value Required">
+              <div class="amc-TFormProgress-surface">
+                <div class="amc-TFormProgress-head">
+                  <div class="amc-TFormProgress-meter" aria-hidden="true" hidden></div>
+                  <header class="amc-TFormProgress-header">
+                    <span class="amc-TFormProgress-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                    <h2 class="amc-TFormProgress-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                    <div class="amc-TFormProgress-status" hidden>
+                      <p class="amc-TFormProgress-count"><span class="amc-TFormProgress-check fa fa-check" aria-hidden="true"></span><span class="amc-TFormProgress-countText"></span></p>
+                      <button type="button" class="amc-TFormProgress-next"></button>
+                    </div>
+                    <div class="amc-TFormProgress-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                  </header>
+                  <p class="amc-TFormProgress-draft" hidden></p>
+                </div>
+                <div class="amc-TFormProgress-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TFormProgress-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+                <p class="amc-TFormProgress-live" role="status" aria-live="polite"></p>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-form-progress.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-form-progress.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_FORM_PROGRESS
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Living region template for forms. Design principles: Zeigarnik effect, used honestly: an open task stays in mind, so the frame shows a finite, visible distance to completion; only required items count and nothing is faked, so the meter never promises more than the form asks. Form design: the next empty required field is one click away, and with the Mark optional fields option the optional items are labelled instead of the required ones. How it works: the script finds the items in the region body by Universal Theme markup and treats an item as required when its field container has is-required, its control has required or aria-required="true", or its label carries a required marker: a visually hidden text containing (Value Required), a .t-Form-required element or a trailing asterisk. Hidden, disabled and conditionally not rendered items do not count. An item is filled when apex.item(id).isEmpty() is false, or, without the API, when its control has a value or a checked option. The header shows "4 of 7 required fields done" and a Next button naming the next empty required item after the focused one; a click on a meter segment focuses that item. When the last one is filled the segments turn to the success color one after another and the text reads "All 7 required fields done". The count is announced politely through a status region after each completed edit (change or leaving a field), never on every keystroke. It recalculates after apexafterrefresh, when Dynamic Actions show or hide items, and when values change. Forms with more than 24 required items get a continuous bar. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-count %0 of %1 required fields done, data-amc-label-done All %0 required fields done, data-amc-label-next Next: %0, data-amc-label-draft Save a draft now and finish the rest later., data-amc-label-optional Optional, data-amc-label-filled filled, data-amc-label-empty still empty, data-amc-required-marker Value Required (the text of the hidden required marker in your language). Keyboard: the Next button is a real button in the header; segments are a pointer shortcut and hidden from assistive technology because the count and the button carry the same information. Reduced motion: no color sweep or transitions. Forced colors: segments use Highlight. JavaScript API: amcTplFormProgress.refresh(element) and result(element) returning total, done and the items.
+            ```
+    }
+
+    templateOption amc-form-progress-draft-hint (
+        name: Show save-draft hint
+        sequence: 10
+        appearance {
+            cssClasses: amc-TFormProgress--draftHint
+        }
+        help {
+            helpText:
+                ```text
+                While the form is started but not complete, a short line under the header says a draft can be saved and finished later. Use it only when the page really has a Save draft button or autosave.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: DRAFT_HINT
+        }
+    )
+
+    templateOption amc-form-progress-mark-optional (
+        name: Mark optional fields
+        sequence: 20
+        appearance {
+            cssClasses: amc-TFormProgress--markOptional
+        }
+        help {
+            helpText:
+                ```text
+                Adds a quiet Optional tag to the label of every visible item that is not required, for forms where most fields are required.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: MARK_OPTIONAL
+        }
+    )
+
+    templateOption amc-form-progress-sticky (
+        name: Sticky progress header
+        sequence: 30
+        appearance {
+            cssClasses: amc-TFormProgress--sticky
+        }
+        help {
+            helpText:
+                ```text
+                The meter and header stay at the top of the viewport while a long form scrolls. Set --amc-tfp-sticky-top on the page when a fixed page header covers it.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STICKY
+        }
+    )
+
+    templateOption amc-form-progress-bar (
+        name: Continuous bar
+        sequence: 40
+        appearance {
+            cssClasses: amc-TFormProgress--bar
+        }
+        help {
+            helpText:
+                ```text
+                One continuous bar instead of one segment per item. Used automatically when the form has more than 24 required items.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: BAR
+        }
+    )
+
+    templateOption amc-form-progress-no-body-padding (
+        name: No body padding
+        sequence: 50
+        appearance {
+            cssClasses: amc-TFormProgress--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding around the items, for forms that bring their own spacing.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

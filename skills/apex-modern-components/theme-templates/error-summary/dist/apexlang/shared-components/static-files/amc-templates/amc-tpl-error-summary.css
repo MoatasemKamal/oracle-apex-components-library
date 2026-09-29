@@ -1,0 +1,139 @@
+/* Error Summary: smart region template for Universal Theme forms. When APEX shows item errors
+   in the region, a summary appears between the header and the form: a count, one link per field
+   with the error text and a plain-language fix hint. Native items and their inline errors are
+   never restyled. Without errors, or without JavaScript, it is a plain quiet frame. */
+.amc-TErrorSummary {
+  --amc-tes-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tes-danger: var(--ut-palette-danger, #cb1100);
+  --amc-tes-surface: var(--ut-component-background-color, #fff);
+  --amc-tes-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tes-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tes-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tes-radius: calc(var(--ut-component-border-radius, 4px) + 6px);
+  /* Error text is mixed toward the ink so it keeps AA contrast on the tinted panel in light and dark. */
+  --amc-tes-danger-ink: color-mix(in srgb, var(--amc-tes-danger) 82%, var(--amc-tes-ink));
+  margin-block-end: 16px;
+  color: var(--amc-tes-ink);
+}
+.amc-TErrorSummary-surface {
+  display: grid;
+  border-radius: var(--amc-tes-radius);
+  background: var(--amc-tes-surface);
+  box-shadow: 0 0 0 1px var(--amc-tes-line), 0 1px 2px color-mix(in srgb, var(--amc-tes-ink) 6%, transparent);
+  transition: box-shadow .2s ease;
+}
+.amc-TErrorSummary.is-invalid .amc-TErrorSummary-surface {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-tes-danger) 35%, var(--amc-tes-line)), 0 1px 2px color-mix(in srgb, var(--amc-tes-ink) 6%, transparent);
+}
+
+.amc-TErrorSummary-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  min-inline-size: 0;
+  padding-block: 14px 10px;
+  padding-inline: 18px;
+}
+.amc-TErrorSummary-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--amc-tes-accent) 11%, transparent);
+  color: var(--amc-tes-accent);
+  font-size: 14px;
+}
+.amc-TErrorSummary-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TErrorSummary-title { flex: 1 1 12rem; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TErrorSummary-actions, .amc-TErrorSummary-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TErrorSummary-actions:empty, .amc-TErrorSummary-footer:empty { display: none; }
+.amc-TErrorSummary-footer { justify-content: flex-end; padding-block: 0 16px; padding-inline: 18px; }
+
+/* The summary: one quiet panel with a strong inline-start rule, the only loud thing in the frame. */
+.amc-TErrorSummary-summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  margin-block: 2px 8px;
+  margin-inline: 12px;
+  padding-block: 14px;
+  padding-inline: 14px 16px;
+  border-inline-start: 4px solid var(--amc-tes-danger);
+  border-start-end-radius: calc(var(--amc-tes-radius) - 4px);
+  border-end-end-radius: calc(var(--amc-tes-radius) - 4px);
+  background: color-mix(in srgb, var(--amc-tes-danger) 7%, var(--amc-tes-surface));
+  scroll-margin-block: 80px;
+}
+.amc-TErrorSummary-summary[hidden] { display: none; }
+.amc-TErrorSummary-summary:focus { outline: 2px solid var(--amc-tes-danger); outline-offset: 2px; }
+.amc-TErrorSummary-summary:focus:not(:focus-visible) { outline-color: color-mix(in srgb, var(--amc-tes-danger) 55%, transparent); }
+.amc-TErrorSummary--sticky .amc-TErrorSummary-summary {
+  position: sticky;
+  inset-block-start: var(--amc-tes-sticky-top, 8px);
+  z-index: 2;
+  box-shadow: 0 6px 16px -10px color-mix(in srgb, var(--amc-tes-ink) 40%, transparent);
+}
+.amc-TErrorSummary-mark { padding-block-start: 2px; color: var(--amc-tes-danger); font-size: 1rem; }
+.amc-TErrorSummary-content { display: grid; gap: 4px; min-inline-size: 0; }
+.amc-TErrorSummary-heading { margin: 0; font-size: .9375rem; font-weight: 650; line-height: 1.35; }
+.amc-TErrorSummary-intro { margin: 0 0 6px; font-size: .8125rem; line-height: 1.45; color: color-mix(in srgb, var(--amc-tes-muted) 55%, var(--amc-tes-ink)); }
+/* Messages come in the app's language; each line takes its direction from its own text. */
+.amc-TErrorSummary-heading, .amc-TErrorSummary-intro, .amc-TErrorSummary-link, .amc-TErrorSummary-pageMsg, .amc-TErrorSummary-hint, .amc-TErrorSummary-changed { unicode-bidi: plaintext; }
+.amc-TErrorSummary-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.amc-TErrorSummary-item { display: grid; gap: 2px; min-inline-size: 0; font-size: .875rem; line-height: 1.4; }
+.amc-TErrorSummary-link {
+  justify-self: start;
+  display: inline;
+  max-inline-size: 100%;
+  border-radius: 3px;
+  color: var(--amc-tes-danger-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.amc-TErrorSummary-link:hover { text-decoration-thickness: 2px; }
+.amc-TErrorSummary-link:focus-visible { outline: 2px solid var(--amc-tes-danger); outline-offset: 2px; text-decoration: none; }
+.amc-TErrorSummary-pageMsg { font-weight: 600; color: var(--amc-tes-danger-ink); overflow-wrap: anywhere; }
+.amc-TErrorSummary-field { font-weight: 650; unicode-bidi: plaintext; }
+.amc-TErrorSummary-field::after { content: ": "; }
+.amc-TErrorSummary-msg { unicode-bidi: plaintext; }
+.amc-TErrorSummary-hint { color: var(--amc-tes-ink); font-size: .8125rem; overflow-wrap: anywhere; }
+.amc-TErrorSummary--noHints .amc-TErrorSummary-hint { display: none; }
+.amc-TErrorSummary-changed { display: none; font-size: .75rem; color: var(--amc-tes-muted); }
+/* Edited but not re-validated: calmer, never claimed as fixed. */
+.amc-TErrorSummary-item.is-changed .amc-TErrorSummary-changed { display: block; }
+.amc-TErrorSummary-item.is-changed .amc-TErrorSummary-link { color: var(--amc-tes-muted); text-decoration-style: dotted; }
+.amc-TErrorSummary-item.is-changed .amc-TErrorSummary-hint { display: none; }
+
+.amc-TErrorSummary-body { min-inline-size: 0; padding-block: 6px 18px; padding-inline: 18px; }
+.amc-TErrorSummary--noPadding .amc-TErrorSummary-body { padding-inline: 0; padding-block-end: 0; }
+/* Options handled by the runtime: No focus move, Include page errors. */
+.amc-TErrorSummary--noFocus .amc-TErrorSummary-summary:focus { outline-offset: 2px; }
+.amc-TErrorSummary--includePage .amc-TErrorSummary-pageMsg { font-style: normal; }
+
+.amc-TErrorSummary-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-TErrorSummary-surface { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TErrorSummary-surface { border: 1px solid CanvasText; }
+  .amc-TErrorSummary-summary { border: 1px solid CanvasText; border-inline-start: 4px solid Mark; }
+  .amc-TErrorSummary-link { color: LinkText; }
+}
