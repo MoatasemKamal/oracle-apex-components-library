@@ -11,7 +11,7 @@ import { checkCss, versionAtLeast } from "./validate.mjs";
 export const THEME_DIR = "universal-theme"; // theme folder name in an APEXlang app (scaffold default)
 export const THEME_ID = 42; // Universal Theme
 export const STATIC_FOLDER = "amc-templates";
-const DIRECTIONS = ["motion", "depth", "bold", "smart"];
+const DIRECTIONS = ["motion", "depth", "bold", "smart", "living"];
 
 // ---------------------------------------------------------------- parts
 

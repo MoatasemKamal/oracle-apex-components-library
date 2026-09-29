@@ -110,3 +110,41 @@ APEXlang apps keep custom theme templates (`shared-components/themes/universal-t
 here), the `@amc-<slug>` reference syntax, and the legacy parameter names for first-entry
 templates and template options. Run apexlang's compiler-truth audit or a real import before
 production use and correct `tools/lib/theme-templates.mjs` if needed.
+
+## Living Templates (direction `living`)
+
+Templates that go beyond appearance: they **understand their content or their user** and
+adapt. Nothing like this exists in Universal Theme, Bootstrap or the effect libraries, which
+only draw frames. A living template must still render completely without JavaScript and
+look correct as a plain template; the intelligence is an enhancement.
+
+Kinds of intelligence:
+
+- **Content-aware (region templates):** read the native content inside the body, most often
+  a report table, and add meaning: totals, a chart of the same rows, freshness of the data.
+  Read cells with `textContent`, parse numbers locale-safely (strip group separators and
+  currency, accept `,` or `.` decimals by position), and never change the native markup
+  itself; add your own elements beside it.
+- **User-aware (list templates):** adapt to how this person uses the app: frequency and
+  recency of use, time of day or period of month, pages visited. State lives in
+  `localStorage` / `sessionStorage` only, always inside `try/catch`, keyed
+  `amc-tpl-<slug>:<appId>:<listId>`. App and page come from `apex.env.APP_ID` /
+  `apex.env.APP_PAGE_ID` when present, otherwise `location.pathname`. Nothing personal leaves
+  the browser, and each template offers a visible way to reset what it learned.
+- **Behaviour-aware (region templates):** change how the page behaves for focus or
+  personalisation (focus mode, density, arrangement), with state kept per user and page.
+
+Rules on top of the general ones:
+
+- Re-run after partial page refresh: `if (window.apex && apex.jQuery) apex.jQuery(document).on("apexafterrefresh", handler)`
+  plus a `MutationObserver` on the body as a fallback. jQuery-triggered events do not reach
+  `addEventListener`.
+- Announce computed changes politely (`aria-live="polite"`), give generated charts
+  `role="img"` and a text summary, and give every control a real `<button>` with
+  `aria-pressed` / `aria-expanded`.
+- Guard every APEX API (`apex.region(id)?.refresh`) so previews and older releases do not throw.
+- English UI strings live in the template parts (or `data-` attributes on the wrapper) so
+  developers can translate them there; list them in `helpText`.
+- Prove the logic, not only the look: the preview samples must exercise the behaviour, and the
+  author checks results by script (for example that the computed total of the preview
+  report is 68,530).

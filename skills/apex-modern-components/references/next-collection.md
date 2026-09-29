@@ -31,8 +31,10 @@ directions (at least two styles each).
 | `next-profile` | `nextProfile` | partial, report | `amc-NProfile` | 10 |
 | `next-alert` | `nextAlert` | partial, report | `amc-NAlert` | 10 |
 | `next-timeline` | `nextTimeline` | report | `amc-NTimeline` | 10 |
+| `next-gallery` | `nextGallery` | report | `amc-NGallery` | 10 |
+| `next-calendar` | `nextCalendar` | report | `amc-NCalendar` | 10 |
 
-Total: 114 styles. Style entry names are chosen by the family author, lowerCamelCase, and
+Total: 134 styles (Gallery and Calendar added later). Style entry names are chosen by the family author, lowerCamelCase, and
 never renamed afterwards.
 
 ## Shared conventions
@@ -77,3 +79,20 @@ Same as `design-collection.md`, plus:
 2. The family screenshot next to its Design Collection counterpart shows an obvious
    generational difference; if a style could pass as a classic one, redo it.
 3. Checked in Vita, Vita Dark and the RTL panel, at 220px column width and wide.
+
+## Gallery and Calendar
+
+**nextGallery** renders images from a report (IMAGE_URL, THUMB_URL, TITLE, CAPTION, ALT,
+LINK_URL, WIDTH, HEIGHT, GROUP). For BLOB columns the developer selects
+`apex_util.get_blob_file_src(...)` or a REST/Object Storage URL as IMAGE_URL. Every image has
+`alt`, `width`, `height` and `loading="lazy"`; aspect ratios come from WIDTH/HEIGHT through a
+parsed CSS variable set by JS (never a style attribute). A shared, accessible lightbox
+(dialog with focus trap, Escape, arrow keys, swipe, zoom, caption, counter) belongs to the
+family JS and opens from any style.
+
+**nextCalendar** renders events from a report (START_DATE, END_DATE, TITLE, DESCRIPTION,
+CATEGORY, STATE, LINK_URL, ALL_DAY). Dates are ISO strings in the row (`TO_CHAR(... ,
+'YYYY-MM-DD"T"HH24:MI')`); JS builds the calendar grid with `Intl.DateTimeFormat` for month
+and weekday names, honours the first day of week (setting), RTL and the Islamic/Gregorian
+choice only through `Intl` (no hard-coded names). Without JS the rows render as a readable
+agenda list. Keyboard: arrow keys move between days, Enter opens the day's events.
