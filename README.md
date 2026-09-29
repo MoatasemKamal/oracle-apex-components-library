@@ -253,6 +253,24 @@ then run the apexlang skill's gates (format, compiler-truth audit, runtime valid
 **APEX 23.1 to 25.x (or any version, through the Builder)**: App Builder > Shared
 Components > Plug-ins > Import `components/<name>/dist/legacy/amc_<name>.sql`.
 
+## Install with Claude Code (plugin marketplace)
+
+This repository is a Claude Code plugin marketplace. In Claude Code:
+
+```
+/plugin marketplace add MoatasemKamal/oracle-apex-components-library
+/plugin install apex-modern-components@oracle-apex-components
+```
+
+Recommended companions:
+
+```
+/plugin marketplace add oracle/skills
+/plugin install apex@oracle-skills                     # Oracle's APEXlang skill
+/plugin marketplace add anthropics/claude-code
+/plugin install frontend-design@claude-code-plugins    # design direction used by this library's design gate
+```
+
 ## Use the skill with an agent
 
 Install both skills where your agent loads skills, for example with Claude Code:
