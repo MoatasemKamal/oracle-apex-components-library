@@ -1,0 +1,217 @@
+{
+  "name": "Next Card",
+  "apexlangName": "nextCard",
+  "staticId": "AMC_NEXT_CARD",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": ["card", "tile", "next collection", "border beam", "spotlight", "meteors", "3d tilt", "flip card", "neo brutalism", "claymorphism", "aurora", "holographic", "container query", "expanding card", "record card"],
+  "description": "Next Collection card family: one record (order, project, invoice, customer) as a current-generation card in 12 styles across four directions. Motion: border beam, pointer spotlight, meteors. Depth: pointer tilt with parallax layers, flip card, fanned layered stack. Bold: neo-brutalism, claymorphism, aurora with film grain, holographic foil. Smart: a compact card that morphs open, and an adaptive card whose composition switches by container width. It keeps the Universal Theme Cards anatomy (eyebrow, title, body, figure, action) so it reads as a native region, and every color comes from the active theme style. Techniques adapted from Magic UI (border-beam, magic-card, meteors), MIT.",
+  "helpText": "Pick a Style, then map Title (required) and any of Eyebrow, Description, Details, Icon, Image URL, Badge, State, Value, Value Label, Meta, Link URL and Link Label. Empty settings are left out. With Link URL the whole card is clickable. Pointer effects (Spotlight, Tilt 3D, Holo Foil) need the plug-in JavaScript file and run only with a mouse or pen; every effect also runs on keyboard focus, and all motion stops when the user asks the system for reduced motion.",
+  "source": {
+    "url": "https://github.com/magicuidesign/magicui",
+    "author": "Magic UI",
+    "license": "MIT"
+  },
+  "templateComponent": {
+    "availableAs": ["partial", "report"],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": ["files/amc-next-card.css", "files/amc-next-card.js"],
+  "cssFileUrls": ["#PLUGIN_FILES#amc-next-card.css"],
+  "jsFileUrls": ["#PLUGIN_FILES#amc-next-card.js"],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "borderBeam",
+      "sequence": 10,
+      "helpText": "Card design, grouped by direction. MOTION - Border Beam: a light travels around the border. Spotlight: a glow follows the pointer and lights the border of neighbouring cards. Meteors: diagonal light streaks across a night-tinted card. DEPTH - Tilt 3D: the card tilts toward the pointer while its layers float at different depths under a glare. Flip: summary on the front, Details on the back, turned on hover, focus or tap. Layered Stack: two tinted sheets behind the card fan out on hover. BOLD - Neo Brutal: ink border, hard offset shadow, flat fills. Clay: pillowy soft-shadow surface. Aurora Grain: slow aurora gradient under film grain. Holo Foil: holographic foil that shifts with the pointer. SMART - Expand Reveal: a compact card that morphs open to show Description, Details and the action on hover, focus or tap. Adaptive: container queries switch between stacked, side-by-side and billboard compositions; in report mode the first card spans the full row as a billboard.",
+      "entries": [
+        { "name": "borderBeam", "display": "Border Beam", "return": "borderBeam", "sequence": 10 },
+        { "name": "spotlight", "display": "Spotlight", "return": "spotlight", "sequence": 20 },
+        { "name": "meteors", "display": "Meteors", "return": "meteors", "sequence": 30 },
+        { "name": "tilt3d", "display": "Tilt 3D", "return": "tilt3d", "sequence": 40 },
+        { "name": "flip", "display": "Flip", "return": "flip", "sequence": 50 },
+        { "name": "layeredStack", "display": "Layered Stack", "return": "layeredStack", "sequence": 60 },
+        { "name": "neoBrutal", "display": "Neo Brutal", "return": "neoBrutal", "sequence": 70 },
+        { "name": "clay", "display": "Clay", "return": "clay", "sequence": 80 },
+        { "name": "auroraGrain", "display": "Aurora Grain", "return": "auroraGrain", "sequence": 90 },
+        { "name": "holoFoil", "display": "Holo Foil", "return": "holoFoil", "sequence": 100 },
+        { "name": "expandReveal", "display": "Expand Reveal", "return": "expandReveal", "sequence": 110 },
+        { "name": "adaptive", "display": "Adaptive", "return": "adaptive", "sequence": 120 }
+      ]
+    },
+    {
+      "staticId": "TITLE",
+      "apexlangName": "title",
+      "attribute": 2,
+      "name": "Title",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Card heading, for example the project, order or customer name. Rendered as an h3."
+    },
+    {
+      "staticId": "EYEBROW",
+      "apexlangName": "eyebrow",
+      "attribute": 3,
+      "name": "Eyebrow",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional short line above the title, for example an order number or category."
+    },
+    {
+      "staticId": "DESCRIPTION",
+      "apexlangName": "description",
+      "attribute": 4,
+      "name": "Description",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 40,
+      "helpText": "Optional body text of one to three sentences. Expand Reveal shows it when the card opens."
+    },
+    {
+      "staticId": "DETAILS",
+      "apexlangName": "details",
+      "attribute": 5,
+      "name": "Details",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "Optional secondary text that the Flip style shows on the back of the card and Expand Reveal shows when opened, for example the delivery address or the next milestone. Other styles show it as a small note under the description."
+    },
+    {
+      "staticId": "ICON",
+      "apexlangName": "icon",
+      "attribute": 6,
+      "name": "Icon",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 60,
+      "helpText": "Optional Font APEX icon class, for example fa-truck. Static text or a column."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 7,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional picture URL, shown by the Adaptive style as its media column or billboard backdrop and by Tilt 3D as its floating picture. It must come from a developer-controlled source such as a table you own or #APP_FILES#, never free user input. The image is decorative: empty alt, the meaning belongs in Title."
+    },
+    {
+      "staticId": "BADGE",
+      "apexlangName": "badge",
+      "attribute": 8,
+      "name": "Badge",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "Optional status text shown as a badge, for example Shipped or Overdue. Colored by State."
+    },
+    {
+      "staticId": "STATE",
+      "apexlangName": "state",
+      "attribute": 9,
+      "name": "State",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 90,
+      "helpText": "Semantic color of the badge: success, warning, danger, info or neutral. Any other value renders as neutral. Always pair it with Badge text so the state is not shown by color alone."
+    },
+    {
+      "staticId": "VALUE",
+      "apexlangName": "value",
+      "attribute": 10,
+      "name": "Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Optional key figure, for example an amount or a percentage. Format it in SQL with the application NLS settings. Several styles show it in large type."
+    },
+    {
+      "staticId": "VALUE_LABEL",
+      "apexlangName": "valueLabel",
+      "attribute": 11,
+      "name": "Value Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Optional caption for Value, for example Total or Budget."
+    },
+    {
+      "staticId": "META",
+      "apexlangName": "meta",
+      "attribute": 12,
+      "name": "Meta",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 120,
+      "helpText": "Optional small footer text, for example a due date or an owner."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 13,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 130,
+      "helpText": "Optional target URL. When set, the title becomes a link that covers the whole card. Build it with apex_page.get_url in SQL; the value must be developer-controlled, never free user input."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 14,
+      "name": "Link Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 140,
+      "helpText": "Optional visible call to action shown when Link URL is set, for example View Order."
+    },
+    {
+      "staticId": "COLUMNS",
+      "apexlangName": "columns",
+      "attribute": 15,
+      "name": "Columns",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 150,
+      "helpText": "Report mode only. Empty fits as many cards as the region width allows. The fixed options are a maximum: columns drop automatically when a card would get too narrow.",
+      "entries": [
+        { "name": "two", "display": "Up to 2 Columns", "return": "2", "sequence": 10 },
+        { "name": "three", "display": "Up to 3 Columns", "return": "3", "sequence": 20 },
+        { "name": "four", "display": "Up to 4 Columns", "return": "4", "sequence": 30 }
+      ]
+    }
+  ]
+}

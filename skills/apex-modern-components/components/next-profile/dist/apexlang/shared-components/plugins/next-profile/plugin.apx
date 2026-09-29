@@ -1,0 +1,640 @@
+plugin nextProfile (
+    name: Next Profile
+    staticId: AMC_NEXT_PROFILE
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-NProfile amc-NProfile--#STYLE#{if ?STATUS/} {case STATUS/}{when online/}amc-NProfile--online{when away/}amc-NProfile--away{when busy/}amc-NProfile--busy{when offline/}amc-NProfile--offline{otherwise/}amc-NProfile--other{endcase/}{endif/}{if ?LINK_URL/} amc-NProfile--linked{endif/}{if ?IMAGE_URL/} amc-NProfile--hasImage{endif/}">
+            {case STYLE/}{when lanyardBadge/}  <span class="amc-NProfile-strap" aria-hidden="true"><span class="amc-NProfile-clip"></span></span>
+            {otherwise/}{endcase/}  <article class="amc-NProfile-card"{case STYLE/}{when flipContact/} tabindex="0"{when expandBio/} tabindex="0"{otherwise/}{endcase/}>
+            {case STYLE/}{when flipContact/}    <div class="amc-NProfile-flipper">
+                  <div class="amc-NProfile-face amc-NProfile-face--front">
+                    <div class="amc-NProfile-avatar">{if ?IMAGE_URL/}<img class="amc-NProfile-img" src="#IMAGE_URL#" alt="" width="112" height="112" loading="lazy">{else/}<span class="amc-NProfile-initials" aria-hidden="true">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user"></span>{endif/}</span>{endif/}{if ?STATUS/}<span class="amc-NProfile-dot" aria-hidden="true"></span>{endif/}</div>
+                    <div class="amc-NProfile-main">
+                      <h3 class="amc-NProfile-name">#NAME#</h3>
+                      {if ?ROLE/}<p class="amc-NProfile-role">#ROLE#</p>{endif/}
+                      {if ?ORGANIZATION/}<p class="amc-NProfile-org">#ORGANIZATION#</p>{endif/}
+                      {if ?STATUS/}<p class="amc-NProfile-status"><span class="amc-NProfile-statusDot" aria-hidden="true"></span>{case STATUS/}{when online/}Online{when away/}Away{when busy/}Busy{when offline/}Offline{otherwise/}#STATUS#{endcase/}</p>{endif/}
+                    </div>
+                    <span class="amc-NProfile-turn" aria-hidden="true"><span class="fa fa-address-card-o"></span></span>
+                  </div>
+                  <div class="amc-NProfile-face amc-NProfile-face--back">
+                    <p class="amc-NProfile-backName" aria-hidden="true">#NAME#</p>
+                    <ul class="amc-NProfile-contact">
+                      {if ?EMAIL/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-envelope-o" aria-hidden="true"></span><a class="amc-NProfile-contactLink" href="mailto:#EMAIL#">#EMAIL#</a></li>{endif/}
+                      {if ?PHONE/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-NProfile-contactText">#PHONE#</span></li>{endif/}
+                      {if ?LOCATION/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-map-marker" aria-hidden="true"></span><span class="amc-NProfile-contactText">#LOCATION#</span></li>{endif/}
+                    </ul>
+                    {if ?LINK_URL/}<a class="amc-NProfile-action" href="#LINK_URL#">{if ?LINK_LABEL/}#LINK_LABEL#{else/}View profile{endif/}<span class="amc-NProfile-sr">, #NAME#</span><span class="amc-NProfile-actionIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}
+                  </div>
+                </div>
+            {otherwise/}    <span class="amc-NProfile-fx" aria-hidden="true">{case STYLE/}{when tiltHolo/}<span class="amc-NProfile-holo"></span><span class="amc-NProfile-glare"></span>{otherwise/}{endcase/}</span>
+                {case STYLE/}{when tiltHolo/}<div class="amc-NProfile-band"><span class="amc-NProfile-bandMark fa fa-id-badge" aria-hidden="true"></span><span class="amc-NProfile-bandOrg">{if ?ORGANIZATION/}#ORGANIZATION#{else/}Staff ID{endif/}</span></div>{when lanyardBadge/}<div class="amc-NProfile-band"><span class="amc-NProfile-slot" aria-hidden="true"></span><span class="amc-NProfile-bandOrg">{if ?ORGANIZATION/}#ORGANIZATION#{else/}Visitor{endif/}</span></div>{otherwise/}{endcase/}
+                <div class="amc-NProfile-avatar">{case STYLE/}{when orbitRing/}<span class="amc-NProfile-ring" aria-hidden="true"></span><span class="amc-NProfile-orbit" aria-hidden="true"><span class="amc-NProfile-orbitDot"></span></span>{otherwise/}{endcase/}{if ?IMAGE_URL/}<img class="amc-NProfile-img" src="#IMAGE_URL#" alt="" width="112" height="112" loading="lazy">{else/}<span class="amc-NProfile-initials" aria-hidden="true">{if ?INITIALS/}#INITIALS#{else/}<span class="fa fa-user"></span>{endif/}</span>{endif/}{if ?STATUS/}<span class="amc-NProfile-dot" aria-hidden="true"></span>{endif/}</div>
+                <div class="amc-NProfile-main">
+                  <h3 class="amc-NProfile-name">{if ?LINK_URL/}{case STYLE/}{when expandBio/}#NAME#{otherwise/}<a class="amc-NProfile-link" href="#LINK_URL#">#NAME#</a>{endcase/}{else/}#NAME#{endif/}</h3>
+                  {if ?ROLE/}<p class="amc-NProfile-role">#ROLE#</p>{endif/}
+                  {case STYLE/}{when tiltHolo/}{when lanyardBadge/}{otherwise/}{if ?ORGANIZATION/}<p class="amc-NProfile-org">#ORGANIZATION#</p>{endif/}{endcase/}
+                  {if ?STATUS/}<p class="amc-NProfile-status"><span class="amc-NProfile-statusDot" aria-hidden="true"></span>{case STATUS/}{when online/}Online{when away/}Away{when busy/}Busy{when offline/}Offline{otherwise/}#STATUS#{endcase/}</p>{endif/}
+                </div>
+                {case STYLE/}{when expandBio/}<span class="amc-NProfile-toggle" aria-hidden="true"><span class="fa fa-chevron-down"></span></span>{otherwise/}{endcase/}
+                {case STYLE/}{when tiltHolo/}{if ?REFERENCE/}<p class="amc-NProfile-ref"><span class="amc-NProfile-barcode" aria-hidden="true"></span><span class="amc-NProfile-refText">#REFERENCE#</span></p>{endif/}{when lanyardBadge/}{if ?REFERENCE/}<p class="amc-NProfile-ref"><span class="amc-NProfile-barcode" aria-hidden="true"></span><span class="amc-NProfile-refText">#REFERENCE#</span></p>{endif/}{otherwise/}<div class="amc-NProfile-more"><div class="amc-NProfile-moreInner">
+                  {if ?BIO/}<p class="amc-NProfile-bio">#BIO#</p>{endif/}
+                  {if ?STAT1_VALUE/}<dl class="amc-NProfile-stats">
+                    <div class="amc-NProfile-stat"><dt class="amc-NProfile-statLabel">#STAT1_LABEL#</dt><dd class="amc-NProfile-statValue">#STAT1_VALUE#</dd></div>
+                    {if ?STAT2_VALUE/}<div class="amc-NProfile-stat"><dt class="amc-NProfile-statLabel">#STAT2_LABEL#</dt><dd class="amc-NProfile-statValue">#STAT2_VALUE#</dd></div>{endif/}
+                    {if ?STAT3_VALUE/}<div class="amc-NProfile-stat"><dt class="amc-NProfile-statLabel">#STAT3_LABEL#</dt><dd class="amc-NProfile-statValue">#STAT3_VALUE#</dd></div>{endif/}
+                  </dl>{endif/}
+                  {case STYLE/}{when bentoProfile/}<ul class="amc-NProfile-contact">{if ?EMAIL/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-envelope-o" aria-hidden="true"></span><a class="amc-NProfile-contactLink" href="mailto:#EMAIL#">#EMAIL#</a></li>{endif/}{if ?PHONE/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-NProfile-contactText">#PHONE#</span></li>{endif/}{if ?LOCATION/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-map-marker" aria-hidden="true"></span><span class="amc-NProfile-contactText">#LOCATION#</span></li>{endif/}</ul>{when expandBio/}<ul class="amc-NProfile-contact">{if ?EMAIL/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-envelope-o" aria-hidden="true"></span><a class="amc-NProfile-contactLink" href="mailto:#EMAIL#">#EMAIL#</a></li>{endif/}{if ?PHONE/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-phone" aria-hidden="true"></span><span class="amc-NProfile-contactText">#PHONE#</span></li>{endif/}{if ?LOCATION/}<li class="amc-NProfile-contactItem"><span class="amc-NProfile-contactIcon fa fa-map-marker" aria-hidden="true"></span><span class="amc-NProfile-contactText">#LOCATION#</span></li>{endif/}</ul>{if ?LINK_URL/}<a class="amc-NProfile-action" href="#LINK_URL#">{if ?LINK_LABEL/}#LINK_LABEL#{else/}View profile{endif/}<span class="amc-NProfile-sr">, #NAME#</span><span class="amc-NProfile-actionIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{otherwise/}{endcase/}
+                </div></div>{endcase/}
+                {if ?LINK_URL/}{case STYLE/}{when expandBio/}{when tiltHolo/}{when lanyardBadge/}{otherwise/}<span class="amc-NProfile-cta" aria-hidden="true">{if ?LINK_LABEL/}#LINK_LABEL#{else/}View profile{endif/}<span class="amc-NProfile-ctaIcon fa fa-arrow-right"></span></span>{endcase/}{endif/}
+            {endcase/}  </article>
+            </div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-NProfiles amc-NProfiles--#STYLE#{case COLUMNS/}{when 2/} amc-NProfiles--cols2{when 3/} amc-NProfiles--cols3{when 4/} amc-NProfiles--cols4{otherwise/}{endcase/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NProfiles-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-profile.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-profile.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style, then map Name (required) and any of Role, Image URL or Initials, Bio, Status, up to three stats, Link URL and Link Label, Email, Phone, Location, Organisation and Reference. Empty settings are left out. Tilt Holo ID needs the plug-in JavaScript file for its pointer tilt and works without it as a static card. Every hover effect also runs on keyboard focus, and all motion stops when the user asks the system for reduced motion.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: orbitRing
+        }
+        help {
+            helpText:
+                ```
+                Profile design, grouped by direction. MOTION - Orbit Ring: a rotating light ring around the avatar with the status dot in orbit. Beam Frame: two beams of light travel around the card frame. DEPTH - Tilt Holo ID: a staff ID card that tilts toward the pointer under a holographic sheen, with Organisation and Reference. Flip Contact: identity on the front, Email, Phone and Location on the back, turned on hover, focus or tap. Lanyard Badge: a conference badge hanging from a strap that sways gently. BOLD - Neo Brutal: ink borders, hard shadows and flat fills. Clay: pillowy soft-shadow surfaces. Sticker: a die-cut sticker with a peeling corner. SMART - Bento Profile: stats, bio and contact as bento tiles that recompose by region width. Expand Bio: a compact row that morphs open to show Bio, stats and contact on hover, focus or tap.
+                ```
+        }
+        entry orbitRing (
+            sequence: 10
+            display: Orbit Ring
+            return: orbitRing
+        )
+        entry beamFrame (
+            sequence: 20
+            display: Beam Frame
+            return: beamFrame
+        )
+        entry tiltHolo (
+            sequence: 30
+            display: Tilt Holo ID
+            return: tiltHolo
+        )
+        entry flipContact (
+            sequence: 40
+            display: Flip Contact
+            return: flipContact
+        )
+        entry lanyardBadge (
+            sequence: 50
+            display: Lanyard Badge
+            return: lanyardBadge
+        )
+        entry neoBrutal (
+            sequence: 60
+            display: Neo Brutal
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 70
+            display: Clay
+            return: clay
+        )
+        entry sticker (
+            sequence: 80
+            display: Sticker
+            return: sticker
+        )
+        entry bentoProfile (
+            sequence: 90
+            display: Bento Profile
+            return: bentoProfile
+        )
+        entry expandBio (
+            sequence: 100
+            display: Expand Bio
+            return: expandBio
+        )
+    )
+    customAttribute NAME (
+        apexlangName: name
+        attribute: 2
+        name: Name
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Full name of the person, for example Sara Al-Harbi. Rendered as the h3 heading.
+                ```
+        }
+    )
+    customAttribute ROLE (
+        apexlangName: role
+        attribute: 3
+        name: Role
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional job title or team, for example Senior Account Manager.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 4
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional avatar image URL. Must be developer-controlled, for example a column built with apex_util.get_blob_file_src or an #APP_FILES# path, never free user input. The image is decorative; the name carries the meaning.
+                ```
+        }
+    )
+    customAttribute INITIALS (
+        apexlangName: initials
+        attribute: 5
+        name: Initials
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                One or two letters shown when there is no image, for example SH. Build them in SQL from the name.
+                ```
+        }
+    )
+    customAttribute BIO (
+        apexlangName: bio
+        attribute: 6
+        name: Bio
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short description of one or two sentences. Tilt Holo ID and Lanyard Badge leave it out.
+                ```
+        }
+    )
+    customAttribute STATUS (
+        apexlangName: status
+        attribute: 7
+        name: Status
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional presence: online, away, busy or offline, shown as a colored dot plus text. Any other value is shown as plain text in a neutral color, for example On leave.
+                ```
+        }
+    )
+    customAttribute STAT1_VALUE (
+        apexlangName: stat1Value
+        attribute: 8
+        name: Stat 1 Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                First key figure, for example 128 or SAR 2.4M. Format it in SQL. Shown by Orbit Ring, Beam Frame, Neo Brutal, Clay, Sticker, Bento Profile and Expand Bio.
+                ```
+        }
+    )
+    customAttribute STAT1_LABEL (
+        apexlangName: stat1Label
+        attribute: 9
+        name: Stat 1 Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Stat 1, for example Deals won.
+                ```
+        }
+    )
+    customAttribute STAT2_VALUE (
+        apexlangName: stat2Value
+        attribute: 10
+        name: Stat 2 Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Second key figure, for example 128 or SAR 2.4M. Format it in SQL. Shown by Orbit Ring, Beam Frame, Neo Brutal, Clay, Sticker, Bento Profile and Expand Bio.
+                ```
+        }
+    )
+    customAttribute STAT2_LABEL (
+        apexlangName: stat2Label
+        attribute: 11
+        name: Stat 2 Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Stat 2, for example Deals won.
+                ```
+        }
+    )
+    customAttribute STAT3_VALUE (
+        apexlangName: stat3Value
+        attribute: 12
+        name: Stat 3 Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Third key figure, for example 128 or SAR 2.4M. Format it in SQL. Shown by Orbit Ring, Beam Frame, Neo Brutal, Clay, Sticker, Bento Profile and Expand Bio.
+                ```
+        }
+    )
+    customAttribute STAT3_LABEL (
+        apexlangName: stat3Label
+        attribute: 13
+        name: Stat 3 Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Caption for Stat 3, for example Deals won.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 14
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target of the profile, for example an apex_page.get_url link to the employee page. The name becomes a link that covers the card; Flip Contact and Expand Bio show it as a button. The value must be developer-controlled.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 15
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 150
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Visible text of the link, for example View profile. Defaults to View profile.
+                ```
+        }
+    )
+    customAttribute EMAIL (
+        apexlangName: email
+        attribute: 16
+        name: Email
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 160
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional email address shown as a mailto link by Flip Contact on the back, Bento Profile and Expand Bio, for example sara.alharbi@example.com.
+                ```
+        }
+    )
+    customAttribute PHONE (
+        apexlangName: phone
+        attribute: 17
+        name: Phone
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 170
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional phone number shown as text next to Email, for example +966 11 555 0142.
+                ```
+        }
+    )
+    customAttribute LOCATION (
+        apexlangName: location
+        attribute: 18
+        name: Location
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 180
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional office or city, for example Riyadh HQ, Floor 12. Shown with the contact details.
+                ```
+        }
+    )
+    customAttribute ORGANIZATION (
+        apexlangName: organization
+        attribute: 19
+        name: Organisation
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 190
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional company, department or event name, for example Oracle APEX World 2026. Tilt Holo ID and Lanyard Badge print it in the header band; other styles show it under the role.
+                ```
+        }
+    )
+    customAttribute REFERENCE (
+        apexlangName: reference
+        attribute: 20
+        name: Reference
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 200
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional badge or employee number, for example EMP-00412. Tilt Holo ID and Lanyard Badge print it with a barcode strip.
+                ```
+        }
+    )
+    customAttribute COLUMNS (
+        apexlangName: columns
+        attribute: 21
+        name: Columns
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 210
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Report mode only. Empty fits as many profiles as the region width allows. The fixed options are a maximum: columns drop automatically when a profile would get too narrow.
+                ```
+        }
+        entry two (
+            sequence: 10
+            display: Up to 2 Columns
+            return: 2
+        )
+        entry three (
+            sequence: 20
+            display: Up to 3 Columns
+            return: 3
+        )
+        entry four (
+            sequence: 30
+            display: Up to 4 Columns
+            return: 4
+        )
+    )
+    file "amc-next-profile.css" (
+        fileName: amc-next-profile.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-profile.js" (
+        fileName: amc-next-profile.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

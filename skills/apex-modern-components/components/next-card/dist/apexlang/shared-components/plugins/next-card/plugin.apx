@@ -1,0 +1,499 @@
+plugin nextCard (
+    name: Next Card
+    staticId: AMC_NEXT_CARD
+    type: templateComponent
+    templateComponent {
+        availableAs: [
+            partial
+            report
+        ]
+        partial:
+            ```html
+            <div class="amc-NCard amc-NCard--#STYLE# {case STATE/}{when success/}amc-NCard--stateSuccess{when warning/}amc-NCard--stateWarning{when danger/}amc-NCard--stateDanger{when info/}amc-NCard--stateInfo{otherwise/}amc-NCard--stateNeutral{endcase/}{if ?LINK_URL/} amc-NCard--linked{endif/}{if ?IMAGE_URL/} amc-NCard--hasMedia{endif/}">
+            {case STYLE/}{when flip/}  <article class="amc-NCard-card" tabindex="0">
+                <div class="amc-NCard-flipper">
+                  <div class="amc-NCard-face amc-NCard-face--front">
+                    <div class="amc-NCard-head">{if ?ICON/}<span class="amc-NCard-icon" aria-hidden="true"><span class="amc-NCard-glyph fa #ICON#"></span></span>{endif/}<div class="amc-NCard-heading">{if ?EYEBROW/}<p class="amc-NCard-eyebrow">#EYEBROW#</p>{endif/}<h3 class="amc-NCard-title">#TITLE#</h3></div></div>
+                    {if ?VALUE/}<p class="amc-NCard-figure">{if ?VALUE_LABEL/}<span class="amc-NCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-NCard-value">#VALUE#</span></p>{endif/}
+                    <div class="amc-NCard-foot">{if ?BADGE/}<span class="amc-NCard-badge"><span class="amc-NCard-badgeDot" aria-hidden="true"></span>#BADGE#</span>{endif/}<span class="amc-NCard-turn" aria-hidden="true"><span class="amc-NCard-turnIcon fa fa-repeat"></span></span></div>
+                  </div>
+                  <div class="amc-NCard-face amc-NCard-face--back">
+                    <p class="amc-NCard-backTitle" aria-hidden="true">#TITLE#</p>
+                    {if ?DESCRIPTION/}<p class="amc-NCard-desc">#DESCRIPTION#</p>{endif/}
+                    {if ?DETAILS/}<p class="amc-NCard-details">#DETAILS#</p>{endif/}
+                    <div class="amc-NCard-foot">{if ?META/}<span class="amc-NCard-meta">#META#</span>{endif/}{if ?LINK_URL/}<a class="amc-NCard-action" href="#LINK_URL#">{if ?LINK_LABEL/}#LINK_LABEL#{else/}#TITLE#{endif/}<span class="amc-NCard-ctaIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}</div>
+                  </div>
+                </div>
+              </article>
+            {otherwise/}  <article class="amc-NCard-card"{case STYLE/}{when expandReveal/} tabindex="0"{otherwise/}{endcase/}>
+                <span class="amc-NCard-fx" aria-hidden="true">{case STYLE/}{when meteors/}<span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span>{when holoFoil/}<span class="amc-NCard-foil"></span><span class="amc-NCard-glint"></span>{when tilt3d/}<span class="amc-NCard-glare"></span>{otherwise/}{endcase/}</span>
+                {if ?IMAGE_URL/}<figure class="amc-NCard-media"><img class="amc-NCard-img" src="#IMAGE_URL#" width="640" height="400" alt="" loading="lazy"></figure>{endif/}
+                <div class="amc-NCard-body">
+                  <div class="amc-NCard-head">{if ?ICON/}<span class="amc-NCard-icon" aria-hidden="true"><span class="amc-NCard-glyph fa #ICON#"></span></span>{endif/}<div class="amc-NCard-heading">{if ?EYEBROW/}<p class="amc-NCard-eyebrow">#EYEBROW#</p>{endif/}<h3 class="amc-NCard-title">{if ?LINK_URL/}{case STYLE/}{when expandReveal/}#TITLE#{otherwise/}<a class="amc-NCard-link" href="#LINK_URL#">#TITLE#</a>{endcase/}{else/}#TITLE#{endif/}</h3></div>{if ?BADGE/}<span class="amc-NCard-badge"><span class="amc-NCard-badgeDot" aria-hidden="true"></span>#BADGE#</span>{endif/}{case STYLE/}{when expandReveal/}<span class="amc-NCard-toggle" aria-hidden="true"><span class="amc-NCard-toggleIcon fa fa-plus"></span></span>{otherwise/}{endcase/}</div>
+                  {if ?VALUE/}<p class="amc-NCard-figure">{if ?VALUE_LABEL/}<span class="amc-NCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-NCard-value">#VALUE#</span></p>{endif/}
+                  <div class="amc-NCard-more"><div class="amc-NCard-moreInner">{if ?DESCRIPTION/}<p class="amc-NCard-desc">#DESCRIPTION#</p>{endif/}{if ?DETAILS/}<p class="amc-NCard-details">#DETAILS#</p>{endif/}{case STYLE/}{when expandReveal/}{if ?LINK_URL/}<a class="amc-NCard-action" href="#LINK_URL#">{if ?LINK_LABEL/}#LINK_LABEL#{else/}#TITLE#{endif/}<span class="amc-NCard-ctaIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{otherwise/}{endcase/}</div></div>
+                  <div class="amc-NCard-foot">{if ?META/}<span class="amc-NCard-meta">#META#</span>{endif/}{case STYLE/}{when expandReveal/}{otherwise/}{if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-NCard-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-NCard-ctaIcon fa fa-arrow-right"></span></span>{endif/}{endif/}{endcase/}</div>
+                </div>
+              </article>
+            {endcase/}</div>
+            ```
+        reportBody:
+            ```html
+            <ul class="amc-NCards amc-NCards--#STYLE#{case COLUMNS/}{when 2/} amc-NCards--cols2{when 3/} amc-NCards--cols3{when 4/} amc-NCards--cols4{otherwise/}{endcase/}">#APEX$ROWS#</ul>
+            ```
+        reportRow:
+            ```html
+            <li class="amc-NCards-item">#APEX$PARTIAL#</li>
+            ```
+        translateTemplates: true
+        defaultEscapeMode: html
+    }
+    advanced {
+        filePrefix: #PLUGIN_FILES#
+        quickPick: false
+        substituteAttributeValues: true
+        deprecated: false
+        legacy: false
+    }
+    css {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-card.css
+        ]
+    }
+    javaScript {
+        fileUrls: [
+            #PLUGIN_FILES#amc-next-card.js
+        ]
+    }
+    information {
+        version: 1.0.0
+        helpText:
+            ```
+            Pick a Style, then map Title (required) and any of Eyebrow, Description, Details, Icon, Image URL, Badge, State, Value, Value Label, Meta, Link URL and Link Label. Empty settings are left out. With Link URL the whole card is clickable. Pointer effects (Spotlight, Tilt 3D, Holo Foil) need the plug-in JavaScript file and run only with a mouse or pen; every effect also runs on keyboard focus, and all motion stops when the user asks the system for reduced motion.
+            ```
+    }
+    customAttribute STYLE (
+        apexlangName: style
+        attribute: 1
+        name: Style
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 10
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        default {
+            value: borderBeam
+        }
+        help {
+            helpText:
+                ```
+                Card design, grouped by direction. MOTION - Border Beam: a light travels around the border. Spotlight: a glow follows the pointer and lights the border of neighbouring cards. Meteors: diagonal light streaks across a night-tinted card. DEPTH - Tilt 3D: the card tilts toward the pointer while its layers float at different depths under a glare. Flip: summary on the front, Details on the back, turned on hover, focus or tap. Layered Stack: two tinted sheets behind the card fan out on hover. BOLD - Neo Brutal: ink border, hard offset shadow, flat fills. Clay: pillowy soft-shadow surface. Aurora Grain: slow aurora gradient under film grain. Holo Foil: holographic foil that shifts with the pointer. SMART - Expand Reveal: a compact card that morphs open to show Description, Details and the action on hover, focus or tap. Adaptive: container queries switch between stacked, side-by-side and billboard compositions; in report mode the first card spans the full row as a billboard.
+                ```
+        }
+        entry borderBeam (
+            sequence: 10
+            display: Border Beam
+            return: borderBeam
+        )
+        entry spotlight (
+            sequence: 20
+            display: Spotlight
+            return: spotlight
+        )
+        entry meteors (
+            sequence: 30
+            display: Meteors
+            return: meteors
+        )
+        entry tilt3d (
+            sequence: 40
+            display: Tilt 3D
+            return: tilt3d
+        )
+        entry flip (
+            sequence: 50
+            display: Flip
+            return: flip
+        )
+        entry layeredStack (
+            sequence: 60
+            display: Layered Stack
+            return: layeredStack
+        )
+        entry neoBrutal (
+            sequence: 70
+            display: Neo Brutal
+            return: neoBrutal
+        )
+        entry clay (
+            sequence: 80
+            display: Clay
+            return: clay
+        )
+        entry auroraGrain (
+            sequence: 90
+            display: Aurora Grain
+            return: auroraGrain
+        )
+        entry holoFoil (
+            sequence: 100
+            display: Holo Foil
+            return: holoFoil
+        )
+        entry expandReveal (
+            sequence: 110
+            display: Expand Reveal
+            return: expandReveal
+        )
+        entry adaptive (
+            sequence: 120
+            display: Adaptive
+            return: adaptive
+        )
+    )
+    customAttribute TITLE (
+        apexlangName: title
+        attribute: 2
+        name: Title
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 20
+        }
+        validation {
+            required: true
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Card heading, for example the project, order or customer name. Rendered as an h3.
+                ```
+        }
+    )
+    customAttribute EYEBROW (
+        apexlangName: eyebrow
+        attribute: 3
+        name: Eyebrow
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 30
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional short line above the title, for example an order number or category.
+                ```
+        }
+    )
+    customAttribute DESCRIPTION (
+        apexlangName: description
+        attribute: 4
+        name: Description
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 40
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional body text of one to three sentences. Expand Reveal shows it when the card opens.
+                ```
+        }
+    )
+    customAttribute DETAILS (
+        apexlangName: details
+        attribute: 5
+        name: Details
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 50
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional secondary text that the Flip style shows on the back of the card and Expand Reveal shows when opened, for example the delivery address or the next milestone. Other styles show it as a small note under the description.
+                ```
+        }
+    )
+    customAttribute ICON (
+        apexlangName: icon
+        attribute: 6
+        name: Icon
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 60
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional Font APEX icon class, for example fa-truck. Static text or a column.
+                ```
+        }
+    )
+    customAttribute IMAGE_URL (
+        apexlangName: imageUrl
+        attribute: 7
+        name: Image URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 70
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional picture URL, shown by the Adaptive style as its media column or billboard backdrop and by Tilt 3D as its floating picture. It must come from a developer-controlled source such as a table you own or #APP_FILES#, never free user input. The image is decorative: empty alt, the meaning belongs in Title.
+                ```
+        }
+    )
+    customAttribute BADGE (
+        apexlangName: badge
+        attribute: 8
+        name: Badge
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 80
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional status text shown as a badge, for example Shipped or Overdue. Colored by State.
+                ```
+        }
+    )
+    customAttribute STATE (
+        apexlangName: state
+        attribute: 9
+        name: State
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 90
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Semantic color of the badge: success, warning, danger, info or neutral. Any other value renders as neutral. Always pair it with Badge text so the state is not shown by color alone.
+                ```
+        }
+    )
+    customAttribute VALUE (
+        apexlangName: value
+        attribute: 10
+        name: Value
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 100
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional key figure, for example an amount or a percentage. Format it in SQL with the application NLS settings. Several styles show it in large type.
+                ```
+        }
+    )
+    customAttribute VALUE_LABEL (
+        apexlangName: valueLabel
+        attribute: 11
+        name: Value Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 110
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional caption for Value, for example Total or Budget.
+                ```
+        }
+    )
+    customAttribute META (
+        apexlangName: meta
+        attribute: 12
+        name: Meta
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 120
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional small footer text, for example a due date or an owner.
+                ```
+        }
+    )
+    customAttribute LINK_URL (
+        apexlangName: linkUrl
+        attribute: 13
+        name: Link URL
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 130
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Optional target URL. When set, the title becomes a link that covers the whole card. Build it with apex_page.get_url in SQL; the value must be developer-controlled, never free user input.
+                ```
+        }
+    )
+    customAttribute LINK_LABEL (
+        apexlangName: linkLabel
+        attribute: 14
+        name: Link Label
+        scope: component
+        type: sessionStateValue
+        appearance {
+            sequence: 140
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: html
+        }
+        help {
+            helpText:
+                ```
+                Optional visible call to action shown when Link URL is set, for example View Order.
+                ```
+        }
+    )
+    customAttribute COLUMNS (
+        apexlangName: columns
+        attribute: 15
+        name: Columns
+        scope: component
+        type: selectList
+        appearance {
+            sequence: 150
+        }
+        componentLov {
+            type: static
+        }
+        validation {
+            required: false
+        }
+        security {
+            escapeMode: htmlAttribute
+        }
+        help {
+            helpText:
+                ```
+                Report mode only. Empty fits as many cards as the region width allows. The fixed options are a maximum: columns drop automatically when a card would get too narrow.
+                ```
+        }
+        entry two (
+            sequence: 10
+            display: Up to 2 Columns
+            return: 2
+        )
+        entry three (
+            sequence: 20
+            display: Up to 3 Columns
+            return: 3
+        )
+        entry four (
+            sequence: 30
+            display: Up to 4 Columns
+            return: 4
+        )
+    )
+    file "amc-next-card.css" (
+        fileName: amc-next-card.css
+        mimeType: text/css
+        charSet: utf-8
+    )
+    file "amc-next-card.js" (
+        fileName: amc-next-card.js
+        mimeType: application/javascript
+        charSet: utf-8
+    )
+)

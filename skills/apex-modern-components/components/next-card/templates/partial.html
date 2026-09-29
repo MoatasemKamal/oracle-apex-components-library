@@ -1,0 +1,27 @@
+<div class="amc-NCard amc-NCard--#STYLE# {case STATE/}{when success/}amc-NCard--stateSuccess{when warning/}amc-NCard--stateWarning{when danger/}amc-NCard--stateDanger{when info/}amc-NCard--stateInfo{otherwise/}amc-NCard--stateNeutral{endcase/}{if ?LINK_URL/} amc-NCard--linked{endif/}{if ?IMAGE_URL/} amc-NCard--hasMedia{endif/}">
+{case STYLE/}{when flip/}  <article class="amc-NCard-card" tabindex="0">
+    <div class="amc-NCard-flipper">
+      <div class="amc-NCard-face amc-NCard-face--front">
+        <div class="amc-NCard-head">{if ?ICON/}<span class="amc-NCard-icon" aria-hidden="true"><span class="amc-NCard-glyph fa #ICON#"></span></span>{endif/}<div class="amc-NCard-heading">{if ?EYEBROW/}<p class="amc-NCard-eyebrow">#EYEBROW#</p>{endif/}<h3 class="amc-NCard-title">#TITLE#</h3></div></div>
+        {if ?VALUE/}<p class="amc-NCard-figure">{if ?VALUE_LABEL/}<span class="amc-NCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-NCard-value">#VALUE#</span></p>{endif/}
+        <div class="amc-NCard-foot">{if ?BADGE/}<span class="amc-NCard-badge"><span class="amc-NCard-badgeDot" aria-hidden="true"></span>#BADGE#</span>{endif/}<span class="amc-NCard-turn" aria-hidden="true"><span class="amc-NCard-turnIcon fa fa-repeat"></span></span></div>
+      </div>
+      <div class="amc-NCard-face amc-NCard-face--back">
+        <p class="amc-NCard-backTitle" aria-hidden="true">#TITLE#</p>
+        {if ?DESCRIPTION/}<p class="amc-NCard-desc">#DESCRIPTION#</p>{endif/}
+        {if ?DETAILS/}<p class="amc-NCard-details">#DETAILS#</p>{endif/}
+        <div class="amc-NCard-foot">{if ?META/}<span class="amc-NCard-meta">#META#</span>{endif/}{if ?LINK_URL/}<a class="amc-NCard-action" href="#LINK_URL#">{if ?LINK_LABEL/}#LINK_LABEL#{else/}#TITLE#{endif/}<span class="amc-NCard-ctaIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}</div>
+      </div>
+    </div>
+  </article>
+{otherwise/}  <article class="amc-NCard-card"{case STYLE/}{when expandReveal/} tabindex="0"{otherwise/}{endcase/}>
+    <span class="amc-NCard-fx" aria-hidden="true">{case STYLE/}{when meteors/}<span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span><span class="amc-NCard-meteor"></span>{when holoFoil/}<span class="amc-NCard-foil"></span><span class="amc-NCard-glint"></span>{when tilt3d/}<span class="amc-NCard-glare"></span>{otherwise/}{endcase/}</span>
+    {if ?IMAGE_URL/}<figure class="amc-NCard-media"><img class="amc-NCard-img" src="#IMAGE_URL#" width="640" height="400" alt="" loading="lazy"></figure>{endif/}
+    <div class="amc-NCard-body">
+      <div class="amc-NCard-head">{if ?ICON/}<span class="amc-NCard-icon" aria-hidden="true"><span class="amc-NCard-glyph fa #ICON#"></span></span>{endif/}<div class="amc-NCard-heading">{if ?EYEBROW/}<p class="amc-NCard-eyebrow">#EYEBROW#</p>{endif/}<h3 class="amc-NCard-title">{if ?LINK_URL/}{case STYLE/}{when expandReveal/}#TITLE#{otherwise/}<a class="amc-NCard-link" href="#LINK_URL#">#TITLE#</a>{endcase/}{else/}#TITLE#{endif/}</h3></div>{if ?BADGE/}<span class="amc-NCard-badge"><span class="amc-NCard-badgeDot" aria-hidden="true"></span>#BADGE#</span>{endif/}{case STYLE/}{when expandReveal/}<span class="amc-NCard-toggle" aria-hidden="true"><span class="amc-NCard-toggleIcon fa fa-plus"></span></span>{otherwise/}{endcase/}</div>
+      {if ?VALUE/}<p class="amc-NCard-figure">{if ?VALUE_LABEL/}<span class="amc-NCard-valueLabel">#VALUE_LABEL#</span>{endif/}<span class="amc-NCard-value">#VALUE#</span></p>{endif/}
+      <div class="amc-NCard-more"><div class="amc-NCard-moreInner">{if ?DESCRIPTION/}<p class="amc-NCard-desc">#DESCRIPTION#</p>{endif/}{if ?DETAILS/}<p class="amc-NCard-details">#DETAILS#</p>{endif/}{case STYLE/}{when expandReveal/}{if ?LINK_URL/}<a class="amc-NCard-action" href="#LINK_URL#">{if ?LINK_LABEL/}#LINK_LABEL#{else/}#TITLE#{endif/}<span class="amc-NCard-ctaIcon fa fa-arrow-right" aria-hidden="true"></span></a>{endif/}{otherwise/}{endcase/}</div></div>
+      <div class="amc-NCard-foot">{if ?META/}<span class="amc-NCard-meta">#META#</span>{endif/}{case STYLE/}{when expandReveal/}{otherwise/}{if ?LINK_URL/}{if ?LINK_LABEL/}<span class="amc-NCard-cta" aria-hidden="true">#LINK_LABEL#<span class="amc-NCard-ctaIcon fa fa-arrow-right"></span></span>{endif/}{endif/}{endcase/}</div>
+    </div>
+  </article>
+{endcase/}</div>

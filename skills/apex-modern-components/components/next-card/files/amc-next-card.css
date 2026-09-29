@@ -1,0 +1,1291 @@
+/* APEX Modern Components - Next Card (Next Collection)
+ * Twelve current-generation card designs in four directions: motion, depth, bold, smart.
+ * Every color resolves from Universal Theme variables (--ut-*) and color-mix() of them, so
+ * each style follows Vita, Vita Dark, Redwood, Theme Roller and custom styles.
+ * Border Beam, Spotlight and Meteors adapt techniques from Magic UI
+ * (https://github.com/magicuidesign/magicui), MIT License, (c) Magic UI. */
+
+@property --amc-ncard-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.amc-NCard,
+.amc-NCards {
+  --amc-ncard-bg: var(--ut-component-background-color, #fff);
+  --amc-ncard-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-ncard-fg: var(--ut-component-text-default-color, #262626);
+  --amc-ncard-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ncard-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-ncard-radius: max(var(--ut-component-border-radius, .5rem), 1rem);
+  --amc-ncard-accent: var(--ut-palette-primary, #056ac8);
+  --amc-ncard-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-ncard-info: var(--ut-palette-info, #0076df);
+  --amc-ncard-success: var(--ut-palette-success, #278701);
+  --amc-ncard-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-ncard-danger: var(--ut-palette-danger, #cb1100);
+  --amc-ncard-ink: var(--ut-component-text-default-color, #262626);
+  --amc-ncard-shade: var(--amc-ncard-shade-color, #000);
+  --amc-ncard-light: var(--amc-ncard-light-color, #fff);
+  --amc-ncard-mask: var(--amc-ncard-mask-color, #000);
+  --amc-ncard-night: var(--amc-ncard-night-color, #0a0f1f);
+  --amc-ncard-night-fg: var(--amc-ncard-night-text, #eef2ff);
+  --amc-ncard-night-muted: var(--amc-ncard-night-muted-text, #a9b3cf);
+  --amc-ncard-on-media: var(--amc-ncard-on-media-color, #fff);
+  /* Derived palette: stays inside the theme, gives gradients a second and third hue. */
+  --amc-ncard-accent-2: color-mix(in oklab, var(--amc-ncard-accent) 55%, var(--amc-ncard-danger));
+  --amc-ncard-accent-3: color-mix(in oklab, var(--amc-ncard-accent) 45%, var(--amc-ncard-success));
+  --amc-ncard-state: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-ncard-state-fg: var(--ut-component-background-color, #fff);
+  --amc-ncard-gap: 1.25rem;
+  --amc-ncard-min: 16rem;
+  --amc-ncard-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+.amc-NCard--stateSuccess { --amc-ncard-state: var(--ut-palette-success, #278701); --amc-ncard-state-fg: var(--ut-palette-success-contrast, #fff); }
+.amc-NCard--stateWarning { --amc-ncard-state: var(--ut-palette-warning, #fbce4a); --amc-ncard-state-fg: var(--ut-palette-warning-contrast, #262626); }
+.amc-NCard--stateDanger { --amc-ncard-state: var(--ut-palette-danger, #cb1100); --amc-ncard-state-fg: var(--ut-palette-danger-contrast, #fff); }
+.amc-NCard--stateInfo { --amc-ncard-state: var(--ut-palette-info, #0076df); --amc-ncard-state-fg: var(--ut-palette-info-contrast, #fff); }
+
+/* ---------- Report grid ---------- */
+
+.amc-NCards {
+  --amc-ncard-cols: 12;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-ncard-min), 100%), 1fr));
+  gap: var(--amc-ncard-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-NCards--cols2 { --amc-ncard-cols: 2; }
+.amc-NCards--cols3 { --amc-ncard-cols: 3; }
+.amc-NCards--cols4 { --amc-ncard-cols: 4; }
+.amc-NCards--cols2,
+.amc-NCards--cols3,
+.amc-NCards--cols4 {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, max(var(--amc-ncard-min), (100% - (var(--amc-ncard-cols) - 1) * var(--amc-ncard-gap)) / var(--amc-ncard-cols))), 1fr)
+  );
+}
+.amc-NCards-item {
+  display: flex;
+  min-inline-size: 0;
+}
+.amc-NCards--layeredStack { --amc-ncard-gap: 2.25rem; padding: .75rem .75rem 1rem; }
+.amc-NCards--tilt3d { --amc-ncard-gap: 1.75rem; padding-block: .5rem 1rem; }
+.amc-NCards--neoBrutal { padding-block-end: .5rem; padding-inline-end: .5rem; }
+.amc-NCards--clay { --amc-ncard-gap: 1.75rem; padding-block-end: 1rem; }
+.amc-NCards--expandReveal { align-items: start; }
+.amc-NCards--expandReveal > .amc-NCards-item { display: block; }
+.amc-NCards--adaptive > .amc-NCards-item:first-child { grid-column: 1 / -1; }
+
+/* ---------- Shared anatomy ---------- */
+
+.amc-NCard {
+  position: relative;
+  container-type: inline-size;
+  display: flex;
+  inline-size: 100%;
+  min-inline-size: 0;
+  color: var(--amc-ncard-fg);
+  --amc-mx: 18;
+  --amc-my: 0;
+  --amc-rx: 0;
+  --amc-ry: 0;
+}
+.amc-NCard-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  min-inline-size: 0;
+  box-sizing: border-box;
+  border-radius: var(--amc-ncard-radius);
+  background: var(--amc-ncard-bg);
+  color: var(--amc-ncard-fg);
+  outline: none;
+}
+.amc-NCard-card:focus-visible {
+  outline: 2px solid var(--amc-ncard-accent);
+  outline-offset: 3px;
+}
+.amc-NCard-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  direction: ltr;
+}
+.amc-NCard-media {
+  margin: 0;
+  overflow: hidden;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+}
+.amc-NCard-img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.amc-NCard-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: .875rem;
+  padding: 1.25rem;
+  min-inline-size: 0;
+}
+.amc-NCard-head {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+}
+.amc-NCard-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: .75rem;
+  background: color-mix(in srgb, var(--amc-ncard-accent) 12%, transparent);
+  color: var(--amc-ncard-accent);
+  font-size: 1.125rem;
+}
+.amc-NCard-heading {
+  flex: 1;
+  min-inline-size: 0;
+}
+.amc-NCard-eyebrow {
+  margin: 0;
+  color: var(--amc-ncard-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  unicode-bidi: isolate;
+}
+.amc-NCard-title {
+  margin: .125rem 0 0;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.amc-NCard-link {
+  color: inherit;
+  text-decoration: none;
+}
+.amc-NCard-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+}
+.amc-NCard-link:focus-visible {
+  outline: none;
+}
+.amc-NCard-link:focus-visible::after {
+  outline: 2px solid var(--amc-ncard-accent);
+  outline-offset: 3px;
+  border-radius: var(--amc-ncard-radius);
+}
+.amc-NCard-badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: .375rem;
+  padding: .25rem .625rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-ncard-state) 14%, transparent);
+  color: color-mix(in srgb, var(--amc-ncard-state) 62%, var(--amc-ncard-fg));
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.amc-NCard-badgeDot {
+  inline-size: .4375rem;
+  block-size: .4375rem;
+  border-radius: 50%;
+  background: var(--amc-ncard-state);
+}
+.amc-NCard-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .125rem;
+  margin: 0;
+}
+.amc-NCard-valueLabel {
+  color: var(--amc-ncard-muted);
+  font-size: .75rem;
+  font-weight: 500;
+}
+.amc-NCard-value {
+  font-size: 1.75rem;
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+  overflow-wrap: anywhere;
+}
+.amc-NCard-more {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+.amc-NCard-moreInner {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  min-block-size: 0;
+}
+.amc-NCard-moreInner:empty,
+.amc-NCard-more:has(> .amc-NCard-moreInner:empty) {
+  display: none;
+}
+.amc-NCard-desc {
+  margin: 0;
+  color: var(--amc-ncard-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+.amc-NCard-details {
+  margin: 0;
+  padding-inline-start: .75rem;
+  border-inline-start: 2px solid color-mix(in srgb, var(--amc-ncard-accent) 35%, transparent);
+  color: var(--amc-ncard-fg);
+  font-size: .8125rem;
+  line-height: 1.45;
+}
+.amc-NCard-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem .75rem;
+  margin-block-start: auto;
+  font-size: .8125rem;
+}
+.amc-NCard-foot:empty { display: none; }
+.amc-NCard-meta {
+  color: var(--amc-ncard-muted);
+  unicode-bidi: isolate;
+}
+.amc-NCard-cta,
+.amc-NCard-action {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  margin-inline-start: auto;
+  color: var(--amc-ncard-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.amc-NCard-ctaIcon {
+  font-size: .75em;
+  transition: transform .25s var(--amc-ncard-ease);
+}
+.amc-NCard-ctaIcon:dir(rtl) { transform: scaleX(-1); }
+.amc-NCard-card:hover .amc-NCard-ctaIcon,
+.amc-NCard-card:focus-within .amc-NCard-ctaIcon { transform: translateX(.25rem); }
+.amc-NCard-card:hover .amc-NCard-ctaIcon:dir(rtl),
+.amc-NCard-card:focus-within .amc-NCard-ctaIcon:dir(rtl) { transform: scaleX(-1) translateX(.25rem); }
+
+/* Narrow cards (220px columns): the heading takes its own line under icon and badge. */
+@container (max-width: 17rem) {
+  .amc-NCard-head { flex-wrap: wrap; }
+  .amc-NCard-heading { order: 3; flex-basis: 100%; }
+  .amc-NCard-badge { margin-inline-start: auto; }
+  .amc-NCard--tilt3d .amc-NCard-body .amc-NCard-heading { grid-column: 1 / -1; grid-row: 2; }
+  .amc-NCard-body,
+  .amc-NCard-face { padding: 1rem; }
+}
+
+/* ======================================================================
+   MOTION - Border Beam: a comet of light runs around the border.
+   ====================================================================== */
+
+.amc-NCard--borderBeam .amc-NCard-card {
+  border: 1px solid var(--amc-ncard-line);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--amc-ncard-shade) 6%, transparent),
+    0 12px 32px -18px color-mix(in srgb, var(--amc-ncard-accent) 45%, transparent);
+}
+.amc-NCard--borderBeam .amc-NCard-card { z-index: 1; }
+.amc-NCard--borderBeam .amc-NCard-card::before,
+.amc-NCard--borderBeam::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--amc-ncard-radius);
+  padding: 2px;
+  background: conic-gradient(from var(--amc-ncard-angle),
+    transparent 0 52%,
+    color-mix(in srgb, var(--amc-ncard-accent-3) 80%, transparent) 70%,
+    var(--amc-ncard-accent) 84%,
+    var(--amc-ncard-accent-2) 94%,
+    transparent 100%);
+  -webkit-mask: linear-gradient(var(--amc-ncard-mask) 0 0) content-box, linear-gradient(var(--amc-ncard-mask) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-ncard-mask) 0 0) content-box exclude, linear-gradient(var(--amc-ncard-mask) 0 0);
+  pointer-events: none;
+  animation: amc-ncard-spin 6s linear infinite;
+}
+/* Soft halo that trails the beam, behind the card */
+.amc-NCard--borderBeam::before {
+  z-index: 0;
+  inset: 2px;
+  padding: 0;
+  -webkit-mask: none;
+  mask: none;
+  filter: blur(16px);
+  opacity: .55;
+}
+/* Faint dot grid fading down from the top edge */
+.amc-NCard--borderBeam .amc-NCard-fx {
+  background-image: radial-gradient(color-mix(in srgb, var(--amc-ncard-fg) 16%, transparent) 1px, transparent 1.5px);
+  background-size: 14px 14px;
+  -webkit-mask: linear-gradient(to bottom, var(--amc-ncard-mask), transparent 55%);
+  mask: linear-gradient(to bottom, var(--amc-ncard-mask), transparent 55%);
+}
+.amc-NCard--borderBeam .amc-NCard-icon {
+  background: linear-gradient(135deg, var(--amc-ncard-accent), var(--amc-ncard-accent-2));
+  color: var(--amc-ncard-accent-fg);
+  box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--amc-ncard-accent) 70%, transparent);
+}
+.amc-NCard--borderBeam .amc-NCard-value {
+  font-size: min(2rem, 14cqi);
+  background: linear-gradient(90deg, var(--amc-ncard-fg) 20%, var(--amc-ncard-accent) 70%, var(--amc-ncard-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes amc-ncard-spin {
+  to { --amc-ncard-angle: 360deg; }
+}
+
+/* ======================================================================
+   MOTION - Spotlight: a glow and a lit border follow the pointer.
+   ====================================================================== */
+
+.amc-NCard--spotlight .amc-NCard-card {
+  background: var(--amc-ncard-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-ncard-line);
+}
+.amc-NCard--spotlight:dir(rtl) { --amc-mx: 82; }
+/* Lit border */
+.amc-NCard--spotlight .amc-NCard-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(18rem circle at calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%),
+    var(--amc-ncard-accent), color-mix(in srgb, var(--amc-ncard-accent-2) 70%, transparent) 35%, transparent 70%);
+  -webkit-mask: linear-gradient(var(--amc-ncard-mask) 0 0) content-box, linear-gradient(var(--amc-ncard-mask) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-ncard-mask) 0 0) content-box exclude, linear-gradient(var(--amc-ncard-mask) 0 0);
+  pointer-events: none;
+  opacity: .75;
+  transition: opacity .3s ease;
+}
+/* Inner glow and a grid revealed only around the light */
+.amc-NCard--spotlight .amc-NCard-fx {
+  background:
+    radial-gradient(22rem circle at calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%),
+      color-mix(in srgb, var(--amc-ncard-accent) 16%, transparent), transparent 65%);
+}
+.amc-NCard--spotlight .amc-NCard-fx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--amc-ncard-accent) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--amc-ncard-accent) 22%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask: radial-gradient(11rem circle at calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%), var(--amc-ncard-mask), transparent 75%);
+  mask: radial-gradient(11rem circle at calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%), var(--amc-ncard-mask), transparent 75%);
+}
+.amc-NCard--spotlight.amc-is-active .amc-NCard-card::before { opacity: 1; }
+.amc-NCard--spotlight .amc-NCard-card:focus-within {
+  --amc-mx: 50;
+  --amc-my: 40;
+}
+.amc-NCard--spotlight .amc-NCard-icon {
+  background: var(--amc-ncard-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-ncard-line), 0 4px 14px -6px color-mix(in srgb, var(--amc-ncard-accent) 60%, transparent);
+}
+
+/* ======================================================================
+   MOTION - Meteors: streaks cross a night-tinted card.
+   ====================================================================== */
+
+.amc-NCard--meteors .amc-NCard-card {
+  --amc-ncard-fg: var(--amc-ncard-night-fg);
+  --amc-ncard-muted: var(--amc-ncard-night-muted);
+  background:
+    radial-gradient(120% 70% at 85% 0%, color-mix(in srgb, var(--amc-ncard-accent) 45%, transparent), transparent 60%),
+    radial-gradient(90% 60% at 0% 110%, color-mix(in srgb, var(--amc-ncard-accent-2) 40%, transparent), transparent 65%),
+    var(--amc-ncard-night);
+  color: var(--amc-ncard-fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-night-fg) 12%, transparent),
+    0 18px 40px -22px color-mix(in srgb, var(--amc-ncard-accent) 70%, transparent);
+}
+/* Static starfield */
+.amc-NCard--meteors .amc-NCard-fx {
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, var(--amc-ncard-night-fg), transparent),
+    radial-gradient(1px 1px at 34% 68%, var(--amc-ncard-night-muted), transparent),
+    radial-gradient(1.5px 1.5px at 58% 14%, var(--amc-ncard-night-fg), transparent),
+    radial-gradient(1px 1px at 76% 52%, var(--amc-ncard-night-muted), transparent),
+    radial-gradient(1px 1px at 90% 84%, var(--amc-ncard-night-fg), transparent),
+    radial-gradient(1px 1px at 22% 88%, var(--amc-ncard-night-muted), transparent),
+    radial-gradient(1.5px 1.5px at 46% 40%, var(--amc-ncard-night-muted), transparent);
+}
+.amc-NCard-meteor {
+  position: absolute;
+  inset-block-start: -8%;
+  inset-inline-start: var(--amc-ncard-m-x, 50%);
+  inline-size: 2px;
+  block-size: 2px;
+  border-radius: 50%;
+  background: var(--amc-ncard-night-fg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amc-ncard-night-fg) 12%, transparent), 0 0 8px 1px color-mix(in srgb, var(--amc-ncard-accent) 80%, transparent);
+  transform: rotate(145deg) translateX(var(--amc-ncard-m-rest, 120px));
+  animation: amc-ncard-meteor var(--amc-ncard-m-dur, 6s) linear var(--amc-ncard-m-delay, 0s) infinite;
+}
+.amc-NCard-meteor::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: 100%;
+  inline-size: 5.5rem;
+  block-size: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(to left, var(--amc-ncard-night-fg), color-mix(in srgb, var(--amc-ncard-accent) 60%, transparent) 30%, transparent);
+}
+.amc-NCard-meteor:nth-child(1) { --amc-ncard-m-x: 38%; --amc-ncard-m-dur: 5.2s; --amc-ncard-m-delay: -1.1s; --amc-ncard-m-rest: 90px; }
+.amc-NCard-meteor:nth-child(2) { --amc-ncard-m-x: 62%; --amc-ncard-m-dur: 7.4s; --amc-ncard-m-delay: -4.6s; --amc-ncard-m-rest: 210px; }
+.amc-NCard-meteor:nth-child(3) { --amc-ncard-m-x: 88%; --amc-ncard-m-dur: 6.1s; --amc-ncard-m-delay: -2.9s; --amc-ncard-m-rest: 150px; }
+.amc-NCard-meteor:nth-child(4) { --amc-ncard-m-x: 108%; --amc-ncard-m-dur: 8.3s; --amc-ncard-m-delay: -6.2s; --amc-ncard-m-rest: 260px; }
+.amc-NCard-meteor:nth-child(5) { --amc-ncard-m-x: 74%; --amc-ncard-m-dur: 9.6s; --amc-ncard-m-delay: -.4s; --amc-ncard-m-rest: 40px; }
+.amc-NCard-meteor:nth-child(6) { --amc-ncard-m-x: 124%; --amc-ncard-m-dur: 6.8s; --amc-ncard-m-delay: -3.7s; --amc-ncard-m-rest: 330px; }
+
+@keyframes amc-ncard-meteor {
+  0% { transform: rotate(145deg) translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(145deg) translateX(34rem); opacity: 0; }
+}
+
+.amc-NCard--meteors .amc-NCard-icon {
+  background: color-mix(in srgb, var(--amc-ncard-night-fg) 10%, transparent);
+  color: var(--amc-ncard-night-fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-night-fg) 18%, transparent);
+}
+.amc-NCard--meteors .amc-NCard-badge {
+  background: color-mix(in srgb, var(--amc-ncard-state) 22%, transparent);
+  color: color-mix(in srgb, var(--amc-ncard-state) 45%, var(--amc-ncard-night-fg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-state) 40%, transparent);
+}
+.amc-NCard--meteors.amc-NCard--stateNeutral .amc-NCard-badge { --amc-ncard-state: var(--amc-ncard-night-muted); }
+.amc-NCard--meteors .amc-NCard-value { font-size: min(2.125rem, 14cqi); }
+.amc-NCard--meteors .amc-NCard-cta { color: var(--amc-ncard-night-fg); }
+.amc-NCard--meteors .amc-NCard-details { border-color: color-mix(in srgb, var(--amc-ncard-night-fg) 30%, transparent); }
+.amc-NCard--meteors .amc-NCard-link:focus-visible::after { outline-color: var(--amc-ncard-night-fg); }
+
+/* ======================================================================
+   DEPTH - Tilt 3D: pointer tilt, parallax layers at different depths, glare.
+   ====================================================================== */
+
+.amc-NCard--tilt3d {
+  --amc-rx: 5;
+  --amc-ry: -7;
+  perspective: 62.5rem;
+}
+.amc-NCard--tilt3d:dir(rtl) { --amc-ry: 7; }
+.amc-NCard--tilt3d .amc-NCard-card {
+  isolation: auto;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--amc-rx) * 1deg)) rotateY(calc(var(--amc-ry) * 1deg));
+  background: linear-gradient(160deg, var(--amc-ncard-bg), color-mix(in srgb, var(--amc-ncard-accent) 7%, var(--amc-ncard-bg)));
+  box-shadow: inset 0 0 0 1px var(--amc-ncard-line),
+    calc(var(--amc-ry) * -1.2px) calc(var(--amc-rx) * 1.2px + 1.5rem) 2.5rem -1rem color-mix(in srgb, var(--amc-ncard-shade) 28%, transparent),
+    0 2px 6px color-mix(in srgb, var(--amc-ncard-shade) 8%, transparent);
+  transition: transform .5s var(--amc-ncard-ease), box-shadow .5s var(--amc-ncard-ease);
+}
+.amc-NCard--tilt3d.amc-is-active .amc-NCard-card {
+  transition: transform .12s linear, box-shadow .12s linear;
+}
+/* Keyboard: the card straightens and lifts toward the viewer */
+.amc-NCard--tilt3d .amc-NCard-card:focus-within {
+  --amc-rx: 0;
+  --amc-ry: 0;
+  transform: translateZ(1.5rem);
+}
+.amc-NCard--tilt3d .amc-NCard-fx { z-index: auto; }
+.amc-NCard-glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(farthest-corner circle at calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%),
+    color-mix(in srgb, var(--amc-ncard-light) 55%, transparent), transparent 55%);
+  mix-blend-mode: soft-light;
+  opacity: .6;
+}
+/* Glowing back plate floating behind the card */
+.amc-NCard--tilt3d .amc-NCard-card::before {
+  content: "";
+  position: absolute;
+  inset: 30% 4% -6%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--amc-ncard-accent), var(--amc-ncard-accent-2));
+  filter: blur(24px);
+  opacity: .5;
+  transform: translateZ(-3.5rem);
+  pointer-events: none;
+}
+/* The head dissolves into the body grid so only the body is a 3D context; the body then
+   stays the containing block of the stretched link and covers the whole card. */
+.amc-NCard--tilt3d .amc-NCard-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: .75rem;
+  transform-style: preserve-3d;
+}
+.amc-NCard--tilt3d .amc-NCard-head { display: contents; }
+.amc-NCard--tilt3d .amc-NCard-heading { grid-column: 2; }
+.amc-NCard--tilt3d .amc-NCard-badge { grid-column: 3; justify-self: end; }
+.amc-NCard--tilt3d .amc-NCard-figure,
+.amc-NCard--tilt3d .amc-NCard-more,
+.amc-NCard--tilt3d .amc-NCard-foot { grid-column: 1 / -1; }
+.amc-NCard--tilt3d .amc-NCard-icon {
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: .875rem;
+  background: linear-gradient(135deg, var(--amc-ncard-accent), var(--amc-ncard-accent-2));
+  color: var(--amc-ncard-accent-fg);
+  font-size: 1.25rem;
+  box-shadow: 0 14px 22px -10px color-mix(in srgb, var(--amc-ncard-accent) 80%, transparent);
+  transform: translateZ(3.5rem);
+}
+.amc-NCard--tilt3d .amc-NCard-badge {
+  background: var(--amc-ncard-bg);
+  box-shadow: 0 8px 16px -8px color-mix(in srgb, var(--amc-ncard-shade) 35%, transparent), inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-state) 40%, transparent);
+  transform: translateZ(2.75rem);
+}
+.amc-NCard--tilt3d .amc-NCard-figure {
+  align-self: flex-start;
+  justify-self: start;
+  padding: .625rem .875rem;
+  border-radius: .75rem;
+  background: var(--amc-ncard-bg);
+  box-shadow: 0 16px 28px -14px color-mix(in srgb, var(--amc-ncard-shade) 40%, transparent), inset 0 0 0 1px var(--amc-ncard-line);
+  transform: translateZ(2.25rem);
+}
+.amc-NCard--tilt3d .amc-NCard-cta { transform: translateZ(1.5rem); }
+.amc-NCard--tilt3d .amc-NCard-media {
+  margin: .75rem .75rem 0;
+  border-radius: calc(var(--amc-ncard-radius) - .25rem);
+  box-shadow: 0 18px 28px -16px color-mix(in srgb, var(--amc-ncard-shade) 55%, transparent);
+  transform: translateZ(2rem);
+}
+
+/* ======================================================================
+   DEPTH - Flip: summary front, details back.
+   ====================================================================== */
+
+.amc-NCard--flip { perspective: 68.75rem; }
+.amc-NCard--flip .amc-NCard-card {
+  background: none;
+  cursor: pointer;
+}
+.amc-NCard-flipper {
+  display: grid;
+  flex: 1;
+  transform-style: preserve-3d;
+  transition: transform .75s var(--amc-ncard-ease);
+}
+.amc-NCard--flip .amc-NCard-card:hover .amc-NCard-flipper,
+.amc-NCard--flip .amc-NCard-card:focus-within .amc-NCard-flipper { transform: rotateY(180deg); }
+.amc-NCard--flip:dir(rtl) .amc-NCard-card:hover .amc-NCard-flipper,
+.amc-NCard--flip:dir(rtl) .amc-NCard-card:focus-within .amc-NCard-flipper { transform: rotateY(-180deg); }
+.amc-NCard-face {
+  display: flex;
+  flex-direction: column;
+  gap: .875rem;
+  grid-area: 1 / 1;
+  min-inline-size: 0;
+  padding: 1.25rem;
+  border-radius: var(--amc-ncard-radius);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+/* Front: a physical card with a dog-eared corner and an edge in the colour of its back. */
+.amc-NCard-face--front {
+  --amc-ncard-fold: 2.75rem;
+  position: relative;
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--amc-ncard-accent) 12%, transparent), transparent 60%),
+    linear-gradient(225deg, transparent calc(var(--amc-ncard-fold) * .7071), var(--amc-ncard-bg) calc(var(--amc-ncard-fold) * .7071 + .5px));
+  box-shadow:
+    0 1px 3px color-mix(in srgb, var(--amc-ncard-shade) 12%, transparent),
+    0 3px 0 -1px color-mix(in srgb, var(--amc-ncard-accent) 80%, var(--amc-ncard-bg)),
+    0 6px 0 -2px color-mix(in srgb, var(--amc-ncard-accent-2) 70%, var(--amc-ncard-bg)),
+    0 22px 30px -18px color-mix(in srgb, var(--amc-ncard-shade) 45%, transparent);
+}
+.amc-NCard-face--front:dir(rtl) {
+  background:
+    radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--amc-ncard-accent) 12%, transparent), transparent 60%),
+    linear-gradient(135deg, transparent calc(var(--amc-ncard-fold) * .7071), var(--amc-ncard-bg) calc(var(--amc-ncard-fold) * .7071 + .5px));
+}
+.amc-NCard-face--front .amc-NCard-head { padding-inline-end: 1.5rem; }
+.amc-NCard-face--front .amc-NCard-icon {
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-ncard-accent) 14%, var(--amc-ncard-bg));
+}
+.amc-NCard-face--front .amc-NCard-value { font-size: min(2.25rem, 14cqi); }
+/* The folded flap shows the back colour; it lifts a little on hover. */
+.amc-NCard-turn {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  inline-size: var(--amc-ncard-fold);
+  block-size: var(--amc-ncard-fold);
+  padding: .3125rem;
+  border-end-start-radius: .625rem;
+  background: linear-gradient(45deg, var(--amc-ncard-accent) 0%, var(--amc-ncard-accent-2) 50%, transparent 50%);
+  color: var(--amc-ncard-accent-fg);
+  font-size: .6875rem;
+  filter: drop-shadow(-3px 4px 4px color-mix(in srgb, var(--amc-ncard-shade) 30%, transparent));
+}
+.amc-NCard-turn:dir(rtl) {
+  background: linear-gradient(-45deg, var(--amc-ncard-accent) 0%, var(--amc-ncard-accent-2) 50%, transparent 50%);
+  filter: drop-shadow(3px 4px 4px color-mix(in srgb, var(--amc-ncard-shade) 30%, transparent));
+}
+.amc-NCard-face--back {
+  --amc-ncard-fg: var(--amc-ncard-accent-fg);
+  --amc-ncard-muted: color-mix(in srgb, var(--amc-ncard-accent-fg) 82%, transparent);
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(90% 80% at 0% 100%, color-mix(in srgb, var(--amc-ncard-accent-2) 70%, transparent), transparent 70%),
+    linear-gradient(145deg, var(--amc-ncard-accent), color-mix(in oklab, var(--amc-ncard-accent) 70%, var(--amc-ncard-shade)));
+  color: var(--amc-ncard-fg);
+  box-shadow: 0 22px 30px -18px color-mix(in srgb, var(--amc-ncard-accent) 60%, transparent);
+}
+.amc-NCard-backTitle {
+  margin: 0;
+  font-size: .8125rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.amc-NCard-face--back .amc-NCard-desc { color: var(--amc-ncard-fg); font-size: .9375rem; }
+.amc-NCard-face--back .amc-NCard-details {
+  padding: .625rem .75rem;
+  border: 0;
+  border-radius: .625rem;
+  background: color-mix(in srgb, var(--amc-ncard-accent-fg) 14%, transparent);
+}
+.amc-NCard-face--back .amc-NCard-action {
+  padding: .5rem .875rem;
+  border-radius: 999px;
+  background: var(--amc-ncard-accent-fg);
+  color: var(--amc-ncard-accent);
+}
+.amc-NCard-face--back .amc-NCard-action:focus-visible {
+  outline: 2px solid var(--amc-ncard-accent-fg);
+  outline-offset: 2px;
+}
+
+/* ======================================================================
+   DEPTH - Layered Stack: tinted sheets behind the card fan out.
+   ====================================================================== */
+
+.amc-NCard--layeredStack::before,
+.amc-NCard--layeredStack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--amc-ncard-radius);
+  transform-origin: 50% 100%;
+  transition: transform .5s var(--amc-ncard-ease);
+  pointer-events: none;
+}
+.amc-NCard--layeredStack::before {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--amc-ncard-accent-2) 55%, var(--amc-ncard-bg)), color-mix(in srgb, var(--amc-ncard-accent-2) 30%, var(--amc-ncard-bg)));
+  box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--amc-ncard-shade) 40%, transparent);
+  transform: translate(-.375rem, .5rem) rotate(-4deg);
+}
+.amc-NCard--layeredStack::after {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--amc-ncard-accent) 45%, var(--amc-ncard-bg)), color-mix(in srgb, var(--amc-ncard-accent) 22%, var(--amc-ncard-bg)));
+  box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--amc-ncard-shade) 40%, transparent);
+  transform: translate(.375rem, .25rem) rotate(3deg);
+}
+.amc-NCard--layeredStack .amc-NCard-card {
+  z-index: 1;
+  border: 1px solid var(--amc-ncard-line);
+  box-shadow: 0 18px 36px -20px color-mix(in srgb, var(--amc-ncard-shade) 50%, transparent);
+  transition: transform .5s var(--amc-ncard-ease), box-shadow .5s var(--amc-ncard-ease);
+}
+.amc-NCard--layeredStack:hover::before,
+.amc-NCard--layeredStack:focus-within::before { transform: translate(-1.5rem, .25rem) rotate(-10deg); }
+.amc-NCard--layeredStack:hover::after,
+.amc-NCard--layeredStack:focus-within::after { transform: translate(1.5rem, 0) rotate(8deg); }
+.amc-NCard--layeredStack:hover .amc-NCard-card,
+.amc-NCard--layeredStack:focus-within .amc-NCard-card {
+  transform: translateY(-.5rem);
+  box-shadow: 0 28px 44px -22px color-mix(in srgb, var(--amc-ncard-shade) 55%, transparent);
+}
+.amc-NCard--layeredStack .amc-NCard-head { align-items: center; }
+.amc-NCard--layeredStack .amc-NCard-figure {
+  flex-direction: row;
+  align-items: baseline;
+  gap: .5rem;
+}
+.amc-NCard--layeredStack .amc-NCard-value { font-size: min(2.5rem, 14cqi); }
+
+/* ======================================================================
+   BOLD - Neo Brutal: ink border, hard offset shadow, flat fills.
+   ====================================================================== */
+
+.amc-NCard--neoBrutal {
+  --amc-ncard-radius: .375rem;
+  --amc-ncard-hard: .375rem;
+}
+.amc-NCard--neoBrutal .amc-NCard-card {
+  border: 2.5px solid var(--amc-ncard-ink);
+  background: var(--amc-ncard-bg);
+  box-shadow: var(--amc-ncard-hard) var(--amc-ncard-hard) 0 var(--amc-ncard-ink);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.amc-NCard--neoBrutal:dir(rtl) .amc-NCard-card { box-shadow: calc(var(--amc-ncard-hard) * -1) var(--amc-ncard-hard) 0 var(--amc-ncard-ink); }
+.amc-NCard--neoBrutal .amc-NCard-card:hover,
+.amc-NCard--neoBrutal .amc-NCard-card:focus-within {
+  --amc-ncard-hard: .625rem;
+  transform: translate(-.25rem, -.25rem);
+}
+.amc-NCard--neoBrutal .amc-NCard-card:active { --amc-ncard-hard: .125rem; transform: translate(.25rem, .25rem); }
+.amc-NCard--neoBrutal:dir(rtl) .amc-NCard-card:hover,
+.amc-NCard--neoBrutal:dir(rtl) .amc-NCard-card:focus-within { transform: translate(.25rem, -.25rem); }
+.amc-NCard--neoBrutal .amc-NCard-body { gap: 1rem; }
+.amc-NCard--neoBrutal .amc-NCard-icon {
+  border: 2px solid var(--amc-ncard-ink);
+  border-radius: .25rem;
+  background: color-mix(in srgb, var(--amc-ncard-warning) 70%, var(--amc-ncard-bg));
+  color: var(--amc-ncard-ink);
+  box-shadow: 3px 3px 0 var(--amc-ncard-ink);
+}
+.amc-NCard--neoBrutal .amc-NCard-eyebrow {
+  display: inline-block;
+  padding: .125rem .375rem;
+  border: 1.5px solid var(--amc-ncard-ink);
+  background: color-mix(in srgb, var(--amc-ncard-accent) 22%, var(--amc-ncard-bg));
+  color: var(--amc-ncard-ink);
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.amc-NCard--neoBrutal .amc-NCard-title {
+  margin-block-start: .375rem;
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -.01em;
+}
+.amc-NCard--neoBrutal .amc-NCard-badge {
+  border: 2px solid var(--amc-ncard-ink);
+  border-radius: .25rem;
+  background: var(--amc-ncard-state);
+  color: var(--amc-ncard-state-fg);
+  font-weight: 800;
+  box-shadow: 2px 2px 0 var(--amc-ncard-ink);
+  transform: rotate(3deg);
+}
+.amc-NCard--neoBrutal.amc-NCard--stateNeutral .amc-NCard-badge { background: var(--amc-ncard-bg); color: var(--amc-ncard-ink); }
+.amc-NCard--neoBrutal .amc-NCard-badgeDot { background: currentColor; }
+.amc-NCard--neoBrutal .amc-NCard-figure {
+  align-self: stretch;
+  padding: .625rem .875rem;
+  border: 2px solid var(--amc-ncard-ink);
+  border-radius: .25rem;
+  background: var(--amc-ncard-accent);
+  color: var(--amc-ncard-accent-fg);
+}
+.amc-NCard--neoBrutal .amc-NCard-valueLabel { color: inherit; font-weight: 700; opacity: .9; }
+.amc-NCard--neoBrutal .amc-NCard-value { font-size: min(2.25rem, 14cqi); font-weight: 900; letter-spacing: -.03em; }
+.amc-NCard--neoBrutal .amc-NCard-desc { color: var(--amc-ncard-fg); }
+.amc-NCard--neoBrutal .amc-NCard-details { border-inline-start: 3px solid var(--amc-ncard-ink); }
+.amc-NCard--neoBrutal .amc-NCard-meta { color: var(--amc-ncard-fg); font-weight: 600; }
+.amc-NCard--neoBrutal .amc-NCard-cta {
+  padding: .3125rem .625rem;
+  border: 2px solid var(--amc-ncard-ink);
+  border-radius: .25rem;
+  background: var(--amc-ncard-bg);
+  color: var(--amc-ncard-ink);
+  font-weight: 800;
+  box-shadow: 3px 3px 0 var(--amc-ncard-ink);
+}
+.amc-NCard--neoBrutal .amc-NCard-link:focus-visible::after { outline: 3px solid var(--amc-ncard-accent); outline-offset: 5px; }
+
+/* ======================================================================
+   BOLD - Clay: pillowy surface with soft inner and outer shadows.
+   ====================================================================== */
+
+.amc-NCard--clay { --amc-ncard-radius: 1.75rem; }
+.amc-NCard--clay .amc-NCard-card {
+  background: color-mix(in srgb, var(--amc-ncard-accent) 9%, var(--amc-ncard-bg));
+  box-shadow:
+    0 1.25rem 2.25rem -1rem color-mix(in srgb, var(--amc-ncard-accent) 45%, var(--amc-ncard-page)),
+    inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-ncard-accent) 16%, transparent),
+    inset 0 .5rem 1rem color-mix(in srgb, var(--amc-ncard-light) 55%, transparent);
+  transition: transform .35s var(--amc-ncard-ease), box-shadow .35s var(--amc-ncard-ease);
+}
+.amc-NCard--clay .amc-NCard-card:hover,
+.amc-NCard--clay .amc-NCard-card:focus-within {
+  transform: translateY(-.25rem) scale(1.01);
+  box-shadow:
+    0 1.75rem 2.75rem -1rem color-mix(in srgb, var(--amc-ncard-accent) 55%, var(--amc-ncard-page)),
+    inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-ncard-accent) 20%, transparent),
+    inset 0 .5rem 1rem color-mix(in srgb, var(--amc-ncard-light) 60%, transparent);
+}
+.amc-NCard--clay .amc-NCard-body { padding: 1.5rem; }
+.amc-NCard--clay .amc-NCard-icon {
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  border-radius: 1.125rem;
+  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--amc-ncard-light) 45%, var(--amc-ncard-accent)), var(--amc-ncard-accent) 70%);
+  color: var(--amc-ncard-accent-fg);
+  font-size: 1.375rem;
+  box-shadow:
+    0 .75rem 1.25rem -.5rem color-mix(in srgb, var(--amc-ncard-accent) 70%, var(--amc-ncard-page)),
+    inset 0 -.25rem .5rem color-mix(in srgb, var(--amc-ncard-shade) 22%, transparent),
+    inset 0 .25rem .5rem color-mix(in srgb, var(--amc-ncard-light) 45%, transparent);
+}
+.amc-NCard--clay .amc-NCard-badge {
+  padding: .375rem .75rem;
+  background: color-mix(in srgb, var(--amc-ncard-state) 18%, var(--amc-ncard-bg));
+  box-shadow: inset 0 -2px 4px color-mix(in srgb, var(--amc-ncard-state) 25%, transparent), inset 0 2px 3px color-mix(in srgb, var(--amc-ncard-light) 50%, transparent);
+}
+.amc-NCard--clay .amc-NCard-figure {
+  padding: .75rem 1rem;
+  border-radius: 1.125rem;
+  background: color-mix(in srgb, var(--amc-ncard-accent) 6%, var(--amc-ncard-page));
+  box-shadow: inset 0 .25rem .625rem color-mix(in srgb, var(--amc-ncard-accent) 20%, transparent), inset 0 -.125rem .375rem color-mix(in srgb, var(--amc-ncard-light) 50%, transparent);
+}
+.amc-NCard--clay .amc-NCard-value { color: color-mix(in srgb, var(--amc-ncard-accent) 70%, var(--amc-ncard-fg)); font-size: min(2rem, 14cqi); }
+.amc-NCard--clay .amc-NCard-cta {
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  background: var(--amc-ncard-accent);
+  color: var(--amc-ncard-accent-fg);
+  box-shadow: 0 .5rem 1rem -.375rem color-mix(in srgb, var(--amc-ncard-accent) 70%, var(--amc-ncard-page)),
+    inset 0 -.1875rem .375rem color-mix(in srgb, var(--amc-ncard-shade) 20%, transparent),
+    inset 0 .1875rem .375rem color-mix(in srgb, var(--amc-ncard-light) 35%, transparent);
+}
+.amc-NCard--clay .amc-NCard-details { border-inline-start: 0; padding-inline-start: 0; }
+
+/* ======================================================================
+   BOLD - Aurora Grain: slow aurora gradient under film grain.
+   ====================================================================== */
+
+.amc-NCard--auroraGrain .amc-NCard-card {
+  overflow: hidden;
+  background: var(--amc-ncard-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-ncard-line), 0 20px 40px -26px color-mix(in srgb, var(--amc-ncard-accent) 70%, transparent);
+}
+.amc-NCard--auroraGrain .amc-NCard-fx {
+  background:
+    radial-gradient(45% 60% at 15% 15%, var(--amc-ncard-accent), transparent 72%),
+    radial-gradient(50% 65% at 85% 5%, var(--amc-ncard-accent-2), transparent 72%),
+    radial-gradient(55% 60% at 65% 55%, var(--amc-ncard-accent-3), transparent 72%),
+    radial-gradient(45% 55% at 5% 80%, color-mix(in oklab, var(--amc-ncard-warning) 80%, var(--amc-ncard-danger)), transparent 72%);
+  background-color: var(--amc-ncard-bg);
+  background-size: 150% 150%;
+  background-position: 0% 0%;
+  animation: amc-ncard-aurora 16s ease-in-out infinite alternate;
+}
+/* Veil keeps text contrast; grain on top */
+.amc-NCard--auroraGrain .amc-NCard-fx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--amc-ncard-bg) 8%, transparent), color-mix(in srgb, var(--amc-ncard-bg) 40%, transparent) 45%, color-mix(in srgb, var(--amc-ncard-bg) 78%, transparent) 80%);
+}
+.amc-NCard--auroraGrain .amc-NCard-fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: .7;
+}
+@keyframes amc-ncard-aurora {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 30%; }
+  100% { background-position: 40% 100%; }
+}
+.amc-NCard--auroraGrain .amc-NCard-body { gap: .75rem; padding: 1.375rem; }
+.amc-NCard--auroraGrain .amc-NCard-icon {
+  background: color-mix(in srgb, var(--amc-ncard-bg) 55%, transparent);
+  color: var(--amc-ncard-fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-fg) 12%, transparent);
+}
+.amc-NCard--auroraGrain .amc-NCard-eyebrow { color: color-mix(in srgb, var(--amc-ncard-fg) 78%, transparent); }
+.amc-NCard--auroraGrain .amc-NCard-badge { background: color-mix(in srgb, var(--amc-ncard-bg) 70%, transparent); }
+.amc-NCard--auroraGrain .amc-NCard-figure { order: -1; margin-block-end: .25rem; }
+.amc-NCard--auroraGrain .amc-NCard-valueLabel { color: color-mix(in srgb, var(--amc-ncard-fg) 75%, transparent); font-weight: 600; }
+.amc-NCard--auroraGrain .amc-NCard-value {
+  font-size: clamp(1.75rem, 16cqi, 3.25rem);
+  font-weight: 850;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+.amc-NCard--auroraGrain .amc-NCard-desc,
+.amc-NCard--auroraGrain .amc-NCard-meta { color: color-mix(in srgb, var(--amc-ncard-fg) 76%, transparent); }
+.amc-NCard--auroraGrain .amc-NCard-cta { color: var(--amc-ncard-fg); }
+
+/* ======================================================================
+   BOLD - Holo Foil: holographic foil that shifts with the pointer.
+   ====================================================================== */
+
+.amc-NCard--holoFoil {
+  --amc-mx: 30;
+  --amc-my: 20;
+  --amc-ncard-holo-a: color-mix(in oklab, var(--amc-ncard-accent) 72%, var(--amc-ncard-bg));
+  --amc-ncard-holo-b: color-mix(in oklab, var(--amc-ncard-accent-2) 72%, var(--amc-ncard-bg));
+  --amc-ncard-holo-c: color-mix(in oklab, var(--amc-ncard-danger) 58%, var(--amc-ncard-bg));
+  --amc-ncard-holo-d: color-mix(in oklab, var(--amc-ncard-warning) 75%, var(--amc-ncard-bg));
+  --amc-ncard-holo-e: color-mix(in oklab, var(--amc-ncard-success) 62%, var(--amc-ncard-bg));
+  --amc-ncard-holo-f: color-mix(in oklab, var(--amc-ncard-info) 66%, var(--amc-ncard-bg));
+}
+.amc-NCard--holoFoil .amc-NCard-card {
+  overflow: hidden;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--amc-ncard-fg) 4%, var(--amc-ncard-bg)), color-mix(in srgb, var(--amc-ncard-fg) 10%, var(--amc-ncard-bg)));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-fg) 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--amc-ncard-light) 60%, transparent),
+    0 18px 36px -22px color-mix(in srgb, var(--amc-ncard-shade) 55%, transparent);
+}
+.amc-NCard-foil,
+.amc-NCard-glint {
+  position: absolute;
+  inset: 0;
+  transition: background-position .6s var(--amc-ncard-ease);
+}
+.amc-NCard-foil {
+  background: repeating-linear-gradient(115deg,
+    var(--amc-ncard-holo-a) 0%, var(--amc-ncard-holo-b) 7%, var(--amc-ncard-holo-c) 14%,
+    var(--amc-ncard-holo-d) 21%, var(--amc-ncard-holo-e) 28%, var(--amc-ncard-holo-f) 35%, var(--amc-ncard-holo-a) 42%);
+  background-size: 300% 300%;
+  background-position: calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%);
+  opacity: .9;
+  -webkit-mask: linear-gradient(160deg, var(--amc-ncard-mask) 0%, color-mix(in srgb, var(--amc-ncard-mask) 55%, transparent) 45%, color-mix(in srgb, var(--amc-ncard-mask) 12%, transparent) 75%);
+  mask: linear-gradient(160deg, var(--amc-ncard-mask) 0%, color-mix(in srgb, var(--amc-ncard-mask) 55%, transparent) 45%, color-mix(in srgb, var(--amc-ncard-mask) 12%, transparent) 75%);
+}
+/* Fine diagonal foil texture and a moving glint */
+.amc-NCard-glint {
+  background:
+    linear-gradient(110deg, transparent 35%, color-mix(in srgb, var(--amc-ncard-light) 70%, transparent) 48%, transparent 60%),
+    repeating-linear-gradient(55deg, color-mix(in srgb, var(--amc-ncard-light) 9%, transparent) 0 1px, transparent 1px 6px);
+  background-size: 250% 100%, auto;
+  background-position: calc(var(--amc-mx) * 1%) 0, 0 0;
+  mix-blend-mode: soft-light;
+}
+.amc-NCard--holoFoil .amc-NCard-card:focus-within { --amc-mx: 80; --amc-my: 70; }
+.amc-NCard--holoFoil .amc-NCard-icon {
+  inline-size: 2.75rem;
+  block-size: 2rem;
+  border-radius: .375rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--amc-ncard-warning) 70%, var(--amc-ncard-bg)), color-mix(in srgb, var(--amc-ncard-warning) 35%, var(--amc-ncard-fg)));
+  color: color-mix(in srgb, var(--amc-ncard-shade) 70%, var(--amc-ncard-warning));
+  font-size: .875rem;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-shade) 25%, transparent);
+}
+.amc-NCard--holoFoil .amc-NCard-eyebrow {
+  color: var(--amc-ncard-fg);
+  font-size: .6875rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.amc-NCard--holoFoil .amc-NCard-title { font-size: 1.25rem; font-weight: 800; letter-spacing: -.01em; }
+.amc-NCard--holoFoil .amc-NCard-badge { background: color-mix(in srgb, var(--amc-ncard-bg) 75%, transparent); }
+.amc-NCard--holoFoil .amc-NCard-value { font-size: min(2rem, 14cqi); font-weight: 800; }
+.amc-NCard--holoFoil .amc-NCard-valueLabel,
+.amc-NCard--holoFoil .amc-NCard-desc { color: color-mix(in srgb, var(--amc-ncard-fg) 78%, transparent); }
+.amc-NCard--holoFoil .amc-NCard-foot {
+  padding-block-start: .75rem;
+  border-block-start: 1px dashed color-mix(in srgb, var(--amc-ncard-fg) 22%, transparent);
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+}
+
+/* ======================================================================
+   SMART - Expand Reveal: compact card that morphs open.
+   ====================================================================== */
+
+.amc-NCard--expandReveal .amc-NCard-card {
+  --amc-ncard-radius: 1.5rem;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--amc-ncard-accent) 6%, var(--amc-ncard-bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-accent) 18%, var(--amc-ncard-line));
+  transition: border-radius .45s var(--amc-ncard-ease), box-shadow .45s var(--amc-ncard-ease), background-color .45s ease;
+}
+.amc-NCard--expandReveal .amc-NCard-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .625rem 1rem;
+  padding: .875rem 1rem;
+  transition: padding .45s var(--amc-ncard-ease);
+}
+.amc-NCard--expandReveal .amc-NCard-head { grid-column: 1 / -1; align-items: center; }
+.amc-NCard--expandReveal .amc-NCard-icon {
+  border-radius: 50%;
+  background: var(--amc-ncard-accent);
+  color: var(--amc-ncard-accent-fg);
+  transition: transform .45s var(--amc-ncard-ease);
+}
+.amc-NCard--expandReveal .amc-NCard-title { font-size: 1rem; }
+.amc-NCard--expandReveal .amc-NCard-figure {
+  flex-direction: row;
+  align-items: baseline;
+  gap: .375rem;
+}
+.amc-NCard--expandReveal .amc-NCard-value { font-size: 1.25rem; }
+.amc-NCard--expandReveal .amc-NCard-foot { margin: 0; justify-content: flex-end; text-align: end; align-self: center; }
+.amc-NCard--expandReveal .amc-NCard-more {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .45s var(--amc-ncard-ease);
+}
+.amc-NCard--expandReveal .amc-NCard-moreInner {
+  gap: .75rem;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.amc-NCard-toggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  background: var(--amc-ncard-bg);
+  color: var(--amc-ncard-accent);
+  font-size: .8125rem;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-accent) 30%, transparent);
+  transition: transform .45s var(--amc-ncard-ease), background-color .3s ease, color .3s ease;
+}
+/* "More inside" hint: stacked peeking edge under the compact card */
+.amc-NCard--expandReveal .amc-NCard-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 1.25rem;
+  inset-block-end: -.375rem;
+  z-index: -2;
+  block-size: 1rem;
+  border-radius: 0 0 1rem 1rem;
+  background: color-mix(in srgb, var(--amc-ncard-accent) 16%, var(--amc-ncard-bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-accent) 20%, transparent);
+  transition: opacity .3s ease, transform .45s var(--amc-ncard-ease);
+}
+.amc-NCard--expandReveal .amc-NCard-card:hover,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within {
+  --amc-ncard-radius: 1rem;
+  background-color: var(--amc-ncard-bg);
+  background: var(--amc-ncard-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-ncard-line), 0 24px 40px -24px color-mix(in srgb, var(--amc-ncard-accent) 60%, transparent);
+}
+.amc-NCard--expandReveal .amc-NCard-card:hover .amc-NCard-body,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within .amc-NCard-body { padding: 1.25rem; }
+.amc-NCard--expandReveal .amc-NCard-card:hover .amc-NCard-more,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within .amc-NCard-more { grid-template-rows: 1fr; }
+.amc-NCard--expandReveal .amc-NCard-card:hover .amc-NCard-moreInner,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within .amc-NCard-moreInner { opacity: 1; transition-delay: .12s; }
+.amc-NCard--expandReveal .amc-NCard-card:hover .amc-NCard-toggle,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within .amc-NCard-toggle {
+  transform: rotate(135deg);
+  background: var(--amc-ncard-accent);
+  color: var(--amc-ncard-accent-fg);
+}
+.amc-NCard--expandReveal .amc-NCard-card:hover .amc-NCard-icon,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within .amc-NCard-icon { transform: scale(1.12); }
+.amc-NCard--expandReveal .amc-NCard-card:hover::after,
+.amc-NCard--expandReveal .amc-NCard-card:focus-within::after { opacity: 0; transform: translateY(-.5rem); }
+.amc-NCard--expandReveal .amc-NCard-action {
+  align-self: flex-start;
+  margin-inline-start: 0;
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  background: var(--amc-ncard-accent);
+  color: var(--amc-ncard-accent-fg);
+}
+.amc-NCard--expandReveal .amc-NCard-action:focus-visible { outline: 2px solid var(--amc-ncard-accent); outline-offset: 2px; }
+
+@container (max-width: 17rem) {
+  .amc-NCard--expandReveal .amc-NCard-body { grid-template-columns: minmax(0, 1fr); }
+  .amc-NCard--expandReveal .amc-NCard-foot { justify-content: flex-start; text-align: start; }
+}
+
+/* ======================================================================
+   SMART - Adaptive: stacked, side-by-side or billboard by container width.
+   ====================================================================== */
+
+.amc-NCard--adaptive { container-type: inline-size; }
+.amc-NCard--adaptive .amc-NCard-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--amc-ncard-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-ncard-line), 0 10px 30px -22px color-mix(in srgb, var(--amc-ncard-shade) 55%, transparent);
+}
+.amc-NCard--adaptive .amc-NCard-media { position: relative; }
+.amc-NCard--adaptive .amc-NCard-value { font-size: clamp(1.5rem, 8cqi, 2.25rem); }
+.amc-NCard--adaptive .amc-NCard-title { font-size: clamp(1rem, 5cqi, 1.25rem); }
+/* Stacked (narrow): value pinned over the picture */
+@container (max-width: 23.99rem) {
+  .amc-NCard--adaptive .amc-NCard-media .amc-NCard-img { aspect-ratio: 16 / 10; }
+  .amc-NCard--adaptive .amc-NCard-body { gap: .75rem; }
+}
+/* Side by side */
+@container (min-width: 24rem) {
+  .amc-NCard--adaptive.amc-NCard--hasMedia .amc-NCard-card { grid-template-columns: minmax(8rem, 38%) minmax(0, 1fr); }
+  .amc-NCard--adaptive .amc-NCard-media {
+    border-radius: 0;
+    border-start-start-radius: inherit;
+    border-end-start-radius: inherit;
+  }
+  .amc-NCard--adaptive .amc-NCard-img { aspect-ratio: auto; min-block-size: 100%; }
+  .amc-NCard--adaptive .amc-NCard-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: start;
+  }
+  .amc-NCard--adaptive .amc-NCard-head,
+  .amc-NCard--adaptive .amc-NCard-more,
+  .amc-NCard--adaptive .amc-NCard-foot { grid-column: 1 / -1; }
+  .amc-NCard--adaptive .amc-NCard-figure { grid-column: 1; }
+}
+/* Billboard (wide): picture becomes the backdrop, kinetic headline */
+@container (min-width: 40rem) {
+  .amc-NCard--adaptive .amc-NCard-card,
+  .amc-NCard--adaptive.amc-NCard--hasMedia .amc-NCard-card {
+    grid-template-columns: minmax(0, 1fr);
+    min-block-size: 20rem;
+    background:
+      radial-gradient(80% 120% at 100% 0%, color-mix(in srgb, var(--amc-ncard-accent-2) 45%, transparent), transparent 60%),
+      linear-gradient(135deg, color-mix(in oklab, var(--amc-ncard-accent) 80%, var(--amc-ncard-shade)), var(--amc-ncard-accent));
+  }
+  .amc-NCard--adaptive .amc-NCard-media { position: absolute; inset: 0; border-radius: inherit; }
+  .amc-NCard--adaptive .amc-NCard-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, color-mix(in srgb, var(--amc-ncard-shade) 85%, transparent), color-mix(in srgb, var(--amc-ncard-shade) 35%, transparent) 55%, color-mix(in srgb, var(--amc-ncard-shade) 10%, transparent));
+  }
+  .amc-NCard--adaptive .amc-NCard-img { block-size: 100%; aspect-ratio: auto; }
+  .amc-NCard--adaptive .amc-NCard-body {
+    --amc-ncard-fg: var(--amc-ncard-on-media);
+    --amc-ncard-muted: color-mix(in srgb, var(--amc-ncard-on-media) 80%, transparent);
+    position: relative;
+    z-index: 1;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    align-items: end;
+    gap: 1rem 2.5rem;
+    padding: clamp(1.5rem, 4cqi, 2.5rem);
+    color: var(--amc-ncard-fg);
+  }
+  .amc-NCard--adaptive .amc-NCard-head { grid-column: 1 / -1; grid-row: 1; align-items: center; }
+  .amc-NCard--adaptive .amc-NCard-heading { display: flex; flex-direction: column-reverse; align-self: stretch; }
+  .amc-NCard--adaptive .amc-NCard-title {
+    margin: 0;
+    max-inline-size: 18ch;
+    font-size: clamp(1.75rem, 5.5cqi, 3.25rem);
+    font-weight: 800;
+    letter-spacing: -.035em;
+    line-height: 1.02;
+  }
+  .amc-NCard--adaptive .amc-NCard-eyebrow { margin-block-start: .5rem; letter-spacing: .08em; text-transform: uppercase; }
+  .amc-NCard--adaptive .amc-NCard-head { align-items: flex-start; }
+  .amc-NCard--adaptive .amc-NCard-icon {
+    background: color-mix(in srgb, var(--amc-ncard-on-media) 16%, transparent);
+    color: var(--amc-ncard-on-media);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-on-media) 25%, transparent);
+  }
+  .amc-NCard--adaptive .amc-NCard-badge {
+    background: color-mix(in srgb, var(--amc-ncard-shade) 35%, transparent);
+    color: var(--amc-ncard-on-media);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-ncard-on-media) 30%, transparent);
+  }
+  .amc-NCard--adaptive .amc-NCard-more { grid-column: 1; grid-row: 3; }
+  .amc-NCard--adaptive .amc-NCard-desc { font-size: 1rem; max-inline-size: 52ch; }
+  .amc-NCard--adaptive .amc-NCard-figure { grid-column: 2; grid-row: 3; align-items: flex-end; text-align: end; }
+  .amc-NCard--adaptive .amc-NCard-value { font-size: clamp(2.25rem, 6cqi, 3.75rem); letter-spacing: -.04em; }
+  .amc-NCard--adaptive .amc-NCard-foot {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    padding-block-start: 1rem;
+    border-block-start: 1px solid color-mix(in srgb, var(--amc-ncard-on-media) 22%, transparent);
+  }
+  .amc-NCard--adaptive .amc-NCard-cta { color: var(--amc-ncard-on-media); }
+  .amc-NCard--adaptive .amc-NCard-details { border-color: color-mix(in srgb, var(--amc-ncard-on-media) 40%, transparent); }
+}
+
+/* ---------- Reduced motion: every moving part stops, the design stays ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-NCard *,
+  .amc-NCard *::before,
+  .amc-NCard *::after,
+  .amc-NCard::before,
+  .amc-NCard::after {
+    animation: none;
+    transition-duration: .01ms;
+    transition-delay: 0s;
+  }
+  /* Beam becomes a static gradient border */
+  .amc-NCard--borderBeam .amc-NCard-card::before {
+    background: linear-gradient(135deg, var(--amc-ncard-accent), color-mix(in srgb, var(--amc-ncard-accent-2) 60%, transparent) 40%, transparent 60%, var(--amc-ncard-accent-3));
+  }
+  .amc-NCard--borderBeam::before { opacity: .25; }
+  /* Tilt disabled: the card sits flat with its layers still floating */
+  .amc-NCard--tilt3d .amc-NCard-card,
+  .amc-NCard--tilt3d .amc-NCard-card:focus-within { transform: none; }
+  .amc-NCard--neoBrutal .amc-NCard-card:hover,
+  .amc-NCard--neoBrutal .amc-NCard-card:focus-within,
+  .amc-NCard--clay .amc-NCard-card:hover,
+  .amc-NCard--clay .amc-NCard-card:focus-within,
+  .amc-NCard--layeredStack:hover .amc-NCard-card,
+  .amc-NCard--layeredStack:focus-within .amc-NCard-card { transform: none; }
+}
+
+/* ---------- Forced colors ---------- */
+
+@media (forced-colors: active) {
+  .amc-NCard-card,
+  .amc-NCard-face { border: 1px solid CanvasText; }
+  .amc-NCard-badge { border: 1px solid CanvasText; }
+  .amc-NCard-fx,
+  .amc-NCard--layeredStack::before,
+  .amc-NCard--layeredStack::after { display: none; }
+  .amc-NCard--borderBeam .amc-NCard-value { color: CanvasText; background: none; }
+}

@@ -1,0 +1,1247 @@
+/* APEX Modern Components - Next Profile (Next Collection)
+ * Ten current-generation profile designs in four directions: motion, depth, bold, smart.
+ * Every color resolves from Universal Theme variables (--ut-*) and color-mix() of them, so
+ * each style follows Vita, Vita Dark, Redwood, Theme Roller and custom styles.
+ * Orbit Ring and Beam Frame adapt techniques from Magic UI (orbiting-circles, border-beam,
+ * https://github.com/magicuidesign/magicui), MIT License, (c) Magic UI. */
+
+@property --amc-nprof-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.amc-NProfile,
+.amc-NProfiles {
+  --amc-nprof-bg: var(--ut-component-background-color, #fff);
+  --amc-nprof-page: var(--ut-body-background-color, #f5f5f5);
+  --amc-nprof-fg: var(--ut-component-text-default-color, #262626);
+  --amc-nprof-muted: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-nprof-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-nprof-radius: max(var(--ut-component-border-radius, .5rem), 1rem);
+  --amc-nprof-accent: var(--ut-palette-primary, #056ac8);
+  --amc-nprof-accent-fg: var(--ut-palette-primary-contrast, #fff);
+  --amc-nprof-success: var(--ut-palette-success, #278701);
+  --amc-nprof-warning: var(--ut-palette-warning, #fbce4a);
+  --amc-nprof-danger: var(--ut-palette-danger, #cb1100);
+  --amc-nprof-info: var(--ut-palette-info, #0076df);
+  --amc-nprof-ink: var(--ut-component-text-default-color, #262626);
+  --amc-nprof-shade: var(--amc-nprof-shade-color, #000);
+  --amc-nprof-light: var(--amc-nprof-light-color, #fff);
+  --amc-nprof-mask: var(--amc-nprof-mask-color, #000);
+  --amc-nprof-paper: var(--amc-nprof-paper-color, #fff);
+  --amc-nprof-accent-2: color-mix(in oklab, var(--amc-nprof-accent) 55%, var(--amc-nprof-danger));
+  --amc-nprof-accent-3: color-mix(in oklab, var(--amc-nprof-accent) 45%, var(--amc-nprof-success));
+  --amc-nprof-status: var(--ut-component-text-muted-color, #6b6b6b);
+  --amc-nprof-gap: 1.25rem;
+  --amc-nprof-min: 15rem;
+  --amc-nprof-ease: cubic-bezier(.2, .8, .2, 1);
+}
+.amc-NProfile--online { --amc-nprof-status: var(--ut-palette-success, #278701); }
+.amc-NProfile--away { --amc-nprof-status: var(--ut-palette-warning, #fbce4a); }
+.amc-NProfile--busy { --amc-nprof-status: var(--ut-palette-danger, #cb1100); }
+
+/* ---------- Report grid ---------- */
+
+.amc-NProfiles {
+  --amc-nprof-cols: 12;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--amc-nprof-min), 100%), 1fr));
+  gap: var(--amc-nprof-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.amc-NProfiles--cols2 { --amc-nprof-cols: 2; }
+.amc-NProfiles--cols3 { --amc-nprof-cols: 3; }
+.amc-NProfiles--cols4 { --amc-nprof-cols: 4; }
+.amc-NProfiles--cols2,
+.amc-NProfiles--cols3,
+.amc-NProfiles--cols4 {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, max(var(--amc-nprof-min), (100% - (var(--amc-nprof-cols) - 1) * var(--amc-nprof-gap)) / var(--amc-nprof-cols))), 1fr)
+  );
+}
+.amc-NProfiles-item {
+  display: flex;
+  min-inline-size: 0;
+}
+.amc-NProfiles--beamFrame { --amc-nprof-min: 19rem; }
+.amc-NProfiles--tiltHolo { --amc-nprof-gap: 1.75rem; padding-block: .5rem 1rem; }
+.amc-NProfiles--lanyardBadge { --amc-nprof-gap: 2rem; }
+.amc-NProfiles--neoBrutal { padding-block-end: .5rem; padding-inline-end: .5rem; }
+.amc-NProfiles--clay { --amc-nprof-gap: 1.75rem; padding-block-end: 1rem; }
+.amc-NProfiles--sticker { --amc-nprof-gap: 1.5rem; padding: .5rem; }
+.amc-NProfiles--expandBio { align-items: start; }
+.amc-NProfiles--expandBio > .amc-NProfiles-item { display: block; }
+
+/* ---------- Shared anatomy ---------- */
+
+.amc-NProfile {
+  position: relative;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  inline-size: 100%;
+  min-inline-size: 0;
+  color: var(--amc-nprof-fg);
+  --amc-mx: 30;
+  --amc-my: 20;
+  --amc-rx: 0;
+  --amc-ry: 0;
+}
+.amc-NProfile-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  inline-size: 100%;
+  min-inline-size: 0;
+  box-sizing: border-box;
+  padding: 1.5rem 1.25rem;
+  border-radius: var(--amc-nprof-radius);
+  background: var(--amc-nprof-bg);
+  color: var(--amc-nprof-fg);
+  text-align: center;
+  outline: none;
+}
+.amc-NProfile-card:focus-visible {
+  outline: 2px solid var(--amc-nprof-accent);
+  outline-offset: 3px;
+}
+.amc-NProfile-fx {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.amc-NProfile-avatar {
+  position: relative;
+  flex: none;
+  inline-size: 5rem;
+  block-size: 5rem;
+  border-radius: 50%;
+}
+.amc-NProfile-img,
+.amc-NProfile-initials {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+.amc-NProfile-initials {
+  background: color-mix(in srgb, var(--amc-nprof-accent) 16%, var(--amc-nprof-bg));
+  color: var(--amc-nprof-accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.amc-NProfile-dot {
+  position: absolute;
+  inset-block-end: 4%;
+  inset-inline-end: 4%;
+  inline-size: .875rem;
+  block-size: .875rem;
+  border-radius: 50%;
+  background: var(--amc-nprof-status);
+  box-shadow: 0 0 0 3px var(--amc-nprof-bg);
+}
+.amc-NProfile-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .125rem;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+.amc-NProfile-name {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.amc-NProfile-link {
+  color: inherit;
+  text-decoration: none;
+}
+.amc-NProfile-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+}
+.amc-NProfile-link:focus-visible { outline: none; }
+.amc-NProfile-link:focus-visible::after {
+  outline: 2px solid var(--amc-nprof-accent);
+  outline-offset: 3px;
+  border-radius: var(--amc-nprof-radius);
+}
+.amc-NProfile-role {
+  margin: 0;
+  color: var(--amc-nprof-muted);
+  font-size: .875rem;
+}
+.amc-NProfile-org {
+  margin: 0;
+  color: var(--amc-nprof-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.amc-NProfile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  margin: .375rem 0 0;
+  padding: .1875rem .5625rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-nprof-status) 13%, transparent);
+  color: color-mix(in srgb, var(--amc-nprof-status) 60%, var(--amc-nprof-fg));
+  font-size: .75rem;
+  font-weight: 600;
+}
+.amc-NProfile-statusDot {
+  inline-size: .5rem;
+  block-size: .5rem;
+  border-radius: 50%;
+  background: var(--amc-nprof-status);
+}
+.amc-NProfile-more {
+  display: grid;
+  grid-template-rows: 1fr;
+  inline-size: 100%;
+}
+.amc-NProfile-moreInner {
+  display: flex;
+  flex-direction: column;
+  gap: .875rem;
+  min-block-size: 0;
+}
+.amc-NProfile-more:has(> .amc-NProfile-moreInner:empty) { display: none; }
+.amc-NProfile-bio {
+  margin: 0;
+  color: var(--amc-nprof-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+}
+.amc-NProfile-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(5.25rem, 1fr));
+  gap: .5rem;
+  margin: 0;
+}
+.amc-NProfile-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: .125rem;
+  min-inline-size: 0;
+  padding: .5rem;
+  border-radius: .75rem;
+  background: color-mix(in srgb, var(--amc-nprof-fg) 4%, transparent);
+}
+.amc-NProfile-statValue {
+  margin: 0;
+  font-size: min(1.125rem, 6.5cqi);
+  font-weight: 750;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+.amc-NProfile-statLabel {
+  color: var(--amc-nprof-muted);
+  font-size: .6875rem;
+  font-weight: 500;
+  overflow-wrap: break-word;
+}
+.amc-NProfile-contact {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: .8125rem;
+  text-align: start;
+}
+.amc-NProfile-contactItem {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-inline-size: 0;
+}
+.amc-NProfile-contactIcon {
+  flex: none;
+  inline-size: 1rem;
+  color: var(--amc-nprof-accent);
+  text-align: center;
+}
+.amc-NProfile-contactLink,
+.amc-NProfile-contactText {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+}
+.amc-NProfile-contactLink {
+  position: relative;
+  z-index: 4;
+  color: var(--amc-nprof-accent);
+  text-decoration: none;
+}
+.amc-NProfile-contactLink:hover { text-decoration: underline; }
+.amc-NProfile-contactLink:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: .125rem; }
+.amc-NProfile-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  color: var(--amc-nprof-accent);
+  font-size: .8125rem;
+  font-weight: 600;
+}
+.amc-NProfile-action {
+  position: relative;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  background: var(--amc-nprof-accent);
+  color: var(--amc-nprof-accent-fg);
+  font-size: .8125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.amc-NProfile-action:focus-visible { outline: 2px solid var(--amc-nprof-accent); outline-offset: 2px; }
+.amc-NProfile-ctaIcon,
+.amc-NProfile-actionIcon {
+  font-size: .75em;
+  transition: transform .25s var(--amc-nprof-ease);
+}
+.amc-NProfile-ctaIcon:dir(rtl),
+.amc-NProfile-actionIcon:dir(rtl) { transform: scaleX(-1); }
+.amc-NProfile-card:hover .amc-NProfile-ctaIcon,
+.amc-NProfile-card:focus-within .amc-NProfile-ctaIcon { transform: translateX(.25rem); }
+.amc-NProfile-card:hover .amc-NProfile-ctaIcon:dir(rtl),
+.amc-NProfile-card:focus-within .amc-NProfile-ctaIcon:dir(rtl) { transform: scaleX(-1) translateX(.25rem); }
+.amc-NProfile-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ======================================================================
+   MOTION - Orbit Ring: a light ring spins around the avatar, status in orbit.
+   ====================================================================== */
+
+.amc-NProfile--orbitRing .amc-NProfile-card {
+  gap: .875rem;
+  padding-block-start: 2.25rem;
+  background:
+    radial-gradient(60% 45% at 50% 0%, color-mix(in srgb, var(--amc-nprof-accent) 20%, transparent), transparent 70%),
+    var(--amc-nprof-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line), 0 16px 36px -24px color-mix(in srgb, var(--amc-nprof-accent) 70%, transparent);
+}
+.amc-NProfile--orbitRing .amc-NProfile-fx {
+  background-image: radial-gradient(color-mix(in srgb, var(--amc-nprof-fg) 14%, transparent) 1px, transparent 1.5px);
+  background-size: 16px 16px;
+  -webkit-mask: radial-gradient(55% 40% at 50% 22%, var(--amc-nprof-mask), transparent);
+  mask: radial-gradient(55% 40% at 50% 22%, var(--amc-nprof-mask), transparent);
+}
+.amc-NProfile--orbitRing .amc-NProfile-avatar {
+  inline-size: 5.75rem;
+  block-size: 5.75rem;
+  margin-block-end: .625rem;
+}
+.amc-NProfile--orbitRing .amc-NProfile-img,
+.amc-NProfile--orbitRing .amc-NProfile-initials { box-shadow: 0 0 0 4px var(--amc-nprof-bg); }
+.amc-NProfile-ring {
+  position: absolute;
+  inset: -.5rem;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--amc-nprof-accent), var(--amc-nprof-accent-2), transparent 42%, transparent 58%, var(--amc-nprof-accent-3), var(--amc-nprof-accent));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), var(--amc-nprof-mask) calc(100% - 2.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), var(--amc-nprof-mask) calc(100% - 2.5px));
+  animation: amc-nprof-rotate 4s linear infinite;
+}
+.amc-NProfile-orbit {
+  position: absolute;
+  inset: -1.25rem;
+  border: 1px dashed color-mix(in srgb, var(--amc-nprof-accent) 40%, transparent);
+  border-radius: 50%;
+  transform: rotate(-40deg);
+  animation: amc-nprof-rotate 10s linear infinite;
+}
+.amc-NProfile-orbitDot {
+  position: absolute;
+  inset-block-start: -.375rem;
+  inset-inline-start: calc(50% - .375rem);
+  inline-size: .75rem;
+  block-size: .75rem;
+  border-radius: 50%;
+  background: var(--amc-nprof-accent);
+  box-shadow: 0 0 0 3px var(--amc-nprof-bg), 0 0 12px 2px color-mix(in srgb, var(--amc-nprof-accent) 70%, transparent);
+}
+.amc-NProfile--orbitRing.amc-NProfile--online .amc-NProfile-orbitDot,
+.amc-NProfile--orbitRing.amc-NProfile--away .amc-NProfile-orbitDot,
+.amc-NProfile--orbitRing.amc-NProfile--busy .amc-NProfile-orbitDot {
+  background: var(--amc-nprof-status);
+  box-shadow: 0 0 0 3px var(--amc-nprof-bg), 0 0 12px 2px color-mix(in srgb, var(--amc-nprof-status) 70%, transparent);
+}
+.amc-NProfile--orbitRing .amc-NProfile-dot { display: none; }
+@keyframes amc-nprof-rotate {
+  to { transform: rotate(320deg); }
+}
+.amc-NProfile--orbitRing .amc-NProfile-name { font-size: 1.25rem; }
+.amc-NProfile--orbitRing .amc-NProfile-stats {
+  grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+  gap: 0;
+  padding-block-start: .875rem;
+  border-block-start: 1px solid var(--amc-nprof-line);
+}
+.amc-NProfile--orbitRing .amc-NProfile-stat { background: none; padding: 0 .25rem; }
+.amc-NProfile--orbitRing .amc-NProfile-stat + .amc-NProfile-stat { border-inline-start: 1px solid var(--amc-nprof-line); }
+.amc-NProfile--orbitRing .amc-NProfile-cta {
+  justify-content: center;
+  align-self: stretch;
+  margin-block-start: auto;
+  padding: .5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-nprof-accent) 10%, transparent);
+}
+
+/* ======================================================================
+   MOTION - Beam Frame: two beams chase each other around the frame.
+   ====================================================================== */
+
+.amc-NProfile--beamFrame .amc-NProfile-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: .875rem 1.125rem;
+  padding: 1.25rem;
+  text-align: start;
+  border: 1px solid var(--amc-nprof-line);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nprof-accent) 7%, transparent), transparent 60%),
+    var(--amc-nprof-bg);
+}
+.amc-NProfile--beamFrame .amc-NProfile-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--amc-nprof-angle),
+    transparent 0 25%, var(--amc-nprof-accent) 42%, var(--amc-nprof-accent-2) 48%, transparent 50%,
+    transparent 75%, var(--amc-nprof-accent-3) 92%, var(--amc-nprof-accent) 98%, transparent 100%);
+  -webkit-mask: linear-gradient(var(--amc-nprof-mask) 0 0) content-box, linear-gradient(var(--amc-nprof-mask) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(var(--amc-nprof-mask) 0 0) content-box exclude, linear-gradient(var(--amc-nprof-mask) 0 0);
+  pointer-events: none;
+  animation: amc-nprof-spin 7s linear infinite;
+}
+@keyframes amc-nprof-spin {
+  to { --amc-nprof-angle: 360deg; }
+}
+.amc-NProfile--beamFrame .amc-NProfile-avatar {
+  inline-size: 4.5rem;
+  block-size: 4.5rem;
+  padding: 3px;
+  border-radius: 1.375rem;
+  background: linear-gradient(135deg, var(--amc-nprof-accent), var(--amc-nprof-accent-2), var(--amc-nprof-accent-3));
+  box-sizing: border-box;
+}
+.amc-NProfile--beamFrame .amc-NProfile-img,
+.amc-NProfile--beamFrame .amc-NProfile-initials {
+  border: 2px solid var(--amc-nprof-bg);
+  border-radius: 1.125rem;
+}
+.amc-NProfile--beamFrame .amc-NProfile-dot { inset-block-end: -.25rem; inset-inline-end: -.25rem; }
+.amc-NProfile--beamFrame .amc-NProfile-main { align-items: flex-start; }
+.amc-NProfile--beamFrame .amc-NProfile-name { font-size: 1.1875rem; }
+.amc-NProfile--beamFrame .amc-NProfile-org { order: -1; color: var(--amc-nprof-accent); letter-spacing: .06em; text-transform: uppercase; font-size: .6875rem; }
+.amc-NProfile--beamFrame .amc-NProfile-more,
+.amc-NProfile--beamFrame .amc-NProfile-cta { grid-column: 1 / -1; }
+.amc-NProfile--beamFrame .amc-NProfile-stats { grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); }
+.amc-NProfile--beamFrame .amc-NProfile-stat {
+  background: var(--amc-nprof-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line);
+}
+.amc-NProfile--beamFrame .amc-NProfile-stat:first-child .amc-NProfile-statValue {
+  background: linear-gradient(90deg, var(--amc-nprof-accent), var(--amc-nprof-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.amc-NProfile--beamFrame .amc-NProfile-cta { justify-self: end; }
+
+/* ======================================================================
+   DEPTH - Tilt Holo ID: staff ID card, pointer tilt, holographic sheen.
+   ====================================================================== */
+
+.amc-NProfile--tiltHolo {
+  --amc-rx: 4;
+  --amc-ry: -8;
+  perspective: 56rem;
+}
+.amc-NProfile--tiltHolo:dir(rtl) { --amc-ry: 8; }
+.amc-NProfile--tiltHolo .amc-NProfile-card {
+  isolation: auto;
+  flex: none;
+  gap: .625rem;
+  max-inline-size: 17rem;
+  padding: 0 0 1.125rem;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--amc-rx) * 1deg)) rotateY(calc(var(--amc-ry) * 1deg));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--amc-nprof-accent) 10%, var(--amc-nprof-bg)), var(--amc-nprof-bg) 55%);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line),
+    calc(var(--amc-ry) * -1.2px) calc(var(--amc-rx) * 1.2px + 1.5rem) 2.5rem -1rem color-mix(in srgb, var(--amc-nprof-shade) 30%, transparent);
+  transition: transform .5s var(--amc-nprof-ease), box-shadow .5s var(--amc-nprof-ease);
+}
+.amc-NProfile--tiltHolo.amc-is-active .amc-NProfile-card { transition: transform .12s linear, box-shadow .12s linear; }
+.amc-NProfile--tiltHolo .amc-NProfile-card:focus-within { --amc-rx: 0; --amc-ry: 0; }
+.amc-NProfile--tiltHolo .amc-NProfile-fx { z-index: auto; }
+.amc-NProfile-holo,
+.amc-NProfile-glare {
+  position: absolute;
+  inset: 0;
+}
+.amc-NProfile-holo {
+  background: repeating-linear-gradient(120deg,
+    color-mix(in oklab, var(--amc-nprof-accent) 60%, var(--amc-nprof-bg)) 0%,
+    color-mix(in oklab, var(--amc-nprof-accent-2) 60%, var(--amc-nprof-bg)) 8%,
+    color-mix(in oklab, var(--amc-nprof-warning) 65%, var(--amc-nprof-bg)) 16%,
+    color-mix(in oklab, var(--amc-nprof-success) 55%, var(--amc-nprof-bg)) 24%,
+    color-mix(in oklab, var(--amc-nprof-info) 60%, var(--amc-nprof-bg)) 32%,
+    color-mix(in oklab, var(--amc-nprof-accent) 60%, var(--amc-nprof-bg)) 40%);
+  background-size: 300% 300%;
+  background-position: calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%);
+  opacity: .55;
+  -webkit-mask: linear-gradient(200deg, var(--amc-nprof-mask), transparent 70%);
+  mask: linear-gradient(200deg, var(--amc-nprof-mask), transparent 70%);
+}
+.amc-NProfile-glare {
+  background: radial-gradient(farthest-corner circle at calc(var(--amc-mx) * 1%) calc(var(--amc-my) * 1%),
+    color-mix(in srgb, var(--amc-nprof-light) 50%, transparent), transparent 55%);
+  mix-blend-mode: soft-light;
+  opacity: .6;
+}
+.amc-NProfile-band {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: .5rem;
+  box-sizing: border-box;
+  padding: .75rem 1rem;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+  background: linear-gradient(120deg, var(--amc-nprof-accent), var(--amc-nprof-accent-2));
+  color: var(--amc-nprof-accent-fg);
+  font-size: .6875rem;
+  font-weight: 750;
+  letter-spacing: .1em;
+  text-align: start;
+  text-transform: uppercase;
+}
+.amc-NProfile-bandMark { font-size: 1rem; }
+.amc-NProfile-bandOrg { min-inline-size: 0; overflow-wrap: anywhere; }
+.amc-NProfile--tiltHolo .amc-NProfile-avatar {
+  inline-size: 6.25rem;
+  block-size: 7.5rem;
+  margin-block-start: .5rem;
+  border-radius: .875rem;
+  box-shadow: 0 0 0 4px var(--amc-nprof-bg), 0 18px 26px -14px color-mix(in srgb, var(--amc-nprof-shade) 55%, transparent);
+  transform: translateZ(2.5rem);
+}
+.amc-NProfile--tiltHolo .amc-NProfile-initials { font-size: 2rem; }
+/* No transform here: the card stays the containing block of the stretched link. */
+.amc-NProfile--tiltHolo .amc-NProfile-main { padding-inline: 1rem; }
+.amc-NProfile--tiltHolo .amc-NProfile-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -.01em; }
+.amc-NProfile-ref {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3125rem;
+  inline-size: 100%;
+  margin: .25rem 0 0;
+  padding-block-start: .75rem;
+  border-block-start: 1px dashed color-mix(in srgb, var(--amc-nprof-fg) 20%, transparent);
+}
+.amc-NProfile-barcode {
+  inline-size: 62%;
+  block-size: 1.625rem;
+  background: repeating-linear-gradient(90deg,
+    var(--amc-nprof-fg) 0 2px, transparent 2px 4px, var(--amc-nprof-fg) 4px 5px, transparent 5px 8px,
+    var(--amc-nprof-fg) 8px 11px, transparent 11px 12px, var(--amc-nprof-fg) 12px 13px, transparent 13px 16px);
+  opacity: .85;
+}
+.amc-NProfile-refText {
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  font-variant-numeric: tabular-nums;
+  unicode-bidi: plaintext;
+}
+
+/* ======================================================================
+   DEPTH - Flip Contact: identity front, contact details on the back.
+   ====================================================================== */
+
+.amc-NProfile--flipContact { perspective: 62rem; }
+.amc-NProfile--flipContact .amc-NProfile-card {
+  display: block;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.amc-NProfile-flipper {
+  display: grid;
+  block-size: 100%;
+  border-radius: var(--amc-nprof-radius);
+  box-shadow: 0 22px 34px -22px color-mix(in srgb, var(--amc-nprof-shade) 50%, transparent);
+  transform-style: preserve-3d;
+  transition: transform .75s var(--amc-nprof-ease);
+}
+.amc-NProfile--flipContact .amc-NProfile-card:hover .amc-NProfile-flipper,
+.amc-NProfile--flipContact .amc-NProfile-card:focus-within .amc-NProfile-flipper { transform: rotateY(180deg); }
+.amc-NProfile--flipContact:dir(rtl) .amc-NProfile-card:hover .amc-NProfile-flipper,
+.amc-NProfile--flipContact:dir(rtl) .amc-NProfile-card:focus-within .amc-NProfile-flipper { transform: rotateY(-180deg); }
+.amc-NProfile-face {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  grid-area: 1 / 1;
+  min-inline-size: 0;
+  padding: 1.5rem 1.25rem;
+  border-radius: var(--amc-nprof-radius);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.amc-NProfile-face--front {
+  --amc-nprof-fold: 2.75rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nprof-accent) 16%, var(--amc-nprof-bg)) 0 3.75rem, var(--amc-nprof-bg) 3.75rem);
+  box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--amc-nprof-accent) 70%, var(--amc-nprof-bg));
+  -webkit-mask: linear-gradient(225deg, transparent calc(var(--amc-nprof-fold) * .7071), var(--amc-nprof-mask) calc(var(--amc-nprof-fold) * .7071 + .5px));
+  mask: linear-gradient(225deg, transparent calc(var(--amc-nprof-fold) * .7071), var(--amc-nprof-mask) calc(var(--amc-nprof-fold) * .7071 + .5px));
+}
+.amc-NProfile-face--front:dir(rtl) {
+  -webkit-mask: linear-gradient(135deg, transparent calc(var(--amc-nprof-fold) * .7071), var(--amc-nprof-mask) calc(var(--amc-nprof-fold) * .7071 + .5px));
+  mask: linear-gradient(135deg, transparent calc(var(--amc-nprof-fold) * .7071), var(--amc-nprof-mask) calc(var(--amc-nprof-fold) * .7071 + .5px));
+}
+.amc-NProfile-face--front .amc-NProfile-avatar {
+  inline-size: 5.5rem;
+  block-size: 5.5rem;
+  margin-block-start: .5rem;
+}
+.amc-NProfile-face--front .amc-NProfile-img,
+.amc-NProfile-face--front .amc-NProfile-initials { box-shadow: 0 0 0 4px var(--amc-nprof-bg), 0 10px 20px -10px color-mix(in srgb, var(--amc-nprof-shade) 50%, transparent); }
+.amc-NProfile-turn {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+  inline-size: var(--amc-nprof-fold);
+  block-size: var(--amc-nprof-fold);
+  padding: .3125rem;
+  border-end-start-radius: .625rem;
+  background: linear-gradient(45deg, var(--amc-nprof-accent) 0%, var(--amc-nprof-accent-2) 50%, transparent 50%);
+  color: var(--amc-nprof-accent-fg);
+  font-size: .6875rem;
+}
+.amc-NProfile-turn:dir(rtl) { background: linear-gradient(-45deg, var(--amc-nprof-accent) 0%, var(--amc-nprof-accent-2) 50%, transparent 50%); }
+.amc-NProfile-face--back {
+  --amc-nprof-fg: var(--amc-nprof-accent-fg);
+  justify-content: center;
+  align-items: stretch;
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(90% 80% at 100% 100%, color-mix(in srgb, var(--amc-nprof-accent-2) 70%, transparent), transparent 70%),
+    linear-gradient(150deg, var(--amc-nprof-accent), color-mix(in oklab, var(--amc-nprof-accent) 70%, var(--amc-nprof-shade)));
+  color: var(--amc-nprof-fg);
+  text-align: start;
+}
+.amc-NProfile-backName {
+  margin: 0;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.amc-NProfile-face--back .amc-NProfile-contact { gap: .625rem; font-size: .875rem; }
+.amc-NProfile-face--back .amc-NProfile-contactIcon {
+  display: grid;
+  place-items: center;
+  inline-size: 1.875rem;
+  block-size: 1.875rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--amc-nprof-accent-fg) 16%, transparent);
+  color: var(--amc-nprof-accent-fg);
+}
+.amc-NProfile-face--back .amc-NProfile-contactLink { color: var(--amc-nprof-accent-fg); text-decoration: underline; text-underline-offset: .2em; }
+.amc-NProfile-face--back .amc-NProfile-action {
+  align-self: flex-start;
+  background: var(--amc-nprof-accent-fg);
+  color: var(--amc-nprof-accent);
+}
+.amc-NProfile-face--back .amc-NProfile-action:focus-visible { outline-color: var(--amc-nprof-accent-fg); }
+
+/* ======================================================================
+   DEPTH - Lanyard Badge: a conference badge hanging from a strap.
+   ====================================================================== */
+
+.amc-NProfile--lanyardBadge {
+  transform-origin: 50% 0;
+  animation: amc-nprof-sway 5.5s ease-in-out infinite alternate;
+}
+.amc-NProfiles-item:nth-child(even) .amc-NProfile--lanyardBadge { animation-delay: -2.4s; }
+@keyframes amc-nprof-sway {
+  from { transform: rotate(-1.75deg); }
+  to { transform: rotate(1.75deg); }
+}
+.amc-NProfile-strap {
+  position: relative;
+  z-index: 1;
+  display: block;
+  inline-size: 1.75rem;
+  block-size: 3.25rem;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 .5rem, color-mix(in srgb, var(--amc-nprof-accent-fg) 18%, transparent) .5rem .625rem),
+    linear-gradient(90deg, var(--amc-nprof-accent) 0 30%, var(--amc-nprof-accent-2) 30% 70%, var(--amc-nprof-accent) 70%);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--amc-nprof-shade) 20%, transparent);
+}
+.amc-NProfile-clip {
+  position: absolute;
+  inset-block-end: -.875rem;
+  inset-inline-start: calc(50% - 1.125rem);
+  inline-size: 2.25rem;
+  block-size: 1.375rem;
+  border-radius: .375rem .375rem .75rem .75rem;
+  background:
+    radial-gradient(circle at 50% 70%, var(--amc-nprof-page) 0 .25rem, transparent .3rem),
+    linear-gradient(180deg, color-mix(in srgb, var(--amc-nprof-fg) 22%, var(--amc-nprof-bg)), color-mix(in srgb, var(--amc-nprof-fg) 48%, var(--amc-nprof-bg)));
+  box-shadow: 0 3px 6px color-mix(in srgb, var(--amc-nprof-shade) 30%, transparent), inset 0 1px 0 color-mix(in srgb, var(--amc-nprof-light) 50%, transparent);
+}
+.amc-NProfile--lanyardBadge .amc-NProfile-card {
+  flex: none;
+  gap: .5rem;
+  inline-size: min(100%, 16rem);
+  padding: 0 0 1.125rem;
+  background: var(--amc-nprof-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line), 0 26px 40px -24px color-mix(in srgb, var(--amc-nprof-shade) 55%, transparent);
+  transition: transform .4s var(--amc-nprof-ease), box-shadow .4s var(--amc-nprof-ease);
+}
+.amc-NProfile--lanyardBadge .amc-NProfile-card:hover,
+.amc-NProfile--lanyardBadge .amc-NProfile-card:focus-within {
+  transform: translateY(-.375rem) rotate(-1deg);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line), 0 34px 44px -24px color-mix(in srgb, var(--amc-nprof-shade) 60%, transparent);
+}
+.amc-NProfile--lanyardBadge .amc-NProfile-band {
+  flex-direction: column;
+  gap: .625rem;
+  padding: 1rem 1rem 2.75rem;
+  text-align: center;
+}
+.amc-NProfile-slot {
+  display: block;
+  inline-size: 2.75rem;
+  block-size: .5rem;
+  border-radius: 999px;
+  background: var(--amc-nprof-page);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, var(--amc-nprof-shade) 40%, transparent);
+}
+.amc-NProfile--lanyardBadge .amc-NProfile-avatar {
+  inline-size: 5.5rem;
+  block-size: 5.5rem;
+  margin-block-start: -2.75rem;
+}
+.amc-NProfile--lanyardBadge .amc-NProfile-img,
+.amc-NProfile--lanyardBadge .amc-NProfile-initials { box-shadow: 0 0 0 4px var(--amc-nprof-bg); }
+.amc-NProfile--lanyardBadge .amc-NProfile-main { padding-inline: 1rem; }
+.amc-NProfile--lanyardBadge .amc-NProfile-name {
+  font-size: 1.5rem;
+  font-weight: 850;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.amc-NProfile--lanyardBadge .amc-NProfile-role { color: var(--amc-nprof-accent); font-weight: 600; }
+.amc-NProfile--lanyardBadge .amc-NProfile-ref { inline-size: calc(100% - 2rem); }
+.amc-NProfile--lanyardBadge .amc-NProfile-barcode { inline-size: 80%; block-size: 1.25rem; }
+
+/* ======================================================================
+   BOLD - Neo Brutal: ink borders, hard shadows, flat fills.
+   ====================================================================== */
+
+.amc-NProfile--neoBrutal {
+  --amc-nprof-radius: .375rem;
+  --amc-nprof-hard: .375rem;
+}
+.amc-NProfile--neoBrutal .amc-NProfile-card {
+  align-items: flex-start;
+  gap: .875rem;
+  padding: 1.25rem;
+  border: 2.5px solid var(--amc-nprof-ink);
+  text-align: start;
+  box-shadow: var(--amc-nprof-hard) var(--amc-nprof-hard) 0 var(--amc-nprof-ink);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.amc-NProfile--neoBrutal:dir(rtl) .amc-NProfile-card { box-shadow: calc(var(--amc-nprof-hard) * -1) var(--amc-nprof-hard) 0 var(--amc-nprof-ink); }
+.amc-NProfile--neoBrutal .amc-NProfile-card:hover,
+.amc-NProfile--neoBrutal .amc-NProfile-card:focus-within { --amc-nprof-hard: .625rem; transform: translate(-.25rem, -.25rem); }
+.amc-NProfile--neoBrutal:dir(rtl) .amc-NProfile-card:hover,
+.amc-NProfile--neoBrutal:dir(rtl) .amc-NProfile-card:focus-within { transform: translate(.25rem, -.25rem); }
+/* Flat header block with an ink dot pattern */
+.amc-NProfile--neoBrutal .amc-NProfile-fx {
+  inset-block-end: auto;
+  block-size: 4.25rem;
+  border-block-end: 2.5px solid var(--amc-nprof-ink);
+  border-radius: 0;
+  background:
+    radial-gradient(color-mix(in srgb, var(--amc-nprof-ink) 30%, transparent) 1.2px, transparent 1.6px) 0 0 / 10px 10px,
+    color-mix(in srgb, var(--amc-nprof-warning) 70%, var(--amc-nprof-bg));
+}
+.amc-NProfile--neoBrutal .amc-NProfile-avatar {
+  inline-size: 4.75rem;
+  block-size: 4.75rem;
+  border-radius: .25rem;
+  box-shadow: 4px 4px 0 var(--amc-nprof-ink);
+}
+.amc-NProfile--neoBrutal .amc-NProfile-img,
+.amc-NProfile--neoBrutal .amc-NProfile-initials { border: 2.5px solid var(--amc-nprof-ink); }
+.amc-NProfile--neoBrutal .amc-NProfile-initials { background: var(--amc-nprof-accent); color: var(--amc-nprof-accent-fg); }
+.amc-NProfile--neoBrutal .amc-NProfile-dot { box-shadow: 0 0 0 2px var(--amc-nprof-ink); inset-block-end: -.25rem; inset-inline-end: -.25rem; }
+.amc-NProfile--neoBrutal .amc-NProfile-main { align-items: flex-start; }
+.amc-NProfile--neoBrutal .amc-NProfile-name { font-size: 1.375rem; font-weight: 850; letter-spacing: -.01em; }
+.amc-NProfile--neoBrutal .amc-NProfile-role { color: var(--amc-nprof-fg); font-weight: 600; }
+.amc-NProfile--neoBrutal .amc-NProfile-status {
+  border: 2px solid var(--amc-nprof-ink);
+  border-radius: .25rem;
+  background: var(--amc-nprof-bg);
+  color: var(--amc-nprof-ink);
+  font-weight: 800;
+  box-shadow: 2px 2px 0 var(--amc-nprof-ink);
+  transform: rotate(-2deg);
+}
+.amc-NProfile--neoBrutal .amc-NProfile-bio { color: var(--amc-nprof-fg); }
+.amc-NProfile--neoBrutal .amc-NProfile-stats { grid-template-columns: minmax(0, 1fr); gap: .375rem; }
+.amc-NProfile--neoBrutal .amc-NProfile-stat {
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .25rem .75rem;
+  padding: .375rem .625rem;
+  border: 2px solid var(--amc-nprof-ink);
+  border-radius: .25rem;
+  background: var(--amc-nprof-bg);
+}
+.amc-NProfile--neoBrutal .amc-NProfile-stat:nth-child(1) { background: var(--amc-nprof-accent); color: var(--amc-nprof-accent-fg); }
+.amc-NProfile--neoBrutal .amc-NProfile-stat:nth-child(2) { background: color-mix(in srgb, var(--amc-nprof-success) 30%, var(--amc-nprof-bg)); }
+.amc-NProfile--neoBrutal .amc-NProfile-stat:nth-child(1) .amc-NProfile-statLabel { color: inherit; }
+.amc-NProfile--neoBrutal .amc-NProfile-statLabel { color: var(--amc-nprof-fg); font-weight: 700; }
+.amc-NProfile--neoBrutal .amc-NProfile-statValue { font-size: 1.25rem; font-weight: 900; }
+.amc-NProfile--neoBrutal .amc-NProfile-cta {
+  padding: .3125rem .625rem;
+  border: 2px solid var(--amc-nprof-ink);
+  border-radius: .25rem;
+  background: var(--amc-nprof-bg);
+  color: var(--amc-nprof-ink);
+  font-weight: 800;
+  box-shadow: 3px 3px 0 var(--amc-nprof-ink);
+}
+
+/* ======================================================================
+   BOLD - Clay: pillowy surfaces with soft inner and outer shadows.
+   ====================================================================== */
+
+.amc-NProfile--clay { --amc-nprof-radius: 2rem; }
+.amc-NProfile--clay .amc-NProfile-card {
+  gap: .875rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: color-mix(in srgb, var(--amc-nprof-accent) 9%, var(--amc-nprof-bg));
+  box-shadow:
+    0 1.25rem 2.25rem -1rem color-mix(in srgb, var(--amc-nprof-accent) 45%, var(--amc-nprof-page)),
+    inset 0 -.625rem 1.25rem color-mix(in srgb, var(--amc-nprof-accent) 16%, transparent),
+    inset 0 .5rem 1rem color-mix(in srgb, var(--amc-nprof-light) 55%, transparent);
+  transition: transform .35s var(--amc-nprof-ease);
+}
+.amc-NProfile--clay .amc-NProfile-card:hover,
+.amc-NProfile--clay .amc-NProfile-card:focus-within { transform: translateY(-.25rem) scale(1.01); }
+.amc-NProfile--clay .amc-NProfile-avatar {
+  inline-size: 6rem;
+  block-size: 6rem;
+  padding: .4375rem;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--amc-nprof-accent) 12%, var(--amc-nprof-bg));
+  box-shadow:
+    0 .75rem 1.25rem -.5rem color-mix(in srgb, var(--amc-nprof-accent) 55%, var(--amc-nprof-page)),
+    inset 0 -.25rem .5rem color-mix(in srgb, var(--amc-nprof-accent) 22%, transparent),
+    inset 0 .25rem .5rem color-mix(in srgb, var(--amc-nprof-light) 60%, transparent);
+}
+.amc-NProfile--clay .amc-NProfile-dot { inset-block-end: .375rem; inset-inline-end: .375rem; box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-nprof-accent) 12%, var(--amc-nprof-bg)); }
+.amc-NProfile--clay .amc-NProfile-name { font-size: 1.25rem; }
+.amc-NProfile--clay .amc-NProfile-status {
+  padding: .3125rem .75rem;
+  background: color-mix(in srgb, var(--amc-nprof-status) 16%, var(--amc-nprof-bg));
+  box-shadow: inset 0 -2px 4px color-mix(in srgb, var(--amc-nprof-status) 22%, transparent), inset 0 2px 3px color-mix(in srgb, var(--amc-nprof-light) 50%, transparent);
+}
+.amc-NProfile--clay .amc-NProfile-stat {
+  border-radius: 1.125rem;
+  background: color-mix(in srgb, var(--amc-nprof-accent) 6%, var(--amc-nprof-page));
+  box-shadow: inset 0 .25rem .625rem color-mix(in srgb, var(--amc-nprof-accent) 20%, transparent), inset 0 -.125rem .375rem color-mix(in srgb, var(--amc-nprof-light) 50%, transparent);
+}
+.amc-NProfile--clay .amc-NProfile-statValue { color: color-mix(in srgb, var(--amc-nprof-accent) 70%, var(--amc-nprof-fg)); }
+.amc-NProfile--clay .amc-NProfile-cta {
+  justify-content: center;
+  align-self: stretch;
+  margin-block-start: auto;
+  padding: .625rem 1rem;
+  border-radius: 999px;
+  background: var(--amc-nprof-accent);
+  color: var(--amc-nprof-accent-fg);
+  box-shadow: 0 .5rem 1rem -.375rem color-mix(in srgb, var(--amc-nprof-accent) 70%, var(--amc-nprof-page)),
+    inset 0 -.1875rem .375rem color-mix(in srgb, var(--amc-nprof-shade) 20%, transparent),
+    inset 0 .1875rem .375rem color-mix(in srgb, var(--amc-nprof-light) 35%, transparent);
+}
+
+/* ======================================================================
+   BOLD - Sticker: die-cut sticker with a peeling corner.
+   ====================================================================== */
+
+.amc-NProfile--sticker {
+  --amc-nprof-peel: 3rem;
+  padding: .25rem;
+  filter: drop-shadow(0 .5rem .625rem color-mix(in srgb, var(--amc-nprof-shade) 22%, transparent)) drop-shadow(0 1px 1px color-mix(in srgb, var(--amc-nprof-shade) 25%, transparent));
+  transform: rotate(-2deg);
+  transition: transform .35s var(--amc-nprof-ease);
+}
+.amc-NProfiles-item:nth-child(even) .amc-NProfile--sticker { transform: rotate(1.5deg); }
+.amc-NProfiles-item:nth-child(3n) .amc-NProfile--sticker { transform: rotate(-.75deg); }
+.amc-NProfiles-item .amc-NProfile--sticker:hover,
+.amc-NProfiles-item .amc-NProfile--sticker:focus-within,
+.amc-NProfile--sticker:hover,
+.amc-NProfile--sticker:focus-within { --amc-nprof-peel: 4.25rem; transform: rotate(0deg) scale(1.02); }
+.amc-NProfile--sticker .amc-NProfile-card {
+  --amc-nprof-fg: var(--amc-nprof-accent-fg);
+  --amc-nprof-muted: color-mix(in srgb, var(--amc-nprof-accent-fg) 82%, transparent);
+  --amc-nprof-radius: 1.75rem;
+  border: .4375rem solid var(--amc-nprof-paper);
+  background:
+    radial-gradient(70% 50% at 100% 0%, color-mix(in srgb, var(--amc-nprof-accent-3) 70%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--amc-nprof-accent), var(--amc-nprof-accent-2));
+  color: var(--amc-nprof-fg);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--amc-nprof-peel)), calc(100% - var(--amc-nprof-peel)) 100%, 0 100%);
+  transition: clip-path .35s var(--amc-nprof-ease);
+}
+.amc-NProfile--sticker:dir(rtl) .amc-NProfile-card { clip-path: polygon(0 0, 100% 0, 100% 100%, var(--amc-nprof-peel) 100%, 0 calc(100% - var(--amc-nprof-peel))); }
+/* The peeled flap: the paper back of the cut-away corner */
+.amc-NProfile--sticker::after {
+  content: "";
+  position: absolute;
+  inset-block-end: .25rem;
+  inset-inline-end: .25rem;
+  inline-size: var(--amc-nprof-peel);
+  block-size: var(--amc-nprof-peel);
+  border-start-start-radius: .875rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--amc-nprof-paper) 80%, var(--amc-nprof-shade)) 0%, var(--amc-nprof-paper) 35%, color-mix(in srgb, var(--amc-nprof-paper) 88%, var(--amc-nprof-shade)) 50%, transparent 50%);
+  transition: inline-size .35s var(--amc-nprof-ease), block-size .35s var(--amc-nprof-ease);
+  pointer-events: none;
+}
+.amc-NProfile--sticker:dir(rtl)::after {
+  border-start-start-radius: 0;
+  border-start-end-radius: .875rem;
+  background: linear-gradient(225deg, color-mix(in srgb, var(--amc-nprof-paper) 80%, var(--amc-nprof-shade)) 0%, var(--amc-nprof-paper) 35%, color-mix(in srgb, var(--amc-nprof-paper) 88%, var(--amc-nprof-shade)) 50%, transparent 50%);
+}
+.amc-NProfile--sticker .amc-NProfile-avatar {
+  inline-size: 5.5rem;
+  block-size: 5.5rem;
+  transform: rotate(4deg);
+}
+.amc-NProfile--sticker .amc-NProfile-img,
+.amc-NProfile--sticker .amc-NProfile-initials {
+  border: .3125rem solid var(--amc-nprof-paper);
+  box-shadow: 0 6px 12px -4px color-mix(in srgb, var(--amc-nprof-shade) 35%, transparent);
+}
+.amc-NProfile--sticker .amc-NProfile-dot { box-shadow: 0 0 0 3px var(--amc-nprof-paper); }
+.amc-NProfile--sticker .amc-NProfile-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+.amc-NProfile--sticker .amc-NProfile-status {
+  background: var(--amc-nprof-paper);
+  color: color-mix(in srgb, var(--amc-nprof-status) 55%, var(--amc-nprof-shade));
+  transform: rotate(-3deg);
+}
+.amc-NProfile--sticker.amc-NProfile--other .amc-NProfile-status,
+.amc-NProfile--sticker.amc-NProfile--offline .amc-NProfile-status { color: color-mix(in srgb, var(--amc-nprof-paper) 30%, var(--amc-nprof-shade)); }
+.amc-NProfile--sticker .amc-NProfile-bio { color: var(--amc-nprof-fg); }
+.amc-NProfile--sticker .amc-NProfile-stat { background: color-mix(in srgb, var(--amc-nprof-paper) 18%, transparent); border-radius: 1rem; }
+.amc-NProfile--sticker .amc-NProfile-cta { color: var(--amc-nprof-fg); padding-inline-end: 1.5rem; }
+.amc-NProfile--sticker .amc-NProfile-link:focus-visible::after { outline-color: var(--amc-nprof-paper); }
+
+/* ======================================================================
+   SMART - Bento Profile: tiles that recompose by container width.
+   ====================================================================== */
+
+.amc-NProfile--bentoProfile .amc-NProfile-card {
+  display: grid;
+  align-items: stretch;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "av s1" "id id" "s2 s3" "bio bio" "ct ct";
+  gap: .625rem;
+  padding: 0;
+  text-align: start;
+  background: none;
+}
+.amc-NProfile--bentoProfile .amc-NProfile-more,
+.amc-NProfile--bentoProfile .amc-NProfile-moreInner,
+.amc-NProfile--bentoProfile .amc-NProfile-stats { display: contents; }
+.amc-NProfile--bentoProfile .amc-NProfile-avatar,
+.amc-NProfile--bentoProfile .amc-NProfile-main,
+.amc-NProfile--bentoProfile .amc-NProfile-stat,
+.amc-NProfile--bentoProfile .amc-NProfile-bio,
+.amc-NProfile--bentoProfile .amc-NProfile-contact {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: 1rem;
+  border-radius: 1.125rem;
+  background: var(--amc-nprof-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line);
+}
+.amc-NProfile--bentoProfile .amc-NProfile-avatar {
+  grid-area: av;
+  inline-size: auto;
+  block-size: auto;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+}
+.amc-NProfile--bentoProfile .amc-NProfile-img,
+.amc-NProfile--bentoProfile .amc-NProfile-initials { border-radius: 0; font-size: 2.25rem; }
+.amc-NProfile--bentoProfile .amc-NProfile-dot { inset-block-end: .625rem; inset-inline-end: .625rem; }
+.amc-NProfile--bentoProfile .amc-NProfile-main {
+  grid-area: id;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: .25rem;
+  background:
+    radial-gradient(80% 90% at 100% 0%, color-mix(in srgb, var(--amc-nprof-accent-2) 60%, transparent), transparent 70%),
+    linear-gradient(135deg, var(--amc-nprof-accent), color-mix(in oklab, var(--amc-nprof-accent) 75%, var(--amc-nprof-shade)));
+  color: var(--amc-nprof-accent-fg);
+  box-shadow: none;
+}
+.amc-NProfile--bentoProfile .amc-NProfile-name { font-size: clamp(1.25rem, 7cqi, 2rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.amc-NProfile--bentoProfile .amc-NProfile-role,
+.amc-NProfile--bentoProfile .amc-NProfile-org { color: color-mix(in srgb, var(--amc-nprof-accent-fg) 82%, transparent); }
+.amc-NProfile--bentoProfile .amc-NProfile-status { background: color-mix(in srgb, var(--amc-nprof-accent-fg) 16%, transparent); color: var(--amc-nprof-accent-fg); }
+.amc-NProfile--bentoProfile .amc-NProfile-link:focus-visible::after { border-radius: 1.125rem; }
+.amc-NProfile--bentoProfile .amc-NProfile-stat { justify-content: flex-end; }
+.amc-NProfile--bentoProfile .amc-NProfile-stat:nth-child(1) { grid-area: s1; background: color-mix(in srgb, var(--amc-nprof-accent) 12%, var(--amc-nprof-bg)); box-shadow: none; }
+.amc-NProfile--bentoProfile .amc-NProfile-stat:nth-child(2) { grid-area: s2; }
+.amc-NProfile--bentoProfile .amc-NProfile-stat:nth-child(3) { grid-area: s3; background: color-mix(in srgb, var(--amc-nprof-success) 12%, var(--amc-nprof-bg)); box-shadow: none; }
+.amc-NProfile--bentoProfile .amc-NProfile-statValue { font-size: clamp(1.25rem, 8cqi, 2rem); letter-spacing: -.02em; }
+.amc-NProfile--bentoProfile .amc-NProfile-bio { grid-area: bio; color: var(--amc-nprof-fg); background: color-mix(in srgb, var(--amc-nprof-fg) 4%, var(--amc-nprof-bg)); box-shadow: none; }
+.amc-NProfile--bentoProfile .amc-NProfile-contact { grid-area: ct; justify-content: center; }
+.amc-NProfile--bentoProfile .amc-NProfile-cta { display: none; }
+@container (min-width: 24rem) {
+  .amc-NProfile--bentoProfile .amc-NProfile-card {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas: "av id id" "s1 s2 s3" "bio bio ct";
+  }
+}
+@container (min-width: 44rem) {
+  .amc-NProfile--bentoProfile .amc-NProfile-card {
+    grid-template-columns: minmax(0, 1.1fr) repeat(2, minmax(0, 1fr)) minmax(0, .9fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "av id id s1" "av bio bio s2" "av ct ct s3";
+  }
+  .amc-NProfile--bentoProfile .amc-NProfile-avatar { aspect-ratio: auto; min-block-size: 100%; }
+  .amc-NProfile--bentoProfile .amc-NProfile-img,
+  .amc-NProfile--bentoProfile .amc-NProfile-initials { position: absolute; inset: 0; }
+  .amc-NProfile--bentoProfile .amc-NProfile-main { min-block-size: 8.5rem; }
+}
+
+/* ======================================================================
+   SMART - Expand Bio: a compact row that morphs into the full profile.
+   ====================================================================== */
+
+.amc-NProfile--expandBio .amc-NProfile-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .25rem .875rem;
+  padding: .625rem .875rem .625rem .625rem;
+  border-radius: 2.25rem;
+  text-align: start;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--amc-nprof-accent) 6%, var(--amc-nprof-bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nprof-accent) 18%, var(--amc-nprof-line));
+  transition: border-radius .45s var(--amc-nprof-ease), box-shadow .45s var(--amc-nprof-ease), padding .45s var(--amc-nprof-ease);
+}
+.amc-NProfile--expandBio .amc-NProfile-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 1.5rem;
+  inset-block-end: -.375rem;
+  z-index: -2;
+  block-size: 1rem;
+  border-radius: 0 0 1rem 1rem;
+  background: color-mix(in srgb, var(--amc-nprof-accent) 16%, var(--amc-nprof-bg));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nprof-accent) 20%, transparent);
+  transition: opacity .3s ease, transform .45s var(--amc-nprof-ease);
+}
+.amc-NProfile--expandBio .amc-NProfile-card:hover::after,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within::after { opacity: 0; transform: translateY(-.5rem); }
+.amc-NProfile--expandBio .amc-NProfile-img,
+.amc-NProfile--expandBio .amc-NProfile-initials { box-shadow: 0 0 0 2px var(--amc-nprof-bg), 0 0 0 4px color-mix(in srgb, var(--amc-nprof-accent) 45%, transparent); }
+.amc-NProfile--expandBio .amc-NProfile-avatar {
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  transition: transform .45s var(--amc-nprof-ease);
+}
+.amc-NProfile--expandBio .amc-NProfile-dot { inline-size: .75rem; block-size: .75rem; inset-block-end: 0; inset-inline-end: 0; }
+.amc-NProfile--expandBio .amc-NProfile-main { align-items: flex-start; }
+.amc-NProfile--expandBio .amc-NProfile-name { font-size: 1rem; }
+.amc-NProfile--expandBio .amc-NProfile-role { font-size: .8125rem; }
+.amc-NProfile--expandBio .amc-NProfile-org,
+.amc-NProfile--expandBio .amc-NProfile-status { display: none; }
+.amc-NProfile-toggle {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: 50%;
+  background: var(--amc-nprof-bg);
+  color: var(--amc-nprof-accent);
+  font-size: .75rem;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-nprof-accent) 30%, transparent);
+  transition: transform .45s var(--amc-nprof-ease), background-color .3s ease, color .3s ease;
+}
+.amc-NProfile--expandBio .amc-NProfile-more {
+  grid-column: 1 / -1;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .45s var(--amc-nprof-ease);
+}
+.amc-NProfile--expandBio .amc-NProfile-moreInner {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.amc-NProfile--expandBio .amc-NProfile-bio { padding-block-start: .75rem; }
+.amc-NProfile--expandBio .amc-NProfile-stat { background: var(--amc-nprof-bg); box-shadow: inset 0 0 0 1px var(--amc-nprof-line); }
+.amc-NProfile--expandBio .amc-NProfile-action { align-self: flex-start; margin-block-end: .25rem; }
+.amc-NProfile--expandBio .amc-NProfile-card:hover,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within {
+  padding: 1rem 1.125rem;
+  border-radius: 1.25rem;
+  background: var(--amc-nprof-bg);
+  box-shadow: inset 0 0 0 1px var(--amc-nprof-line), 0 24px 40px -24px color-mix(in srgb, var(--amc-nprof-accent) 60%, transparent);
+}
+.amc-NProfile--expandBio .amc-NProfile-card:hover .amc-NProfile-avatar,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within .amc-NProfile-avatar { transform: scale(1.1); }
+.amc-NProfile--expandBio .amc-NProfile-card:hover .amc-NProfile-more,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within .amc-NProfile-more { grid-template-rows: 1fr; }
+.amc-NProfile--expandBio .amc-NProfile-card:hover .amc-NProfile-moreInner,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within .amc-NProfile-moreInner { opacity: 1; transition-delay: .12s; }
+.amc-NProfile--expandBio .amc-NProfile-card:hover .amc-NProfile-status,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within .amc-NProfile-status { display: inline-flex; }
+.amc-NProfile--expandBio .amc-NProfile-card:hover .amc-NProfile-toggle,
+.amc-NProfile--expandBio .amc-NProfile-card:focus-within .amc-NProfile-toggle {
+  transform: rotate(180deg);
+  background: var(--amc-nprof-accent);
+  color: var(--amc-nprof-accent-fg);
+}
+
+/* ---------- Narrow profiles (220px columns) ---------- */
+
+@container (max-width: 17rem) {
+  .amc-NProfile--beamFrame .amc-NProfile-card { grid-template-columns: minmax(0, 1fr); }
+  .amc-NProfile--beamFrame .amc-NProfile-cta { justify-self: start; }
+  .amc-NProfile-card { padding-inline: 1rem; }
+  .amc-NProfile-statValue { font-size: 1rem; }
+  .amc-NProfile--expandBio .amc-NProfile-card { gap: .25rem .625rem; }
+  .amc-NProfile--expandBio .amc-NProfile-avatar { inline-size: 2.75rem; block-size: 2.75rem; }
+  .amc-NProfile--expandBio .amc-NProfile-card { padding-inline-end: .5rem; }
+  .amc-NProfile--sticker { --amc-nprof-peel: 2.25rem; padding: .125rem; }
+  .amc-NProfile--sticker .amc-NProfile-card { padding: 1.25rem .75rem; border-width: .3125rem; }
+  .amc-NProfile--sticker .amc-NProfile-name { font-size: 1.25rem; }
+  .amc-NProfile--sticker .amc-NProfile-cta { padding-inline-end: 1rem; }
+}
+
+@container (max-width: 14rem) {
+  .amc-NProfile:not(.amc-NProfile--bentoProfile) .amc-NProfile-stats { grid-template-columns: minmax(0, 1fr); gap: .375rem; }
+  .amc-NProfile:not(.amc-NProfile--bentoProfile) .amc-NProfile-stat {
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .125rem .5rem;
+    padding: .375rem .625rem;
+    text-align: start;
+  }
+  .amc-NProfile--orbitRing .amc-NProfile-stat + .amc-NProfile-stat { border-inline-start: 0; }
+}
+
+/* ---------- Reduced motion: every moving part stops, the design stays ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .amc-NProfile,
+  .amc-NProfile *,
+  .amc-NProfile *::before,
+  .amc-NProfile *::after,
+  .amc-NProfile::after {
+    animation: none;
+    transition-duration: .01ms;
+    transition-delay: 0s;
+  }
+  .amc-NProfile--beamFrame .amc-NProfile-card::before {
+    background: linear-gradient(135deg, var(--amc-nprof-accent), transparent 35%, transparent 65%, var(--amc-nprof-accent-2));
+  }
+  .amc-NProfile--tiltHolo .amc-NProfile-card { transform: none; }
+  .amc-NProfile--lanyardBadge { transform: none; }
+  .amc-NProfile--neoBrutal .amc-NProfile-card:hover,
+  .amc-NProfile--neoBrutal .amc-NProfile-card:focus-within,
+  .amc-NProfile--clay .amc-NProfile-card:hover,
+  .amc-NProfile--clay .amc-NProfile-card:focus-within,
+  .amc-NProfile--lanyardBadge .amc-NProfile-card:hover,
+  .amc-NProfile--lanyardBadge .amc-NProfile-card:focus-within { transform: none; }
+}
+
+/* ---------- Forced colors ---------- */
+
+@media (forced-colors: active) {
+  .amc-NProfile-card,
+  .amc-NProfile-face,
+  .amc-NProfile--bentoProfile .amc-NProfile-main,
+  .amc-NProfile--bentoProfile .amc-NProfile-stat { border: 1px solid CanvasText; }
+  .amc-NProfile-dot,
+  .amc-NProfile-statusDot { forced-color-adjust: none; background: CanvasText; }
+  .amc-NProfile-fx,
+  .amc-NProfile--sticker::after { display: none; }
+  .amc-NProfile--beamFrame .amc-NProfile-statValue { color: CanvasText; background: none; }
+}

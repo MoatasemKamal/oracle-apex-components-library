@@ -1,0 +1,375 @@
+{
+  "name": "Next Profile",
+  "apexlangName": "nextProfile",
+  "staticId": "AMC_NEXT_PROFILE",
+  "pluginType": "templateComponent",
+  "version": "1.0.0",
+  "filesVersion": 1,
+  "minApexVersion": "23.1",
+  "keywords": [
+    "profile",
+    "person",
+    "employee",
+    "contact card",
+    "team member",
+    "next collection",
+    "orbit ring",
+    "border beam",
+    "id card",
+    "holographic",
+    "flip card",
+    "lanyard",
+    "conference badge",
+    "neo brutalism",
+    "claymorphism",
+    "sticker",
+    "bento",
+    "expanding card"
+  ],
+  "description": "Next Collection profile family: one person (employee, customer contact, speaker) in 10 current-generation styles across four directions. Motion: an orbiting light ring around the avatar and a card frame with travelling beams. Depth: a tilting holographic staff ID, a flip card with contact details on the back, and a swaying lanyard badge. Bold: neo-brutalism, claymorphism and a die-cut sticker. Smart: a bento profile that recomposes its tiles by width and a compact row that expands into a full bio. It keeps the anatomy of the Universal Theme profile patterns (avatar, name, role, presence, figures, action) and every color comes from the active theme style. Beam and ring techniques adapted from Magic UI (border-beam, orbiting-circles), MIT.",
+  "helpText": "Pick a Style, then map Name (required) and any of Role, Image URL or Initials, Bio, Status, up to three stats, Link URL and Link Label, Email, Phone, Location, Organisation and Reference. Empty settings are left out. Tilt Holo ID needs the plug-in JavaScript file for its pointer tilt and works without it as a static card. Every hover effect also runs on keyboard focus, and all motion stops when the user asks the system for reduced motion.",
+  "source": {
+    "url": "https://github.com/magicuidesign/magicui",
+    "author": "Magic UI",
+    "license": "MIT"
+  },
+  "templateComponent": {
+    "availableAs": [
+      "partial",
+      "report"
+    ],
+    "defaultEscapeMode": "html",
+    "translateTemplates": true,
+    "templates": {
+      "partial": "templates/partial.html",
+      "reportBody": "templates/report-body.html",
+      "reportRow": "templates/report-row.html"
+    }
+  },
+  "files": [
+    "files/amc-next-profile.css",
+    "files/amc-next-profile.js"
+  ],
+  "cssFileUrls": [
+    "#PLUGIN_FILES#amc-next-profile.css"
+  ],
+  "jsFileUrls": [
+    "#PLUGIN_FILES#amc-next-profile.js"
+  ],
+  "attributes": [
+    {
+      "staticId": "STYLE",
+      "apexlangName": "style",
+      "attribute": 1,
+      "name": "Style",
+      "type": "selectList",
+      "required": true,
+      "escapeMode": "htmlAttribute",
+      "default": "orbitRing",
+      "sequence": 10,
+      "helpText": "Profile design, grouped by direction. MOTION - Orbit Ring: a rotating light ring around the avatar with the status dot in orbit. Beam Frame: two beams of light travel around the card frame. DEPTH - Tilt Holo ID: a staff ID card that tilts toward the pointer under a holographic sheen, with Organisation and Reference. Flip Contact: identity on the front, Email, Phone and Location on the back, turned on hover, focus or tap. Lanyard Badge: a conference badge hanging from a strap that sways gently. BOLD - Neo Brutal: ink borders, hard shadows and flat fills. Clay: pillowy soft-shadow surfaces. Sticker: a die-cut sticker with a peeling corner. SMART - Bento Profile: stats, bio and contact as bento tiles that recompose by region width. Expand Bio: a compact row that morphs open to show Bio, stats and contact on hover, focus or tap.",
+      "entries": [
+        {
+          "name": "orbitRing",
+          "display": "Orbit Ring",
+          "return": "orbitRing",
+          "sequence": 10
+        },
+        {
+          "name": "beamFrame",
+          "display": "Beam Frame",
+          "return": "beamFrame",
+          "sequence": 20
+        },
+        {
+          "name": "tiltHolo",
+          "display": "Tilt Holo ID",
+          "return": "tiltHolo",
+          "sequence": 30
+        },
+        {
+          "name": "flipContact",
+          "display": "Flip Contact",
+          "return": "flipContact",
+          "sequence": 40
+        },
+        {
+          "name": "lanyardBadge",
+          "display": "Lanyard Badge",
+          "return": "lanyardBadge",
+          "sequence": 50
+        },
+        {
+          "name": "neoBrutal",
+          "display": "Neo Brutal",
+          "return": "neoBrutal",
+          "sequence": 60
+        },
+        {
+          "name": "clay",
+          "display": "Clay",
+          "return": "clay",
+          "sequence": 70
+        },
+        {
+          "name": "sticker",
+          "display": "Sticker",
+          "return": "sticker",
+          "sequence": 80
+        },
+        {
+          "name": "bentoProfile",
+          "display": "Bento Profile",
+          "return": "bentoProfile",
+          "sequence": 90
+        },
+        {
+          "name": "expandBio",
+          "display": "Expand Bio",
+          "return": "expandBio",
+          "sequence": 100
+        }
+      ]
+    },
+    {
+      "staticId": "NAME",
+      "apexlangName": "name",
+      "attribute": 2,
+      "name": "Name",
+      "type": "sessionStateValue",
+      "required": true,
+      "escapeMode": "html",
+      "sequence": 20,
+      "helpText": "Full name of the person, for example Sara Al-Harbi. Rendered as the h3 heading."
+    },
+    {
+      "staticId": "ROLE",
+      "apexlangName": "role",
+      "attribute": 3,
+      "name": "Role",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 30,
+      "helpText": "Optional job title or team, for example Senior Account Manager."
+    },
+    {
+      "staticId": "IMAGE_URL",
+      "apexlangName": "imageUrl",
+      "attribute": 4,
+      "name": "Image URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 40,
+      "helpText": "Optional avatar image URL. Must be developer-controlled, for example a column built with apex_util.get_blob_file_src or an #APP_FILES# path, never free user input. The image is decorative; the name carries the meaning."
+    },
+    {
+      "staticId": "INITIALS",
+      "apexlangName": "initials",
+      "attribute": 5,
+      "name": "Initials",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 50,
+      "helpText": "One or two letters shown when there is no image, for example SH. Build them in SQL from the name."
+    },
+    {
+      "staticId": "BIO",
+      "apexlangName": "bio",
+      "attribute": 6,
+      "name": "Bio",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 60,
+      "helpText": "Optional short description of one or two sentences. Tilt Holo ID and Lanyard Badge leave it out."
+    },
+    {
+      "staticId": "STATUS",
+      "apexlangName": "status",
+      "attribute": 7,
+      "name": "Status",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 70,
+      "helpText": "Optional presence: online, away, busy or offline, shown as a colored dot plus text. Any other value is shown as plain text in a neutral color, for example On leave."
+    },
+    {
+      "staticId": "STAT1_VALUE",
+      "apexlangName": "stat1Value",
+      "attribute": 8,
+      "name": "Stat 1 Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 80,
+      "helpText": "First key figure, for example 128 or SAR 2.4M. Format it in SQL. Shown by Orbit Ring, Beam Frame, Neo Brutal, Clay, Sticker, Bento Profile and Expand Bio."
+    },
+    {
+      "staticId": "STAT1_LABEL",
+      "apexlangName": "stat1Label",
+      "attribute": 9,
+      "name": "Stat 1 Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 90,
+      "helpText": "Caption for Stat 1, for example Deals won."
+    },
+    {
+      "staticId": "STAT2_VALUE",
+      "apexlangName": "stat2Value",
+      "attribute": 10,
+      "name": "Stat 2 Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 100,
+      "helpText": "Second key figure, for example 128 or SAR 2.4M. Format it in SQL. Shown by Orbit Ring, Beam Frame, Neo Brutal, Clay, Sticker, Bento Profile and Expand Bio."
+    },
+    {
+      "staticId": "STAT2_LABEL",
+      "apexlangName": "stat2Label",
+      "attribute": 11,
+      "name": "Stat 2 Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 110,
+      "helpText": "Caption for Stat 2, for example Deals won."
+    },
+    {
+      "staticId": "STAT3_VALUE",
+      "apexlangName": "stat3Value",
+      "attribute": 12,
+      "name": "Stat 3 Value",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 120,
+      "helpText": "Third key figure, for example 128 or SAR 2.4M. Format it in SQL. Shown by Orbit Ring, Beam Frame, Neo Brutal, Clay, Sticker, Bento Profile and Expand Bio."
+    },
+    {
+      "staticId": "STAT3_LABEL",
+      "apexlangName": "stat3Label",
+      "attribute": 13,
+      "name": "Stat 3 Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 130,
+      "helpText": "Caption for Stat 3, for example Deals won."
+    },
+    {
+      "staticId": "LINK_URL",
+      "apexlangName": "linkUrl",
+      "attribute": 14,
+      "name": "Link URL",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 140,
+      "helpText": "Optional target of the profile, for example an apex_page.get_url link to the employee page. The name becomes a link that covers the card; Flip Contact and Expand Bio show it as a button. The value must be developer-controlled."
+    },
+    {
+      "staticId": "LINK_LABEL",
+      "apexlangName": "linkLabel",
+      "attribute": 15,
+      "name": "Link Label",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 150,
+      "helpText": "Visible text of the link, for example View profile. Defaults to View profile."
+    },
+    {
+      "staticId": "EMAIL",
+      "apexlangName": "email",
+      "attribute": 16,
+      "name": "Email",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 160,
+      "helpText": "Optional email address shown as a mailto link by Flip Contact on the back, Bento Profile and Expand Bio, for example sara.alharbi@example.com."
+    },
+    {
+      "staticId": "PHONE",
+      "apexlangName": "phone",
+      "attribute": 17,
+      "name": "Phone",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 170,
+      "helpText": "Optional phone number shown as text next to Email, for example +966 11 555 0142."
+    },
+    {
+      "staticId": "LOCATION",
+      "apexlangName": "location",
+      "attribute": 18,
+      "name": "Location",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 180,
+      "helpText": "Optional office or city, for example Riyadh HQ, Floor 12. Shown with the contact details."
+    },
+    {
+      "staticId": "ORGANIZATION",
+      "apexlangName": "organization",
+      "attribute": 19,
+      "name": "Organisation",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 190,
+      "helpText": "Optional company, department or event name, for example Oracle APEX World 2026. Tilt Holo ID and Lanyard Badge print it in the header band; other styles show it under the role."
+    },
+    {
+      "staticId": "REFERENCE",
+      "apexlangName": "reference",
+      "attribute": 20,
+      "name": "Reference",
+      "type": "sessionStateValue",
+      "required": false,
+      "escapeMode": "html",
+      "sequence": 200,
+      "helpText": "Optional badge or employee number, for example EMP-00412. Tilt Holo ID and Lanyard Badge print it with a barcode strip."
+    },
+    {
+      "staticId": "COLUMNS",
+      "apexlangName": "columns",
+      "attribute": 21,
+      "name": "Columns",
+      "type": "selectList",
+      "required": false,
+      "escapeMode": "htmlAttribute",
+      "sequence": 210,
+      "helpText": "Report mode only. Empty fits as many profiles as the region width allows. The fixed options are a maximum: columns drop automatically when a profile would get too narrow.",
+      "entries": [
+        {
+          "name": "two",
+          "display": "Up to 2 Columns",
+          "return": "2",
+          "sequence": 10
+        },
+        {
+          "name": "three",
+          "display": "Up to 3 Columns",
+          "return": "3",
+          "sequence": 20
+        },
+        {
+          "name": "four",
+          "display": "Up to 4 Columns",
+          "return": "4",
+          "sequence": 30
+        }
+      ]
+    }
+  ]
+}
