@@ -1,0 +1,145 @@
+regionTemplate amc-freshness-frame (
+    name: AMC Freshness Frame
+    templateOptions {
+        default: [
+            amc-TFreshnessFrame--stale5
+        ]
+    }
+    region {
+        template:
+            ```html
+            <section class="amc-TFreshnessFrame #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-label-updated="Updated %0" data-amc-label-now="just now" data-amc-label-stale="Out of date" data-amc-label-stale-announce="The data in this region may be out of date." data-amc-label-refreshed="Data refreshed." data-amc-label-refreshing="Refreshing">
+              <span class="amc-TFreshnessFrame-edge" aria-hidden="true"><span class="amc-TFreshnessFrame-fuse"></span></span>
+              <div class="amc-TFreshnessFrame-surface">
+                <header class="amc-TFreshnessFrame-header">
+                  <span class="amc-TFreshnessFrame-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+                  <h2 class="amc-TFreshnessFrame-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+                  <div class="amc-TFreshnessFrame-status" hidden>
+                    <span class="amc-TFreshnessFrame-dot" aria-hidden="true"></span>
+                    <span class="amc-TFreshnessFrame-flag"></span>
+                    <time class="amc-TFreshnessFrame-age"></time>
+                    <button type="button" class="t-Button t-Button--small amc-TFreshnessFrame-refresh" hidden><span class="amc-TFreshnessFrame-refreshIcon fa fa-refresh" aria-hidden="true"></span><span class="amc-TFreshnessFrame-refreshLabel">Refresh</span></button>
+                  </div>
+                  <div class="amc-TFreshnessFrame-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+                </header>
+                <div class="amc-TFreshnessFrame-body">#BODY##SUB_REGIONS#</div>
+                <footer class="amc-TFreshnessFrame-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+                <p class="amc-TFreshnessFrame-live" role="status" aria-live="polite"></p>
+              </div>
+            </section>
+            ```
+    }
+    accessibility {
+        landmarkType: region
+    }
+    javaScript {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-freshness-frame.js
+        ]
+    }
+    css {
+        fileUrls: [
+            #APP_FILES#amc-templates/amc-tpl-freshness-frame.css
+        ]
+    }
+    advanced {
+        staticId: AMC_TPL_FRESHNESS_FRAME
+        translatable: false
+    }
+    comments {
+        comments:
+            ```text
+            Time-aware region template. The data time is the page load, or an ISO timestamp in a data-amc-updated attribute on the region (Custom Attributes, for example data-amc-updated="&P1_LOADED_AT.") or on any element inside the body, such as a hidden span in the report with the time the rows were loaded, so a report filled by a nightly job shows its real age. The header shows Updated just now, then the age in the page language through Intl.RelativeTimeFormat, with the exact time as a tooltip on a time element. A fuse along the top edge burns from full to empty over the threshold, its glow fading and its color moving from the success to the warning palette color; one timer for all regions updates every 10 seconds and does nothing while the tab is hidden. At the threshold (5 minutes by default; template options 1, 5 or 15 minutes, or a data-amc-stale-seconds Custom Attribute) the frame turns to an Out of date state: hatched warning edge, warning ring, flag text, a polite announcement, and a Refresh button when apex.region(staticId).refresh exists. Refresh marks the body aria-busy and everything resets on apexafterrefresh, also after refreshes started by Dynamic Actions, which re-read data-amc-updated from the new content. Auto refresh when stale refreshes once per stale period, only while the tab is visible. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-updated Updated %0, data-amc-label-now just now, data-amc-label-stale Out of date, data-amc-label-stale-announce The data in this region may be out of date., data-amc-label-refreshed Data refreshed., data-amc-label-refreshing Refreshing, and the Refresh button label in the template. Under reduced motion the fuse steps instead of gliding and nothing pulses or spins, but every state still changes; in forced-colors mode the stale state uses a double border. Without JavaScript the region is a plain frame. JavaScript API: amcTplFreshnessFrame.refresh(element), reset(element) and state(element).
+            ```
+    }
+
+    templateOption amc-freshness-frame-stale-1-min (
+        name: Stale after 1 minute
+        sequence: 10
+        appearance {
+            cssClasses: amc-TFreshnessFrame--stale1
+        }
+        help {
+            helpText:
+                ```text
+                For live queues and monitoring screens. When several thresholds are chosen, the shortest wins.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STALE_1_MIN
+        }
+    )
+
+    templateOption amc-freshness-frame-stale-5-min (
+        name: Stale after 5 minutes
+        sequence: 20
+        appearance {
+            cssClasses: amc-TFreshnessFrame--stale5
+        }
+        help {
+            helpText:
+                ```text
+                The default for operational reports; also used when no threshold is chosen.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STALE_5_MIN
+        }
+    )
+
+    templateOption amc-freshness-frame-stale-15-min (
+        name: Stale after 15 minutes
+        sequence: 30
+        appearance {
+            cssClasses: amc-TFreshnessFrame--stale15
+        }
+        help {
+            helpText:
+                ```text
+                For dashboards and summaries that change slowly.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: STALE_15_MIN
+        }
+    )
+
+    templateOption amc-freshness-frame-auto-refresh (
+        name: Auto refresh when stale
+        sequence: 40
+        appearance {
+            cssClasses: amc-TFreshnessFrame--autoRefresh
+        }
+        help {
+            helpText:
+                ```text
+                Refreshes the region by itself once it turns stale, only while the browser tab is visible and once per stale period. Needs a region type that supports refresh, such as Classic Report, Interactive Report, Cards or Chart.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: AUTO_REFRESH
+        }
+    )
+
+    templateOption amc-freshness-frame-no-body-padding (
+        name: No body padding
+        sequence: 50
+        appearance {
+            cssClasses: amc-TFreshnessFrame--noPadding
+        }
+        help {
+            helpText:
+                ```text
+                Removes side padding so reports run edge to edge.
+                ```
+        }
+        advanced {
+            isAdvancedOption: false
+            staticId: NO_BODY_PADDING
+        }
+    )
+)

@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Insight Frame",
+  "staticId": "AMC_TPL_INSIGHT_FRAME",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A region frame that reads the report it wraps and states what the numbers say: an insight strip under the title with the total or average, row count, largest and smallest row and a share-of-total bar, plus a thin share bar under every row; no design system frame understands its content this way.",
+  "useFor": "Classic Report and Interactive Report regions with a numeric column (amounts, quantities, hours, percentages). Around a Form, Chart, Cards or Static Content without a table it is a plain frame.",
+  "keywords": ["insight", "summary", "total", "average", "report", "analytics", "living", "content-aware"],
+  "helpText": "Content-aware region template. The script reads the first data table in the region body with textContent, never changing it, and parses numbers locale-safely: group separators, currency prefixes or suffixes such as SAR or a currency symbol, a comma or dot decimal mark by position, negatives as -1,200 or (1,200), percentages, and Arabic-Indic digits. Codes such as SO-55120, dates and year or ID columns are not treated as measures. The key column is the last numeric column; the Use first numeric column option picks the first, and a region Custom Attribute data-amc-column=\"Amount\" (header text or 1-based position) picks one by name. Row labels come from the first descriptive text column, or data-amc-label-column. The strip shows the total as headline with Rows, Average and Largest, formatted with the same separators and currency as the report; percentage columns and the Average headline option make the average the headline. Hovering or focusing the Largest or Smallest value draws a ring around that row and clicking it scrolls the row into view; hovering a row lights its segment in the distribution bar and shows its share. Share bars are hidden when the column has negative values. It recomputes after apexafterrefresh and when the body changes, glows once and announces a summary politely through a status region. Without a table the region is a plain frame. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-rows Rows, data-amc-label-total Total, data-amc-label-average Average, data-amc-label-largest Largest, data-amc-label-smallest Smallest, data-amc-label-share of total. Under reduced motion there is no glow or fade; in forced-colors mode bars use Highlight. JavaScript API: amcTplInsightFrame.refresh(element) and result(element).",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "FIRST_NUMERIC", "name": "Use first numeric column", "cssClass": "amc-TInsightFrame--first", "sequence": 10, "help": "Summarise the first numeric column instead of the last one, for reports where the measure comes before derived columns." },
+    { "staticId": "MIN_MAX", "name": "Show smallest", "cssClass": "amc-TInsightFrame--minMax", "sequence": 20, "help": "Adds the smallest value with its row label next to the largest, so the strip shows the full range." },
+    { "staticId": "AVERAGE_HEADLINE", "name": "Average as headline", "cssClass": "amc-TInsightFrame--avgHeadline", "sequence": 30, "help": "The large figure is the average instead of the total, for rates, scores and durations where a sum means nothing. Percentage columns do this automatically." },
+    { "staticId": "NO_ROW_BARS", "name": "Hide row bars", "cssClass": "amc-TInsightFrame--noBars", "sequence": 40, "help": "Keeps the insight strip but draws no share bar under each row, for dense reports or reports with their own inline charts." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TInsightFrame--noPadding", "sequence": 50, "help": "Removes side padding so reports run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

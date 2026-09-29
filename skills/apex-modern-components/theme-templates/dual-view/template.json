@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Dual View",
+  "staticId": "AMC_TPL_DUAL_VIEW",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A region frame that turns the report it wraps into a chart of the same rows: a Table / Chart switch in the header draws a to-scale SVG bar chart or donut from the table itself, with no chart region, query or configuration, and keeps the table as the accessible source.",
+  "useFor": "Classic Report and Interactive Report regions with one text column to label the rows and one numeric column to compare: sales by region, orders by customer, spend by category, monthly totals. Around a Form, Chart or Static Content without a table it is a plain frame.",
+  "keywords": ["chart", "table", "toggle", "bar chart", "donut", "report", "living", "content-aware", "data visualization"],
+  "helpText": "Content-aware region template. The script reads the first data table in the region body with textContent, never changing it, and parses numbers locale-safely: group separators, currency prefixes or suffixes, a comma or dot decimal mark by position, negatives and Arabic-Indic digits. Values come from the last numeric column, skipping year and ID columns, or from a region Custom Attribute data-amc-column=\"Amount\" (header text or 1-based position); labels come from the first descriptive text column, skipping code columns such as SO-55120, or from data-amc-label-column. When a table with numbers is found, a Table / Chart switch appears in the header: two buttons with aria-pressed. Chart mode hides the report and draws an SVG chart to scale, redrawn when the region is resized: vertical bars with axis ticks, gridlines, a zero baseline for negative values and value labels, switching by itself to horizontal bars when labels are long, when there are more than 12 rows or when the region is narrow. Values and labels reuse the report's own number format and currency. The chart has role=img with an aria-label listing the values, and a caption with the column names, row count and total; the native table stays in the DOM, hidden in chart mode, and comes back with one click. The chosen view is remembered per application page and region in localStorage; give the region a Static ID. After apexafterrefresh or any change to the body the chart is redrawn. Without a table or without JavaScript there is no switch and the region is a plain frame. English strings to translate: the Table and Chart button labels and the View as group label in the template, and on the section element or per region as Custom Attributes data-amc-label-caption %0 by %1, data-amc-label-total Total, data-amc-label-rows Rows, data-amc-label-other Other, data-amc-label-bar Bar chart, data-amc-label-donut Donut chart, data-amc-label-first Showing the first %0 of %1 rows. Under reduced motion the switch thumb and chart appear without animation; in forced-colors mode marks use Highlight. JavaScript API: amcTplDualView.show(element, 'chart' or 'table'), refresh(element) and data(element).",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "CHART_FIRST", "name": "Chart first", "cssClass": "amc-TDualView--chartFirst", "sequence": 10, "help": "Opens in chart mode until the user picks a view; after that the user's choice wins." },
+    { "staticId": "DONUT", "name": "Donut", "cssClass": "amc-TDualView--donut", "sequence": 20, "help": "Chart mode draws a donut of each row's share with the total in the centre and a legend with values and percentages. The six largest rows get their own slice and the rest become Other; negative values are left out. Use it for parts of a whole." },
+    { "staticId": "HORIZONTAL", "name": "Horizontal bars", "cssClass": "amc-TDualView--horizontal", "sequence": 30, "help": "Always draws horizontal bars, for rankings and long category names. Without it the chart chooses horizontal bars by itself when labels would not fit." },
+    { "staticId": "SORTED", "name": "Sort chart by value", "cssClass": "amc-TDualView--sorted", "sequence": 40, "help": "The chart orders bars from largest to smallest; the report keeps its own order. Leave it off for months or other ordered categories." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TDualView--noPadding", "sequence": 50, "help": "Removes side padding so reports run edge to edge." }
+  ],
+  "defaultOptions": [],
+  "presetOptions": []
+}

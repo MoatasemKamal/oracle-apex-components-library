@@ -1,0 +1,19 @@
+<section class="amc-TDualView #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# aria-labelledby="#REGION_STATIC_ID#_heading" data-amc-label-caption="%0 by %1" data-amc-label-total="Total" data-amc-label-rows="Rows" data-amc-label-other="Other" data-amc-label-bar="Bar chart" data-amc-label-donut="Donut chart" data-amc-label-first="Showing the first %0 of %1 rows">
+  <div class="amc-TDualView-surface">
+    <header class="amc-TDualView-header">
+      <span class="amc-TDualView-icon fa #ICON_CSS_CLASSES#" aria-hidden="true"></span>
+      <h2 class="amc-TDualView-title" id="#REGION_STATIC_ID#_heading">#TITLE#</h2>
+      <div class="amc-TDualView-switch" role="group" aria-label="View as" hidden>
+        <span class="amc-TDualView-thumb" aria-hidden="true"></span>
+        <button type="button" class="amc-TDualView-opt" data-amc-view="table" aria-pressed="true"><span class="amc-TDualView-optIcon fa fa-table" aria-hidden="true"></span><span class="amc-TDualView-optLabel">Table</span></button>
+        <button type="button" class="amc-TDualView-opt" data-amc-view="chart" aria-pressed="false"><span class="amc-TDualView-optIcon amc-TDualView-optIcon--chart fa fa-bar-chart" aria-hidden="true"></span><span class="amc-TDualView-optLabel">Chart</span></button>
+      </div>
+      <div class="amc-TDualView-actions">#HELP##EDIT##CHANGE##COPY##DELETE##CREATE#</div>
+    </header>
+    <div class="amc-TDualView-stage">
+      <div class="amc-TDualView-body">#BODY##SUB_REGIONS#</div>
+      <figure class="amc-TDualView-chart" hidden></figure>
+    </div>
+    <footer class="amc-TDualView-footer">#PREVIOUS##CLOSE##NEXT#</footer>
+  </div>
+</section>

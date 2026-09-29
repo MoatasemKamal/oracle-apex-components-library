@@ -1,0 +1,22 @@
+{
+  "kind": "region",
+  "name": "AMC Freshness Frame",
+  "staticId": "AMC_TPL_FRESHNESS_FRAME",
+  "version": "1.0.0",
+  "minApexVersion": "23.1",
+  "direction": "living",
+  "description": "A region frame that knows how old its data is: the header says Updated just now or 3 min ago, a fuse along the top edge burns down and loses its glow as the data ages, and past a threshold the frame turns to a hatched warning Out of date state with a Refresh button, which no design system frame does.",
+  "useFor": "Regions whose data changes while the page stays open: operational Classic and Interactive Reports, queues, dashboards, stock levels, Charts and Cards on wall screens, and reports loaded by a scheduled job.",
+  "keywords": ["freshness", "stale", "last updated", "refresh", "live data", "dashboard", "living", "time-aware"],
+  "helpText": "Time-aware region template. The data time is the page load, or an ISO timestamp in a data-amc-updated attribute on the region (Custom Attributes, for example data-amc-updated=\"&P1_LOADED_AT.\") or on any element inside the body, such as a hidden span in the report with the time the rows were loaded, so a report filled by a nightly job shows its real age. The header shows Updated just now, then the age in the page language through Intl.RelativeTimeFormat, with the exact time as a tooltip on a time element. A fuse along the top edge burns from full to empty over the threshold, its glow fading and its color moving from the success to the warning palette color; one timer for all regions updates every 10 seconds and does nothing while the tab is hidden. At the threshold (5 minutes by default; template options 1, 5 or 15 minutes, or a data-amc-stale-seconds Custom Attribute) the frame turns to an Out of date state: hatched warning edge, warning ring, flag text, a polite announcement, and a Refresh button when apex.region(staticId).refresh exists. Refresh marks the body aria-busy and everything resets on apexafterrefresh, also after refreshes started by Dynamic Actions, which re-read data-amc-updated from the new content. Auto refresh when stale refreshes once per stale period, only while the tab is visible. English strings to translate, on the section element in the template or per region as Custom Attributes: data-amc-label-updated Updated %0, data-amc-label-now just now, data-amc-label-stale Out of date, data-amc-label-stale-announce The data in this region may be out of date., data-amc-label-refreshed Data refreshed., data-amc-label-refreshing Refreshing, and the Refresh button label in the template. Under reduced motion the fuse steps instead of gliding and nothing pulses or spins, but every state still changes; in forced-colors mode the stale state uses a double border. Without JavaScript the region is a plain frame. JavaScript API: amcTplFreshnessFrame.refresh(element), reset(element) and state(element).",
+  "landmarkType": "region",
+  "templateOptions": [
+    { "staticId": "STALE_1_MIN", "name": "Stale after 1 minute", "cssClass": "amc-TFreshnessFrame--stale1", "sequence": 10, "help": "For live queues and monitoring screens. When several thresholds are chosen, the shortest wins." },
+    { "staticId": "STALE_5_MIN", "name": "Stale after 5 minutes", "cssClass": "amc-TFreshnessFrame--stale5", "sequence": 20, "help": "The default for operational reports; also used when no threshold is chosen." },
+    { "staticId": "STALE_15_MIN", "name": "Stale after 15 minutes", "cssClass": "amc-TFreshnessFrame--stale15", "sequence": 30, "help": "For dashboards and summaries that change slowly." },
+    { "staticId": "AUTO_REFRESH", "name": "Auto refresh when stale", "cssClass": "amc-TFreshnessFrame--autoRefresh", "sequence": 40, "help": "Refreshes the region by itself once it turns stale, only while the browser tab is visible and once per stale period. Needs a region type that supports refresh, such as Classic Report, Interactive Report, Cards or Chart." },
+    { "staticId": "NO_BODY_PADDING", "name": "No body padding", "cssClass": "amc-TFreshnessFrame--noPadding", "sequence": 50, "help": "Removes side padding so reports run edge to edge." }
+  ],
+  "defaultOptions": ["amc-TFreshnessFrame--stale5"],
+  "presetOptions": []
+}

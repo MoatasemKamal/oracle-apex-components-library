@@ -1,0 +1,199 @@
+/* Freshness Frame: living region template for Universal Theme. The frame knows how old its data
+   is. A fuse burns along the top edge from full to empty while the data ages (the script sets
+   --amc-tff-fresh from 1 to 0 every 10 seconds and the registered property glides between steps),
+   its glow fades and its color turns from the success to the warning palette color. At the
+   threshold the frame switches to a hatched warning edge with an "Out of date" flag and a
+   Refresh button. Without JavaScript it is a plain frame with a quiet full edge. */
+@property --amc-tff-fresh { syntax: "<number>"; inherits: true; initial-value: 1; }
+
+.amc-TFreshnessFrame {
+  --amc-tff-ok: var(--ut-palette-success, #278701);
+  --amc-tff-warn: var(--ut-palette-warning, #fbce4a);
+  --amc-tff-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tff-surface: var(--ut-component-background-color, #fff);
+  --amc-tff-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tff-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tff-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tff-radius: calc(var(--ut-component-border-radius, 4px) + 8px);
+  --amc-tff-live: color-mix(in srgb, var(--amc-tff-ok) calc(var(--amc-tff-fresh) * 100%), var(--amc-tff-warn));
+  --amc-tff-edge: 3px;
+  position: relative;
+  isolation: isolate;
+  margin-block-end: 16px;
+  border-radius: var(--amc-tff-radius);
+  color: var(--amc-tff-ink);
+  transition: --amc-tff-fresh 10s linear;
+}
+.amc-TFreshnessFrame.is-resetting { transition: none; }
+
+.amc-TFreshnessFrame-surface {
+  display: grid;
+  border-radius: inherit;
+  background: var(--amc-tff-surface);
+  box-shadow:
+    0 0 0 1px var(--amc-tff-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tff-ink) 6%, transparent),
+    0 14px 34px -24px color-mix(in srgb, var(--amc-tff-live) calc(var(--amc-tff-fresh) * 90%), transparent);
+}
+
+/* The fuse edge */
+.amc-TFreshnessFrame-edge {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0;
+  inset-inline: 0;
+  block-size: var(--amc-tff-edge);
+  border-start-start-radius: var(--amc-tff-radius);
+  border-start-end-radius: var(--amc-tff-radius);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--amc-tff-ink) 7%, transparent);
+  pointer-events: none;
+}
+.amc-TFreshnessFrame-fuse {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--amc-tff-live) 55%, transparent), var(--amc-tff-live));
+  transform-origin: left center;
+  transform: scaleX(var(--amc-tff-fresh));
+  box-shadow: 0 0 calc(var(--amc-tff-fresh) * 10px) color-mix(in srgb, var(--amc-tff-live) calc(var(--amc-tff-fresh) * 80%), transparent);
+}
+.amc-TFreshnessFrame:dir(rtl) .amc-TFreshnessFrame-fuse {
+  transform-origin: right center;
+  background: linear-gradient(270deg, color-mix(in srgb, var(--amc-tff-live) 55%, transparent), var(--amc-tff-live));
+}
+/* Before the script runs the edge is a quiet full line. */
+.amc-TFreshnessFrame:not(.is-live) .amc-TFreshnessFrame-fuse { background: color-mix(in srgb, var(--amc-tff-accent) 45%, transparent); box-shadow: none; }
+
+/* Header */
+.amc-TFreshnessFrame-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-inline-size: 0;
+  padding-block: 15px 12px;
+  padding-inline: 18px 14px;
+}
+.amc-TFreshnessFrame-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--amc-tff-accent) 12%, transparent);
+  color: var(--amc-tff-accent);
+  font-size: 14px;
+}
+.amc-TFreshnessFrame-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TFreshnessFrame-title { flex: 1 1 8rem; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TFreshnessFrame-actions, .amc-TFreshnessFrame-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TFreshnessFrame-actions:empty, .amc-TFreshnessFrame-footer:empty { display: none; }
+
+/* Status chip */
+.amc-TFreshnessFrame-status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-block-size: 28px;
+  padding-block: 3px;
+  padding-inline: 10px 4px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--amc-tff-ink) 5%, transparent);
+  box-shadow: inset 0 0 0 1px var(--amc-tff-line);
+  font-size: .75rem;
+  color: var(--amc-tff-muted);
+  transition: background-color .3s ease, box-shadow .3s ease;
+}
+.amc-TFreshnessFrame-status[hidden] { display: none; }
+.amc-TFreshnessFrame-dot {
+  position: relative;
+  flex: none;
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--amc-tff-live);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amc-tff-live) 22%, transparent);
+}
+.amc-TFreshnessFrame-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--amc-tff-live);
+  opacity: 0;
+}
+.amc-TFreshnessFrame-flag:empty { display: none; }
+.amc-TFreshnessFrame-flag { font-weight: 700; color: var(--amc-tff-ink); }
+.amc-TFreshnessFrame-age { font-variant-numeric: tabular-nums; unicode-bidi: isolate; padding-inline-end: 6px; }
+.amc-TFreshnessFrame-refresh { display: inline-flex; align-items: center; gap: 6px; }
+.amc-TFreshnessFrame-refresh[hidden] { display: none; }
+.amc-TFreshnessFrame-refresh:focus-visible { outline: 2px solid var(--amc-tff-accent); outline-offset: 2px; }
+.amc-TFreshnessFrame-refreshIcon { font-size: 12px; }
+
+/* Stale */
+.amc-TFreshnessFrame.is-stale {
+  --amc-tff-live: var(--amc-tff-warn);
+}
+.amc-TFreshnessFrame.is-stale .amc-TFreshnessFrame-surface {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--amc-tff-warn) 70%, var(--amc-tff-line)),
+    0 1px 2px color-mix(in srgb, var(--amc-tff-ink) 6%, transparent),
+    0 14px 34px -24px color-mix(in srgb, var(--amc-tff-warn) 70%, transparent);
+}
+.amc-TFreshnessFrame.is-stale .amc-TFreshnessFrame-fuse {
+  transform: none;
+  background: repeating-linear-gradient(135deg, var(--amc-tff-warn) 0 8px, color-mix(in srgb, var(--amc-tff-warn) 35%, transparent) 8px 14px);
+  box-shadow: none;
+}
+.amc-TFreshnessFrame.is-stale { --amc-tff-edge: 4px; }
+.amc-TFreshnessFrame.is-stale .amc-TFreshnessFrame-status {
+  background: color-mix(in srgb, var(--amc-tff-warn) 20%, var(--amc-tff-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amc-tff-warn) 65%, transparent);
+  color: var(--amc-tff-ink);
+}
+.amc-TFreshnessFrame.is-stale .amc-TFreshnessFrame-dot::after { animation: amc-tff-pulse 2.4s ease-out infinite; }
+@keyframes amc-tff-pulse {
+  0% { opacity: .9; transform: scale(.6); }
+  70%, 100% { opacity: 0; transform: scale(1.6); }
+}
+
+/* Busy while refreshing, and a single ring when fresh data arrives. */
+.amc-TFreshnessFrame.is-busy .amc-TFreshnessFrame-refreshIcon { animation: amc-tff-spin .9s linear infinite; }
+.amc-TFreshnessFrame.is-busy .amc-TFreshnessFrame-body { opacity: .65; transition: opacity .2s ease; }
+@keyframes amc-tff-spin { to { rotate: 360deg; } }
+.amc-TFreshnessFrame.is-renewed .amc-TFreshnessFrame-dot::after { animation: amc-tff-pulse 1s ease-out 2; }
+
+/* Body */
+.amc-TFreshnessFrame-body { min-inline-size: 0; padding-block: 2px 16px; padding-inline: 18px; overflow-x: auto; }
+.amc-TFreshnessFrame-footer { justify-content: flex-end; padding: 0 18px 14px; }
+.amc-TFreshnessFrame-live {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Template options (thresholds and Auto refresh are read by the script). */
+.amc-TFreshnessFrame--stale1, .amc-TFreshnessFrame--stale5, .amc-TFreshnessFrame--stale15, .amc-TFreshnessFrame--autoRefresh { --amc-tff-flag: 1; }
+.amc-TFreshnessFrame--noPadding .amc-TFreshnessFrame-body { padding-inline: 0; padding-block: 0 4px; }
+
+/* Reduced motion: the fuse steps instead of gliding, nothing pulses or spins; states still change. */
+@media (prefers-reduced-motion: reduce) {
+  .amc-TFreshnessFrame, .amc-TFreshnessFrame-status, .amc-TFreshnessFrame.is-busy .amc-TFreshnessFrame-body { transition: none !important; }
+  .amc-TFreshnessFrame-dot::after, .amc-TFreshnessFrame-refreshIcon { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TFreshnessFrame-surface { border: 1px solid CanvasText; }
+  .amc-TFreshnessFrame-fuse { background: Highlight; forced-color-adjust: none; }
+  .amc-TFreshnessFrame.is-stale .amc-TFreshnessFrame-surface { border: 3px double CanvasText; }
+  .amc-TFreshnessFrame-status { border: 1px solid CanvasText; }
+  .amc-TFreshnessFrame-dot { background: CanvasText; forced-color-adjust: none; }
+}

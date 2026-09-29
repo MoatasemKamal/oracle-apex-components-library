@@ -1,0 +1,36 @@
+{
+ "samples": [
+  {
+   "title": "Fresh: just loaded, 5 minute threshold",
+   "regionTitle": "Open orders",
+   "icon": "fa-shopping-cart",
+   "bodyKind": "report",
+   "options": [
+    "amc-TFreshnessFrame--stale5"
+   ],
+   "buttons": {
+    "CREATE": "New order"
+   }
+  },
+  {
+   "title": "Stale: the body says the rows were loaded at 08:00 UTC",
+   "regionTitle": "Warehouse stock",
+   "icon": "fa-cubes",
+   "options": [
+    "amc-TFreshnessFrame--stale15",
+    "amc-TFreshnessFrame--noPadding"
+   ],
+   "body": "<span hidden data-amc-updated=\"2026-09-29T08:00:00Z\"></span><table class=\"pv-report\"><thead><tr><th>Order</th><th>Customer</th><th>Status</th><th class=\"pv-num\">Amount</th></tr></thead><tbody><tr><td>SO-55120</td><td>Al Noor Trading</td><td>Shipped</td><td class=\"pv-num\">48,300</td></tr><tr><td>SO-55127</td><td>Gulf Medical Supplies</td><td>Picking</td><td class=\"pv-num\">12,780</td></tr><tr><td>SO-55131</td><td>Red Sea Logistics</td><td>On hold</td><td class=\"pv-num\">7,450</td></tr></tbody></table>"
+  },
+  {
+   "title": "Around a Chart, 1 minute threshold, auto refresh",
+   "regionTitle": "Calls in queue",
+   "icon": "fa-headphones",
+   "bodyKind": "chart",
+   "options": [
+    "amc-TFreshnessFrame--stale1",
+    "amc-TFreshnessFrame--autoRefresh"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,194 @@
+/* Dual View: living region template for Universal Theme. The frame reads the report inside it
+   and offers the same rows as a chart: a Table / Chart switch in the header swaps the native
+   report for an SVG bar chart or donut drawn to scale from the table itself. The table stays in
+   the DOM as the accessible source. Without a table, or without JavaScript, it is a plain frame. */
+.amc-TDualView {
+  --amc-tdv-accent: var(--ut-palette-primary, #056ac8);
+  --amc-tdv-accent-ink: var(--ut-palette-primary-contrast, #fff);
+  --amc-tdv-surface: var(--ut-component-background-color, #fff);
+  --amc-tdv-ink: var(--ut-component-text-default-color, #262626);
+  --amc-tdv-muted: var(--ut-component-text-muted-color, #707070);
+  --amc-tdv-line: var(--ut-component-border-color, rgba(0, 0, 0, .1));
+  --amc-tdv-radius: calc(var(--ut-component-border-radius, 4px) + 8px);
+  --amc-tdv-dir: 1;
+  --amc-tdv-c1: var(--amc-tdv-accent);
+  --amc-tdv-c2: color-mix(in srgb, var(--amc-tdv-accent) 76%, var(--amc-tdv-surface));
+  --amc-tdv-c3: color-mix(in srgb, var(--amc-tdv-accent) 56%, var(--amc-tdv-surface));
+  --amc-tdv-c4: color-mix(in srgb, var(--amc-tdv-accent) 40%, var(--amc-tdv-surface));
+  --amc-tdv-c5: color-mix(in srgb, var(--amc-tdv-accent) 72%, var(--amc-tdv-ink));
+  --amc-tdv-c6: color-mix(in srgb, var(--amc-tdv-accent) 48%, var(--amc-tdv-ink));
+  --amc-tdv-cx: color-mix(in srgb, var(--amc-tdv-muted) 45%, var(--amc-tdv-surface));
+  margin-block-end: 16px;
+  color: var(--amc-tdv-ink);
+}
+.amc-TDualView:dir(rtl) { --amc-tdv-dir: -1; }
+.amc-TDualView-surface {
+  display: grid;
+  border-radius: var(--amc-tdv-radius);
+  background: var(--amc-tdv-surface);
+  box-shadow:
+    0 0 0 1px var(--amc-tdv-line),
+    0 1px 2px color-mix(in srgb, var(--amc-tdv-ink) 6%, transparent),
+    0 16px 36px -26px color-mix(in srgb, var(--amc-tdv-accent) 55%, transparent);
+}
+
+/* Header with the Table / Chart switch */
+.amc-TDualView-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  min-inline-size: 0;
+  padding-block: 12px;
+  padding-inline: 18px 12px;
+}
+.amc-TDualView-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--amc-tdv-accent) 12%, transparent);
+  color: var(--amc-tdv-accent);
+  font-size: 14px;
+}
+.amc-TDualView-icon.fa:not([class*="fa-"]) { display: none; }
+.amc-TDualView-title { flex: 1 1 8rem; min-inline-size: 0; margin: 0; font-size: 1rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.amc-TDualView-actions, .amc-TDualView-footer { display: flex; flex-wrap: wrap; gap: 6px; }
+.amc-TDualView-actions:empty, .amc-TDualView-footer:empty { display: none; }
+
+.amc-TDualView-switch {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  flex: none;
+  padding: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--amc-tdv-ink) 7%, transparent);
+  box-shadow: inset 0 0 0 1px var(--amc-tdv-line);
+}
+.amc-TDualView-switch[hidden] { display: none; }
+.amc-TDualView-thumb {
+  position: absolute;
+  inset-block: 3px;
+  inset-inline-start: 3px;
+  inline-size: calc(50% - 3px);
+  border-radius: 999px;
+  background: var(--amc-tdv-surface);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--amc-tdv-ink) 22%, transparent), inset 0 0 0 1px color-mix(in srgb, var(--amc-tdv-accent) 30%, transparent);
+  transition: transform .32s cubic-bezier(.3, 1.3, .5, 1);
+}
+.amc-TDualView.is-chart .amc-TDualView-thumb { transform: translateX(calc(100% * var(--amc-tdv-dir))); }
+.amc-TDualView-opt {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-block-size: 30px;
+  margin: 0;
+  padding-block: 4px;
+  padding-inline: 12px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--amc-tdv-muted);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+.amc-TDualView-opt[aria-pressed="true"] { color: var(--amc-tdv-accent); }
+.amc-TDualView-opt:hover { color: var(--amc-tdv-ink); }
+.amc-TDualView-opt[aria-pressed="true"]:hover { color: var(--amc-tdv-accent); }
+.amc-TDualView-opt:focus-visible { outline: 2px solid var(--amc-tdv-accent); outline-offset: 1px; }
+.amc-TDualView-optIcon { font-size: 13px; }
+
+/* Body and chart */
+.amc-TDualView-stage { min-inline-size: 0; }
+.amc-TDualView-body { min-inline-size: 0; padding-block: 2px 16px; padding-inline: 18px; overflow-x: auto; }
+.amc-TDualView.is-chart .amc-TDualView-body { display: none; }
+.amc-TDualView-chart {
+  display: grid;
+  gap: 8px;
+  min-inline-size: 0;
+  margin: 0;
+  padding-block: 4px 16px;
+  padding-inline: 18px;
+  animation: amc-tdv-in .35s ease-out;
+}
+.amc-TDualView-chart[hidden] { display: none; }
+@keyframes amc-tdv-in { from { opacity: .4; } to { opacity: 1; } }
+.amc-TDualView-svg { display: block; max-inline-size: 100%; overflow: visible; direction: ltr; }
+.amc-TDualView-tick { stroke: color-mix(in srgb, var(--amc-tdv-ink) 9%, transparent); stroke-width: 1; stroke-dasharray: 2 3; }
+.amc-TDualView-zero { stroke: color-mix(in srgb, var(--amc-tdv-ink) 35%, transparent); stroke-width: 1; }
+.amc-TDualView-axis { fill: var(--amc-tdv-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.amc-TDualView-cat { fill: var(--amc-tdv-ink); font-size: 12px; }
+.amc-TDualView-value { fill: var(--amc-tdv-ink); font-size: 11px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.amc-TDualView-bar {
+  fill: var(--amc-tdv-c1);
+  transition: fill .15s ease, opacity .15s ease;
+}
+.amc-TDualView-bars:hover .amc-TDualView-bar { opacity: .55; }
+.amc-TDualView-bars .amc-TDualView-bar:hover { opacity: 1; fill: color-mix(in srgb, var(--amc-tdv-accent) 82%, var(--amc-tdv-ink)); }
+
+.amc-TDualView-donut { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 24px; }
+.amc-TDualView-track { fill: none; stroke: color-mix(in srgb, var(--amc-tdv-ink) 6%, transparent); stroke-width: 22; }
+.amc-TDualView-slice { fill: none; stroke-width: 22; transition: stroke-width .15s ease, opacity .15s ease; }
+.amc-TDualView.is-pointing .amc-TDualView-slice { opacity: .45; }
+.amc-TDualView.is-pointing .amc-TDualView-slice.is-on { opacity: 1; stroke-width: 26; }
+.amc-TDualView-centerValue { fill: var(--amc-tdv-ink); font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.amc-TDualView-centerLabel { fill: var(--amc-tdv-muted); font-size: 11px; }
+.amc-TDualView-legend { display: grid; flex: 1 1 16rem; gap: 2px; min-inline-size: 0; margin: 0; padding: 0; list-style: none; }
+.amc-TDualView-key {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto 3.2em;
+  align-items: center;
+  gap: 8px;
+  padding-block: 4px;
+  padding-inline: 6px;
+  border-radius: 6px;
+  font-size: .8125rem;
+  transition: background-color .15s ease;
+}
+.amc-TDualView-key.is-on { background: color-mix(in srgb, var(--amc-tdv-accent) 10%, transparent); }
+.amc-TDualView-swatch { inline-size: 10px; block-size: 10px; border-radius: 3px; }
+.amc-TDualView-keyLabel { min-inline-size: 0; overflow-wrap: anywhere; line-height: 1.25; unicode-bidi: isolate; }
+.amc-TDualView-keyValue, .amc-TDualView-keyPct { font-variant-numeric: tabular-nums; text-align: end; unicode-bidi: plaintext; }
+.amc-TDualView-keyValue { font-weight: 650; }
+.amc-TDualView-keyPct { color: var(--amc-tdv-muted); }
+.amc-TDualView-c1 { stroke: var(--amc-tdv-c1); background: var(--amc-tdv-c1); }
+.amc-TDualView-c2 { stroke: var(--amc-tdv-c2); background: var(--amc-tdv-c2); }
+.amc-TDualView-c3 { stroke: var(--amc-tdv-c3); background: var(--amc-tdv-c3); }
+.amc-TDualView-c4 { stroke: var(--amc-tdv-c4); background: var(--amc-tdv-c4); }
+.amc-TDualView-c5 { stroke: var(--amc-tdv-c5); background: var(--amc-tdv-c5); }
+.amc-TDualView-c6 { stroke: var(--amc-tdv-c6); background: var(--amc-tdv-c6); }
+.amc-TDualView-cx { stroke: var(--amc-tdv-cx); background: var(--amc-tdv-cx); }
+
+.amc-TDualView-caption { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: .75rem; color: var(--amc-tdv-muted); }
+.amc-TDualView-capTitle { font-weight: 650; color: var(--amc-tdv-ink); unicode-bidi: isolate; }
+.amc-TDualView-capMeta { font-variant-numeric: tabular-nums; unicode-bidi: isolate; }
+.amc-TDualView-footer { justify-content: flex-end; padding: 0 18px 14px; }
+
+/* Template options (Chart first, Donut, Horizontal bars and Sort by value are read by the script). */
+.amc-TDualView--chartFirst, .amc-TDualView--donut, .amc-TDualView--horizontal, .amc-TDualView--sorted { --amc-tdv-flag: 1; }
+.amc-TDualView--noPadding .amc-TDualView-body { padding-inline: 0; padding-block: 0 4px; }
+
+@media (max-width: 380px) {
+  .amc-TDualView-optLabel { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .amc-TDualView-opt { padding-inline: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .amc-TDualView-thumb, .amc-TDualView-opt, .amc-TDualView-bar, .amc-TDualView-slice, .amc-TDualView-key { transition: none !important; }
+  .amc-TDualView-chart { animation: none !important; }
+}
+@media (forced-colors: active) {
+  .amc-TDualView-surface { border: 1px solid CanvasText; }
+  .amc-TDualView-opt { border: 1px solid ButtonText; }
+  .amc-TDualView-opt[aria-pressed="true"] { background: Highlight; color: HighlightText; forced-color-adjust: none; }
+  .amc-TDualView-bar { fill: Highlight; }
+  .amc-TDualView-slice { stroke: Highlight; }
+  .amc-TDualView-cat, .amc-TDualView-value, .amc-TDualView-axis, .amc-TDualView-centerValue, .amc-TDualView-centerLabel { fill: CanvasText; }
+}

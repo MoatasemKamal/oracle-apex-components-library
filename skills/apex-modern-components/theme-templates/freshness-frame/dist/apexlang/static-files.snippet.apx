@@ -1,0 +1,9 @@
+file "amc-templates/amc-tpl-freshness-frame.css" (
+    mimeType: text/css
+    charSet: utf-8
+)
+
+file "amc-templates/amc-tpl-freshness-frame.js" (
+    mimeType: application/javascript
+    charSet: utf-8
+)

@@ -1,0 +1,60 @@
+{
+ "samples": [
+  {
+   "title": "Around a Classic Report, table first",
+   "regionTitle": "Open orders",
+   "icon": "fa-shopping-cart",
+   "bodyKind": "report",
+   "options": [],
+   "buttons": {
+    "CREATE": "New order"
+   }
+  },
+  {
+   "title": "Chart first: bars drawn from the same report",
+   "regionTitle": "Open orders by customer",
+   "icon": "fa-bar-chart",
+   "bodyKind": "report",
+   "options": [
+    "amc-TDualView--chartFirst"
+   ]
+  },
+  {
+   "title": "Chart first, donut, eight rows fold into Other",
+   "regionTitle": "Spend by category",
+   "icon": "fa-pie-chart",
+   "options": [
+    "amc-TDualView--chartFirst",
+    "amc-TDualView--donut"
+   ],
+   "body": "<table class=\"pv-report\"><thead><tr><th>Category</th><th class=\"pv-num\">Invoices</th><th class=\"pv-num\">Spend</th></tr></thead><tbody><tr><td>Raw materials</td><td class=\"pv-num\">42</td><td class=\"pv-num\">SAR 184,200</td></tr><tr><td>Logistics</td><td class=\"pv-num\">31</td><td class=\"pv-num\">SAR 96,450</td></tr><tr><td>Salaries</td><td class=\"pv-num\">12</td><td class=\"pv-num\">SAR 88,000</td></tr><tr><td>Utilities</td><td class=\"pv-num\">18</td><td class=\"pv-num\">SAR 21,300</td></tr><tr><td>Marketing</td><td class=\"pv-num\">9</td><td class=\"pv-num\">SAR 17,900</td></tr><tr><td>IT services</td><td class=\"pv-num\">7</td><td class=\"pv-num\">SAR 12,480</td></tr><tr><td>Travel</td><td class=\"pv-num\">11</td><td class=\"pv-num\">SAR 6,720</td></tr><tr><td>Office supplies</td><td class=\"pv-num\">23</td><td class=\"pv-num\">SAR 3,150</td></tr></tbody></table>"
+  },
+  {
+   "title": "Chart first, negative months get a zero baseline",
+   "regionTitle": "Net cash flow 2026",
+   "icon": "fa-line-chart",
+   "options": [
+    "amc-TDualView--chartFirst"
+   ],
+   "body": "<table class=\"pv-report\"><thead><tr><th>Month</th><th class=\"pv-num\">Net cash flow</th></tr></thead><tbody><tr><td>Jan</td><td class=\"pv-num\">42,500</td></tr><tr><td>Feb</td><td class=\"pv-num\">31,200</td></tr><tr><td>Mar</td><td class=\"pv-num\">-12,400</td></tr><tr><td>Apr</td><td class=\"pv-num\">18,900</td></tr><tr><td>May</td><td class=\"pv-num\">56,300</td></tr><tr><td>Jun</td><td class=\"pv-num\">-8,750</td></tr><tr><td>Jul</td><td class=\"pv-num\">24,100</td></tr><tr><td>Aug</td><td class=\"pv-num\">61,800</td></tr><tr><td>Sep</td><td class=\"pv-num\">37,450</td></tr></tbody></table>"
+  },
+  {
+   "title": "Chart first, horizontal bars sorted by value",
+   "regionTitle": "Sales by region",
+   "icon": "fa-map-marker",
+   "options": [
+    "amc-TDualView--chartFirst",
+    "amc-TDualView--horizontal",
+    "amc-TDualView--sorted"
+   ],
+   "body": "<table class=\"pv-report\"><thead><tr><th>Region</th><th class=\"pv-num\">Sales</th></tr></thead><tbody><tr><td>Eastern Province</td><td class=\"pv-num\">1,284,000</td></tr><tr><td>Riyadh Region</td><td class=\"pv-num\">2,941,500</td></tr><tr><td>Makkah Region</td><td class=\"pv-num\">2,310,750</td></tr><tr><td>Madinah Region</td><td class=\"pv-num\">640,200</td></tr><tr><td>Asir Region</td><td class=\"pv-num\">412,900</td></tr></tbody></table>"
+  },
+  {
+   "title": "No table inside: plain frame, no switch",
+   "regionTitle": "Quarter close",
+   "icon": "fa-calendar",
+   "bodyKind": "text",
+   "options": []
+  }
+ ]
+}
